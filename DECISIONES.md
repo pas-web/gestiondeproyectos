@@ -7,8 +7,9 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 51 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 1 (28 jul 2026): menú de navegación, Semana 0,
-  página del gimnasio y detalle de sesiones de las semanas 1 y 2.
+- **Último bloque cerrado:** bloque 1 (28 jul 2026): menú de navegación, Semana 0
+  como semana real con sesiones, página del gimnasio, detalle de sesiones de las
+  semanas 0, 1 y 2, y reparto de contenido entre la Semana 0 y la Semana 1.
 - **Siguiente paso acordado:** producir la sección "El jueves y el viernes" de las
   semanas 3 a 17, en lotes por unidad, previa aprobación del formato piloto.
 
@@ -31,6 +32,31 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 | Hoja de retroalimentación | El profesor, cuando le llegue la observación | El profesor, por bloques de filas | Activo desde jul 2026 |
 | Ticket de salida | El grupo, cada viernes | El profesor, y se lee en voz alta el jueves siguiente | Pendiente de montar el formulario |
 | Vitrina de lo producido | El grupo, con el profesor como filtro | Todos, en la sección "Lo que produjimos" de cada semana | Sin montar |
+
+## Calendario
+
+- **18 semanas de clase: del jueves 30 de julio al viernes 27 de noviembre de 2026.**
+  Sesiones de dos horas los jueves y dos horas los viernes.
+- La Semana 0 (aterrizaje) se suma por delante. Las 17 semanas de contenido
+  conservan sus fechas originales, de la apertura del 5 de agosto a la del 25 de
+  noviembre: ningún candado se movió.
+- Sin choques con días feriados. El 16 de septiembre cae miércoles y los feriados
+  de noviembre caen lunes, así que ningún jueves ni viernes se pierde.
+- La Semana 0 no lleva candado: es también el programa del curso y queda abierta
+  todo el semestre.
+
+## Reparto entre la Semana 0 y la Semana 1
+
+La Semana 0 se lleva el gancho y lo administrativo: el encargo contado como
+historia, el chapuzón de malabares, el fondo nombrado sin rodeos, la evaluación
+explicada a fondo con espacio para objeciones, la firma de los dos pactos y el
+armado del expediente. La Semana 1 queda liberada para el oficio: manejo contra
+gestión, las dos listas de la presa, el ciclo del proyecto por capas, las
+hipótesis sobre las reglas del fondo y el sobre sellado.
+
+Razón: con los pactos dentro, la Semana 1 cargaba siete cosas en cuatro horas y
+la evaluación quedaba explicada de prisa. Un sistema de evaluación que no se pudo
+discutir el primer día se cobra caro en noviembre.
 
 ## Reglas de producción
 
@@ -73,6 +99,8 @@ la razón en la última columna).
 ## Pendientes
 
 - Sección "El jueves y el viernes" de las semanas 3 a 17.
+- Revisar si la semana 2 necesita ajuste ahora que la campana del no y el contrato
+  de gestión ya no compiten con los pactos.
 - Montar el formulario del ticket de salida y colgarlo al pie de cada semana.
 - Definir si la vitrina de lo producido arranca este semestre o no.
 - Llenar las secciones "Lo que produjimos" conforme avance el curso.
