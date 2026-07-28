@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 14 · Obra y comunicación · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 14 · Obra y comunicación</div>
+  <div class="migas">Unidad 3 · Construir en la presa · Se abre el miércoles 4 de noviembre</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-11-04">
+
+<p class="pregunta">¿La obra habla por sí sola?</p>
+<p class="bajada">No. Y de eso va la semana. La ejecución entra en su recta final (el viernes 13 todo debe estar entregado) y el jueves la clase se muda a la presa, no a construir sino a verificar: cada equipo revisa la obra de otro con el cronograma en la mano. El viernes tu proyecto aprende a hablar: el género humilde y poderoso del aviso comunitario, el tercer y último duelo con la IA (trae tu registro de cacería, hoy se cobra) y la tercera autoevaluación.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Distinguir el avance real del avance contado, y reportar el tuyo sin maquillaje: lo que se puede tocar, contar o usar.</li>
+    <li>Cerrar tu plan de recta final: qué falta, quién lo hace y qué se recorta con criterio si el tiempo no alcanza.</li>
+    <li>Escribir un aviso comunitario que sí convoca: las cinco preguntas contestadas, en el idioma del que lo lee.</li>
+    <li>Ganarle el tercer duelo a la IA con las fallas que llevas cazándole desde agosto.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">La obra no habla, y el silencio se llena solo</h3>
+  <p>Hay una superstición del gestor primerizo: que el trabajo bien hecho se defiende solo. No se defiende. En una comunidad no existe el silencio: lo que el equipo no cuenta, el rumor lo inventa, y el rumor tiene imaginación (¿y ese dinero de dónde salió?, ¿y eso de quién va a ser?, ¿y por qué ellos?). Comunicar el proyecto no es presumirlo: es rendir cuentas y convocar, las dos cosas que mantienen una obra pública siendo pública. Por eso la comunicación no es el adorno del final: es una tarea del RACI, con dueño y frecuencia, como cualquier otra.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El género</span>
+  <h3 style="margin-top:.2rem">El aviso que sí avisa</h3>
+  <p>Media hoja, cinco preguntas: ¿quién convoca?, ¿qué?, ¿cuándo y dónde?, ¿para qué?, ¿qué se necesita traer o saber? Cada pregunta sin contestar la contesta el rumor. Se escribe en el idioma del que lo lee, no del que lo escribe (las palabras del Anexo 1 se quedan en el Anexo 1: acá no hay componentes, hay área de juegos). Convoca la delegación, porque la obra es de la comunidad: el equipo redacta y hace la talacha, la voz es de la autoridad. Y la regla más vieja del curso vuelve por su fuero: solo se promete lo que ya está firmado.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">La recta final</span>
+  <h3 style="margin-top:.2rem">Terminado es que se puede usar</h3>
+  <p>El avance no se mide en sensaciones ("vamos como al 80") ni en dinero gastado ni en juntas tenidas: se mide en tareas terminadas-terminadas, las que dejan algo que se puede tocar, contar o usar. Esta semana el semáforo va sin maquillaje, porque el viernes 13 se entrega lo que esté. Si el tiempo no alcanza, se recorta con criterio: se protege el propósito y se recorta el adorno, que para eso tu cronograma sano traía margen. Y acuérdate del velorio: el atraso confesado a tiempo es avance; el que se calla, se paga.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">Lo que se cobra</span>
+  <h3 style="margin-top:.2rem">El tercer duelo: la cacería se paga</h3>
+  <p>Desde agosto, cuando diseñabas la consulta, empezaste un registro de las fallas de la IA: lo que inventa, lo que promete, el español de folleto que no es de ningún lugar. Dos duelos después (la cadena, el marco), llega el último y es en su terreno favorito: redactar bonito. La consigna es el aviso de la inauguración; la IA hará el suyo con el mejor prompt de tu equipo, tú harás el tuyo con oficio. Tu arma es la lista: tres meses de cacería te enseñaron a ver en tres segundos lo que la máquina hace por default. El viernes cierra con el veredicto del semestre: para qué sí sirve, para qué no, y qué no se le suelta nunca.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-14/ejercicio-11-el-avance-contado.html"><strong>El avance contado</strong></a> · Seis reportes de última semana de obra. Distingue el avance real del que solo se cuenta.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-14/ejercicio-21-el-aviso-que-no-avisa.html"><strong>El aviso que no avisa</strong></a> · Seis avisos comunitarios con falla. Encuéntrasela antes de escribir el tuyo.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-14/ejercicio-32-mi-recta-final-y-mi-aviso.html"><strong>Mi recta final y mi aviso</strong></a> · Tu semáforo honesto, tu recorte con criterio, tu aviso y tu prompt del tercer duelo.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Aviso comunitario</dt>
+    <dd>El género textual que convoca y rinde cuentas en media hoja: quién invita, a qué, cuándo, dónde, para qué y qué traer. Es el pariente humilde de la convocatoria del fondo que destripaste en septiembre, y funciona con la misma lógica al revés: allá leías como dictaminador, acá escribes para que un vecino con prisa entienda a la primera.</dd>
+    <dt>Las cinco preguntas del aviso</dt>
+    <dd>¿Quién convoca? ¿Qué? ¿Cuándo y dónde? ¿Para qué? ¿Qué se necesita traer o saber? La prueba de fuego: léeselo a alguien que no esté en el curso; si te pregunta algo de esa lista, el aviso no avisa.</dd>
+    <dt>Convocar</dt>
+    <dd>Más que informar: lograr que la gente llegue. Informar dice "hay faena"; convocar dice quién invita, a qué hora, qué traer y qué habrá. En comunidad, el remitente pesa tanto como el texto: la misma faena convocada por la delegación junta gente, convocada por fuereños junta curiosos.</dd>
+    <dt>Avance real / avance contado</dt>
+    <dd>Real: dejó algo que se puede tocar, contar o usar, y tiene evidencia (foto, conteo, quién lo verificó). Contado: porcentaje de sensación, insumos en bodega reportados como obra, gasto como si fuera avance, juntas como si fueran productos. El tablero solo acepta el primero.</dd>
+    <dt>Semáforo de obra</dt>
+    <dd>Verde: terminado-terminado (se puede usar). Amarillo: en proceso, con fecha y responsable. Rojo: sin tocar o atorado, con la causa nombrada. Se llena desde la lista de tareas del cronograma, nunca desde el ánimo. Un semáforo todo verde a estas alturas no tranquiliza: levanta cejas.</dd>
+    <dt>Recorte con criterio</dt>
+    <dd>Cuando el tiempo no alcanza, se decide qué se simplifica o se suelta protegiendo el propósito del componente: se recorta el adorno (el acabado de lujo, lo que se puede hacer en diciembre) y no se toca lo que hace que la cosa funcione y sea segura. Recortar a tiempo es manejo adaptativo; estirar la obra negando el calendario es la esquela en borrador.</dd>
+    <dt>Regla de promesas</dt>
+    <dd>En el aviso solo se promete lo que ya está comprometido y firmado (en la solicitud aprobada, en el dictamen, en los tratos con papel). Lo demás, si se dice, se dice como intención con dueño ("el equipo va a buscar..."), nunca como hecho. El papel viaja solo y en diciembre alguien viene a cobrar la promesa que nadie firmó.</dd>
+    <dt>Registro de cacería</dt>
+    <dd>La bitácora de fallas de la IA que el grupo alimenta desde la semana 3: datos inventados, promesas gratis, tono de folleto, seguridad sin fuentes. Esta semana se cosecha por última vez y produce el veredicto del semestre: para qué se le encarga, para qué no, y qué no se le suelta nunca (los datos, las promesas y la voz propia).</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán los avisos reales de cada equipo (los que se pegaron y se mandaron de verdad), la foto de la recta final de la obra, el resultado del tercer duelo y el veredicto del semestre sobre la IA.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>A quien no habla, Dios no lo oye, dice el refrán. Tampoco lo oye la delegada, ni el vecino del paso, ni el comité que le confió el dinero. Tu obra ya casi sabe estar; esta semana aprende a hablar.</p>
+  <p>Termina lo que empezaste, cuéntalo como se debe y cóbrale a la IA todo lo que le cazaste desde agosto. El proyecto que se cuenta, convoca. El que se calla, se lo inventan.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

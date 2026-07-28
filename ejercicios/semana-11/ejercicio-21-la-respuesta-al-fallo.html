@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S11 · La respuesta al fallo</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .respuesta { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; }
+  .respuesta b { color:var(--marca); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La respuesta al fallo</h1>
+<p class="sub">Gimnasio · Semana 11 · Práctica libre, sin registro y sin nota.</p>
+
+<p>El comité del manantial señaló en su fallo: "el indicador de uso no tiene línea base sólida" y "el riego de los sabinos depende de un acuerdo verbal". Seis equipos imaginarios respondieron a esa retroalimentación. Cinco respuestas fallan por algo con nombre; una se salva. El viernes 23 entregas la tuya: entrena el ojo antes.</p>
+
+<div class="intro">
+  Las fallas de la respuesta: la <strong>defensa ofendida</strong> (el comité no entendió), el <strong>sí a todo</strong> (acepta cada punto y no cambia nada), la <strong>respuesta selectiva</strong> (contesta lo cómodo y calla lo duro), la <strong>promesa vaga</strong> ("lo tomaremos en cuenta") y el <strong>intento de apelación</strong> (renegociar el monto disfrazado de respuesta).
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Toma el fallo real de tu componente y clasifica cada señalamiento en tres columnas: entendimos / cambiamos (con fecha) / sostenemos (con argumento). Después redacta la respuesta completa y léela en voz alta preguntándote: ¿suena a alguien que escuchó, o a alguien que se defiende? Esa lectura en voz alta caza el tono que el ojo perdona.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '"Lamentamos que el comité no haya comprendido nuestro indicador. La línea base existe y está clara en la solicitud; quizá faltó leerla con más atención. Sobre el riego, el acuerdo con la señora de la tienda es de total confianza y cuestionarlo nos parece injusto."',
+      ops: ['Respuesta selectiva', 'La defensa ofendida: convierte cada señalamiento en un error del lector y no cambia nada; el comité que la reciba no olvidará el tono', 'Sí a todo', 'Nada: defender el trabajo propio es legítimo'],
+      resp: 1,
+      pista: 'Cuenta cuántas veces la responsabilidad queda del lado del comité y cuántas del equipo. ¿Qué proporción salió?',
+      exp: 'La defensa ofendida: el señalamiento se convierte en agravio y la respuesta en desquite. Aunque el equipo tuviera razón en el fondo (a veces la tiene), el tono cancela el contenido: quien decide no va a releer la solicitud con cariño después de que lo acusaron de no saber leer. Sostener se puede y se debe, pero con argumento y sin adjetivos: "la línea base está en la sección 4 (conteos de agosto); reconocemos que quedó poco visible y en la respuesta la resumimos en una tabla". Mismo fondo, otro planeta.' },
+    { r: '"Agradecemos profundamente cada observación del honorable comité. Tienen toda la razón en ambos puntos. Corregiremos todo lo señalado y trabajaremos con más empeño para estar a la altura de su confianza."',
+      ops: ['La defensa ofendida', 'Intento de apelación', 'El sí a todo: acepta cada punto sin decir QUÉ va a cambiar, CUÁNDO ni CÓMO; pura reverencia sin contenido', 'Se salva: la humildad es la actitud correcta'],
+      resp: 2,
+      pista: 'Subraya en esta respuesta qué cambia exactamente en el proyecto, con qué fecha. ¿Subrayaste algo?',
+      exp: 'El sí a todo: suena humilde y está vacío. No dice cómo va a construirse la línea base ni qué pasa con el acuerdo de riego: solo promete empeño, que no se puede verificar (y a estas alturas del curso ya sabes qué se hace con lo que no se puede verificar). La humildad operativa se ve distinto: "tienen razón en la línea base: haremos conteos los dos domingos previos al arranque (18 y 25 de octubre) y la tabla se anexa el viernes 23". Aceptar sin plan es otra forma de no escuchar.' },
+    { r: '"Sobre la línea base: el comité tiene razón, anexamos conteos de los domingos 18 y 25 de octubre con hoja fechada. (Sobre el segundo punto, el equipo considera que el tema del riego ya quedó explicado durante la sesión de preguntas.)"',
+      ops: ['La respuesta selectiva: contesta bien lo cómodo y despacha en un paréntesis el señalamiento duro, que era el del acuerdo verbal', 'El sí a todo', 'La defensa ofendida', 'Se salva: el primer punto está perfecto'],
+      resp: 0,
+      pista: 'Compara el espacio y el rigor que recibe cada uno de los dos señalamientos. ¿Por qué será?',
+      exp: 'La respuesta selectiva, la más tramposa porque la mitad visible está bien hecha: el primer punto trae fecha y documento. Pero el señalamiento incómodo (el acuerdo verbal de riego, que era el más serio: de él depende que los sabinos vivan) se despacha en un paréntesis con un "ya quedó explicado" que no es respuesta sino esquive. El comité lee las dos mitades y concluye lo obvio: este equipo responde lo que le conviene. La regla es completa o no es: cada señalamiento del fallo recibe su renglón, y el más duro recibe el mejor.' },
+    { r: '"Ambas observaciones nos parecen muy valiosas y las tomaremos en cuenta para mejorar el proyecto. Estaremos atentos a fortalecer la línea base y a dar seguimiento al tema del riego durante la ejecución."',
+      ops: ['La defensa ofendida', 'La promesa vaga: "tomar en cuenta", "fortalecer" y "dar seguimiento" no tienen quién, qué ni cuándo; es el sí vago de S9 en versión escrita', 'Intento de apelación', 'Se salva: se compromete a mejorar todo'],
+      resp: 1,
+      pista: 'Ya conoces esta falla de otra semana, cuando la delegada dijo "cuenten con el apoyo, luego vemos". ¿Cómo se llamaba?',
+      exp: 'La promesa vaga: el pariente escrito del "sí, luego vemos" que cazaste en S9. "Fortalecer la línea base" no dice conteos ni fechas; "dar seguimiento al riego" no dice nota firmada ni responsable. El comité no puede verificar nada de esto en su seguimiento, así que para efectos prácticos el equipo respondió: nada. La versión con contenido cuesta dos datos por punto: qué exactamente y para cuándo. Si un renglón de tu respuesta no los tiene, todavía no está escrito.' },
+    { r: '"Entendemos las observaciones y las atenderemos. Ahora bien, considerando que ambas debilidades ya están resueltas, solicitamos respetuosamente al comité reconsiderar el monto asignado y completar los $2,000 que se descontaron, pues el proyecto los necesita."',
+      ops: ['El sí a todo', 'La respuesta selectiva', 'El intento de apelación: usa la respuesta para renegociar el monto, y el fallo es inapelable; quema el canal que sí tenía', 'Nada: pedir no cuesta, eso enseñó la semana 2'],
+      resp: 2,
+      pista: 'Relee qué es "inapelable" en la hoja de consulta. ¿Para qué existe entonces la respuesta a la retro?',
+      exp: 'El intento de apelación: disfraza de respuesta lo que es una renegociación, y el fallo es inapelable por regla que el equipo conoce desde septiembre. El daño es doble: no va a conseguir los $2,000 y desperdició el documento cuyo verdadero poder es otro (demostrar que el equipo escucha y ejecuta, que es lo que los comités recuerdan cuando llega la siguiente convocatoria). Y ojo con la trampa retórica: "pedir no cuesta" aplica ANTES de las reglas, no contra ellas: cortejar el no es virtud en el trato; ignorar una cláusula es amateurismo en el papel. La energía de ese párrafo iba mejor en la recalibración: ¿cómo se hace el proyecto con $2,000 menos? (Especie, faena, escala: el curso ya te dio las tres respuestas.)' },
+    { r: '"Punto 1 (línea base): tienen razón, quedó débil. La construimos así: conteos en los domingos 18 y 25 de octubre, 16:00 a 18:00, hoja fechada y firmada por quien registra; la tabla se anexa a esta respuesta. Punto 2 (acuerdo verbal): sostenemos el acuerdo con la señora de la tienda como mecanismo, porque su presencia diaria es la más confiable del sitio, y atendemos la debilidad señalada: el acuerdo se puso por escrito el lunes (nota firmada, se anexa) con relevo del equipo cada quince días."',
+      ops: ['La respuesta selectiva: el punto 2 no obedeció al comité', 'Se salva: cada señalamiento con su renglón, lo que se corrige trae fecha y documento, y lo que se sostiene trae argumento y de todos modos atiende la debilidad', 'La defensa ofendida: sostener es defenderse', 'La promesa vaga'],
+      resp: 1,
+      pista: 'Pásale la estructura de tres partes: ¿qué entendió, qué cambió con fecha, qué sostuvo con argumento? Revisa punto por punto.',
+      exp: 'Así se ve la respuesta que se salva, y fíjate en la joya del punto 2: sostener NO es desobedecer. El equipo mantiene su mecanismo (con argumento: la presencia diaria) y aun así atiende la debilidad real que el comité señaló (lo verbal se volvió escrito, con relevo). Escuchar sin obedecer a ciegas y sostener sin cerrarse: exactamente lo que la semana enseña. Cada punto tiene su renglón, cada cambio su fecha y su anexo, y el tono no pide perdón ni pelea. Un comité que recibe esto apunta el nombre del equipo para bien, y eso, en el mundo de las convocatorias, es capital que no sale en ningún presupuesto.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué tiene esta respuesta?</div>' +
+               '<span class="respuesta">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

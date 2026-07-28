@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S14 · Mi recta final y mi aviso</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi recta final y mi aviso</h1>
+<p class="sub">Gimnasio · Semana 14 · Los bloques 1 a 3 se trabajan el jueves en la presa; el 8 se llena después del duelo.</p>
+
+<p>Los ocho bloques de la última semana de obra: primero el estado real de tu frente, luego el plan para llegar al viernes 13, y después la otra mitad del oficio: contarlo. Nada se guarda ni se manda: cópialo a tu bitácora. La regla de respeto sigue: cargos y roles, no nombres.</p>
+
+<div class="reglas">
+  Las reglas duras de la semana: el avance se cuenta <strong>desde la lista y con evidencia</strong> · terminado es que <strong>se puede usar</strong> · al viernes 13 <strong>se entrega lo que esté</strong> (el recorte protege el propósito, no el orgullo) · el aviso contesta <strong>las cinco preguntas</strong> · solo se promete <strong>lo firmado</strong> · convoca <strong>la delegación</strong> · y a la IA no se le sueltan <strong>los datos, las promesas ni la voz</strong>.
+</div>
+
+<div class="caso">
+  <h2>1 · El semáforo honesto de mi frente</h2>
+  <p class="porque">Desde la lista de tareas de tu cronograma real, nunca desde el ánimo. Verde: terminado-terminado, con su evidencia (foto, conteo, quién lo vio). Amarillo: en proceso, con fecha y responsable. Rojo: sin tocar o atorado, con la causa nombrada.</p>
+  <textarea id="r1" placeholder="Verde: ... (evidencia: ...) / Amarillo: ... (fecha, quién) / Rojo: ... (causa)" style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Lo que falta, con nombre y fecha</h2>
+  <p class="porque">Cada tarea pendiente de aquí al viernes 13: quién la hace y qué día. Si una no cabe en el calendario, no la fuerces aquí: le toca el bloque 3.</p>
+  <textarea id="r2" placeholder="Tarea... quién... para el día... / Tarea... quién... para el..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · El recorte con criterio</h2>
+  <p class="porque">Si el tiempo no alcanza: qué se simplifica o se suelta protegiendo el propósito (se recorta el adorno, lo aplazable a diciembre), y qué no se toca por ningún motivo (lo que hace que funcione y sea seguro).</p>
+  <div class="modelo">Ej.: Se recorta: la segunda mano de pintura (queda para diciembre, no afecta el uso). No se toca: el anclaje de los juegos y la sombra del área de niños (sin eso no se entrega).</div>
+  <textarea id="r3" placeholder="Se recorta o simplifica: ... / No se toca: ... / Por qué el propósito queda a salvo: ..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Mis públicos</h2>
+  <p class="porque">Quién debe enterarse de qué: la delegación, los vecinos del paso, el comité que dio el dinero, los que dijeron que no en tu mapa de poder. Cada público necesita saber algo distinto, y olvidar a uno tiene precio (el rumor cobra en la moneda del olvidado).</p>
+  <textarea id="r4" placeholder="La delegación necesita saber... / Los vecinos de junto... / El comité... / Los del no..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · Mi aviso</h2>
+  <p class="porque">El aviso real más próximo de tu equipo, en media hoja: las cinco preguntas contestadas (quién convoca, qué, cuándo y dónde, para qué, qué traer o saber), revisado contra las cinco fallas del gimnasio 2. En el idioma del que lo lee.</p>
+  <textarea id="r5" placeholder="La delegación de... invita a... el día... a las... en... Traer... Dudas: con..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · Mi prompt del duelo</h2>
+  <p class="porque">La consigna del viernes: el aviso público de la inauguración (viernes 27 de noviembre, en la presa). Escribe el mejor prompt que tu equipo pueda darle a la IA: contexto, público, formato, tono. Recuerda qué no se le suelta: nombres de personas no; los datos que le des, verificados por ti.</p>
+  <textarea id="r6" placeholder="Escribe un aviso para... El público es... Debe incluir... El tono es... No debe..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · Mi cacería del semestre</h2>
+  <p class="porque">Del registro que el grupo alimenta desde agosto: las tres fallas de la IA que más veces cazaste, cada una con un ejemplo. Esta lista es tu arma para el duelo: lo que sabes que la máquina hace por default, tú lo ves en tres segundos.</p>
+  <textarea id="r7" placeholder="1. Inventa datos cuando... (ej.: ...) / 2. Promete... (ej.: ...) / 3. Su tono... (ej.: ...)" style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · Después del duelo</h2>
+  <p class="porque">Se llena el viernes, con los dos avisos enfrente. Qué hizo mejor la IA (dilo sin miedo: reconocerlo también es criterio), qué le cazaste, qué se queda en tu versión final. Y tu veredicto del semestre: para qué sí la usarías en un proyecto real, para qué no, y qué no le soltarías nunca.</p>
+  <textarea id="r8" placeholder="La IA hizo mejor... / Le cacé... / Mi aviso final se queda con... / Mi veredicto: sí para..., no para..., nunca..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>El semáforo (bloque 1) se copia al tablero de obra del aula: ahí vive, a la vista, no en el cuaderno. El aviso (bloque 5) se escribe a mano y se le lee en voz alta a alguien que no sea del curso: si pregunta algo de las cinco, se corrige antes de pegarlo. La cacería (bloque 7) se cosecha del cuaderno del registro: hojéalo desde agosto, cuenta las fallas repetidas y anota las tres campeonas con su ejemplo.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['El semáforo honesto de mi frente', 'Lo que falta, con nombre y fecha', 'El recorte con criterio', 'Mis públicos', 'Mi aviso', 'Mi prompt del duelo', 'Mi cacería del semestre', 'Después del duelo'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MI RECTA FINAL Y MI AVISO · Semana 14', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

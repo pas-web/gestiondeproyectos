@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S8 · El objetivo en la lupa</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .objetivo { font-family:Georgia,serif; font-style:italic; background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; color:var(--profundo); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El objetivo en la lupa</h1>
+<p class="sub">Gimnasio · Semana 8 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Siete objetivos como los que llegan a las convocatorias de verdad. Cada uno reprueba una de las cinco pruebas (bueno, uno se salva y a otro le falta casi todo). Diagnostica cuál.</p>
+
+<div class="intro">
+  Las cinco pruebas: <strong>específico</strong> (¿qué exactamente?), <strong>medible</strong> (¿cuánto y desde cuánto?), <strong>alcanzable</strong> (¿con este equipo, este dinero, este plazo?), <strong>relevante</strong> (¿responde a lo que la gente pidió?) y <strong>tiempo</strong> (¿para cuándo?). Un objetivo que reprueba una, rebota entero.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe el propósito de tu componente y pásalo por las cinco pruebas, una por renglón, con honestidad de dictaminador. Reescríbelo después de cada prueba que repruebe. El que llegue vivo a la quinta es el que va a tu marco.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { o: '"Mejorar las condiciones de la orilla de la presa."',
+      ops: ['Le falta tiempo', 'No es específico: "mejorar" y "condiciones" pueden significar cualquier cosa', 'No es alcanzable', 'No es relevante'],
+      resp: 1,
+      pista: 'Si tu equipo cumple este objetivo pintando una piedra, ¿alguien podría reclamarles? Esa es la falla.',
+      exp: 'El deseo con verbo: "mejorar las condiciones" lo cumple igual una banca que un letrero que nada. Un objetivo específico nombra el cambio concreto: qué zona, qué uso, qué gente. La niebla no es humildad: es la puerta por donde después se escapan los proyectos ("técnicamente sí mejoramos algo").' },
+    { o: '"Aumentar el uso de la zona de sombra del sabino por parte de las familias de La Florida."',
+      ops: ['No es específico', 'No es relevante', 'No es medible: no dice cuánto, ni desde cuánto, ni cómo se contaría', 'Le sobra ambición'],
+      resp: 2,
+      pista: 'Ya dice qué y quiénes. ¿Pero cuánto es "aumentar"? ¿De 3 familias a 4 ya cumpliste?',
+      exp: 'Específico sí; medible no: sin línea base ("hoy van ~3 familias los domingos") ni meta ("al menos 10 en domingos de noviembre") el "aumento" es indemostrable e inatacable a la vez. La medibilidad empieza por conocer el punto de partida, y ese dato ustedes YA lo tienen: los conteos del reconocimiento y de la consulta son la línea base. Úsenla: pocos equipos llegan a un dictamen con línea base propia.' },
+    { o: '"Que el 100% de las familias de La Florida visite la orilla cada semana a partir de octubre."',
+      ops: ['No es medible', 'No es alcanzable: ninguna conducta humana convierte al cien, y menos en un mes', 'No es específico', 'Le falta tiempo'],
+      resp: 1,
+      pista: 'Número tiene, fecha tiene. Ahora pregúntate: ¿el cien por ciento? ¿Todas las familias? ¿CADA semana?',
+      exp: 'Medible y con fecha, pero de fantasía: ni la fiesta del ejido junta al cien por ciento, y este objetivo lo pide semanal. Un objetivo inalcanzable no motiva: documenta tu futuro incumplimiento. La versión honesta apunta al peldaño "mejor" de tu escalera, no al milagro. Los dictaminadores veteranos tachan el 100% en automático: nadie que haya operado un proyecto lo escribe.' },
+    { o: '"Alcanzar 500 me gusta en la página del proyecto antes de noviembre."',
+      ops: ['No es medible', 'No es alcanzable', 'No es relevante: nada en la consulta pidió likes; la métrica no conecta con el problema', 'No es específico'],
+      resp: 2,
+      pista: 'Específico, medible, con fecha... y sin embargo. ¿Qué pidió la gente de La Florida: sombra o likes?',
+      exp: 'La métrica vanidosa: cumple cuatro pruebas y reprueba la que importa. Ninguna tarjeta del muro dice "queremos presencia digital". La prueba de relevancia se hace contra la evidencia de consulta, no contra el entusiasmo del equipo. Ojo: la difusión PUEDE ser un medio dentro de una cadena (como el video de la semana pasada); lo que no puede es ser el propósito.' },
+    { o: '"Instalar la señalética de la zona de juego infantil."',
+      ops: ['No es relevante', 'Le falta tiempo (y de paso, es un producto vestido de objetivo)', 'No es medible', 'No es alcanzable'],
+      resp: 1,
+      pista: 'Dos fallas conviven aquí. La evidente: ¿para cuándo? La de fondo: ¿esto es un cambio o una entrega?',
+      exp: 'Sin fecha, un objetivo es una intención flotante ("se instala... algún día"). Y hay falla de fondo: instalar señalética es un PRODUCTO; como propósito se queda corto (la prueba de la semana pasada: se cumple con puro dinero, sin que nadie cambie de conducta). Como renglón de producto en tu marco, perfecto, con su fecha; como propósito, rebota.' },
+    { o: '"Que al menos 15 personas usen la zona del sabino entre las 16:00 y las 18:00 en tres domingos consecutivos de noviembre, partiendo de los conteos de agosto."',
+      ops: ['No es alcanzable', 'No es relevante', 'Le falta tiempo', 'Se salva: pasa las cinco pruebas'],
+      resp: 3,
+      pista: 'Pásalo por las cinco, una por una, antes de contestar.',
+      exp: 'Específico (zona, horario, conducta), medible (15 personas, con línea base declarada), alcanzable (mira la escala: quince, no ciento cincuenta), relevante (el uso de la zona de estar ES lo que la consulta pidió) y con tiempo (domingos de noviembre). Nota lo que NO tiene: adjetivos. Los objetivos que aguantan la lupa suelen ser aburridos de leer y cómodos de defender: exactamente al revés que los discursos.' },
+    { o: '"Incrementar la producción de chile habanero."',
+      ops: ['Solo le falta el tiempo', 'Solo le falta ser medible', 'Le falta casi todo: empieza por lo específico y ve prueba por prueba', 'Se salva: es directo y claro'],
+      resp: 2,
+      pista: 'Es el objetivo con el que empezamos el jueves. ¿Cuántas pruebas pasa tal como está?',
+      exp: 'El clásico del taller: reprueba specific (¿de quién, dónde, qué del proceso?), measurable (¿cuánto?), no declara si es alcanzable, la relevancia queda en el aire (¿quién lo pidió?) y no tiene fecha. No se corrige de un jalón: se corrige por capas, reescribiendo el mismo enunciado prueba por prueba, hasta llegar a algo como "que las 12 productoras del grupo X incrementen 15% su producción de habanero para el segundo trimestre, respecto al ciclo anterior". Así se afila un objetivo: con paciencia de herrero, no con inspiración.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué prueba reprueba este objetivo?</div>' +
+               '<span class="objetivo">' + c.o + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

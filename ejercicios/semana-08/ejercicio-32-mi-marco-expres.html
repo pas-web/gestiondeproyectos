@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S8 · Mi marco exprés</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi marco exprés</h1>
+<p class="sub">Gimnasio · Semana 8 · Acompaña el taller del jueves y deja listo el prompt del duelo 2.</p>
+
+<p>El marco de tu componente en una hoja: cuatro renglones que ya conoces (vienen de tu cadena) y las tres columnas que los vuelven auditables. Al final, el prompt del duelo. La versión que va al expediente es la del lunes, post-duelo: esta es tu materia prima.</p>
+
+<div class="reglas">
+  Las reglas duras de la semana: el propósito habla de <strong>gente haciendo algo distinto</strong> (no de obras) · <strong>dos indicadores</strong>, uno de producto y uno de resultado, con número, fecha y línea base · el medio de verificación se decide <strong>antes</strong> de ejecutar · los supuestos son <strong>externos</strong> · lo que no se puede verificar <strong>no se promete</strong>.
+</div>
+
+<div class="caso">
+  <h2>1 · El fin (a lo que contribuyes)</h2>
+  <p class="porque">El cambio grande del que tu componente es una pieza. Verbo "contribuir": aquí no se promete, se apunta.</p>
+  <textarea id="r1" placeholder="Ej.: Contribuir a que la orilla de la presa vuelva a ser el espacio de encuentro de La Florida..." style="min-height:60px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · El propósito (el cambio que sí te toca)</h2>
+  <p class="porque">Pasado por las cinco pruebas. La de fuego: ¿aparece la gente haciendo algo distinto, con número, línea base y fecha?</p>
+  <textarea id="r2" placeholder="Ej.: Que al menos 15 personas usen la zona del sabino entre 16:00 y 18:00 en tres domingos consecutivos de noviembre (línea base: ~4 personas, conteos de agosto)..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · Los productos (lo que entregas)</h2>
+  <p class="porque">Contables y con fecha. Dos o tres, no diez: es la versión exprés.</p>
+  <textarea id="r3" placeholder="Ej.: 1) Zona habilitada (3 asientos de piedra del lugar + sombra de malla de 20 m²) al 30 de octubre. 2) Señalética de uso instalada al 6 de noviembre..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Las actividades clave</h2>
+  <p class="porque">Solo las que sostienen los productos, en orden. El detalle fino vivirá en el cronograma de la solicitud.</p>
+  <textarea id="r4" placeholder="Ej.: Cotizar y comprar malla y postes → acordar faena con la delegación → preparar el terreno → instalar → colocar señalética..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · Mis dos indicadores con escalera</h2>
+  <p class="porque">Uno de producto y uno de resultado, cada uno con sus tres peldaños: bien (el piso digno), mejor (lo esperado), excelente (el techo honesto).</p>
+  <div class="modelo">Modelo: Resultado: uso de la zona en domingos de noviembre, 16:00-18:00. Bien: 8 personas promedio · Mejor: 15 · Excelente: 25 y al menos una reunión familiar completa. (Línea base: 4, conteos de agosto.)</div>
+  <textarea id="r5" placeholder="Indicador de producto con su escalera... / Indicador de resultado con su escalera..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · Los medios de verificación</h2>
+  <p class="porque">Para cada indicador: qué documento existirá, quién lo produce y cuándo. Baratos y contundentes. Si cuesta más que la actividad, es fantasía.</p>
+  <textarea id="r6" placeholder="Ej.: Hojas de conteo fechadas (las llena quien tenga el rol de registro cada domingo), fotos con fecha, acta de entrega con la delegación..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · Los supuestos (columna)</h2>
+  <p class="porque">Los "siempre que" de tu cadena, ya depurados: solo los externos. Si algo depende de tu equipo, no va aquí: va a tu cronograma.</p>
+  <textarea id="r7" placeholder="Ej.: Que la temporada de lluvia no cubra la zona antes de diciembre · que la delegación sostenga el acuerdo de uso · que el proveedor entregue la malla en fecha..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · El prompt del duelo 2</h2>
+  <p class="porque">Pídele a la IA el marco lógico completo de tu componente, con las tres columnas. Dale territorio y restricciones. Y esta vez fíjate especialmente en qué inventa en las columnas de indicadores y verificación.</p>
+  <textarea id="r8" placeholder="Escribe el prompt completo, como se lo dará tu equipo a la IA el viernes..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Dibuja la tabla completa en una doble página: 4 renglones, 3 columnas. Se llena a lápiz, porque el duelo del viernes y el reintento del reto la van a mover. El bloque 8 se entrega al profe el jueves por la noche: es el seguro del duelo.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['El fin', 'El propósito', 'Los productos', 'Las actividades clave', 'Mis dos indicadores con escalera', 'Los medios de verificación', 'Los supuestos', 'El prompt del duelo 2'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MI MARCO EXPRÉS · Semana 8', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

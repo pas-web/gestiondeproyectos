@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S2 · Las puertas ocultas</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .situacion { font-size:1.05rem; color:var(--profundo); margin:.2rem 0 .7rem; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Las puertas ocultas</h1>
+<p class="sub">Gimnasio · Semana 2 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis situaciones atoradas, de las que pasan de verdad. En cada una hay varias salidas posibles; elige la movida con más agencia: la que crea una opción nueva en lugar de esperar, repetir o rendirse.</p>
+
+<div class="intro">
+  Recuerda los dos músculos: <strong>notar</strong> que la opción existe y <strong>actuar</strong>. La movida agéntica casi siempre es concreta, tiene destinatario y se puede hacer esta semana.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe una situación tuya que esté atorada ahorita (de la escuela, del rancho, de tu proyecto). Lista TODAS las salidas que se te ocurran, hasta las malas, mínimo seis. Subraya la que crea una interacción nueva. Esa es tu puerta; ponle fecha.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { s: 'Necesitas hablar con la encargada del vivero municipal para conseguir planta nativa. Le escribiste hace dos semanas y no contesta.',
+      ops: ['Esperar otra semana, ha de andar ocupada',
+            'Reenviar el mismo correo, a lo mejor no lo vio',
+            'Presentarte en el vivero un martes temprano, con tu pregunta concreta en una hoja',
+            'Decirle al profe que la contacte él, que a él sí le contesta'],
+      resp: 2,
+      pista: '¿Cuál de las cuatro crea una interacción NUEVA en vez de repetir la que ya no funcionó o pasarle el problema a otro?',
+      exp: 'Presentarse cambia el canal y el resultado: un correo se ignora fácil, una persona con una pregunta concreta enfrente, no. Ojo al detalle: llegar con la pregunta lista y por escrito respeta el tiempo de la otra persona. Eso también es agencia.' },
+    { s: 'La convocatoria que le interesa a tu equipo pide el aval de una organización constituida. No conocen ninguna.',
+      ops: ['Descartar la convocatoria, ese requisito no depende de ustedes',
+            'Poner el nombre de una organización que suena conocida y ver si cuela',
+            'Preguntar en el grupo si alguien conoce alguna, y si nadie, ya ni modo',
+            'Mapear qué organizaciones trabajan en la región y pedir cita con dos para plantearles el aval'],
+      resp: 3,
+      pista: 'Dos opciones se rinden, una hace trampa. La que queda convierte el requisito en una lista de tareas.',
+      exp: 'El requisito imposible casi siempre es un requisito que nadie ha trabajado. Mapear y pedir cita convierte la pared en puerta, y de paso agranda tu superficie de suerte: esa organización te va a volver a servir. La opción de inventar el dato ni se toca: la confianza no se recupera con otra solicitud.' },
+    { s: 'Quieres aprender a armar presupuestos en hoja de cálculo y en el campus no hay ningún curso de eso.',
+      ops: ['Esperar a que la coordinación abra un curso, ya se pidió',
+            'Pedirle al profe que le dedique varias clases completas al tema',
+            'Buscar un tutorial, practicar con el presupuesto real de tu equipo y llegar con dudas concretas a asesoría',
+            'Dejar que esa parte la haga tu compañera que sí sabe, cada quien sus fuerzas'],
+      resp: 2,
+      pista: 'Asume que todo es aprendible. ¿Cuál opción te deja la habilidad A TI, y esta misma semana?',
+      exp: 'Aprender con el material real del proyecto es doblemente eficiente: sale el presupuesto y sale la habilidad. Delegar para siempre en quien ya sabe funciona hasta el día que esa persona no está. Y el contrato de gestión pide justo esto: una habilidad con cómo y cuándo.' },
+    { s: 'En las reuniones de tu equipo se discute mucho y no se decide nada. La fecha de entrega se acerca.',
+      ops: ['Esperar: alguien tiene que tomar la iniciativa tarde o temprano',
+            'Proponer una decisión concreta con fecha: "si nadie ve problema, hacemos X y lo revisamos el jueves"',
+            'Comentarlo con otros compañeros, a ver si alguien más lo nota',
+            'Decidir tú por tu cuenta y hacerlo sin avisar, para que la cosa avance'],
+      resp: 1,
+      pista: 'Una opción espera, otra murmura, otra atropella. ¿Cuál mueve al equipo sin pasarle por encima?',
+      exp: 'La propuesta concreta con salida ("si nadie ve problema...") destraba sin imponer: cualquiera puede objetar, pero el silencio ya no congela. Hacerlo todo tú sin avisar avanza hoy y cuesta caro mañana: los proyectos son de equipos, no de héroes.' },
+    { s: 'Te enteras de que una investigadora de la UAQ publicó justo sobre el tema de tu proyecto.',
+      ops: ['Leer sus artículos y citarlos, con eso basta',
+            'Escribirle un correo de cuatro líneas: quién eres, qué haces y UNA pregunta concreta',
+            'Pedirle al profe que te la presente cuando se pueda',
+            'Seguirla en redes para estar al tanto de lo que suba'],
+      resp: 1,
+      pista: 'Tres opciones la miran de lejos. Una conversa. Las mejores colaboraciones salen de conversaciones que casi no pasan.',
+      exp: 'El correo corto con una pregunta concreta es la herramienta más barata de la gestión: cinco minutos de escribirlo y la posibilidad de un aliado experto. El peor caso es el silencio, y el silencio ya lo tenías. Anota el intento en tu anti-CV si no contesta: también cuenta.' },
+    { s: 'Le platican al delegado una idea preliminar y responde: "eso ya se intentó hace años y no funcionó".',
+      ops: ['Darle la razón y cambiar de tema, él conoce la historia',
+            'Preguntarle qué pasó aquella vez, qué falló y qué tendría que ser distinto para que ahora sí',
+            'Discutirle ahí mismo con los datos que traes, para que vea que ahora es diferente',
+            'Buscar a otra autoridad que sí se entusiasme con la idea'],
+      resp: 1,
+      pista: 'El "ya se intentó" no es una pared: es un archivo histórico parado enfrente de ti. ¿Cómo se abre un archivo?',
+      exp: 'Quien te dice "ya se intentó" tiene la información más valiosa del proyecto: el diagnóstico del fracaso anterior. Preguntar convierte al escéptico en fuente, y a veces en aliado. Brincártelo para buscar a alguien más entusiasta deja al escéptico de fuera... y los proyectos los tumban los de fuera.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ' + c.s + '</div>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

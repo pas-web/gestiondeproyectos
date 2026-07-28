@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S2 · Mi primer no</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; font-size:1.15rem; color:var(--profundo); margin:.1rem 0 .4rem; }
+  textarea { width:100%; min-height:90px; padding:.6rem; border:1px solid var(--borde); border-radius:8px; font:inherit; font-size:.98rem; background:#FDFDFC; resize:vertical; }
+  button { font:inherit; border:none; border-radius:8px; padding:.55rem 1rem; cursor:pointer; font-weight:bold; margin:.4rem .4rem 0 0; }
+  .btn-ej { background:var(--marca); color:#fff; }
+  .btn-copiar { background:#fff; color:var(--marca); border:2px solid var(--marca); }
+  .ejemplo { display:none; background:#F7F1E3; border-left:4px solid var(--arena); padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.6rem; font-size:.95rem; }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.45rem; }
+  body.proyector textarea { font-size:1.3rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi primer no</h1>
+<p class="sub">Gimnasio · Semana 2 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Vas a diseñar una petición real esperando que te la nieguen. No es broma ni castigo: es el entrenamiento más directo de agencia que existe. Si te dicen que sí, ganaste algo que querías. Si te dicen que no, ganaste una entrada de anti-CV y el no dejó de darte miedo. No hay forma de perder, salvo no pedir.</p>
+
+<div class="reglas">
+  Las tres reglas de la petición: <strong>1)</strong> pide algo que de verdad te sirva (a ti o a tu proyecto), <strong>2)</strong> pídelo a una persona concreta, con nombre, <strong>3)</strong> que sea lo bastante grande para esperar un no. Pedir lo seguro no entrena nada.
+</div>
+
+<div class="caso">
+  <h2>Paso 1 · Qué vas a pedir y a quién</h2>
+  <p>Algo útil y un poco fuera de tu alcance: una entrevista, un préstamo de material, un permiso, una asesoría, un descuento, acceso a un lugar. Revisa tu contrato de gestión: tu lista de personas puente es cantera pura.</p>
+  <textarea id="r1" placeholder="Voy a pedir: ...&#10;Se lo voy a pedir a: (nombre y por qué esa persona)"></textarea>
+  <button class="btn-ej" onclick="toggle('e1')">Compara con un ejemplo</button>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+  <div class="ejemplo" id="e1">Un ejemplo: "Voy a pedir una visita guiada al rancho de la familia que puso el sistema silvopastoril en la carretera a Jalpan, para ver cómo lo financiaron. Se lo voy a pedir al hijo, que fue compañero de mi primo en el bachillerato: es la puerta que tengo". Fíjate: útil, persona concreta, y bien puede decir que no.</div>
+</div>
+
+<div class="caso">
+  <h2>Paso 2 · Redacta la petición</h2>
+  <p>Cuatro líneas bastan: quién eres, qué haces, qué pides exactamente y para cuándo. Sin rodeos y sin disculparte por existir ("perdón que te moleste..." debilita; "te escribo porque..." abre).</p>
+  <textarea id="r2" placeholder="Escribe aquí la petición tal como la dirías o la mandarías..."></textarea>
+  <button class="btn-ej" onclick="toggle('e2')">Compara con un ejemplo</button>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+  <div class="ejemplo" id="e2">Un ejemplo: "Buenas tardes, don Ismael. Soy estudiante de Producción Agropecuaria en el campus Concá y estamos armando un proyecto para la presa de La Florida. Le escribo porque usted organizó la faena del camino en 2023 y me gustaría hacerle cinco preguntas sobre cómo juntó a la gente. ¿Tendría veinte minutos la próxima semana, el día que a usted le acomode?". Concreto, con fecha, y fácil de contestar.</div>
+</div>
+
+<div class="caso">
+  <h2>Paso 3 · El plan del no</h2>
+  <p>Escribe qué vas a hacer si te dicen que no (o si no contestan, que es el no que más duele). Pista: un no casi siempre trae información adentro, si preguntas por qué.</p>
+  <textarea id="r3" placeholder="Si me dicen que no: ...&#10;Si no me contestan en una semana: ..."></textarea>
+  <button class="btn-ej" onclick="toggle('e3')">Compara con un ejemplo</button>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar para mi bitácora</button>
+  <div class="ejemplo" id="e3">Un ejemplo: "Si me dice que no, le pregunto si conoce a alguien más que me pueda contar, y anoto la entrada en mi anti-CV. Si no contesta en una semana, le mando un solo recordatorio corto y luego lo intento en persona el día de plaza. Y a la campana del jueves, con la frente en alto".</div>
+</div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Los tres pasos en una hoja: QUÉ PIDO Y A QUIÉN, LA PETICIÓN (redactada completa) y EL PLAN DEL NO. Llévala el jueves: la campana del no se alimenta de estas hojas.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  function toggle(id) { var e = document.getElementById(id); e.style.display = e.style.display === 'block' ? 'none' : 'block'; }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { alert('Primero escribe tu respuesta.'); return; }
+    var done = function(){ var s=document.createElement('span'); s.className='aviso-copiado'; s.textContent='Copiado'; btn.after(s); setTimeout(function(){s.remove();},2500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(done); }
+    else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(); }
+  }
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S17 · La caja de herramientas</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .enunciado { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.98rem; font-style:italic; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La caja de herramientas</h1>
+<p class="sub">Gimnasio · Semana 17 · Práctica libre, sin registro y sin nota.</p>
+
+<p>El curso se acaba; la caja te la llevas. Seis situaciones que te van a pasar (o le van a pasar a alguien cerca de ti) en los próximos años, sin proyecto escolar de por medio. Reconoce qué herramienta del semestre pide cada una: esa es la prueba de que ya son tuyas.</p>
+
+<div class="intro">
+  La caja completa, por si quieres repasarla antes: escuchar sin prometer · la cadena (¿por qué crees que va a funcionar?) · el marco y sus dos indicadores · el mapa de poder y el trato con plan B · presupuesto con cotizaciones y cronograma que le cree al cielo · RACI y la faena · el libro y la regla de a dos · el velorio (riesgo, supuesto o chamba) · avance real vs contado · el aviso que sí avisa · línea base y el dato con decisión · el acuerdo de cuidado · rendir con el libro · el radar · el anti-CV y cortejar el rechazo.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe la situación REAL más probable de tu propio 2027 (la parcela, el grupo, el trabajo, la beca) y diagnostícala tú mismo: qué herramienta pide, cómo la aplicarías en tres pasos y qué te sabotearía (esa parte también la sabes hacer: es tu velorio). Esa página es la primera de tu vida de gestor sin profesor, y es buen material para el bloque 8 de tu conferencia.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: 'Tu familia decide poner un puesto de quesadillas en las fiestas del pueblo "a ver cómo sale". Ya compraron lona y comal, pero nadie ha preguntado cuánta gente pasa por esa calle ni qué se vende ya en las otras esquinas.',
+      ops: ['El libro del fondo: hay dinero de por medio', 'Escuchar antes de construir + la cadena: primero mirar y preguntar (qué se vende, qué falta, cuánta gente pasa), luego la apuesta causal de por qué ESTO va a funcionar; el comal se compró antes que la pregunta, como los que diseñan de oídas', 'El aviso comunitario', 'El velorio: ya se va a morir'],
+      resp: 1,
+      pista: 'Compraron la solución antes de entender la situación. ¿Qué hizo tu curso ANTES de diseñar nada en la presa, allá en agosto?',
+      exp: 'El orden de agosto: primero se escucha (la consulta, los conteos, mirar como gestor), luego se apuesta (la cadena: si vendemos X aquí, entonces... porque...). La familia hizo lo que casi todo el mundo hace: enamorarse de la solución (el comal) antes de entender la situación (esa calle, esa competencia, ese público). No hace falta un semestre para arreglarlo: una tarde de pararse en la esquina a contar (tu línea base accidental) y tres preguntas a quienes ya venden. La versión de dos pesos del needfinding vale igual que la cara: mirar antes de meter dinero. Y después, si los números animan, la cadena de por qué las quesadillas de ustedes y no las de junto.' },
+    { r: 'En el comité de agua de tu comunidad hay pleito: la limpieza del tanque no se hizo y todos juran que le tocaba a otro. "Yo pensé que iban los de la mesa", "yo pensé que el fontanero", "yo pensé que era hasta diciembre".',
+      ops: ['El radar de convocatorias: falta dinero', 'La línea base: nadie midió el tanque', 'RACI puro: la tarea huérfana del "yo pensé"; una sola persona responsable con nombre y fecha, lo demás son consultados e informados; el pleito no es de gente mala sino de tarea sin dueño', 'El anti-CV: hay que aceptar el fracaso'],
+      resp: 2,
+      pista: '"Yo pensé que le tocaba a otro" es la frase de un ejercicio entero de tu semana 12. ¿Cómo se llamaba la falla y cuál era su antídoto?',
+      exp: 'El pleito del "yo pensé", diagnosticado en S12: la tarea huérfana. Nota lo más importante del diagnóstico: nadie es mala gente aquí, la tarea simplemente no tenía dueño, y las tareas sin dueño no se hacen aunque haya nueve personas de buena voluntad alrededor (de hecho, MÁS gente = MÁS huérfana: todos piensan que va otro). El arreglo cuesta media hoja: la lista de tareas del comité con UNA persona responsable por tarea (R con nombre, no con cargo vago), fecha, y quién nomás se informa. Y la lección de fondo que la faena te enseñó: casi todo lo que las comunidades llaman "falta de compromiso" es en realidad falta de asignación. El compromiso sobra; el RACI falta.' },
+    { r: 'Te ofrecen entrarle a un "negocio seguro" de venta por catálogo: tu prima jura que "va al 90 por ciento de armar su red" y que "ya casi le llega el primer pago grande". Lleva ocho meses diciendo lo mismo.',
+      ops: ['El aviso que no avisa: le falta difusión', 'Avance contado en versión de bolsillo: el "ya casi" crónico sin nada que tocar, contar o usar; ocho meses al 90 es la señal, y la pregunta que desarma es la de siempre: ¿qué existe hoy que no existía hace un mes?', 'El acuerdo de cuidado', 'La sanción graduada: hablar con ella primero'],
+      resp: 1,
+      pista: 'Ocho meses "al 90". ¿Dónde oíste antes ese número que no se mueve? ¿Y cuál era la pregunta que lo desarmaba?',
+      exp: 'El "ya casi" crónico, versión de bolsillo, y tu semana 14 te dio el detector: el avance real se puede tocar, contar o usar; todo lo demás es reporte. La pregunta que desarma (con cariño, es tu prima) es la del tablero: ¿qué existe hoy que no existía hace un mes? ¿Cuántos pagos reales, de cuánto, con qué comprobante? Si la respuesta son sensaciones ("va agarrando vuelo") y promesas ("el mes que entra"), ya sabes leerlo. Ojo: la herramienta no es para burlarse ni para ganarle la discusión: es para decidir TU dinero con datos y, si se deja, para ayudarle a ella a hacerse la misma pregunta. El gestor no le cree ni le descree a la gente: le pregunta al avance.' },
+    { r: 'Tu grupo consiguió por fin el apoyo para el invernadero comunitario. En la emoción, ya quieren arrancar la construcción el lunes. Nadie ha hablado con el dueño de la parcela de junto (por donde pasa la única entrada de material) ni con la señora que llevaba años pidiendo ese apoyo para otra cosa y perdió.',
+      ops: ['El presupuesto: hay que recotizar', 'El monitoreo: falta la línea base', 'El mapa de poder antes que la obra: el vecino del paso es un involucrado clave sin saludar y la señora que perdió es una resistencia legítima sin escuchar; dos conversaciones esta semana cuestan nada, dos pleitos en obra cuestan el proyecto', 'El número con argumento'],
+      resp: 2,
+      pista: 'El dinero ya está y la emoción también. ¿Qué se mapeaba en tu semana 9 ANTES de mover un solo bulto, y qué pasaba con los durmientes y las resistencias que nadie saludaba?',
+      exp: 'La política del proyecto, S9: los proyectos son gente antes que fierros. El vecino del paso es el involucrado clave de manual (zona: puede parar la obra con cerrar una puerta) y nadie lo ha saludado; la señora que perdió es resistencia legítima (su molestia tiene razones, no maldad) y las resistencias se escuchan PRIMERO, no cuando ya truenan. Las dos conversaciones de esta semana cuestan dos tardes y un café; los dos pleitos en plena obra cuestan el paso cerrado y medio pueblo tomando partido. Y el trato con el vecino se hace completo, como aprendiste: pido, ofrezco, le importa, plan B, y a poder ser con papel. La emoción del apoyo ganado es el momento más peligroso del ciclo: es cuando los equipos se saltan a la gente.' },
+    { r: 'La nueva mesa de la asociación de padres quiere "poner orden": propone que quien no asista a las faenas de la escuela pague $300 de multa a la primera falta, "para que se lo piensen".',
+      ops: ['El libro del fondo: falta transparencia en las multas', 'La sanción desproporcionada de Ostrom: el castigo tan grande que nadie se lo aplicará a un vecino, y la regla nacerá muerta; la que funciona es graduada: primero se habla, luego escala; una sanción chica que sí se aplica sostiene más que una enorme que no', 'El duelo IA: que lo decida la máquina', 'El recorte con criterio'],
+      resp: 1,
+      pista: '¿Quién le va a cobrar $300 a su comadre por faltar UNA vez? Si nadie se atreve a aplicar el castigo, ¿cuánto ordena la regla? Esto lo viste en el vivero del gimnasio de la semana 15.',
+      exp: 'La regla que muere de severa, diagnosticada por Ostrom y por tu gimnasio de S15 (el vivero de los $500). La mesa confunde severidad con seriedad: la multa grande se siente firme el día que se vota y es letra muerta el día que toca cobrársela a la comadre, porque aplicarla cuesta más en relación que lo que ordena en conducta. Y una regla que se anuncia y no se aplica es peor que ninguna: enseña que las reglas de esta mesa no van en serio. La contrapropuesta que puedes llevar a esa junta (con el prestigio de quien ya administró un común auditado): sanción graduada (primera falta se platica, segunda se repone con tarea equivalente, tercera va a la asamblea), vigía claro de la lista, y la regla votada por los padres, no decretada por la mesa. Chica y aplicada gana a grande y de adorno.' },
+    { r: 'Encuentras la beca perfecta para estudiar lo que quieres. La lees tres veces. Cumples todo. Y ahí te quedas: llevas dos semanas sin mandar la solicitud "porque seguro le llega gente con mejores promedios" y "para qué, si no me la van a dar".',
+      ops: ['La elegibilidad primero: mejor revisar los requisitos otra vez', 'El plan de monitoreo: falta el indicador', 'El anti-CV y cortejar el rechazo: el no ya lo tienes; la solicitud que no se manda es el único rechazo garantizado, y detrás de todo CV hay una lista más larga de tiros fallados por gente que sí tiró', 'La regla del proyecto primero: esa beca te deformaría'],
+      resp: 2,
+      pista: 'Cumples todo y no mandas. El problema no es la beca: es el miedo al no. ¿Qué documento arrancaste en la semana 2 exactamente para esto, y qué decía la campana de cada jueves?',
+      exp: 'La herramienta más personal de la caja, la de la semana 2: el no ya lo tienes; la solicitud sin mandar es el único rechazo con garantía del cien por ciento. Todo el rito de la campana existió para reescribirte esta escena: el rechazo no es veredicto sobre ti, es evidencia de que jugaste, y tu anti-CV (como el de aquel sociólogo con sus nueve universidades) es la lista de la que algún día vas a estar orgulloso. La aritmética del gestor es fría: mandar cuesta una tarde y compra una probabilidad; no mandar cuesta nada y compra un cero seguro. "Seguro le llega gente mejor" es una hipótesis sin datos, y tú ya no trabajas con hipótesis sin datos. Manda la solicitud. Si sale el no, a la campana y al anti-CV, y el radar ya tiene la siguiente. Así se vive este oficio: pidiendo.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué herramienta pide esta situación?</div>' +
+               '<span class="enunciado">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

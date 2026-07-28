@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S13 · ¿Riesgo, supuesto o chamba?</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .enunciado { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.98rem; font-style:italic; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>¿Riesgo, supuesto o chamba?</h1>
+<p class="sub">Gimnasio · Semana 13 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Siete frases que aparecen en velorios, marcos y tableros, casi siempre en la columna equivocada. Clasifícalas bien, porque cada categoría se trata distinto: el riesgo se vigila, el supuesto se revisa, y la chamba se hace.</p>
+
+<div class="intro">
+  El filtro de dos preguntas: ¿depende de tu equipo? Sí → es <strong>chamba</strong> (va al RACI, con nombre). No → ¿tu proyecto lo necesita cierto para funcionar? Sí → es <strong>supuesto</strong> (va al marco, con vigía). Es algo que puede pasar y dañar → es <strong>riesgo</strong> (va al tablero, con vigía y plan B).
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Toma la lista completa de tu velorio del jueves y repártela en tres columnas: riesgo / supuesto / chamba. La columna de chamba se vacía al RACI esta misma semana (por eso duele más). Las otras dos van al tablero con vigía. Una lista de velorio bien repartida deja de dar miedo: cada renglón ya sabe a dónde ir.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '"Que llueva la semana del colado."',
+      ops: ['Riesgo: externo, puede pasar, daña una actividad concreta; se le pone vigía (quien mira el cielo y el pronóstico) y plan B (la fecha alterna que tu cronograma ya trae)', 'Supuesto: el proyecto necesita que no llueva', 'Chamba: conseguir lonas', 'Ninguna: el clima no se gestiona'],
+      resp: 0,
+      pista: '¿Depende del equipo? No. ¿El proyecto lo necesita FALSO para funcionar, o más bien puede pasar y dañar una actividad puntual?',
+      exp: 'Riesgo de manual: externo, probable en temporada, con daño concreto (el colado no se hace sobre mojado) y, lo más importante, con respuesta operativa posible: vigía y fecha B. La diferencia fina con el supuesto: el supuesto es una condición de fondo que el proyecto necesita cierta todo el tiempo; el riesgo es un evento que puede caer un día específico. La lluvia de una semana es evento: riesgo. Que la temporada entera no inunde la zona: eso sí era supuesto, y estaba en tu marco desde septiembre.' },
+    { r: '"Que la delegación sostenga el acuerdo de uso del espacio cuando cambie la delegada el año que entra."',
+      ops: ['Riesgo: el cambio de autoridad puede pasar', 'Supuesto: condición externa de fondo que el proyecto necesita cierta para seguir existiendo; se revisa en cada cambio de autoridad y se apuntala con papel (el acuerdo escrito sobrevive a las personas)', 'Chamba: caerle bien a la próxima delegada', 'Ninguna: eso no se puede hacer nada'],
+      resp: 1,
+      pista: '¿Es un evento de un día o una condición de fondo que debe seguir siendo cierta? ¿Y qué proyecto difunto del gimnasio 1 murió exactamente de esto?',
+      exp: 'Supuesto, y de los que más esquelas firman (el vivero del gimnasio 1 murió de este exactamente: el acuerdo del pozo con la mesa que salió). El cambio de autoridad es normal y esperable; lo que el proyecto necesita es que el ACUERDO sobreviva al cambio, y eso se apuntala de dos maneras que ya conoces: papel (el acuerdo escrito con la institución, no con la persona) y vigía con calendario (el supuesto se revisa cada cambio de mesa, no cuando truena). Un supuesto con papel y vigía casi se vuelve chamba: esa es la dirección correcta del movimiento.' },
+    { r: '"Que no se nos pase pedir la camioneta del taller con tres días de anticipación."',
+      ops: ['Riesgo: puede pasar que se olvide', 'Supuesto: el proyecto necesita la camioneta', 'Chamba: depende cien por ciento del equipo; va al RACI con nombre y fecha, no a ninguna columna de riesgos', 'Las tres a la vez'],
+      resp: 2,
+      pista: 'Aplica la primera pregunta del filtro: ¿de quién depende pedirla a tiempo?',
+      exp: 'Chamba pura, y el enunciado se delata solo: "que no se nos pase" es la manera elegante de no asignarla. Meter chamba a la columna de riesgos es el truco psicológico más viejo del oficio (si es "riesgo", cuando falle será mala suerte y no responsabilidad). El filtro no perdona: depende del equipo → RACI, con R que pide, fecha que dispara el recordatorio y listo. Regla práctica para tu lista del velorio: todo renglón que empiece con "que no se nos olvide" o "que sí hagamos" es chamba disfrazada, y la columna de chamba se vacía esta semana, no se contempla.' },
+    { r: '"Que el precio de la malla siga siendo el de la cotización cuando toque comprarla."',
+      ops: ['Chamba: negociar el precio', 'Riesgo con amortiguador ya construido: el precio puede moverse (externo), y tu presupuesto ya trae las tres defensas: vigencia escrita, imponderables y segunda cotización; el vigía solo confirma antes de comprar', 'Supuesto de fondo del proyecto', 'Ninguna: los precios no se mueven en un mes'],
+      resp: 1,
+      pista: '¿Externo? Sí. ¿Evento posible con daño concreto? Sí. ¿Y qué tres piezas de tu presupuesto de S10 existían exactamente para esto?',
+      exp: 'Riesgo, y de los bien portados: ya viene amortiguado de fábrica si hiciste la tarea de S10 (cotización con vigencia, renglón de imponderables, plan B de proveedor). Vale la pena tenerlo en el tablero de todos modos, con el vigía más barato del mundo: quien va a comprar llama un día antes a confirmar el precio. La lección general: el riesgo maduro no da miedo porque ya tiene sus defensas construidas; el riesgo que asusta es el que se quedó en la lista del velorio sin pasar al tablero. Madurar riesgos es esto: de la lista, al tablero, a la defensa concreta.' },
+    { r: '"Que la gente siga usando el área cuando el curso se acabe y ya nadie del equipo viva pendiente."',
+      ops: ['Chamba: el equipo debe ir los domingos para siempre', 'Riesgo: puede pasar que dejen de ir', 'El supuesto grande del proyecto entero (su propósito depende de él), y todavía no tiene respuesta: la respuesta se construye, y tiene cita en dos semanas (quién cuida qué cuando el curso se acabe)', 'Ninguna: eso ya no es asunto del proyecto'],
+      resp: 2,
+      pista: 'Este enunciado es más grande que los demás: no amenaza una actividad, amenaza el PROPÓSITO. ¿Y de quién va a ser la chamba de cuidarlo en 2027?',
+      exp: 'El supuesto mayor, el que distingue proyectos de obras: que el cambio sobreviva a los que lo empezaron. Nota que no es chamba del equipo (el equipo se va: esa es justo la condición) ni un evento puntual: es la condición de fondo de todo el propósito, y HOY no tiene respuesta completa, lo cual está bien porque el curso lo sabe: la pregunta "¿quién cuida qué cuando el curso se acabe?" tiene su semana entera dentro de dos (los bienes comunes, el después). Por ahora, al velorio le basta con que quede NOMBRADO en el tablero como el supuesto grande. Los proyectos que ni lo nombran son los del gimnasio 1: mueren en la primera ausencia larga.' },
+    { r: '"Que el comité de agua no cambie de opinión sobre el trazo que ya dio por bueno."',
+      ops: ['Riesgo puro: la gente cambia de opinión', 'Chamba: convencerlos cada semana', 'Supuesto apuntalable: la condición es externa, pero su firmeza depende de cómo se cerró (¿visto bueno de palabra o por escrito?) y de mantener la relación viva (informarles el avance sin que pregunten)', 'Ninguna: ya dijeron que sí, punto'],
+      resp: 2,
+      pista: '¿El visto bueno del comité fue papel o palabra? ¿Y qué mantiene firme una opinión ajena: la suerte o la relación?',
+      exp: 'Supuesto apuntalable, el pariente activo del supuesto pasivo: sí es condición externa (la opinión es de ellos), pero su firmeza no es lotería: depende de cómo se cerró (el visto bueno por escrito de tu RACI de S12 pesa más que el de palabra) y de la relación (el comité que recibe la foto del avance cada viernes no cambia de opinión por sorpresa, porque no hay sorpresa). La I de "informado" de tu matriz es, vista así, mantenimiento de supuestos. Casi todos los supuestos sobre personas se apuntalan igual: papel y comunicación de ida, antes de que pregunten.' },
+    { r: '"Que no vaya a haber un accidente en la faena del sábado."',
+      ops: ['Riesgo que se vigila con fe: ojalá no pase', 'Supuesto del proyecto', 'Chamba casi toda: el protocolo de seguridad de esta semana (guantes, cargas de a dos, botiquín, tareas de niños) convierte el grueso del "accidente" en tareas con nombre; lo que quede después de hacerlas, eso sí es riesgo residual con plan de emergencia', 'Ninguna: los accidentes son cosa del destino'],
+      resp: 2,
+      pista: 'Desarma el "accidente" en sus pedazos: la cal en los ojos, la carga mal hecha, el niño con la herramienta. ¿Cuántos de esos pedazos dependen del equipo?',
+      exp: 'La clasificación más importante del ejercicio: el "accidente" en bloque parece riesgo (y da fatalismo: "ojalá no pase"), pero desarmado en pedazos resulta ser casi todo chamba: los lentes para la cal son chamba, las cargas de a dos son chamba, el botiquín surtido y ubicado es chamba, las tareas sin filo para los niños son chamba, todas con nombre en el protocolo de esta semana. Lo que queda DESPUÉS de hacer toda esa chamba (la víbora improbable, el tropiezo tonto) es el riesgo residual, y a ese se le pone plan de emergencia (a quién se llama, cómo se traslada). El fatalismo es caro: casi todo lo que llama destino tenía RACI.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Riesgo, supuesto o chamba?</div>' +
+               '<span class="enunciado">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

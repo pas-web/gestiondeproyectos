@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S6 · Observar sin encuestar</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --mal:#B0483A; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.2rem; margin:1.8rem 0 .5rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .item { background:#fff; border:1px solid var(--borde); border-radius:10px; padding:.8rem 1rem; margin:.6rem 0; }
+  .item .frase { font-weight:bold; color:var(--profundo); margin-bottom:.5rem; }
+  .item button.op { background:#EAF2EF; color:var(--profundo); border:1px solid var(--borde); font-weight:normal; }
+  .item button.op.elegida-bien { background:var(--marca); color:#fff; border-color:var(--marca); }
+  .item button.op.elegida-mal { background:var(--mal); color:#fff; border-color:var(--mal); }
+  button { font:inherit; border:none; border-radius:8px; padding:.5rem .9rem; cursor:pointer; font-weight:bold; margin:.25rem .35rem 0 0; }
+  .pista { display:none; background:#F7F1E3; border-left:4px solid var(--arena); padding:.6rem .9rem; border-radius:0 8px 8px 0; margin-top:.5rem; font-size:.93rem; }
+  .ok { display:none; color:var(--marca); font-weight:bold; margin-top:.4rem; }
+  .constructor { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; }
+  .constructor label { display:flex; gap:.5rem; align-items:flex-start; margin:.45rem 0; font-size:.97rem; }
+  .constructor input[type=checkbox] { margin-top:.3rem; }
+  .constructor input[type=text] { width:100%; padding:.5rem; border:1px solid var(--borde); border-radius:8px; font:inherit; background:#FDFDFC; margin-top:.3rem; }
+  .btn-copiar { background:#fff; color:var(--marca); border:2px solid var(--marca); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { margin-top:.1rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; }
+  body.proyector { font-size:1.45rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Observar sin encuestar</h1>
+<p class="sub">Gimnasio · Semana 6 · Práctica libre, sin registro y sin nota.</p>
+
+<p>El domingo vas a pasar tres horas en la orilla. Lo que anotes vale oro o vale nada, según UNA distinción: conducta (lo que la gente hace) contra opinión (lo que la gente dice). Entrena aquí primero.</p>
+
+<h2>Parte 1 · ¿Conducta u opinión?</h2>
+<p>Marca qué es cada registro. Si fallas, hay pista.</p>
+
+<div class="item" data-resp="c">
+  <div class="frase">"Siete personas se desviaron de su camino para acercarse a las sillas."</div>
+  <button class="op" onclick="responder(this,'c')">Conducta</button>
+  <button class="op" onclick="responder(this,'o')">Opinión</button>
+  <div class="pista">Pista: ¿esto lo VISTE pasar o alguien te lo CONTÓ? Desviarse del camino es algo que los pies hacen solos.</div>
+  <div class="ok">Bien. Se puede contar, se puede fotografiar, nadie lo puede discutir.</div>
+</div>
+
+<div class="item" data-resp="o">
+  <div class="frase">"Una vecina que ha sembrado toda la vida nos dijo que esos árboles no van a pegar ahí, que ese pedazo se inunda en septiembre."</div>
+  <button class="op" onclick="responder(this,'c')">Conducta</button>
+  <button class="op" onclick="responder(this,'o')">Opinión</button>
+  <div class="pista">Pista: es un pronóstico dicho por alguien, no algo que hayas visto pasar. Y probablemente tiene razón (quien siembra ahí conoce las crecidas), pero para tu registro sigue siendo opinión, no conteo.</div>
+  <div class="ok">Bien. Anótala aparte y tómala en serio: el conocimiento local sobre inundaciones vale más que tu croquis. Es opinión para el registro, y es oro para el diseño. Se verifica en septiembre, no en la encuesta.</div>
+</div>
+
+<div class="item" data-resp="c">
+  <div class="frase">"Tres niños jugaron 40 minutos en la rayuela de cal; ninguno pisó los aros."</div>
+  <button class="op" onclick="responder(this,'c')">Conducta</button>
+  <button class="op" onclick="responder(this,'o')">Opinión</button>
+  <div class="pista">Pista: tiene números, minutos y un hecho negativo observable (nadie usó los aros). ¿Encuesta o cronómetro?</div>
+  <div class="ok">Bien. Y fíjate: lo que NADIE usó es tan dato como lo que todos usaron.</div>
+</div>
+
+<div class="item" data-resp="o">
+  <div class="frase">"A la gente le encantó el mirador."</div>
+  <button class="op" onclick="responder(this,'c')">Conducta</button>
+  <button class="op" onclick="responder(this,'o')">Opinión</button>
+  <div class="pista">Pista: "le encantó" es una interpretación tuya. ¿Qué HICIERON que te hizo pensar eso? Eso es lo que se anota.</div>
+  <div class="ok">Bien. En vez de "les encantó": cuántos se pararon ahí, cuántos tomaron foto, cuánto se quedaron.</div>
+</div>
+
+<div class="item" data-resp="c">
+  <div class="frase">"Once personas tomaron foto desde el punto marcado con cal."</div>
+  <button class="op" onclick="responder(this,'c')">Conducta</button>
+  <button class="op" onclick="responder(this,'o')">Opinión</button>
+  <div class="pista">Pista: sacar el celular y apuntar es un movimiento del cuerpo, no una frase.</div>
+  <div class="ok">Bien. La foto ajena es de las conductas más honestas que hay: nadie fotografía por compromiso.</div>
+</div>
+
+<h2>Parte 2 · Arma tu guía del domingo</h2>
+<div class="constructor">
+  <p>Elige de 3 a 5 conductas contables para tu prototipo (o escribe las tuyas) y copia tu guía a la bitácora.</p>
+  <label><input type="checkbox" value="Personas que pasan por el sitio (total por hora)"> Personas que pasan por el sitio (total por hora)</label>
+  <label><input type="checkbox" value="Personas que se detienen a mirar el prototipo"> Personas que se detienen a mirar el prototipo</label>
+  <label><input type="checkbox" value="Personas que lo usan (se sientan, juegan, suben)"> Personas que lo usan (se sientan, juegan, suben)</label>
+  <label><input type="checkbox" value="Minutos que se quedan quienes lo usan"> Minutos que se quedan quienes lo usan</label>
+  <label><input type="checkbox" value="Personas que preguntan qué es o quién lo puso"> Personas que preguntan qué es o quién lo puso</label>
+  <label><input type="checkbox" value="Personas que toman foto"> Personas que toman foto</label>
+  <label><input type="checkbox" value="Niños que llegan solos (sin que un adulto los lleve)"> Niños que llegan solos (sin que un adulto los lleve)</label>
+  <label><input type="checkbox" value="Personas que se interesan por las plantas en maceta (las tocan, huelen, preguntan por ellas o las mueven)"> Personas que se interesan por las plantas en maceta (las tocan, huelen, preguntan por ellas o las mueven)</label>
+  <label><input type="checkbox" value="Lo que la gente evita o rodea"> Lo que la gente evita o rodea</label>
+  <input type="text" id="extra1" placeholder="Otra conducta propia de tu componente...">
+  <input type="text" id="extra2" placeholder="Otra más si hace falta...">
+  <p style="margin-bottom:.2rem"><button class="btn-copiar" onclick="copiarGuia(this)">Copiar mi guía</button></p>
+  <p style="font-size:.88rem; color:#68807a; margin-top:.6rem;">Consejo de campo: una raya por evento en la hoja, sin confiar en la memoria. Y una columna vacía con el título LO QUE NO ESPERABA: ahí suele estar el hallazgo.</p>
+</div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Copia la tabla: una fila por conducta elegida, columnas por hora del domingo. Agrega la columna LO QUE NO ESPERABA. Esa hoja ES tu instrumento; llévala impresa o dibujada a la presa.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  function responder(btn, eleccion) {
+    var item = btn.closest('.item');
+    var correcta = item.dataset.resp;
+    var botones = item.querySelectorAll('button.op');
+    botones.forEach(function(b){ b.classList.remove('elegida-bien','elegida-mal'); });
+    if (eleccion === correcta) {
+      btn.classList.add('elegida-bien');
+      item.querySelector('.pista').style.display = 'none';
+      item.querySelector('.ok').style.display = 'block';
+    } else {
+      btn.classList.add('elegida-mal');
+      item.querySelector('.ok').style.display = 'none';
+      item.querySelector('.pista').style.display = 'block';
+    }
+  }
+  function copiarGuia(btn) {
+    var sel = Array.from(document.querySelectorAll('.constructor input[type=checkbox]:checked')).map(function(c){ return c.value; });
+    ['extra1','extra2'].forEach(function(id){ var v = document.getElementById(id).value.trim(); if (v) sel.push(v); });
+    if (sel.length < 3) { alert('Elige al menos 3 conductas.'); return; }
+    if (sel.length > 5) { alert('Máximo 5: quien cuenta ocho cosas no cuenta bien ninguna.'); return; }
+    var texto = 'GUIA DE OBSERVACION (S6)\n' + sel.map(function(s,i){ return (i+1)+'. '+s; }).join('\n') + '\n+ Columna: LO QUE NO ESPERABA';
+    var done = function(){ var s=document.createElement('span'); s.className='aviso-copiado'; s.textContent='Copiada'; btn.after(s); setTimeout(function(){s.remove();},2500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(texto).then(done); }
+    else { var ta=document.createElement('textarea'); ta.value=texto; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(); }
+  }
+</script>
+</main>
+</body>
+</html>

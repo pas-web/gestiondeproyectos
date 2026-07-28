@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S3 · La pregunta tramposa</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .situacion { font-size:1.05rem; color:var(--profundo); margin:.2rem 0 .7rem; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La pregunta tramposa</h1>
+<p class="sub">Gimnasio · Semana 3 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Ocho preguntas candidatas para la consulta en La Florida, escuchadas en la vida real de proyectos parecidos. Algunas sirven tal cual; otras traen trampa. Diagnostica cada una.</p>
+
+<div class="intro">
+  Las trampas de esta semana: la <strong>inducida</strong> (trae la respuesta adentro), la <strong>promesa de contrabando</strong> (describe una obra y siembra la expectativa), la <strong>cerrada que mata la conversación</strong>, la <strong>doble pregunta</strong> y la <strong>jerga</strong> que nadie usa en la orilla.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Toma tus tres preguntas candidatas (la tarea del jueves) y pásalas por la misma báscula: ¿describe una obra?, ¿trae la respuesta adentro?, ¿se contesta con un sí o un no seco?, ¿son dos preguntas disfrazadas de una?, ¿la entendería alguien que nunca ha pisado una oficina? Reescribe las que caigan.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { s: '"¿Verdad que a la orilla le hace falta más sombra?"',
+      ops: ['Está bien: la sombra es un dato técnico importante',
+            'Es una pregunta inducida: trae la respuesta adentro',
+            'Es jerga: la gente no habla de "la orilla"',
+            'Es una promesa de contrabando'],
+      resp: 1,
+      pista: 'Léela otra vez: ¿qué respuesta espera quien la hace? ¿Cabe otra?',
+      exp: 'El "¿verdad que...?" solo acepta un sí. Vas a volver con datos que confirman lo que ya pensabas, que es justo lo que no necesitas. La versión neutra pregunta por conductas: "¿dónde se acomoda la gente cuando el sol pega fuerte?". La sombra saldrá sola, si de verdad importa.' },
+    { s: '"Cuénteme de la última vez que vino a la presa con su familia: ¿qué hicieron, cuánto tiempo se quedaron?"',
+      ops: ['Es doble pregunta: hay que partirla en dos',
+            'Es inducida: presume que viene con su familia',
+            'Está bien: es apreciativa y pide una escena, no un pedido',
+            'Es cerrada: se contesta con una fecha'],
+      resp: 2,
+      pista: '¿Qué produce esta pregunta: una lista de obras o una historia con detalles?',
+      exp: 'Es la entrevista apreciativa trabajando: pide una escena real (qué hicieron, cuánto duró) y de las escenas sale material de diseño. Los remates "¿qué hicieron, cuánto se quedaron?" no son doble pregunta tramposa: son ayudas para que la historia arranque. Si la persona no suele ir con familia, lo dirá, y eso también es dato.' },
+    { s: '"¿Le gustaría que hubiera un muelle de madera para pescar?"',
+      ops: ['Está bien: pregunta directamente por una necesidad',
+            'Es jerga técnica',
+            'Es cerrada, pero se arregla agregando "¿por qué?"',
+            'Es promesa de contrabando: describe una obra concreta y siembra la expectativa'],
+      resp: 3,
+      pista: 'Aplica la prueba: ¿la pregunta describe una obra concreta?',
+      exp: 'Desde que la nombraste, el muelle existe en la cabeza de esa persona, y cuando no se construya, tú lo prometiste. Casi nadie contesta "no" a "¿le gustaría?": el sí sale gratis y no informa nada. Pregunta por la práctica real: "¿dónde pesca usted y por qué en ese punto?". Si el muelle hace falta, la respuesta te lo va a decir sin que lo nombres.' },
+    { s: '"¿Usa usted la presa?"',
+      ops: ['Es cerrada donde debía abrir: el sí o no mata la conversación',
+            'Es inducida',
+            'Es promesa de contrabando',
+            'Está bien: hay que empezar por lo básico'],
+      resp: 0,
+      pista: '¿Qué sigue después de que te contesten "sí"? ¿Y después de un "no"?',
+      exp: 'Un "sí" seco te deja donde empezaste y un "no" te cierra la puerta. La versión abierta trae el dato y la historia: "¿para qué usa usted la presa y en qué temporada?". Las cerradas no están prohibidas (sirven para confirmar datos concretos), pero abrir una conversación con una es desperdiciar el turno.' },
+    { s: '"¿Qué opina de que se aproveche el potencial ecoturístico del embalse mediante infraestructura de bajo impacto?"',
+      ops: ['Está bien: es neutra y no promete nada',
+            'Es jerga: nadie conversa así, y quien no entiende no contesta o asiente por pena',
+            'Es doble pregunta',
+            'Es apreciativa'],
+      resp: 1,
+      pista: 'Léesela en voz alta a alguien de tu casa. ¿Qué te contestaría?',
+      exp: '"Potencial ecoturístico", "embalse", "infraestructura de bajo impacto": es el idioma de la convocatoria, no el de la orilla. La gente que no entiende una pregunta no lo dice: asiente por cortesía, y ese asentimiento acaba en un informe como "la comunidad aprueba el proyecto". Tradúcela: "¿le gustaría que viniera gente de fuera a pasear aquí? ¿qué de bueno y qué de malo le ve?".' },
+    { s: '"¿Qué le falta a la presa y cuánto cree usted que deba invertirse?"',
+      ops: ['Está bien: el presupuesto es parte del diseño',
+            'Es inducida',
+            'Es doble pregunta, y las dos mitades tienen problema propio',
+            'Es jerga'],
+      resp: 2,
+      pista: '¿Cuántas preguntas hay aquí? Y cada una por separado, ¿qué produce?',
+      exp: 'Dos preguntas en un turno: la gente contesta la que quiere y la otra se pierde. Y por separado tampoco ganan: "¿qué falta?" produce una lista de obras (cada una con su factura implícita) y pedirle cifras de inversión al vecino es trasladarle una chamba que es tuya. El dinero se planea en el escritorio con cotizaciones, no se encuesta en la orilla.' },
+    { s: '"¿A qué horas se junta más gente en la orilla?"',
+      ops: ['Es cerrada y hay que desecharla',
+            'Está bien: es neutra, pide un dato observable y abre conversación',
+            'Es promesa de contrabando',
+            'Es inducida: presume que se junta gente'],
+      resp: 1,
+      pista: 'No toda pregunta corta es mala. ¿Esta trae la respuesta adentro? ¿Describe una obra?',
+      exp: 'Pide un dato que la persona conoce de sobra y no carga ninguna expectativa. Además abre solita la siguiente: "¿y qué hacen a esa hora?". Que presuma que se junta gente no es trampa: tus conteos de la semana 2 ya lo confirmaron, y si en algún tramo no se junta nadie, la respuesta te lo dirá. Preguntar desde lo que ya observaste es método, no vicio.' },
+    { s: '"Si se hiciera un área de juegos, ¿usted traería a sus nietos?"',
+      ops: ['Está bien: valida la demanda antes de construir',
+            'Es jerga',
+            'Es cerrada, ese es su único problema',
+            'Es promesa de contrabando con disfraz de hipótesis: el "si se hiciera" no la salva'],
+      resp: 3,
+      pista: 'El "si se hiciera" suena prudente. ¿Qué queda sembrado en la memoria de la persona de todos modos?',
+      exp: 'La hipótesis no descarga la promesa: la persona no recuerda el "si", recuerda el área de juegos. Y el "sí, claro" que casi todos contestan no valida nada (decir sí no cuesta). Si quieres saber de los niños, pregunta por su vida real: "¿dónde juegan los niños de aquí cuando hace calor?". La respuesta trae ubicación, horario y riesgos, que es lo que el diseño necesita.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ' + c.s + '</div>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

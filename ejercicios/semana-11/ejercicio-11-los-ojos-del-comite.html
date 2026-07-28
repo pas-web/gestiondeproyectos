@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S11 · Los ojos del comité</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .pregunta-c { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; }
+  .pregunta-c b { color:var(--marca); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Los ojos del comité</h1>
+<p class="sub">Gimnasio · Semana 11 · Práctica libre, sin registro y sin nota.</p>
+
+<p>El proyecto del manantial también pasa a dictamen esta semana. Seis preguntas que su comité hizo en la sesión. Detrás de cada pregunta hay un rubro de la rúbrica pesando: identifícalo, y sabrás qué respuesta la satisface. Es el entrenamiento inverso del jueves: tú del lado de la mesa.</p>
+
+<div class="intro">
+  La rúbrica de cien puntos: <strong>pertinencia</strong> (25: ¿lo pidió la comunidad?), <strong>viabilidad técnica y ambiental</strong> (25: ¿funciona en ese sitio?), <strong>presupuesto</strong> (20: ¿cada peso con su papel?), <strong>cronograma y capacidad</strong> (15: ¿cabe en el tiempo con esas manos?) y <strong>contrapartida y gestión</strong> (15: ¿qué ponen el equipo y la comunidad?).
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe las tres preguntas que más miedo te dan para el jueves y clasifícalas por rubro. Verás que el miedo tiene dirección: casi siempre apunta al rubro más débil de tu solicitud. Ahí es donde se prepara la respuesta (o el cambio de última hora que todavía alcanza).</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '<b>Dictaminadora 1:</b> "En su hoja de consulta veo que la gente pidió sombra y un lugar donde sentarse. ¿En qué momento pidieron la tarima elevada tipo mirador que ustedes proponen?"',
+      ops: ['Presupuesto: pregunta por el costo del mirador', 'Pertinencia: está rastreando si el diseño responde a lo que la comunidad pidió o a lo que al equipo se le antojó', 'Cronograma y capacidad', 'Viabilidad técnica'],
+      resp: 1,
+      pista: 'La pregunta compara dos cosas: lo que dijo la consulta y lo que propone el proyecto. ¿Qué rubro vive de esa comparación?',
+      exp: 'Pertinencia pura, y es el rubro más pesado junto con viabilidad (25 puntos). La dictaminadora no está en contra del mirador: está midiendo la distancia entre la evidencia de la consulta y el diseño. La respuesta que satisface enseña el hilo: "la mesa de conversación pidió un lugar para ver el agua sin lodo; el registro en limpio lo dice así, y de ahí salió elevar la tarima". Si el hilo no existe, la respuesta honesta es reconocerlo y recalibrar: la consulta es el patrón de este proyecto, no un trámite de agosto.' },
+    { r: '<b>Dictaminador 2:</b> "Proponen sembrar seis sabinos de tres metros en la orilla. ¿En qué temporada, con qué agua los primeros meses, y quién los riega cuando ustedes ya no estén?"',
+      ops: ['Contrapartida y gestión: pregunta quién ayuda', 'Pertinencia', 'Viabilidad técnica y ambiental: especie, temporada, agua y mantenimiento; está probando si el proyecto funciona en el sitio real más allá del papel', 'Presupuesto: los sabinos son caros'],
+      resp: 2,
+      pista: 'Temporada, riego, sobrevivencia de la planta. ¿Ese conocimiento de qué rubro es?',
+      exp: 'Viabilidad técnica y ambiental (25 puntos), y es LA pregunta donde este grupo juega de local: temporada de siembra, riego de establecimiento, quién mantiene. Nota la tercera parte de la pregunta ("cuando ustedes ya no estén"): la viabilidad incluye el después, no solo el montaje. La respuesta de gestor trae número y responsable: "en octubre-noviembre por la humedad residual, riego con el acuerdo de la señora de la tienda (nota firmada), y planta en maceta primero como marca la regla del prototipo". El dato técnico defendido con calma vale más que diez adjetivos.' },
+    { r: '<b>Dictaminadora 3:</b> "El renglón de la malla dice $2,850. La cotización anexa dice $2,850 pero es del 3 de octubre y su compra sería a fin de mes. ¿Qué pasa si el precio ya subió?"',
+      ops: ['Presupuesto: está auditando la solidez de los números (vigencia de cotización, plan si el precio se mueve, colchón)', 'Pertinencia', 'Viabilidad ambiental', 'Cronograma: pregunta por la fecha de compra'],
+      resp: 0,
+      pista: 'La pregunta persigue un número y su papel. ¿Qué rubro audita números y papeles?',
+      exp: 'Presupuesto (20 puntos), en su versión fina: no pregunta si el número existe (ahí está la cotización) sino si aguanta el tiempo. La respuesta que satisface tiene tres piezas que ya conoces: la vigencia escrita en la cotización, el renglón de imponderables (para eso existe el colchón del 5%) y el plan B de proveedor (la segunda cotización). Si el equipo responde "no habíamos pensado en eso", el rubro se raspa; si responde con las tres piezas, el dictaminador apunta y pasa a otra cosa. Así de rápido se gana o se pierde un rubro en la mesa.' },
+    { r: '<b>Dictaminador 4:</b> "Ustedes son tres, tienen clases entre semana, y su cronograma mete limpieza, anclaje y colado en la semana dos. ¿Cuántas horas-persona calculan y de dónde salen?"',
+      ops: ['Presupuesto: horas-persona suena a dinero', 'Cronograma y capacidad: está midiendo si el plan cabe en el tiempo real con las manos reales del equipo', 'Pertinencia', 'Contrapartida: pregunta qué ponen ustedes'],
+      resp: 1,
+      pista: 'La pregunta cruza el calendario con el tamaño del equipo. ¿Qué rubro se llama, justamente, cronograma y capacidad?',
+      exp: 'Cronograma y capacidad (15 puntos): el rubro que caza cronogramas ilusos. El dictaminador ya hizo la cuenta de servilleta (tres personas, entre semana hay clases, la semana dos trae tres actividades pesadas) y quiere ver si el equipo la hizo también. La respuesta que satisface muestra la cuenta y el amortiguador: "las actividades pesadas van en sábado, la faena del 24 aporta la mano de obra gruesa (convocada desde el 17 vía delegación) y el colado tiene fecha B". Capacidad no es cuántos son: es cuántas manos reales tiene cada fecha.' },
+    { r: '<b>Dictaminadora 5:</b> "Veo $1,600 de contrapartida en tarimas y flete. ¿Esos tratos ya están cerrados o son planes? ¿Me enseñan las notas?"',
+      ops: ['Contrapartida y gestión: está verificando que lo conseguido sea real y documentado, no esperanza', 'Presupuesto: pregunta por dinero', 'Viabilidad técnica', 'Pertinencia'],
+      resp: 0,
+      pista: '¿Qué rubro premia lo que el equipo y la comunidad ponen de su lado, y castiga la especie fantasma?',
+      exp: 'Contrapartida y gestión (15 puntos), con la pregunta exacta contra la especie fantasma: ¿cerrado o plan? La regla de S9 es la respuesta: solo cuenta lo que tiene nombre, fecha y documento, y aquí el equipo saca la nota firmada de la bodega y el acuerdo del taller, y el rubro se gana en veinte segundos. Detalle de oficio: la dictaminadora pidió VER las notas, no que le contaran de ellas. Los documentos de contrapartida viajan con la solicitud y a la sesión, no se quedan en la casa de nadie.' },
+    { r: '<b>Dictaminador 6:</b> "Última pregunta. Si este comité les diera la mitad de lo que piden, ¿qué harían?"',
+      ops: ['Presupuesto: quiere renegociar el monto', 'Es una pregunta trampa que no evalúa nada: mejor responder que el proyecto se hace completo o no se hace', 'Cronograma y capacidad', 'Está pesando varios rubros a la vez: sobre todo capacidad de gestión (¿saben recalibrar protegiendo el propósito?) y de paso si distinguen lo esencial de lo accesorio'],
+      resp: 3,
+      pista: 'No toda pregunta pertenece a una sola celda de la rúbrica. ¿Qué revela un equipo que sabe (o no sabe) responder al "con la mitad"?',
+      exp: 'La pregunta favorita de los comités con oficio, porque radiografía al equipo entero: quien responde "con la mitad no se puede" declara que no distingue lo esencial de lo accesorio, y quien recorta al vuelo protegiendo el propósito ("caería el mirador, la sombra y los asientos se sostienen, la faena y la especie amortiguan") demuestra gestión de la buena, que pesa en contrapartida-gestión y de rebote en presupuesto y cronograma. Prepararla no es pesimismo: casi ningún proyecto del mundo real recibe todo lo que pidió. El gimnasio 3 te hace escribirla antes del jueves.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué rubro está pesando esta pregunta?</div>' +
+               '<span class="pregunta-c">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

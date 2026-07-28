@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.65; font-size:1.05rem; }
+  header.curso { background:var(--profundo); color:#EAF4F2; padding:2.2rem 1.5rem 1.8rem; }
+  header.curso .uni { font-size:.85rem; letter-spacing:.12em; text-transform:uppercase; opacity:.75; }
+  header.curso h1 { font-family:Georgia,'Times New Roman',serif; font-size:2rem; margin:.3rem 0 .2rem; }
+  header.curso .arco { font-family:Georgia,serif; font-style:italic; color:var(--arena); font-size:1.1rem; }
+  main { max-width:780px; margin:0 auto; padding:1.5rem 1.2rem 4rem; }
+  .intro { font-size:1.1rem; color:#45605a; }
+  .intro::before { content:""; display:block; width:64px; height:5px; background:var(--arena); margin-bottom:.9rem; border-radius:3px; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.35rem; margin:2.4rem 0 .6rem; }
+  .fijas { display:flex; gap:.8rem; flex-wrap:wrap; margin:.8rem 0; }
+  .fijas a { flex:1 1 220px; background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.9rem 1.1rem; text-decoration:none; color:var(--profundo); }
+  .fijas a strong { color:var(--marca); display:block; }
+  .fijas a span { font-size:.9rem; color:#68807a; }
+  .unidad-t { font-family:Georgia,serif; color:var(--profundo); font-size:1.05rem; margin:1.6rem 0 .3rem; }
+  .semana { display:flex; gap:.8rem; align-items:baseline; background:#fff; border:1px solid var(--borde); border-radius:10px; padding:.6rem .9rem; margin:.45rem 0; }
+  .semana .num { font-family:Georgia,serif; color:var(--arena); font-weight:bold; min-width:2.2rem; }
+  .semana a { color:var(--marca); font-weight:bold; text-decoration:none; }
+  .semana .fecha { margin-left:auto; font-size:.82rem; color:#8aa39c; white-space:nowrap; }
+  .semana.cerrada { opacity:.75; }
+  .semana.cerrada .titulo { color:#68807a; }
+  footer { text-align:center; font-size:.85rem; color:#8aa39c; padding:2rem 1rem; }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="uni">UAQ Campus Concá · Lic. en Producción Agropecuaria Sustentable · Agosto-diciembre 2026</div>
+  <h1>Gestión y Manejo de Proyectos</h1>
+  <div class="arco">La presa que queremos</div>
+</header>
+
+<main>
+
+<p class="intro">Este curso no trabaja con casos inventados. Hay una presa real, un fondo real de $20,000 y una comunidad que va a decidir qué se hace con su orilla. Aquí vive todo lo que necesitas: cada semana se abre el miércoles, y el gimnasio y "Tu calificación" están siempre abiertos.</p>
+
+<h2>Siempre abierto</h2>
+<div class="fijas">
+  <a href="tu-calificacion.html"><strong>Tu calificación</strong><span>Cómo se evalúa este curso, sin letra chiquita.</span></a>
+</div>
+
+<h2>Las semanas</h2>
+<div id="semanas"></div>
+
+<footer>Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</footer>
+
+</main>
+
+<script>
+  // Semanas ya publicadas en el sitio (agregar el número cuando se suba su página).
+  var DISPONIBLES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  var SEMANAS = [
+    {n:1, t:"La presa y el fondo", abre:"2026-08-05", u:"Unidad 1 · Escuchar la presa"},
+    {n:2, t:"Agencia", abre:"2026-08-12", u:null},
+    {n:3, t:"Diseñar la consulta", abre:"2026-08-19", u:null},
+    {n:4, t:"La consulta y el sobre", abre:"2026-08-26", u:null},
+    {n:5, t:"Líneas y reglas del fondo", abre:"2026-09-02", u:"Unidad 2 · Diseñar lo que pidieron"},
+    {n:6, t:"Prototipo en la presa", abre:"2026-09-09", u:null},
+    {n:7, t:"La apuesta causal", abre:"2026-09-16", u:null},
+    {n:8, t:"Ingeniería del papel", abre:"2026-09-23", u:null},
+    {n:9, t:"La política del proyecto", abre:"2026-09-30", u:null},
+    {n:10, t:"Presupuesto y pre-pitch", abre:"2026-10-07", u:null},
+    {n:11, t:"La Dictaminadora", abre:"2026-10-14", u:"Unidad 3 · Construir en la presa"},
+    {n:12, t:"La faena y el libro del fondo", abre:"2026-10-21", u:null},
+    {n:13, t:"El velorio del proyecto", abre:"2026-10-28", u:null},
+    {n:14, t:"Obra y comunicación", abre:"2026-11-04", u:null},
+    {n:15, t:"Medir lo que importa", abre:"2026-11-11", u:"Unidad 4 · Entregar la presa viva"},
+    {n:16, t:"Auditoría y radar", abre:"2026-11-18", u:null},
+    {n:17, t:"La inauguración", abre:"2026-11-25", u:null}
+  ];
+  var cont = document.getElementById('semanas');
+  SEMANAS.forEach(function (s) {
+    if (s.u) {
+      var h = document.createElement('div');
+      h.className = 'unidad-t';
+      h.textContent = s.u;
+      cont.appendChild(h);
+    }
+    var xx = (s.n < 10 ? '0' : '') + s.n;
+    var abre = new Date(s.abre + 'T12:00:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'long' });
+    var d = document.createElement('div');
+    var publicada = DISPONIBLES.indexOf(s.n) !== -1;
+    d.className = 'semana' + (publicada ? '' : ' cerrada');
+    d.innerHTML = '<span class="num">S' + s.n + '</span>' +
+      (publicada
+        ? '<a href="semanas/semana-' + xx + '.html">' + s.t + '</a>'
+        : '<span class="titulo">' + s.t + '</span>') +
+      '<span class="fecha">abre el ' + abre + '</span>';
+    cont.appendChild(d);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S16 · Mi rendición y mi radar</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi rendición y mi radar</h1>
+<p class="sub">Gimnasio · Semana 16 · Los bloques 1 a 4 preparan el viernes; el 5 a 8 arman tu 2027.</p>
+
+<p>Ocho bloques en dos mitades: primero tu parte de la rendición del viernes (que no te agarre improvisando) y luego tu radar, la herramienta con la que sales del curso. Nada se guarda ni se manda: cópialo a tu bitácora. Cargos y roles, no nombres.</p>
+
+<div class="reglas">
+  Las reglas duras de la semana: se contesta <strong>con el libro</strong>, no con la memoria · el remanente <strong>se declara y se reintegra</strong> · el asiento tardío marcado <strong>se muestra con la frente en alto</strong> · ninguna pregunta es ofensa · el radar <strong>descarta rápido</strong> · <strong>elegibilidad primero, proyecto primero</strong> · la IA barre volumen, <strong>la letra chiquita la lees tú</strong>.
+</div>
+
+<div class="caso">
+  <h2>1 · Mi parte del libro, en limpio</h2>
+  <p class="porque">Los asientos de tu turno y los de tu equipo que te toca rendir: verificados contra comprobante, uno por uno. Anota folios o fechas de los asientos y qué comprobante respalda cada uno.</p>
+  <textarea id="r1" placeholder="Asiento del... por $..., comprobante: nota de... / Asiento del... comprobante..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Mi número incómodo</h2>
+  <p class="porque">Todo libro honesto tiene uno: el gasto que se pasó, el asiento tardío, el pendiente que la gente va a ver. Nómbralo tú antes de que lo encuentren, con su explicación en forma canónica (dato, asiento, comprobante o tarjeta de pendiente).</p>
+  <div class="modelo">Ej.: El asiento tardío del 4-nov (semana de la faena grande): está marcado TARDÍO, comprobante completo. Si preguntan: la regla es que se marca, no se disimula; que se vea es la prueba de que el libro dice la verdad.</div>
+  <textarea id="r2" placeholder="Mi número incómodo es... / Está asentado en... / Mi explicación: ..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · La pregunta que temo y mi respuesta</h2>
+  <p class="porque">La que no quieres que caiga el viernes. Escríbela con todas sus letras y redacta la respuesta que rinde: dato, asiento, comprobante, sin tono de disculpa ni de pleito. Ensáyala en voz alta (el gimnasio 1 entrena el reflejo).</p>
+  <textarea id="r3" placeholder="La pregunta que temo: '...' / Mi respuesta con el libro: ..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Mi papel en la sesión</h2>
+  <p class="porque">Quién eres el viernes: qué parte rindes, qué folder manejas, dónde te sientas, y la señal del equipo si alguien se engancha con una pregunta con veneno.</p>
+  <textarea id="r4" placeholder="Rindo la parte de... / Manejo el folder de... / Si alguien se engancha, la señal es..." style="min-height:70px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · Mis fuentes</h2>
+  <p class="porque">La primera columna del radar: dónde te vas a enterar. La hoja colectiva de agosto ("¿y tú a quién sigues?") es tu arranque; suma dependencias, fundaciones y boletines de LO TUYO, con el ritmo de revisión de cada una.</p>
+  <textarea id="r5" placeholder="Sigo a... (reviso cada...) / El boletín de... / La página de... (cada mes)..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · Mis palabras clave</h2>
+  <p class="porque">Con qué buscas (y con qué le pides a la IA que barra por ti): las palabras de tu tema, tu territorio y tu población. Anota también las que NO son tuyas, para descartar rápido.</p>
+  <textarea id="r6" placeholder="Mis palabras: vivero, nativas, ANP, espacio comunitario, jóvenes rurales... / No son mías: startup, escalable..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · Mi calendario 2027</h2>
+  <p class="porque">Las convocatorias anuales se ganan cuando están cerradas. Tu círculo rojo (la del curso ya sabes cuál) y al menos otras dos, con cuándo suelen abrir y qué hay que tener listo dos meses antes.</p>
+  <textarea id="r7" placeholder="Círculo rojo: ... (suele abrir en..., preparo desde...) / También: ... / Y: ..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · Mi anti-CV al día y el tiro que sigue</h2>
+  <p class="porque">Los rechazos y silencios del semestre, asentados con la frente en alto (jugaste), y la siguiente solicitud real con fecha: la que sale de tu radar, no de la casualidad.</p>
+  <textarea id="r8" placeholder="Mi anti-CV del semestre: ... / Mi siguiente solicitud real: ... para el (fecha)..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Los bloques 1 a 3 se escriben en la libreta que llevarás el viernes a la mesa (no en hojas sueltas: en la sesión pública se ve todo). El radar (5 a 7) va en la última página de tu bitácora, la que encuentras rápido: es la página que vas a seguir usando cuando el curso ya no exista. Y el bloque 8 se copia al anti-CV de tu expediente, que el viernes que viene se cierra.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['Mi parte del libro, en limpio', 'Mi número incómodo', 'La pregunta que temo y mi respuesta', 'Mi papel en la sesión', 'Mis fuentes', 'Mis palabras clave', 'Mi calendario 2027', 'Mi anti-CV al día y el tiro que sigue'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MI RENDICIÓN Y MI RADAR · Semana 16', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

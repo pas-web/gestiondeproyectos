@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S4 · Mis dos minutos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:72px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mis dos minutos</h1>
+<p class="sub">Gimnasio · Semana 4 · Ábrelo o descárgalo ANTES de salir el viernes: en la orilla puede no haber señal.</p>
+
+<p>Cuando la consulta termine, el grupo hace círculo y cada estación cuenta lo suyo en dos minutos. Esta es la estructura: cinco huecos, se llenan en cinco minutos con la libreta enfrente, y con eso ya tienes qué decir. El primer peldaño de la escalera no se sube improvisando.</p>
+
+<div class="reglas">
+  Las reglas de los dos minutos: se habla de <strong>lo que se escuchó</strong>, no de lo que opinas; la frase textual se lee <strong>tal cual</strong>, con comillas y todo; y el remate no propone soluciones: para eso falta una semana entera.
+</div>
+
+<div class="caso">
+  <h2>1 · Lo que más se repitió</h2>
+  <p class="porque">La petición, queja o tema que salió una y otra vez en tu estación. Con número si lo tienes ("lo dijeron como 6 personas").</p>
+  <textarea id="r1" placeholder="Ej.: La sombra: casi todos los que pasaron por la mesa hablaron del solazo de la tarde..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · La frase textual que no esperábamos</h2>
+  <p class="porque">Una sola, la mejor. Entre comillas, con quién la dijo (edad aproximada, no nombre).</p>
+  <textarea id="r2" placeholder='Ej.: "Aquí veníamos a nadar de chicos, ya nadie se mete" (señor ~65, pescador)...'></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · Lo que marca el mapa</h2>
+  <p class="porque">Las dos o tres zonas más marcadas del mapa parlante y qué pidió la gente en cada una. Si tu estación no era el mapa, lo que viste marcar al pasar.</p>
+  <textarea id="r3" placeholder="Ej.: Casi todas las marcas se juntan del lado del sabino grande; nadie marcó nada del lado del cortinal..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Lo que nos preguntaríamos ahora</h2>
+  <p class="porque">La pregunta nueva que te dejó la consulta: lo que ya no se alcanzó a preguntar o lo que apareció y nadie tenía en el guion.</p>
+  <textarea id="r4" placeholder="Ej.: ¿Por qué las señoras casi no se acercaron a la mesa y sí a la pared de ideas?..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · El remate</h2>
+  <p class="porque">Un renglón para cerrar tus dos minutos. Sin proponer soluciones: es lo que la estación se lleva en la cabeza.</p>
+  <textarea id="r5" placeholder="Ej.: La gente no pidió cosas nuevas: pidió recuperar las que la presa ya tuvo..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Los mismos cinco huecos en la última hoja de tu libreta de registro, dibujados desde antes. Al terminar la consulta, cinco minutos de llenado y listo: se cuenta con la libreta en la mano, que para eso es de campo.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['Lo que más se repitió', 'La frase textual que no esperábamos', 'Lo que marca el mapa', 'Lo que nos preguntaríamos ahora', 'El remate'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MIS DOS MINUTOS · Consulta en La Florida · Semana 4', ''];
+    for (var i = 1; i <= 5; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

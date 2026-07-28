@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S4 · El día de la consulta</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .situacion { font-size:1.05rem; color:var(--profundo); margin:.2rem 0 .7rem; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El día de la consulta</h1>
+<p class="sub">Gimnasio · Semana 4 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Siete aprietos que pueden pasarte el viernes en la orilla. Ninguno es invento: así se ponen las consultas de verdad. Decide qué haces en cada uno ahora, que está barato; el viernes ya no hay pausa.</p>
+
+<div class="intro">
+  Las tres brújulas del día: <strong>no prometer</strong> (nada, a nadie, nunca), <strong>registrar textual</strong> (lo que no se anota no existe) y el <strong>código de auxilio</strong>: si una conversación te rebasa, "esa pregunta se la paso al profesor, ahorita se lo traigo". Pedir ayuda a tiempo es protocolo, no derrota.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe el aprieto que MÁS miedo te da del viernes (el tuyo, no uno de esta lista). Escribe qué harías, palabra por palabra, como si fuera guion. Léelo en voz alta una vez. Los nervios odian el ensayo.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { s: 'Un señor de unos 50 años, amable, te pregunta directo: "¿Entonces sí van a poner el asador techado que dicen?"',
+      ops: ['Confirmarle que sí, para que se anime a participar: al fin que un asador es barato',
+            '"Eso todavía no está decidido, nada lo está. Cuénteme mejor: cuando su familia viene a la orilla, ¿dónde se acomodan?"',
+            'Decirle que eso no te toca a ti y mandarlo con el profesor',
+            'Cambiar de tema con elegancia para no comprometerte'],
+      resp: 1,
+      pista: 'Hay que desmontar la expectativa sin matar la conversación. ¿Cuál opción hace las dos cosas?',
+      exp: 'La respuesta honesta desactiva la promesa ("nada está decidido") y de inmediato le da a la persona un lugar mejor donde poner su interés: su propia experiencia. Ojo con el dato de fondo: alguien ya anda diciendo que habrá asador. Eso se anota y se avisa al profe al final: los rumores de promesas también son hallazgo.' },
+    { s: 'Una señora te pregunta sin rodeos: "¿Y cuánto dinero traen para esto?"',
+      ops: ['Decirle la cifra exacta: la transparencia es un valor del curso',
+            '"Dinero no hay todavía, esto es solo una tarea de la escuela"',
+            '"Hay un fondo chico de la universidad para empezar algo este semestre; cuánto alcanza y para qué, todavía no está decidido"',
+            'Decirle que esa información es confidencial'],
+      resp: 2,
+      pista: 'Ni la cifra ni la mentira ni el portazo. ¿Cuál respuesta es verdad completa sin sembrar expectativa?',
+      exp: 'Es la respuesta que ensayamos: verdadera (el fondo existe), sin cifra (una cantidad dicha en la orilla crece sola de boca en boca) y sin promesa (no está decidido). Decir "no hay dinero" es mentir y decir la cifra es soltar un número que la comunidad recordará mejor que tú. La transparencia completa llega cuando haya decisiones que transparentar: y va a llegar, con todo y cuentas públicas.' },
+    { s: 'Un vecino llega con los brazos cruzados: "Ustedes son como los del programa aquel, que vinieron, apuntaron un montón de cosas y nunca volvieron."',
+      ops: ['Explicarle que la UAQ es diferente y que este proyecto sí es serio',
+            'Darle la razón y retirarte: no tiene caso insistir con alguien molesto',
+            'Preguntarle: "¿Qué pasó aquella vez? ¿Qué apuntaron, qué les prometieron?" y escuchar con la libreta abierta',
+            'Decirle que ustedes son estudiantes y no tienen la culpa de lo que hicieron otros'],
+      resp: 2,
+      pista: 'Ya conoces esta puerta de la semana 2: el escéptico no es una pared. ¿Qué guarda adentro?',
+      exp: 'El enojado con las instituciones es la mejor fuente del día: tiene el archivo de los fracasos anteriores y la lista exacta de promesas rotas que este proyecto no debe repetir. Defender a la UAQ es discutir; preguntar es registrar. Y hay un premio secundario: pocas cosas desarman tanto a una persona molesta como ser escuchada en serio, con libreta.' },
+    { s: 'Una señora se acerca al mapa con bolsa del mandado: "Es que voy de salida, tengo el nixtamal en la lumbre."',
+      ops: ['Pedirle cinco minutitos: el guion completo apenas tarda eso',
+            'Dejarla ir: una conversación a medias contamina el registro',
+            'Una sola pregunta, la mejor de tu guion, y ofrecerle marcar una cosa en el mapa antes de irse',
+            'Apuntarle su nombre para buscarla después en su casa'],
+      resp: 2,
+      pista: 'El guion es tuyo; el tiempo es de ella. ¿Qué cabe en 40 segundos que aun así valga oro?',
+      exp: 'La consulta se adapta a la vida de la gente y no al revés. Una respuesta buena y una marca en el mapa son datos completos; retener a alguien que dijo que va de salida es faltarle al respeto (y lo que conteste con prisa saldrá con prisa). Buscarla en su casa sin que ella lo pida ya es otra cosa: aquí el que llega, llega solo.' },
+    { s: 'Media hora de consulta y a tu estación no se ha acercado nadie. La gente está, pero lejos: en la tienda, bajo la sombra del otro lado.',
+      ops: ['Esperar: el protocolo dice que cada quien atiende su estación',
+            'Avisar a tu observador y volverte estación móvil: mapa bajo el brazo y a donde está la gente',
+            'Ponerte a gritar para invitar a la gente a que se acerque',
+            'Aprovechar para adelantar tu registro en limpio'],
+      resp: 1,
+      pista: 'Semana 2, ejercicio 1, caso del correo sin respuesta: ¿repites lo que no funciona o cambias el canal?',
+      exp: 'La estación es un medio, no un altar: si la gente no viene, la estación va. Avisar al observador primero mantiene el protocolo (nadie desaparece sin que su equipo sepa), y llegar a la sombra donde ya están platicando es entrar a la conversación en su terreno, que además es más cómoda para todos. Diez pláticas buenas junto a la tienda valen más que una carpa impecable y vacía.' },
+    { s: 'Tres niños agarraron los crayones y están rayando el mapa parlante: dibujaron una cancha y un puesto de nieves encima de tu zona de marcas.',
+      ops: ['Retirarlos con cariño: el mapa es un instrumento de registro serio',
+            'Dejarlos y luego borrar sus rayones al pasar el registro en limpio',
+            'Darles su espacio (una esquina del mapa o su propia hoja) y preguntarles dónde juegan y por qué ahí',
+            'Llamar a sus mamás para que los recojan'],
+      resp: 2,
+      pista: '¿Quién va a usar el centro recreativo más horas por semana que nadie? Exacto.',
+      exp: 'Los niños son usuarios de primera fila del proyecto y su consulta vale igual: la cancha y el puesto de nieves SON datos, y "¿dónde juegan cuando hace calor?" produce ubicaciones, horarios y riesgos que ningún adulto te va a dar. La corrección es de formato (su esquina, su hoja, su clave en el registro), no de fondo. Borrar sus marcas es tirar información.' },
+    { s: 'Oyes que tu compañero de estación, apurado por un vecino insistente, acaba de decir: "Sí, lo del muelle yo creo que sí va a salir."',
+      ops: ['Corregirlo ahí mismo con firmeza para que el vecino vea que el equipo es serio',
+            'No hacer nada: corregirlo enfrente de la gente sería exhibirlo',
+            'Entrar suave a la conversación: "Bueno, esa es de las ideas que se están juntando, todavía no hay nada decidido", y al final avisarle al profe',
+            'Contárselo al resto del equipo en el receso para que todos lo sepan'],
+      resp: 2,
+      pista: 'Hay que salvar dos cosas a la vez: la expectativa del vecino y la dignidad del compañero. Una opción salva las dos.',
+      exp: 'La frase suave desmonta la promesa sin regañar a nadie: el vecino escucha la versión correcta de labios del equipo y tu compañero entiende sin ser exhibido. Avisar al profe no es acusar: la promesa accidental es un dato del día que hay que registrar y procesar en frío la semana siguiente (le pasa a cualquiera bajo presión, para eso se ensaya). Callar del todo deja al vecino esperando su muelle.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ' + c.s + '</div>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

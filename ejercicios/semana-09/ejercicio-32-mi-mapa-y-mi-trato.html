@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S9 · Mi mapa y mi trato</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi mapa y mi trato</h1>
+<p class="sub">Gimnasio · Semana 9 · Acompaña el taller del jueves y deja armado el trato de la semana.</p>
+
+<p>El mapa de poder de tu componente, bloque por bloque, y al final el trato real que tu equipo va a hacer esta semana. Nada de lo que escribas aquí se guarda ni se manda: cópialo a tu bitácora. Es la materia prima del reto 3.</p>
+
+<div class="reglas">
+  Las reglas duras de la semana: el mapa se escribe con <strong>cargos y roles, no con nombres</strong> (es herramienta de trabajo, no lista de amigos y enemigos, y no sale del aula) · la resistencia <strong>se escucha primero</strong>: su objeción trae diseño · el trato ofrece <strong>solo lo que controlas</strong> · sin plan B no hay negociación · la contrapartida solo cuenta <strong>con nombre, fecha y documento</strong> · el sí de palabra <strong>no es la anuencia</strong>.
+</div>
+
+<div class="caso">
+  <h2>1 · El sí que necesito</h2>
+  <p class="porque">¿Quién autoriza qué, para que tu componente exista? Para casi todos empieza en la anuencia de la delegación, pero puede haber más de un sí.</p>
+  <textarea id="r1" placeholder="Ej.: La delegación firma la anuencia (qué se hará, dónde, quién responde). El comité de agua acepta el trazo si respeta la toma..." style="min-height:60px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Los clave</h2>
+  <p class="porque">Mucho interés, mucha influencia. Por cada uno: qué le importa (tu hipótesis, a verificar preguntando) y cuál es la jugada.</p>
+  <textarea id="r2" placeholder="Ej.: La delegación: le importa que el proyecto no le sume carga ni conflictos; jugada: llegar con el papel redactado y pedir diez minutos, no una junta..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · Los durmientes</h2>
+  <p class="porque">Mucha influencia, poco interés todavía. ¿A quién hay que informar antes de que se entere por terceros?</p>
+  <textarea id="r3" placeholder="Ej.: El dueño de la parcela que da al paso: visitarlo antes de mover material; qué necesita: que le respeten la cerca y saber quién responde..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Las resistencias</h2>
+  <p class="porque">¿Quién tiene razones para que tu componente no le guste? Escribe su objeción como la diría esa persona, y luego el dato de diseño que trae dentro.</p>
+  <div class="modelo">Modelo: Objeción: "me van a cerrar el paso al agua". Dato de diseño: el acceso al abrevadero se respeta y se señaliza. La escucha va antes que el convencimiento.</div>
+  <textarea id="r4" placeholder="Objeción (con sus palabras)... / Dato de diseño que trae dentro... / Quién del equipo va a escucharla y cuándo..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · Los que faltan</h2>
+  <p class="porque">La pregunta que más paga: ¿quién usa el sitio hoy, a quién toca tu componente, y nadie ha hablado con esa persona? Esa conversación pendiente es la que evita el pleito.</p>
+  <textarea id="r5" placeholder="Ej.: Los que pescan en la orilla los domingos: nadie los ha mencionado; buscar a dos el próximo domingo y preguntarles qué no debería cambiar..." style="min-height:60px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · Mi trato en especie</h2>
+  <p class="porque">Algo de tu lista de materiales que se puede conseguir en lugar de comprar. Qué pides, a quién, qué ofreces a cambio, cuánto vale en pesos y con qué documento lo vas a probar.</p>
+  <div class="modelo">Modelo: 12 tarimas de la bodega de materiales · ofrecemos vaciar y barrer el rincón el sábado + agradecimiento en la lona · valor: $1,200 (12 × $100) · documento: nota firmada de recibido y foto.</div>
+  <textarea id="r6" placeholder="Qué pido... / A quién... / Qué ofrezco... / Valor en pesos... / Documento..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · Mi plan B</h2>
+  <p class="porque">Si el trato principal no sale: ¿otro proveedor, otra fecha, otra forma de resolverlo? Se escribe antes de tocar la puerta: es lo que te deja negociar en vez de aceptar.</p>
+  <textarea id="r7" placeholder="Ej.: Si la bodega dice que no: la empacadora de la cabecera desecha tarimas los lunes; si nadie presta, el piso se hace de piedra del lugar con una faena más..." style="min-height:60px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · El ensayo</h2>
+  <p class="porque">Tus primeras dos frases del trato real, como las vas a decir. En voz alta suenan distinto que en la cabeza: por eso el viernes se ensaya.</p>
+  <textarea id="r8" placeholder="Ej.: Buenas tardes. Venimos por lo del área de la orilla: necesitamos su firma en la carta de anuencia y le traemos el papel listo; son diez minutos y usted dice cuándo..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Dibuja el cruce en una doble página (interés horizontal, influencia vertical), ubica a tus involucrados por rol y marca la jugada junto a cada clave. Abajo, el trato de la semana en cuatro renglones: pido, ofrezco, le importa, plan B. A lápiz: los tratos de verdad van a mover el mapa. Esa doble página es tu reto 3, versión 1.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['El sí que necesito', 'Los clave', 'Los durmientes', 'Las resistencias', 'Los que faltan', 'Mi trato en especie', 'Mi plan B', 'El ensayo'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MI MAPA Y MI TRATO · Semana 9', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 12 · La faena y el libro del fondo · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 12 · La faena y el libro del fondo</div>
+  <div class="migas">Unidad 3 · Construir en la presa · Se abre el miércoles 21 de octubre</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-10-21">
+
+<p class="pregunta">¿Quién carga qué?</p>
+<p class="bajada">La obra ya corre y con ella llegan los dos animales que tumban proyectos: el trabajo que era de todos y no lo hizo nadie, y el dinero que se manejó de buena fe y de mala manera. Esta semana el curso les pone nombre técnico a dos tecnologías que tu comunidad domina desde hace generaciones: la faena, para repartir el trabajo, y el libro público, para contar el dinero delante de todos. También vence algo: la respuesta a la retroalimentación se entrega el viernes 23.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Partir tu obra en frentes y tareas que una persona puede cargar en un día: el desglose del trabajo, sin humo.</li>
+    <li>Ponerle nombre y apellido a cada tarea con la matriz RACI: quién la hace, quién responde, a quién se consulta, a quién se informa.</li>
+    <li>Planear una faena como se debe: convocatoria con tiempo, herramienta contada, comida resuelta y registro firmado.</li>
+    <li>Abrir y llevar el libro del fondo: cada peso registrado a 48 horas, con su comprobante, delante de todos.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">La faena es tecnología de gestión</h3>
+  <p>Antes de que existieran los diplomados en gestión de proyectos, las comunidades de esta sierra ya levantaban capillas, caminos y aulas con faena. Y la faena bien hecha trae todo lo que los manuales venden caro: convocatoria legítima (la delegación llama, no un particular), reparto de cargos, herramienta contada, comida resuelta (nadie trabaja de balde y en ayunas) y la memoria de quién vino, que es la moneda con la que se paga la próxima. Esta semana no aprendes algo nuevo: aprendes a ver con ojos de gestor lo que tu comunidad hace desde siempre, y a escribirlo para que también lo vea un comité.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El aparato</span>
+  <h3 style="margin-top:.2rem">Partir la obra: los frentes</h3>
+  <p>"Habilitar el área" no se puede cargar: es demasiado grande y resbaloso. El desglose del trabajo lo parte en frentes (limpieza, anclaje, piso, sombra, señalética) y cada frente en tareas del tamaño de una persona y un día. La prueba del buen desglose: cada tarea se puede decir en una frase con verbo ("nivelar el tramo del sabino", "pintar los postes"), se le puede poner nombre y se puede saber si ya quedó. Lo que no se puede partir así, todavía no está pensado.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">La palabra prohibida</span>
+  <h3 style="margin-top:.2rem">RACI: por fin se nombra</h3>
+  <p>Tu equipo lleva desde septiembre operando con oficios (quien escribe, quien lleva los números, quien da la cara), y en la semana del prototipo hubo un pizarrón con columnas que nunca dijimos cómo se llamaba. Se llama RACI, y hoy se desbloquea la palabra: por cada tarea, quién la Realiza, quién Aprueba (una sola persona responde, aunque trabajen varias), a quién se Consulta antes y a quién se Informa después. La matriz existe para matar al asesino silencioso de las obras colectivas: el "yo pensé que tú". Regla de oro que ya conoces: lo que es de todos no es de nadie.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">La siembra que se paga</span>
+  <h3 style="margin-top:.2rem">Abre el libro del fondo</h3>
+  <p>Desde agosto está prometido: el dinero del fondo se cuenta en público. El viernes abre el libro, y las reglas ya las destripaste en septiembre: cada movimiento asentado a más tardar 48 horas después, con su comprobante (factura o recibo simple con firma), a la vista de quien quiera verlo. El libro se lleva por turnos: a todos les toca, no solo a quien es bueno para los números, porque llevar cuentas públicas es de las habilidades que este curso sí puede enseñar y la vida sí va a cobrar. El primer asiento ya existe y es viejo: los $200 del ensayo del prototipo entran como anticipo. En noviembre, este libro se audita en público. No es amenaza: es la mejor carta de presentación que tendrá tu equipo.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">La regla nueva</span>
+  <h3 style="margin-top:.2rem">El dinero se toca de a dos</h3>
+  <p>Ninguna compra del fondo la hace una persona sola: siempre dos, una compra y la otra atestigua y guarda el comprobante. No es desconfianza de nadie: es protección de todos, empezando por el que compra (la mejor defensa contra el chisme de dinero es no haber estado solo). Las organizaciones comunitarias que llegan lejos operan así; las que se rompen, casi siempre se rompieron por un dinero que tocó una sola mano y una duda que nadie pudo contestar. El comprobante se pide en el momento de la compra, no después de memoria: el recibo que no se llenó en la tienda no existe.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-12/ejercicio-11-el-pleito-del-yo-pense.html"><strong>El pleito del "yo pensé"</strong></a> · Seis descalabros de obra colectiva en el manantial. Diagnostica qué letra del RACI faltó en cada uno.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-12/ejercicio-21-el-libro-chueco.html"><strong>El libro chueco</strong></a> · Seis asientos del libro del fondo: cinco tienen falla con nombre y uno se salva. La auditoría de noviembre empieza aquí.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-12/ejercicio-32-mi-frente-y-mi-turno.html"><strong>Mi frente y mi turno</strong></a> · El desglose de tu obra, el RACI de tu equipo, tu faena y tu turno en el libro. La bitácora de la semana.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Faena</dt>
+    <dd>Trabajo colectivo convocado por la autoridad local para un fin común. Como tecnología de gestión resuelve de un golpe mano de obra, pertenencia y contrapartida (los jornales de faena se cuantifican en pesos y suman en tu solicitud y en tu informe). Su protocolo no lo pone el equipo: lo pone la costumbre del lugar, y respetarlo es parte del oficio.</dd>
+    <dt>Mano vuelta</dt>
+    <dd>El pariente de la faena entre particulares: hoy te ayudo con lo tuyo, mañana me ayudas con lo mío. Entre los equipos del curso opera igual: la cuadrilla de un componente es el respaldo natural del otro, y la deuda se paga con trabajo, no con dinero.</dd>
+    <dt>Desglose del trabajo (EDT)</dt>
+    <dd>Partir la obra en frentes y los frentes en tareas del tamaño de una persona y un día. El nombre técnico es Estructura de Desglose del Trabajo; la prueba práctica es que cada tarea tenga verbo, dueño posible y forma de saber si ya quedó.</dd>
+    <dt>Frente de trabajo</dt>
+    <dd>Un pedazo de la obra que avanza en paralelo a los demás: la limpieza es un frente, el piso es otro, la señalética otro. Cada frente tiene su responsable y su semáforo en el tablero de obra. Si dos frentes se estorban, el cronograma lo tenía que haber dicho.</dd>
+    <dt>RACI</dt>
+    <dd>La matriz que asigna cada tarea: quién la Realiza, quién Aprueba y responde por ella (siempre UNA persona), a quién se Consulta antes de decidir y a quién se Informa después. Sus dos fallas clásicas: la tarea con dos cabezas (nadie responde porque responden ambos) y la tarea huérfana (todos pensaron que era de otro).</dd>
+    <dt>Libro del fondo</dt>
+    <dd>La contabilidad pública del dinero del fondo: un libro a la vista donde cada movimiento queda asentado con fecha, concepto, monto, comprobante y quiénes hicieron la compra. Se lleva por turnos entre todos y se audita en público en noviembre. Es heredero directo de cómo las organizaciones comunitarias serias cuentan su dinero.</dd>
+    <dt>Asiento</dt>
+    <dd>Cada renglón del libro: un movimiento de dinero con todos sus datos. El asiento sano se escribe a más tardar 48 horas después del movimiento, con el comprobante engrapado o referido. El asiento de memoria ("fue como el martes, creo que $340") no es un asiento: es el principio de un problema.</dd>
+    <dt>Comprobante</dt>
+    <dd>El papel que prueba el gasto: factura cuando la hay, recibo simple cuando el comercio local no factura (fecha, concepto, monto, nombre y firma de quien recibe el dinero, llenado en el momento). Sin comprobante no hay reembolso: ese gasto lo paga la bolsa del que lo hizo. La regla es dura porque la auditoría lo será.</dd>
+    <dt>La regla de a dos</dt>
+    <dd>Ningún movimiento de dinero lo hace una persona sola: una compra, otra atestigua y resguarda el comprobante. Protege el dinero y protege a las personas: contra la duda ajena, el mejor testigo es haber tenido testigo.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán los desgloses por frente, las matrices RACI de los equipos, la foto semanal del libro del fondo con sus primeros asientos y el plan de cada faena con su registro.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>Un solo palo no hace monte, dice el refrán. Esta semana tu proyecto deja de ser un papel bien escrito y se vuelve cuadrilla: trabajo con nombre, herramienta contada y dinero que se cuenta delante de todos.</p>
+  <p>La confianza no se pide: se construye con un libro abierto y un comprobante a tiempo. Así se cuida un fondo, y así se cuida también la fama de un equipo.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S1 · El ciclo por capas</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .hito { font-size:1.05rem; color:var(--profundo); margin:.2rem 0 .7rem; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  button { font:inherit; border:none; border-radius:8px; padding:.5rem .8rem; cursor:pointer; font-weight:bold; margin:.3rem .35rem 0 0; font-size:.92rem; }
+  .opcion { background:#fff; color:var(--marca); border:2px solid var(--marca); }
+  .opcion.elegida-bien { background:var(--marca); color:#fff; }
+  .opcion.elegida-mal { background:#fff; color:#8a4b3a; border-color:#C97B5D; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .capas { display:flex; flex-wrap:wrap; gap:.5rem; margin:.8rem 0; }
+  .capa { flex:1 1 140px; background:#fff; border:1px solid var(--borde); border-radius:10px; padding:.6rem .8rem; text-align:center; }
+  .capa .nombre { font-family:Georgia,serif; font-weight:bold; color:var(--marca); }
+  .capa .desc { font-size:.82rem; color:#68807a; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; }
+  body.proyector { font-size:1.45rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El ciclo por capas</h1>
+<p class="sub">Gimnasio · Semana 1 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Todo proyecto pasa por cuatro momentos. En clase el mapa se va a dibujar capa por capa durante el semestre; aquí lo puedes armar de un jalón. Sigue la historia de un proyecto real de sombra y borde vivo en la orilla de una presa, y coloca cada escena en su momento del ciclo.</p>
+
+<div class="capas">
+  <div class="capa"><div class="nombre">Idea</div><div class="desc">De dónde sale y cómo se afina</div></div>
+  <div class="capa"><div class="nombre">Diseño</div><div class="desc">Problema, plan, presupuesto, riesgos</div></div>
+  <div class="capa"><div class="nombre">Manejo y evaluación</div><div class="desc">Ejecutar, medir, corregir</div></div>
+  <div class="capa"><div class="nombre">Gestión</div><div class="desc">Conseguir recursos y rendir cuentas</div></div>
+</div>
+
+<div class="intro">
+  <strong>Una advertencia honesta:</strong> en la vida real el ciclo no es una fila india. Se traslapa, regresa y se muerde la cola. Pero primero se aprende el mapa y luego se aprende a romperlo.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Dibuja cuatro círculos concéntricos y ponles nombre de adentro hacia afuera: idea, diseño, manejo y evaluación, gestión. Piensa en algo que se haya hecho en tu comunidad (un salón, un pozo, una capilla, un camino) y escribe una escena de esa historia en cada círculo. Si alguna capa te queda vacía, esa es la pregunta interesante: ¿se saltaron ese momento o no se supo?</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { s: 'En una plática después de la faena, alguien suelta: "aquí lo que hace falta es sombra de verdad, en las secas no se aguanta".',
+      resp: 'I',
+      pista: 'Todavía no hay plan, ni dinero, ni problema bien planteado. Solo hay una ocurrencia dicha en voz alta.',
+      exp: 'Idea. Así nacen casi todos los proyectos: alguien dice en voz alta lo que muchos pensaban. Lo que sigue es afinarla, no enamorarse de ella.' },
+    { s: 'El grupo compara tres ocurrencias distintas (sombra, juegos, un muelle) y elige una usando dos criterios: qué pidió más gente y qué se puede mantener después.',
+      resp: 'I',
+      pista: 'Aún no se diseña nada. Se está decidiendo CUÁL idea merece diseño.',
+      exp: 'Idea, en su parte madura: elegir con criterios en vez de por antojo. Un buen proyecto empieza descartando ideas queridas.' },
+    { s: 'El equipo escribe el problema con números: en la orilla no hay un solo árbol en 300 metros y en abril la sombra más cercana está a 10 minutos caminando.',
+      resp: 'D',
+      pista: 'Ya hay idea elegida. Ahora la están convirtiendo en algo que se pueda argumentar y medir.',
+      exp: 'Diseño. Plantear el problema con datos es el primer ladrillo del diseño: sin problema claro no hay proyecto, hay ocurrencia con presupuesto.' },
+    { s: 'Arman el presupuesto con tres cotizaciones por partida y un cronograma que arranca en octubre, cuando baja el calor y se puede plantar.',
+      resp: 'D',
+      pista: 'Nada se ha comprado ni plantado todavía. Están dibujando el plan en papel.',
+      exp: 'Diseño. Presupuesto y cronograma son diseño puro. Fíjate en el detalle de plantar en octubre: el buen diseño respeta el calendario biológico, no el del entusiasmo.' },
+    { s: 'Hacen una lista de a quién le afecta la obra y a quién le conviene: los pescadores, el comité de agua, la escuela, la delegada.',
+      resp: 'D',
+      pista: 'Es una lista que se hace ANTES de empezar, para no llevarse sorpresas. ¿En qué momento se dibujan los mapas?',
+      exp: 'Diseño: análisis de involucrados. Los proyectos no fracasan solos, los fracasan las personas a las que nadie preguntó. Este mapa se dibuja antes de mover un dedo.' },
+    { s: 'Llenan la solicitud de una convocatoria estatal, anexos incluidos, y la entregan tres días antes del cierre.',
+      resp: 'G',
+      pista: 'El plan ya existe. Ahora están persiguiendo el dinero de alguien más.',
+      exp: 'Gestión. La solicitud es el género literario del gestor: traducir tu proyecto al idioma del que tiene el dinero. Vas a escribir una de verdad este semestre.' },
+    { s: 'El sábado de la faena, el responsable del agua no llegó y el equipo reacomoda las cuadrillas ahí mismo para no perder el día.',
+      resp: 'ME',
+      pista: 'El proyecto ya está andando y algo salió distinto del plan. ¿Qué momento es cuando se corrige sobre la marcha?',
+      exp: 'Manejo y evaluación. Ejecutar es corregir en tiempo real. El plan no se abandona: se ajusta y se anota en la bitácora por qué.' },
+    { s: 'Seis meses después de plantar, cuentan cuánta gente se detiene en el nuevo borde con sombra un domingo cualquiera, y comparan contra el conteo que hicieron antes de la obra.',
+      resp: 'ME',
+      pista: 'La obra ya está hecha. ¿Qué se está haciendo con los números de antes y de después?',
+      exp: 'Manejo y evaluación: medir contra línea base. El conteo de antes vale oro; sin él, el de después no demuestra nada. Guarda esa idea, reaparece fuerte en este curso.' },
+    { s: 'Presentan al comité que puso el dinero un informe con fotos, gastos y el conteo de uso, y responden sus preguntas en una reunión pública.',
+      resp: 'G',
+      pista: 'El informe no es para el equipo: es para quien confió su dinero. ¿Cómo se llama darle la cara?',
+      exp: 'Gestión: rendición de cuentas. El informe final no es el fin del proyecto, es el principio del siguiente: quien rinde cuentas claras vuelve a ser financiado.' },
+    { s: 'De las diez plantas del borde, tres no pegaron. El equipo investiga por qué (les dio el sol de la tarde sin riego de establecimiento) y repone con otra especie y otro calendario.',
+      resp: 'ME',
+      pista: 'Algo falló, se estudió la causa y se corrigió el plan. Ese ciclo corto tiene nombre.',
+      exp: 'Manejo y evaluación: aprender del fallo y ajustar. Que algo no pegue no es fracaso, es dato. Ignorar el dato sí es fracaso.' }
+  ];
+
+  var etiquetas = { I: 'Idea', D: 'Diseño', ME: 'Manejo y evaluación', G: 'Gestión' };
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var botones = Object.keys(etiquetas).map(function (k) {
+      return '<button class="opcion" onclick="responder(' + i + ',\'' + k + '\',this)">' + etiquetas[k] + '</button>';
+    }).join('');
+    d.innerHTML = '<div class="hito"><span class="num-caso">' + (i + 1) + '.</span> ' + c.s + '</div>' +
+      botones +
+      '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+      '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    cont.appendChild(d);
+  });
+
+  function responder(i, eleccion, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (eleccion === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .45; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

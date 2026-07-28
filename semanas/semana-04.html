@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 4 · La consulta y el sobre · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 4 · La consulta y el sobre</div>
+  <div class="migas">Unidad 1 · Escuchar la presa · Se abre el miércoles 26 de agosto</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-08-26">
+
+<p class="pregunta">¿Y si la respuesta no es la que esperabas?</p>
+<p class="bajada">Tres semanas preparándote para dos horas: miraste la orilla, aprendiste a preguntar sin prometer, armaste el guion de tu estación. Esta semana se acaba la preparación. El jueves ensayamos completo, con vecinos difíciles incluidos. El viernes, la consulta de verdad en La Florida. Y cuando termine, junto a la presa, vuelve algo que sellaste hace un mes y que sigue engrapado en el aula: tu sobre.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Correr tu guion completo bajo presión: el ensayo del jueves trae vecinos difíciles a propósito.</li>
+    <li>Ejecutar tu rol en la consulta real: preguntar, registrar u observar, sin prometer nada.</li>
+    <li>Contar en público lo que tu estación escuchó: dos minutos, en parejas, ante el grupo. Primer peldaño de la escalera.</li>
+    <li>Cerrar la unidad 1 con tu primera autoevaluación (de ensayo: aquí se aprende a hacerla, no se juega nada).</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">El método</span>
+  <h3 style="margin-top:.2rem">El ensayo no es teatro</h3>
+  <p>Los equipos que ensayan no son los inseguros: son los que prefieren equivocarse barato. El jueves cada estación corre su guion completo (apertura, preguntas, registro, cierre) contra vecinos interpretados con mala leche: uno que pide promesas, uno que llega enojado, una señora con prisa. Todo lo que truene el jueves en el aula es un problema que el viernes ya no existe. Lo que truene el viernes, se paga frente a la gente.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">La actitud</span>
+  <h3 style="margin-top:.2rem">Escuchar es el trabajo</h3>
+  <p>El viernes tu opinión descansa. Si llevas tres semanas imaginando la orilla con mesas y sombra, ese es justo el filtro que hay que apagar: la consulta no es para comprobar tu idea, es para enterarte de la de ellos. La señal de que funcionó no es que la gente pida lo que esperabas: es que alguien pida algo que a nadie del equipo se le había ocurrido. Ese día, la respuesta incómoda es la valiosa. Anótala textual, entre comillas, aunque no te guste.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">La siembra se paga</span>
+  <h3 style="margin-top:.2rem">El sobre vuelve</h3>
+  <p>En la primera semana escribiste tu pronóstico, lo sellaste con tu firma y lo viste quedar engrapado en el cartel. Nadie lo ha abierto. El viernes, cuando la consulta termine y la gente se haya despedido, los nueve sobres viajan de regreso a la orilla y se abren ahí, uno por uno. Qué se hace con lo que digan, se sabe en el momento. No te decimos más.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El peldaño</span>
+  <h3 style="margin-top:.2rem">Contarlo en dos minutos</h3>
+  <p>Este semestre vas a contar tu proyecto cuatro veces, cada vez más alto: ante tu grupo, ante tus pares, ante un comité externo y ante la comunidad entera. El viernes subes el primer peldaño: en parejas, dos minutos, ahí mismo en la orilla: qué escuchó tu estación, la frase que no esperaban, lo que marca el mapa. Sin diapositivas y sin nervios de examen: es una ronda entre colegas que acaban de trabajar juntos.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El cierre de unidad</span>
+  <h3 style="margin-top:.2rem">Tu primera autoevaluación</h3>
+  <p>Con la consulta hecha, la unidad 1 se cierra y toca la primera autoevaluación del expediente. Es de ensayo: sirve para aprender a mirarte el trabajo, no produce ningún número. Revisas tu suelo de la unidad (contrato firmado, consulta, sobre, presentación, tickets), escribes qué hiciste bien y qué está aún no, y lo platicas si quieres. La única que cuenta para el acta es la de diciembre; estas son el gimnasio de aquella.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-04/ejercicio-11-el-dia-de-la-consulta.html"><strong>El día de la consulta</strong></a> · Siete aprietos que pueden pasarte el viernes en la orilla. Decide qué haces en cada uno, antes de que te pasen de verdad.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-04/ejercicio-21-mis-dos-minutos.html"><strong>Mis dos minutos</strong></a> · La estructura para contar lo que escuchó tu estación. Se llena en cinco minutos al final de la consulta.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-04/ejercicio-32-el-registro-en-limpio.html"><strong>El registro en limpio</strong></a> · La misma noche del viernes, pasa tu registro crudo a limpio. Mañana ya no te vas a acordar; hoy sí.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Ensayo general</dt>
+    <dd>Correr el proceso completo en condiciones parecidas a las reales, con fallas provocadas a propósito. No es para quedar bien: es para que el error salga barato. Lo que se corrige en ensayo cuesta minutos; lo que se corrige en campo cuesta confianza.</dd>
+    <dt>Protocolo del día</dt>
+    <dd>El acuerdo escrito de cómo corre el viernes: hora de llegada, montaje, quién saluda a la delegación, cuánto dura cada cosa, cómo se levanta todo y cómo nos despedimos. Cuando hay protocolo, los nervios tienen menos espacio donde meterse.</dd>
+    <dt>Frase textual</dt>
+    <dd>Lo que la persona dijo, palabra por palabra, entre comillas. "Aquí veníamos a nadar de chicos, ya nadie se mete" vale oro; "la señora dijo que antes era mejor" vale poco. La frase textual carga el detalle, y el diseño se alimenta de detalles.</dd>
+    <dt>La respuesta incómoda</dt>
+    <dd>La que no cabe en lo que ya habías imaginado. Es la evidencia de que la consulta está funcionando: si todo lo que escuchas confirma lo que pensabas, o tuviste mucha puntería o preguntaste chueco. Se registra igual que las demás, con más cariño si duele.</dd>
+    <dt>El sobre</dt>
+    <dd>Tu pronóstico de la semana 1, sellado y firmado: las tres cosas que creías que la gente iba a pedir. El viernes se abre junto a la presa, después de escuchar a la comunidad de verdad. Lo que se hace con él, se sabe ahí.</dd>
+    <dt>Peldaño</dt>
+    <dd>Cada subida de la escalera de contar en público: parejas ante el grupo (esta semana), pre-pitch entre pares, pitch ante comité externo, rendición pública ante la comunidad. Nadie llega a la cuarta sin haber pisado la primera; por eso la primera es chiquita y entre conocidos.</dd>
+    <dt>Autoevaluación de ensayo</dt>
+    <dd>Mirar tu propio trabajo de la unidad y ponerlo en palabras: qué está bien, qué está aún no, qué harías distinto. Se llama de ensayo porque no produce número: entrena el músculo para la única que sí cuenta, la de diciembre. Va en el expediente.</dd>
+    <dt>Suelo de la unidad</dt>
+    <dd>La lista corta de cosas que garantizan que la unidad quedó caminada: en la unidad 1 son el contrato firmado, la consulta (o su compensatoria si faltaste con causa), el sobre, la presentación en parejas y los tickets. No es examen: es el piso donde se para lo que sigue.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán las fotos de la consulta, el mapa parlante ya rayado por la comunidad, el conteo de asistentes y las frases textuales que más van a dar de qué hablar en la semana 5.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>Un mes de preparación para dos horas en las que lo más importante es callarse a tiempo. Así son los proyectos: lo que se ve dura una tarde, lo que lo sostiene dura semanas.</p>
+  <p>El viernes la boca descansa y las orejas trabajan. Y al final, tu sobre te va a decir qué tanto conocías ya la respuesta.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

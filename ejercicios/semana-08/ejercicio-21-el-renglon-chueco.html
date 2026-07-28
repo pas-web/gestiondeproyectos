@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S8 · El renglón chueco</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .renglon { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; }
+  .renglon b { color:var(--marca); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El renglón chueco</h1>
+<p class="sub">Gimnasio · Semana 8 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis renglones sacados de marcos lógicos verosímiles (proyecto: habilitar un área de estar junto a un manantial, en una comunidad serrana). Cinco traen falla de columna; uno se salva. Es el mismo ojo del duelo del viernes, entrenado en frío.</p>
+
+<div class="intro">
+  Las fallas de columna: el <strong>indicador sin número ni fecha</strong>, el <strong>número inventado</strong> (¿de dónde salió?), el <strong>medio de verificación fantasma</strong> (el documento que nadie va a producir), el <strong>supuesto interno</strong> (que es tu chamba, no una condición externa) y el <strong>propósito-producto</strong> (la obra vestida de cambio).
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Dibuja el marco exprés de tu componente (una hoja: 4 renglones, 3 columnas) y pásale este mismo filtro renglón por renglón. Cada falla que te encuentres tú es una que no te encuentra el Comité.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '<b>Propósito:</b> instalar tres bancas y una sombra de malla junto al manantial.',
+      ops: ['Indicador sin número', 'Propósito-producto: la obra vestida de cambio; el propósito debe decir qué hace la gente distinto', 'Supuesto interno', 'Nada: es concreto y claro'],
+      resp: 1,
+      pista: 'Aplica la prueba del propósito: ¿se cumple con puro dinero, sin que nadie cambie de conducta?',
+      exp: 'Con presupuesto y un fin de semana, este "propósito" se cumple aunque nadie vuelva a pisar el manantial. Las bancas y la malla son PRODUCTOS (renglón de abajo); el propósito es lo que pasa después: "las familias usan el área en las tardes de calor". La confusión no es cosmética: define qué vas a medir y qué vas a defender ante quien pregunte si funcionó.' },
+    { r: '<b>Indicador (de resultado):</b> incremento significativo en la satisfacción de los usuarios del área.',
+      ops: ['Medio de verificación fantasma', 'Supuesto interno', 'Indicador sin número, sin línea base y sin fecha: "significativo" no se puede auditar', 'Nada: la satisfacción importa'],
+      resp: 2,
+      pista: '¿Cuánto es "significativo"? ¿Satisfacción medida desde cuándo, cómo, contra qué?',
+      exp: 'El adorno clásico: suena a evaluación y no compromete nada. "Significativo" es la palabra favorita de los marcos que no piensan medirse. La versión honesta cambia satisfacción declarada por conducta observable: "al menos 15 personas usan el área entre 16:00 y 18:00 en tres domingos seguidos de noviembre". La gente vota con los pies, y los pies se cuentan.' },
+    { r: '<b>Indicador (de resultado):</b> el 80% de los habitantes de la comunidad visitará el área al menos una vez al mes.',
+      ops: ['Número inventado: ¿de dónde salió ese 80%? Sin línea base ni fuente, es un numerito decorativo (y de paso, inalcanzable)', 'Supuesto interno', 'Propósito-producto', 'Nada: tiene número y frecuencia, eso pide la regla'],
+      resp: 0,
+      pista: 'Tener número no basta. ¿Ese 80% viene de algún dato o de las ganas?',
+      exp: 'La falla favorita de la IA en los duelos: el porcentaje confiado que no viene de ningún lado. Un número sin fuente es peor que no tener número, porque aparenta rigor. Los números defendibles nacen de una línea base ("hoy van ~20 personas los domingos, según nuestros conteos de agosto") y crecen desde ahí con modestia. Cuando veas un porcentaje redondo y ambicioso, pregunta siempre: ¿quién lo midió y cuándo?' },
+    { r: '<b>Medio de verificación:</b> encuestas trimestrales de percepción aplicadas a una muestra representativa de la población.',
+      ops: ['Indicador sin número', 'Medio de verificación fantasma: nadie en este proyecto va a diseñar, aplicar y procesar encuestas trimestrales representativas', 'Nada: las encuestas son el estándar', 'Propósito-producto'],
+      resp: 1,
+      pista: '¿Quién las aplica? ¿Con qué tiempo? ¿El proyecto dura siquiera dos trimestres?',
+      exp: 'El documento que nadie va a producir: se escribe para llenar la celda y muere ahí. Un medio de verificación es real si cabe en la vida del equipo: hoja de conteo fechada, lista de asistencia, foto con fecha, el registro del mapa. Regla práctica: si el medio de verificación cuesta más esfuerzo que la actividad que verifica, es fantasía. El duelo del viernes va a estar lleno de estos: ahí los cazas.' },
+    { r: '<b>Supuesto:</b> que el equipo trabaje con compromiso y termine las actividades a tiempo.',
+      ops: ['Número inventado', 'Medio de verificación fantasma', 'Supuesto interno: eso no es una condición externa, es tu chamba; los supuestos viven fuera de tu control', 'Nada: sin compromiso no hay proyecto'],
+      resp: 2,
+      pista: 'La columna de supuestos es para lo que NO controlas. ¿Quién controla el compromiso del equipo?',
+      exp: 'El supuesto interno delata que la columna se llenó sin entenderla: tu compromiso no es un riesgo del entorno, es tu responsabilidad (y si necesita columna, el problema es otro). Los supuestos legítimos de este proyecto suenan así: "que la temporada de lluvia no cubra la zona antes de diciembre", "que la delegación sostenga el acuerdo de uso", "que el proveedor entregue la malla en la fecha cotizada". Externos, concretos, vigilables.' },
+    { r: '<b>Producto:</b> área de estar habilitada (3 bancas, sombra de malla de 20 m²) · <b>Indicador:</b> obra concluida y funcional al 30 de octubre · <b>Verificación:</b> fotos fechadas y acta de entrega con la delegación · <b>Supuesto:</b> que el proveedor entregue la malla en la fecha cotizada.',
+      ops: ['Propósito-producto', 'Indicador sin número', 'Supuesto interno', 'Se salva: cada columna hace su trabajo y ninguna promete de más'],
+      resp: 3,
+      pista: 'Revisa columna por columna contra la lista de fallas. ¿Encuentras alguna?',
+      exp: 'Renglón sano: es renglón de PRODUCTO y se asume como tal (no pretende ser el cambio), el indicador tiene qué y cuándo, la verificación es barata y contundente (fotos fechadas y un acta con firma real), y el supuesto es externo y concreto. Fíjate en el acta con la delegación: un medio de verificación que además fortalece la relación con la comunidad. Así se ve la ingeniería del papel cuando está bien hecha: aburrida, sólida y sin grietas.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué tiene este renglón?</div>' +
+               '<span class="renglon">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

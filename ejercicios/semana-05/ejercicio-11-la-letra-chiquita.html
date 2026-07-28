@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S5 · La letra chiquita</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .7rem; }
+  .clausula { font-family:Georgia,serif; font-style:italic; background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La letra chiquita</h1>
+<p class="sub">Gimnasio · Semana 5 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Siete cláusulas del tipo que aparece en convocatorias reales de este país (PROCODES, INAES, fondos municipales). Ninguna está ahí de adorno: cada una descalifica solicitudes todos los años. Descifra qué implica cada una para quien solicita.</p>
+
+<div class="intro">
+  La regla del oficio: las reglas de operación se leen <strong>dos veces</strong>. La primera para entender qué dicen; la segunda para encontrar lo que la primera se saltó. Este ejercicio entrena la segunda pasada.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Dibuja la plantilla de dos columnas: Elemento / Qué implica para nosotros. Es la misma que vas a usar el viernes con un documento que te interesa bastante más que estos. Practícala con la cláusula que te haya costado más de este ejercicio.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { c: '"Los apoyos se otorgarán en orden de prelación conforme a la fecha de registro, hasta agotar la suficiencia presupuestal del ejercicio fiscal."',
+      ops: ['Que hay dinero asegurado para todos los que cumplan requisitos',
+            'Que puedes cumplir todo, calificar bien... y no recibir nada porque el dinero se acabó antes de que llegaras',
+            'Que el presupuesto se define después de ver cuántos solicitan',
+            'Que conviene esperar al final de la ventanilla para registrarse con calma'],
+      resp: 1,
+      pista: '"Hasta agotar" y "orden de prelación": ¿qué pesa más aquí, tu calidad o tu fecha?',
+      exp: 'La bolsa es finita y la fila importa: registrarse el primer día no es ansiedad, es estrategia. Miles de solicitudes buenas se quedan fuera cada año no por malas sino por tardías. Cuando una convocatoria trae esta cláusula, el calendario del equipo se planea desde la fecha de apertura, no desde la de cierre.' },
+    { c: '"Las cotizaciones deberán presentarse en papel membretado del proveedor, con vigencia no mayor a 30 días naturales a la fecha de entrega de la solicitud."',
+      ops: ['Que puedes juntar cotizaciones desde ahorita e irlas guardando',
+            'Que cualquier precio de internet con captura de pantalla sirve',
+            'Que las cotizaciones se consiguen cerca de la fecha de entrega, con proveedores formales, y eso hay que agendarlo hacia atrás',
+            'Que el membrete es un formalismo que nadie revisa'],
+      resp: 2,
+      pista: 'Treinta días naturales corren rápido. ¿Desde cuándo y con quién tienes que estar hablando?',
+      exp: 'Esta cláusula convierte "conseguir cotizaciones" en un asunto de calendario y de relaciones: proveedores formales (con membrete) que respondan en la ventana correcta. El mapeo hacia atrás es la herramienta: de la fecha de entrega se restan los 30 días y ahí queda tu ventana para cotizar, y al proveedor lo contactas desde antes para que no te deje colgado. La captura de MercadoLibre no descalifica al proveedor: te descalifica a ti.' },
+    { c: '"Serán desechadas las solicitudes que no acrediten la legal propiedad o posesión del predio donde se ejecutarán las acciones, o en su caso, el consentimiento expreso del propietario o de la asamblea correspondiente."',
+      ops: ['Que este requisito solo aplica a terrenos privados, no a tierras ejidales',
+            'Que basta con que todos sepan de quién es el terreno',
+            'Que se puede entregar la solicitud y llevar el papel del predio después',
+            'Que antes de diseñar nada hay que resolver el papel del terreno: acta, anuencia o permiso, con firma de quien corresponde'],
+      resp: 3,
+      pista: '"Serán desechadas" no dice "se les pedirá una aclaración". ¿Qué se resuelve primero: la idea o el papel?',
+      exp: 'La cláusula más letal del género: proyectos enteros mueren porque el terreno "era de todos" pero no había acta. En tierra ejidal o comunal, el consentimiento lo da la asamblea con acta firmada, y las asambleas tienen sus tiempos (no sesionan porque tú traes prisa). Todo proyecto en sitio empieza por la pregunta aburrida: ¿de quién es esto y quién firma?' },
+    { c: '"La presentación de la solicitud no genera derecho ni garantía alguna de recibir el apoyo, aun cuando se cumplan la totalidad de los requisitos establecidos."',
+      ops: ['Que la convocatoria es una lotería y no vale la pena esmerarse',
+            'Que cumplir requisitos te mete al concurso, no al presupuesto: solicitar no es recibir, y el plan del equipo necesita un escenario sin este dinero',
+            'Que es una fórmula legal sin consecuencias prácticas',
+            'Que si cumples todo y no te dan, puedes exigirlo'],
+      resp: 1,
+      pista: 'La cláusula parece desalentadora, pero en realidad te está dando una instrucción de planeación. ¿Cuál?',
+      exp: 'Requisitos cumplidos = boleto de entrada, no premio. La instrucción escondida es doble: primero, el esmero va en lo que sí te distingue (los criterios de dictaminación, no la lista de requisitos); segundo, ningún proyecto serio se planea con un solo escenario. ¿Qué hace tu equipo si el dictamen dice no o dice menos? El que tiene respuesta para eso negocia distinto y duerme mejor.' },
+    { c: '"En la dictaminación se dará prioridad a los proyectos que acrediten una aportación del solicitante, en efectivo o en especie, equivalente al menos al veinte por ciento del monto total del proyecto."',
+      ops: ['Que hay que tener dinero en el banco para poder participar',
+            'Que la aportación es opcional y no afecta el resultado',
+            'Que el trabajo, los materiales y las gestiones propias cuentan, pero solo si se declaran y se les pone número',
+            'Que conviene inflar el presupuesto para que el 20% se vea más grande'],
+      resp: 2,
+      pista: 'En especie: ¿cuánto vale una faena de 10 personas? ¿Y quién lo dice si tú no lo escribes?',
+      exp: 'La contrapartida es el argumento más fuerte de un proyecto comunitario: dice "esto no se cae si el dinero externo se va". Pero solo existe si se cuantifica: jornales a precio de la región, materiales del monte con valor de mercado, el flete que presta el compadre. Los equipos que no la declaran regalan puntos; los que la inflan pierden credibilidad completa en la primera verificación.' },
+    { c: '"No podrán ser beneficiarias las personas o grupos que tengan pendiente la comprobación de recursos de ejercicios anteriores del presente u otros programas."',
+      ops: ['Que el historial se borra cada año fiscal',
+            'Que cerrar bien un proyecto (comprobar cada peso) es la llave del proyecto siguiente: el historial te acompaña',
+            'Que esta cláusula solo aplica a montos grandes',
+            'Que si el pendiente es de otro programa, aquí no cuenta'],
+      resp: 1,
+      pista: 'El mundo de los fondos es chico y tiene memoria. ¿Qué protege más tu futuro: ganar este apoyo o cerrar bien el anterior?',
+      exp: 'En el ecosistema real de convocatorias todos se hablan: un grupo "encobijado" (con comprobación pendiente) queda fuera de todo hasta aclarar. La lección para el semestre es directa: la rendición de cuentas no es el trámite final aburrido, es el activo que te mantiene elegible de por vida. Los proyectos se cierran con el mismo cuidado con que se abren.' },
+    { c: '"La ventanilla de recepción permanecerá abierta del 1 al 15 de marzo, o hasta agotar el número de folios disponibles, lo que ocurra primero."',
+      ops: ['Que tienes quince días cómodos para preparar la entrega',
+            'Que el "o lo que ocurra primero" puede cerrar la ventanilla el día 2: se llega el día 1, con todo listo desde febrero',
+            'Que los folios se agotan solo en las ciudades grandes',
+            'Que si se acaban los folios te apuntan en lista de espera'],
+      resp: 1,
+      pista: 'Dos fechas de cierre en una misma frase. ¿Cuál de las dos no controlas?',
+      exp: 'El clásico: la fecha impresa dice 15 y la real puede ser el 2. "Hasta agotar folios" significa que el cierre depende de la demanda, no del calendario, y la demanda no la controlas. Traducción operativa: el expediente se termina ANTES de que abra la ventanilla y alguien va el primer día. En el mapeo hacia atrás, esta cláusula recorre todos los plazos del equipo dos semanas.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué implica esta cláusula?</div>' +
+               '<span class="clausula">' + c.c + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

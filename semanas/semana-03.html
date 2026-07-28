@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 3 · Diseñar la consulta · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 3 · Diseñar la consulta</div>
+  <div class="migas">Unidad 1 · Escuchar la presa · Se abre el miércoles 19 de agosto</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-08-19">
+
+<p class="pregunta">¿Cómo se pregunta sin prometer?</p>
+<p class="bajada">La semana pasada miraste la presa con ojos de gestor: conteos, recorridos, ausencias. Esta semana toca lo que sigue, y es más delicado: preguntar. La próxima semana la gente de La Florida va a decir qué debe tener su orilla, y el proyecto entero se va a parar sobre esas respuestas. Si la pregunta sale chueca, el proyecto sale chueco. Esta semana no vamos a la presa: diseñamos la consulta, pregunta por pregunta, rol por rol.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Explicar por qué la consulta no es una encuesta ni un examen: es la comunidad definiendo qué debe tener su orilla.</li>
+    <li>Detectar preguntas que inducen la respuesta o que prometen de contrabando.</li>
+    <li>Formular preguntas apreciativas: empezar por lo que ya funciona, no por lo que falta.</li>
+    <li>Armar el guion de tu estación, tu rol y la logística de la consulta de la próxima semana.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">El qué lo pone la comunidad</h3>
+  <p>El reconocimiento te dijo qué hay en la orilla. La consulta va a decir qué debe haber, y eso no lo decides tú ni lo decide el profe: lo decide quien usa la presa todos los días. Los cursos de diseño más citados del mundo (Stanford, MIT) mandan a sus equipos a esto mismo antes de permitirles dibujar una sola línea: el problema lo trae el socio, no el estudiante. Quien se salta este paso diseña de oídas, y los que diseñan de oídas terminan construyendo muelles donde nadie pesca.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">La regla</span>
+  <h3 style="margin-top:.2rem">No prometer</h3>
+  <p>En la visita del viernes pasado ya la practicaste sin saber su nombre: no anunciar, no ofrecer. Ahora la regla formal, la más seria del semestre: en la consulta nada se promete. Y ojo, porque hay promesas de contrabando: "¿les gustaría un asador techado junto al sabino?" no pregunta, promete. La gente de las comunidades tiene memoria larga de proyectos que llegaron, preguntaron bonito, prometieron y se fueron. Una promesa rota cuesta más cara que un silencio, y la confianza no se repara con otra visita.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">La herramienta</span>
+  <h3 style="margin-top:.2rem">La entrevista apreciativa</h3>
+  <p>La pregunta obvia ("¿qué le falta a la presa?") produce la respuesta obvia: una lista de obras, cada una con su factura. La entrevista apreciativa entra por el otro lado: "cuénteme de un día en que la orilla estuvo llena de gente, ¿qué había ese día?". La respuesta a "¿qué falta?" es un pedido; la respuesta a "¿qué pasaba ese día?" es una escena, con hora, sombra, comida y quién trajo a quién. Las escenas sí se pueden diseñar. Completa el juego con la distinción abierta/cerrada y neutra/inducida: el gimnasio te pone a afinar el oído.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">La IA en su lugar</span>
+  <p>Pídele a una IA un guion de consulta comunitaria y te lo entrega en veinte segundos, bien redactado y con voz segura. Ese es justo el problema: la seguridad no es criterio. En el guion van a venir preguntas que inducen, promesas de contrabando y supuestos de ciudad que en La Florida no aplican. El gimnasio 2 trae uno de esos guiones para que le caces las trampas. La velocidad es de la máquina; el criterio, para eso viniste al curso.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El diseño fino</span>
+  <h3 style="margin-top:.2rem">Estaciones, roles y registro</h3>
+  <p>El viernes armamos la consulta pieza por pieza: las estaciones (el mapa grande de la presa donde la gente marca, la mesa de conversación, la pared de ideas), los roles (quien pregunta, quien anota, quien observa) y el registro, porque un buen registro vale más que una buena memoria. De ahí sales con tu guion, tu rol y tu lista de materiales. La próxima semana se ensaya y se ejecuta.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-03/ejercicio-11-la-pregunta-tramposa.html"><strong>La pregunta tramposa</strong></a> · Ocho preguntas candidatas para la consulta. Unas sirven y otras traen trampa; atrapa cuál es cuál.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-03/ejercicio-21-cazar-a-la-ia.html"><strong>Cazarle las trampas a la IA</strong></a> · Un guion de consulta escrito por IA, con sus trampas escondidas. Márcalas todas.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-03/ejercicio-32-el-guion-de-mi-estacion.html"><strong>El guion de mi estación</strong></a> · Arma la apertura, las preguntas y el cierre de tu estación para el diseño fino del viernes.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Consulta comunitaria</dt>
+    <dd>El momento en que la comunidad define qué debe tener el proyecto. No es un trámite de firmas ni una encuesta de salida: es la fuente de las decisiones de diseño. Lo que ahí se diga manda sobre lo que a ti se te haya ocurrido.</dd>
+    <dt>Needfinding</dt>
+    <dd>Encontrar la necesidad antes de diseñar la solución. El orden importa: primero los ojos (reconocimiento), luego las preguntas (consulta), y solo después el lápiz. El problema lo trae la comunidad, no el estudiante.</dd>
+    <dt>Diseño participativo</dt>
+    <dd>Diseñar con la gente y no para la gente. En este proyecto: la consulta define el qué, ustedes traducen ese qué en componentes técnicos, y la comunidad vuelve a aparecer en cada paso que sigue.</dd>
+    <dt>La regla de no prometer</dt>
+    <dd>En la consulta nada se ofrece ni se asegura. La apertura honesta es simple y verdadera: venimos a escuchar qué debería tener la orilla; todavía no hay nada decidido. Prometer de más quema la confianza, y la confianza es el terreno donde se construye todo lo demás.</dd>
+    <dt>Promesa de contrabando</dt>
+    <dd>La promesa disfrazada de pregunta: "¿les gustaría que hubiera juegos para los niños?" ya sembró la expectativa de los juegos. Se detecta con una prueba sencilla: si la pregunta describe una obra concreta, probablemente está prometiendo.</dd>
+    <dt>Pregunta inducida</dt>
+    <dd>La que trae la respuesta adentro: "¿verdad que hace falta más sombra?". Produce datos que confirman lo que ya pensabas, que es exactamente lo que no necesitas. Su antídoto es la pregunta neutra: "¿a qué horas se junta la gente aquí y dónde se acomoda?".</dd>
+    <dt>Entrevista apreciativa</dt>
+    <dd>Empezar por lo que ya funciona: pedir la historia de una vez que las cosas salieron bien y desmenuzar qué la hizo posible. Da material de diseño (escenas, no pedidos) y arranca la conversación por el orgullo en vez de la carencia.</dd>
+    <dt>Mapa parlante</dt>
+    <dd>Un mapa grande del sitio sobre el que la gente marca directamente: por dónde entra, dónde se sienta, qué zona evita, dónde le gustaría que pasara algo. Registra ubicaciones con una precisión que la pura conversación no alcanza.</dd>
+    <dt>El registro</dt>
+    <dd>Lo que no se anota no existe. Cada estación lleva a alguien cuyo único trabajo es registrar: frases textuales, quién las dijo (edad aproximada, no nombre), marcas en el mapa. La memoria del equipo al día siguiente no es un medio de verificación.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán el guion final de la consulta, el reparto de roles y el mapa base que viajará a La Florida.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>Preguntando se llega a Roma, dice el refrán, pero no dice cómo: hay preguntas que llevan a Roma y preguntas que te regresan al punto de salida con las manos llenas de lo que ya sabías.</p>
+  <p>La próxima semana la presa contesta. Esta semana, que la pregunta esté a la altura.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

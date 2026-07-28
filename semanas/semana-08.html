@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 8 · Ingeniería del papel · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 8 · Ingeniería del papel</div>
+  <div class="migas">Unidad 2 · Diseñar lo que pidieron · Se abre el miércoles 23 de septiembre</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-09-23">
+
+<p class="pregunta">¿Cómo se mide una promesa?</p>
+<p class="bajada">Tu cadena ya dice qué apuestas. Esta semana la apuesta se viste de traje: marco lógico exprés, objetivos que aguanten la lupa y dos indicadores por componente que se puedan verificar sin fe. No es burocracia: es tu proyecto traducido al idioma en que las instituciones deciden. El viernes hay segundo duelo con la IA, y algo más: llega el Anexo 1, el formato de solicitud del fondo. El papel de octubre se empieza a llenar esta semana.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Traducir tu cadena de resultados a un marco lógico exprés: la misma apuesta, en tabla auditable.</li>
+    <li>Afinar objetivos con las cinco pruebas (SMART) hasta que no les sobre humo ni les falte fecha.</li>
+    <li>Elegir dos indicadores por componente, con su escalera de bien, mejor y excelente, y medios de verificación reales.</li>
+    <li>Cotejar tu marco contra el de la IA y cazarle las fallas de segunda generación: las que se ven bonitas en tabla.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">La tabla es un traductor</h3>
+  <p>El marco lógico tiene mala fama y la tiene ganada: se ha usado como trámite hueco millones de veces. Pero bien entendido es otra cosa: tu cadena de resultados acomodada en cuatro renglones (propósito, productos, actividades, y el fin al que contribuyes) con tres columnas al lado: cómo se mide, dónde se verifica, qué se supone. Un desconocido con tu tabla enfrente puede auditar tu proyecto sin conocerte, y eso es exactamente lo que va a pasar en octubre. La versión exprés de este curso cabe en una hoja; los marcos de veinte hojas se dejan para cuando alguien los pague.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">Las cinco pruebas</span>
+  <h3 style="margin-top:.2rem">El objetivo que aguanta la lupa</h3>
+  <p>"Mejorar la orilla" no es un objetivo: es un deseo con verbo. Las cinco pruebas lo van afinando: específico (¿qué de la orilla?), medible (¿cuánto y desde cuánto?), alcanzable (¿con este equipo, este dinero, este semestre?), relevante (¿responde a lo que la consulta pidió o a lo que se te ocurrió?) y con tiempo (¿para cuándo?). El jueves lo hacemos en vivo con un objetivo del valle, letra por letra, hasta que quede uno que un dictaminador no pueda rebotar.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El aparato</span>
+  <h3 style="margin-top:.2rem">Dos indicadores, no veinte</h3>
+  <p>Este curso pide dos indicadores por componente: uno de producto (¿entregaste lo que dijiste?) y uno de resultado (¿la gente hace algo distinto?). Cada uno con su escalera de tres peldaños (bien, mejor, excelente) y su medio de verificación de a de veras: hoja de conteo fechada, foto, lista, registro. Regla de oro: lo que no se puede verificar no se promete. Veinte indicadores que nadie va a medir valen menos que dos que sí.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">El duelo</span>
+  <h3 style="margin-top:.2rem">Duelo 2: el marco</h3>
+  <p>Mismo ritual, segunda ronda: el marco lógico de tu componente hecho por tu equipo y hecho por la IA con su mejor prompt. Aviso de lo que viene: la IA arma tablas hermosas, y en la columna de indicadores le brota el numerito inventado ("el 80% de los usuarios reportará satisfacción") y en la de verificación, el documento que nadie va a producir ("encuestas trimestrales de percepción"). La cacería de esta semana es más fina que la pasada: las fallas ya no están en la lógica, están en la letra chica de las columnas.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El fondo toca la puerta</span>
+  <h3 style="margin-top:.2rem">Llega el Anexo 1</h3>
+  <p>El viernes se reparte el formato de solicitud del fondo, como lo prometía el calendario de las reglas. De aquí al 9 de octubre, todo lo que el curso produce tiene destino: la cadena, el marco, los indicadores y lo que viene (mapa de poder, presupuesto, cronograma) son las piezas del formato. Ya no estás haciendo tareas: estás armando una solicitud. Se siente distinto, y esa es la idea.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-08/ejercicio-11-el-objetivo-en-la-lupa.html"><strong>El objetivo en la lupa</strong></a> · Siete objetivos con algo de menos (o de más). Diagnostica qué prueba reprueban.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-08/ejercicio-21-el-renglon-chueco.html"><strong>El renglón chueco</strong></a> · Seis renglones de marcos lógicos con falla escondida (uno se salva). El mismo ojo del duelo, en versión tabla.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-08/ejercicio-32-mi-marco-expres.html"><strong>Mi marco exprés</strong></a> · Arma la tabla de tu componente renglón por renglón y deja listo el prompt del duelo 2.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Marco lógico</dt>
+    <dd>La tabla que resume tu proyecto para ojos ajenos: qué cambio buscas (propósito), qué entregas (productos), qué haces (actividades) y a qué contribuyes (fin), cada renglón con su indicador, su medio de verificación y su supuesto. Es el formato estándar de las convocatorias mexicanas de desarrollo y conservación: hablarlo es requisito del oficio.</dd>
+    <dt>Resumen narrativo</dt>
+    <dd>La primera columna del marco: la historia de tu proyecto contada en cuatro renglones, de abajo hacia arriba: hago actividades, que entregan productos, que logran el propósito, que contribuye al fin. Si tu cadena de la semana pasada está bien hecha, el resumen narrativo ya existe: solo cambia de ropa.</dd>
+    <dt>Propósito</dt>
+    <dd>El cambio que tu componente logra en la gente o en el sitio: el renglón más importante de la tabla y el que más se escribe mal. Prueba rápida: si tu propósito se puede cumplir con puro dinero y sin que nadie cambie de conducta ("instalar las mesas"), no es propósito: es producto disfrazado de cambio.</dd>
+    <dt>Indicador</dt>
+    <dd>La señal contable que dirá si cumpliste: cuánto, de qué, dónde, para cuándo. Un indicador sin número o sin fecha es un adorno. En este curso: dos por componente, uno de producto y uno de resultado.</dd>
+    <dt>Bien, mejor, excelente</dt>
+    <dd>La escalera de cada indicador: el piso digno (bien), el escenario esperado (mejor) y el techo honesto (excelente). Poner los tres peldaños por escrito te protege del optimismo y le da al dictamen algo serio que leer. Prometer solo el techo es la receta clásica del incumplimiento.</dd>
+    <dt>Medio de verificación</dt>
+    <dd>Dónde constará que el indicador se cumplió: la hoja de conteo fechada, la lista de asistencia, la foto con fecha, el registro contable. Se decide ANTES de ejecutar, porque el documento que no se planeó no existe cuando se necesita. Lo que no se puede verificar no se promete.</dd>
+    <dt>Supuesto (columna)</dt>
+    <dd>Los "siempre que" de tu cadena, ahora en su columna oficial: condiciones externas, fuera de tu control, necesarias para subir de un renglón al otro. "Que el equipo trabaje bien" no es supuesto: es tu chamba. "Que la temporada de lluvia no cubra la zona" sí lo es.</dd>
+    <dt>Ingeniería del papel</dt>
+    <dd>El nombre honesto de esta semana: los proyectos también se construyen en papel, y el papel tiene su ingeniería (formatos, columnas, pruebas de resistencia). Despreciarla es romántico y caro: las buenas ideas mal escritas pierden contra las ideas regulares bien escritas, todos los años, en todas las convocatorias.</dd>
+    <dt>Anexo 1</dt>
+    <dd>El formato de solicitud del fondo, prometido en las reglas para esta semana. Se llena con las piezas que el curso ha ido produciendo. La solicitud completa, impresa y en mano, se entrega el 9 de octubre a las 14:00. El que lo lee dos veces esta semana llena mejor que el que lo abre en octubre.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán los marcos exprés de los componentes, los indicadores con su escalera, la tabla del cotejo del duelo 2 y la cacería nueva.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>Las palabras se las lleva el viento, dice el refrán, y los dictaminadores lo saben mejor que nadie: por eso piden tablas. Una promesa con número, fecha y hoja de conteo deja de ser palabra y se vuelve compromiso.</p>
+  <p>Esta semana tu apuesta aprende a dejarse medir. Lo que aguante la lupa aquí, aguantará la mesa en octubre.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

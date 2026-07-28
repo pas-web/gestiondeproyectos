@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S5 · De peticiones a líneas</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .situacion { font-family:Georgia,serif; font-style:italic; font-size:1.05rem; color:var(--profundo); margin:.2rem 0 .7rem; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; font-style:normal; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .lineas-caja { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin:1rem 0; font-size:.95rem; }
+  .lineas-caja strong { color:var(--marca); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>De peticiones a líneas</h1>
+<p class="sub">Gimnasio · Semana 5 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Caso de entrenamiento: en El Sabinito (una comunidad como la tuya, en otra parte de la Sierra) se consultó a la gente sobre el manantial del pueblo y su alrededor. Aquí van diez voces del registro. La síntesis propuso tres líneas de trabajo y una canasta especial. Acomoda cada voz donde pertenece.</p>
+
+<div class="lineas-caja">
+  <strong>Línea A · Dónde estar:</strong> el problema de la sombra, los asientos, el espacio para juntarse.<br>
+  <strong>Línea B · El agua y su orilla:</strong> el problema de la limpieza, el acceso al agua, la pesca.<br>
+  <strong>Línea C · Los niños:</strong> el problema de dónde y cómo juegan los chicos.<br>
+  <strong>Canasta T · Condición transversal:</strong> no es una línea con obra propia: es una regla que TODAS las líneas deben respetar (seguridad, no cobrar, mantenimiento, no dañar).
+</div>
+
+<div class="intro">
+  La prueba de la canasta T: si lo que pide la voz debe cumplirse <strong>en todos los componentes a la vez</strong>, no es línea: es condición. Las condiciones no se diseñan aparte, se heredan a todo.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Toma cinco frases textuales de TU registro de la consulta y hazles lo mismo: ¿línea o condición? ¿Y la línea está nombrada como problema o ya trae la obra escondida en el nombre? Llega el jueves con esas cinco clasificadas: la mesa de tarjetas va a ir más rápido.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { s: '"No hay sombra más que la del sabino grande, y esa la agarra el que llega temprano." (señora ~55)',
+      ops: ['Línea A · Dónde estar', 'Línea B · El agua y su orilla', 'Línea C · Los niños', 'Canasta T · Condición transversal'],
+      resp: 0,
+      pista: '¿De qué problema habla: del agua, de los niños o de poder quedarse a gusto?',
+      exp: 'Directa a la línea A: es el problema de poder estar. Fíjate en el detalle que regala: la sombra existe pero es escasa y se compite por ella. Ese matiz ("la agarra el que llega temprano") vale para dimensionar: no falta toda la sombra, falta sombra para todos.' },
+    { s: '"El agua sale limpia, pero la orilla se llena de botes y bolsas cada domingo." (señor ~40)',
+      ops: ['Línea A · Dónde estar', 'Línea B · El agua y su orilla', 'Canasta T · Condición transversal', 'Línea C · Los niños'],
+      resp: 1,
+      pista: 'Habla de la orilla y su estado. ¿Es regla para todos o problema propio de un lugar?',
+      exp: 'Línea B: el estado de la orilla es un problema con lugar y solución propia (manejo de residuos ahí). Ojo con la tentación de mandarlo a la canasta T como "mantenimiento": la voz señala un problema concreto y localizado, no una regla general. La frontera es fina y por eso la síntesis se hace con las tarjetas a la vista.' },
+    { s: '"Estaría bueno que los chamacos tuvieran dónde jugar que no fuera la carretera." (señora ~35)',
+      ops: ['Línea C · Los niños', 'Canasta T · Condición transversal', 'Línea A · Dónde estar', 'Línea B · El agua y su orilla'],
+      resp: 0,
+      pista: 'El sujeto de la frase son los niños y su lugar. ¿Y el dato de riesgo que trae de regalo?',
+      exp: 'Línea C, y de las voces más valiosas del registro: no solo pide lugar para jugar, documenta dónde juegan HOY (la carretera). El diseño de la línea C arranca con ese dato de riesgo: cualquier propuesta se mide contra "¿saca a los niños de la carretera?".' },
+    { s: '"Eso sí: que no se les ocurra cobrar por entrar." (señor ~65)',
+      ops: ['Línea B · El agua y su orilla', 'Línea A · Dónde estar', 'Canasta T · Condición transversal', 'Línea C · Los niños'],
+      resp: 2,
+      pista: 'Aplica la prueba: ¿esto se cumple en un componente o en todos a la vez?',
+      exp: 'Canasta T de libro: el "no cobrar" no es una obra que un equipo diseña, es una regla que todos los componentes heredan. Y es de las condiciones más serias del registro: tocarla rompe la confianza con toda la comunidad, no con un usuario. Las condiciones transversales van escritas en cada solicitud, aunque no tengan presupuesto.' },
+    { s: '"Antes había mojarra; se echaban buenas tardes de pesca aquí." (señor ~70)',
+      ops: ['Canasta T · Condición transversal', 'Línea B · El agua y su orilla', 'Línea A · Dónde estar', 'Línea C · Los niños'],
+      resp: 1,
+      pista: 'Es una historia del pasado. ¿A qué línea le está regalando memoria?',
+      exp: 'Línea B, vía entrevista apreciativa: la escena de "antes había" es evidencia de un uso perdido que la comunidad valora. No pide nada explícito y por eso alguien podría botarla, pero es de las tarjetas más ricas: dice que la orilla ya supo dar tardes de pesca, y lo que ya existió es más fácil de defender ante cualquier dictamen que lo que nunca ha existido.' },
+    { s: '"Las fiestas del ejido se hacían aquí; cabía el rancho entero." (señora ~60)',
+      ops: ['Línea A · Dónde estar', 'Línea C · Los niños', 'Línea B · El agua y su orilla', 'Canasta T · Condición transversal'],
+      resp: 0,
+      pista: 'Otra memoria. ¿De qué problema habla el que ya no haya fiestas aquí?',
+      exp: 'Línea A en su versión colectiva: no solo el estar de una familia en la tarde, sino el espacio de reunión del pueblo entero. Junto con la voz de la sombra, esta tarjeta le da a la línea A su rango completo: de la banca individual a la explanada de fiesta. Dimensionar una línea es exactamente esto: ver todas las escalas del mismo problema.' },
+    { s: '"¿Y quién va a cuidar todo eso cuando ustedes se vayan?" (señor ~50)',
+      ops: ['Línea B · El agua y su orilla', 'Canasta T · Condición transversal', 'Línea A · Dónde estar', 'Línea C · Los niños'],
+      resp: 1,
+      pista: 'No pide una obra. Pide una respuesta que toda obra debe tener. ¿Dónde va?',
+      exp: 'Canasta T, y es LA pregunta del proyecto entero: el mantenimiento y la continuidad. Todo componente que se proponga debe traer respuesta ("¿quién lo cuida, con qué y por qué le conviene cuidarlo?") o el señor tiene razón y estamos sembrando fierros huérfanos. Las mejores condiciones transversales del registro suelen venir de los escépticos.' },
+    { s: '"Un chapoteadero para los chiquitos, aunque fuera bajito." (señora ~30)',
+      ops: ['Línea C · Los niños', 'Canasta T · Condición transversal', 'Línea B · El agua y su orilla', 'Línea A · Dónde estar'],
+      resp: 0,
+      pista: 'Trae la solución puesta. ¿Cuál es la necesidad que carga adentro y de quién es?',
+      exp: 'Línea C, pero con traducción obligatoria: la voz pide una obra (chapoteadero) y la síntesis registra la necesidad que carga ("agua segura y a la medida para niños chicos"). La tarjeta guarda la frase textual Y la traducción; el diseño después decidirá si la respuesta es un chapoteadero o otra cosa que cumpla lo mismo. Respetar la voz no es obedecer la obra: es no perder la necesidad.' },
+    { s: '"De noche está muy oscuro; da pendiente pasar por ahí." (señora ~45)',
+      ops: ['Línea A · Dónde estar', 'Línea B · El agua y su orilla', 'Canasta T · Condición transversal', 'Línea C · Los niños'],
+      resp: 2,
+      pista: 'La oscuridad, ¿es problema de un componente o condición del sitio entero?',
+      exp: 'Canasta T: la seguridad de paso es condición del sitio completo, no obra de una línea (aunque alguna solución concreta, como iluminación, pueda acabar en el presupuesto de algún componente). Clasificarla como transversal obliga a que TODOS los equipos la consideren en su diseño: un componente precioso al que da miedo llegar de noche es medio componente.' },
+    { s: '"Que quede bonito, pero sin tumbar ni un sabino." (señor ~55)',
+      ops: ['Línea B · El agua y su orilla', 'Línea A · Dónde estar', 'Línea C · Los niños', 'Canasta T · Condición transversal'],
+      resp: 3,
+      pista: 'Última prueba de la canasta: ¿se cumple en un componente o en todos?',
+      exp: 'Canasta T y además coincide con la normativa: en una Reserva de la Biosfera el sabinal no se toca, con o sin petición. Cuando una condición transversal de la comunidad coincide con una regla ambiental, se vuelve doblemente innegociable, y conviene citarla textual en las solicitudes: pocos argumentos convencen más que "la comunidad lo pidió y la norma lo exige".' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ' + c.s + '</div>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 1 · La presa y el fondo · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 1 · La presa y el fondo</div>
+  <div class="migas">Unidad 1 · Escuchar la presa · Se abre el miércoles 5 de agosto</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-08-05">
+
+<p class="pregunta">¿Qué harías con veinte mil pesos que no son tuyos?</p>
+<p class="bajada">Este curso no trabaja con casos inventados. Hay una presa real (la de La Florida), un encargo real (habilitarla como espacio recreativo para la comunidad) y un fondo real de $20,000 que este grupo va a ejercer durante el semestre. La comunidad va a decidir qué se hace; ustedes van a diseñarlo, defenderlo y construirlo. Esta primera semana aterrizamos: qué vas a vivir, con qué reglas, y qué crees tú que va a pedir la gente (eso último va a quedar sellado en un sobre).</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Explicar qué proyecto vas a vivir este semestre y qué papel te toca en él.</li>
+    <li>Distinguir manejo de gestión, la pareja de palabras que le da nombre a la materia.</li>
+    <li>Firmar los dos pactos del curso (evaluación sin números y uso de IA con criterio) sabiendo exactamente qué firmas.</li>
+    <li>Sellar tu pronóstico sobre lo que pedirá la comunidad, en un sobre que nadie abrirá hasta la semana 4.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La distinción</span>
+  <h3 style="margin-top:.2rem">Manejo no es gestión</h3>
+  <p>Manejar un proyecto es llevarlo por dentro: planear, organizar el trabajo, gastar bien, corregir a tiempo. Gestionar es conseguir por fuera lo que el proyecto necesita: dinero, permisos, aliados, información. Un refrán para cada una. Del manejo: "el flojo y el que no planea trabajan dos veces". De la gestión: "a quien no habla, Dios no lo oye". El curso se llama como se llama porque vas a hacer las dos cosas, con dinero de verdad.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El encargo</span>
+  <h3 style="margin-top:.2rem">La presa de La Florida</h3>
+  <p>A unos minutos del campus hay una presa que la gente usa a su manera: alguien pesca, alguien pasea, alguien va a mirar el agua. No hay sombra pensada, ni lugar para sentarse, ni nada para los niños. El encargo del semestre: convertir esa orilla en un espacio que la comunidad quiera usar. Qué debe tener no lo decides tú ni lo decide el profesor; lo decide la gente de La Florida, y se lo vamos a preguntar bien (a eso vamos en las semanas 3 y 4).</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">El misterio</span>
+  <h3 style="margin-top:.2rem">Las reglas del fondo</h3>
+  <p>El fondo de $20,000 existe y es del proyecto, no del profesor. Lo que todavía no sabes: cómo se decide quién lo ejerce, en qué se puede gastar y quién vigila cada peso. Esas reglas se destripan en la semana 5, y te conviene llegar con hipótesis. Pista: en el mundo real el dinero de los proyectos casi nunca lo reparte quien te cae bien.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">El sobre</span>
+  <h3 style="margin-top:.2rem">Tu pronóstico, sellado</h3>
+  <p>Esta semana escribes las tres cosas que tú crees que la comunidad va a pedir para la presa, y las sellas en un sobre con tu nombre frente al grupo. Nadie lo abre hasta la semana 4, cuando la consulta haya hablado. Ahí sabremos quién conoce a su comunidad y quién diseñaba de oídas. No es adivinanza: es la primera medición del curso, y el medido eres tú.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-01/ejercicio-11-refranes-de-gestion.html"><strong>Refranes de gestión</strong></a> · Ocho refranes de los de tu casa, a ver de qué hablan en realidad: de manejar, de gestionar o de planear.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-01/ejercicio-22-manejo-o-gestion.html"><strong>¿Manejo o gestión?</strong></a> · Diez situaciones reales de proyectos rurales para afilar la distinción de la semana.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-01/ejercicio-32-el-ciclo-por-capas.html"><strong>El ciclo por capas</strong></a> · Arma el mapa del curso: ordena lo que le pasa a un proyecto desde la idea hasta el financiamiento.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Proyecto</dt>
+    <dd>Esfuerzo temporal, con principio y fin, para lograr un cambio concreto con recursos limitados. Un módulo de lombricultura que arranca en marzo y entrega composta en septiembre es un proyecto; ordeñar todos los días es una operación. La diferencia importa: los proyectos se diseñan, las operaciones se sostienen.</dd>
+    <dt>Manejo de proyectos</dt>
+    <dd>Llevar el proyecto por dentro: definir qué se hará, en qué orden, con qué dinero y quién hace qué, y corregir cuando la realidad opine distinto (siempre opina distinto).</dd>
+    <dt>Gestión de proyectos</dt>
+    <dd>Conseguir por fuera lo que el proyecto necesita: financiamiento, permisos, aliados, información, gente. Se hace hablando, escribiendo y tocando puertas. Quien tiene más saliva, come más pinole.</dd>
+    <dt>El ciclo del proyecto</dt>
+    <dd>Cuatro momentos que este curso recorre completos: la idea (de dónde sale y cómo se afina), el diseño (convertirla en plan que se sostenga), el manejo y la evaluación (ejecutar, medir, corregir) y la gestión (conseguir los recursos y rendir cuentas). El mapa completo se va a ir dibujando en el pizarrón semana a semana, por capas.</dd>
+    <dt>El fondo semilla</dt>
+    <dd>$20,000 reales para ejecutar lo que el proceso decida. No es premio ni beca: es presupuesto de proyecto, con reglas (semana 5) y con libro de cuentas público (más adelante). Se nombra sin rodeos porque así se aprende: el dinero es parte del oficio.</dd>
+    <dt>El sobre</dt>
+    <dd>Tu pronóstico sellado de lo que pedirá la comunidad. Se firma, se sella y se guarda a la vista del grupo. Se abre en la semana 4, después de la consulta.</dd>
+    <dt>El expediente del gestor</dt>
+    <dd>Carpeta física que arrancas esta semana y alimentas todo el semestre: pactos firmados, registro de retos, bitácora, autoevaluaciones. Al final del curso te la llevas: es tu primer portafolio profesional, no un trámite.</dd>
+    <dt>Ticket de salida</dt>
+    <dd>Cierre de cada viernes: dos o tres preguntas cortas sobre lo que pasó en la semana. Sin calificación. Sirve para que el profesor sepa qué quedó claro y qué hay que volver a tocar.</dd>
+    <dt>"Tu calificación"</dt>
+    <dd>La página del sitio donde está explicado el sistema completo de evaluación. Está siempre abierta, sin candado. Versión corta: durante el semestre ningún trabajo lleva número; todo produce retroalimentación y evidencia, y la calificación del acta sale al final, contigo en la mesa.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán la foto de los sobres sellados y los dos pactos firmados por el grupo. Esta sección se llena con lo que pase en el aula.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>El jueves vas a intentar malabarear de verdad, con bolas de verdad, y se te van a caer. De eso se trata: nadie aprende a malabarear leyendo sobre malabares, y nadie aprende a gestionar proyectos sin que se le caigan algunos. Este semestre las bolas son reales: una presa, un fondo, una comunidad que espera.</p>
+  <p>Nadie planea fracasar. Pero la mayoría de los que fracasan no tenían un plan. Empecemos por ahí.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

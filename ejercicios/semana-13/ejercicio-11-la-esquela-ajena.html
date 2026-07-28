@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S13 · La esquela ajena</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .esquela { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.7rem 1rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; font-family:Georgia,serif; }
+  .esquela b { color:var(--marca); font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La esquela ajena</h1>
+<p class="sub">Gimnasio · Semana 13 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis proyectos difuntos de una sierra parecida a esta, con su causa de muerte oficial (la que se dijo en las reuniones) y los datos del expediente. Tu trabajo de forense: encontrar la causa real. Casi nunca coinciden.</p>
+
+<div class="intro">
+  Las causas de muerte más comunes del expediente: el <strong>supuesto sin vigía</strong> (era cierto en octubre, dejó de serlo y nadie miraba), el <strong>involucrado brincado</strong> (el mapa de poder lo avisaba), el <strong>dinero sin libro</strong> (la duda mata antes que el desfalco), el <strong>mantenimiento sin dueño</strong> (murió después de la inauguración) y la <strong>chamba disfrazada de mala suerte</strong>.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe la esquela de un proyecto real que hayas visto morir en tu comunidad (sin nombres: la regla de respeto aplica también con los difuntos). Ponle causa oficial y causa real. Esa distancia entre las dos causas es lo que el velorio del jueves quiere cerrar para el tuyo.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '<b>El invernadero de la telesecundaria.</b> Causa oficial: "el plástico se rompió con el viento". Expediente: se inauguró en junio con hortalizas sembradas; en julio y agosto no hubo clases; el sistema de riego dependía de que alguien abriera la llave dos veces al día; en septiembre las plantas estaban secas y el grupo que lo construyó ya había egresado. El plástico se rompió en octubre, cuando ya nadie entraba.',
+      ops: ['El viento: contra el clima no hay plan', 'El supuesto sin vigía: nadie revisó el riego', 'El mantenimiento sin dueño: murió en vacaciones, cuando el proyecto dejó de tener quién; el plástico roto es la esquela, no la causa', 'El dinero sin libro'],
+      resp: 2,
+      pista: 'Ordena las fechas: ¿qué murió primero, el plástico o el riego? ¿Y quién era el dueño del proyecto en agosto?',
+      exp: 'El mantenimiento sin dueño, la causa de muerte más común de los proyectos escolares y comunitarios: viven mientras dura el entusiasmo (o el semestre) y mueren en la primera ausencia larga, porque el después de la inauguración nunca tuvo RACI. El plástico roto es lo que se ve, no lo que pasó: para octubre el invernadero ya llevaba tres meses muerto. La vacuna la conoces: la pregunta "¿quién cuida qué cuando el curso se acabe?" no es de la semana 15 por adorno; tu componente la va a tener que responder antes de diciembre.' },
+    { r: '<b>El lavadero comunitario nuevo.</b> Causa oficial: "la gente no lo quiso usar, prefiere sus costumbres". Expediente: se construyó con buen material en el terreno que ofreció un particular, a 400 metros del canal donde las señoras lavan desde siempre. Nadie les preguntó; se enteraron cuando ya estaba el firme colado. Quedó bonito y vacío.',
+      ops: ['La gente y sus costumbres: así son los pueblos', 'El involucrado brincado: las usuarias de siempre nunca estuvieron en el mapa; el proyecto se diseñó para ellas sin ellas, y el lugar lo decidió la comodidad del terreno, no el uso real', 'El supuesto sin vigía', 'El mantenimiento sin dueño'],
+      resp: 1,
+      pista: '¿Quiénes eran las expertas en lavar ahí, y en qué momento del proyecto aparecieron? Te suena de un ejercicio de hace unas semanas.',
+      exp: 'El involucrado brincado, y de los dolorosos porque el proyecto era bueno y el material también: las señoras del canal eran "las que faltan" del mapa de poder (te sonaba: son las mismas del tablero del manantial de S9). Culpar a "las costumbres" es la coartada clásica del diseñador que no preguntó: la gente no rechazó el lavadero, rechazó caminar 400 metros extra para hacer lo que ya resolvía a gusto. La consulta de agosto existe exactamente para que tu proyecto no tenga esta esquela: lo que la comunidad pidió es el patrón, no la ocurrencia bien intencionada.' },
+    { r: '<b>El grupo de la vainilla.</b> Causa oficial: "hubo malos entendidos con el dinero y la gente se desanimó". Expediente: el apoyo llegó completo y se ejercició bien (los papeles, cuando por fin se juntaron, cuadraban). Pero las cuentas las llevaba una sola persona en una libreta personal, los cortes se daban de palabra y dos socios pidieron ver comprobantes en la asamblea de marzo; no estaban a la mano. Para mayo la mitad del grupo ya no llegaba a las reuniones.',
+      ops: ['El desfalco: alguien se quedó con dinero', 'La gente desanimada: pasa en todos los grupos', 'El supuesto sin vigía', 'El dinero sin libro: nadie robó y no importó; la duda sin libro que la conteste mata la confianza igual que el robo, nada más que más despacio'],
+      resp: 3,
+      pista: 'Fíjate bien: los papeles CUADRABAN. ¿Entonces qué fue lo que no aguantó: el dinero o la manera de contarlo?',
+      exp: 'El dinero sin libro, y es la lección más fina del expediente: no hubo desfalco, hubo opacidad, y la opacidad bastó. Cuando un socio pregunta y la respuesta es "confía en mí" en lugar de un libro abierto, la semilla está sembrada aunque las cuentas cuadren: la duda no necesita razón, necesita espacio, y el espacio se lo da la libreta personal y el corte de palabra. Por eso tu libro del fondo es público, de a dos, con turnos y a 48 horas: no porque alguien sea sospechoso, sino para que la duda nunca tenga dónde vivir. Las organizaciones se rompen menos por pesos que por preguntas sin responder.' },
+    { r: '<b>El vivero del grupo de jóvenes.</b> Causa oficial: "la sequía del año pasado acabó con la planta". Expediente: el proyecto asumió desde su marco "que el pozo del ejido siga prestando agua dos veces por semana". En enero cambió la mesa del comisariado y el acuerdo del pozo (que era de palabra, con la mesa anterior) se dejó de respetar. El grupo se enteró cuando la planta ya estaba estresada; para la sequía de abril, ya no hubo de dónde regar.',
+      ops: ['La sequía: contra el clima no hay proyecto', 'El supuesto sin vigía: "que el pozo siga prestando" era cierto en octubre y dejó de serlo en enero, y nadie tenía el turno de mirarlo (además era acuerdo de palabra: doble falla conocida)', 'El mantenimiento sin dueño', 'El involucrado brincado'],
+      resp: 1,
+      pista: 'El supuesto estaba ESCRITO en el marco. ¿Qué le faltó: estar escrito o tener quién lo revisara cuando cambió la mesa?',
+      exp: 'El supuesto sin vigía, la causa de muerte favorita de los proyectos con buen marco lógico: escribir el supuesto se sintió como resolverlo, y un supuesto escrito sin vigía es una esquela en borrador (lo dice tu hoja de consulta). El cambio de mesa del comisariado era EL evento que volvía frágil el acuerdo, y encima el acuerdo era de palabra (el sí de palabra no es anuencia: también te suena). La sequía de abril solo cobró lo que enero ya debía. En tu tablero de esta semana, cada supuesto del marco lleva vigía con nombre: esa es la corrección exacta de esta muerte.' },
+    { r: '<b>La sala de cómputo comunitaria.</b> Causa oficial: "se echó a perder el equipo, ya ve que eso no dura". Expediente: seis equipos donados, buen arranque. El acta decía que "el comité daría mantenimiento". Nadie del comité sabía (ni le tocaba saber) de máquinas; el joven que sí sabía nunca fue nombrado nada; el polvo, un pico de voltaje sin regulador y dos años hicieron el resto. El regulador costaba menos que una de las sillas.',
+      ops: ['El equipo barato: la tecnología no dura', 'El dinero sin libro', 'La chamba disfrazada de mala suerte: el mantenimiento era una tarea concreta (regulador, limpieza, un responsable que supiera) que se escribió como vaguedad de acta y se archivó como fatalidad', 'El involucrado brincado'],
+      resp: 2,
+      pista: '"El comité dará mantenimiento": pásale el filtro de S12. ¿Es riesgo, es supuesto o era chamba con nombre pendiente de asignar?',
+      exp: 'La chamba disfrazada, primero de acta y al final de mala suerte: "el comité dará mantenimiento" es la tarea huérfana con uniforme de gala (¿quién del comité?, ¿haciendo qué?, ¿cada cuánto?, ¿sabiendo cómo?). El regulador de $400 y una limpieza mensual eran renglones de RACI, no fatalidades tecnológicas, y el joven que sabía era un R esperando que alguien lo nombrara. Cuando oigas "ya ve que eso no dura" en un velorio de proyecto, revisa el expediente: nueve de cada diez veces encontrarás una tarea concreta que nadie escribió con nombre. La mala suerte existe, pero trabaja mucho menos de lo que se le acredita.' },
+    { r: '<b>El sendero interpretativo del arroyo.</b> Causa oficial y real, para variar, la misma: "lo tumbó la creciente de septiembre". Expediente: el equipo lo sabía posible; lo construyó con materiales del lugar y uniones pensadas para rehacerse, dejó fotos y planos de cada tramo, un fondito de reposición acordado en asamblea y una cuadrilla nombrada para después de cada temporada de agua. La creciente lo tumbó en septiembre; en noviembre ya estaba de vuelta, mejor trazado.',
+      ops: ['El supuesto sin vigía: no debieron construir junto al arroyo', 'Nada que diagnosticar: este no se murió; se cayó y se levantó, que es distinto, porque el diseño ya contaba con caerse', 'La chamba disfrazada de mala suerte', 'El mantenimiento sin dueño'],
+      resp: 1,
+      pista: 'Compara este expediente con los otros cinco: ¿qué tenía este proyecto ANTES de la creciente que los demás no tenían antes de su golpe?',
+      exp: 'El proyecto que no se murió: se cayó, que es otra cosa. La diferencia no fue la suerte (la creciente llegó igual) sino que el diseño ya contaba con el golpe: materiales rehacibles, memoria de cómo estaba hecho, dinero de reposición y cuadrilla nombrada de antemano. Eso es manejo adaptativo en su versión mayor: no evitar todas las caídas (imposible junto a un arroyo, junto a una presa, en el campo) sino diseñar para levantarse barato y rápido. Fíjate para tu velorio: la pregunta no es solo "¿de qué moriría mi proyecto?" sino "¿de qué caída ya sabemos levantarnos?". Los proyectos viejos de las sierras son todos de esta familia: se han caído muchas veces, por eso siguen.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿De qué murió de verdad?</div>' +
+               '<span class="esquela">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

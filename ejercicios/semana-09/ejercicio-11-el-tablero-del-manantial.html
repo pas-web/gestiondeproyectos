@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S9 · El tablero del manantial</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .actor { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; }
+  .actor b { color:var(--marca); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El tablero del manantial</h1>
+<p class="sub">Gimnasio · Semana 9 · Práctica libre, sin registro y sin nota.</p>
+
+<p>El proyecto vecino de siempre: habilitar un área de estar junto a un manantial, en una comunidad serrana. Siete personas alrededor de ese proyecto. Tu trabajo: leer a cada una (interés e influencia) y elegir la jugada que le toca.</p>
+
+<div class="intro">
+  Las cuatro zonas del mapa: los <strong>clave</strong> (mucho interés, mucha influencia: se trabaja de la mano), los <strong>durmientes</strong> (mucha influencia, poco interés: se les informa antes), los <strong>aliados de a pie</strong> (mucho interés, poca influencia: se activan con tareas) y los <strong>lejanos</strong> (en el radar). Y la quinta categoría que no sale en el cruce: <strong>los que faltan</strong>.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Dibuja el cruce (interés horizontal, influencia vertical) en una página y ubica a los siete. Luego haz lo mismo con los involucrados de TU componente: ese es el arranque del reto 3. Recuerda la regla de respeto: cargos y roles, no nombres.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '<b>La delegada.</b> Firma la anuencia y puede convocar faena. El proyecto le parece bien, pero trae encima la fiesta patronal, un pleito de linderos y la gestión del agua potable.',
+      ops: ['Durmiente: se le informa y ya', 'Clave: mucho interés potencial y mucha influencia; se trabaja con ella de la mano y desde temprano, con tratos concretos que no le sumen carga', 'Aliada de a pie: se activa con tareas', 'Lejana: con saludarla basta'],
+      resp: 1,
+      pista: '¿Quién firma el papel sin el cual no hay proyecto? ¿Y qué pasa si se le busca hasta el final, cuando ande más ocupada?',
+      exp: 'Clave de manual: sin su firma no hay anuencia y sin su convocatoria no hay faena. Pero fíjate en la lectura fina: le interesa el proyecto y no tiene tiempo. La jugada no es "convencerla" (ya está convencida), es facilitarle: llegar con el papel redactado, proponer fecha y hora, pedir diez minutos y no una junta. A los clave ocupados se les cuida el tiempo como se cuida el agua.' },
+    { r: '<b>El comité de agua.</b> El manantial alimenta la toma de la comunidad. Han oído del proyecto y andan diciendo que "meter gente junto a la captación va a ensuciar el agua".',
+      ops: ['Resistencia sin remedio: mejor evitarlos y avanzar', 'Durmientes: poco interés, se les informa después', 'Clave con objeción: mucha influencia, mucho interés (defensivo); se les escucha PRIMERO, porque su objeción trae diseño (retirar el área de la captación, comprometer limpieza)', 'Aliados de a pie'],
+      resp: 2,
+      pista: '¿Pueden frenar el proyecto? ¿Les importa? ¿Y qué información útil hay dentro de su queja?',
+      exp: 'Mucha influencia (cuidan la toma de todos) y mucho interés, aunque sea en contra: eso es un clave con objeción, no un enemigo. Su queja trae el ajuste que salva el proyecto: distancia de la captación, reglas de limpieza, quizá un responsable de vigilarla. El equipo que los busca antes de diseñar gana un aliado técnico; el que los esquiva construye un pleito con fecha de estreno.' },
+    { r: '<b>El dueño de la parcela colindante.</b> No sabe nada del proyecto. Su cerca da al paso por donde entrarían materiales y visitantes. Vive en la cabecera y viene cada quince días.',
+      ops: ['Aliado de a pie: seguro le gusta la idea', 'Durmiente: mucha influencia (puede cerrar el paso), poco interés (ni sabe); se le informa ANTES de que se entere por terceros, en su siguiente venida', 'Lejano: no es de la comunidad, no cuenta', 'Resistencia: ya se opuso'],
+      resp: 1,
+      pista: '¿Qué puede hacer con su cerca? ¿Y cómo suele reaccionar la gente que se entera de una obra junto a su terreno por el chisme y no por una visita?',
+      exp: 'El durmiente clásico: hoy ni mira el proyecto, pero un candado en su paso lo detiene todo. El pleito de las obras comunitarias casi siempre empieza igual: "a mí nadie me avisó". La jugada es barata y rinde mucho: buscarlo antes, contarle el proyecto, preguntarle qué necesita (que le respeten la cerca, que no le dejen basura, saber quién responde). Diez minutos de visita ahorran meses de conflicto.' },
+    { r: '<b>La señora de la tienda frente al manantial.</b> Le entusiasma la idea: más gente en el área es más venta. No decide nada en las asambleas, pero pasa ahí todo el día y conoce a todos.',
+      ops: ['Clave: hay que dedicarle las reuniones importantes', 'Durmiente: se le informa y ya', 'Lejana: si no vota en la asamblea, no cuenta', 'Aliada de a pie: mucho interés, poca influencia formal; se activa con tareas concretas (ojos del sitio, agua para la faena, correr la voz) y se le reconoce'],
+      resp: 3,
+      pista: 'No tiene voto, pero ¿qué tiene? Presencia diaria, información y ganas. ¿Qué se hace con eso?',
+      exp: 'Aliada de a pie de oro: su influencia formal es poca, pero su presencia diaria vale más que tres asambleas. Puede avisar si algo se daña, prestar sombra y agua el día de la faena, y correr la voz mejor que cualquier lona. El error común con estos aliados es tenerlos contentos y desocupados: se activan con tareas concretas y se les agradece en público. Nadie cuida lo que no le encargaron.' },
+    { r: '<b>El ganadero que abreva.</b> Pasa con sus animales al manantial dos veces al día, como su padre y su abuelo. Dice que el proyecto "es para gente de fuera" y que le van a cerrar el paso.',
+      ops: ['Resistencia con información de diseño: su objeción es concreta (el paso al abrevadero) y el diseño puede incorporarla; se le escucha primero y se ajusta', 'Enemigo del proyecto: documentarlo y seguir', 'Durmiente: ignora el proyecto', 'Lejano: los animales no son involucrados'],
+      resp: 0,
+      pista: '¿Qué pierde él exactamente con el proyecto? Nómbralo. ¿Y el diseño puede resolver eso sin morir en el intento?',
+      exp: 'La resistencia de libro: no odia tu sombra, necesita el paso al agua que su familia usa desde hace tres generaciones. Dentro de su queja hay una instrucción de diseño gratis: dejar el acceso al abrevadero, quizá señalizarlo. El equipo que lo escucha primero convierte al opositor más ruidoso en el vecino que defiende el proyecto ("a mí sí me tomaron en cuenta"). El que lo ignora le regala un argumento a cada asamblea que viene.' },
+    { r: '<b>La técnica de la oficina de la reserva.</b> El manantial está dentro del área natural protegida. Ella no ha oído del proyecto; su oficina puede pedir que la obra se ajuste o se detenga si toca vegetación o cauce.',
+      ops: ['Lejana: es de gobierno, mejor no despertarla', 'Durmiente institucional: mucha influencia, cero interés todavía; se le busca ANTES de mover una piedra, con el proyecto por escrito, porque despertarla tú vale oro y que la despierte una denuncia cuesta carísimo', 'Aliada de a pie', 'Resistencia: seguro se opone'],
+      resp: 1,
+      pista: '¿Conviene que se entere por ustedes o por una queja? ¿Qué diferencia hay entre pedir orientación antes y pedir perdón después?',
+      exp: 'Durmiente institucional: hoy no los mira, pero tiene la influencia más dura del tablero (puede detener la obra con un oficio). La tentación de "mejor no despertarla" es la trampa: si la despierta una queja, llega como autoridad; si la despiertan ustedes con el proyecto por escrito y preguntas concretas, llega como asesora (qué especies cuidar, qué distancia del cauce, qué permiso aplica). Con las instituciones, el orden de la conversación decide el tono de la relación.' },
+    { r: '<b>Las señoras que lavan en el canal.</b> Usan el escurrimiento del manantial los martes y sábados desde siempre. No han ido a ninguna reunión del proyecto y nadie las ha mencionado en el mapa.',
+      ops: ['Lejanas: si no van a las reuniones, no les interesa', 'Durmientes: mucha influencia formal', 'Las que faltan: usuarias actuales del sitio, invisibles en el mapa; se les busca antes de mover una piedra, porque la obra puede chocar con su rutina y su palabra pesa en el pueblo', 'Ya están cubiertas: la delegada habla por todos'],
+      resp: 2,
+      pista: 'El sitio ya tiene usuarios antes de tu proyecto. ¿Qué pasa si tu obra les estorba el uso de siempre y nadie habló con ellas?',
+      exp: 'Las que faltan: la categoría que no sale del cruce de ejes, sale de preguntarse quién usa el sitio HOY. Que no vayan a reuniones no significa que no les importe: significa que nadie les ha preguntado. Si la obra invade su espacio de lavado o enloda el canal, el proyecto estrena opositoras con toda la razón y con voz en cada cocina del pueblo. La conversación pendiente cuesta una visita en martes; el conflicto evitado no tiene precio. En tu mapa real, esta pregunta es la que más paga: ¿quién falta?' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Dónde va y qué jugada le toca?</div>' +
+               '<span class="actor">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

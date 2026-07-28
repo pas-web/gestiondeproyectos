@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 10 · Presupuesto y pre-pitch · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 10 · Presupuesto y pre-pitch</div>
+  <div class="migas">Unidad 2 · Diseñar lo que pidieron · Se abre el miércoles 7 de octubre</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-10-07">
+
+<p class="pregunta">¿Cuánto cuesta hacerlo de verdad?</p>
+<p class="bajada">Esta es la semana en que el proyecto deja de ser tuyo. El jueves se arma el presupuesto con cotizaciones de a de veras y un cronograma que quepa en cuatro semanas. El viernes se ensaya el pitch entre pares, se corrige lo que la Troika encuentre, y a las 14:00 la solicitud se entrega en mano. Después de esa hora, ya no hay nada que pulir: solo esperar al Comité.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Armar el presupuesto de tu componente con cotizaciones reales: cada peso con su papel, cada partida con su actividad.</li>
+    <li>Dibujar un cronograma que quepa en las cuatro semanas de ejecución, con responsables, dependencias y la lluvia contemplada.</li>
+    <li>Ensamblar la solicitud completa: las diez secciones del Anexo 1, las firmas, la anuencia y las cotizaciones anexas.</li>
+    <li>Contar tu proyecto en dos minutos y dejar que tus pares le encuentren los huecos antes de que se los encuentre el Comité.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">El presupuesto es tu proyecto en pesos</h3>
+  <p>Un presupuesto no es una lista de cosas caras: es tu cronograma traducido a dinero. Cada partida responde a una actividad y cada actividad a un producto; el renglón que no puede explicar para qué actividad existe, sobra. Y las reglas del fondo no perdonan la aritmética: tope de $12,000 por componente, y la solicitud que lo exceda se desecha sin evaluar. No es crueldad: es el ensayo general del mundo de las convocatorias, donde el que no lee las reglas paga con meses de trabajo.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El aparato</span>
+  <h3 style="margin-top:.2rem">La cotización y sus dos hermanos olvidados</h3>
+  <p>Un precio sin papel es un rumor: la cotización escrita y fechada es lo que vuelve tu presupuesto defendible (y lo que te salva si el precio sube en noviembre). Este curso pide tres por partida grande: para comparar, para tener plan B y para responder cuando el Comité pregunte de dónde salió el número. Y los dos renglones que todo primer presupuesto olvida: el flete (el material cotizado en la cabecera no camina solo hasta la orilla) y los imponderables (el clavo que falta en domingo; un colchón chico, alrededor del 5%, con nombre honesto).</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El aparato</span>
+  <h3 style="margin-top:.2rem">Un calendario que quepa</h3>
+  <p>La ejecución va del 19 de octubre al 13 de noviembre: cuatro semanas, ni una más. El cronograma que cabe tiene tres virtudes: respeta las dependencias (no se instala lo que no se ha comprado, no se cuela piso el día que se convoca la faena), tiene responsable por renglón (lo que es de todos no es de nadie) y le cree a la temporada (si puede llover, hay fecha B). El error clásico es la joroba: todo amontonado en la última semana, donde ya no hay margen para que algo salga mal. Y algo siempre sale mal: para eso planeas.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">El peldaño</span>
+  <h3 style="margin-top:.2rem">El pre-pitch: la Troika</h3>
+  <p>Segundo peldaño de la escalera que empezó en la consulta: contar tu proyecto en dos minutos, ante tus pares, con el mismo formato y el mismo reloj que verás en el dictamen. Luego viene lo mejor: te volteas, y tu equipo escucha en silencio mientras los otros discuten tu proyecto como si no estuvieras. Duele un poco y vale oro: lo que tus pares no entendieron, el Comité tampoco lo va a entender, y hoy todavía puedes corregirlo. El jueves que viene ya no.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">La hora</span>
+  <h3 style="margin-top:.2rem">La entrega: viernes 9, 14:00, en mano</h3>
+  <p>Como lo dicen las reglas desde septiembre: la solicitud completa, impresa y en mano, el viernes 9 de octubre a las 14:00. Completa quiere decir: las diez secciones del Anexo 1 llenas, el presupuesto con sus cotizaciones anexas, el cronograma, la contrapartida cuantificada, la carta compromiso con sus tres firmas y la anuencia de la delegación. No hay prórroga porque en las convocatorias reales no la hay: el sistema se cierra a la hora que se cierra, con tu proyecto adentro o afuera. Entregar a tiempo también es una habilidad, y se aprende entregando.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-10/ejercicio-11-el-presupuesto-agujerado.html"><strong>El presupuesto agujerado</strong></a> · Siete partidas del proyecto del manantial. Cinco traen agujero, una excede algo peor y una se salva.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-10/ejercicio-21-el-cronograma-iluso.html"><strong>El cronograma iluso</strong></a> · Seis renglones de calendario con falla escondida (uno se salva). Dependencias, jorobas y lluvia.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-10/ejercicio-32-mi-solicitud-y-mi-pitch.html"><strong>Mi solicitud y mi pitch</strong></a> · El checklist final de la solicitud y el guion de tus dos minutos. Se llena esta semana o no sirve.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Partida</dt>
+    <dd>Cada renglón del presupuesto: qué se compra o se paga, cuánto, para qué actividad. La prueba de la partida honesta: se puede leer en voz alta ante el Comité sin carraspear. "Materiales varios: $3,000" no pasa la prueba; "malla sombra 6×4 m, cotización de la ferretería del 3 de octubre: $2,850" sí.</dd>
+    <dt>Cotización</dt>
+    <dd>El precio por escrito, con fecha y quién lo da. Tres por partida grande: para comparar, para tener plan B si un proveedor falla y para defender el número. La cotización es al presupuesto lo que el medio de verificación es al indicador: sin papel, no existe.</dd>
+    <dt>Recibo simple</dt>
+    <dd>El comprobante que las reglas del fondo aceptan para el comercio local que no factura: una nota con fecha, concepto, monto, nombre y firma de quien recibe el dinero. Se llena en el momento de la compra, no después de memoria. Sin comprobante no hay reembolso: ese gasto lo paga tu bolsa.</dd>
+    <dt>Flete</dt>
+    <dd>El renglón que los primeros presupuestos siempre olvidan: mover el material del punto A al punto B cuesta, en dinero o en trato (la camioneta prestada del mapa de poder también es flete, y es contrapartida). Cotizar el material sin cotizar su traslado es presupuestar la mitad del problema.</dd>
+    <dt>Imponderables</dt>
+    <dd>El colchón para lo que no se dejó ver: el clavo que falta en domingo, el precio que subió, la bisagra que nadie contó. Chico (alrededor del 5%) y con nombre honesto en su renglón. Un presupuesto al centavo exacto no es precisión: es optimismo disfrazado de contabilidad.</dd>
+    <dt>Cronograma</dt>
+    <dd>Las actividades acomodadas en el calendario real: qué se hace, en qué semana, quién responde. En este fondo, cuatro semanas exactas (19 de octubre a 13 de noviembre). Su columna invisible es la dependencia: qué tiene que estar terminado para que este renglón pueda empezar.</dd>
+    <dt>Dependencia</dt>
+    <dd>La relación de orden entre actividades: no se instala lo que no se ha comprado, no se convoca faena de un día para otro, no se cuela piso si no llegó el cemento. El cronograma que ignora sus dependencias no es un plan: es una lista de deseos con fechas.</dd>
+    <dt>Pre-pitch (Troika)</dt>
+    <dd>El ensayo del dictamen entre pares: dos minutos de pitch, y luego tu equipo escucha de espaldas mientras los demás discuten tu proyecto con toda libertad. La regla de oro del que escucha: no defenderse, apuntar. Lo que no se entendió hoy se corrige hoy; el jueves 15 ya no.</dd>
+    <dt>La entrega en mano</dt>
+    <dd>Viernes 9 de octubre, 14:00, impresa y completa: diez secciones, cotizaciones anexas, contrapartida cuantificada, tres firmas y anuencia. La hora es la hora, como en toda convocatoria real. El proyecto entregado a tiempo con un defecto vive; el proyecto perfecto entregado a las 14:10 no existe.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán los presupuestos con sus cotizaciones, los cronogramas de cuatro semanas, lo que la Troika corrigió a tiempo y la foto del momento de la entrega.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>Cuentas claras, amistades largas, dice el refrán, y los proyectos comunitarios viven o mueren por esa regla: el dinero que se cuenta claro delante de todos no rompe confianzas. Esta semana tu proyecto aprende su precio exacto y su calendario honesto.</p>
+  <p>Y el viernes a las 14:00 lo sueltas. Ya no será tu borrador: será tu solicitud. Lo que sigue no depende de escribir mejor, sino de haber escrito bien.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

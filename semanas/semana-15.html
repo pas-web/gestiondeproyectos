@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 15 · Medir lo que importa · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 15 · Medir lo que importa</div>
+  <div class="migas">Unidad 4 · Entregar la presa viva · Se abre el miércoles 11 de noviembre</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-11-11">
+
+<p class="pregunta">¿Cómo sabrás que funcionó?</p>
+<p class="bajada">Empieza la última unidad y este viernes 13 se acaba la ejecución: lo que esté, se entrega. Pero "quedó bonito" no es lo mismo que "funcionó", y para saber la diferencia hay que medir. La buena noticia: tienes una línea base desde agosto y ni cuenta te habías dado. La otra pregunta de la semana viene del velorio, la que dejaste escrita en el bloque 8: ¿quién va a cuidar esto cuando el curso se acabe? Una señora que estudió comunidades como la tuya ganó un Nobel contestándola.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Medir el cambio y no el esfuerzo: distinguir el "dimos tres talleres" del "treinta familias lo usan".</li>
+    <li>Armar el plan de monitoreo de una hoja: qué se mide, quién, cada cuánto y qué decisión dispara el dato.</li>
+    <li>Rescatar tu línea base: los conteos de agosto y la foto de hoy, el antes sin el cual el después no dice nada.</li>
+    <li>Escribir el acuerdo de cuidado de tu componente: quién usa, quién cuida qué y qué pasa si no, con reglas de aquí.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">Sin el antes, el después no dice nada</h3>
+  <p>Vuelve Kenia por última vez, pero con otra pregunta: ¿cómo supieron que proteger los manantiales no había funcionado? Porque alguien contaba los casos de diarrea, antes y después. Sin ese conteo, la historia sería otra: manantiales inaugurados, fotos, aplausos, y niños igual de enfermos que nadie está mirando. La medición es lo que separa saber de suponer. Y la mitad de la medición es el antes: quien no midió el punto de partida solo puede decir "se ve mejor", que es lo que se dice cuando no se sabe.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">La herramienta</span>
+  <h3 style="margin-top:.2rem">El monitoreo de una hoja</h3>
+  <p>Cinco decisiones y cabe en una hoja: para quién se mide (la comunidad y el comité leen cosas distintas), qué se mide (uno o dos indicadores del cambio, no doce del esfuerzo), cada cuánto, quién mide (alguien que se queda: el equipo se va en diciembre) y qué decisión dispara el dato (el dato que no cambia nada es adorno). La regla de oro del monitoreo realista: el indicador se levanta caminando. Un conteo de domingo, una foto al mes, una libreta de mantenimiento valen más que la encuesta trimestral que nadie va a aplicar jamás.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">La otra mitad</span>
+  <h3 style="margin-top:.2rem">Lo que es de todos sí se puede cuidar</h3>
+  <p>"Lo que es de todos nadie lo cuida", dice el derrotismo. Elinor Ostrom ganó el Nobel de Economía demostrando que es mentira: comunidades de todo el mundo cuidan aguas, bosques y pastos comunes desde hace siglos, sin dueño y sin gobierno encima, con reglas propias. Y no necesitas ir muy lejos por la evidencia: el tandeo del agua, las faenas, el comité que vigila el monte. Tu región administra bienes comunes desde antes de que la academia les pusiera nombre. Lo que Ostrom aporta es la receta destilada: límites claros, reglas hechas aquí, vigías conocidos, sanciones que empiezan hablando y una autoridad local que respalde. Tu componente está a punto de volverse un bien común: le toca su acuerdo.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">Lo que vuelve</span>
+  <h3 style="margin-top:.2rem">Tres deudas se pagan</h3>
+  <p>Primera: en agosto, cuando el reconocimiento del sitio, contaste cosas (cuánta gente iba a la presa, qué había, en qué estado). Eso era tu línea base y no lo sabías. Segunda: en el marco exprés te obligué a quedarte con DOS indicadores y guardar los sobrantes; esta semana se desempolvan los guardados y se elige el que servirá para el después. Tercera: el bloque 8 de tu velorio ("lo que lo mantendría vivo") dejó una pregunta sin responder a propósito. Su cita es el viernes.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-15/ejercicio-11-la-medicion-que-no-mide.html"><strong>La medición que no mide</strong></a> · Seis maneras de medir que no dicen nada (y una que sí). Diagnostica antes de armar tu plan.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-15/ejercicio-21-y-esto-quien-lo-cuida.html"><strong>¿Y esto quién lo cuida?</strong></a> · Seis bienes comunes de la región con su arreglo de cuidado. Encuentra por qué fallan o por qué aguantan.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-15/ejercicio-32-mi-despues.html"><strong>Mi después</strong></a> · Tu línea base, tus indicadores, tu plan de monitoreo y tu acuerdo de cuidado. Es el reto 6 y es lo que le dejas a la presa.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Línea base</dt>
+    <dd>El valor del indicador ANTES de que el proyecto toque nada: cuánta gente usaba la presa, qué había, en qué estado. Es la mitad de cualquier medición: el "aumentó" necesita un "desde cuánto". Se levanta antes de empezar o no se levanta nunca; por eso los conteos de agosto valen oro y la foto de esta semana (el antes de inaugurar) es la última oportunidad de tener una.</dd>
+    <dt>Monitoreo</dt>
+    <dd>Medir de a poquito y seguido para saber si el cambio prometido está pasando, y ajustar si no. No es un trámite del final: es la versión institucionalizada de lo que Kenia enseñó (mirar, descubrir, corregir). El mínimo viable: uno o dos indicadores, un responsable que se queda, una frecuencia realista y una decisión atada al dato.</dd>
+    <dt>Indicador del después</dt>
+    <dd>El que mide el cambio cuando el curso ya no exista. Se elige con dos filtros: habla del outcome (uso, beneficio), no del output (cosas instaladas), y se puede levantar caminando (conteo, foto, libreta). El indicador heroico que exige encuesta y computadora muere en enero.</dd>
+    <dt>Medir el cambio, no el esfuerzo</dt>
+    <dd>El esfuerzo se mide solo (talleres dados, metros construidos, faenas hechas) y consuela; el cambio hay que salir a buscarlo (quién lo usa, qué mejoró) y a veces incomoda. La escalera de la semana 7 era esto: por los outputs rindes cuentas, pero la promesa que hiciste en tu cadena era de cambio.</dd>
+    <dt>El dato con decisión</dt>
+    <dd>Todo indicador debe tener escrita la decisión que dispara: "si en marzo el conteo baja de tanto, se convoca faena de mantenimiento". El dato que se junta y se guarda en una libreta que nadie lee no es monitoreo: es superstición con papelería.</dd>
+    <dt>Bien común</dt>
+    <dd>Lo que es de todos y de nadie: el agua, el monte, el pasto, y desde diciembre, tu área de la presa. No es propiedad privada ni del gobierno: es de la comunidad, y por eso necesita reglas de la comunidad. La "tragedia de los comunes" (cada quien jala para sí hasta acabarse lo de todos) es un riesgo real, no un destino: se desactiva con acuerdo, no con cercas.</dd>
+    <dt>Principios de Ostrom (versión de este curso)</dt>
+    <dd>Lo que tienen en común los bienes comunes que sobreviven: límites claros (se sabe quién usa y qué cosa), reglas hechas aquí (no reglamento importado), vigías conocidos (alguien mira, y se sabe quién), sanciones graduadas (la primera vez se habla, no se multa), arreglo barato de conflictos (se resuelve en la comunidad, no en el juzgado) y respaldo de la autoridad local (la delegación reconoce el acuerdo). Suena a cómo funciona una faena bien llevada, y no es coincidencia.</dd>
+    <dt>Acuerdo de cuidado</dt>
+    <dd>Media hoja que contesta la pregunta del velorio: quién usa, quién cuida qué (por cargo, no por nombre), qué regla hay, qué pasa si no se cumple y quién respalda. Se escribe como borrador y se discute con la delegación: el acuerdo que la comunidad no hizo suyo es un papel más.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán las líneas base rescatadas (los conteos de agosto junto a los de noviembre), los planes de monitoreo de una hoja, los acuerdos de cuidado en borrador y la foto del día en que se acabó la ejecución.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>El ojo del amo engorda al caballo, dice el refrán. Pero la presa no tiene amo: tiene comunidad. Esta semana se decide qué ojos la van a mirar cuando ustedes ya no estén, y qué van a estar contando cuando la miren.</p>
+  <p>Se acaba la ejecución. Lo que sigue ya no es construir: es saber, cuidar y contar. Para eso también hay herramientas, y son las últimas que te faltan.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

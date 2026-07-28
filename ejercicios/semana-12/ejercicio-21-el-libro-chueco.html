@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S12 · El libro chueco</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .asiento { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; font-family:Georgia,serif; }
+  .asiento b { color:var(--marca); font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El libro chueco</h1>
+<p class="sub">Gimnasio · Semana 12 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis asientos del libro del fondo del manantial, copiados como aparecen. Cinco tienen una falla con nombre; uno se salva. En noviembre, una auditoría pública va a leer tu libro con estos mismos ojos: entrénalos tú primero.</p>
+
+<div class="intro">
+  Las fallas del libro: el <strong>gasto sin comprobante</strong> (lo paga tu bolsa), el <strong>asiento de memoria</strong> (tardío y aproximado), el <strong>recibo cojo</strong> (sin fecha, firma o concepto), el <strong>gasto fuera de partida</strong> (dinero del fondo en algo no aprobado) y el <strong>vale personal</strong> ("tomé prestado, luego lo repongo": el pecado mayor).
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Copia los movimientos reales de tu equipo hasta hoy y ásentalos como si fuera el libro: fecha, concepto, monto, comprobante, quiénes dos. Después pásales esta lista de fallas. El libro chueco se endereza fácil en octubre; en la auditoría de noviembre ya no se endereza: se explica frente a todos.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '<b>Asiento 4:</b> "22-oct · Cemento y grava para anclaje · $685 · compraron: los dos de números y vocería · comprobante: se lo pedimos al de la ferretería pero andaba solo atendiendo y quedó de dárnoslo el sábado."',
+      ops: ['Asiento de memoria', 'Gasto sin comprobante: el papel prometido no es papel; se pide EN el momento o el gasto queda descubierto', 'Vale personal', 'Nada: el de la ferretería es de confianza'],
+      resp: 1,
+      pista: '¿Qué hay HOY engrapado junto a este asiento? ¿Y si el sábado la ferretería está cerrada, o el señor ya no se acuerda?',
+      exp: 'El gasto sin comprobante, en su versión más común: no el que se negó, sino el que "quedó de dárnoslo". La regla existe justo para ese momento: el recibo simple se llena ahí, en el mostrador, aunque el de la ferretería ande solo (dos minutos: fecha, concepto, monto, nombre y firma; el formato lo traes tú). Un comprobante prometido depende de la memoria ajena, y las reglas del fondo son secas: sin papel no hay reembolso. Bien lo demás, eso sí: fueron de a dos y asentaron el mismo día.' },
+    { r: '<b>Asiento 7:</b> "28-oct (creo que la compra fue el 23 o el 24) · Cosas para la faena, refrescos y algo más · como $250 · compró: no me acuerdo quién fue conmigo · hay una nota pero no se lee bien."',
+      ops: ['El asiento de memoria: cinco días tarde y todo aproximado; ya no es un registro, es un recuerdo', 'Gasto fuera de partida', 'Vale personal', 'Nada: lo importante es que la nota existe'],
+      resp: 0,
+      pista: 'Cuenta las palabras de duda en el asiento: "creo", "o el", "algo más", "como", "no me acuerdo". ¿Eso se puede auditar?',
+      exp: 'El asiento de memoria, la falla que la regla de las 48 horas existe para prevenir: a cinco días, la fecha es "creo", el concepto es "y algo más", el monto es "como" y el testigo es "no me acuerdo". Nada de eso es mala fe, es memoria humana normal, y por eso el plazo es corto: se asienta cuando el recuerdo todavía es dato. Ojo con la corrección: el asiento tardío se asienta tardío y se marca como tardío (no se le inventa fecha), porque el libro que confiesa sus retrasos es creíble, y el que los disimula ya no.' },
+    { r: '<b>Comprobante del asiento 9:</b> una hoja de cuaderno que dice: "Recibí $400 por el flete. Gracias." Sin fecha, sin nombre de quién recibió, sin firma.',
+      ops: ['Gasto sin comprobante: esa hoja no cuenta', 'Vale personal', 'El recibo cojo: existe pero le faltan las piezas que lo vuelven prueba (fecha, nombre, firma); se completa con quien lo dio, hoy mejor que mañana', 'Nada: el flete se hizo, todos lo vieron'],
+      resp: 2,
+      pista: 'Imagina a la auditoría con esa hoja en la mano: ¿quién recibió los $400, cuándo, y quién lo puede confirmar? ¿La hoja lo dice?',
+      exp: 'El recibo cojo: es mejor que nada (por eso no es la falla 1) pero no aguanta una auditoría, porque no responde quién, cuándo ni con qué firma. La diferencia con el recibo sano son treinta segundos en el momento: fecha, concepto, monto, nombre de quien recibe y su firma. Y la corrección todavía es posible y honesta: volver con el del flete esta semana y completar el papel (que él mismo escriba y firme), anotando en el libro que se completó después. El recibo simple es un formato humilde con un trabajo enorme: convertir "todos lo vimos" en algo que un extraño puede creer.' },
+    { r: '<b>Asiento 11:</b> "29-oct · Lona impresa con el nombre del equipo y logotipo, para que la gente nos ubique · $380 · de a dos, con nota de la imprenta en regla."',
+      ops: ['Recibo cojo', 'Gasto fuera de partida: papeles perfectos para un gasto que el presupuesto aprobado no contiene; el fondo paga el proyecto dictaminado, no las ocurrencias bonitas', 'Asiento de memoria', 'Se salva: trae nota en regla y fueron de a dos'],
+      resp: 1,
+      pista: 'Busca este renglón en el presupuesto que aprobó el comité. ¿Está? El procedimiento pudo ser perfecto y aun así hay problema: ¿dónde?',
+      exp: 'El gasto fuera de partida, la falla más engañosa porque el procedimiento fue impecable: de a dos, nota en regla, asiento a tiempo. Pero el fondo aprobó un presupuesto con partidas, y "lona con logotipo" no es ninguna de ellas: el dictamen autoriza ESE proyecto, no la bolsa libre. Un gasto nuevo tiene su camino (proponerlo, que quede escrito, usar imponderables si de verdad es imponderable), y una lona de equipo, por bonita que sea, difícilmente lo es. En la auditoría, este asiento se lee de una sola manera: dinero público en gusto privado. Se repone, y mejor repuesto en octubre que explicado en noviembre.' },
+    { r: '<b>Papelito dentro del libro, asiento 13:</b> "Tomé $300 del sobre del fondo para completar una urgencia. Los repongo el viernes sin falta. Firmo para que conste." Y sí: la firma está, la fecha está, y los $300 se repusieron el viernes, completos.',
+      ops: ['Recibo cojo: le faltó el concepto', 'Asiento de memoria', 'El vale personal: el pecado mayor del dinero colectivo; no importa que haya firmado y repuesto: el fondo no es caja de préstamos, y un solo vale tolerado abre la puerta de todos los demás', 'Nada: firmó, fechó y repuso completo; más transparente imposible'],
+      resp: 2,
+      pista: 'La transparencia del papelito es real. La pregunta es otra: ¿quién autorizó ese préstamo? ¿Y qué pasa el día que alguien más "tome prestado" y su viernes no llegue?',
+      exp: 'El vale personal, y es la lección más seria del libro: el problema NO es la honestidad de quien tomó (firmó, fechó, repuso: probablemente es buena gente en un apuro), es que el fondo se convirtió en caja de préstamos sin que nadie lo decidiera. El dinero colectivo tiene un solo uso: el aprobado. El día que un vale se tolera "porque repuso", el siguiente se tolera porque el primero se toleró, y el tercero ya no se repone, y las organizaciones comunitarias que se rompieron por dinero casi siempre empezaron exactamente ahí. La respuesta correcta a la urgencia real de un compañero existe y no toca el sobre: se llama pedirle al equipo, a la mano vuelta, al profe. El fondo, ni con papelito.' },
+    { r: '<b>Asiento 15:</b> "30-oct · 6 costales de mortero para el piso (partida 2 del presupuesto aprobado) · $540 · cotización vigente de la ferretería La Espuela · compraron: la de números y el de vocería · recibo simple llenado en mostrador, engrapado · asentado el mismo día por quien lleva el turno del libro."',
+      ops: ['Gasto fuera de partida', 'Asiento de memoria: mucho detalle para ser de verdad', 'Se salva: partida aprobada, de a dos, comprobante del momento, asiento a tiempo y hasta el turno del libro haciendo su trabajo', 'Recibo cojo'],
+      resp: 2,
+      pista: 'Pásale la lista completa de fallas, una por una. ¿Encontraste alguna? El detalle no es sospechoso: es el oficio.',
+      exp: 'El asiento sano, y de paso el retrato de cómo se ve el sistema completo funcionando: la compra vive en una partida aprobada (el dictamen la respalda), la cotización sigue vigente (el presupuesto de S10 sigue trabajando), fueron de a dos, el recibo se llenó en el mostrador y el asiento lo escribió el turno en el mismo día. Nadie hizo nada heroico: cada quien hizo su parte chiquita del protocolo, y la suma es un renglón que la auditoría va a leer en diez segundos y pasar al siguiente. Así se ve la confianza cuando está bien construida: aburrida, verificable y de a dos.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué tiene este asiento?</div>' +
+               '<span class="asiento">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

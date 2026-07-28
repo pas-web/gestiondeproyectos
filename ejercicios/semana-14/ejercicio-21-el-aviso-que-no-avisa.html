@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S14 · El aviso que no avisa</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .enunciado { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.98rem; font-style:italic; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El aviso que no avisa</h1>
+<p class="sub">Gimnasio · Semana 14 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis avisos comunitarios sobre la obra de la presa. Uno sí avisa; los otros cinco fallan cada uno de una manera distinta, y las cinco maneras existen en la vida real (una de ellas la vas a ver el viernes salir de una máquina). Diagnostícalos antes de escribir el tuyo.</p>
+
+<div class="intro">
+  Las cinco preguntas del aviso: ¿<strong>quién</strong> convoca? ¿<strong>qué</strong>? ¿<strong>cuándo y dónde</strong>? ¿<strong>para qué</strong>? ¿<strong>qué se necesita</strong> traer o saber? Cada pregunta sin contestar la contesta el rumor. Y las dos reglas: solo se promete <strong>lo firmado</strong>, y convoca <strong>la delegación</strong>.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Recorta o copia un aviso real de tu comunidad (de faena, del agua, de la clínica) y pásalo por las cinco preguntas: palomita a las que contesta, tache a las que no. Después reescríbelo en media hoja contestando las cinco sin subir de tono. Es el mismo músculo que vas a usar el viernes, con la ventaja de que los avisos reales de tu comunidad son mejores maestros que cualquier ejemplo inventado.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '"Se convoca a la entrega de outputs del componente 2: infraestructura recreativa y módulo de sombra viva, conforme al marco del proyecto de habilitación de la presa."',
+      ops: ['Aviso sano: es preciso y técnico', 'Jerga de solicitud: está escrito en el idioma del Anexo 1, no en el del vecino; la traducción existe y siempre es más corta', 'Le falta la fecha nada más', 'Promete lo que nadie firmó'],
+      resp: 1,
+      pista: 'Léeselo en voz alta a alguien que no esté en el curso. ¿Qué entendió? "Componente", "outputs", "marco": ¿de qué documento vienen esas palabras?',
+      exp: 'El aviso se escribe en el idioma del que lo lee, no del que lo escribe. "Componente", "outputs" y "marco" son palabras del papeleo del fondo: allá eran obligatorias (y te costaron un octubre entero), acá son niebla. La traducción existe y siempre es más corta: "ya quedaron el área de juegos y la sombra del mirador; vengan a verlas". La prueba de fuego no falla: léeselo a alguien de fuera del curso; si te pide traducción, el aviso no avisa. Dominar los dos idiomas (el del formato y el de la gente) y saber cuándo toca cada uno: eso es ser gestor.' },
+    { r: '"¡La presa está quedando muy bonita! Pronto habrá grandes sorpresas para toda la comunidad. ¡No falten!"',
+      ops: ['Aviso sano: contagia el entusiasmo', 'Jerga de solicitud', 'No contesta ninguna de las cinco preguntas: no falten a qué, cuándo, dónde; "pronto" no es fecha y el entusiasmo no es información', 'El remitente está equivocado'],
+      resp: 2,
+      pista: 'Pásale la lista: ¿quién convoca? ¿qué? ¿cuándo y dónde? ¿para qué? ¿qué se necesita? Cuenta cuántas contesta.',
+      exp: 'Cero de cinco. ¿No falten a qué, cuándo, a qué hora, dónde? "Pronto" no es fecha, "sorpresas" no es información y los signos de admiración no cargan datos. Este aviso es puro ánimo, y el ánimo sin información produce exactamente lo contrario de lo que busca: la gente pregunta, nadie sabe, el rumor contesta ("dicen que van a cobrar la entrada", "dicen que es para los de la universidad"). Cada pregunta sin contestar es un hueco, y los huecos en comunidad no se quedan vacíos: se llenan solos y casi nunca a tu favor.' },
+    { r: '"Con esta obra habrá empleos para los jóvenes, apoyos para las familias y proyectos nuevos cada año en La Florida."',
+      ops: ['Aviso sano: comunica los beneficios del proyecto', 'No dice fecha', 'Promete lo que nadie firmó: empleos, apoyos y futuro anual que no están en ninguna solicitud ni dictamen; el papel viaja solo y en diciembre alguien viene a cobrar', 'Jerga de solicitud'],
+      resp: 2,
+      pista: 'Abre la solicitud aprobada de este proyecto. ¿En qué página están los empleos, los apoyos y los proyectos anuales? ¿Y qué regla aprendiste en agosto, diseñando la consulta?',
+      exp: 'La regla más vieja del curso vuelve por su fuero: no prometer lo que no está comprometido. La aprendiste en agosto para no prometer de palabra en la consulta; en el aviso el riesgo es mayor, porque lo escrito viaja solo, sin nadie que lo matice, y se guarda. El vecino no distingue intenciones en un papel: lee "habrá empleos" y en diciembre pregunta, con toda razón, por su empleo. Lo firmado (la solicitud aprobada, el dictamen, los tratos con papel) se puede prometer, porque ya es compromiso. Lo demás, si se quiere decir, se dice como intención con dueño: "el equipo va a buscar que...". La diferencia parece de estilo y es de honestidad.' },
+    { r: '"El equipo 2 de la universidad invita a todos los vecinos a la faena de cierre de este sábado en la presa."',
+      ops: ['Aviso sano: corto y claro', 'El remitente equivocado: la faena la convoca la delegación; el equipo propone, redacta y trabaja, pero la voz que convoca es la de la comunidad, porque la obra es de la comunidad', 'Promete lo que nadie firmó', 'No contesta ninguna de las cinco preguntas'],
+      resp: 1,
+      pista: 'El texto está casi decente. El problema no es lo que dice: es quién lo dice. ¿De quién es la obra? ¿Y quién convoca las faenas desde que abrió el libro?',
+      exp: 'El texto pasa raspando; el remitente reprueba. La faena la convoca la delegación (es protocolo del curso desde la semana de la faena, y es protocolo de la vida): el equipo propone la fecha, redacta el aviso y carga los bultos, pero la voz que convoca es la autoridad comunitaria, porque la obra es de la comunidad y no de los que llegaron un semestre. No es un formalismo: es el mensaje de fondo del aviso (esto es suyo, no nuestro) y además funciona mejor, porque la convocatoria de fuera junta curiosos y la de la delegación junta faena. Detalle fino: "este sábado" sin fecha es frágil; el papel que se queda pegado dos semanas ya no sabe cuál sábado era.' },
+    { r: '"¡Descubre el oasis escondido de la Sierra Gorda! Vive una experiencia única e inolvidable junto al espejo de agua, donde la naturaleza y la aventura se encuentran."',
+      ops: ['Aviso sano: invita con imaginación', 'Jerga de solicitud', 'No dice quién convoca nada más', 'Español de folleto, de ningún lugar: adjetivos apilados, cero datos y una voz que no es de nadie de La Florida; es el tono que la IA produce por default y hay que saber verlo en tres segundos'],
+      resp: 3,
+      pista: 'Este tono ya lo tienes en tu registro de cacería. ¿Quién de tu comunidad dice "espejo de agua"? ¿Qué dato trae? ¿De quién es esa voz?',
+      exp: 'El español de ningún lugar: "experiencia única e inolvidable", "oasis escondido", "espejo de agua". Adjetivos apilados, cero datos (ni fecha, ni hora, ni quién, ni qué traer) y una voz que no es de nadie: nadie en La Florida llama a su presa "espejo de agua". Para un cartel turístico de otra cosa, tal vez; para convocar a los vecinos a SU presa, es disfraz. Y aquí está el aviso del viernes: este es el tono que la IA produce por default cuando se le pide "redacta una invitación atractiva", y tu registro de cacería lleva desde agosto entrenándote para verlo en tres segundos. La voz propia (la que dice "la presa", "la faena", "hay agua y comida") no se delega. El duelo se gana con esa voz.' },
+    { r: '"La delegación de La Florida invita a la faena de cierre del área de juegos de la presa, este sábado 7 de noviembre a las 8:00, en la presa. Traigan pala o guantes si tienen; hay agua y comida. Habrá tareas para los niños, sin herramienta. Dudas: con la delegada o con el equipo del proyecto, los viernes en la escuela."',
+      ops: ['Le falta entusiasmo: nadie va a ir', 'Promete lo que nadie firmó (el agua y la comida)', 'Aviso sano: contesta las cinco preguntas en cinco renglones, promete solo lo que ya existe y quita barreras de entrada ("si tienen")', 'Jerga de solicitud'],
+      resp: 2,
+      pista: 'Pásale la lista completa: quién, qué, cuándo y dónde, para qué, qué se necesita. Y las dos reglas: promesas y remitente. ¿Cuántas palomitas junta?',
+      exp: 'Cinco de cinco, más las dos reglas: convoca la delegación, dice qué y para qué, cuándo y dónde con fecha y hora, qué traer, y a quién preguntar con día y lugar (no "cualquier cosa me dicen"). Promete solo lo que ya existe: el agua y la comida están conseguidas, y las tareas para niños sin herramienta salen directo del protocolo de seguridad de la semana pasada. Fíjate en los detalles de oficio: "si tienen" le quita la barrera de entrada al que no tiene pala (que venga, acá hay), y la fecha completa aguanta dos semanas pegada en la tiendita. Sin un solo adjetivo de folleto. Así se ve el género bien hecho: corto, llano, completo. Guárdalo de vara para el tuyo.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué le pasa a este aviso?</div>' +
+               '<span class="enunciado">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

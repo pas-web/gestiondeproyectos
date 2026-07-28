@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 9 · La política del proyecto · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 9 · La política del proyecto</div>
+  <div class="migas">Unidad 2 · Diseñar lo que pidieron · Se abre el miércoles 30 de septiembre</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-09-30">
+
+<p class="pregunta">¿Quién tiene que decir que sí?</p>
+<p class="bajada">Tu proyecto ya aguanta la lupa en el papel. Pero los papeles no firman anuencias, no prestan camionetas ni abren candados: eso lo hace la gente. Esta semana levantas el mapa de las personas de tu proyecto (quién ayuda, quién se resiste, quién falta), ensayas el oficio de pedir bien y descubres que buena parte de lo que necesitas no se compra: se consigue. La solicitud se entrega el 9 de octubre, y hay firmas que no dependen de ti.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Levantar el mapa de poder de tu componente: cada involucrado ubicado por su interés y su influencia, sin caricaturas.</li>
+    <li>Leer las resistencias como información de diseño y no como enemigos: la objeción de hoy es el ajuste que te salva en noviembre.</li>
+    <li>Preparar y ensayar un trato real (la anuencia, el préstamo, la cotización que falta) con oferta, escucha y plan B.</li>
+    <li>Convertir lo conseguido en especie en contrapartida contante para tu solicitud: los favores también se cuantifican.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">Los proyectos son gente</h3>
+  <p>El marco lógico más fino del mundo no instala una malla si la delegación no firma, si el dueño del terreno de junto se siente brincado o si nadie consigue quién preste la camioneta. Todo proyecto tiene una capa política: no la de los partidos, sino la de los acuerdos entre personas con intereses distintos. Ignorarla no la desaparece: solo garantiza que te sorprenda. El mapa de poder la vuelve visible: cada involucrado ubicado por cuánto le importa tu proyecto (interés) y cuánto puede moverlo o frenarlo (influencia).</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El aparato</span>
+  <h3 style="margin-top:.2rem">Cuatro zonas y una regla de respeto</h3>
+  <p>Del cruce de los dos ejes salen cuatro zonas: los clave (mucho interés, mucha influencia: con ellos se trabaja de la mano y desde temprano), los durmientes (mucha influencia, poco interés: se les informa antes de que despierten de malas), los aliados de a pie (mucho interés, poca influencia: son tus ojos y tus manos en el sitio, se activan con tareas concretas) y los lejanos (se tienen en el radar). Y la pregunta que más paga: ¿quién falta? La conversación que nadie ha tenido suele ser la que evita el pleito. Regla de respeto: el mapa se dibuja con cargos y roles, nunca con nombres y etiquetas, y no sale del aula. En una comunidad chica, un papel que diga "opositor" junto a un nombre hace más daño que cualquier retraso de obra.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El oficio</span>
+  <h3 style="margin-top:.2rem">El trato</h3>
+  <p>Pedir bien es un oficio con partes: qué pido (concreto, con fecha y cantidad), qué ofrezco (algo real: trabajo, acarreo, el lugar limpio, el agradecimiento público), qué le importa al otro (se averigua preguntando y callando, no se adivina) y mi plan B (tu poder en un trato es poder decir "gracias, lo busco por otro lado" sin hundir el proyecto; quien no tiene plan B no negocia: suplica). El viernes se ensaya con vecinos difíciles antes de hacerlo de verdad. Equivocarse en el ensayo es gratis; en la bodega, no.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">La historia</span>
+  <h3 style="margin-top:.2rem">El trato de las tarimas</h3>
+  <p>No todo lo que tu proyecto necesita se compra. Un grupo de gestores necesitaba doce tarimas de pino para el piso de una sombra y el presupuesto ya no daba. En la bodega de materiales del pueblo había un rincón lleno de tarimas arrumbadas que nomás estorbaban. El trato: nos las llevamos, le vaciamos y barremos el rincón el sábado, y en la lona de la inauguración va el nombre de su bodega. Doce tarimas a cien pesos cada una que no se gastaron: mil doscientos pesos conseguidos con una conversación de diez minutos. Y ojo, eso vale en tu solicitud: la rúbrica del fondo da hasta 15 puntos a la contrapartida y gestión, y lo conseguido en especie cuenta si se cuantifica en pesos y se documenta (nota firmada, foto, mensaje). El favor bien hecho también es presupuesto.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El papel que no depende de ti</span>
+  <h3 style="margin-top:.2rem">La anuencia</h3>
+  <p>El fondo exige el sí por escrito de la delegación, y ese papel no lo produce tu equipo: se gestiona. El mapa te dice con quién se habla, el trato te dice cómo, y el calendario te dice cuándo: la solicitud se entrega el viernes 9 de octubre a las 14:00, y una anuencia no se consigue el jueves 8 por la noche. Un sí de palabra no es una anuencia: es el paso previo. Esta semana es la semana.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-09/ejercicio-11-el-tablero-del-manantial.html"><strong>El tablero del manantial</strong></a> · Siete involucrados del proyecto del manantial (el vecino de siempre del gimnasio). Ubica a cada quien en su zona y elige la jugada.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-09/ejercicio-21-el-mal-trato.html"><strong>El mal trato</strong></a> · Seis negociaciones: cinco salieron chuecas y una se salva. Ponle nombre a la falla antes de que te pase a ti.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-09/ejercicio-32-mi-mapa-y-mi-trato.html"><strong>Mi mapa y mi trato</strong></a> · Levanta el mapa de tu componente y deja armado el trato real de la semana. Es la materia prima del reto 3.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Mapa de poder</dt>
+    <dd>El dibujo de las personas de tu proyecto: cada involucrado ubicado por su interés (cuánto le importa) y su influencia (cuánto puede moverlo o frenarlo). Es herramienta interna de trabajo, no se publica ni se exhibe: sirve para decidir con quién hablar, en qué orden y con qué oferta.</dd>
+    <dt>Involucrado</dt>
+    <dd>Cualquier persona, grupo o institución a la que tu proyecto toca, o que puede tocar a tu proyecto: autoridades, comités, vecinos del sitio, usuarios actuales, proveedores, la escuela, la reserva. Incluye a los que nadie ha mencionado: los que faltan también son involucrados, solo que todavía no lo saben.</dd>
+    <dt>Durmiente</dt>
+    <dd>Quien tiene mucha influencia y poco interés: no está mirando tu proyecto, pero si despierta de malas lo puede frenar con una mano. La jugada es informarle antes de que se entere por terceros. El pleito clásico de las obras comunitarias empieza con la frase "a mí nadie me avisó".</dd>
+    <dt>Resistencia</dt>
+    <dd>Quien tiene razones para que tu proyecto no le guste. No es un enemigo: es alguien a quien tu proyecto le cuesta algo. Se le escucha primero, porque su objeción casi siempre trae información de diseño: el que abreva su ganado en el manantial no odia tu sombra, necesita el paso al agua. El diseño que incorpora la objeción convierte la resistencia en vecino conforme.</dd>
+    <dt>El trato</dt>
+    <dd>El nombre honesto de la negociación: qué pido, qué ofrezco, qué le importa al otro, con qué cierro. Un trato bien cerrado tiene quién, qué, cuánto y cuándo. El "sí, luego vemos" no es un trato: es una amabilidad que no se puede cobrar.</dd>
+    <dt>Plan B</dt>
+    <dd>Tu alternativa si el trato no sale: otro proveedor, otra fecha, otra forma de resolverlo. Se prepara antes de tocar la puerta, porque es lo que te permite negociar condiciones en lugar de aceptarlas. Quien llega sin plan B firma lo que le pongan enfrente.</dd>
+    <dt>Gestión en especie</dt>
+    <dd>Conseguir sin comprar: el préstamo, la donación, el acarreo, la mano de obra de la faena, la planta del vivero. Es el idioma natural del campo (la faena y la mano vuelta existen desde mucho antes que las convocatorias) y es gestión de la buena: cada peso que no gastas es un peso que rinde en otro lado.</dd>
+    <dt>Contrapartida</dt>
+    <dd>Lo que tu equipo y la comunidad ponen de su lado: trabajo, materiales, préstamos, especie. La rúbrica del fondo le da hasta 15 puntos, pero solo cuenta la contrapartida cuantificada (en pesos) y documentada (nota firmada, foto fechada, mensaje). El favor confirmado es contrapartida; el favor supuesto es esperanza.</dd>
+    <dt>Anuencia</dt>
+    <dd>El sí por escrito de la autoridad local, requisito del fondo. No la produce tu equipo: se gestiona con la delegación, con tiempo y con un trato claro (qué se hará, dónde, quién responde). Un sí de palabra es el paso previo, no el papel.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedará lo que esta semana se consiga sin gastar: los tratos cerrados, las tarimas propias de cada equipo y cuánto creció cada contrapartida. Los mapas no: esos son herramienta interna y se quedan en el aula.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>Favor con favor se paga, dice el refrán, y esa es la contabilidad más vieja de la sierra: la que no usa recibos y no perdona deudas. Esta semana tu proyecto aprende a pedir sin suplicar y a ofrecer sin prometer de más.</p>
+  <p>El que tiene su mapa sabe a qué puerta tocar. El que ensayó el trato toca sin que le tiemble la mano.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S2 · Mirar como gestor</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; font-size:1.12rem; color:var(--profundo); margin:.1rem 0 .3rem; }
+  .caso .porque { font-size:.88rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; padding:.6rem; border:1px solid var(--borde); border-radius:8px; font:inherit; font-size:.98rem; background:#FDFDFC; resize:vertical; }
+  button { font:inherit; border:none; border-radius:8px; padding:.55rem 1rem; cursor:pointer; font-weight:bold; margin:.4rem .4rem 0 0; }
+  .btn-copiar { background:#fff; color:var(--marca); border:2px solid var(--marca); }
+  .btn-todo { background:var(--marca); color:#fff; display:block; width:100%; margin-top:1.4rem; padding:.8rem; }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mirar como gestor</h1>
+<p class="sub">Gimnasio · Semana 2 · Guía de observación para la visita a la presa. Descárgala o ábrela ANTES de salir: en la orilla puede no haber señal.</p>
+
+<p>El viernes no vamos a la presa a tener ideas: vamos a juntar datos para tenerlas después. Trabaja tu zona en pareja, llena cada bloque con lo que VES (no con lo que crees que debería haber) y al final copia todo a tu bitácora de un botón.</p>
+
+<div class="reglas">
+  Las tres reglas de la visita: <strong>1)</strong> observar sin intervenir, <strong>2)</strong> no anunciar ni prometer nada a nadie, <strong>3)</strong> si alguien pregunta, la verdad simple: somos de la UAQ y estamos conociendo la presa.
+</div>
+
+<div class="caso">
+  <h2>1 · Quién está y qué hace</h2>
+  <p class="porque">Cuenta personas por actividad durante tu tiempo en la zona: pescando, caminando, sentados, niños jugando, lavando, otra cosa. Anota horas.</p>
+  <textarea id="r1" placeholder="Ej.: 2 señores pescando (16:10), 1 familia sentada en piedras junto al sabino..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Recorridos y paradas</h2>
+  <p class="porque">Por dónde entra y sale la gente, qué veredas se ven más pisadas, dónde se detiene la gente y cuánto. Las veredas no mienten: son votos con los pies.</p>
+  <textarea id="r2" placeholder="Ej.: la vereda del lado del camino es la más marcada; todos se paran donde la orilla hace curva..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · La sombra a esta hora</h2>
+  <p class="porque">Dónde hay sombra ahorita, de qué (árbol, peña, construcción), quién la está usando. Y el dato incómodo: cuántos metros de orilla no tienen ninguna.</p>
+  <textarea id="r3" placeholder="Ej.: un solo mezquite grande da sombra usable y ahí están todos; como 200 pasos de orilla pelona..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Huellas de uso</h2>
+  <p class="porque">Lo que la gente dejó dicho sin decirlo: fogatas, basura (de qué tipo), troncos acomodados como asiento, piedras pulidas de tanto sentarse, restos de anzuelos y línea.</p>
+  <textarea id="r4" placeholder="Ej.: 3 círculos de fogata, botellas de refresco (no de cerveza) cerca del árbol, un tronco claramente puesto como banca..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · Lo que no hay</h2>
+  <p class="porque">Las ausencias notorias: dónde sentarse, sombra, un lugar para los niños, señal de celular, un bote de basura, un acceso parejo para alguien mayor. La lista de ausencias es la semilla de la consulta.</p>
+  <textarea id="r5" placeholder="Ej.: no hay un solo lugar plano para sentarse en todo mi tramo; una señora mayor se regresó en la bajada..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · El ojo agroecológico</h2>
+  <p class="porque">Esto solo lo puede registrar alguien de tu carrera: especies de la orilla (las que reconozcas, con seña de dónde), estado del suelo, erosión, zonas que aguantarían pisoteo y zonas que no.</p>
+  <textarea id="r6" placeholder="Ej.: sabinos jóvenes en la entrada norte, suelo compactado donde se estacionan, cárcava empezando junto a la bajada..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · La foto y el croquis</h2>
+  <p class="porque">Una foto que resuma tu tramo (anota desde dónde la tomaste, para repetirla igual dentro de unos meses) y un croquis simple en tu libreta: orilla, veredas, sombra, paradas.</p>
+  <textarea id="r7" placeholder="Ej.: foto desde la piedra grande mirando al norte, 16:40. Croquis en la página 3 de mi libreta..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · Mi hipótesis (para el final)</h2>
+  <p class="porque">Ya de regreso: ¿qué crees que va a pedir la gente en la consulta, después de lo que viste HOY? ¿Cambió algo respecto a lo que pusiste en tu sobre?</p>
+  <textarea id="r8" placeholder="Después de hoy creo que la gente va a pedir..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button class="btn-todo" onclick="copiarTodo(this)">Copiar toda la guía para mi bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Numera una hoja del 1 al 8 con estos títulos: quién está, recorridos, sombra, huellas, ausencias, ojo agroecológico, foto y croquis, hipótesis. Es la misma guía; el papel no se queda sin batería, que en la orilla es ventaja seria.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['Quién está y qué hace','Recorridos y paradas','La sombra a esta hora','Huellas de uso','Lo que no hay','El ojo agroecológico','La foto y el croquis','Mi hipótesis'];
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { alert('Primero escribe tu respuesta.'); return; }
+    ejecutarCopia(t, btn);
+  }
+  function copiarTodo(btn) {
+    var partes = [];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      if (v) partes.push(TITULOS[i-1].toUpperCase() + ':\n' + v);
+    }
+    if (!partes.length) { alert('Todavía no has llenado ningún bloque.'); return; }
+    ejecutarCopia('RECONOCIMIENTO DEL SITIO · PRESA DE LA FLORIDA\n\n' + partes.join('\n\n'), btn);
+  }
+  function ejecutarCopia(t, btn) {
+    var done = function(){ var s=document.createElement('span'); s.className='aviso-copiado'; s.textContent='Copiado'; btn.after(s); setTimeout(function(){s.remove();},2500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(done); }
+    else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(); }
+  }
+</script>
+</main>
+</body>
+</html>

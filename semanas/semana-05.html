@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 5 · Líneas y reglas del fondo · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 5 · Líneas y reglas del fondo</div>
+  <div class="migas">Unidad 2 · Diseñar lo que pidieron · Se abre el miércoles 2 de septiembre</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-09-02">
+
+<p class="pregunta">¿Cómo se reparte lo que no alcanza?</p>
+<p class="bajada">La consulta dejó libretas llenas, un mapa rayado y una respuesta incómoda o dos. Esta semana todo eso se convierte en decisiones: el jueves fabricamos las líneas de trabajo y se forman los equipos. Y el viernes se acaba el misterio más viejo del curso: las reglas del fondo, selladas desde la semana 1, se entregan impresas y se destripan. Arranca la unidad 2: ya escuchamos la presa, ahora diseñamos lo que pidieron.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Convertir un registro de campo en líneas de trabajo sin traicionar la voz de la gente.</li>
+    <li>Elegir tu línea con evidencia y formar equipo con criterio de oficios, no solo de amistad.</li>
+    <li>Leer unas reglas de operación como dictaminador: no "qué me piden" sino "qué van a premiar".</li>
+    <li>Explicar la mecánica completa del fondo: qué se pide, cuándo, quién decide y con qué criterios.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">La síntesis no traiciona</h3>
+  <p>Pasar de ochenta frases a tres líneas de trabajo es una fabricación, y las fabricaciones se controlan con método: cada petición a una tarjeta con su fuente, las tarjetas se agrupan por afinidad en el muro, y cada grupo se nombra por el problema, no por la solución. La consulta no dijo "palapa": dijo "no hay dónde estar a gusto en la tarde". Si la línea ya trae la obra en el nombre, la síntesis se saltó un paso y alguien está diseñando de oídas otra vez. El conteo protege: lo que se repitió ocho veces pesa más que lo que gritó uno.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El equipo</span>
+  <h3 style="margin-top:.2rem">Tres oficios por equipo</h3>
+  <p>Los equipos se forman por componente, y un componente necesita tres oficios: quien escribe (la solicitud no se redacta sola), quien trae los números (cotizaciones, presupuesto) y quien da la cara (con la comunidad, con el grupo, con quien decida). En un grupo de nueve la amistad es inevitable y está bien; el criterio es que en tu equipo los tres oficios tengan dueño. Postularte a una línea es un acto con evidencia: qué del registro respalda que esa línea importa y qué sabes hacer tú para empujarla.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El giro</span>
+  <h3 style="margin-top:.2rem">Leer como dictaminador</h3>
+  <p>Todo el mundo lee las convocatorias preguntándose "¿qué me piden?". Los que ganan las leen al revés: "¿qué van a premiar?". El dictaminador no lee tu entusiasmo: lee una tabla de criterios con la pluma en la mano, y cada párrafo tuyo o le da puntos o le da flojera. Esta semana entrenas esa lectura con la plantilla de dos columnas: elemento por elemento, qué implica para nosotros. Es la habilidad que separa al que aplica del que gana, y en este oficio se usa toda la vida.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">La siembra se paga</span>
+  <h3 style="margin-top:.2rem">Las reglas, por fin</h3>
+  <p>Un mes preguntando y un mes de "semana 5". Ya llegamos. El viernes recibes el documento impreso, completo, y nadie te lo va a explicar: se lee en frío, con la plantilla enfrente, porque descubrir lo que dice (y lo que no dice) es exactamente el entrenamiento. Aquí no te adelantamos ni una cláusula. Trae al viernes las tres preguntas que esperas que las reglas respondan: el gimnasio 3 te las guarda.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-05/ejercicio-11-la-letra-chiquita.html"><strong>La letra chiquita</strong></a> · Siete cláusulas de convocatorias reales. Descifra qué implica cada una antes de que una te descalifique.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-05/ejercicio-21-de-peticiones-a-lineas.html"><strong>De peticiones a líneas</strong></a> · Diez voces de una consulta. Acomoda cada una en su línea sin traicionar lo que dijo.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-05/ejercicio-32-mi-linea-mi-equipo.html"><strong>Mi línea, mi equipo</strong></a> · Tu postulación con evidencia, los oficios de tu equipo y tus tres preguntas para las reglas.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Síntesis</dt>
+    <dd>El paso de los datos crudos a las decisiones, hecho con método y a la vista de todos. Se sintetiza sobre el registro (frases, conteos, mapa), nunca sobre el recuerdo. Toda línea de trabajo debe poder mostrar sus tarjetas: de qué voces viene.</dd>
+    <dt>Línea de trabajo</dt>
+    <dd>Un problema que la consulta volvió ineludible, nombrado como problema: "dónde estar a gusto en la tarde", "el agua y su orilla", "los niños no tienen dónde". De cada línea saldrá un componente; la línea respeta el problema para que el diseño no llegue con la solución puesta.</dd>
+    <dt>Componente</dt>
+    <dd>La pieza del centro recreativo que un equipo diseña y ejecuta: la respuesta concreta a una línea. Los componentes de los equipos son hermanos y rivales a la vez: se complementan en la orilla y compiten por el mismo fondo.</dd>
+    <dt>Mesa de tarjetas</dt>
+    <dd>El método de agrupación: una petición u observación por tarjeta, con su fuente ("señora ~60, mesa 2"), agrupadas por afinidad en el muro hasta que los grupos se nombran solos. Mover tarjetas es barato; mover conclusiones publicadas, no.</dd>
+    <dt>Evidencia de consulta</dt>
+    <dd>Lo que respalda una línea o una decisión: número de menciones, frases textuales, marcas del mapa. "A mí me late" no es evidencia; "lo dijeron seis personas y el mapa lo confirma" sí.</dd>
+    <dt>Reglas de operación</dt>
+    <dd>El documento donde una convocatoria dice quién puede pedir, cuánto, cómo, cuándo y con qué obligaciones. Se leen completas, con lápiz, dos veces: la primera para entender, la segunda para encontrar lo que la primera se saltó. Ahí vive la letra chiquita que descalifica solicitudes enteras.</dd>
+    <dt>Leer como dictaminador</dt>
+    <dd>Leer la convocatoria desde la silla del que decide: convertir los criterios de evaluación en una lista de "esto es lo que premian" y escribir la solicitud para esa lista. El dictaminador no conoce tu esfuerzo: conoce tu documento.</dd>
+    <dt>Contrapartida</dt>
+    <dd>Lo que el solicitante pone de su lado: trabajo, materiales, gestiones, dinero propio. En las convocatorias reales la contrapartida habla por ti: dice "esto no se cae si ustedes se van". Se declara y se cuantifica, no se presume.</dd>
+    <dt>Monto solicitado y monto otorgado</dt>
+    <dd>Dos números distintos, y la diferencia educa: en el mundo real pides lo que justificas y te dan lo que el dictamen decide, que puede ser todo, menos o nada. Por eso el presupuesto se arma para defenderse solo.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán las líneas de trabajo con sus tarjetas de evidencia, los equipos con sus componentes bautizados y la tabla colectiva del destripado de las reglas.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>Cuentas claras, amistades largas, dice el refrán. Por eso las reglas se escriben antes de que el dinero se mueva: no son el estorbo del proyecto, son el proyecto diciendo cómo quiere ser tratado.</p>
+  <p>El viernes conoces las cuentas. Las amistades se van a poner a prueba solas.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

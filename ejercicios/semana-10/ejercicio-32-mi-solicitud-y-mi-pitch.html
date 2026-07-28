@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S10 · Mi solicitud y mi pitch</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi solicitud y mi pitch</h1>
+<p class="sub">Gimnasio · Semana 10 · El checklist final y el guion de tus dos minutos.</p>
+
+<p>Ocho bloques para llegar al viernes con todo: el estado real de tu solicitud, los números que vas a defender y el pitch ensayado. Nada se guarda ni se manda: cópialo a tu bitácora y trabájalo con tu equipo. El viernes a las 14:00 esto ya no se puede llenar.</p>
+
+<div class="reglas">
+  Las reglas duras de la semana: tope <strong>$12,000</strong> (excederlo desecha sin evaluar) · cada partida <strong>con su papel</strong> · flete e imponderables <strong>con renglón propio</strong> · lo conseguido en especie va en contrapartida, <strong>no en el gasto</strong> · el cronograma cabe en <strong>cuatro semanas</strong> con responsable por renglón · el pitch dura <strong>dos minutos</strong> y el reloj no perdona.
+</div>
+
+<div class="caso">
+  <h2>1 · El semáforo de la solicitud</h2>
+  <p class="porque">Las diez secciones del Anexo 1: cuáles están terminadas, cuáles a medias, cuáles vacías. Junto a cada pendiente: quién lo cierra y cuándo (que quepa antes del viernes 14:00).</p>
+  <textarea id="r1" placeholder="Ej.: Secciones 1-4: listas. Sección 5 (presupuesto): falta anexar cotización de la malla, la trae mañana quien lleva los números. Sección 9 (carta compromiso): faltan 2 firmas, se juntan el jueves..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Mi presupuesto en limpio</h2>
+  <p class="porque">Las partidas con su cotización, el flete, los imponderables y el total contra el tope. Si el total pasa de $12,000, este bloque es tu alarma de incendio.</p>
+  <div class="modelo">Modelo: malla sombra $2,850 (cot. 3-oct) · postes $1,900 (cot. 3-oct) · cemento $680 (cot. 5-oct) · flete $400 · imponderables $290 (5%) · TOTAL: $6,120 de $12,000. Respira.</div>
+  <textarea id="r2" placeholder="Partida por partida, con su papel, y el total contra el tope..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · Mi cronograma en cuatro renglones</h2>
+  <p class="porque">Una línea por semana: qué pasa, quién responde, qué depende de qué. Filtros: dependencias, responsable, cielo (fecha B para lo que se moja).</p>
+  <textarea id="r3" placeholder="S1 (19-23 oct): compras y flete, responsable... / S2 (26-30 oct): faena de limpieza (convocada desde el 17), anclaje... / S3: ... / S4 (9-13 nov): remates y acta de entrega (semana medio vacía a propósito)..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Mi contrapartida final</h2>
+  <p class="porque">Todo lo conseguido: trabajo, especie, préstamos. Cada cosa con su valor en pesos y su documento. Es la sección donde tu proyecto presume que ya camina solo.</p>
+  <textarea id="r4" placeholder="Ej.: 12 tarimas ($1,200, nota firmada) + camioneta para flete ($400, acuerdo del taller) + 2 faenas estimadas (9 personas × 2 jornadas...) = total en pesos..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · Firmas y anuencia</h2>
+  <p class="porque">La carta compromiso con sus tres firmas y la anuencia de la delegación. Estado real, sin optimismo: firmado es firmado; "ya dijo que sí" no es firmado.</p>
+  <textarea id="r5" placeholder="Ej.: Anuencia: FIRMADA el lunes 5, en el folder. Carta compromiso: 2 de 3 firmas, la tercera el jueves en clase..." style="min-height:60px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · El pitch de dos minutos</h2>
+  <p class="porque">Cuatro movimientos, sin adornos: qué pidió la comunidad (la consulta te respalda), qué van a hacer (el componente en una frase), por qué va a funcionar (tu cadena en dos frases) y cuánto cuesta con qué contrapartida. Escríbelo como lo vas a decir.</p>
+  <div class="modelo">Prueba del pitch sano: si alguien que no es del curso lo escucha, puede repetir qué haces, para quién y cuánto cuesta. Si solo puede repetir adjetivos, hay que reescribirlo.</div>
+  <textarea id="r6" placeholder="Escríbelo completo, palabra por palabra. Dos minutos son unas 250 palabras dichas con calma..." style="min-height:130px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · La pregunta que temo</h2>
+  <p class="porque">La pregunta del Comité que no quieres que hagan. Escribirla es la mitad de desarmarla; la otra mitad es la respuesta honesta (que a veces es "eso no lo sabemos aún, y así lo vamos a averiguar").</p>
+  <textarea id="r7" placeholder="La pregunta... / La respuesta que daría hoy... / Qué me falta para responderla mejor el jueves..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · El plan de la entrega</h2>
+  <p class="porque">Viernes 9, 14:00, en mano. Quién imprime y dónde, quién engrapa y revisa contra el checklist, quién la lleva, a qué hora salen. Con margen: la impresora del viernes 13:30 es un animal traicionero.</p>
+  <textarea id="r8" placeholder="Ej.: Impresión: jueves noche en el centro de cómputo (respaldo: papelería de la cabecera viernes 10 am). Revisión final contra checklist: viernes 12:00. Sale a entregar: ... a las 13:40..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Los bloques 1, 2 y 3 se trabajan en equipo sobre el propio Anexo 1 (para eso trae su checklist al final). El pitch se escribe a mano y se ensaya en voz alta con reloj: dos veces mínimo antes del viernes, porque la primera vez siempre dura cuatro minutos y la segunda ya casi dos. El bloque 7 se contesta en secreto y se compara en equipo: si los tres temen la misma pregunta, esa es LA pregunta.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['El semáforo de la solicitud', 'Mi presupuesto en limpio', 'Mi cronograma en cuatro renglones', 'Mi contrapartida final', 'Firmas y anuencia', 'El pitch de dos minutos', 'La pregunta que temo', 'El plan de la entrega'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MI SOLICITUD Y MI PITCH · Semana 10', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

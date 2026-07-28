@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S12 · Mi frente y mi turno</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi frente y mi turno</h1>
+<p class="sub">Gimnasio · Semana 12 · La bitácora de obra de la semana.</p>
+
+<p>Ocho bloques para dejar tu obra organizada como cuadrilla y tu dinero contado como se debe. Nada se guarda ni se manda: cópialo a tu bitácora. La regla de respeto sigue viva: cargos y roles, no nombres de vecinos.</p>
+
+<div class="reglas">
+  Las reglas duras de la semana: cada tarea con verbo y dueño, <strong>una sola A</strong> por tarea · la faena la convoca <strong>la delegación</strong>, con una semana · el dinero se toca <strong>de a dos</strong> · asiento a <strong>48 horas</strong> con comprobante del momento · el gasto vive en su <strong>partida aprobada</strong> · el fondo <strong>no presta</strong>: ni con papelito.
+</div>
+
+<div class="caso">
+  <h2>1 · Los frentes de mi obra</h2>
+  <p class="porque">Tu componente partido en frentes que avanzan en paralelo. Tres a cinco, no diez.</p>
+  <textarea id="r1" placeholder="Ej.: 1) Limpieza y trazo. 2) Anclaje y estructura. 3) Piso. 4) Señalética y remates..." style="min-height:60px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Las tareas de esta semana</h2>
+  <p class="porque">Del frente que toca ahora: tareas del tamaño de una persona y un día, cada una con verbo y forma de saber si quedó.</p>
+  <textarea id="r2" placeholder="Ej.: Nivelar el tramo del sabino (queda: a nivel de manguera, foto). Pintar 6 postes (queda: dos manos, secos)..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · Mi RACI, cazado</h2>
+  <p class="porque">La matriz de tu equipo pasada por los dos cazadores: ¿alguna tarea sin R? ¿Alguna con dos A? ¿Tus C saben algo que tú no ves y tus I quedan mal si no se enteran primero?</p>
+  <div class="modelo">Modelo de renglón: "Colar anclaje · R: dos del equipo + albañil (mano vuelta) · A: vocería · C: comité de agua (visto bueno antes) · I: delegada y profe (foto el mismo día)".</div>
+  <textarea id="r3" placeholder="Tarea por tarea, con sus letras. Anota qué hueco encontraste y cómo lo tapaste..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Mi faena</h2>
+  <p class="porque">El protocolo completo: la delegación convoca (el equipo propone), una semana de anticipación, herramienta contada, comida resuelta, registro firmado, fecha B.</p>
+  <textarea id="r4" placeholder="Fecha propuesta... / Cuándo y cómo se le propone a la delegación... / Herramienta: quién trae qué... / Comida... / Registro: quién lo carga (R con nombre)... / Fecha B..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · Mi próxima compra</h2>
+  <p class="porque">El protocolo antes de salir: partida aprobada, cotización vigente, quiénes dos van, formato de recibo simple en la bolsa.</p>
+  <textarea id="r5" placeholder="Qué se compra y de qué partida... / Cotización (fecha y vigencia)... / Quiénes dos... / Cuándo... / Quién asienta y cuándo..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · Mi turno en el libro</h2>
+  <p class="porque">Cuándo te toca, qué asientos deberás dejar hechos y qué significa entregar el turno: libro cuadrado, comprobantes engrapados y poder explicárselo a quien pregunte.</p>
+  <textarea id="r6" placeholder="Mi turno: del ... al ... / Movimientos que caerán en mi turno... / Cómo lo entrego cuadrado..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · Lo conseguido sin dinero</h2>
+  <p class="porque">La cuenta paralela que también se audita: jornales de faena, mano vuelta, préstamos, donaciones. Cada uno con su valor y su papel (lista firmada, nota, foto).</p>
+  <textarea id="r7" placeholder="Ej.: Faena del sábado: 14 personas × 1 jornal = ... / Albañil por mano vuelta: 2 jornadas... / Con qué papel se prueba cada uno..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · Lo que me quita el sueño</h2>
+  <p class="porque">El riesgo de obra más real de tu frente esta semana (el material que no llega, la lluvia, la tarea que nadie puede cargar el jueves). Escribirlo es la mitad; la otra mitad: a quién se lo dices y cuál es el plan B.</p>
+  <textarea id="r8" placeholder="El riesgo... / A quién aviso (mi A, mi C o el profe)... / Plan B..." style="min-height:60px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Los bloques 1 a 3 se dibujan mejor de lo que se escriben: frentes como columnas, tareas como renglones, letras RACI en las celdas, en doble página. El bloque 4 se lleva a la delegación en persona (es un trato: ya sabes prepararlo). Y el 6 se copia a la primera página de tu turno en el libro, para que quien te releve sepa qué recibió.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['Los frentes de mi obra', 'Las tareas de esta semana', 'Mi RACI, cazado', 'Mi faena', 'Mi próxima compra', 'Mi turno en el libro', 'Lo conseguido sin dinero', 'Lo que me quita el sueño'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MI FRENTE Y MI TURNO · Semana 12', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

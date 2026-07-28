@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S13 · Mi velorio</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi velorio</h1>
+<p class="sub">Gimnasio · Semana 13 · Se llena el jueves en el rito; se usa hasta diciembre.</p>
+
+<p>Los ocho bloques del velorio de tu componente. Los primeros cuatro son el rito del jueves; los últimos cuatro son lo que el rito deja trabajando. Nada se guarda ni se manda: cópialo a tu bitácora. La regla de respeto sigue: cargos y roles, no nombres.</p>
+
+<div class="reglas">
+  Las reglas duras de la semana: la causa de muerte se escribe con <strong>sustantivos concretos</strong>, no con vaguedades · la lista del fracaso se hace <strong>sin censura</strong> · la confesión es la parte que <strong>no se puede saltar</strong> · el riesgo lleva <strong>vigía y plan B</strong> · el supuesto se <strong>revisa y apuntala</strong> · la chamba <strong>se hace</strong> (va al RACI, no a la lista) · y todo esto es de mentiras <strong>para que no sea de a de veras</strong>.
+</div>
+
+<div class="caso">
+  <h2>1 · La esquela</h2>
+  <p class="porque">Tu componente murió en 2028. Escríbelo con la plantilla y sin piedad.</p>
+  <div class="modelo">Nació en octubre de 2026, con faena y dictamen · prometía... · murió de... (sustantivos: "el riego sin dueño", "el pleito del paso") · le sobreviven... · se le recordará por...</div>
+  <textarea id="r1" placeholder="Escribe la esquela completa..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · La lista del fracaso</h2>
+  <p class="porque">Todo lo que garantizaría ese final. Meta: quince renglones, sin censura, de lo climático a lo político a lo contable. Las categorías que siempre se olvidan: el mantenimiento después de la inauguración, el relevo que no existe, el vecino no escuchado.</p>
+  <textarea id="r2" placeholder="1. Dejar el riego sin dueño desde diciembre. 2. No volver a hablar con el comité de agua. 3. ..." style="min-height:130px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · La confesión</h2>
+  <p class="porque">La pregunta que arde: ¿qué de esa lista ya lo estamos haciendo, aunque sea tantito? Se contesta en equipo y por escrito. Lo confesado hoy se corrige gratis.</p>
+  <textarea id="r3" placeholder="Del renglón 4, la verdad es que ya... / Del 9, llevamos dos semanas sin..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Lo que se para hoy</h2>
+  <p class="porque">De la confesión salen compromisos con nombre y fecha: qué se deja de hacer (o se empieza) desde esta semana.</p>
+  <textarea id="r4" placeholder="Ej.: Desde hoy, la foto semanal al comité aunque no pregunten (la manda quien lleva vocería, los viernes)..." style="min-height:60px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · La lista repartida</h2>
+  <p class="porque">Cada renglón de tu lista a su columna: riesgo (vigía + plan B), supuesto (vigía + apuntalamiento) o chamba (al RACI, esta semana). El gimnasio 2 es el entrenador de esta repartición.</p>
+  <textarea id="r5" placeholder="Riesgos: ... / Supuestos: ... / Chamba (ya en el RACI): ..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · Mis tres riesgos vivos</h2>
+  <p class="porque">Los tres que de verdad te preocupan de aquí a la inauguración, cada uno con su vigía (quién lo mira y cada cuánto) y su plan B concreto.</p>
+  <textarea id="r6" placeholder="Riesgo 1... vigía... plan B... / Riesgo 2... / Riesgo 3..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · El protocolo de mi próxima jornada</h2>
+  <p class="porque">Media hoja: protecciones por tarea (cal, filo, cargas), agua y sombra, botiquín (dónde, quién sabe usarlo), tareas sin riesgo para los niños que lleguen, y a quién se llama si algo pasa.</p>
+  <textarea id="r7" placeholder="Jornada del... / Protecciones... / Cargas de a dos en... / Botiquín... / Niños... / Emergencias: llamar a..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · Lo que lo mantendría vivo</h2>
+  <p class="porque">La esquela al revés: para que tu componente llegue vivo a 2028, ¿quién tendría que estar cuidando qué, cuando el curso ya no exista? No hace falta la respuesta completa (tiene su semana propia dentro de dos): hace falta la pregunta bien escrita.</p>
+  <textarea id="r8" placeholder="Ej.: El riego necesita un dueño que no sea de este equipo. Candidatos: ... / El acuerdo de uso necesita sobrevivir al cambio de delegación: ..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>La esquela se escribe a mano en la plantilla del jueves (esa se queda en el expediente, para releerla en diciembre y ver si envejeció equivocada, que es la meta). La lista y su repartición van en doble página: lista a la izquierda, tres columnas a la derecha. El bloque 6 se copia al tablero de obra del aula: los riesgos con vigía viven ahí, a la vista, no en el cuaderno.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['La esquela', 'La lista del fracaso', 'La confesión', 'Lo que se para hoy', 'La lista repartida', 'Mis tres riesgos vivos', 'El protocolo de mi próxima jornada', 'Lo que lo mantendría vivo'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MI VELORIO · Semana 13', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

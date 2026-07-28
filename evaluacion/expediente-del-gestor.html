@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expediente del gestor · Gestión y Manejo de Proyectos · 2026</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.5; font-size:.97rem; }
+  .pagina { max-width:760px; margin:1rem auto; background:#fff; padding:2rem 2.3rem; border:1px solid var(--borde); }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.2rem 0 .3rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.25rem; margin:.2rem 0 .5rem; }
+  h3 { color:var(--profundo); font-size:1.02rem; margin:1rem 0 .3rem; }
+  .curso { font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--marca); font-weight:bold; }
+  p, li, td, th { font-size:.94rem; }
+  ul { padding-left:1.2rem; margin:.3rem 0; }
+  li { margin:.3rem 0; }
+  table { width:100%; border-collapse:collapse; margin:.5rem 0; }
+  th, td { border:1px solid var(--borde); padding:.45rem .55rem; text-align:left; vertical-align:top; }
+  th { background:#E4EFEB; color:var(--profundo); font-size:.86rem; }
+  .ejemplo td { color:#9ab0aa; font-style:italic; }
+  .clave { border-left:5px solid var(--arena); background:#FBF7EC; padding:.6rem .9rem; margin:.8rem 0; }
+  .linea-larga { border-bottom:1px solid var(--borde); height:1.5rem; }
+  .renglones div { border-bottom:1px solid var(--borde); height:1.7rem; }
+  .chk { display:flex; gap:.55rem; align-items:flex-start; padding:.3rem 0; }
+  .chk .caja { flex:none; width:1rem; height:1rem; border:1.5px solid var(--marca); border-radius:3px; margin-top:.2rem; }
+  .portada { text-align:center; padding:5rem 2.3rem 4rem; }
+  .portada .franja { width:80px; height:6px; background:var(--arena); margin:1.4rem auto; border-radius:3px; }
+  .portada h1 { font-size:2.1rem; }
+  .portada .nombre { margin-top:4rem; }
+  .portada .nombre .linea-larga { max-width:420px; margin:0 auto; }
+  .portada .nota { color:#68807a; font-size:.9rem; max-width:460px; margin:2.5rem auto 0; }
+  .pie { font-size:.78rem; color:#8aa39c; margin-top:1.4rem; border-top:1px dashed var(--borde); padding-top:.5rem; }
+  #btn-imprimir { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.7rem 1.1rem; font:inherit; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+  @media print {
+    body { background:#fff; }
+    .pagina { max-width:none; margin:0; border:none; padding:0 0 1rem; page-break-after:always; }
+    .pagina:last-child { page-break-after:auto; }
+    #btn-imprimir { display:none; }
+    @page { margin:1.6cm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PÁGINA 1 · PORTADA -->
+<div class="pagina portada">
+  <div class="curso">Gestión y Manejo de Proyectos · UAQ Campus Concá · Agosto-diciembre 2026</div>
+  <div class="franja"></div>
+  <h1>Expediente del gestor</h1>
+  <p style="font-family:Georgia,serif; font-size:1.15rem; color:#45605a;">La presa que queremos</p>
+  <div class="nombre">
+    <div class="linea-larga"></div>
+    <p style="font-size:.9rem; color:#68807a; margin-top:.3rem;">Nombre del gestor o de la gestora</p>
+  </div>
+  <p class="nota">Esta carpeta es tuya. Se alimenta cada semana y en diciembre te la llevas: es la evidencia de lo que sabes hacer, tu primer portafolio profesional. Trátala como lo que es.</p>
+</div>
+
+<!-- PÁGINA 2 · CÓMO FUNCIONA -->
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Cómo funciona</div>
+  <h2>Lo que guarda esta carpeta y por qué</h2>
+  <p>En este curso ningún trabajo lleva número durante el semestre. En lugar de puntos, acumulas evidencia: retos dominados, solicitudes hechas, rechazos cosechados, decisiones registradas. Este expediente es donde vive todo eso.</p>
+  <h3>El orden de la carpeta</h3>
+  <ul>
+    <li><strong>Tus pactos firmados</strong> (evaluación e IA): se engrapan justo después de esta hoja.</li>
+    <li><strong>Dónde empiezo</strong>: tu punto de partida, escrito la primera semana.</li>
+    <li><strong>Mi contrato de gestión</strong>: se llena y se firma en la semana 2.</li>
+    <li><strong>Registro de retos</strong>: las herramientas del oficio, con sus intentos.</li>
+    <li><strong>Anti-currículum</strong>: lo que pediste y no salió, que también cuenta.</li>
+    <li><strong>Solicitudes reales</strong>: las dos (o más) del semestre.</li>
+    <li><strong>Mapa de evidencias</strong>: qué es cada cosa y dónde está.</li>
+    <li><strong>El suelo por unidad</strong>: tu checklist de no reprobar.</li>
+    <li><strong>Autoevaluaciones</strong>: cuatro paradas para mirarte, la última con calificación.</li>
+  </ul>
+  <div class="clave"><strong>"Aún no" no es "mal".</strong> Cuando un reto salga "aún no", se reintenta las veces que haga falta, sin castigo. Lo único que este expediente no perdona es la hoja vacía: la evidencia que no registras no existe.</div>
+  <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
+</div>
+
+<!-- PÁGINA 3 · DÓNDE EMPIEZO -->
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Semana 1</div>
+  <h2>Dónde empiezo</h2>
+  <p>Tres preguntas, sin adornos. En diciembre vas a releer esta hoja y te va a dar gusto (o risa, que también sirve).</p>
+  <h3>Lo que ya sé hacer hoy</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Lo que quiero saber hacer en diciembre</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Personas que conozco que ya viven de proyectos (aunque sea de lejos)</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Mi pronóstico del sobre (cópialo aquí antes de sellarlo, para tu propio registro)</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <p class="pie">Fecha: __________ · Se llena en la semana 1</p>
+</div>
+
+<!-- PÁGINA 4 · REGISTRO DE RETOS -->
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Registro de retos</div>
+  <h2>Las herramientas del oficio</h2>
+  <p>Cada herramienta clave tiene un reto. Se intenta, se recibe retroalimentación y se reintenta hasta que salga. Anota la fecha de cada intento y el resultado: bien o aún no.</p>
+  <table>
+    <tr><th style="width:34%">Reto</th><th>Intento 1<br>(fecha y resultado)</th><th>Intento 2</th><th>Intento 3</th><th>Quedó "bien" el</th></tr>
+    <tr class="ejemplo"><td>Ejemplo: cadena de resultados</td><td>18-sep · aún no (confundí actividades con resultados)</td><td>25-sep · bien</td><td></td><td>25-sep</td></tr>
+    <tr><td>Cadena de resultados</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Marco lógico exprés y objetivos SMART</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Presupuesto con cotizaciones reales</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Cronograma</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Mapa de poder y negociación</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Monitoreo y línea base</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td style="color:#68807a; font-style:italic;">(Reto que se agregue en el camino)</td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <div class="clave">Escribe siempre el porqué del "aún no" (una frase basta). Ese porqué es el que convierte el reintento en aprendizaje y no en volado.</div>
+  <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
+</div>
+
+<!-- PÁGINA 5 · ANTI-CURRÍCULUM -->
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Anti-currículum</div>
+  <h2>Lo que pedí y no salió</h2>
+  <p>Detrás de todo currículum exitoso hay una lista más larga de noes: becas negadas, correos sin respuesta, convocatorias perdidas. Los gestores profesionales coleccionan esa lista porque demuestra que jugaron. Aquí va la tuya. Cada no anunciado en la campana del no se anota aquí.</p>
+  <table>
+    <tr><th style="width:14%">Fecha</th><th style="width:30%">Qué pedí o solicité</th><th style="width:22%">A quién</th><th style="width:14%">Resultado</th><th>Qué aprendí</th></tr>
+    <tr class="ejemplo"><td>3-sep</td><td>Préstamo de 30 sillas para la consulta</td><td>Salón de eventos de Concá</td><td>No (las usan ese día)</td><td>Pedir con dos semanas, no con dos días</td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <div class="clave">Un no documentado vale más que un "iba a pedir". El resultado no se te toma en cuenta; el intento sí.</div>
+  <p class="pie">¿Se llenó la hoja? Buenísima señal. Engrapa otra igual encima.</p>
+</div>
+
+<!-- PÁGINA 6 · SOLICITUDES REALES -->
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Solicitudes reales</div>
+  <h2>Las dos que cuentan (mínimo)</h2>
+  <p>Compromiso transversal del semestre: al menos dos solicitudes reales, fuera del salón, a personas u organizaciones de verdad. El resultado es irrelevante para tu calificación; hacerlas no. Una solicitud real tiene destinatario con nombre, petición concreta y fecha.</p>
+  <h3>Solicitud 1</h3>
+  <table>
+    <tr><th style="width:28%">Qué pedí</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th>A quién (nombre y organización)</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th>Cómo (oficio, correo, visita, llamada)</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th>Fecha en que la hice</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th>Respuesta (o silencio, con fecha)</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th>Evidencia (dónde está la copia)</th><td><div class="linea-larga"></div></td></tr>
+  </table>
+  <h3>Solicitud 2</h3>
+  <table>
+    <tr><th style="width:28%">Qué pedí</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th>A quién (nombre y organización)</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th>Cómo (oficio, correo, visita, llamada)</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th>Fecha en que la hice</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th>Respuesta (o silencio, con fecha)</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th>Evidencia (dónde está la copia)</th><td><div class="linea-larga"></div></td></tr>
+  </table>
+  <p class="pie">¿Hiciste más de dos? Las extra van al anti-currículum o a esta hoja repetida. Más saliva, más pinole.</p>
+</div>
+
+<!-- PÁGINA 7 · MAPA DE EVIDENCIAS -->
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Mapa de evidencias</div>
+  <h2>Qué es y dónde está</h2>
+  <p>No toda tu evidencia cabe en esta carpeta: hay fotos en el Drive del curso, hojas grandes en el salón, registros en la bitácora del equipo. Este mapa es el índice para encontrarla cuando la necesites (por ejemplo, para defender tu autoevaluación).</p>
+  <table>
+    <tr><th style="width:16%">Semana</th><th style="width:42%">Qué es la evidencia</th><th>Dónde está</th></tr>
+    <tr class="ejemplo"><td>S4</td><td>Foto del sobre abierto junto a los resultados de la consulta</td><td>Drive del curso · carpeta S4</td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+  </table>
+  <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
+</div>
+
+<!-- PÁGINA 8 · EL SUELO -->
+<div class="pagina">
+  <div class="curso">Expediente del gestor · El suelo</div>
+  <h2>Tu checklist de no reprobar</h2>
+  <p>Esto es lo que basta cumplir para no reprobar la materia. Sin números y sin letra chiquita. Marca cada casilla cuando esté hecha; tu profesor lleva la misma lista.</p>
+  <h3>Unidad 1 · Escuchar la presa</h3>
+  <div class="chk"><span class="caja"></span><span>Contrato de gestión firmado (semana 2)</span></div>
+  <div class="chk"><span class="caja"></span><span>Participé en la consulta comunitaria (o hice la actividad compensatoria)</span></div>
+  <div class="chk"><span class="caja"></span><span>Sellé mi sobre en la semana 1</span></div>
+  <div class="chk"><span class="caja"></span><span>Presentación en parejas de la semana 4</span></div>
+  <div class="chk"><span class="caja"></span><span>Tickets de salida de la unidad respondidos</span></div>
+  <h3>Unidad 2 · Diseñar lo que pidieron</h3>
+  <div class="chk"><span class="caja"></span><span>Intenté al menos 3 retos de herramientas (aunque salgan "aún no")</span></div>
+  <div class="chk"><span class="caja"></span><span>Cotizaciones reales entregadas para el presupuesto</span></div>
+  <div class="chk"><span class="caja"></span><span>Pre-pitch ante compañeros (semana 10)</span></div>
+  <div class="chk"><span class="caja"></span><span>Bitácora de equipo al corriente en mi parte</span></div>
+  <h3>Unidad 3 · Construir en la presa</h3>
+  <div class="chk"><span class="caja"></span><span>Cumplí el rol que me tocó en la ejecución</span></div>
+  <div class="chk"><span class="caja"></span><span>Respondí a la retroalimentación de la Dictaminadora</span></div>
+  <div class="chk"><span class="caja"></span><span>Participé en el velorio del proyecto (semana 13)</span></div>
+  <div class="chk"><span class="caja"></span><span>Llevé el libro del fondo cuando fue mi turno</span></div>
+  <h3>Unidad 4 · Entregar la presa viva</h3>
+  <div class="chk"><span class="caja"></span><span>Participé en la inauguración</span></div>
+  <div class="chk"><span class="caja"></span><span>Expediente completo (este documento, vivido)</span></div>
+  <div class="chk"><span class="caja"></span><span>Autoevaluación final y conferencia de cierre</span></div>
+  <h3>Todo el semestre</h3>
+  <div class="chk"><span class="caja"></span><span>Solicitud real 1 hecha</span></div>
+  <div class="chk"><span class="caja"></span><span>Solicitud real 2 hecha</span></div>
+  <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
+</div>
+
+<!-- PÁGINAS 9-12 · AUTOEVALUACIONES -->
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Autoevaluación 1 (ensayo)</div>
+  <h2>Cierre de la unidad 1 · Semana 4</h2>
+  <p>Primera parada. Esta autoevaluación es ensayo: no produce calificación, produce práctica de mirarte con honestidad.</p>
+  <h3>Lo que hice esta unidad (con evidencia: cita tu mapa)</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Lo que me costó y cómo lo enfrenté</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Mi sobre contra la realidad: ¿qué tanto conocía a mi comunidad?</h3>
+  <div class="renglones"><div></div><div></div></div>
+  <h3>Si esta unidad llevara número, yo me pondría un ______ porque:</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <div class="clave"><strong>Bloque para transcribir al formulario privado:</strong> nombre, unidad 1, calificación propuesta y la justificación de arriba en dos frases.</div>
+  <p class="pie">Fecha: __________ · La regla de los tres casos aplica desde el ensayo, para que la conozcas sin riesgo.</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Autoevaluación 2 (ensayo)</div>
+  <h2>Cierre de la unidad 2 · Semana 11</h2>
+  <p>Segunda parada, la semana de la Dictaminadora. Recuerda el cortafuegos: el fondo reparte dinero, no calificaciones. Aquí se evalúa tu trabajo, no el veredicto.</p>
+  <h3>Lo que hice esta unidad (con evidencia)</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Mis retos: cuáles quedaron "bien", cuáles siguen en "aún no" y qué plan tengo</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Qué aprendí del pitch y de la retroalimentación recibida</h3>
+  <div class="renglones"><div></div><div></div></div>
+  <h3>Si esta unidad llevara número, yo me pondría un ______ porque:</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <div class="clave"><strong>Bloque para transcribir al formulario privado:</strong> nombre, unidad 2, calificación propuesta y justificación.</div>
+  <p class="pie">Fecha: __________</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Autoevaluación 3 (ensayo)</div>
+  <h2>Cierre de la unidad 3 · Semana 14</h2>
+  <p>Tercera parada, con obra en la presa y libro del fondo andando. La evidencia de esta unidad pesa: gasto real, decisiones reales, comunidad mirando.</p>
+  <h3>Lo que hice esta unidad (con evidencia)</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Una decisión difícil en la que participé y cómo se tomó</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Qué haría distinto si la obra empezara mañana</h3>
+  <div class="renglones"><div></div><div></div></div>
+  <h3>Si esta unidad llevara número, yo me pondría un ______ porque:</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <div class="clave"><strong>Bloque para transcribir al formulario privado:</strong> nombre, unidad 3, calificación propuesta y justificación.</div>
+  <p class="pie">Fecha: __________</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Autoevaluación final</div>
+  <h2>La que cuenta · Semana 17</h2>
+  <p>Esta sí produce el número del acta, en conferencia individual de cinco minutos, con este expediente en la mesa. Llega con él completo: es tu mejor argumento.</p>
+  <h3>El semestre en tres evidencias (las que mejor me representan y dónde están)</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Dónde empecé y dónde termino (relee tu página 3 antes de contestar)</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Mi anti-currículum: qué me enseñaron los noes</h3>
+  <div class="renglones"><div></div><div></div></div>
+  <h3>Lo que me llevo para mis propios proyectos</h3>
+  <div class="renglones"><div></div><div></div></div>
+  <h3>Mi calificación final propuesta es ______ porque:</h3>
+  <div class="renglones"><div></div><div></div><div></div><div></div></div>
+  <div class="clave"><strong>Regla de los tres casos, por última vez:</strong> si coincidimos, queda. Si te pusiste de menos, sube sin trámite. Si te pusiste de más, lo conversamos con el expediente enfrente. Nunca baja por escrito.</div>
+  <p class="pie">Fecha: __________ · Firma del gestor: ____________________</p>
+</div>
+
+<!-- CONTRAPORTADA -->
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Contraportada</div>
+  <h2>El pacto, en corto</h2>
+  <ul>
+    <li>Ningún trabajo lleva número durante el semestre; todo produce retroalimentación y evidencia.</li>
+    <li>Los retos se resuelven "bien" o "aún no", y el "aún no" siempre se puede reintentar.</li>
+    <li>Cumplir el suelo de las cuatro unidades y las dos solicitudes reales garantiza no reprobar.</li>
+    <li>La calificación del acta sale de tu autoevaluación final, en conferencia, con la regla de los tres casos.</li>
+    <li>El fondo reparte dinero, no calificaciones.</li>
+    <li>La versión completa y firmada del pacto está al inicio de esta carpeta.</li>
+  </ul>
+  <p style="margin-top:2.5rem; font-family:Georgia,serif; color:var(--profundo);">Un gestor se conoce por su expediente: lo que pidió, lo que intentó, lo que corrigió y lo que puede probar. Este es el tuyo.</p>
+  <p class="pie">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026 · La presa que queremos</p>
+</div>
+
+<button id="btn-imprimir" onclick="window.print()">Imprimir</button>
+</body>
+</html>

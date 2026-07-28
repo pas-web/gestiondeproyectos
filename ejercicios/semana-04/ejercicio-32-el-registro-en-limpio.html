@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S4 · El registro en limpio</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:84px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El registro en limpio</h1>
+<p class="sub">Gimnasio · Semana 4 · Se llena LA MISMA NOCHE del viernes. No es capricho: es memoria.</p>
+
+<p>A las 24 horas de una jornada de campo, la mitad de los detalles ya se fue; a la semana, queda el resumen que te conviene recordar. Por eso el registro se pasa en limpio la misma noche, con la libreta al lado y el cansancio encima. Este documento es el insumo directo del jueves que viene: de aquí van a salir las líneas de trabajo del proyecto.</p>
+
+<div class="reglas">
+  Tres reglas del limpiado: se escribe lo que <strong>pasó</strong>, no lo que concluyes (las conclusiones se fabrican la próxima semana, con método); las frases van <strong>textuales</strong> aunque suenen raro; y lo que no recuerdes bien se marca con <strong>(?)</strong> en vez de rellenarse bonito.
+</div>
+
+<div class="caso">
+  <h2>1 · Los datos duros</h2>
+  <p class="porque">Cuántas personas pasaron por tu estación, edades aproximadas, cuántas mujeres, hombres, niños. Hora de inicio y fin, clima. Aburrido y valiosísimo.</p>
+  <textarea id="r1" placeholder="Ej.: 14 personas entre 17:00 y 19:10. 6 mujeres (~30-70), 5 hombres (~20-65), 3 niños. Nublado, fresco..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Todas las frases textuales</h2>
+  <p class="porque">Cada una entre comillas, con su quién (edad aproximada y ocupación si la sabes; nunca el nombre). Incluye las que no entiendes todavía: esas suelen ser las buenas.</p>
+  <textarea id="r2" placeholder='Ej.: "El agua baja mucho en abril, ahí ni lancha entra" (señor ~50, riega nopalera)...'></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · Lo que dice el mapa</h2>
+  <p class="porque">Zona por zona: qué marcó la gente, qué pidió dónde, y las marcas de los niños con su clave aparte. Si puedes, foto del mapa esta misma noche, con luz buena.</p>
+  <textarea id="r3" placeholder="Ej.: Zona del sabino: 7 marcas (sombra, mesas, 'aquí se hacía la fiesta del ejido'). Cortinal: 0 marcas..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · El conteo de menciones</h2>
+  <p class="porque">Lista de temas y cuántas veces salió cada uno, sin interpretar. "Sombra: 8. Baños: 5. Miedo a que se cobre la entrada: 3." El número protege contra el recuerdo selectivo.</p>
+  <textarea id="r4" placeholder="Ej.: Sombra/calor: 8 · lugar para sentarse: 6 · basura: 4 · que no cobren: 3 · pesca: 3 · seguridad de niños junto al agua: 2..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · La respuesta incómoda</h2>
+  <p class="porque">Lo que no cabe en lo que el equipo imaginaba, lo que contradice tus hipótesis del reconocimiento, lo que preferirías no haber oído. Textual y completo.</p>
+  <textarea id="r5" placeholder='Ej.: Dos personas dijeron que mejor ni le muevan: "luego viene gente de fuera y deja un batidero"...'></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · La capa técnica</h2>
+  <p class="porque">Lo que solo ustedes saben registrar: nivel del agua por temporada, especies mencionadas, ganado que baja a beber, erosión, zonas que no aguantarían pisoteo. Marca cada dato con quién lo dijo o si lo observaste tú.</p>
+  <textarea id="r6" placeholder="Ej.: 'En abril el agua se retira como 15 metros' (señor ~50). Observado: orilla norte con talud suelto, no aguanta tránsito..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · Las ausencias</h2>
+  <p class="porque">Quién NO estuvo (¿jóvenes de tu edad?, ¿los pescadores?, ¿la gente de los ranchos lejanos?) y qué tema nadie tocó aunque esperabas que saliera. La consulta también habla por sus silencios.</p>
+  <textarea id="r7" placeholder="Ej.: Casi no hubo jóvenes de 15-25; nadie mencionó el ecoturismo ni gente de fuera, todo fue uso propio..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · Pendientes y promesas accidentales</h2>
+  <p class="porque">Lo que quedó colgado: la persona que pidió que regresaran a su casa, el rumor de promesa que anda circulando, lo que se te salió decir y hay que corregir. Esto va directo al profe el lunes; nada de esconderlo.</p>
+  <textarea id="r8" placeholder="Ej.: Un señor ya andaba diciendo que va a haber asador techado (lo desmontamos, pero anda la versión). Señora ~70 pidió que fuéramos a ver el lavadero viejo..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Los mismos ocho bloques, en limpio y esta noche, en las hojas que siguen a tu registro crudo (nunca sobre él: el crudo se conserva tal cual, tachones y todo, que es tu medio de verificación). El jueves se trabaja con el limpio en la mesa.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['Los datos duros', 'Todas las frases textuales', 'Lo que dice el mapa', 'El conteo de menciones', 'La respuesta incómoda', 'La capa técnica', 'Las ausencias', 'Pendientes y promesas accidentales'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['EL REGISTRO EN LIMPIO · Consulta en La Florida · Semana 4', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S17 · El número con argumento</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .enunciado { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.98rem; font-style:italic; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El número con argumento</h1>
+<p class="sub">Gimnasio · Semana 17 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis maneras de abrir la conferencia final, tomadas de conferencias reales de otros cursos (con los detalles cambiados). Solo una aguanta los cinco minutos. Las otras cinco fallan por razones que ya conoces de todo el semestre, porque autoevaluarse es rendir cuentas: la misma herramienta, apuntada hacia adentro.</p>
+
+<div class="intro">
+  La forma canónica del número con argumento: <strong>mi número + mis pruebas del expediente + lo aún no dicho sin drama + contra el suelo público</strong>. Igual que en la auditoría: se rinde con el libro, no con el orgullo ni con la pena. Tu expediente es tu libro.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe tu apertura de conferencia en cinco renglones con la forma canónica: número, tres pruebas citadas (página o pieza del expediente), un aún-no sin drama y el cierre contra el suelo. Léela en voz alta con reloj: debe caber en un minuto, porque los otros cuatro son de conversación. Si al leerla te suena a disculpa o a comercial, ya sabes cuál de los seis casos de arriba estás siendo.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '"La verdad yo creo que un 6, porque siento que me faltó mucho. Otros compañeros hicieron más que yo." (Su expediente: retos todos en bien, dos solicitudes reales mandadas, turno del libro impecable, bitácora completa.)',
+      ops: ['Número justo: la humildad es una virtud', 'La deprimida: el número salió del sentimiento y de compararse, no del expediente; la evidencia dice otra cosa, y no contarse los propios logros también es un error de medición', 'Número inflado', 'Le falta hablar del equipo'],
+      resp: 1,
+      pista: 'Compara el número con la lista entre paréntesis. ¿De dónde salió el 6: de la evidencia o de un sentimiento? ¿Y contra quién se está midiendo, contra el suelo o contra otros?',
+      exp: 'La autoevaluación deprimida, y es un error de medición, no de humildad: el número salió del sentimiento ("siento que me faltó") y de la comparación con otros, dos fuentes que este curso pasó semanas desacreditando (el porcentaje de sensación, el medirse contra el vecino en lugar de contra el criterio). El expediente es la línea base personal y dice otra cosa: retos en bien, solicitudes reales, libro impecable. La regla de tres casos protege a esta persona (su número sube sin que lo pida), pero la conversación importante es otra: por qué no se contó sus propios logros. Quien no sabe ver su propia evidencia va a cobrar de menos toda la vida: en becas, en sueldos, en tratos. Medirse bien a uno mismo es la primera medición del oficio.' },
+    { r: '"Yo merezco el 10 porque le eché todas las ganas del mundo. Nadie le echó más ganas que yo, la verdad me esforcé muchísimo todo el semestre."',
+      ops: ['Número con argumento: el esfuerzo es evidencia', 'La deprimida', 'Puro esfuerzo sin producto: "le eché ganas" es la versión personal de "tuvimos juntas y mandamos mensajes"; el esfuerzo se agradece, pero la conferencia pide lo que existe: retos, solicitudes, turnos, bitácora', 'Solo le falta subir el número'],
+      resp: 2,
+      pista: 'Cambia "le eché ganas" por "tuvimos dos reuniones y mandamos mensajes". ¿Te suena? ¿Qué le pedía el tablero de obra a ese reporte?',
+      exp: 'El avance contado, versión autobiográfica: puro esfuerzo, cero producto citado. "Le eché ganas" es exactamente "tuvimos juntas, mandamos mensajes, fuimos a ver": puede ser verdad y no dice nada, porque el esfuerzo se mide solo y siempre consuela. La conferencia, como el tablero, pregunta otra cosa: ¿qué existe? Retos en bien (¿cuáles?), solicitudes mandadas (¿cuántas, a qué?), el turno del libro (¿cómo quedó?), la bitácora (¿qué muestra?). Ojo: las ganas no valen cero, valen mucho, pero valen COMO CAUSA de los productos, no como sustituto. La reparación es sencilla y la persona casi siempre puede hacerla: traducir cada "ganas" a su producto ("me esforcé" → "reintenté el reto de presupuesto tres veces hasta el bien, aquí están las tres versiones"). Eso ya es argumento.' },
+    { r: '"Pues un 9 o un 10, no sé. Aprendí mucho de todo, la verdad. El curso me gustó mucho y siento que crecí bastante como persona."',
+      ops: ['Número con argumento: el aprendizaje está declarado', 'La vaga: números al voleo ("9 o 10, no sé") y aprendizajes sin nombre ("mucho de todo"); no cita una sola pieza del expediente, y lo que no se puede señalar no se puede asentar', 'La deprimida', 'La que culpa al equipo'],
+      resp: 1,
+      pista: '"Mucho de todo" es como "aumentó notablemente". ¿Qué le faltaba a ese reporte en la semana 15? ¿Y qué se puede señalar con el dedo en esta apertura?',
+      exp: '"Aprendí mucho de todo" es el "aumentó notablemente" de la semana 15: la frase que se dice cuando no se midió. Nada aquí se puede señalar con el dedo: ni el número (¿9 o 10? son actas distintas), ni los aprendizajes (¿cuáles?), ni una sola pieza del expediente. Y la regla de la conferencia es la de la auditoría: lo que no se puede citar no se puede asentar. La reparación es el expediente mismo, que existe precisamente para esto: abrirlo y convertir cada vaguedad en su pieza ("crecí como persona" → "en agosto no podía hablar frente a nadie: aquí está mi bitácora del pre-pitch y aquí la foto mía rindiendo en la auditoría"). El curso te dio un semestre entero de evidencia física de tu propio cambio; la conferencia vaga es no haberla hojeado.' },
+    { r: '"Yo cumplí con todo lo mío, pero mi equipo no me dejó brillar: me tocaron compañeros que no jalaban y por eso mi componente no quedó como debía. Solo, me hubiera salido mejor."',
+      ops: ['Argumento válido: los equipos desiguales existen', 'La deprimida', 'La vaga', 'La que se lava las manos: culpa al equipo delante del profe como el que entrega a un compañero en la auditoría; y confiesa sin querer no haber usado las herramientas de equipo (RACI, consultoría, el trato) que eran justo la materia'],
+      resp: 3,
+      pista: 'En la auditoría de la semana pasada había un pecado mayor: entregar a un compañero por nombre. ¿Y de quién era la chamba de arreglar al equipo que no jala, en un curso que enseñó RACI, Troika y negociación?',
+      exp: 'La que se lava las manos, y falla dos veces. Primero, por forma: culpar al equipo en la conferencia es el pariente de entregar a un compañero en la auditoría (las fallas colectivas se rinden en plural, y el "no me dejaron brillar" retrata más al que habla que a los ausentes). Segundo, y más hondo, por fondo: en un curso cuya materia incluía RACI, consultorías Troika, mapa de poder y el trato con plan B, el equipo que no jala no es circunstancia externa: es exactamente el problema que las herramientas debían atacar. La pregunta natural del profe será: ¿qué hiciste con el RACI cuando viste la tarea huérfana?, ¿llevaste el problema a la Troika?, ¿negociaste? La versión honesta de esta conferencia existe y es fuerte: "mi equipo batalló, esto intenté, esto funcionó, esto no, y esto aprendí de gestionar gente que no responde". Eso es evidencia de gestor. El reclamo es evidencia de pasajero.' },
+    { r: '"Merezco 10 porque mi equipo GANÓ: la Dictaminadora nos dio el monto completo y nuestro componente fue el que más dinero recibió. Ahí están los resultados."',
+      ops: ['Argumento sólido: el dictamen es evidencia externa', 'El cortafuegos roto: el dinero del fondo nunca fue calificación (firmado en el pacto desde agosto); el dictamen habló de un papel, el acta habla de un aprendiz, y confundirlos era el riesgo que el pacto existía para evitar', 'La deprimida', 'Puro esfuerzo sin producto'],
+      resp: 1,
+      pista: 'Hay una cláusula que firmaste en agosto y que se dijo en voz alta el día del dictamen. ¿Qué reparte el comité y qué reparte el profe? ¿Son la misma cosa?',
+      exp: 'El cortafuegos, la cláusula 2.2, el que se firmó en agosto y se repitió en voz alta el día que más falta hacía: la Dictaminadora reparte dinero, no calificaciones. Y no era capricho: era exactamente para este momento (y para su gemelo triste: el compañero del equipo que quedó desierto y cree que por eso merece menos). El dictamen evaluó UN PAPEL contra una rúbrica un jueves de octubre; el acta evalúa a UN APRENDIZ contra el suelo y su expediente a lo largo de 17 semanas, y las dos cosas se cruzan menos de lo que parece: hubo papeles ganadores cargados por equipos donde alguien aprendió poco, y papeles perdedores que enseñaron muchísimo a quien los cargó. El monto ganado puede citarse, claro, pero como UNA pieza entre las demás (¿y tus retos? ¿tus solicitudes? ¿tu turno del libro?). Como argumento único, es confesar que no se entendió el pacto.' },
+    { r: '"Propongo 9. Mis pruebas: los seis retos en bien (dos al primer intento, los demás con reintento, aquí están las versiones), mis dos solicitudes reales (una perdida, está en mi anti-CV con lo que aprendí; la otra en espera), mi turno del libro sin observaciones en la auditoría, y la bitácora completa. Lo aún no: mi cronograma siguió flojo hasta el final, por eso no propongo 10. Contra el suelo del pacto, cumplo todo. Ese es mi caso."',
+      ops: ['Inflada: nadie con una solicitud perdida merece 9', 'La vaga: le falta emoción', 'El número con argumento: número claro, evidencia citada pieza por pieza, el aún-no dicho sin drama y descontado con criterio propio, y todo medido contra el suelo público; aguanta los cinco minutos y probablemente los merece', 'Puro esfuerzo'],
+      resp: 2,
+      pista: 'Pásale la forma canónica: ¿número claro? ¿pruebas citadas? ¿el aún-no nombrado sin drama? ¿medido contra el suelo y no contra otros? Cuenta.',
+      exp: 'Así se ve: número claro (9, no "9 o 10"), evidencia citada pieza por pieza y citable (las versiones de los retos, el anti-CV, el acta de la auditoría, la bitácora), el aún-no nombrado sin drama Y usado con criterio propio (el cronograma flojo es la razón del no-10: la persona se auditó sola antes de que la auditen), y la vara correcta: el suelo público, no la comparación con compañeros. Fíjate en el detalle más fino: la solicitud PERDIDA aparece como prueba a favor, no como mancha, porque el curso fue claro en eso desde agosto (el resultado era irrelevante; el tiro contaba) y porque está en el anti-CV con su aprendizaje. Esta conferencia dura un minuto y deja cuatro para conversar de lo que importa. Y una cosa más: la forma se aprende, el contenido se construyó en 17 semanas. La conferencia fuerte no se redacta la víspera: se vivió. La tuya ya está vivida; solo falta ordenarla.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Aguanta la conferencia?</div>' +
+               '<span class="enunciado">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

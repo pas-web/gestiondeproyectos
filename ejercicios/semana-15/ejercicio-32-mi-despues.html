@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S15 · Mi después</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi después</h1>
+<p class="sub">Gimnasio · Semana 15 · Es el reto 6 (monitoreo y línea base). Los bloques 1 a 5 son del jueves; el 6 a 8, del viernes.</p>
+
+<p>Ocho bloques que contestan la pregunta de la semana dos veces: cómo sabrás que funcionó (medición) y quién lo va a sostener (cuidado). Es lo que tu equipo le deja a la presa cuando el curso ya no exista. Nada se guarda ni se manda: cópialo a tu bitácora. Cargos y roles, no nombres.</p>
+
+<div class="reglas">
+  Las reglas duras de la semana: se mide <strong>el cambio, no el esfuerzo</strong> · sin el <strong>antes</strong>, el después no dice nada · el indicador <strong>se levanta caminando</strong> y por alguien que <strong>se queda</strong> · el dato sin <strong>decisión</strong> es adorno · el acuerdo lleva <strong>cargos, no nombres</strong> · la sanción <strong>empieza hablando</strong> · y el borrador lo hace suyo <strong>la comunidad</strong>, o es un papel más.
+</div>
+
+<div class="caso">
+  <h2>1 · El cambio que prometí</h2>
+  <p class="porque">Relee la cadena de tu componente (semana 7) y copia aquí su promesa de cambio: no lo que instalaste, lo que debía pasarle a la gente y al lugar por lo que instalaste.</p>
+  <textarea id="r1" placeholder="Mi componente prometía que... (uso, beneficio, cambio; no fierros ni talleres)" style="min-height:70px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Mi línea base rescatada</h2>
+  <p class="porque">El antes que ya tienes sin saberlo: qué dicen tus conteos y croquis de agosto (semana 2), qué pedía la gente en la consulta, y qué falta fotografiar o contar ESTA semana (el estado al cierre de la ejecución) antes de que sea tarde.</p>
+  <div class="modelo">Ej.: Agosto: 4 niños en promedio un domingo, zona sin sombra, 0 bancas. Consulta: pidieron lugar para los niños y sombra. Falta: conteo de este domingo y foto del área terminada, la levanta (cargo) antes del viernes 20.</div>
+  <textarea id="r2" placeholder="Lo que ya tengo de agosto: ... / Lo que dijo la consulta: ... / Lo que falta levantar esta semana: ... (quién y cuándo)" style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · Mis indicadores del después</h2>
+  <p class="porque">Uno o dos, no más. Desempolva los que guardaste en la semana 8 (la regla de los dos) y elige con los dos filtros: hablan del cambio (bloque 1) y se levantan caminando. Anota también cuál descartaste y por qué (ese criterio es parte del reto).</p>
+  <textarea id="r3" placeholder="Indicador 1: ... (se levanta así: ...) / Indicador 2: ... / Descarté ... porque..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Quién mide, cuándo y qué dispara</h2>
+  <p class="porque">La parte que separa el monitoreo de la papelería: quién lo levanta (cargo que SE QUEDA, colgado de una rutina que ya existe), cada cuánto, dónde queda anotado, y la decisión con umbral: "si baja de tanto, entonces...".</p>
+  <textarea id="r4" placeholder="Lo levanta (cargo)... cada... queda anotado en... / Si el dato baja de..., entonces se..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · Mi plan en una hoja, en limpio</h2>
+  <p class="porque">Los bloques 1 a 4 armados en un solo párrafo legible: es lo que se entrega como reto 6 y lo que un desconocido debería poder ejecutar sin preguntarte nada.</p>
+  <textarea id="r5" placeholder="El componente promete... Se mide con... La línea base es... Lo levanta... cada... Si baja de..., se..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · Quién cuida qué</h2>
+  <p class="porque">La pregunta del bloque 8 de tu velorio, por fin contestada: quién usa tu componente y quién cuida cada cosa que necesita cuidado (regar, apretar, limpiar, abrir, guardar), por cargo de la comunidad. La prueba: ¿sobrevive a que tu equipo desaparezca en diciembre?</p>
+  <textarea id="r6" placeholder="Usan: ... / El riego lo ve (cargo)... / El mantenimiento de... lo ve... / El equipo queda solo como..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · La regla y sus escalones</h2>
+  <p class="porque">La regla de uso principal de tu componente (una, clara, con las palabras de aquí) y su sanción graduada: qué pasa la primera vez (se habla), la segunda, la tercera. Y el vigía: qué cargo mira que se cumpla y con qué frecuencia.</p>
+  <textarea id="r7" placeholder="La regla: ... / Primera vez: se habla en corto con... / Segunda: ... / Tercera: ... / Vigía: (cargo), cada..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · Lo que le llevo a la delegación</h2>
+  <p class="porque">El acuerdo (bloques 6 y 7) es borrador hasta que la comunidad lo haga suyo. Prepara la cita: qué le propones a la delegación, qué le pides que respalde, qué esperas que cambie, y cuándo van (antes de la auditoría del viernes 20).</p>
+  <textarea id="r8" placeholder="Le proponemos... / Le pedimos que respalde... / Seguro nos cambian... y está bien / Vamos el día... van (cargos del equipo)..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>El plan de una hoja (bloque 5) se escribe en la plantilla impresa del jueves: esa es la que se entrega como reto y la que se queda con quien va a medir. El acuerdo de cuidado (bloques 6 y 7) va en media hoja aparte, con letra buena: es la que viaja a la delegación. Y los conteos de agosto se fotografían junto a los de esta semana en la misma página de la bitácora: ese par de números juntos es tu antes y tu después, el corazón de todo el asunto.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['El cambio que prometí', 'Mi línea base rescatada', 'Mis indicadores del después', 'Quién mide, cuándo y qué dispara', 'Mi plan en una hoja, en limpio', 'Quién cuida qué', 'La regla y sus escalones', 'Lo que le llevo a la delegación'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MI DESPUÉS · Semana 15 · Reto 6', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

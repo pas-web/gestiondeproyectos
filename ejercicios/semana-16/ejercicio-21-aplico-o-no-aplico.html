@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S16 · ¿Aplico o no aplico?</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .perfil { background:#fff; border-left:5px solid var(--arena); border:1px solid var(--borde); border-radius:12px; padding:.9rem 1.2rem; font-size:.97rem; margin:1rem 0; }
+  .perfil strong { color:var(--profundo); }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .enunciado { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.98rem; font-style:italic; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>¿Aplico o no aplico?</h1>
+<p class="sub">Gimnasio · Semana 16 · Práctica libre, sin registro y sin nota.</p>
+
+<p>El radar sirve para descartar rápido, no para coleccionar. Aquí hay seis convocatorias (inventadas, pero con todas las mañas de las reales) y un solo perfil: el de abajo. Decide qué se hace con cada una. Las respuestas posibles son siempre las mismas cuatro, como en la vida.</p>
+
+<div class="perfil">
+  <strong>Tu perfil para este ejercicio:</strong> grupo de tres, sin figura legal propia (grupo de hecho con respaldo de la delegación), en una localidad dentro de una Reserva de la Biosfera. Proyecto vivo: área recreativa comunitaria junto a la presa, con vivero de nativas en arranque. Evidencia: un proyecto chico ejecutado, con libro auditado en público, fotos y línea base. Pueden juntar contrapartida en especie y faena; dinero líquido, casi nada.
+</div>
+
+<div class="intro">
+  El orden del triage: <strong>elegibilidad primero</strong> (¿puedo aplicar hoy?), <strong>proyecto primero</strong> (¿esto sirve a lo que ya quiero hacer, o me deforma?), <strong>calendario después</strong> (¿llego con calidad, o la agendo para su próxima edición?). En minutos, no en tardes.</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Toma las dos convocatorias más prometedoras de tu radar real y pásalas por el triage por escrito: elegibilidad (requisito por requisito, palomita o tache), proyecto (¿sirve tal cual, se estira sin traicionarse, o deforma?) y calendario (¿llego con calidad?). La que sobreviva completa es tu solicitud real que sigue; la fecha de su apertura va directo a tu calendario 2027 con recordatorio dos meses antes.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: 'Programa federal de conservación y desarrollo en Áreas Naturales Protegidas. Apoya proyectos comunitarios (ecoturismo, viveros, restauración) de habitantes de localidades dentro de ANP. Montos de $80,000 a $400,000. Pide: grupo de habitantes con anuencia de la autoridad local, proyecto con presupuesto y cronograma. La última edición abrió en el primer trimestre del año.',
+      ops: ['La descarto: es demasiado dinero para nosotros', 'Va directo al calendario 2027 con círculo rojo: elegibilidad casi perfecta (habitantes de ANP, grupo con anuencia), el proyecto es EL proyecto, y la preparación empieza meses antes de que abra', 'Aplico hoy mismo aunque no esté abierta', 'La agendo para dentro de tres años, cuando tengamos A.C.'],
+      resp: 1,
+      pista: 'Pasa el triage en orden: ¿son elegibles? (habitantes de ANP, grupo con anuencia: sí). ¿Sirve al proyecto tal cual? (vivero y área recreativa: es exactamente esto). ¿Está abierta hoy?',
+      exp: 'El pariente de PROCODES, y para este perfil es la convocatoria reina: elegibilidad cumplida HOY (habitantes de localidad en ANP, grupo con anuencia: no pide figura legal), el proyecto no se estira ni tantito (vivero de nativas y espacio comunitario en Reserva es el corazón de estas reglas de operación) y la evidencia que ya tienen (libro auditado en público, fotos, línea base) es exactamente lo que estos formatos piden y casi nadie trae. Lo único que no se puede es aplicar hoy: no está abierta. Por eso existe el calendario del radar: círculo rojo en el primer trimestre, recordatorio dos meses antes, y el expediente de este curso listo como anexo. Las convocatorias anuales se ganan en los meses en que están cerradas.' },
+    { r: 'Fondo internacional para iniciativas ambientales de base. Hasta 50,000 dólares. Pide: organización legalmente constituida con al menos dos años de operación, estados financieros auditados de los dos últimos ejercicios, cofinanciamiento líquido del 50 por ciento, solicitud y reportes en inglés.',
+      ops: ['Aplico ya: 50,000 dólares arreglan todo', 'La agendo para su próxima edición del año que entra', 'No es para mí HOY (cuatro requisitos duros incumplibles), pero va al radar de largo plazo: el día que exista la figura legal con historia, esta liga se reactiva', 'La descarto para siempre: lo internacional no es para gente como nosotros'],
+      resp: 2,
+      pista: 'Elegibilidad primero, requisito por requisito: ¿figura legal? no. ¿Dos años de estados financieros? no. ¿50% líquido? no. ¿Inglés? se resuelve. ¿Cuántos taches aguanta una solicitud?',
+      exp: 'El canto de la sirena: el monto deslumbra y la elegibilidad ejecuta. Cuatro requisitos duros, tres incumplibles hoy por más ganas que haya (la figura legal no se inventa en un mes, los estados financieros de dos años literalmente requieren dos años, y el 50 por ciento líquido de 50,000 dólares es medio millón de pesos). Aplicar sería regalar semanas de trabajo a un rechazo administrativo seguro, que ni siquiera alimenta el anti-CV con dignidad (perder por elegibilidad no enseña nada: es no haber jugado). Pero ojo con la cuarta opción, el descarte amargo ("lo internacional no es para nosotros"): falso y venenoso. La respuesta madura es el radar de largo plazo: esta liga se guarda con nota ("requiere A.C. con 2 años"), y el día que el grupo dé ese paso, se reactiva. Los requisitos duros de hoy son la lista de crecimiento de mañana.' },
+    { r: 'Convocatoria estatal de proyectos juveniles comunitarios. Monto y requisitos a tu alcance, el proyecto encaja. Detalle: la encontraste hoy y cierra en cinco días, pidiendo proyecto completo, presupuesto con tres cotizaciones vigentes, anuencia firmada y carta de la institución educativa.',
+      ops: ['Aplico: cinco días alcanzan si no dormimos', 'La dejo pasar ESTA edición y la agendo con círculo: una solicitud armada en cinco días compite contra solicitudes armadas en dos meses, y las cotizaciones y firmas reales no corren a esa velocidad; la lección va al radar (enterarse antes)', 'No soy elegible', 'La descarto: seguro es fraude si cierra tan pronto'],
+      resp: 1,
+      pista: 'Eres elegible y el proyecto encaja: el problema es otro. ¿Cuánto tardaron tus tres cotizaciones reales en octubre? ¿Y la anuencia? ¿Contra quién compite una solicitud de cinco días?',
+      exp: 'La trampa de la prisa, y duele porque la elegibilidad y el encaje son reales: lo único que falta es el tiempo, que es justo lo que no se negocia. Tú ya sabes cuánto tardan las piezas de verdad (tus tres cotizaciones de octubre tomaron más de una semana; la anuencia tuvo fecha límite interna y aún así sudó): en cinco días solo sale una solicitud de relleno, y las solicitudes de relleno compiten contra las que otros grupos armaron en dos meses. Se pierde doble: el rechazo probable Y la semana de trabajo que se le robó a la inauguración. La decisión madura es dejar pasar ESTA edición con la lección aprendida en voz alta: el radar existe exactamente para que la próxima vez te enteres cuando abre, no cuando cierra. Círculo en el calendario y a otra cosa. (Y no, cerrar pronto no la hace fraude: la hace mal difundida, que es distinto y es la mitad de las convocatorias públicas.)' },
+    { r: 'Premio nacional de emprendimiento e innovación tecnológica para jóvenes. $150,000 al mejor pitch. Piden: modelo de negocio escalable, componente digital (app o plataforma), proyección de usuarios y video en formato de startup. Un conocido les dice: "métanle una app de reservaciones a su presa y entran fácil".',
+      ops: ['Aplico: $150,000 son $150,000, la app se inventa para el papel', 'La agendo para 2027 cuando tengamos la app', 'No soy elegible por la edad', 'La descarto por la regla del proyecto primero: para caber habría que deformar un espacio comunitario en startup con app; el que persigue cualquier dinero termina haciendo proyectos de nadie'],
+      resp: 3,
+      pista: 'Elegibles probablemente sí son (jóvenes). La pregunta es la otra: ¿tu proyecto NECESITA una app de reservaciones, o la app la necesita el papel? ¿Quién deformaría a quién?',
+      exp: 'La regla del proyecto primero en su versión más tentadora: dinero real, elegibilidad probable y un "conocido" con el atajo listo ("métanle una app"). Pero mira la operación con frialdad: el área recreativa comunitaria de una presa en la Sierra Gorda no necesita app de reservaciones ni modelo escalable ni proyección de usuarios; para caber en ese premio habría que disfrazar el proyecto de otra cosa, y los disfraces cuestan doble: si pierdes, perdiste semanas construyendo un personaje; si GANAS, es peor, porque ahora debes ejecutar el proyecto deformado que prometiste (con app y todo) o incumplir. El que persigue cualquier dinero termina haciendo proyectos de nadie. Esto no es descarte amargo sino criterio: la convocatoria es buena PARA OTROS (el que sí trae una idea digital). El radar maduro descarta sin resentimiento y sin autoengaño: "no es lo nuestro" es una frase de gestor, no de derrotado.' },
+    { r: 'Fundación privada que apoya "proyectos comunitarios de agua y medio ambiente" con montos ideales. Todo suena perfecto en el resumen que la IA te preparó. Ya en las bases, cláusula 8: "aportación líquida del solicitante del 30 por ciento del monto total, depositada en garantía al momento de la firma".',
+      ops: ['Aplico y luego veo cómo consigo el 30 por ciento', 'La agendo para 2027', 'La letra chiquita la mata para este perfil: 30 por ciento LÍQUIDO en garantía es requisito duro incumplible (la contrapartida de este grupo es especie y faena); se agradece a la IA el barrido y se le recuerda quién lee las bases', 'La descarto: las fundaciones privadas no son confiables'],
+      resp: 2,
+      pista: 'El resumen de la IA dijo "todo perfecto". ¿Quién tiene la obligación de leer la cláusula 8? Recuerda tu perfil: ¿de qué es tu contrapartida, de dinero o de especie y faena?',
+      exp: 'La cláusula asesina, pariente directa de la letra chiquita que destripaste en septiembre (la semana 5 fue entrenamiento para este momento). El 30 por ciento líquido en garantía no es un detalle: para un grupo cuya contrapartida es especie y faena, es un muro, y descubrirlo DESPUÉS de armar la solicitud (o peor: después de ganarla y no poder firmar) es el fracaso más caro del catálogo. La segunda lección es del arco IA del semestre: el resumen de la máquina dijo "todo suena perfecto" porque los resúmenes comprimen, y la cláusula 8 es exactamente el tipo de detalle que se pierde en la compresión. El veredicto de S14 operando: la IA barre volumen (te encontró la convocatoria, bien), el criterio no se delega (las bases las lees tú, cláusula por cláusula, ANTES de ilusionar al equipo). Elegibilidad primero significa eso: primero la letra chiquita, luego el entusiasmo.' },
+    { r: 'Convocatoria municipal chica: "Iniciativas comunitarias de espacio público", hasta $25,000. Pide: grupo de vecinos con aval de la delegación, descripción del proyecto en formato libre de máximo 5 cuartillas, presupuesto simple, evidencia de trabajo previo si existe. Cierra en seis semanas. El monto alcanzaría justo para la segunda etapa del vivero.',
+      ops: ['Aplico ya: elegibilidad cumplida hoy, seis semanas alcanzan para calidad, el monto sirve a la etapa que sigue del proyecto real, y la evidencia del curso (libro auditado, línea base, fotos) es ventaja competitiva rara', 'La descarto: $25,000 es muy poco para tanto papeleo', 'La agendo para 2027, ahorita hay mucha escuela', 'No soy elegible sin figura legal'],
+      resp: 0,
+      pista: 'Corre el triage completo: ¿elegible hoy? ¿sirve al proyecto sin deformarlo? ¿llegas con calidad en seis semanas? Y una más: ¿cuántos solicitantes crees que traen un libro auditado en público como evidencia?',
+      exp: 'La buena, y nota por qué: no es la más grande ni la más brillante, es la que pasa el triage completo HOY. Elegible (grupo con aval de delegación: lo tienen firmado), proyecto primero (la segunda etapa del vivero es la continuación natural, cero deformación), calendario con calidad (seis semanas es el doble de lo que tomó la solicitud del fondo del curso, y aquella salió bien) y una ventaja que no cotiza en el papel pero decide dictámenes: la evidencia. Un grupo de estudiantes que llega con libro de cuentas auditado en público, línea base con conteos y acta firmada por su delegación no compite en la misma división que el promedio de solicitudes de 5 cuartillas. Sobre el descarte por chica ("$25,000 es poco"): los montos chicos bien ejecutados son los que construyen el historial que las convocatorias grandes piden; así se sube la escalera. Y de paso es la solicitud real que a más de uno le falta para su cuota del semestre.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué haces con esta?</div>' +
+               '<span class="enunciado">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

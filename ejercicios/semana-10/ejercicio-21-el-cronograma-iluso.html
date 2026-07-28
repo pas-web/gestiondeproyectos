@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S10 · El cronograma iluso</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .renglon { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; }
+  .renglon b { color:var(--marca); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El cronograma iluso</h1>
+<p class="sub">Gimnasio · Semana 10 · Práctica libre, sin registro y sin nota.</p>
+
+<p>El cronograma del proyecto del manantial: cuatro semanas de ejecución, del 19 de octubre al 13 de noviembre. Seis renglones de su calendario: cinco traen una ilusión escondida y uno se salva. El mismo filtro que le toca al tuyo.</p>
+
+<div class="intro">
+  Las ilusiones del calendario: la <strong>dependencia invertida</strong> (instalar antes de comprar), la <strong>joroba final</strong> (todo amontonado en la última semana), el renglón <strong>sin responsable</strong> (lo que es de todos no es de nadie), la <strong>faena instantánea</strong> (convocar de un día para otro) y el calendario <strong>que no le cree al cielo</strong> (obra a la intemperie sin fecha B).
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Dibuja tus cuatro semanas en una hoja horizontal y pasa tres filtros en orden: primero dependencias (¿qué necesita estar listo antes de cada renglón?), luego responsables (un nombre por renglón), luego el cielo (¿qué se hace a la intemperie y cuál es su fecha B?). Si la semana 4 quedó gorda, algo migra a la 1.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '<b>Semana 1 (19-23 oct):</b> instalar la malla sombra y anclar postes. <b>Semana 2 (26-30 oct):</b> comprar la malla, los postes y el cemento.',
+      ops: ['Joroba final', 'Dependencia invertida: se instala en la semana 1 lo que se compra en la 2; el calendario promete magia', 'Sin responsable', 'Nada: el orden de los renglones no importa'],
+      resp: 1,
+      pista: 'Lee las dos semanas en orden y pregúntate qué malla exactamente se instala el 19 de octubre.',
+      exp: 'La dependencia invertida: el renglón de la semana 1 necesita lo que la semana 2 apenas compra. Parece error de dedo y a veces lo es, pero el Comité no puede distinguir el error de dedo del equipo que no pensó su secuencia, y evalúa lo que lee (cronograma-capacidad: 15 puntos). El filtro es mecánico y se corre renglón por renglón: ¿qué necesita estar terminado para que esto pueda empezar? Compras en la 1, instalación en la 2, y el calendario deja de prometer magia.' },
+    { r: '<b>Semana 1:</b> compras. <b>Semana 2:</b> (libre, por si algo). <b>Semana 3:</b> (libre, por si algo). <b>Semana 4 (9-13 nov):</b> limpieza del terreno, anclaje, instalación de malla, armado del piso, señalética, acta de entrega.',
+      ops: ['La joroba final: seis actividades en cinco días sin margen; si llueve el martes, el proyecto entero se entrega tarde', 'Dependencia invertida', 'Nada: así queda tiempo de sobra en medio', 'Faena instantánea'],
+      resp: 0,
+      pista: 'Cuenta las actividades de la semana 4 y los días que tiene. Ahora imagina que el miércoles llueve.',
+      exp: 'La joroba final, la ilusión más común: las semanas 2 y 3 "libres por si algo" se sienten prudentes, pero el margen guardado al final no protege nada, porque después de la semana 4 no hay semana 5. El margen sirve cuando está ANTES del riesgo, no después: limpieza y anclaje en la semana 2, piso en la 3, y la semana 4 queda para señalética, acta y los imprevistos que las otras semanas hayan dejado vivos. Regla práctica: la última semana de un cronograma sano está medio vacía a propósito.' },
+    { r: '<b>Semana 2:</b> faena de limpieza del terreno "el sábado que se pueda, según ande la gente".',
+      ops: ['Dependencia invertida', 'Se salva: la flexibilidad es respeto a la comunidad', 'La faena instantánea (y sin responsable): una faena se convoca vía delegación con una semana de anticipación, con fecha fija y alguien del equipo a cargo de que la convocatoria salga', 'Joroba final'],
+      resp: 2,
+      pista: '¿Cómo se entera la gente de una faena? ¿Quién la convoca, con cuánta anticipación, y quién del equipo se asegura de que eso pase?',
+      exp: 'Dos ilusiones en un renglón: que la faena se convoca sola ("según ande la gente") y que no necesita dueño. La faena es de las tecnologías de gestión más finas que existen, pero tiene su protocolo serrano: se pide a la delegación, se anuncia con una semana de anticipación por los canales del pueblo, y alguien del equipo (con nombre) confirma dos días antes. El renglón sano dice: "faena de limpieza: sábado 24-oct, convocatoria vía delegación desde el 17-oct, responsable: quien lleva la vocería". La flexibilidad de verdad está en la fecha B, no en la fecha difusa.' },
+    { r: '<b>Semana 2:</b> gestionar la anuencia de la delegación y conseguir las dos cotizaciones que faltan.',
+      ops: ['Fuera de lugar: la anuencia y las cotizaciones son requisitos de la SOLICITUD que se entregó el 9 de octubre; si aparecen en el cronograma de ejecución, la solicitud se entregó incompleta', 'Sin responsable', 'Joroba final', 'Nada: nunca es tarde para los papeles'],
+      resp: 0,
+      pista: '¿Cuándo se entregó la solicitud? ¿Y qué debía llevar adentro para ser evaluada?',
+      exp: 'El renglón delator: promete hacer en noviembre lo que la solicitud necesitaba en octubre. La anuencia y las cotizaciones no son actividades del proyecto: son requisitos para que el proyecto exista, y el Comité que encuentra este renglón entiende al instante que la solicitud que tiene enfrente está coja. El cronograma de ejecución empieza donde la solicitud termina: compras, obra, faenas, registro, entrega. Los papeles previos ya no se planean: ya se tienen (por eso S9 fue la semana que fue).' },
+    { r: '<b>Semana 3 (2-6 nov):</b> colado del anclaje y sellado del piso, a cielo abierto. Sin fecha alterna. En la sección de supuestos del marco, el mismo equipo escribió: "que la temporada de lluvia no cubra la zona antes de diciembre".',
+      ops: ['Dependencia invertida', 'El calendario que no le cree al cielo: el propio equipo declaró la lluvia como riesgo y su cronograma no tiene fecha B para la única actividad que la lluvia arruina', 'Faena instantánea', 'Nada: si llueve, se moja, así es la obra'],
+      resp: 1,
+      pista: 'Compara el renglón con el supuesto que el mismo equipo escribió en su marco de la semana 8. ¿Se hablan entre sí?',
+      exp: 'La incoherencia elegante: el supuesto del marco reconoce la lluvia y el cronograma la ignora. Los documentos de una solicitud se leen juntos, y un dictaminador con oficio busca exactamente esto: que el riesgo declarado tenga respuesta operativa. El colado y el sellado son las actividades que la lluvia arruina de verdad (no se cuela sobre mojado); el renglón sano trae su fecha B en la misma semana o la siguiente, y de ser posible las horas de la mañana. No cuesta un peso: cuesta pensarlo antes.' },
+    { r: '<b>Semana 1 (19-23 oct):</b> compra de materiales (cotizaciones vigentes) y registro de gastos en el libro a 48 horas, responsable: quien lleva los números · flete el jueves 22 con la camioneta acordada (nota de S9) · <b>fecha B por lluvia:</b> el viernes 23.',
+      ops: ['Sin responsable', 'Joroba final', 'Dependencia invertida', 'Se salva: compras al inicio, responsable con nombre de oficio, dependencia del flete resuelta con su trato, registro a 48 horas y hasta fecha B'],
+      resp: 3,
+      pista: 'Córrele los tres filtros: dependencias, responsable, cielo. Y un cuarto: ¿las obligaciones del fondo están contempladas?',
+      exp: 'El renglón sano hace todo el trabajo aburrido: las compras van al principio (el margen queda DESPUÉS del riesgo), el responsable es el oficio de números del equipo, el flete no es un deseo sino un trato ya cerrado con su nota, la fecha B existe, y el registro a 48 horas cumple la obligación del fondo desde el primer peso gastado (la auditoría pública de noviembre se gana en octubre). Un cronograma de renglones así no impresiona a nadie en la primera lectura, y en la segunda gana: se nota que alguien ya vivió las cuatro semanas en su cabeza antes de escribirlas.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué tiene este renglón?</div>' +
+               '<span class="renglon">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

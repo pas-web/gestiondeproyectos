@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S17 · Mi conferencia final</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi conferencia final</h1>
+<p class="sub">Gimnasio · Semana 17 · Se trabaja el jueves con el expediente abierto; se termina antes de tu conferencia.</p>
+
+<p>Ocho bloques que ordenan tu semestre para los cinco minutos que lo cierran. No es un examen que estudiar: es una vida de tres meses que ya viviste, puesta en limpio. Nada se guarda ni se manda: cópialo a tu bitácora y llévalo a tu conferencia. Cargos y roles, no nombres.</p>
+
+<div class="reglas">
+  Las reglas duras de la última semana: el número sale <strong>del expediente</strong>, no del sentimiento · te mides <strong>contra el suelo</strong>, no contra tus compañeros · el aún-no se dice <strong>sin drama</strong> · el rechazo documentado <strong>es prueba a favor</strong> · el dinero del fondo <strong>no toca el acta</strong> · nunca se baja por escrito · y lo que declares aquí, <strong>se sostiene con evidencia enfrente</strong>.
+</div>
+
+<div class="caso">
+  <h2>1 · Mi semestre en tres momentos</h2>
+  <p class="porque">El mejor, el más duro y el que te cambió. Con fecha y lugar, no en abstracto: son el esqueleto de tu conferencia y de la historia que vas a contar de este curso por años.</p>
+  <textarea id="r1" placeholder="El mejor: ... / El más duro: ... / El que me cambió: ..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Mi contrato de agosto, rendido</h2>
+  <p class="porque">Los dos compromisos que firmaste en la semana 2: contactar a una persona de tu lista y desarrollar una habilidad. ¿Se cumplieron? Se contesta con verdad: el compromiso incumplido bien explicado vale más que el maquillado.</p>
+  <textarea id="r2" placeholder="Compromiso 1 (contactar a...): cumplido/no, así fue... / Compromiso 2 (la habilidad de...): ..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · Mi anti-CV, leído con orgullo</h2>
+  <p class="porque">Los no y los silencios del semestre, completos, y qué te enseñó cada uno. Recuerda la regla de la casa: cada renglón es un tiro que sí hiciste; la lista vacía sería la mala señal.</p>
+  <textarea id="r3" placeholder="No 1: ... me enseñó... / No 2 (el silencio de...): ... / Lo que esta lista dice de mí: ..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Mis retos, en el estado real</h2>
+  <p class="porque">Los seis, uno por uno: bien o aún no, en cuántos intentos, y qué versión lo prueba. Los reintentos no restan: son la evidencia de cómo trabajas.</p>
+  <textarea id="r4" placeholder="Cadena: bien (2.º intento) / Marco: bien... / Cronograma: aún no, porque..." style="min-height:90px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · Mis tres mejores pruebas</h2>
+  <p class="porque">Las tres piezas del expediente que mejor te defienden, elegidas con criterio de dictaminador: las que muestran cambio, no esfuerzo. Cítalas como en la auditoría: pieza, dónde está, qué prueba.</p>
+  <div class="modelo">Ej.: La bitácora del 9 de octubre (mi trato con el dueño del paso, con plan B) prueba que sé negociar con papel. / El acta de la auditoría sin observaciones a mi turno prueba... / Mi guion de la estación de consulta prueba...</div>
+  <textarea id="r5" placeholder="Prueba 1: ... está en... y demuestra... / Prueba 2: ... / Prueba 3: ..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · Mi aún-no, sin drama</h2>
+  <p class="porque">Lo que sigue verde, dicho como en el tablero de obra: la cosa, la causa y qué harías distinto. Nombrarlo tú antes de que lo pregunten es lo que vuelve creíble todo lo demás.</p>
+  <textarea id="r6" placeholder="Sigue verde: ... / La causa fue... / La próxima vez..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · Mi número con argumento</h2>
+  <p class="porque">El 0-10 que propones, en la forma canónica: número claro, medido contra el suelo público (no contra compañeros), con tus pruebas del bloque 5 y tu aún-no del 6 ya descontado con tu propio criterio. Cabe en un minuto; ensáyalo con reloj.</p>
+  <textarea id="r7" placeholder="Propongo... Mis pruebas: ... Lo aún no: ... Contra el suelo: ... Ese es mi caso." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · Lo que me llevo</h2>
+  <p class="porque">Las dos preguntas con que cierra toda conferencia: ¿qué herramienta vas a seguir usando el año que entra (y en qué, concretamente)? ¿Cuál es tu siguiente solicitud real y para cuándo? Y una tuya: releída tu página 3 de agosto, ¿qué le dirías a quien la escribió?</p>
+  <textarea id="r8" placeholder="Me llevo... y la voy a usar en... / Mi siguiente solicitud: ... para el... / A mi yo de agosto le diría..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Este ejercicio ES de cuaderno: se trabaja el jueves con el expediente físico abierto, hojeándolo de la primera página a la última (vas a encontrar cosas que ya no te acordabas que hiciste: esas suelen ser las mejores pruebas). El bloque 7 se ensaya en voz alta con reloj: un minuto. Y la respuesta al yo de agosto del bloque 8 escríbela en la última página del expediente, de puño y letra: es la línea final del portafolio que te llevas.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['Mi semestre en tres momentos', 'Mi contrato de agosto, rendido', 'Mi anti-CV, leído con orgullo', 'Mis retos, en el estado real', 'Mis tres mejores pruebas', 'Mi aún-no, sin drama', 'Mi número con argumento', 'Lo que me llevo'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MI CONFERENCIA FINAL · Semana 17', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

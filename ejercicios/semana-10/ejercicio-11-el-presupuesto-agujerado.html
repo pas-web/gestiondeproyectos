@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S10 · El presupuesto agujerado</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .partida { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; }
+  .partida b { color:var(--marca); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El presupuesto agujerado</h1>
+<p class="sub">Gimnasio · Semana 10 · Práctica libre, sin registro y sin nota.</p>
+
+<p>El proyecto del manantial entrega su solicitud esta semana, igual que tú. Siete piezas de su presupuesto: cinco traen agujero, una comete algo peor y una se salva. Encuéntralos antes de que el Comité los encuentre en el tuyo.</p>
+
+<div class="intro">
+  Los agujeros clásicos: el <strong>precio de oídas</strong> (sin cotización que lo respalde), la <strong>partida bolsa</strong> (un renglón gordo que no dice para qué actividad), el <strong>flete olvidado</strong> (el material no camina solo), el <strong>presupuesto al centavo</strong> (sin imponderables), el <strong>doble papel</strong> (cobrar al fondo lo que ya es contrapartida) y el pecado mayor: <strong>exceder el tope</strong> (se desecha sin evaluar).
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe el presupuesto de tu componente partida por partida y pásale esta lista de agujeros, renglón por renglón. Suma dos veces (una de ida y una de regreso) y compara contra el tope. Cada agujero que tapes hoy es un punto que no pierdes el jueves 15.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '<b>Partida:</b> malla sombra 6×4 m: $2,800. <b>Fuente:</b> "es lo que nos dijo un señor que sabe de eso".',
+      ops: ['Partida bolsa: no dice para qué', 'Precio de oídas: sin cotización escrita y fechada, ese número no se puede defender ni reclamar si sube', 'Flete olvidado', 'Nada: el señor sabe'],
+      resp: 1,
+      pista: 'Si el Comité pregunta "¿de dónde salió este número?", ¿qué papel enseñas?',
+      exp: 'El precio de oídas: quizá hasta es correcto, pero no se puede defender (no hay papel) ni reclamar (si en noviembre la malla cuesta $3,400, el proveedor no debe nada a nadie). La cotización escrita y fechada convierte el rumor en compromiso: es al presupuesto lo que el medio de verificación es al indicador. Y de paso: con tres cotizaciones, el número no solo se defiende, se elige.' },
+    { r: '<b>Partida:</b> materiales varios de construcción: $3,500.',
+      ops: ['Precio de oídas', 'Sin imponderables', 'Partida bolsa: un renglón gordo que no dice qué se compra ni para qué actividad; imposible de evaluar y facilísimo de recortar', 'Nada: siempre se necesitan materiales'],
+      resp: 2,
+      pista: 'Intenta auditar este renglón: ¿qué exactamente se compra con esos $3,500? ¿Para qué actividad del cronograma?',
+      exp: 'La partida bolsa: el renglón que lo puede ser todo no es nada. Un dictaminador no puede evaluar si $3,500 de "varios" es razonable o inflado, así que hace lo que hacen los comités: lo recorta o lo pregunta, y en ambos casos el equipo queda mal parado. La versión sana desagrega: cemento (2 bultos, $340), clavo y alambre ($180), brochas y sellador ($260)... con su cotización cada grupo. Lo que se nombra se puede defender; lo "vario" se sacrifica primero.' },
+    { r: '<b>Situación:</b> los postes y la malla están cotizados en la ferretería de la cabecera, puestos EN la ferretería. El presupuesto no tiene ningún renglón de traslado, y la orilla del manantial está a 40 minutos de terracería.',
+      ops: ['Doble papel', 'Nada: el material ya está cotizado, es lo que importa', 'El flete olvidado: mover el material cuesta, en dinero o en trato, y aquí no está ni en el presupuesto ni en la contrapartida', 'Partida bolsa'],
+      resp: 2,
+      pista: '¿Cómo llegan seis postes de tres metros de la cabecera a la orilla? ¿Quién los lleva, en qué y con qué dinero?',
+      exp: 'El agujero favorito de los primeros presupuestos: cotizar el material y olvidar que no camina solo. El flete se resuelve de dos maneras y las dos se escriben: con dinero (renglón de flete con su cotización) o con trato (la camioneta del taller que apareció en el mapa de poder de S9; entonces no es renglón de gasto, es contrapartida cuantificada: "flete resuelto en especie, valor $400, nota de acuerdo firmada"). Lo que no se puede es dejarlo en el aire, porque el 19 de octubre el material va a estar muy bonito... en la ferretería.' },
+    { r: '<b>El total del equipo:</b> $9,847.50, todo cotizado y desagregado, al centavo. No hay renglón de imponderables "porque ya está todo contemplado".',
+      ops: ['El presupuesto al centavo: la precisión aparente sin colchón es optimismo disfrazado; el clavo de domingo no está contemplado nunca', 'Partida bolsa', 'Excede el tope', 'Nada: la exactitud es virtud'],
+      resp: 0,
+      pista: '¿Qué pasa el domingo de la semana 3, cuando falte una bisagra y la ferretería del pueblo cobre lo que cobra?',
+      exp: '"Ya está todo contemplado" es la frase que la semana 3 se encarga de desmentir: el precio que subió, la bisagra que nadie contó, el bulto que se rompió. El colchón honesto es chico (alrededor del 5%: aquí unos $490) y va en su propio renglón con su nombre: imponderables. No es dinero escondido, es humildad presupuestal: la diferencia entre "nos falló el plan" y "el plan ya sabía que algo iba a fallar". Un comité con oficio desconfía más del presupuesto perfecto que del que trae su colchón declarado.' },
+    { r: '<b>En el presupuesto:</b> renglón "12 tarimas para piso: $1,200". <b>En la sección de contrapartida:</b> "12 tarimas conseguidas en especie con la bodega de materiales: $1,200".',
+      ops: ['Flete olvidado', 'El doble papel: las mismas tarimas no pueden ser gasto del fondo Y contrapartida; conseguidas no se cobran, se presumen', 'Precio de oídas', 'Nada: así se registran las cosas dos veces para que quede claro'],
+      resp: 1,
+      pista: 'Sigue el dinero: si las tarimas ya las regaló la bodega, ¿a quién le pagarías los $1,200 del fondo?',
+      exp: 'El doble papel: el trato de S9 consiguió las tarimas gratis, así que ese renglón de gasto pagaría... nada, y ese dinero quedaría flotando (que es exactamente lo que una auditoría pública encuentra en octubre y no perdona en noviembre). Las tarimas conseguidas van en UN solo lugar: la contrapartida, cuantificada y con su nota firmada, donde suman puntos de rúbrica y cuentan la mejor historia del equipo (este proyecto ya consiguió $1,200 antes de recibir un peso). El presupuesto pide lo que falta, no lo que ya se tiene.' },
+    { r: '<b>El total de otro equipo:</b> $12,850, bien desagregado y todo cotizado. "Nos pasamos tantito del tope, pero seguro el Comité entiende que el proyecto lo vale."',
+      ops: ['Sin imponderables', 'Partida bolsa', 'Nada: un buen proyecto justifica pasarse un poco', 'El pecado mayor: excede el tope de $12,000 y la cláusula es seca: se desecha SIN EVALUAR; nadie va a leer lo bien cotizado que estaba'],
+      resp: 3,
+      pista: 'Relee la cláusula 5.2 de las reglas que destriparon en septiembre. ¿Qué verbo usa?',
+      exp: 'No hay "tantito" en una cláusula: $12,850 > $12,000 y la solicitud se desecha sin evaluar, con sus cotizaciones perfectas adentro. Es la lección más barata de aprender en el gimnasio y la más cara de aprender en la vida real, donde se pierde en silencio: el sistema de la convocatoria no manda carta explicando. Si el proyecto de verdad necesita $12,850, las opciones son legales y conocidas: recortar alcance, conseguir los $850 en especie (S9 enseñó cómo) o replantear una partida. Rogarle al tope no es una opción: el tope no escucha.' },
+    { r: '<b>Partida:</b> cemento gris, 4 bultos: $680 (cotización ferretería La Espuela, 5-oct, vigencia 15 días) · para el anclaje de postes, semana 1 · flete incluido en el viaje general del 19-oct · respaldo: segunda cotización de la cabecera por $720.',
+      ops: ['Precio de oídas: falta el papel', 'Doble papel', 'Se salva: cotización fechada y vigente, actividad y semana claras, flete resuelto y hasta plan B de proveedor', 'Partida bolsa: mucho detalle sospechoso'],
+      resp: 2,
+      pista: 'Pásale la lista completa de agujeros, uno por uno. ¿Encontraste alguno?',
+      exp: 'Así se ve el renglón sano, y fíjate que no es elegante: es completo. Tiene papel (cotización fechada y con vigencia, que en tiempos de precios inquietos vale doble), dice para qué actividad y en qué semana (el presupuesto y el cronograma se dan la mano), el flete está resuelto y declarado, y la segunda cotización es el plan B que S9 enseñó a tener antes de tocar puertas. Un presupuesto entero hecho de renglones así se defiende solo: el equipo nada más lo acompaña.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué tiene esta pieza?</div>' +
+               '<span class="partida">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S9 · El mal trato</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .dialogo { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; }
+  .dialogo b { color:var(--marca); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El mal trato</h1>
+<p class="sub">Gimnasio · Semana 9 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis tratos del proyecto del manantial, contados como pasaron. Cinco salieron chuecos por una falla con nombre; uno se salva. El mismo ojo del ensayo del viernes, entrenado en frío.</p>
+
+<div class="intro">
+  Las fallas del trato: <strong>manos vacías</strong> (pedir sin ofrecer nada), <strong>prometer de más</strong> (ofrecer lo que no controlas), <strong>sin plan B</strong> (aceptar lo que sea porque no hay alternativa), <strong>recitar sin escuchar</strong> (llegar con el discurso y perderse el dato) y <strong>el sí vago</strong> (cerrar sin quién, qué, cuánto ni cuándo).
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe el trato real de tu equipo esta semana (la anuencia, el préstamo, la cotización) en cuatro renglones: qué pido, qué ofrezco, qué le importa al otro, mi plan B. Luego pásale este mismo filtro: ¿cuál de las cinco fallas te queda más cerca? Esa es la que vas a ensayar el viernes.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '<b>En el taller mecánico:</b> "Venimos a ver si nos presta su camioneta el sábado, para acarrear la malla y los postes desde la cabecera. Es que el flete cuesta 600 pesos y ya no nos alcanza. Le prometemos cuidarla mucho."',
+      ops: ['Sin plan B', 'Manos vacías: cuenta SU problema y no ofrece nada; cuidar la camioneta es lo mínimo, no una oferta', 'Prometer de más', 'Nada: fue honesto con el dinero'],
+      resp: 1,
+      pista: '¿Qué gana el del taller con este trato? Búscalo en el diálogo. ¿Lo encontraste?',
+      exp: 'El trato de manos vacías: pide un favor caro (camioneta, sábado, camino de terracería) y ofrece el aire. Contar tu problema no es ofrecer: al otro le queda claro qué pierdes tú, no qué gana él. La versión con manos llenas existía: el diésel pagado, una mano en el taller ese sábado, el nombre del taller en el agradecimiento público de la inauguración. Casi siempre hay algo que ofrecer; lo que no hubo fue la pregunta de qué le serviría a él.' },
+    { r: '<b>Con la delegada, pidiendo la anuencia:</b> "Con esta área el turismo va a llegar, va a haber venta para las tiendas, los jóvenes ya no se van a ir, y hasta se podría pavimentar el camino el año que entra. Fírmenos aquí, es puro beneficio."',
+      ops: ['Manos vacías', 'Sin plan B', 'Prometer de más: ofrece resultados que no controla (turismo, ventas, pavimento); cuando no lleguen, la deuda queda a nombre del proyecto', 'Nada: entusiasmo es lo que se necesita'],
+      resp: 2,
+      pista: '¿Cuáles de esas promesas dependen del equipo? Repásalas una por una. La regla de la consulta de agosto sigue viva.',
+      exp: 'La falla más cara de todas, y ya la conocías: no prometer es regla de este curso desde la consulta. Aquí el equipo hipotecó el proyecto: cuando el pavimento no llegue (no depende de ellos ni tantito), la comunidad no va a recordar el área bonita, va a recordar la promesa rota, y la que firmó carga el reclamo. El trato honesto ofrece lo que sí se controla: un área terminada en noviembre, con acta de entrega y mantenimiento acordado. Con eso se pide la firma, y alcanza.' },
+    { r: '<b>Con el proveedor de la malla:</b> "Se las dejo en 900, pero me pagan hoy en efectivo y el recibo se los mando luego, ahorita no tengo." El equipo, entre dientes: "Bueno, pues ya qué. Es que ya no hay tiempo de buscar en otro lado."',
+      ops: ['Sin plan B: acepta pagar sin comprobante porque no tiene alternativa (y de paso iba a chocar con las reglas del fondo)', 'Manos vacías', 'Recitar sin escuchar', 'Nada: el tiempo apremiaba, ni modo'],
+      resp: 0,
+      pista: '"Ya qué" es la firma del que llegó sin alternativa. ¿Y qué dicen las reglas del fondo sobre pagar sin comprobante?',
+      exp: 'Sin plan B no hay negociación: hay rendición. El "ya qué" aceptó un pago sin comprobante, que las reglas del fondo no perdonan (sin documento no hay reembolso: ese gasto lo iba a pagar el equipo de su bolsa). El plan B se construye antes de ir: segunda cotización en la cabecera, otra fecha de compra, o el recibo simple que las reglas sí aceptan para el comercio local, llenado ahí mismo. Con alternativa en la bolsa, la respuesta cambia sola: "así no podemos; si me lo da con recibo, hoy mismo le pago".' },
+    { r: '<b>Con el comité de agua:</b> "El proyecto tiene tres etapas: primero la limpieza, luego la nivelación..." El comité interrumpe: "A nosotros lo que nos preocupa es la captación." El equipo sigue: "...y al final la sombra y los asientos. ¿Alguna duda?"',
+      ops: ['El sí vago', 'Recitar sin escuchar: el comité DIJO el dato que importaba (la captación) y el equipo siguió con su guion como si nada', 'Manos vacías', 'Nada: llevar el discurso preparado es profesionalismo'],
+      resp: 1,
+      pista: 'Vuelve a leer la interrupción. El comité regaló la llave del trato. ¿Qué hizo el equipo con ella?',
+      exp: 'Prepararse está bien; blindarse está mal. El comité interrumpió para regalar el dato que decide todo el trato: su preocupación es la captación. Lo que seguía era soltar el guion y jalar el hilo: "¿qué distancia les dejaría tranquilos?, ¿quién de ustedes puede revisar el trazo con nosotros?". De esa conversación salía un aliado técnico y un ajuste de diseño gratis. Del "¿alguna duda?" salió un comité que se sintió no escuchado, que es la peor versión de un clave. En un trato, lo que el otro interrumpe para decir vale más que todo tu discurso.' },
+    { r: '<b>Otra vez con la delegada:</b> "Sí, muchachos, cuenten con el apoyo, luego vemos cómo." El equipo sale contento y lo anota en la bitácora: "Anuencia: resuelta."',
+      ops: ['Prometer de más', 'Manos vacías', 'Nada: la delegada ya dijo que sí, eso es lo que cuenta', 'El sí vago: no quedó quién, qué, ni cuándo; un sí sin fecha ni papel no se puede cobrar (y la bitácora ya lo dio por hecho)'],
+      resp: 3,
+      pista: '¿Qué exactamente quedó acordado? Intenta escribirlo: quién hace qué, para cuándo. ¿Se puede?',
+      exp: 'El sí vago es la falla más dulce, porque se siente como triunfo: todos contentos y nada acordado. "Cuenten con el apoyo" no dice si es la firma, la faena o los dos, ni para cuándo, y "luego vemos" es la fecha favorita de las cosas que no pasan. Peor: la bitácora ya lo dio por resuelto, así que nadie lo va a perseguir hasta que sea tarde. El cierre correcto cuesta una frase: "¿le parece si el jueves le traemos la carta para firma, a la hora que usted diga?". Quién, qué, cuándo. Lo demás es cortesía, y la cortesía no se archiva en el Anexo 1.' },
+    { r: '<b>En la bodega de materiales:</b> "Vimos que tiene tarimas arrumbadas en el patio. Necesitamos doce para el piso de la sombra. ¿Se las cambiamos por vaciarle y barrerle ese rincón el sábado? Y en la lona de agradecimiento de la inauguración va el nombre de su bodega." El encargado: "Llévense quince, pero antes de las diez." El equipo: "Hecho: sábado a las nueve, venimos tres y le firmamos de recibido las quince."',
+      ops: ['Prometer de más: la lona es humo', 'Manos vacías', 'Se salva: pide concreto, ofrece algo real, escucha la condición y cierra con quién, cuánto, cuándo y documento', 'El sí vago: faltó el contrato notariado'],
+      resp: 2,
+      pista: 'Pásale la plantilla completa: ¿qué pidió?, ¿qué ofreció?, ¿escuchó?, ¿cómo cerró? Revisa antes de decidir.',
+      exp: 'Así se ve el trato bien hecho, y nota que no tiene nada de solemne: pidió concreto (doce tarimas, para qué), ofreció dos cosas reales (el rincón vaciado y barrido, el agradecimiento público, que sí se controla porque la lona la hace el equipo), escuchó la condición del otro (antes de las diez) y la incorporó al cierre, que quedó con todo: quién (tres personas), cuánto (quince), cuándo (sábado a las nueve) y documento (firma de recibido, que además es la prueba de contrapartida para la solicitud). Quince tarimas conseguidas y un vecino que ahora es parte del proyecto. El buen trato deja al otro contento de haber dicho que sí.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué tiene este trato?</div>' +
+               '<span class="dialogo">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

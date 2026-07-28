@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S11 · Mi día ante el comité</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Mi día ante el comité</h1>
+<p class="sub">Gimnasio · Semana 11 · Se trabaja antes del jueves; los últimos bloques, después del fallo.</p>
+
+<p>Ocho bloques en dos tiempos. Del 1 al 5 se llenan ANTES del jueves: el pitch, las preguntas y tus tres planes. El 6, el 7 y el 8 esperan al fallo del viernes. Nada se guarda ni se manda: cópialo a tu bitácora.</p>
+
+<div class="reglas">
+  Las reglas duras de la semana: el pitch dura <strong>dos minutos y el reloj corta</strong> · lo que no se sabe se dice: <strong>"eso no lo sabemos aún, y así lo vamos a averiguar"</strong> · el fallo es <strong>inapelable</strong> y no se responde en caliente · la respuesta a la retro es <strong>obligatoria</strong> (viernes 23) con sus tres partes · el comité reparte <strong>dinero, no calificaciones</strong>.
+</div>
+
+<div class="caso">
+  <h2>1 · El pitch, versión final</h2>
+  <p class="porque">El de la Troika más lo que la Troika corrigió. Cuatro movimientos: qué pidió la comunidad, qué van a hacer, por qué va a funcionar, cuánto cuesta y con qué contrapartida.</p>
+  <textarea id="r1" placeholder="Palabra por palabra, como lo vas a decir el jueves..." style="min-height:130px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Tres preguntas probables, tres respuestas listas</h2>
+  <p class="porque">Una por cada rubro donde tu solicitud está más floja (el gimnasio 1 te dice cómo suenan). Respuesta corta, con dato y papel.</p>
+  <textarea id="r2" placeholder="Pregunta probable 1 (rubro)... respuesta... / Pregunta 2... / Pregunta 3..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · La pregunta del "con la mitad"</h2>
+  <p class="porque">Casi ningún proyecto recibe todo. Si el comité da la mitad: qué cae primero (lo accesorio), qué se sostiene (lo que produce el cambio) y qué lo amortigua (especie, faena, escala).</p>
+  <div class="modelo">Modelo: "Caería el mirador. La sombra y los asientos se sostienen porque son lo que la consulta pidió. La faena cubre la mano de obra y las tarimas ya están conseguidas: el propósito no se toca."</div>
+  <textarea id="r3" placeholder="Qué cae primero... qué se sostiene... qué lo amortigua..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Mi frase para lo que no sé</h2>
+  <p class="porque">Va a haber una pregunta sin respuesta: decide HOY cómo la vas a recibir, para no inventar un dato con el pánico. Escribe tu versión de "eso no lo sabemos aún, y así lo vamos a averiguar".</p>
+  <textarea id="r4" placeholder="Ej.: Ese dato no lo tenemos todavía; lo podemos averiguar con un conteo el domingo y se lo hacemos llegar con la respuesta a la retroalimentación..." style="min-height:60px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · Los papeles que viajan conmigo</h2>
+  <p class="porque">Lo que el comité puede pedir ver: cotizaciones, notas de contrapartida, anuencia, hoja de consulta, conteos. Lista y responsable de llevarlos.</p>
+  <textarea id="r5" placeholder="Ej.: Folder del equipo: cotizaciones (3), nota de las tarimas, acuerdo del taller, anuencia (copia), registro en limpio de la consulta. Lo lleva..." style="min-height:60px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · Después del fallo: las tres columnas</h2>
+  <p class="porque">Se llena el viernes, con el fallo enfrente y en frío. Cada señalamiento del comité en su columna.</p>
+  <div class="modelo">Entendimos (sin torcerlo) · Cambiamos (qué y para cuándo) · Sostenemos (con qué argumento, y qué debilidad real atendemos de todos modos).</div>
+  <textarea id="r6" placeholder="Señalamiento 1 → columna y plan... / Señalamiento 2 → ..." style="min-height:110px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · Mi proyecto recalibrado</h2>
+  <p class="porque">Con el monto real: el presupuesto y el cronograma ajustados para arrancar el lunes 19. Qué se compra la semana 1, con qué cotización vigente, quién lo hace.</p>
+  <textarea id="r7" placeholder="Monto asignado... / Qué cambia en el presupuesto... / Qué cambia en el cronograma... / Compra de la semana 1: qué, quién, cuándo..." style="min-height:100px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>8 · Mi renglón del anti-CV</h2>
+  <p class="porque">Si el fallo trajo un no (parcial o completo), se documenta como se documentan los noes de la gente que juega: fecha, qué se pidió, qué se obtuvo, qué se aprendió. Si trajo un sí completo, escribe el no que más cerca estuvo (la pregunta que casi los tumba).</p>
+  <textarea id="r8" placeholder="Ej.: 15-oct-2026. Pedimos $9,200 al fondo; el comité asignó $7,000. Aprendimos que la línea base se construye antes, no después..." style="min-height:80px"></textarea>
+  <button class="btn-copiar" onclick="copiar('r8', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Los bloques 1 a 5 se escriben a mano y el pitch se ensaya con reloj, de pie, dos veces mínimo (la primera siempre sale de cuatro minutos; la segunda ya casi cabe). El bloque 6 se dibuja como tabla de tres columnas en doble página el viernes, con el fallo enfrente: esa tabla ES el borrador de tu respuesta del viernes 23, y el 7 va directo a tu bitácora de obra.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['El pitch, versión final', 'Tres preguntas probables', 'La pregunta del con la mitad', 'Mi frase para lo que no sé', 'Los papeles que viajan conmigo', 'Después del fallo: las tres columnas', 'Mi proyecto recalibrado', 'Mi renglón del anti-CV'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['MI DÍA ANTE EL COMITÉ · Semana 11', ''];
+    for (var i = 1; i <= 8; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

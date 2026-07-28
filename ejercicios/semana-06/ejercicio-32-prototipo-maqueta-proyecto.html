@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S6 · ¿Prototipo, maqueta o proyecto?</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --mal:#B0483A; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .item { background:#fff; border:1px solid var(--borde); border-radius:10px; padding:.8rem 1rem; margin:.6rem 0; }
+  .item .frase { font-weight:bold; color:var(--profundo); margin-bottom:.5rem; }
+  button { font:inherit; border:none; border-radius:8px; padding:.5rem .9rem; cursor:pointer; font-weight:bold; margin:.25rem .35rem 0 0; }
+  .op { background:#EAF2EF; color:var(--profundo); border:1px solid var(--borde); font-weight:normal; }
+  .op.elegida-bien { background:var(--marca); color:#fff; border-color:var(--marca); }
+  .op.elegida-mal { background:var(--mal); color:#fff; border-color:var(--mal); }
+  .pista { display:none; background:#F7F1E3; border-left:4px solid var(--arena); padding:.6rem .9rem; border-radius:0 8px 8px 0; margin-top:.5rem; font-size:.93rem; }
+  .ok { display:none; color:var(--marca); font-weight:bold; margin-top:.4rem; font-size:.95rem; }
+  .cierre { display:none; background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:1rem 1.3rem; margin-top:1.5rem; }
+  .cierre strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; }
+  body.proyector { font-size:1.45rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>¿Prototipo, maqueta o proyecto?</h1>
+<p class="sub">Gimnasio · Semana 6 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Tres palabras que la gente revuelve todo el tiempo. Recuerda: el prototipo se PRUEBA en el sitio, la maqueta se CONVERSA en la mesa, el proyecto se SOMETE al fondo. Clasifica los ocho casos.</p>
+
+<div class="item" data-resp="p">
+  <div class="frase">1. Acomodar veinte plantas nativas en maceta siguiendo la línea donde se sembraría la barrera viva, y ver si la gente camina junto a ellas o las brinca.</div>
+  <button class="op" onclick="responder(this,'p')">Prototipo</button>
+  <button class="op" onclick="responder(this,'m')">Maqueta</button>
+  <button class="op" onclick="responder(this,'y')">Proyecto</button>
+  <div class="pista">Pista: está en el sitio, en tamaño real, y hay una conducta que contar. La maceta es la versión quitable de la siembra.</div>
+  <div class="ok">Bien: se monta, se observa, se regresa al vivero. La siembra de verdad va en el proyecto.</div>
+</div>
+
+<div class="item" data-resp="m">
+  <div class="frase">2. El modelo de cartón de la palapa, a escala, para discutir con el equipo dónde iría.</div>
+  <button class="op" onclick="responder(this,'p')">Prototipo</button>
+  <button class="op" onclick="responder(this,'m')">Maqueta</button>
+  <button class="op" onclick="responder(this,'y')">Proyecto</button>
+  <div class="pista">Pista: es a escala y vive en una mesa. Sirve para ponerse de acuerdo, no para ver qué hace la gente.</div>
+  <div class="ok">Bien: conversar el diseño también hace falta, pero no confundas acordar con probar.</div>
+</div>
+
+<div class="item" data-resp="y">
+  <div class="frase">3. El documento con presupuesto, cronograma y responsables que se entrega a la Dictaminadora.</div>
+  <button class="op" onclick="responder(this,'p')">Prototipo</button>
+  <button class="op" onclick="responder(this,'m')">Maqueta</button>
+  <button class="op" onclick="responder(this,'y')">Proyecto</button>
+  <div class="pista">Pista: tiene pesos, fechas y firmas. ¿A quién se le entrega eso?</div>
+  <div class="ok">Bien: y llega más fuerte si trae los conteos del prototipo adentro.</div>
+</div>
+
+<div class="item" data-resp="p">
+  <div class="frase">4. Tres sillas prestadas bajo una lona, tres horas de domingo, una hoja de conteo.</div>
+  <button class="op" onclick="responder(this,'p')">Prototipo</button>
+  <button class="op" onclick="responder(this,'m')">Maqueta</button>
+  <button class="op" onclick="responder(this,'y')">Proyecto</button>
+  <div class="pista">Pista: son las sillas de Times Square pero en Concá.</div>
+  <div class="ok">Bien: barato, quitable, y hace una pregunta clara.</div>
+</div>
+
+<div class="item" data-resp="m">
+  <div class="frase">5. El dibujo del centro recreativo completo en el pizarrón, con zonas de colores.</div>
+  <button class="op" onclick="responder(this,'p')">Prototipo</button>
+  <button class="op" onclick="responder(this,'m')">Maqueta</button>
+  <button class="op" onclick="responder(this,'y')">Proyecto</button>
+  <div class="pista">Pista: aunque no sea de cartón, es una representación para conversar. La gente de la presa no puede usar un pizarrón.</div>
+  <div class="ok">Bien: plano y dibujo cuentan como maqueta, viven en la mesa.</div>
+</div>
+
+<div class="item" data-resp="p">
+  <div class="frase">6. Un fin de semana de "mercadito de prueba": dos mesas prestadas donde tres señoras venden gorditas, para ver si hay clientela en la presa.</div>
+  <button class="op" onclick="responder(this,'p')">Prototipo</button>
+  <button class="op" onclick="responder(this,'m')">Maqueta</button>
+  <button class="op" onclick="responder(this,'y')">Proyecto</button>
+  <div class="pista">Pista: es un servicio, no una construcción, pero se está probando en tamaño real con gente real. Los prototipos no son solo de fierro y madera.</div>
+  <div class="ok">Bien: también los servicios se prototipan. Las ventas del sábado son el conteo.</div>
+</div>
+
+<div class="item" data-resp="y">
+  <div class="frase">7. La solicitud PROCODES 2027 para escalar el componente ganador.</div>
+  <button class="op" onclick="responder(this,'p')">Prototipo</button>
+  <button class="op" onclick="responder(this,'m')">Maqueta</button>
+  <button class="op" onclick="responder(this,'y')">Proyecto</button>
+  <div class="pista">Pista: convocatoria, anexos, reglas de operación. Eso ya es papel formal ante una institución.</div>
+  <div class="ok">Bien: y ese papel ganará fuerza citando lo que el prototipo y la obra 2026 demostraron.</div>
+</div>
+
+<div class="item" data-resp="m">
+  <div class="frase">8. El recorrido virtual del mirador hecho en el celular con una app 3D.</div>
+  <button class="op" onclick="responder(this,'p')">Prototipo</button>
+  <button class="op" onclick="responder(this,'m')">Maqueta</button>
+  <button class="op" onclick="responder(this,'y')">Proyecto</button>
+  <div class="pista">Pista: se ve moderno, pero nadie puede subirse a un 3D a ver el agua. ¿Dónde vive: en el sitio o en la pantalla?</div>
+  <div class="ok">Bien: digital y bonito, pero sigue siendo representación para conversar. La pantalla es la nueva mesa.</div>
+</div>
+
+<div class="cierre" id="cierre">
+  <p><strong>Cerraste los ocho.</strong> La distinción de fondo: la maqueta convence al equipo, el prototipo convence a la realidad, el proyecto convence al que firma el cheque. El orden importa: realidad antes que cheque.</p>
+  <p style="font-size:.92rem">¿Cómo te fue? Bien: los ocho a la primera o con una pista. Aún no: si necesitaste pistas en la mitad o más, vuelve a intentarlo mañana, el ejercicio no se acaba.</p>
+</div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe P, M o Y para los ocho casos y revisa con alguien de otro equipo en qué difieren. Después escribe un ejemplo propio de cada categoría para TU componente.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var resueltos = 0;
+  function responder(btn, eleccion) {
+    var item = btn.closest('.item');
+    var correcta = item.dataset.resp;
+    var botones = item.querySelectorAll('button.op');
+    botones.forEach(function(b){ b.classList.remove('elegida-bien','elegida-mal'); });
+    if (eleccion === correcta) {
+      btn.classList.add('elegida-bien');
+      item.querySelector('.pista').style.display = 'none';
+      item.querySelector('.ok').style.display = 'block';
+      if (!item.dataset.hecho) { item.dataset.hecho = '1'; resueltos++; }
+      if (resueltos === 8) { document.getElementById('cierre').style.display = 'block'; }
+    } else {
+      btn.classList.add('elegida-mal');
+      item.querySelector('.ok').style.display = 'none';
+      item.querySelector('.pista').style.display = 'block';
+    }
+  }
+</script>
+</main>
+</body>
+</html>

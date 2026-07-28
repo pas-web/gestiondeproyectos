@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S7 · La cadena rota</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .cadena { font-family:Georgia,serif; font-style:italic; background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; color:var(--profundo); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La cadena rota</h1>
+<p class="sub">Gimnasio · Semana 7 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis apuestas causales de proyectos verosímiles. Cinco traen una falla escondida; una se salva. Diagnostica cada una: es el mismo ojo clínico que vas a necesitar el viernes contra la IA, y en octubre a tu favor.</p>
+
+<div class="intro">
+  Las fallas de esta semana: el <strong>brinco de eslabón</strong> (de la actividad al milagro sin pasos intermedios), el <strong>producto disfrazado</strong> (entregar algo no es que lo usen), el <strong>supuesto heroico</strong> (la flecha depende de algo improbable o de nadie) y la <strong>grandilocuencia</strong> (prometer el escalón que no te toca).
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Hazle esto mismo a la cadena de tu equipo antes del viernes: flecha por flecha, pregúntate cuál de las cuatro fallas podría estar escondida ahí. Cada falla que encuentres tú es una que la plenaria ya no te encuentra a ti.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { c: '"Si damos un taller de compostaje a los ejidatarios, entonces disminuirá la quema de esquilmos en el valle."',
+      ops: ['Brinco de eslabón: del taller al cambio de práctica faltan todos los pasos intermedios',
+            'Supuesto heroico: los ejidatarios no van a talleres',
+            'Grandilocuencia: la quema no es un problema real',
+            'Nada: la cadena es razonable'],
+      resp: 0,
+      pista: 'Entre "tomé un taller" y "cambié mi manejo de esquilmos" hay una vida entera. ¿Está dibujada?',
+      exp: 'El brinco clásico: taller → milagro. Los eslabones que faltan son justo el proyecto: que los asistentes prueben la técnica en una parcela, que les funcione, que el costo les salga, que la temporada lo permita, que el vecino lo vea. Cada eslabón faltante es una flecha sin dueño. La versión honesta es más larga y menos impresionante, y por eso es mejor.' },
+    { c: '"Si repartimos 40 manuales de bioinsumos, entonces 40 familias sabrán preparar sus propios insumos."',
+      ops: ['Grandilocuencia: 40 familias son demasiadas',
+            'Producto disfrazado: repartir el manual no es que lo lean, y leerlo no es saber hacerlo',
+            'Supuesto heroico: los manuales se van a mojar',
+            'Nada: el número es verificable'],
+      resp: 1,
+      pista: '¿Cuántas cosas tienen que pasar entre recibir un papel y saber preparar un caldo mineral?',
+      exp: 'El producto disfrazado en su forma pura: la cadena da por hecho que entregar = leer = entender = practicar = dominar. Cada signo de igual es mentira en algún porcentaje. Nota la trampa aritmética además: 40 manuales → 40 familias sabrán, como si la tasa de conversión fuera del cien por ciento. Ninguna conducta humana convierte al cien.' },
+    { c: '"Si sembramos árboles nativos en la orilla este otoño, entonces las familias tendrán sombra fresca para diciembre."',
+      ops: ['Producto disfrazado',
+            'Brinco de eslabón: falta el eslabón del riego',
+            'Supuesto heroico: la cadena le pide al árbol un ritmo que ningún árbol tiene',
+            'Nada: los nativos crecen rápido'],
+      resp: 2,
+      pista: 'La falla no está en la gente esta vez. Está en la biología. ¿Cuánto tarda una sombra?',
+      exp: 'Supuesto heroico contra la biología: un árbol plantado en octubre da sombra en años, no en semanas, y ustedes lo saben mejor que nadie en este proyecto. La cadena honesta separa horizontes: sombra inmediata por otra vía (malla, estructura, lo que el diseño decida) y el arbolado como apuesta de mediano plazo con su plan de riego y cuidado. Prometer sombra en diciembre con árboles de octubre es regalarle la objeción al dictaminador.' },
+    { c: '"Si señalizamos la zona de juego y las mamás la conocen en la inauguración, entonces los niños jugarán ahí y no junto al canal, siempre que la zona tenga sombra en las horas de uso."',
+      ops: ['Brinco de eslabón: falta el paso de la inauguración',
+            'Supuesto heroico: las mamás no van a inauguraciones',
+            'Producto disfrazado: la señalética no cambia conductas',
+            'Nada: eslabones concretos, conducta visible y supuesto honesto a la vista'],
+      resp: 3,
+      pista: 'Busca las tres piezas: ¿hay pasos intermedios?, ¿hay gente haciendo algo distinto?, ¿hay un "siempre que" escrito?',
+      exp: 'Esta se salva, y conviene ver por qué: tiene el eslabón intermedio (las mamás conocen la zona, con mecanismo concreto: la inauguración), tiene la conducta nueva y observable (los niños juegan ahí y no junto al canal) y tiene el supuesto escrito y verificable (sombra en horas de uso). No es una cadena espectacular: es una cadena defendible. En octubre, defendible gana.' },
+    { c: '"Si producimos un video del manantial y lo subimos a redes, entonces la gente de la ciudad valorará la Sierra y la conservación de la región mejorará."',
+      ops: ['Grandilocuencia: la cadena promete el escalón que a nadie le toca, con eslabones que nadie controla ni puede medir',
+            'Producto disfrazado: el video no es un producto',
+            'Nada: la difusión siempre suma',
+            'Brinco de eslabón: falta decir en qué red se sube'],
+      resp: 0,
+      pista: '"Valorar", "mejorar la conservación de la región": ¿quién haría qué, dónde, y cómo te enterarías?',
+      exp: 'Grandilocuencia de manual: de un video a la conservación regional hay un abismo de eslabones difusos ("valorar" no es una conducta observable) y el punto de llegada es un impacto que ni proyectos de millones se atreven a prometer directo. El video puede ser un producto legítimo DENTRO de una cadena chica y honesta (por ejemplo: que los visitantes de fuera conozcan las reglas de la orilla antes de venir). Chico y medible gana a grande y gaseoso.' },
+    { c: '"Si instalamos botes de basura en los puntos de uso, entonces la orilla permanecerá limpia."',
+      ops: ['Grandilocuencia: la limpieza es un impacto',
+            'Supuesto heroico escondido: la cadena funciona solo si alguien vacía los botes, y ese alguien no existe en la cadena',
+            'Producto disfrazado: los botes no son producto',
+            'Nada: es la cadena más directa del mundo'],
+      resp: 1,
+      pista: 'Imagina el bote en agosto, lleno desde junio. ¿Qué le faltó a la cadena?',
+      exp: 'El supuesto heroico favorito de los proyectos de equipamiento: el mantenimiento como magia. Un bote sin operador es basura futura concentrada en un punto, con avispas. La cadena honesta mete el eslabón incómodo: quién vacía, cada cuánto, a dónde lleva lo recolectado y por qué le conviene seguir haciéndolo cuando el semestre termine. ¿Te suena? Es la pregunta del señor de la consulta: "¿y quién va a cuidar todo eso cuando ustedes se vayan?". Las condiciones transversales existen para las cadenas también.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué tiene esta cadena?</div>' +
+               '<span class="cadena">' + c.c + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

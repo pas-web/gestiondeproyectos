@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 2 · Agencia · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 2 · Agencia</div>
+  <div class="migas">Unidad 1 · Escuchar la presa · Se abre el miércoles 12 de agosto</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-08-12">
+
+<p class="pregunta">¿Qué pedirías si el no ya lo tuvieras?</p>
+<p class="bajada">La semana pasada te dije que hay cosas que no puedo enseñar: pasión, ambición, visión. Esta semana la matizamos, porque hay una que durante años se creyó de ese lado y no lo está: la proactividad. Hay gente que la estudió en serio y encontró que se entrena, como un músculo. Se llama agencia, y esta semana la empiezas a trabajar con dos aparatos: un contrato firmado y una lista de rechazos. El viernes, además, vamos a la presa por primera vez.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Explicar qué es la agencia (ver opciones donde otros ven pared, y actuar) y por qué se puede entrenar.</li>
+    <li>Arrancar tu anti-currículum: el registro de lo que pidas y no salga, que también es evidencia.</li>
+    <li>Firmar tu contrato de gestión: dos compromisos concretos y verificables para este semestre.</li>
+    <li>Mirar la orilla de la presa como gestor: quién la usa, cómo la usa y qué no está ahí.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">La agencia se entrena</h3>
+  <p>Cate Hall, una abogada que se reinventó varias veces, la define así: agencia es la capacidad de ver las puertas ocultas en las paredes de la vida, y atreverse a girar la perilla. Dos movimientos: notar que la opción existe y actuar. Su hallazgo incómodo para los que se dicen "es que yo no soy así": nadie nace agéntico. Se practica pidiendo, preguntando, apareciéndose. Igual que el malabar de la semana pasada: tirando la bola.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El aparato</span>
+  <h3 style="margin-top:.2rem">El anti-currículum</h3>
+  <p>Un sociólogo mexicano, Héctor Vera, publicó una lista rara: las nueve universidades que no lo contrataron, los tres posdoctorados que le negaron, las editoriales que rechazaron sus libros. Su punto: detrás de todo currículum exitoso hay una lista más larga de noes, y esa lista demuestra que jugaste. Esta semana arrancas la tuya en el expediente, y estrenamos el ritual que la alimenta: la campana del no, cada jueves. Un no conseguido se anuncia y se celebra, porque significa que pediste.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El compromiso</span>
+  <h3 style="margin-top:.2rem">Tu contrato de gestión</h3>
+  <p>La agencia sin fecha es buena intención. El contrato de gestión te pide poco y en serio: tus áreas de interés, tu lista de personas y organizaciones puente, y dos compromisos firmados para el semestre: contactar al menos a una persona de tu lista (cómo y cuándo) y desarrollar una habilidad (cómo y cuándo). Va al expediente y se revisa al final. Es tuyo, no del profesor: tú eliges a quién y qué.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">Expediente Kenia · Entrega 1</span>
+  <p>Un caso real que nos va a acompañar todo el semestre. Kenia rural, hace unos años: la diarrea infantil mataba y el agua de los manantiales salía contaminada. Varias organizaciones hicieron lo obvio y lo hicieron bien: protegieron los manantiales con obra, y el agua empezó a salir limpia del tubo. Ya está, ¿no? Pues no: la diarrea infantil casi no bajó. La obra era correcta, el agua salía limpia, y los niños se seguían enfermando. ¿Por qué? Eso se sabe en la semana 6. Mientras, anota tu hipótesis en la bitácora: vale la pena apostar.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">Salida de campo</span>
+  <h3 style="margin-top:.2rem">Reconocimiento del sitio</h3>
+  <p>El viernes caminamos la orilla de la presa de La Florida. No vamos a anunciar nada ni a prometer nada: vamos a mirar. Quién está, qué hace, por dónde camina la gente, dónde se para, qué sombra hay a las cuatro de la tarde y qué pasa donde no hay ninguna. El gimnasio trae la guía. Lo que anotes ahí es la primera evidencia de campo del proyecto.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-02/ejercicio-11-las-puertas-ocultas.html"><strong>Las puertas ocultas</strong></a> · Seis situaciones atoradas. Encuentra la movida agéntica en cada una.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-02/ejercicio-21-mi-primer-no.html"><strong>Mi primer no</strong></a> · Diseña una petición real esperando que te la nieguen. En este curso, eso es ganar.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-02/ejercicio-32-mirar-como-gestor.html"><strong>Mirar como gestor</strong></a> · La guía de observación para la visita del viernes a la presa.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Agencia</dt>
+    <dd>Ver las opciones que la situación de verdad ofrece (casi siempre más de las que parecen) y actuar sobre ellas. Dos músculos: notar y moverse. Se entrena con práctica, no con carácter.</dd>
+    <dt>Cortejar el rechazo</dt>
+    <dd>Pedir cosas donde esperas un no, a propósito, para desacoplar el no del drama. Si solo pides lo que seguro te dan, estás pidiendo poco. En gestión de proyectos esto no es filosofía: la mayoría de las solicitudes a convocatorias pierden, y el que no aguanta noes no dura en el oficio.</dd>
+    <dt>Anti-currículum</dt>
+    <dd>El registro de lo que pediste y no salió: becas negadas, correos sin respuesta, convocatorias perdidas. Evidencia de que jugaste. Vive en tu expediente y crece con orgullo.</dd>
+    <dt>La campana del no</dt>
+    <dd>Ritual de cada jueves: cinco minutos donde los rechazos de la semana se anuncian y se celebran. El aplauso no es consuelo: es reconocimiento de que alguien pidió de verdad.</dd>
+    <dt>Contrato de gestión</dt>
+    <dd>Documento firmado con dos compromisos verificables del semestre: contactar a una persona puente y desarrollar una habilidad, ambos con cómo y cuándo. Se guarda en el expediente y se revisa en diciembre.</dd>
+    <dt>Superficie de suerte</dt>
+    <dd>La suerte no es pareja: le llega más al que conoce más gente, aparece en más lugares y pregunta más. Cada conversación con alguien del medio agranda tu superficie. Por eso el contrato pide contactar, no admirar de lejos.</dd>
+    <dt>El foso del estatus bajo</dt>
+    <dd>Todo aprendizaje pasa por un rato de ser malo en algo y preguntar obviedades en público. Ese foso se cruza chapoteando, no en silencio. Este salón es un foso seguro: aquí ser novato no cuesta nada.</dd>
+    <dt>Reconocimiento del sitio</dt>
+    <dd>Primera visita de campo: observar sin intervenir. Conductas, recorridos, usos, ausencias. Todavía no preguntamos nada a nadie (eso se diseña con cuidado en la semana 3): primero los ojos, luego las preguntas.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán las primeras entradas del anti-CV grupal, los contratos firmados (el dato, no el contenido: eso es de cada quien) y las fotos y hallazgos del reconocimiento de la presa.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>Héctor Vera dice que los rechazos que más duelen son los que ni siquiera te contestan. Y aun así volvió a pedir, cada vez. Su currículum de logros existe gracias a ese otro, el de los noes, que es más largo.</p>
+  <p>El no ya lo tienes. Esta semana ve por el sí, y si no sale, toca la campana.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

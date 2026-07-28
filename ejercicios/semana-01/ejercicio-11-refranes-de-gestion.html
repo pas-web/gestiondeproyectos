@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S1 · Refranes de gestión</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .refran { font-family:Georgia,serif; font-size:1.2rem; color:var(--profundo); margin:.2rem 0 .7rem; }
+  button { font:inherit; border:none; border-radius:8px; padding:.55rem 1rem; cursor:pointer; font-weight:bold; margin:.3rem .4rem 0 0; }
+  .opcion { background:#fff; color:var(--marca); border:2px solid var(--marca); }
+  .opcion.elegida-bien { background:var(--marca); color:#fff; }
+  .opcion.elegida-mal { background:#fff; color:#8a4b3a; border-color:#C97B5D; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; }
+  body.proyector { font-size:1.45rem; }
+  body.proyector .refran { font-size:1.7rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Refranes de gestión</h1>
+<p class="sub">Gimnasio · Semana 1 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Los refranes llevan siglos hablando de proyectos, nomás que nadie les había puesto el letrero. Para cada uno, decide de qué hablan en realidad.</p>
+
+<div class="intro">
+  Recuerda la distinción de la semana. <strong>Manejo:</strong> llevar el proyecto por dentro (planear, organizar, gastar bien, corregir). <strong>Gestión:</strong> conseguir por fuera lo que el proyecto necesita (dinero, permisos, aliados, información).
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Divide una hoja en dos columnas: MANEJO y GESTIÓN. Reparte los ocho refranes donde creas que van y escribe, junto a cada uno, una situación de un proyecto rural donde ese refrán se cumpla. Compara el viernes con alguien más.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '"A quien no habla, Dios no lo oye."',
+      resp: 'G',
+      pista: 'Piensa: ¿esto se arregla trabajando adentro del proyecto, o tocando una puerta y pidiendo?',
+      exp: 'Gestión pura. Los proyectos que no se piden no se financian: el financiamiento, el permiso y el aliado llegan cuando alguien habla por el proyecto. La mitad de este curso es aprender a hablar por el tuyo.' },
+    { r: '"El flojo y el que no planea trabajan dos veces."',
+      resp: 'M',
+      pista: 'El refrán habla de un error que se comete antes de empezar el trabajo. ¿Eso pasa dentro o fuera del proyecto?',
+      exp: 'Manejo. Planear es trabajo interno del proyecto, y no planear se paga con retrabajo: la zanja que se abre dos veces, el viaje a Jalpan que se repite porque faltó una cotización.' },
+    { r: '"Quien tiene más saliva, come más pinole."',
+      resp: 'G',
+      pista: 'La saliva se gasta hablando. ¿Con quién hablas para que tu proyecto coma?',
+      exp: 'Gestión. Negociar, convencer y sostener la conversación con quien tiene el recurso. En la semana 9 vas a practicar esto con un mapa de poder en la mano.' },
+    { r: '"Al ojo del amo engorda el caballo."',
+      resp: 'M',
+      pista: 'El amo no está pidiendo nada afuera: está mirando algo que ya es suyo. ¿Qué actividad del proyecto es esa?',
+      exp: 'Manejo: seguimiento. Un proyecto sin alguien que lo mire seguido adelgaza solo, igual que el caballo. Por eso existen los avances semanales y el libro de cuentas.' },
+    { r: '"Cuentas claras, amistades largas."',
+      resp: 'M',
+      pista: 'Llevar las cuentas es una tarea de todos los días. ¿Se hace dentro o fuera del proyecto?',
+      exp: 'Manejo: registrar cada peso es trabajo interno. Pero fíjate en la segunda mitad del refrán: las amistades largas son con quien te prestó o te financió, y esa confianza es la que te consigue el siguiente apoyo. El buen manejo alimenta a la gestión.' },
+    { r: '"El que no enseña, no vende."',
+      resp: 'G',
+      pista: '¿A quién le estás enseñando la mercancía? No es a tu propio equipo.',
+      exp: 'Gestión. Un proyecto que nadie ve no consigue apoyo: mostrar avances, invitar a la obra, presentar resultados. La vitrina también se gestiona.' },
+    { r: '"Más vale paso que dure y no trote que canse."',
+      resp: 'M',
+      pista: 'El refrán habla de ritmo. ¿Quién decide el ritmo de las actividades de un proyecto?',
+      exp: 'Manejo: cronograma realista. El proyecto que arranca en trote (todo el fondo gastado en dos semanas, el equipo desvelado) llega cojeando a la meta, si llega. Planear el paso es planear que alcances.' },
+    { r: '"Camarón que se duerme se lo lleva la corriente."',
+      resp: 'G',
+      pista: 'Piensa en las oportunidades que tienen fecha de cierre. ¿Qué pierde el que se duerme?',
+      exp: 'Gestión. Las convocatorias abren y cierran en fechas fijas, y el que no anda pendiente se entera cuando ya cerró. Por eso los gestores viven con el radar prendido (este grupo va a armar el suyo).' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    d.innerHTML = '<div class="refran">' + c.r + '</div>' +
+      '<button class="opcion" onclick="responder(' + i + ',\'M\',this)">Manejo</button>' +
+      '<button class="opcion" onclick="responder(' + i + ',\'G\',this)">Gestión</button>' +
+      '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+      '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    cont.appendChild(d);
+  });
+
+  function responder(i, eleccion, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (eleccion === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      var botones = btn.parentNode.querySelectorAll('.opcion');
+      botones.forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .45; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

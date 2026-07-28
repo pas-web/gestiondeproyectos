@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 17 · La inauguración · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 17 · La inauguración</div>
+  <div class="migas">Unidad 4 · Entregar la presa viva · Se abre el miércoles 25 de noviembre</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-11-25">
+
+<p class="pregunta">¿Qué se queda y qué te llevas?</p>
+<p class="bajada">La última semana. El viernes se inaugura en la presa, delante de la comunidad que lo pidió todo en agosto: es el escalón más alto de la escalera que empezaste subiendo con tu pareja en la ceremonia del sobre. El jueves se prepara el evento, se cierra tu expediente y escribes la única autoevaluación que produce número, como firmaste el primer día. Lo que se queda es de la comunidad. Lo que te llevas, nadie te lo quita.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Rendir en público, ante tu comunidad, el ciclo completo: qué se prometió, qué se hizo, qué quedó pendiente y qué sigue.</li>
+    <li>Entregar la obra con su acuerdo de cuidado, para que viva más que el curso.</li>
+    <li>Cerrar tu expediente: el contrato de agosto rendido, el anti-CV leído con orgullo, los retos al corriente.</li>
+    <li>Proponer tu calificación con evidencia y defenderla en tu conferencia: el número con argumento.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">Entregar no es terminar</h3>
+  <p>Hay proyectos que terminan y proyectos que se entregan, y no es lo mismo. El que termina se apaga: se acaba el dinero, se va el equipo, la obra queda huérfana. El que se entrega cambia de manos: la comunidad recibe la obra CON su acuerdo de cuidado, su plan de monitoreo y su libro rendido, y el cambio apenas empieza. El viernes no es el final del proyecto: es el día en que el proyecto deja de necesitarlos. Que es, si lo piensas, la definición de haberlo hecho bien.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El evento</span>
+  <h3 style="margin-top:.2rem">La inauguración: el escalón más alto</h3>
+  <p>En agosto contaste lo tuyo frente a tu pareja. En octubre, frente a tus pares con reloj, y luego frente a un comité que traía dinero y rúbrica. El viernes toca el público de verdad: tu comunidad, en la presa, sin podio de por medio. La rendición es corta y completa: prometimos, hicimos, quedó pendiente, sigue. Abre la delegación, porque la fiesta es de ellos; el acuerdo de cuidado se entrega en mano; y el convivio no es adorno: celebrar bien también es parte del oficio. Ah, y un detalle de gestor hasta el último minuto: cuenta cuánta gente vino. Es el primer dato del después.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El cierre</span>
+  <h3 style="margin-top:.2rem">El expediente y el número</h3>
+  <p>Todo el semestre trabajaste sin números, como firmaste en el pacto. Esta semana el 0-10 aparece por única vez, y sale de donde siempre se dijo: de tu autoevaluación final y tu conferencia, contra la evidencia de tu expediente. La regla de tres casos sigue viva: si tu número coincide con lo que la evidencia muestra, se asienta; si te quedaste corto, sube sin que te avisen; si te pasaste, lo conversamos cinco minutos. Nadie baja por escrito, nadie negocia sin pruebas. El número con argumento es la última herramienta del curso: te va a tocar usarla toda la vida, en becas, en trabajos y en tratos.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">Lo que se paga</span>
+  <h3 style="margin-top:.2rem">Las deudas del primer mes</h3>
+  <p>Esta semana cobra todo lo que se sembró en agosto. El contrato de gestión que firmaste en la semana 2 rinde sus dos compromisos: ¿contactaste a tu persona?, ¿desarrollaste tu habilidad? Se contesta con verdad, no con pena. El anti-CV que arrancaste ese mismo día se lee completo y con la frente en alta: cada no de esa lista es un tiro que sí hiciste. El mapa del curso que se fue dibujando por capas queda completo por fin, y la página 3 de tu expediente (la que llenaste el primer día, diciendo dónde empezabas) se relee en voz baja. Compárala con quien eres hoy. Para eso era todo esto.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-17/ejercicio-11-la-caja-de-herramientas.html"><strong>La caja de herramientas</strong></a> · Seis situaciones de la vida real, después del curso. Reconoce qué herramienta del semestre pide cada una.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-17/ejercicio-21-el-numero-con-argumento.html"><strong>El número con argumento</strong></a> · Seis maneras de proponer tu calificación. Solo una aguanta la conferencia.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-17/ejercicio-32-mi-conferencia-final.html"><strong>Mi conferencia final</strong></a> · Tu semestre en evidencia: el contrato rendido, el anti-CV, tus pruebas, tu número y lo que te llevas.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Inauguración</dt>
+    <dd>La entrega pública de la obra a la comunidad: recorrido, rendición corta por equipo, entrega del acuerdo de cuidado y convivio. No es un evento de la universidad con logos y discursos largos: es una fiesta de la comunidad que la delegación abre y encabeza.</dd>
+    <dt>Rendición pública</dt>
+    <dd>La versión de dos minutos, sin papel de por medio, de todo el ciclo: qué se prometió (la consulta y la solicitud), qué se hizo (la obra y sus números), qué quedó pendiente (con fecha, sin esconderlo) y qué sigue (el acuerdo y el monitoreo). El público más importante del semestre y el formato más corto: así es siempre.</dd>
+    <dt>Entrega</dt>
+    <dd>El momento en que la obra cambia de manos: deja de ser "el proyecto de los muchachos" y pasa a ser de la comunidad, con papeles (el acuerdo de cuidado firmado, el plan de monitoreo, el libro rendido). Lo que se entrega sin papeles se devuelve solo, tarde o temprano, en forma de reclamo.</dd>
+    <dt>Expediente del gestor</dt>
+    <dd>Tu portafolio físico del semestre: contrato de gestión, anti-CV, registro de retos, bitácora, autoevaluaciones. Esta semana se cierra y te lo llevas: es tuyo, y es la evidencia de tu conferencia. Dentro de unos años, cuando llenes una solicitud de verdad, vas a volver a él más veces de las que crees.</dd>
+    <dt>Conferencia final</dt>
+    <dd>Cinco minutos, tu expediente en la mesa, tu número propuesto y tus pruebas. No es examen ni juicio: es la conversación donde tu autoevaluación se vuelve acta. Se agenda con el profe en la semana siguiente a la inauguración.</dd>
+    <dt>El número con argumento</dt>
+    <dd>La habilidad de proponer tu propia evaluación con evidencia: ni la modestia que se castiga sola, ni el globo que se poncha con dos preguntas. Se construye igual que todo en este curso: contra el suelo público de "Tu calificación", con el expediente como prueba, nombrando lo logrado Y lo aún no.</dd>
+    <dt>Regla de tres casos</dt>
+    <dd>La de siempre, por última vez: coincide con la evidencia → se asienta; te quedaste corto → sube sin aviso; te pasaste → conferencia y se conversa. Nunca se baja por escrito. Firmada en agosto, cumplida en noviembre.</dd>
+    <dt>El primer dato del después</dt>
+    <dd>La inauguración es también el arranque del monitoreo: la asistencia contada y la foto del evento son la primera medición del "después" de tu plan de una hoja. El gestor cuenta hasta en su propia fiesta.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán las fotos de la inauguración, el acuerdo de cuidado entregado, el conteo del primer dato del después y la última página de esta historia: la presa que queremos, abierta y viva.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>El primer día de este curso alguien te dijo que no se puede malabarear sin batallar, y te dio tres calcetines con frijol. Diecisiete semanas después escuchaste a una comunidad, diseñaste lo que pidió, pediste dinero de verdad, te dijeron que sí y que no, construiste, rendiste cuentas delante de todos y entregaste una obra con su acuerdo para que viva sin ti.</p>
+    <p>Este es el último chapuzón. El agua ya la conoces: es la de tu presa. Sal, sacúdete, y ve a gestionar lo que sigue.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

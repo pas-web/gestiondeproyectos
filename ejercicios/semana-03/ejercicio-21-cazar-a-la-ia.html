@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S3 · Cazarle las trampas a la IA</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .guion { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .guion-head { font-size:.85rem; color:#68807a; border-bottom:1px dashed var(--borde); padding-bottom:.6rem; margin-bottom:.6rem; }
+  .linea { display:flex; gap:.7rem; align-items:flex-start; padding:.55rem .6rem; border-radius:8px; cursor:pointer; border:2px solid transparent; margin:.25rem 0; }
+  .linea:hover { background:#F2F7F5; }
+  .linea .num { font-family:Georgia,serif; color:var(--arena); font-weight:bold; min-width:1.4rem; }
+  .linea.marcada { border-color:var(--arena); background:#F7F1E3; }
+  .linea.cazada { border-color:var(--marca); background:#E4EFEB; }
+  .linea.fallada { border-color:#C97B5D; background:#F7ECE7; }
+  .linea.escapada { border-color:#C97B5D; border-style:dashed; }
+  .veredicto { display:none; font-size:.9rem; margin:.1rem 0 .5rem 2.4rem; padding:.5rem .8rem; border-radius:0 8px 8px 0; }
+  .veredicto.trampa { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .veredicto.limpia { background:#F7F1E3; border-left:4px solid var(--arena); }
+  #btn-revisar { display:block; margin:1.2rem auto; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.05rem; }
+  #btn-revisar:disabled { opacity:.5; cursor:default; }
+  #resultado { display:none; text-align:center; font-family:Georgia,serif; font-size:1.15rem; color:var(--profundo); background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Cazarle las trampas a la IA</h1>
+<p class="sub">Gimnasio · Semana 3 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Le pedimos a una IA "un guion de consulta comunitaria para un centro recreativo junto a una presa". Contestó en veinte segundos, con voz segura y formato impecable. Abajo está su guion, línea por línea. Siete líneas traen trampa: inducidas, promesas de contrabando, supuestos de ciudad, jerga de encuesta. Tres se salvan.</p>
+
+<div class="intro">
+  Toca cada línea que consideres trampa (se marca en amarillo; vuelve a tocarla para desmarcar). Cuando tengas tu cacería lista, aprieta <strong>Revisar</strong>. La seguridad del texto no es criterio: lee despacio.
+</div>
+
+<div class="guion">
+  <div class="guion-head">Salida de la IA · "Guion de Consulta Comunitaria – Centro Recreativo"</div>
+  <div id="lineas"></div>
+</div>
+
+<button id="btn-revisar" onclick="revisar()">Revisar mi cacería</button>
+<div id="resultado"></div>
+
+<div class="cuaderno">
+  <h2>Para tu registro de cacería</h2>
+  <p>Anota en la bitácora las trampas que se te escaparon y por qué se te escaparon (casi siempre es la misma razón: la línea sonaba profesional). Ese patrón es la lección del semestre: la IA no se equivoca con torpeza, se equivoca con elegancia. El registro de cacería del grupo crece con lo que encuentres aquí.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var lineas = [
+    { t: '"Buenas tardes, somos estudiantes de la UAQ y venimos a presentarles un emocionante proyecto que transformará su presa."',
+      trampa: true,
+      exp: 'TRAMPA. La apertura ya prometió: "emocionante proyecto", "transformará". Llegaste a escuchar y el guion te puso a vender. La apertura honesta es al revés: venimos a escuchar qué debería tener la orilla; no hay nada decidido.' },
+    { t: '"Para comenzar: ¿no cree usted que la presa se encuentra actualmente muy descuidada?"',
+      trampa: true,
+      exp: 'TRAMPA doble. Es inducida (el "¿no cree usted...?" solo acepta un sí) y además juzga el lugar de la gente en su propia cara. Empezar insultando la orilla es empezar perdiendo la conversación.' },
+    { t: '"¿Con qué frecuencia visita usted la presa: a diario, cada semana, de vez en cuando?"',
+      trampa: false,
+      exp: 'SE SALVA. Cerrada, pero de las útiles: pide un dato concreto que la persona sabe sin pensar, y las opciones ayudan en vez de inducir. Buen tornillo para el arranque, siempre que después venga una abierta.' },
+    { t: '"¿Le gustaría contar con áreas verdes, juegos infantiles y un gimnasio al aire libre?"',
+      trampa: true,
+      exp: 'TRAMPA. Promesa de contrabando por partida triple: tres obras descritas con nombre y apellido. Cada una queda sembrada como expectativa, y el "sí" que van a contestar (decir sí es gratis) no informa nada del uso real.' },
+    { t: '"Cuénteme qué hace usted normalmente cuando viene a la orilla."',
+      trampa: false,
+      exp: 'SE SALVA. Abierta, neutra, pide práctica real y no opinión. De aquí salen escenas, y las escenas se pueden diseñar. Es de las que van directo al banco de preguntas.' },
+    { t: '"¿Estaría usted dispuesto a pagar una cuota de acceso para el mantenimiento de las instalaciones?"',
+      trampa: true,
+      exp: 'TRAMPA. Supuesto de ciudad en paquete completo: da por hecho que habrá "instalaciones", que tendrán costo de mantenimiento y que la solución es cobrar la entrada... a la gente cuya orilla es. Preguntar por cobros en la primera visita quema la confianza que el proyecto necesita entera.' },
+    { t: '"En una escala del 1 al 10, ¿qué tan satisfecho se encuentra con la oferta recreativa actual de la localidad?"',
+      trampa: true,
+      exp: 'TRAMPA. "Oferta recreativa actual de la localidad" es idioma de encuesta de centro comercial, no de conversación en la orilla. Y el numerito no diseña nada: un "4" no te dice qué pasa ni qué falta ni a quién le duele.' },
+    { t: '"¿Hay algo del uso de la presa que le preocupe, por ejemplo la seguridad, la basura o el nivel del agua?"',
+      trampa: false,
+      exp: 'SE SALVA. Abierta, con ejemplos que orientan sin imponer (preocupaciones, no obras). Trae a la mesa los riesgos que el diseño debe respetar, y le da lugar a quien tiene reservas sobre el proyecto, que también es parte de la consulta.' },
+    { t: '"Para finalizar: ¿está usted de acuerdo en que este proyecto traerá grandes beneficios para toda la comunidad?"',
+      trampa: true,
+      exp: 'TRAMPA. Inducida y presume dos cosas que nadie ha decidido: que hay proyecto y que beneficia. Esta línea existe para fabricar un dato de informe ("el 95% aprueba el proyecto"), no para escuchar. Es la trampa más elegante del guion.' },
+    { t: '"Agradecemos su valiosa participación. ¡Muy pronto verá los resultados reflejados en su presa!"',
+      trampa: true,
+      exp: 'TRAMPA. El cierre promete plazo y resultados, todo junto y con signos de admiración. El cierre sin promesas es otro: gracias, esto se estudia con calma, y venimos a contarles qué salió. Contar qué salió sí se promete, porque sí se puede cumplir.' }
+  ];
+
+  var cont = document.getElementById('lineas');
+  var revisado = false;
+  lineas.forEach(function (l, i) {
+    var d = document.createElement('div');
+    d.className = 'linea';
+    d.id = 'l' + i;
+    d.innerHTML = '<span class="num">' + (i + 1) + '</span><span>' + l.t + '</span>';
+    d.onclick = function () { if (!revisado) d.classList.toggle('marcada'); };
+    cont.appendChild(d);
+    var v = document.createElement('div');
+    v.className = 'veredicto ' + (l.trampa ? 'trampa' : 'limpia');
+    v.id = 'v' + i;
+    v.textContent = l.exp;
+    cont.appendChild(v);
+  });
+
+  function revisar() {
+    if (revisado) return;
+    revisado = true;
+    var cazadas = 0, falsas = 0, escapadas = 0;
+    lineas.forEach(function (l, i) {
+      var d = document.getElementById('l' + i);
+      var marcada = d.classList.contains('marcada');
+      d.classList.remove('marcada');
+      if (l.trampa && marcada) { d.classList.add('cazada'); cazadas++; }
+      else if (!l.trampa && marcada) { d.classList.add('fallada'); falsas++; }
+      else if (l.trampa && !marcada) { d.classList.add('escapada'); escapadas++; }
+      document.getElementById('v' + i).style.display = 'block';
+      d.style.cursor = 'default';
+    });
+    var r = document.getElementById('resultado');
+    var frase;
+    if (cazadas === 7 && falsas === 0) frase = 'Cacería perfecta: 7 de 7, sin falsas alarmas. Ese es el criterio que la velocidad no compra.';
+    else if (cazadas >= 5) frase = 'Cazaste ' + cazadas + ' de 7 trampas' + (falsas ? ', con ' + falsas + ' falsa' + (falsas > 1 ? 's' : '') + ' alarma' + (falsas > 1 ? 's' : '') : '') + (escapadas ? '. Lee con calma las que se escaparon: suelen ser las que suenan más profesionales.' : '.');
+    else frase = 'Cazaste ' + cazadas + ' de 7 trampas. Normal en la primera pasada: la IA no se equivoca con torpeza, se equivoca con elegancia. Lee los veredictos y vuelve a intentarlo recargando la página.';
+    r.textContent = frase;
+    r.style.display = 'block';
+    document.getElementById('btn-revisar').disabled = true;
+  }
+</script>
+</main>
+</body>
+</html>

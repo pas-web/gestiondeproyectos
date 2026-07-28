@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S16 · La pregunta dura</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .enunciado { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.98rem; font-style:italic; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La pregunta dura</h1>
+<p class="sub">Gimnasio · Semana 16 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis preguntas que pueden caer el viernes, de la más justa a la que trae veneno. Para cada una, cuatro maneras de contestar: una rinde, las otras defienden, evaden o se enganchan. Entrena aquí el reflejo, que delante de la comunidad no hay pausa.</p>
+
+<div class="intro">
+  La forma canónica de toda respuesta de auditoría: <strong>el dato + el asiento donde consta + el comprobante que lo respalda</strong>. Y la regla de conducta: ninguna pregunta es ofensa. El que defiende contesta desde el orgullo; el que rinde contesta <strong>desde el libro</strong>.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe la pregunta que MÁS temes que te hagan el viernes (sé honesto: todos tenemos una) y redacta su respuesta en forma canónica: dato, asiento, comprobante. Léela en voz alta hasta que salga sin tono de disculpa y sin tono de pleito. Esa pregunta escrita es el bloque 3 del gimnasio 3, y ensayarla es la mejor preparación que existe para la sesión.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: '"¿Por qué pagaron $800 por la malla si con don R., aquí en el pueblo, está en $500?"',
+      ops: ['"Cotizamos donde se pudo, señora, no somos adivinos."', 'Al libro: "El asiento del 28 de octubre, aquí está: $800 con flete incluido hasta la presa, cotización con vigencia del 12 de octubre, aquí la nota. La de $500, ¿es puesta aquí? Porque si don R. da ese precio con flete, le agradecemos el dato: queda anotado para la siguiente compra."', '"Eso ya se pagó y ya quedó, mejor hablemos de lo que sigue."', '"El precio lo autorizó el profesor, a él pregúntele."'],
+      resp: 1,
+      pista: 'La pregunta es legítima y hasta útil. ¿Qué respuesta cita asiento, comprobante y condiciones, y encima convierte a la señora en aliada de la próxima compra?',
+      exp: 'La pregunta del precio es la más común de toda auditoría comunitaria y casi siempre es de buena fe: la señora conoce su pueblo. La respuesta que rinde hace tres cosas: cita el asiento con fecha y comprobante (el dato, no la memoria), explica la condición que cambia el precio (el flete: los $500 del pueblo a veces son $850 puestos en la presa) y recibe el dato como regalo en vez de como ataque ("queda anotado"). Las otras tres son los tres pecados: la primera se burla (defiende), la tercera evade y la cuarta se lava las manos. Detalle de oficio: nunca contestar un precio sin el comprobante enfrente; "creo que fue por el flete" vale cero, "aquí está la nota con el flete" vale todo.' },
+    { r: '"¿Y el dinero que sobró? Porque algo debió sobrar."',
+      ops: ['"Casi no sobró nada, unos pesitos."', '"Eso lo vemos después entre el equipo, es tema interno."', 'Al libro y a las reglas: "Sobraron $1,340, está en el corte de la última página, súmelo conmigo si gusta. Y no nos lo quedamos ni lo repartimos: las reglas que firmamos en septiembre dicen que el remanente se reintegra, y aquí está el recibo del reintegro con su fecha" (o la fecha en que se hará, asentada en el acta).', '"Sobró poquito y lo usamos para el convivio de cierre, ni modo que no."'],
+      resp: 2,
+      pista: '"Algo debió sobrar" no es desconfianza: es sentido común. ¿Qué respuesta da la cifra exacta, invita a verificarla y cita la regla escrita sobre remanentes?',
+      exp: 'El remanente es donde más proyectos comunitarios se manchan, casi nunca por robo: por informalidad ("lo usamos para el convivio", "quedó ahí para lo que se ofrezca"). Las reglas del fondo lo previeron desde septiembre: el remanente se declara y se reintegra, punto. La respuesta que rinde da la cifra al peso (no "poquito": $1,340), muestra dónde consta, INVITA a sumar (la invitación a verificar es el gesto que más confianza compra) y cita la regla firmada, que despersonaliza la decisión: no es que el equipo sea santo, es que el sistema no deja opción. Nota sobre la opción del convivio: se oye simpática y es exactamente el precedente que envenena fondos futuros; el "ni modo que no" es la bandera roja.' },
+    { r: '"Aquí dice que esto se apuntó dos semanas después de la compra. ¿No que todo a 48 horas?"',
+      ops: ['"Es que en la obra no hay tiempo de andar apuntando."', '"¿Dos semanas? A ver, préstame... no, yo creo que está mal la fecha."', '"Eso fue culpa del compañero que tenía el turno, ya se le llamó la atención."', 'Al libro, con la falla de frente: "Así es, y por eso el asiento tiene la marca de TARDÍO: la regla es que el retraso se marca, no se disimula. Fue la semana de la faena grande, se juntó todo, y se asentó en cuanto se pudo, con su comprobante completo, aquí está. Que usted haya podido ver que fue tardío es la prueba de que el libro dice la verdad."'],
+      resp: 3,
+      pista: 'La señora encontró exactamente lo que el sistema quería que se pudiera encontrar. ¿Qué respuesta convierte la falla marcada en la mejor evidencia de que el libro no miente?',
+      exp: 'La joya del ejercicio: la pregunta parece pillada y es en realidad el sistema funcionando. Desde S12 la regla fue que el asiento tardío se asienta y SE MARCA tardío, precisamente para que un día como el viernes alguien pudiera encontrarlo y el equipo pudiera decir la frase que más confianza construye en una auditoría: "que usted pueda ver la falla es la prueba de que el libro dice la verdad". Un libro sin un solo tardío en cuatro semanas de obra no tranquiliza a nadie con experiencia: huele a libro maquillado. Las otras opciones: excusa general (defiende), duda del propio libro (demoledor: si tú no le crees, nadie), y el peor pecado de todos: entregar a un compañero por nombre delante de la comunidad. Las fallas del sistema se rinden en plural: "se nos juntó", no "fue él".' },
+    { r: '"¿Y por qué no quedó la segunda mano de pintura, si eso prometieron?"',
+      ops: ['Con la tarjeta del pendiente: "Cierto, no quedó, y está anotado como pendiente desde el cierre de la ejecución: aquí está la tarjeta. Cuando el tiempo apretó decidimos proteger lo que hace que el área funcione y sea segura (el anclaje, la sombra) y aplazar el acabado. La segunda mano está comprometida para diciembre, con fecha y responsable, y consta en el acta de hoy."', '"Es que el clima no ayudó, ya saben cómo es esto."', '"Sí quedó, nada más que no se nota mucho con esta luz."', '"La pintura no era tan importante, lo importante ya está."'],
+      resp: 0,
+      pista: 'El pendiente existe y la comunidad lo está viendo. ¿Qué respuesta muestra que no fue descuido sino decisión documentada, con fecha para saldarse?',
+      exp: 'La pregunta del pendiente se contesta con la mejor herramienta de S14: el recorte con criterio DOCUMENTADO. La diferencia entre "no acabamos" (descuido) y "decidimos aplazar el acabado para proteger lo esencial, consta con fecha" (gestión) es toda la diferencia, y solo existe si se escribió a tiempo: por eso las tarjetas de pendientes se redactan el jueves, no se improvisan el viernes. La respuesta sana además compromete fecha y responsable delante de todos y lo mete al acta: el pendiente que consta en acta pública se cumple, el que se dice de palabra se evapora. Las otras: la del clima es excusa difusa, la de "sí quedó" es mentira con luz, y la de "no era tan importante" le discute a la señora qué debe importarle, que es la manera más rápida de perder una auditoría.' },
+    { r: '"Yo nomás quiero saber si es cierto lo que andan diciendo: que ustedes se compraron cosas para ustedes con ese dinero."',
+      ops: ['"¿Quién anda diciendo eso? Dígame quién, porque eso es difamar."', '"Eso es mentira y nos ofende. Sigamos con lo que sigue."', 'Al libro abierto, sin veneno de vuelta: "Gracias por preguntarlo de frente, porque es la pregunta que este libro existe para contestar. Cada peso está aquí, con comprobante, y ninguna compra fue para nosotros: revisémoslo asiento por asiento ahorita mismo si gusta, o venga con calma el día que quiera: el registro es público. Además ninguna compra la hizo una sola persona: todo fue de a dos, esa fue la regla desde el primer día."', '"El profesor supervisó todo, con eso debería bastar."'],
+      resp: 2,
+      pista: 'La pregunta trae rumor adentro y el que la hace tuvo el valor de decirla de frente. ¿Qué respuesta agradece ese valor, abre el libro completo y cita la regla de a dos, sin buscar culpables del rumor?',
+      exp: 'La pregunta con veneno, y la respuesta empieza por entender algo: quien la pregunta de frente es tu aliado, no tu enemigo (el rumor de verdad peligroso es el que nunca llega a la mesa). Por eso la respuesta sana AGRADECE la franqueza, ofrece el libro completo en el acto ("asiento por asiento ahorita mismo") y cita la regla estructural que hace improbable el desvío (de a dos: nadie compró solo). Lo que nunca se hace: cazar al que anda diciendo (convierte la auditoría en pleito y confirma que el rumor dolió), ofenderse y cortar (la indignación se lee como culpa aunque sea inocencia) o escudarse en la autoridad del profe (rendir cuentas ajenas no es rendir). El rumor no sobrevive a un comprobante; la indignación lo alimenta.' },
+    { r: '"Todo muy bien con las cuentas, pero ¿quién va a cuidar esto cuando ustedes ya no estén? Porque cosas bonitas hemos tenido y se acaban."',
+      ops: ['"Nosotros vamos a estar al pendiente, lo prometemos."', 'Con el acuerdo de cuidado: "Esa es la pregunta más importante de la tarde, y no se contesta con este libro sino con este otro papel: el acuerdo de cuidado que trabajamos con la delegación esta semana. Quién usa, quién cuida qué, por cargo y no por persona, y qué pasa si no se cumple. Está en borrador a propósito: es de ustedes, y el viernes que viene, en la inauguración, se presenta para que lo terminen de hacer suyo."', '"Eso ya no es parte del proyecto, el proyecto termina en diciembre."', '"Para eso vamos a venir cada mes a revisar."'],
+      resp: 1,
+      pista: 'La señora tiene evidencia histórica de su lado ("cosas bonitas hemos tenido y se acaban"). ¿Qué respuesta le da un papel concreto en lugar de una promesa, y le devuelve la propiedad a la comunidad?',
+      exp: 'La mejor pregunta que puede recibir el proyecto, porque la señora tiene razón históricamente: las cosas bonitas sin arreglo de cuidado se acaban, lo viste en el gimnasio de la semana pasada. Y es la única pregunta de la tarde que NO se contesta con el libro de cuentas: se contesta con el otro entregable, el acuerdo de cuidado de S15 (cargos, reglas, sanción graduada, respaldo de la delegación). Fíjate qué hace la respuesta sana: valida la pregunta ("la más importante"), muestra papel en lugar de prometer presencia, y devuelve la propiedad ("es de ustedes, para que lo hagan suyo"). Las opciones malas son las tres tentaciones clásicas: prometer presencia eterna del equipo (don Isidro en potencia: se van en diciembre), deslindarse ("ya no es el proyecto": sí es, es su parte más importante) y ofrecerse de supervisores perpetuos (ni podrán ni deben: la obra es de la comunidad). Rendir cuentas también es rendir el futuro.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Cuál respuesta rinde?</div>' +
+               '<span class="enunciado">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

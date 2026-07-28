@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 13 · El velorio del proyecto · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 13 · El velorio del proyecto</div>
+  <div class="migas">Unidad 3 · Construir en la presa · Se abre el miércoles 28 de octubre</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-10-28">
+
+<p class="pregunta">¿De qué va a morir tu proyecto?</p>
+<p class="bajada">Es temporada de muertos y este curso no va a desaprovecharla: el jueves tu proyecto se muere de mentiras, con esquela, flores y café, para que puedas verlo entero y encontrarle las grietas a tiempo. El viernes se habla del riesgo que no es metáfora (la seguridad en la obra) y se cierra por fin la historia que quedó abierta desde septiembre: la del agua en Kenia. Ah, y regresa algo que dejaste en la semana 1.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Velar a tu proyecto antes de tiempo: escribir su esquela, encontrar qué lo mataría y confesar qué de eso ya está pasando.</li>
+    <li>Convertir la lista del fracaso en riesgos vivos con vigía y plan B, conectados con los supuestos de tu marco.</li>
+    <li>Escribir el protocolo de seguridad de tu próxima jornada de obra: la cal, las cargas, el sol, los bichos y el botiquín.</li>
+    <li>Leer tu obra con ojos de manejo adaptativo: qué estás mirando esta semana que podría corregir tu diseño.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">Se muere de mentiras para no morirse de verdad</h3>
+  <p>Pídele a un equipo que enliste los riesgos de su proyecto y saldrán tres, tibios y corteses. Pídele que imagine que su proyecto YA murió y que explique de qué, y saldrán quince, precisos y dolorosos. La cabeza humana es mala para profetizar y buena para contar historias de difuntos: el velorio existe para aprovechar ese truco. No es pesimismo: los proyectos que se imaginan muertos a tiempo son los que llegan vivos a viejos. Y de paso, un secreto del oficio: la columna de supuestos de tu marco siempre fue esto. Un supuesto es un riesgo disfrazado de buena fe.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El rito</span>
+  <h3 style="margin-top:.2rem">El velorio: esquela, lista y confesión</h3>
+  <p>Tres momentos, con café y flores de temporada. La esquela: tu componente murió en 2028; escribe cuándo nació, qué prometía, de qué murió y quién lo lloró (o quién ni se enteró, que es peor). La lista: entre todos, todo lo que garantizaría ese final, sin censura, de la lluvia al pleito, del dinero mal contado al mantenimiento que nadie hizo. La confesión: la pregunta que arde, ¿qué de esta lista ya lo estamos haciendo, aunque sea tantito? Lo que se confiesa hoy se corrige gratis; lo que se calla, se paga en noviembre o en 2028.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El riesgo que no es metáfora</span>
+  <h3 style="margin-top:.2rem">Que la obra no cobre caro</h3>
+  <p>Entre tanta figura hay riesgos que sangran de verdad: la cal en los ojos, la espalda que carga sola lo que era de a dos, el sol de mediodía sin agua, el alacrán bajo la piedra que se movió sin guante, la herramienta que se presta sin enseñar. La obra comunitaria segura no es la que no trabaja: es la que trabaja con protocolo (guantes y lentes donde tocan, cargas de a dos, agua y sombra, botiquín ubicado y alguien que sepa usarlo, tareas sin filo para los niños que siempre llegan a las faenas). Un proyecto que manda a alguien al centro de salud sí se muere, y de eso no hay esquela que valga.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">La historia que se cierra</span>
+  <h3 style="margin-top:.2rem">Kenia: la última entrega</h3>
+  <p>La conoces por entregas desde septiembre: protegieron los manantiales y el agua salió limpia, pero la diarrea casi no bajó; el agua se recontaminaba en casa. Esta semana, el final. Lo que siguió, cómo falló y qué terminó funcionando se cuenta el viernes, y la moraleja es la herramienta más honesta de esta unidad: el manejo adaptativo. Cada solución falló por una razón que nadie podía adivinar desde el escritorio: se descubrió mirando. El diseño es una hipótesis; la evidencia la corrige; el equipo que mira, ajusta. El tuyo está en su semana de mirar.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">Lo que vuelve</span>
+  <h3 style="margin-top:.2rem">El malabar</h3>
+  <p>El viernes vuelven las bolas de la semana 1. No se dice más: solo que aquella frase del primer día ("no puedes malabarear sin batallar") va a cobrar sentido nuevo con las manos ocupadas. Trae las tuyas si te las llevaste.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-13/ejercicio-11-la-esquela-ajena.html"><strong>La esquela ajena</strong></a> · Seis proyectos difuntos de la región. Diagnostica la causa de muerte real detrás de la causa oficial.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-13/ejercicio-21-riesgo-supuesto-o-chamba.html"><strong>¿Riesgo, supuesto o chamba?</strong></a> · Siete enunciados que la gente mete a la columna equivocada. Clasifícalos y decide qué se hace con cada uno.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-13/ejercicio-32-mi-velorio.html"><strong>Mi velorio</strong></a> · La esquela de tu componente, tu lista, tu confesión y tus riesgos con vigía. Se llena el jueves, se usa hasta diciembre.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Velorio del proyecto (pre-mortem)</dt>
+    <dd>El ejercicio de imaginar el proyecto ya muerto y explicar de qué, ANTES de que pase. Funciona porque la cabeza encuentra más fallas explicando un fracaso consumado que prediciendo uno posible. La versión de este curso se viste de Día de Muertos porque estamos en octubre y en México, y porque el humor le quita al miedo lo paralizante sin quitarle lo útil.</dd>
+    <dt>Esquela</dt>
+    <dd>El anuncio de la muerte: nació, prometía, murió de, le sobreviven. Escribirla de tu propio proyecto obliga a nombrar la causa de muerte con sustantivos, no con vaguedades: no "falta de compromiso" sino "el riego quedó sin dueño desde diciembre".</dd>
+    <dt>Pensamiento inverso (TRIZ)</dt>
+    <dd>Preguntar al revés: en lugar de "¿cómo aseguramos el éxito?", "¿qué haríamos para garantizar el fracaso?". La lista sale más rápida, más honesta y más completa, porque sabotear es más fácil de imaginar que triunfar. El paso que la vuelve oro es la confesión: comparar la lista contra lo que ya se hace.</dd>
+    <dt>Riesgo</dt>
+    <dd>Algo externo que puede pasar y dañaría el proyecto: se le pone probabilidad de andar cerca, un vigía (quién lo mira) y un plan B. No se elimina: se vigila. El riesgo sin vigía es un supuesto; el supuesto sin revisar es una esquela en borrador.</dd>
+    <dt>Supuesto</dt>
+    <dd>La condición externa que tu proyecto necesita cierta y que escribiste en tu marco en septiembre ("que la lluvia no cubra la zona", "que la delegación sostenga el acuerdo"). Esta semana se revisan de frente: ¿siguen siendo ciertos? El supuesto es un riesgo disfrazado, y el velorio le quita el disfraz.</dd>
+    <dt>Chamba</dt>
+    <dd>Lo que depende de tu equipo y por lo tanto no es riesgo ni supuesto: es responsabilidad con nombre en el RACI. "Que no se nos olvide pedir el flete" no se vigila: se hace. Meter chamba a la columna de riesgos es la manera elegante de no hacerla.</dd>
+    <dt>Manejo adaptativo</dt>
+    <dd>Ejecutar mirando: tratar el diseño como hipótesis, observar qué hace la realidad con él y corregir sin drama. No es improvisar (se ajusta el cómo protegiendo el propósito) ni es fracasar (el ajuste a tiempo es la señal de un equipo despierto). El caso del agua en Kenia es su historia de cabecera, y esta semana por fin se cuenta completa.</dd>
+    <dt>Protocolo de seguridad</dt>
+    <dd>La lista corta que se revisa antes de cada jornada: equipo de protección donde toca (cal, cemento, filo), cargas de a dos, agua y sombra, botiquín ubicado con alguien que sepa usarlo, tareas sin riesgo para menores, y a quién se llama si algo pasa. Cabe en media hoja y vale más que ella.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán las esquelas (que ojalá envejezcan equivocadas), las listas del velorio con sus confesiones, los riesgos con vigía en el tablero de obra y los protocolos de seguridad de cada equipo.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>Nadie sabe lo que tiene hasta que lo ve perdido, dice el refrán. Esta semana lo pierdes de mentiras, con flores y café, para verlo completo: lo que tu proyecto tiene, lo que le falta y lo que lo mataría si nadie lo mira.</p>
+  <p>Los muertos de octubre son de papel. Trabaja el velorio con ganas, para que los de a de veras no lleguen.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>

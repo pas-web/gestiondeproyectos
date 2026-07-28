@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S1 · ¿Manejo o gestión?</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .situacion { font-size:1.05rem; color:var(--profundo); margin:.2rem 0 .7rem; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  button { font:inherit; border:none; border-radius:8px; padding:.55rem 1rem; cursor:pointer; font-weight:bold; margin:.3rem .4rem 0 0; }
+  .opcion { background:#fff; color:var(--marca); border:2px solid var(--marca); }
+  .opcion.elegida-bien { background:var(--marca); color:#fff; }
+  .opcion.elegida-mal { background:#fff; color:#8a4b3a; border-color:#C97B5D; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .marcador { text-align:center; font-family:Georgia,serif; color:var(--profundo); font-size:1.1rem; margin-top:1.5rem; display:none; background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.8rem; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; }
+  body.proyector { font-size:1.45rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>¿Manejo o gestión?</h1>
+<p class="sub">Gimnasio · Semana 1 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Diez situaciones tomadas de proyectos como el que vas a vivir. Decide si cada una es trabajo de manejo o de gestión. Ojo: varias tienen trampa fina.</p>
+
+<div class="intro">
+  <strong>Manejo:</strong> decisiones y trabajo dentro del proyecto (planear, organizar, gastar bien, registrar, corregir). <strong>Gestión:</strong> conseguir fuera del proyecto lo que le hace falta (dinero, permisos, aliados, préstamos, información de quien la tiene).
+</div>
+
+<div id="casos"></div>
+<div class="marcador" id="marcador"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Escribe tres cosas que hiciste esta semana (de la escuela, de tu casa, del rancho). Para cada una pregúntate: ¿fue manejo (organicé algo mío) o fue gestión (conseguí algo de alguien)? Vas a descubrir que ya haces las dos todos los días.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { s: 'Las lluvias se adelantaron dos semanas y el equipo reacomoda el calendario de actividades del vivero.',
+      resp: 'M',
+      pista: '¿Le pidieron algo a alguien de fuera, o reacomodaron lo suyo?',
+      exp: 'Manejo. Ajustar el plan cuando la realidad cambia es la parte del oficio que nunca se acaba. El cronograma no es una foto: es un animal vivo.' },
+    { s: 'Una del equipo llama a la oficina regional para preguntar qué permiso se necesita para poner sombra fija en la orilla de una presa dentro de la Reserva.',
+      resp: 'G',
+      pista: 'La respuesta que buscan no la tiene nadie del equipo. ¿Dónde está?',
+      exp: 'Gestión. La información oficial es un recurso externo y conseguirla a tiempo es gestionar. El proyecto que averigua el permiso al final suele averiguarlo tarde.' },
+    { s: 'El equipo reparte quién trae la cal, quién las estacas y quién avisa a qué hora se empieza el sábado.',
+      resp: 'M',
+      pista: 'Todo lo que se reparte aquí ya lo tiene el equipo. ¿Eso es adentro o afuera?',
+      exp: 'Manejo. Repartir responsabilidades es organización interna. En la semana 12 le vas a poner nombre técnico a esta repartición.' },
+    { s: 'Le piden prestadas al vivero del campus veinte plantas nativas en maceta para el fin de semana.',
+      resp: 'G',
+      pista: 'Las plantas no son del proyecto. ¿Cómo llegaron?',
+      exp: 'Gestión, y de la fina: conseguir prestado es financiamiento en especie. Los buenos gestores consiguen la mitad de su proyecto sin dinero, pidiendo bien.' },
+    { s: 'Cada compra del ensayo se anota el mismo día en la hoja de gastos, con nota o foto del ticket.',
+      resp: 'M',
+      pista: '¿Quién necesita ese registro primero: alguien de fuera o el propio equipo?',
+      exp: 'Manejo. El registro diario de gastos es disciplina interna. Que después sirva para rendir cuentas a otros es la cosecha; la siembra se hace adentro y a diario.' },
+    { s: 'Alguien del equipo dedica una hora a revisar qué convocatorias abiertas financian proyectos de ecoturismo comunitario.',
+      resp: 'G',
+      pista: 'El dinero de esas convocatorias, ¿dónde está ahorita?',
+      exp: 'Gestión. Buscar convocatorias es cazar recursos externos. En este curso vas a armar un radar para no hacerlo a ciegas.' },
+    { s: 'El equipo escribe su bitácora de la semana: qué se hizo, qué se gastó, qué salió distinto de lo planeado.',
+      resp: 'M',
+      pista: 'Esa bitácora, ¿la exige alguien de fuera o la necesita el equipo para no perderse?',
+      exp: 'Manejo. La bitácora es la memoria del proyecto. Sin ella, en octubre nadie se acuerda de por qué se decidió lo que se decidió en agosto.' },
+    { s: 'Invitan al delegado de la comunidad a la presentación de avances, con fecha y hora, para que vea en qué va el trabajo.',
+      resp: 'G',
+      pista: 'El delegado no es parte del equipo. ¿Qué gana el proyecto teniéndolo cerca?',
+      exp: 'Gestión. Un aliado informado es un aliado; uno sorprendido es un problema. Cultivar la relación con las autoridades locales es trabajo de gestión, no cortesía.' },
+    { s: 'El tiempo del sábado no alcanzó y el equipo decide qué actividad se recorta y cuál no se toca.',
+      resp: 'M',
+      pista: 'Decidir qué se sacrifica cuando no alcanza, ¿es conseguir algo o es administrar lo que hay?',
+      exp: 'Manejo. Priorizar bajo presión es de las decisiones internas más difíciles. Pista para tu futuro: se recorta lo reversible, se protege lo que no se puede repetir.' },
+    { s: 'Consiguen que la maderería preste tarimas para el ensayo a cambio de aparecer en el letrero de agradecimientos.',
+      resp: 'G',
+      pista: 'Hubo un intercambio con alguien de fuera. ¿Cómo se llama eso?',
+      exp: 'Gestión: negociación en especie. Nadie gastó un peso y las dos partes ganaron. En la semana 9 vas a practicar exactamente este tipo de trato.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  var aciertos = 0, resueltos = 0;
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    d.innerHTML = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ' + c.s + '</div>' +
+      '<button class="opcion" onclick="responder(' + i + ',\'M\',this)">Manejo</button>' +
+      '<button class="opcion" onclick="responder(' + i + ',\'G\',this)">Gestión</button>' +
+      '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+      '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    cont.appendChild(d);
+  });
+
+  function responder(i, eleccion, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (eleccion === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      var botones = btn.parentNode.querySelectorAll('.opcion');
+      var yaResuelto = botones[0].disabled;
+      botones.forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .45; });
+      if (!yaResuelto) {
+        resueltos++;
+        if (pistaNoUsada[i] !== false) aciertos++;
+        if (resueltos === casos.length) {
+          var m = document.getElementById('marcador');
+          m.style.display = 'block';
+          m.textContent = aciertos >= 8 ? 'Vas bien: la distinción ya es tuya. Úsala el viernes.'
+            : 'Aún no del todo, y no pasa nada: vuelve a leer la tarjeta de la semana y reintenta mañana. El gimnasio no cierra.';
+        }
+      }
+    } else {
+      pistaNoUsada[i] = false;
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+  var pistaNoUsada = {};
+</script>
+</main>
+</body>
+</html>

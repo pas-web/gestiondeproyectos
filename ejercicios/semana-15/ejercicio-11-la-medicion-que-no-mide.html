@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S15 · La medición que no mide</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .enunciado { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.98rem; font-style:italic; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La medición que no mide</h1>
+<p class="sub">Gimnasio · Semana 15 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis proyectos de la región que juran estar midiendo. Uno sí mide; los otros cinco cometen cada uno un pecado clásico del monitoreo, y los seis pecados van a intentar meterse a tu plan de una hoja. Aprende a verlos aquí, donde no cuestan.</p>
+
+<div class="intro">
+  Las cuatro preguntas del monitoreo sano: ¿mide el <strong>cambio</strong> o el esfuerzo? ¿Tiene <strong>antes</strong> (línea base)? ¿Se levanta <strong>caminando</strong> y por alguien que se queda? ¿El dato dispara alguna <strong>decisión</strong>? Cuatro síes es monitoreo; tres o menos es papelería.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Toma el indicador principal de tu componente y pásalo por las cuatro preguntas, por escrito: qué cambio mide, cuál es su antes (búscalo en tus conteos de agosto), quién lo levanta caminando cuando el curso ya no exista, y qué decisión dispara ("si baja de tanto, entonces..."). Si alguna pregunta se queda sin respuesta, ese es exactamente el hueco que tu plan de una hoja tiene que cerrar el jueves.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: 'Un proyecto de estufas ahorradoras reporta al final: "34 estufas instaladas, 6 talleres impartidos, 51 personas capacitadas. Éxito total."',
+      ops: ['Medición sana: los números son claros y verificables', 'Mide puro esfuerzo: estufas, talleres y capacitados son outputs; el cambio prometido (menos leña, menos humo en las cocinas) no se midió y nadie sabe si ocurrió', 'Le falta línea base nada más', 'El dato no dispara decisiones'],
+      resp: 1,
+      pista: 'Los números son reales y verificables, sí. Pero ¿qué prometía la cadena de este proyecto: estufas instaladas o cocinas con menos humo? ¿Cuál de las dos cosas midieron?',
+      exp: 'El pecado más común y el mejor disfrazado, porque los números son verdaderos: 34 estufas SÍ se instalaron. Pero la cadena de ese proyecto no prometía estufas: prometía menos leña cortada y menos humo respirado, y de eso no hay un solo dato. Es la historia de Kenia sin la parte que la salva: manantiales protegidos, aplausos, y nadie contando la diarrea. El esfuerzo se mide solo y siempre consuela; el cambio hay que salir a buscarlo y a veces incomoda (¿y si la mitad de las estufas están arrumbadas?). Regla: en tu plan de una hoja, al menos un indicador tiene que ser de cambio, aunque duela más levantarlo.' },
+    { r: 'Seis meses después de las jornadas de reforestación, el reporte dice: "el uso del vivero comunitario aumentó notablemente".',
+      ops: ['Medición sana: el aumento está documentado', 'Mide esfuerzo en lugar de cambio', 'Sin línea base: "aumentó" necesita un "desde cuánto"; sin el conteo de antes, "notablemente" es una opinión con corbata', 'El indicador es demasiado caro de levantar'],
+      resp: 2,
+      pista: '"Aumentó". ¿Desde cuánto? ¿Comparado con qué conteo de qué fecha? Si nadie midió el antes, ¿qué palabra queda en lugar de un número?',
+      exp: 'Sin el antes, el después no dice nada: "aumentó notablemente" es lo que se dice cuando no se sabe. La línea base tiene una crueldad: se levanta ANTES de empezar o no se levanta nunca; no hay manera de viajar en el tiempo a contar cuánta gente usaba el vivero en marzo. Por eso los conteos que tu grupo hizo en agosto valen oro: son irrepetibles. Y por eso la foto de esta semana (el estado exacto al cierre de la ejecución) es la última línea base disponible de tu componente: lo que no quede contado o fotografiado ahora será "notablemente" para siempre.' },
+    { r: 'El plan de monitoreo de un grupo de agua entrega: "encuesta semestral a las 80 familias, base de datos en Excel, comité de evaluación que sesiona cada mes". Lo diseñaron los tres técnicos del proyecto, que terminan su contrato en diciembre.',
+      ops: ['Medición sana: es el plan más completo posible', 'Mide esfuerzo en lugar de cambio', 'Sin línea base', 'El plan heroico: exige gente, tiempo y herramientas que no van a existir; muere en enero y no mide nada, porque quien medía se va'],
+      resp: 3,
+      pista: '¿Quién aplica la encuesta de junio, si los tres técnicos salieron en diciembre? Un plan perfecto que nadie puede ejecutar, ¿cuánto mide?',
+      exp: 'El plan heroico: técnicamente hermoso y sociológicamente imposible. Encuesta semestral, Excel y comité mensual exigen gente, tiempo y computadora que en enero ya no van a estar, porque quienes lo diseñaron se van con el proyecto. El monitoreo que sobrevive es el que se ajusta a quien se queda: una libreta en la tienda, un conteo el domingo, una foto al mes en el grupo de la comunidad. La regla de oro se aplica sin piedad: el indicador se levanta caminando o no se levanta. Mejor un dato humilde que sí existe que un sistema elegante que no. En tu plan de una hoja, la columna "quién" solo admite nombres de cargos que siguen aquí en marzo.' },
+    { r: 'Para saber si el nuevo espacio comunitario funciona, el equipo decide monitorear los "me gusta" de la página del proyecto, "porque esos sí se pueden contar fácil".',
+      ops: ['Medición sana: es un dato barato y disponible', 'Mide lo fácil en lugar de lo que importa: el like no dice quién usa el espacio; la comodidad del dato le ganó a la pregunta', 'Sin línea base', 'El plan es demasiado caro'],
+      resp: 1,
+      pista: 'El dato es facilísimo de levantar, cierto. Ahora: ¿un "me gusta" de alguien que vive en Querétaro capital mide el uso del espacio? ¿Qué pregunta contesta ese número?',
+      exp: 'El borracho que busca las llaves bajo el farol porque ahí hay luz. Los likes se cuentan solos, pero contestan otra pregunta ("¿le gustó la foto a gente que quizá nunca ha venido?") y no la que importa ("¿la comunidad usa el espacio?"). Es la trampa inversa a la del plan heroico: aquél medía lo importante de forma imposible; este mide lo posible sin importancia. El oficio está en el cruce: un dato barato QUE hable del cambio. Para un espacio comunitario existe y es viejísimo: pararse a contar un domingo (cuántas personas, haciendo qué, de qué edades). Quince minutos, cero tecnología, y contesta la pregunta de verdad.' },
+    { r: 'El comité de un manantial lleva tres años apuntando en una libreta el aforo mensual del agua. La libreta está completa, bien guardada, y nadie la ha leído nunca ni ha cambiado nada por lo que dice.',
+      ops: ['Medición sana: tres años de datos continuos valen mucho', 'Mide esfuerzo en lugar de cambio', 'El dato sin decisión: se junta y se guarda pero no dispara nada; es superstición con papelería, y con una regla de "si baja de tanto, entonces..." revive', 'Sin línea base'],
+      resp: 2,
+      pista: 'El dato existe y es bueno. ¿Qué le falta? Pista: si el aforo bajara a la mitad el mes que entra, ¿pasaría algo? ¿Quién haría qué?',
+      exp: 'El caso más triste, porque el trabajo duro ya está hecho: tres años de aforos es un tesoro... enterrado. Al dato le falta su otra mitad: la decisión que dispara. Monitorear no es coleccionar números, es mirar para actuar (Kenia otra vez: midieron, descubrieron, corrigieron). La reparación cuesta una oración: "si el aforo de mayo baja del promedio, el comité convoca a revisar tomas y fugas". Con esa regla, la libreta pasa de reliquia a instrumento, y quien la llena deja de hacer un trámite y empieza a hacer vigilancia. En tu plan de una hoja, la última columna ("qué decisión dispara") es la que convierte todo lo demás en monitoreo.' },
+    { r: 'El plan del área de juegos dice: "Indicador: niñas y niños usando el área un domingo al mes (conteo de media hora, 12:00). Antes: conteo de agosto, 4 en promedio. Lo levanta: quien tenga el turno del comité del agua, que pasa por ahí. Si baja de 10 dos meses seguidos: se revisa qué pasa y se convoca faena o ajuste".',
+      ops: ['El plan heroico: demasiado trabajo para el comité', 'Mide lo fácil en lugar de lo que importa', 'Sin línea base', 'Medición sana: cambio con antes, se levanta caminando por alguien que se queda, y el dato dispara una decisión concreta'],
+      resp: 3,
+      pista: 'Pásale las cuatro preguntas de la caja de arriba, una por una. Cuenta los síes.',
+      exp: 'Cuatro de cuatro: mide el cambio (uso real, no columpios instalados), tiene antes (el conteo de agosto: 4 en promedio, ahí está la línea base rescatada), se levanta caminando y por alguien que se queda (el turno del comité que ya pasa por ahí: cero esfuerzo extra, cargo y no nombre), y el dato tiene su decisión escrita, con umbral y todo (baja de 10 dos meses → se revisa y se convoca). Fíjate en la elegancia de fondo: no inventó vigilante nuevo, se colgó de una estructura que la comunidad ya tiene y que ya camina por ahí. Ese es el monitoreo que sobrevive al curso: humilde, colgado de lo que existe, con el antes guardado y la decisión escrita. Tu plan de una hoja quiere parecerse a este.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Mide o no mide?</div>' +
+               '<span class="enunciado">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

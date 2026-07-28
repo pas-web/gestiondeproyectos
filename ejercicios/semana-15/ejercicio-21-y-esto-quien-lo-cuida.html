@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S15 · ¿Y esto quién lo cuida?</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .enunciado { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.98rem; font-style:italic; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>¿Y esto quién lo cuida?</h1>
+<p class="sub">Gimnasio · Semana 15 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Seis bienes comunes de la región, cada uno con su arreglo de cuidado. Uno aguanta; los otros cinco tienen una grieta que Ostrom diagnosticó hace décadas estudiando comunidades como estas. Encuentra la grieta: tu acuerdo de cuidado va a querer repetir alguna.</p>
+
+<div class="intro">
+  Los principios (versión de este curso): <strong>límites claros</strong> (quién usa y qué cosa) · <strong>reglas hechas aquí</strong> · <strong>vigías conocidos</strong> · <strong>sanciones graduadas</strong> (primero se habla) · <strong>conflictos que se arreglan barato</strong> · <strong>respaldo de la autoridad local</strong>. Los comunes que sobreviven juntan casi todos; los que mueren dejaron uno grande sin cubrir.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Piensa en un bien común real de tu comunidad que funcione (el agua, una galera, el monte, el molino) y escríbele su radiografía: quién usa, quién vigila, qué regla hay, qué pasa la primera vez que alguien falla y qué pasa la tercera, y quién respalda. Luego marca cuáles de los seis principios cumple. Vas a descubrir que tu comunidad tiene doctorado en esto; esa radiografía es la mejor plantilla para el acuerdo de tu componente.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: 'El área de juegos se inaugura con discurso: "esto es de todos, cuídenlo entre todos". No se acuerda nada más. Para marzo hay columpios vencidos, basura, y cada quien dice que le tocaba a otro.',
+      ops: ['El arreglo aguanta: la buena voluntad basta en comunidades chicas', '"De todos" sin acuerdo es de nadie: sin límites, sin vigía y sin regla, la tragedia de los comunes corre completa; no por mala gente, por falta de arreglo', 'El problema es que faltó una multa fuerte', 'El problema es que el gobierno no lo administró'],
+      resp: 1,
+      pista: '"Cuídenlo entre todos" suena bien y no contesta ninguna pregunta: ¿quién exactamente, qué exactamente, y qué pasa si no? ¿Eso es un acuerdo o un deseo?',
+      exp: 'La tragedia de los comunes de manual, y nota lo importante: no ocurrió por mala gente sino por falta de arreglo. "Entre todos" no es una asignación: es un deseo, y los deseos no tienen vigía. Cuando la responsabilidad es de todos en abstracto, es de nadie en concreto, y el primer columpio vencido lo confirma: todos lo vieron, a nadie le tocaba. La reparación no es cercar ni multar: es el acuerdo que el discurso se saltó (quién usa, quién cuida qué por cargo, qué regla, qué pasa si no). Tu componente corre exactamente este riesgo el día de la inauguración, discurso incluido: por eso el acuerdo de cuidado se escribe ANTES.' },
+    { r: 'Para el manantial, una asociación de fuera trae un reglamento "probado en 40 comunidades": 22 artículos, se imprime, se firma, se pega en la casa ejidal. A los seis meses nadie lo aplica y varios ni saben que existe.',
+      ops: ['El arreglo aguanta: un reglamento probado es mejor que improvisar', 'Faltó límite claro de quién usa el agua', 'Regla importada: nadie de aquí la hizo, nadie la siente suya y nadie la defiende; las reglas que sobreviven se hacen con los usos y palabras del lugar', 'Faltó imprimirlo más grande'],
+      resp: 2,
+      pista: '¿Quién escribió esas reglas y con las costumbres de qué lugar? Cuando una regla choca con cómo se ha hecho aquí toda la vida, ¿cuál de las dos gana?',
+      exp: 'La regla importada, y Ostrom la encontró fallando en todo el mundo: los arreglos que sobreviven los hacen los propios usuarios, con sus usos, su calendario y sus palabras. No porque la sabiduría externa no valga (los 22 artículos seguro traen buenas ideas), sino porque la regla que nadie hizo suya nadie la defiende: se obedece de papel, no de acuerdo. La versión sana del apoyo externo existe: traer preguntas y ejemplos, y que la comunidad escriba su propia media hoja, aunque técnicamente sea "menos completa". Media hoja propia vale más que 22 artículos ajenos. Aviso directo para tu equipo: ustedes también son "los de fuera"; su acuerdo de cuidado es borrador para que la delegación y los vecinos lo hagan suyo, no decreto para pegar en la pared.' },
+    { r: 'El potrero de agostadero común tiene regla clara y aceptada: máximo cinco cabezas por familia. Pero nadie tiene el encargo de contar, y como nadie cuenta, algunos ya meten ocho, y los demás, viendo eso, van metiendo más.',
+      ops: ['El arreglo aguanta: la regla es buena y es local', 'Regla importada', 'Sanción desproporcionada', 'Regla sin vigía: nadie tiene el encargo de mirar, y la regla que no se mira se deshace sola, porque cumplirla se vuelve ingenuidad'],
+      resp: 3,
+      pista: 'La regla es buena, es local y todos la aceptaron. ¿Entonces qué falta? ¿Quién tiene el ENCARGO (no la buena voluntad) de contar las cabezas?',
+      exp: 'La regla sin vigía, y fíjate en la mecánica del derrumbe: no falla porque la gente sea tramposa, falla porque cumplir una regla que nadie mira se vuelve ingenuidad. El que respeta las cinco cabezas ve al de las ocho pastando gratis, y la pregunta "¿y yo por qué sí?" hace el resto: la regla se deshace sola, sin que nadie la haya derogado. El vigía no es desconfianza: es el mantenimiento de la regla (como el ojo del amo, pero por turnos). Y tiene que ser encargo con nombre de cargo y frecuencia ("el comité cuenta el primer domingo del mes"), no esperanza difusa. En tu acuerdo de cuidado, la columna del vigía es tan importante como la regla misma: regla sin vigía es el caso 1 con más pasos.' },
+    { r: 'En el reglamento del vivero comunitario decidieron ponerse duros: a la PRIMERA falta (no regar en tu turno), multa de $500 y expulsión de un año. Resultado: a nadie se le ha aplicado nunca, aunque las faltas pasan cada semana.',
+      ops: ['El arreglo aguanta: con mano dura la gente aprende', 'Sanción desproporcionada: el castigo es tan grande que nadie se atreve a aplicarlo a un vecino, y la regla muere de severa; la sanción que funciona es graduada: primero se habla', 'Regla importada', 'Faltó línea base'],
+      resp: 1,
+      pista: '¿Quién le cobra $500 y expulsa un año a su vecina de toda la vida por no regar un martes? Si nadie se atreve a aplicar el castigo, ¿cuánto vale la regla?',
+      exp: 'La sanción desproporcionada, la falla más contraintuitiva: la regla murió de severa. En una comunidad donde todos se conocen, nadie va a cobrarle $500 y expulsar un año a su vecina por un turno de riego: aplicar el castigo cuesta más (en relación, en pleito) que dejarlo pasar, así que todo se deja pasar y la regla queda de adorno. Ostrom lo vio en los comunes longevos del mundo entero: las sanciones que funcionan son GRADUADAS: la primera vez se habla en corto, la segunda se llama la atención delante del comité, la tercera hay consecuencia material chica, y solo la reincidencia terca escala. La gradación no es blandura: es lo que vuelve la sanción aplicable, y una sanción chica que sí se aplica sostiene más que una enorme que no. Tu acuerdo: que el primer escalón sea siempre una conversación.' },
+    { r: 'La galera comunitaria funciona perfecto gracias a don Isidro, que abre, presta, apunta y repara desde hace quince años, sin encargo formal y sin relevo. Todos lo celebran. Nadie más sabe dónde están las llaves ni cómo se apunta.',
+      ops: ['El arreglo aguanta: quince años lo demuestran', 'El cuidador eterno: funciona de maravilla hasta el día que él falte, y ese día se pierde todo junto (llaves, memoria y costumbre); el común que depende de una sola persona buena es frágil, no fuerte', 'Regla importada', 'Sanción desproporcionada'],
+      resp: 1,
+      pista: 'Hoy funciona, cierto. Ahora aplica la prueba de diciembre de tu propio curso: ¿qué pasa el día que don Isidro ya no pueda? ¿Quién sabe lo que él sabe?',
+      exp: 'El cuidador eterno: la versión comunitaria del tesorero eterno que el libro del fondo prohibió con turnos. Quince años de funcionamiento perfecto esconden una fragilidad total: todo el arreglo (llaves, memoria, criterio, costumbre) vive en una sola cabeza sin relevo, y el día que falte no se pierde una persona: se pierde la institución completa, de golpe. La reparación se hace HOY que él está: encargo formal reconocido (que su trabajo tenga nombre y respaldo de la delegación), un segundo con llaves que aprenda el oficio, la libreta de cómo se hace, y relevo pactado. Ojo con la lección para tu proyecto: el estudiante entusiasta que "se queda al pendiente" del componente es don Isidro en potencia; el acuerdo de cuidado existe para que el cuidado sea de cargos que se relevan, no de personas que se cansan.' },
+    { r: 'El agua de riego se reparte por tandeo: lista de turnos hecha en asamblea, el canalero en funciones vigila (cargo que rota cada año), al que se pasa de su turno primero se le habla, luego va a la asamblea, y la delegación respalda la lista. Lleva décadas funcionando y se ajusta cuando el año viene seco.',
+      ops: ['El cuidador eterno: todo depende del canalero', 'Sanción desproporcionada', 'Arreglo que aguanta: reglas hechas aquí, límites y turnos claros, vigía por cargo rotativo, sanción graduada, conflicto que se arregla en asamblea, respaldo de la autoridad, y capacidad de ajustarse; junta los seis principios sin haber leído a Ostrom', 'Regla importada: el tandeo vino de fuera'],
+      resp: 2,
+      pista: 'Pásale la lista de la caja de arriba, principio por principio. ¿Cuántos junta? ¿Y quién escribió esas reglas: un consultor o las asambleas de varias generaciones?',
+      exp: 'Seis de seis, y décadas de evidencia: reglas hechas aquí (asamblea, no consultor), límites y turnos claros (la lista), vigía conocido y POR CARGO que rota (canalero: nada de cuidador eterno), sanción graduada (primero se habla, luego asamblea), conflicto barato (se arregla aquí, no en el juzgado) y respaldo de la autoridad local. Y un séptimo de regalo que Ostrom también documentó: se ajusta cuando cambian las condiciones (el año seco). Esto es lo que el Nobel de 2009 encontró estudiando acequias, bosques y pesquerías del mundo: que arreglos como el tandeo de tu región resuelven todos los días lo que la teoría juraba imposible. Tu comunidad no necesita que le enseñen a cuidar comunes: tu acuerdo de cuidado solo tiene que parecerse a lo que ella ya hace con el agua.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Dónde está la grieta?</div>' +
+               '<span class="enunciado">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S3 · El guion de mi estación</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
+  textarea { width:100%; min-height:84px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
+  textarea:focus { outline:none; border-color:var(--marca); }
+  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
+  .btn-copiar:hover { border-color:var(--marca); }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .modelo { background:#F7F1E3; border-left:4px solid var(--arena); border-radius:0 8px 8px 0; padding:.6rem .9rem; font-size:.92rem; margin:.5rem 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.4rem; }
+  body.proyector textarea { font-size:1.25rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El guion de mi estación</h1>
+<p class="sub">Gimnasio · Semana 3 · Trae esto avanzado al diseño fino del viernes; ahí se termina en equipo.</p>
+
+<p>La consulta no se improvisa: cada estación llega con guion. Arma aquí el tuyo bloque por bloque y cópialo a tu bitácora al final. Lo que escribas se afina el viernes con tu equipo; llegar con borrador es llegar con ventaja.</p>
+
+<div class="reglas">
+  Las tres pruebas antes de escribir cualquier pregunta: <strong>1)</strong> ¿describe una obra concreta? (promete de contrabando), <strong>2)</strong> ¿trae la respuesta adentro? (induce), <strong>3)</strong> ¿la entendería tu abuela a la primera? (jerga). Dos síes y un no: reescribe.
+</div>
+
+<div class="caso">
+  <h2>1 · Mis tres preguntas candidatas</h2>
+  <p class="porque">La tarea del jueves. Escríbelas ya pasadas por las tres pruebas; estas van al pizarrón el viernes.</p>
+  <textarea id="r1" placeholder="1. &#10;2. &#10;3. "></textarea>
+  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>2 · Mi estación y mi rol</h2>
+  <p class="porque">Estación (mapa parlante, mesa de conversación, pared de ideas) y rol (quien pregunta, quien anota, quien observa). Si aún no se reparte, anota tu preferencia y por qué.</p>
+  <textarea id="r2" placeholder="Ej.: Mesa de conversación, rol de registro: escribo rápido y no me da pena pedir que repitan una frase textual..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>3 · La apertura honesta</h2>
+  <p class="porque">Las primeras frases que dirás a cada persona. Sin vender, sin prometer, sin jerga.</p>
+  <div class="modelo">Modelo (hazlo tuyo, no lo copies): "Buenas tardes, somos estudiantes de la UAQ, de aquí de Concá. Estamos escuchando qué debería tener la orilla de la presa; no hay nada decidido todavía. ¿Nos regala unos minutos?"</div>
+  <textarea id="r3" placeholder="Escribe tu apertura como la dirías tú, con tus palabras..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>4 · Mis preguntas de estación</h2>
+  <p class="porque">Las 3 o 4 que usará tu estación (saldrán del banco del viernes). Incluye al menos una apreciativa: la que pide una escena, no un pedido.</p>
+  <textarea id="r4" placeholder="Ej.: Cuénteme de un día en que la orilla estuvo llena de gente, ¿qué había ese día?..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>5 · El registro</h2>
+  <p class="porque">Qué vas a anotar y cómo: frases textuales entre comillas, edad aproximada sin nombres, marcas en el mapa con su clave. Lo que no se anota no existe.</p>
+  <textarea id="r5" placeholder="Ej.: Libreta con dos columnas: frase textual / quién la dijo (señora ~60, pescador ~40). Marcas en el mapa numeradas y la misma numeración en la libreta..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>6 · El cierre sin promesas</h2>
+  <p class="porque">Cómo termina cada conversación. Lo único que sí se puede prometer es lo que sí se va a cumplir: volver a contar qué salió.</p>
+  <textarea id="r6" placeholder="Ej.: Muchas gracias. Todo esto lo vamos a estudiar con calma y venimos a contarles qué salió..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
+</div>
+
+<div class="caso">
+  <h2>7 · Lo que me toca llevar</h2>
+  <p class="porque">Materiales de tu estación y quién los consigue. Sé específico: no "papel", sino cuánto, de cuál y de dónde sale.</p>
+  <textarea id="r7" placeholder="Ej.: 2 pliegos de kraft grueso, 6 plumones que no traspasen, cinta canela (la tengo yo), tabla de apoyo (pedirla en el laboratorio)..."></textarea>
+  <button class="btn-copiar" onclick="copiar('r7', this)">Copiar</button>
+</div>
+
+<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Los mismos siete bloques, una página por bloque. El viernes trae el cuaderno abierto: el guion de tu estación se arma sobre esto.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var TITULOS = ['Mis tres preguntas candidatas', 'Mi estación y mi rol', 'La apertura honesta', 'Mis preguntas de estación', 'El registro', 'El cierre sin promesas', 'Lo que me toca llevar'];
+  function marcar(btn) {
+    var aviso = document.createElement('span');
+    aviso.className = 'aviso-copiado';
+    aviso.textContent = 'copiado';
+    btn.after(aviso);
+    setTimeout(function () { aviso.remove(); }, 1500);
+  }
+  function copiar(id, btn) {
+    var t = document.getElementById(id).value;
+    if (!t.trim()) { t = '(sin llenar)'; }
+    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  }
+  function copiarTodo(btn) {
+    var partes = ['GUION DE MI ESTACIÓN · Consulta en La Florida · Semana 3', ''];
+    for (var i = 1; i <= 7; i++) {
+      var v = document.getElementById('r' + i).value.trim();
+      partes.push(i + ' · ' + TITULOS[i - 1]);
+      partes.push(v || '(sin llenar)');
+      partes.push('');
+    }
+    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
+  }
+</script>
+</main>
+</body>
+</html>

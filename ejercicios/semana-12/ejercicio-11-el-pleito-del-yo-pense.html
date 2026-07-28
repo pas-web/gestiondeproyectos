@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S12 · El pleito del "yo pensé"</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .descalabro { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; }
+  .descalabro b { color:var(--marca); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El pleito del "yo pensé"</h1>
+<p class="sub">Gimnasio · Semana 12 · Práctica libre, sin registro y sin nota.</p>
+
+<p>La obra del manantial también arrancó, y en su primera semana pasaron seis descalabros. Ninguno fue por flojera ni por mala fe: todos fueron por una letra del RACI que faltó o que sobró. Diagnostícalos antes de que tu obra los repita.</p>
+
+<div class="intro">
+  Las cuatro letras: quién <strong>Realiza</strong> (hace la tarea), quién <strong>Aprueba</strong> (UNA persona responde por ella), a quién se <strong>Consulta</strong> (antes de decidir) y a quién se <strong>Informa</strong> (después de hacer). Las fallas clásicas: la tarea <strong>huérfana</strong> (sin R), la de <strong>dos cabezas</strong> (dos A), el consultado <strong>brincado</strong> y el informado <strong>tarde</strong>.
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Dibuja la matriz de tu componente: tareas en renglones, nombres en columnas, letras en las celdas. Luego pásale los dos cazadores: ¿alguna tarea sin R? ¿Alguna con dos A? Cada celda que corrijas hoy es un "yo pensé que tú" que no vas a tener que decir en noviembre.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { r: 'El sábado de la faena, nadie llevó el registro de asistencia. Al final del día: "¿tú lo apuntaste?", "no, yo pensé que tú". Veinte personas trabajaron y no hay lista firmada: los jornales de contrapartida no se pueden probar.',
+      ops: ['Dos cabezas: había dos responsables del registro', 'Tarea huérfana: el registro no tenía R; era tarea "de todos" y lo de todos no es de nadie', 'Consultado brincado', 'Nada: fue mala suerte'],
+      resp: 1,
+      pista: 'Antes de la faena, ¿alguien podía decir "el registro es mío"? Si nadie podía decirlo, la tarea ya estaba perdida desde el plan.',
+      exp: 'La tarea huérfana, y de las caras: veinte jornales trabajados que valen cero en el informe porque no hay lista firmada (lo que no se puede verificar no se promete, y tampoco se puede cobrar como contrapartida). El registro parecía tan obvio que nadie lo asignó, y las tareas obvias son las primeras huérfanas. En la matriz sana, hasta lo chiquito tiene R con nombre: el registro, las fotos, el agua, las llaves. La faena entera salió bien y el papel salió mal: en el mundo de los fondos, eso es que salió mal.' },
+    { r: 'Dos del equipo fueron a comprar la pintura. Uno escogió esmalte café porque combina; el otro ya había quedado por teléfono en verde con los demás. Discutieron en la tienda, compraron el café "porque ya estábamos ahí", y el equipo deshizo la compra al día siguiente (el flete de regreso lo pagaron de su bolsa).',
+      ops: ['Tarea huérfana: nadie era responsable', 'Informado tarde', 'Dos cabezas: los dos actuaban como A de la misma decisión, y cuando dos aprueban, nadie aprueba', 'Nada: los gustos se discuten'],
+      resp: 2,
+      pista: 'La regla dice UNA sola A por tarea. En esa tienda, ¿cuántas personas creían tener la última palabra?',
+      exp: 'La tarea de dos cabezas: ambos creían tener la última palabra sobre el color, así que la decisión se tomó dos veces y ninguna valió. Nota que la regla de a dos (dos personas van a la compra) NO significa dos que deciden: uno es A de la decisión (que además ya estaba tomada con el equipo), el otro atestigua y resguarda el comprobante. Realizar entre varios está bien; aprobar, solo uno. El flete de regreso pagado de su bolsa es la colegiatura clásica de esta lección.' },
+    { r: 'El equipo del piso niveló y compactó su tramo en dos tardes de buen trabajo. Cuando el comité de agua pasó a ver, señaló que el desnivel quedó mandando el escurrimiento hacia la captación, exactamente lo que habían pedido evitar desde la sesión de preguntas. Hay que retrabajar el tramo.',
+      ops: ['Consultado brincado: el comité de agua era C de esa tarea (se le consulta ANTES de nivelar, no se le enseña después) y la matriz lo sabía desde el dictamen', 'Tarea huérfana', 'Dos cabezas', 'Nada: retrabajar es normal en obra'],
+      resp: 0,
+      pista: '¿Quién sabía del escurrimiento más que nadie, y en qué momento se le preguntó: antes de compactar o después?',
+      exp: 'El consultado brincado: la C existe para las tareas donde alguien sabe algo que tú no ves, y el comité de agua era C obvio de cualquier tarea que tocara pendientes y escurrimientos (lo dijeron en la sesión del dictamen, con todas sus letras). Consultar antes costaba una visita de veinte minutos; enseñar después costó dos tardes de retrabajo y un poco de confianza. Regla práctica para tu matriz: donde tu tarea toque el tema de un experto local, esa persona es C, y C significa antes.' },
+    { r: 'El equipo cambió la faena del sábado al domingo por un compromiso familiar del responsable. Avisaron a su gente, pero a la delegada nadie le dijo: el sábado llegaron ocho vecinos convocados por ella al lugar de la obra, y no había nadie del equipo. La delegada tuvo que dar la cara.',
+      ops: ['Dos cabezas', 'Informado tarde (o nunca): la delegada convocó y era la primera en saber del cambio; el costo no fue logístico, fue de confianza y fue de ELLA', 'Tarea huérfana', 'Nada: los cambios de fecha pasan'],
+      resp: 1,
+      pista: '¿Quién quedó mal ante ocho vecinos sin haber tenido la culpa? Esa persona era una letra de la matriz. ¿Cuál?',
+      exp: 'El informado tarde, en su versión más dolorosa: la I de la delegada no era cortesía, era crítica, porque ELLA convocó (la convocatoria legítima es de la autoridad, no del equipo: eso es la faena). El cambio de fecha era razonable; no avisarle la dejó dando la cara ante ocho vecinos madrugadores, y esa cuenta la paga el proyecto entero en su rubro más caro: la confianza. En tu matriz, pregunta por cada tarea: si esto cambia, ¿quién queda mal si no se entera primero? Esa persona es I con asterisco.' },
+    { r: 'Para no repetir descalabros, el equipo rehízo su matriz "más democrática": en cada tarea pusieron a los tres como R, a los tres como A, a los tres como C y a los tres como I. "Así todos somos responsables de todo."',
+      ops: ['Se salva: la corresponsabilidad total es el ideal', 'Consultado brincado', 'La matriz diluida: todos en todo es nadie en nada; volvió a fabricar tareas huérfanas, ahora con papeleo', 'Informado tarde'],
+      resp: 2,
+      pista: 'Si la pintura vuelve a comprarse mal, ¿a quién le preguntas qué pasó? Si la respuesta es "a los tres", ¿quién te va a contestar?',
+      exp: 'La matriz diluida: parece generosa y es la huérfana disfrazada de asamblea. Si los tres son A de todo, ninguna decisión tiene última palabra; si los tres son R de todo, el sábado cada quien pensará que van los otros. La matriz no reparte culpas: reparte claridad, y la claridad es puntuda por diseño (una A, R con nombres, C y I donde aportan). La corresponsabilidad de verdad no está en las celdas: está en que la matriz la hicieron juntos y cualquiera puede cubrir a otro AVISANDO, que es distinto a que nadie sepa quién era.' },
+    { r: 'Tarea: "colar el anclaje de los postes, martes 27". R: dos del equipo más el albañil vecino que se sumó por mano vuelta. A: quien lleva la vocería del equipo. C: el comité de agua (revisó el trazo el lunes, dejó visto bueno). I: la delegada (mensaje el martes por la noche con foto del colado) y el profe. Fecha B por lluvia: jueves 29.',
+      ops: ['Dos cabezas: hay tres personas en R', 'Se salva: R claros aunque sean varios, UNA A, la C consultada antes con visto bueno, las I informadas a tiempo y hasta fecha B', 'Consultado brincado: el comité debió estar el martes', 'Matriz diluida'],
+      resp: 1,
+      pista: 'Repasa letra por letra contra las reglas: ¿cuántas A hay? ¿La C fue antes o después? ¿Las I se enteraron a tiempo? ¿R puede ser más de uno?',
+      exp: 'El renglón sano, y desarma dos confusiones de un golpe: R puede ser más de uno (tres manos colando está muy bien: la regla de UNO es solo para la A) y la C no necesita estar presente el día de la tarea: necesita haber sido consultada ANTES, y el visto bueno del lunes es exactamente eso. Las I se enteran el mismo día con evidencia (la foto), la mano vuelta del albañil queda a la vista (y se anota como contrapartida en jornales), y la fecha B ya viene del cronograma. Cuando la matriz está así, el martes 27 nadie pregunta "¿y quién iba a...?": esa pregunta ya no existe.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué letra falló aquí?</div>' +
+               '<span class="descalabro">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

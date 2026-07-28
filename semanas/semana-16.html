@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 16 · Auditoría y radar · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso {
+    background: var(--profundo); color: #EAF4F2;
+    padding: 1.1rem 1.5rem;
+  }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta {
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
+    color: var(--profundo); margin: 1.8rem 0 .4rem;
+  }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .45rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+
+  .siembra { border-left: 5px solid var(--arena); }
+
+  .gimnasio-item { display: flex; gap: .8rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom: none; }
+  .gimnasio-item .num { font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.2rem; }
+
+  .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .consulta dd { margin: .2rem 0 .4rem 0; }
+
+  .chapuzon {
+    background: var(--profundo); color: #EAF4F2;
+    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
+  }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+
+  .aviso-goteo {
+    background: #fff; border: 2px dashed var(--marca); border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
+    display: none;
+  }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 16 · Auditoría y radar</div>
+  <div class="migas">Unidad 4 · Entregar la presa viva · Se abre el miércoles 18 de noviembre</div>
+</header>
+
+<main>
+
+<div id="wk-gate" data-abre="2026-11-18">
+
+<p class="pregunta">¿Y el dinero dónde quedó?</p>
+<p class="bajada">La pregunta que toda obra pública debe poder contestar, y este viernes la contesta la tuya: el libro del fondo se abre delante de la comunidad, asiento por asiento, comprobante por comprobante, como marcan las reglas que leíste en septiembre. No es un juicio: es la otra mitad de la confianza. El jueves se cuadra el libro y se ensaya, y de paso el curso te entrega su última herramienta: el radar, porque un gestor termina un proyecto y ya anda oliendo el siguiente.</p>
+
+<h2>Esta semana podrás</h2>
+<div class="podras">
+  <ul>
+    <li>Cuadrar un libro de cuentas hasta que aguante cualquier pregunta: asientos, comprobantes, remanente y pendientes con su explicación.</li>
+    <li>Rendir cuentas en público sin ponerte a la defensiva: toda pregunta se contesta con el libro, hasta la que trae veneno.</li>
+    <li>Armar tu radar de convocatorias 2027: fuentes, palabras clave y calendario, con la IA barriendo y tu criterio filtrando.</li>
+    <li>Decidir en minutos si una convocatoria es para ti, para tu 2027, o para nadie.</li>
+  </ul>
+</div>
+
+<h2>Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La idea grande</span>
+  <h3 style="margin-top:.2rem">Las cuentas se rinden, no se defienden</h3>
+  <p>Hay una diferencia de fondo entre defender las cuentas y rendirlas. El que defiende contesta desde la memoria y el orgullo ("confíen, todo se hizo bien") y cada pregunta le suena a acusación. El que rinde contesta desde el libro ("miren el asiento del 4 de noviembre, aquí está el comprobante") y cada pregunta le da la oportunidad de mostrar que el sistema funciona. El dinero público se vuelve legítimo exactamente así: cuando cualquiera puede preguntar cualquier cosa y la respuesta está escrita. Por eso el asiento tardío que se marcó tardío vale más el viernes que un libro perfecto de mentiras: demuestra que el libro dice la verdad aunque no convenga.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El evento</span>
+  <h3 style="margin-top:.2rem">La auditoría pública del viernes</h3>
+  <p>Como marcan las reglas del fondo: viernes 20, sesión abierta, la comunidad invitada por la delegación. El formato es simple y serio: el libro a la vista, cada equipo rinde su parte (qué entró, qué salió, qué queda, qué quedó pendiente y por qué), las preguntas se reciben todas y se contestan con el libro, el remanente se declara y se reintegra conforme a las reglas, y todo queda en acta. Una sola regla de conducta: ninguna pregunta es ofensa. La señora que pregunta ejerce un derecho que tu propio proyecto le dio.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">La última herramienta</span>
+  <h3 style="margin-top:.2rem">El radar</h3>
+  <p>La gestión no termina con un proyecto: se vive en ciclos, y entre ciclo y ciclo el gestor tiene el radar prendido. Un radar son tres cosas: fuentes (las organizaciones y boletines que sueltan convocatorias de lo tuyo), palabras clave (con qué buscas) y calendario (las convocatorias anuales se preparan con meses, no con días). Aquí la IA juega en su cancha buena, la del veredicto que ustedes mismos escribieron: barrer volumen sí, decidir no. La máquina lee cien convocatorias por ti; la letra chiquita la lees tú, como aprendiste en septiembre, con ojos de dictaminador. Y en el radar de este grupo ya hay una marcada con círculo rojo: PROCODES 2027.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">Lo que se paga</span>
+  <h3 style="margin-top:.2rem">El libro rinde su examen</h3>
+  <p>El libro del fondo abrió hace un mes con los $200 del ensayo y las reglas escritas en su primera página: comprobante o no pasó, de a dos, a 48 horas, turnos para todos. Cada quien lo cargó en su turno. El viernes ese sistema completo rinde su examen delante de quien más importa. Y otra deuda vieja se cobra: aquella tarea de agosto de seguir organizaciones ("¿y tú a quién sigues?") era el radar en semilla; esta semana se le pone motor, calendario y nombre.</p>
+</div>
+
+<h2>El gimnasio</h2>
+<div class="tarjeta">
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-16/ejercicio-11-la-pregunta-dura.html"><strong>La pregunta dura</strong></a> · Seis preguntas de auditoría pública, de la justa a la envenenada. Elige la respuesta que rinde en vez de defender.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-16/ejercicio-21-aplico-o-no-aplico.html"><strong>¿Aplico o no aplico?</strong></a> · Seis convocatorias sobre la mesa y un solo perfil: el tuyo. Decide en minutos cuál va, cuál espera y cuál deforma tu proyecto.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-16/ejercicio-32-mi-rendicion-y-mi-radar.html"><strong>Mi rendición y mi radar</strong></a> · Tu parte del libro en limpio, tu pregunta temida con su respuesta, y tu radar 2027 armado.</div></div>
+</div>
+
+<h2>Hoja de consulta</h2>
+<div class="tarjeta consulta">
+  <dl>
+    <dt>Auditoría pública</dt>
+    <dd>La revisión abierta de las cuentas del fondo ante la comunidad, comprometida en las reglas desde septiembre. No busca culpables: busca demostrar que el libro aguanta cualquier pregunta. Sus piezas: libro a la vista, comprobantes en orden, remanente declarado, pendientes con explicación y acta firmada.</dd>
+    <dt>Rendir cuentas</dt>
+    <dd>Contestar con el libro, no con la memoria ni con el orgullo. La forma canónica de toda respuesta de auditoría: el dato, el asiento donde consta, el comprobante que lo respalda. Si la respuesta no está en el libro, se dice "eso no está asentado y es una falla nuestra", que también es rendir.</dd>
+    <dt>Remanente</dt>
+    <dd>Lo que sobró del fondo. No se reparte, no se guarda para después, no se gasta en la fiesta: se declara y se reintegra conforme a las reglas que firmaron. Un remanente bien declarado es señal de presupuesto honesto, no de proyecto flojo.</dd>
+    <dt>La pregunta con veneno</dt>
+    <dd>La que trae rumor o acusación adentro ("dicen que se compraron algo para ustedes"). Se contesta igual que todas: con el libro abierto y la invitación a revisarlo asiento por asiento, sin ofenderse. La indignación defiende; el libro rinde. El rumor no sobrevive a un comprobante.</dd>
+    <dt>Acta de auditoría</dt>
+    <dd>La constancia de que la sesión ocurrió: quién estuvo, qué se revisó, qué se preguntó, qué quedó pendiente y las firmas. Cierra el ciclo del dinero como el acuse de la solicitud lo abrió: con papel.</dd>
+    <dt>Radar de convocatorias</dt>
+    <dd>El hábito de enterarse a tiempo: fuentes que se revisan con ritmo (organizaciones, boletines, páginas de dependencias), palabras clave propias y un calendario de convocatorias anuales. El radar no junta convocatorias: las descarta rápido, para que el tiempo se gaste en las dos que sí son.</dd>
+    <dt>Elegibilidad primero</dt>
+    <dd>Antes de ilusionarse con el monto se leen los requisitos duros: quién puede aplicar, qué figura pide, qué aportación exige, de qué territorio. La letra chiquita se lee como dictaminador (semana 5): la convocatoria que no puedes cumplir no es una oportunidad, es un gasto de ilusión.</dd>
+    <dt>La regla del proyecto primero</dt>
+    <dd>La convocatoria se busca para el proyecto, no el proyecto para la convocatoria. El que persigue cualquier dinero termina haciendo proyectos de nadie: deformados para caber en reglas ajenas. Se vale estirar el proyecto; no se vale traicionarlo.</dd>
+  </dl>
+</div>
+
+<h2>Lo que produjimos</h2>
+<div class="tarjeta">
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán la foto del libro abierto ante la comunidad, el acta de la auditoría, los radares personales armados y la lista de convocatorias con círculo rojo para 2027.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>El chapuzón 🌊</h2>
+  <p>Cuentas claras, amistades largas, dice el refrán. El viernes el libro se abre delante de todos: que se abra orgulloso, con sus asientos tardíos marcados y su remanente declarado, porque un libro que aguanta preguntas vale más que cualquier discurso.</p>
+  <p>Y el sábado, con las cuentas rendidas, prende tu radar. Así se vive este oficio: se rinde un ciclo y se olfatea el siguiente.</p>
+</div>
+
+</div>
+
+<div class="aviso-goteo" id="aviso-goteo">
+  <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
+  <p>Disponible a partir del <strong id="fecha-abre"></strong>. El gimnasio y "Tu calificación" están siempre abiertos.</p>
+</div>
+
+<script>
+  // Candado de goteo: pedagógico, no de seguridad.
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
+    var hoy = new Date();
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && hoy < abre) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+      document.getElementById('fecha-abre').textContent =
+        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  })();
+</script>
+
+</main>
+</body>
+</html>
