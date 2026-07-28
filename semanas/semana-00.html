@@ -30,7 +30,8 @@
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
-  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.8rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -58,7 +59,7 @@
   .ritmo dd { margin: .1rem 0 0; }
 
   .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
   a { color: var(--marca); }
 </style>
@@ -74,85 +75,296 @@
 <main>
 
 <p class="pregunta">¿Para qué te va a servir esta materia cuando ya nadie te esté calificando?</p>
-<p class="bajada">Esta es la semana de aterrizaje y esta página es el programa del curso, escrito para que lo entiendas y no para que lo firmes. Aquí está qué vas a aprender, en qué orden, con qué lo vas a demostrar y por qué le sirve a alguien que se va a dedicar a la producción agropecuaria sustentable. Queda abierta todo el semestre: vuelve cuando se te olvide para qué estamos haciendo lo que estamos haciendo.</p>
+<p class="bajada">Esta página es dos cosas a la vez. Arriba están las dos primeras sesiones con su contenido completo, para que puedas leerlas antes de llegar y volver a ellas después. Abajo está el programa del curso, escrito para que lo entiendas y no para que lo firmes. Queda abierta todo el semestre: vuelve cuando se te olvide para qué estamos haciendo lo que estamos haciendo.</p>
+
+<div class="indice">
+  <a href="#jueves">🤹 Jueves 30</a>
+  <a href="#viernes">✍️ Viernes 31</a>
+  <a href="#programa">🗺️ El programa</a>
+  <a href="#unidades">📚 Las cuatro unidades</a>
+  <a href="#oficio">🌾 Por qué te sirve</a>
+  <a href="#ritmo">🔁 Cómo es una semana</a>
+</div>
 
 <h2>Esta semana podrás</h2>
 <div class="podras">
   <ul>
     <li>Explicar en qué consiste el encargo del semestre y qué papel te toca en él.</li>
+    <li>Nombrar las tres capas de información con las que se construye un proyecto, y decir cuál tenemos hoy.</li>
     <li>Decir qué vas a saber hacer en diciembre que hoy no sabes hacer.</li>
     <li>Entender cómo se evalúa este curso, por qué se evalúa así y qué te toca a ti sostener.</li>
-    <li>Firmar los dos pactos (evaluación sin números y uso de inteligencia artificial con criterio) sabiendo exactamente qué firmas.</li>
+    <li>Firmar los dos pactos, el de evaluación y el de inteligencia artificial, sabiendo exactamente qué firmas.</li>
     <li>Arrancar tu expediente del gestor, la carpeta que vas a alimentar todo el semestre y te vas a llevar al final.</li>
   </ul>
 </div>
 
-<h2>El jueves y el viernes</h2>
-<p class="pista-ses">Da clic en cada día para ver el detalle de la sesión.</p>
+<h2 class="corte" id="jueves">Las dos sesiones de esta semana</h2>
+<p style="margin-top:.2rem;color:#68807a;font-size:.95rem">Cada bloque trae su duración aproximada. Léelas antes de venir si puedes; si no, quedan aquí para después.</p>
 
-<details class="sesion">
-  <summary>Jueves 30 de julio · 2 horas<span class="sub">El encargo</span></summary>
-  <div class="cuerpo">
-    <p class="foco">Foco del día: que se antojen. Hoy no se lee ningún reglamento.</p>
-    <table class="minutos"><tbody>
-      <tr><td class="m">0-10</td><td><strong>Arranque sin trámites.</strong> El curso en una frase y el aviso de que hoy no se va a leer ninguna lista de requisitos. Lo administrativo es mañana y va a tener todo el tiempo que necesite.</td></tr>
-      <tr><td class="m">10-30</td><td><strong>El chapuzón: malabares.</strong> Tres bolas por persona y tres rondas de intentarlo de verdad. Se caen. Después, la conversación corta: qué se siente ser malo en algo delante de los demás, y por qué este salón va a ser un lugar seguro para eso todo el semestre. Nadie aprende a malabarear leyendo sobre malabares.</td></tr>
-      <tr><td class="m">30-50</td><td><strong>El encargo, contado como historia.</strong> La presa de La Florida: quién la usa, qué le falta, qué se podría hacer con esa orilla. Se abre el piso para que quien la conozca cuente lo que ha visto ahí. Nadie corrige a nadie: esto es la primera capa de información del proyecto.</td></tr>
-      <tr><td class="m">50-60</td><td><strong>Respiro.</strong></td></tr>
-      <tr><td class="m">60-75</td><td><strong>El fondo de $20,000.</strong> Se nombra sin rodeos: existe, es del proyecto y no del profesor, y este grupo lo va a ejercer con comprobantes y libro de cuentas público. Preguntas, las que salgan. Las reglas completas se destripan en la semana 5.</td></tr>
-      <tr><td class="m">75-95</td><td><strong>Qué vas a saber hacer en diciembre.</strong> Se proyecta esta página: los siete resultados del curso y las cuatro unidades. Se recorre el sitio en vivo, se enseña el menú y el gimnasio, y cada quien lo abre en su celular.</td></tr>
-      <tr><td class="m">95-112</td><td><strong>La pregunta que se llevan.</strong> En parejas: si mañana te entregaran el encargo completo, ¿por dónde empezarías? Tres respuestas en voz alta, sin corregir ninguna. Se anotan en una hoja grande que se queda pegada en el salón hasta diciembre.</td></tr>
-      <tr><td class="m">112-120</td><td><strong>Cierre.</strong> Qué traer mañana: una carpeta o folder para el expediente. Aviso de que mañana se habla de la calificación, y de que se vale llegar desconfiando.</td></tr>
-    </tbody></table>
-    <p class="trae"><strong>Trae:</strong> cuaderno y algo con qué escribir. Las bolas de malabares las pone el curso.</p>
-    <p class="ajuste">Si el tiempo se acorta: el recorrido del sitio se puede dejar como tarea con el enlace por WhatsApp. El chapuzón y el encargo no se recortan: son lo único que hace que quieran volver el viernes.</p>
+<!-- ====================== JUEVES ====================== -->
+<section class="dia">
+  <div class="cabeza">
+    <div class="cuando">Jueves 30 de julio · 2 horas</div>
+    <h3>El encargo</h3>
+    <p class="foco">Hoy no se lee ningún reglamento. Hoy se trata de que se te antoje.</p>
   </div>
-</details>
-
-<details class="sesion">
-  <summary>Viernes 31 de julio · 2 horas<span class="sub">Evaluación y pactos</span></summary>
   <div class="cuerpo">
-    <p class="foco">Foco del día: que entiendan cómo se evalúa antes de firmarlo, y que puedan discutirlo.</p>
-    <table class="minutos"><tbody>
-      <tr><td class="m">0-10</td><td><strong>Retomar la hoja de ayer.</strong> Se lee lo que el grupo puso en "por dónde empezarías". Se marca cuáles de esas ideas son de escuchar, cuáles de diseñar y cuáles de conseguir dinero: ahí está el mapa del semestre sin haberlo dicho todavía.</td></tr>
-      <tr><td class="m">10-40</td><td><strong>La evaluación sin números, explicada.</strong> Se proyecta "Tu calificación" completa. Las piezas: durante el semestre ningún trabajo lleva número, todo produce retroalimentación y evidencia, la evidencia se acumula en el expediente físico, hay un suelo público por unidad, y el número del acta se acuerda al final en una conversación. Se dice también lo que no significa: no es un curso más fácil, y aquí no hay dónde esconderse detrás de un promedio.</td></tr>
-      <tr><td class="m">40-55</td><td><strong>Preguntas y objeciones.</strong> Se invita explícitamente a la desconfianza: quien crea que este sistema lo perjudica que lo diga ahora y en voz alta. Se responde una por una, sin defenderse. Las dudas que queden se anotan y se retoman al cerrar la unidad 1.</td></tr>
-      <tr><td class="m">55-65</td><td><strong>Respiro.</strong></td></tr>
-      <tr><td class="m">65-80</td><td><strong>El pacto de uso de inteligencia artificial.</strong> Qué sí, qué no y cómo se declara. La regla corta: la herramienta se usa y se dice que se usó. Se discute un caso concreto de este curso para que no quede en abstracto.</td></tr>
-      <tr><td class="m">80-97</td><td><strong>Firma y armado del expediente.</strong> Cada quien firma sus dos pactos y los archiva como primeras hojas de su carpeta. Se rotulan las secciones que va a tener: pactos, bitácora, anti-currículum, evidencias por unidad y autoevaluaciones. Foto grupal de los pactos firmados para la sección "Lo que produjimos".</td></tr>
-      <tr><td class="m">97-110</td><td><strong>Cómo funciona el ritmo.</strong> La semana se abre el miércoles en el sitio, las sesiones son jueves y viernes, el gimnasio nunca se cierra. Se enseña dónde está el detalle de cada sesión y se pide leerlo antes de llegar.</td></tr>
-      <tr><td class="m">110-118</td><td><strong>Ticket de salida, estreno.</strong> Se contesta antes de irse. Sin nombre si así se prefiere. Lo que salga se lee en voz alta el jueves siguiente, y eso va a pasar todas las semanas.</td></tr>
-      <tr><td class="m">118-120</td><td><strong>La pregunta de la semana que viene.</strong> Se dice en voz alta y no se responde: qué harías con veinte mil pesos que no son tuyos. Que la piensen.</td></tr>
-    </tbody></table>
-    <p class="trae"><strong>Trae:</strong> la carpeta o folder del expediente y pluma. Las copias de los dos pactos las pone el curso.</p>
-    <p class="ajuste">Si el tiempo se acorta: el bloque del ritmo semanal se resuelve con un mensaje al grupo. Las objeciones no se recortan nunca: un sistema de evaluación que no se pudo discutir el primer día se cobra caro en noviembre.</p>
+
+    <div class="bloque">
+      <h4><span class="em">🎬</span> Arranque sin trámites <span class="reloj">⏱ 10 min</span></h4>
+      <p>El curso cabe en una frase: <strong>hay una presa, hay veinte mil pesos y hay una comunidad que va a decir qué quiere ahí.</strong> El resto del semestre es aprender a no arruinar esa oportunidad.</p>
+      <p>Nada de listas de requisitos hoy. Lo administrativo es mañana y va a tener todo el tiempo que necesite, porque un sistema de evaluación que no se pudo discutir el primer día se cobra caro en noviembre.</p>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">🤹</span> El chapuzón: tres bolas y el suelo <span class="reloj">⏱ 20 min</span></h4>
+      <p class="pasa"><b>Qué pasa:</b> tres bolas por persona y tres rondas de intentarlo de verdad. Se van a caer. Muchas veces. Y después platicamos qué se sintió.</p>
+      <p>Existen dos maneras distintas de saber algo. Una es <strong>saber qué</strong>: puedes explicar que un malabar de tres bolas es una cascada, que cada bola se lanza cuando la anterior llega a su punto más alto, que la vista se fija arriba y no en las manos. Puedes leer eso en dos minutos. La otra es <strong>saber cómo</strong>, y esa no se lee: se ensaya, y al ensayarla se falla.</p>
+      <p>La gestión de proyectos vive entera del segundo tipo. Puedes explicarme perfectamente qué es un marco lógico y no ser capaz de llenar uno que se sostenga. Puedes recitar cómo se comprueba un gasto y perder la factura de la grava.</p>
+      <div class="ojo">
+        <strong>⚠️ La trampa que este ejercicio desarma.</strong> Leer un manual produce una sensación agradabilísima de competencia. Es falsa. Se llama ilusión de saber y se rompe en el primer intento real: el momento incómodo en que descubres que entendiste todo y no puedes hacer nada. Aquí preferimos que ese momento pase hoy, con bolas de tela, y no en noviembre con dinero público.
+      </div>
+      <p>Hay una cosa más, y es la que de verdad importa para el semestre. Cuando se te cae la bola, la caída <strong>no es el error: es el dato</strong>. Te dice que lanzaste muy alto, o muy cruzado, o demasiado pronto. El que aprende rápido no es el que tira menos bolas, es el que mira dónde cayeron.</p>
+      <div class="llave">
+        <span class="rot">La regla del salón que se estrena hoy</span>
+        Aquí se puede ser malo en público. Vas a preguntar obviedades, vas a proponer ideas que no funcionan y te van a dictaminar en la semana 11 sin consideraciones. Si hoy no te puedes caer delante de tus compañeros, en noviembre no vas a aguantar que un comité te diga que no.
+      </div>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">🏞️</span> El encargo, contado como historia <span class="reloj">⏱ 25 min</span></h4>
+      <p>A unos minutos del campus está la <strong>presa de La Florida</strong>. La gente la usa a su manera: alguien pesca, alguien pasea, alguien va nada más a mirar el agua. No hay sombra pensada, ni dónde sentarse, ni nada para los niños. El encargo del semestre es convertir esa orilla en un espacio que la comunidad quiera usar.</p>
+      <p>Para eso existe un fondo de $20,000 que este grupo va a ejercer de verdad, con reglas, con comprobantes y con libro de cuentas público. No es un ejercicio de escritorio ni un caso de estudio. Al final del semestre la presa va a estar distinta, o no, y las dos cosas van a haber sido decisión de ustedes.</p>
+      <p class="pasa"><b>Qué pasa:</b> se abre el piso. Quien conozca la presa cuenta lo que ha visto ahí, y nadie corrige a nadie. Todo lo que salga se anota.</p>
+      <p>Y aquí aparece el primer contenido técnico del curso, porque lo que acabamos de hacer tiene nombre. Un proyecto se construye sobre <strong>tres capas de información</strong>, y ninguna sirve sola:</p>
+      <table class="veredicto">
+        <tr><th>Capa</th><th>De dónde sale</th><th>Para qué sirve y para qué no</th><th>Cuándo la levantamos</th></tr>
+        <tr>
+          <td><strong>1. Lo que se ve</strong></td>
+          <td>Observación directa, tus propios ojos.</td>
+          <td>Buenísima para hechos: dónde camina la gente, dónde hay sombra. Ciega para intenciones: nunca te dice <em>por qué</em>.</td>
+          <td>Semana 2, la salida a la presa.</td>
+        </tr>
+        <tr>
+          <td><strong>2. Lo que se dice</strong></td>
+          <td>Preguntarle a la gente.</td>
+          <td>La única fuente de deseos y prioridades. Pero está sesgada por quién se anima a hablar y por lo que cree que quieres oír.</td>
+          <td>Semanas 3 y 4, la consulta.</td>
+        </tr>
+        <tr>
+          <td><strong>3. Lo que se cuenta</strong></td>
+          <td>Datos, registros, mediciones.</td>
+          <td>Da magnitudes y permite comparar. No te dice qué significan para la gente que vive ahí.</td>
+          <td>Unidad 2 para diseñar y unidad 4 para medir.</td>
+        </tr>
+      </table>
+      <p>Hoy tenemos un pedacito de la capa 1, contada de memoria y de segunda mano. Eso es todo. <strong>Con eso no se diseña nada</strong>, y sin embargo es exactamente el punto donde arranca cualquier proyecto real: alguien que sabe poco y tiene que decidir cómo averiguar más.</p>
+      <div class="ojo">
+        <strong>⚠️ La tentación número uno del oficio.</strong> Si hoy sales de aquí pensando "hay que poner una palapa", perfecto: anótalo. Pero anótalo como <strong>hipótesis</strong>, no como plan. En la semana 4, cuando la comunidad ya haya hablado, vas a abrir un sobre con lo que creías hoy y comparar. La mitad del oficio consiste en aguantarse las ganas de resolver antes de haber escuchado.
+      </div>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">💰</span> El fondo: veinte mil pesos que no son de nadie del salón <span class="reloj">⏱ 15 min</span></h4>
+      <p>Se nombra sin rodeos: <strong>el fondo existe, es del proyecto y no del profesor</strong>, y este grupo lo va a ejercer con comprobantes y con un libro de cuentas que cualquiera pueda revisar.</p>
+      <p>Todo fondo del mundo, sea de $20,000 o de veinte millones, trae encima las mismas tres preguntas. Hoy solo se nombran, porque responderlas es literalmente el contenido de la semana 5:</p>
+      <div class="flujo">
+        <div class="paso"><b>🙋</b><span class="t">¿Quién decide?</span>en qué se gasta y con qué proceso</div>
+        <div class="paso"><b>📋</b><span class="t">¿En qué se puede?</span>qué gastos son elegibles y cuáles no</div>
+        <div class="paso"><b>🧾</b><span class="t">¿Quién comprueba?</span>ante quién se rinde cuentas y cuándo</div>
+      </div>
+      <p>Y una palabra que vas a oír todo el semestre y conviene separar desde hoy: <strong>gastar no es comprobar</strong>. Gastar es que el dinero salga. Comprobar es poder demostrar, con un papel que aguante que lo revisen, en qué salió. Un peso gastado sin comprobante se pierde dos veces: se fue, y además te lo van a cobrar.</p>
+      <div class="dato">
+        <strong>💡 Para llevar al campo.</strong> Pregúntale a alguien que haya manejado recursos de un programa público qué fue lo que más problemas le dio. Vas a escuchar hablar de comprobación mucho antes que de técnica. Trae esa respuesta a clase: la vamos a necesitar en la unidad 3.
+      </div>
+      <p>Preguntas, las que salgan. Ninguna es tonta y varias no van a tener respuesta todavía.</p>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">🗺️</span> A dónde vamos <span class="reloj">⏱ 20 min</span></h4>
+      <p>Se proyecta esta misma página, la mitad de abajo: los siete resultados del curso, las cuatro unidades y cómo funciona el sitio. Cada quien lo abre en su celular, porque de aquí en adelante la semana empieza en la página y no en el salón.</p>
+      <div class="llave">
+        <span class="rot">Lo que se queda picando para el jueves que viene</span>
+        La materia se llama Gestión <em>y</em> Manejo de Proyectos, y esas dos palabras no son sinónimos ni adorno del nombre. Son dos oficios distintos, se hacen con manos distintas y casi todos los proyectos que fracasan lo hacen porque alguien confundió uno con el otro. Hoy solo queda dicho. La semana 1 lo destripa.
+      </div>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">❓</span> La pregunta que te llevas <span class="reloj">⏱ 20 min</span></h4>
+      <p class="pasa"><b>Qué pasa:</b> en parejas, cinco minutos. <strong>Si mañana te entregaran el encargo completo, ¿por dónde empezarías?</strong> Después, tres respuestas en voz alta. No se corrige ninguna.</p>
+      <p>Todo lo que salga se escribe en una hoja grande que se queda pegada en el salón hasta diciembre. Mañana la vamos a releer para hacerle una cosa, y en la semana 17 la vamos a releer otra vez para reírnos un poco de nosotros mismos. Guardar lo que pensabas antes de saber es una costumbre profesional, no un juego.</p>
+    </div>
+
+    <div class="pie-dia">
+      <p><span class="rot">Trae</span> · cuaderno y algo con qué escribir. Las bolas de malabares las pone el curso.</p>
+      <p><span class="rot">Mañana</span> · una carpeta o folder para el expediente. Mañana se habla de la calificación y se vale llegar desconfiando.</p>
+      <p><span class="rot">Si el tiempo se acorta</span> · el recorrido del sitio se puede dejar de tarea con el enlace por WhatsApp. El chapuzón y el encargo no se recortan: son lo único que hace que quieran volver el viernes.</p>
+    </div>
+
   </div>
-</details>
+</section>
 
-<h2>El encargo del semestre</h2>
+<!-- ====================== VIERNES ====================== -->
+<section class="dia" id="viernes">
+  <div class="cabeza">
+    <div class="cuando">Viernes 31 de julio · 2 horas</div>
+    <h3>Cómo se evalúa este curso</h3>
+    <p class="foco">Hoy se vale llegar desconfiando. Se firma hasta el final, y solo después de haberlo discutido.</p>
+  </div>
+  <div class="cuerpo">
 
-<div class="tarjeta">
-  <span class="etiqueta">Lo que hay</span>
-  <h3 style="margin-top:.2rem">Una presa, un fondo y una comunidad</h3>
-  <p>A unos minutos del campus está la presa de La Florida. La gente la usa a su manera: alguien pesca, alguien pasea, alguien va a mirar el agua. No hay sombra pensada, ni dónde sentarse, ni nada para los niños. El encargo del semestre es convertir esa orilla en un espacio que la comunidad quiera usar.</p>
-  <p>Para eso hay un fondo de $20,000 que este grupo va a ejercer de verdad, con reglas, con comprobantes y con libro de cuentas público. No es un ejercicio de escritorio ni un caso de estudio: al final del semestre la presa va a estar distinta, o no, y las dos cosas van a haber sido decisión de ustedes.</p>
-  <p>Lo que se construya no lo decide el profesor. Lo decide la gente de La Florida, y en la unidad 1 vamos a ir a preguntárselo bien.</p>
-</div>
+    <div class="bloque">
+      <h4><span class="em">🔁</span> Retomamos la hoja de ayer <span class="reloj">⏱ 10 min</span></h4>
+      <p class="pasa"><b>Qué pasa:</b> se lee en voz alta lo que el grupo escribió en "por dónde empezarías" y se marca cada idea con uno de tres colores: 👂 <strong>escuchar</strong>, ✏️ <strong>diseñar</strong>, 🤝 <strong>conseguir</strong>.</p>
+      <p>Cuando termine el marcado, la hoja va a estar dividida en tres montones muy desiguales, y esos tres montones son el mapa del semestre. Ustedes acaban de dibujarlo sin saberlo y sin que nadie se los dijera.</p>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">🤢</span> Por qué aquí no hay números <span class="reloj">⏱ 20 min</span></h4>
+      <p>Antes de explicar el sistema, una pregunta honesta, y conviene contestarla en voz alta: <strong>¿te ha pasado esto?</strong></p>
+      <div class="flujo">
+        <div class="paso"><b>📖</b><span class="t">El atracón</span>estudias la noche anterior</div>
+        <span class="flecha">→</span>
+        <div class="paso"><b>📝</b><span class="t">El examen</span>lo devuelves todo</div>
+        <span class="flecha">→</span>
+        <div class="paso"><b>🔢</b><span class="t">El número</span>sacas tu puntaje</div>
+        <span class="flecha">→</span>
+        <div class="paso"><b>🕳️</b><span class="t">El vacío</span>un mes después, nada</div>
+      </div>
+      <p>Eso tiene nombre: <strong>aprendizaje bulímico</strong>. Se traga a la fuerza, se devuelve completo, no alimenta. Y no es culpa de quien lo hace: es exactamente lo que el sistema pide. Si lo único que se mide es lo que aparece en el examen, atragantarse la noche anterior es la estrategia <em>racional</em>.</p>
+      <p>Lo incómodo es que la calificación no solo falla en enseñar. También cambia lo que te atreves a intentar, y hay un experimento clásico que lo enseña con una claridad brutal.</p>
+      <div class="dato">
+        <strong>🧪 El experimento de los anagramas.</strong> En 1978, Susan Harter puso a un grupo de niños a resolver anagramas de distintos grados de dificultad. Cuando no había calificación de por medio, los niños escogían anagramas <strong>al límite de su habilidad</strong> y reportaban disfrutarlos. Cuando se metió la calificación en la ecuación, los mismos niños escogieron consistentemente <strong>los más fáciles</strong>, reportaron menos placer y verbalizaron más ansiedad. Trabajando por calificación bajaron su desempeño <em>y</em> se sintieron peor.
+      </div>
+      <p>Traduce eso a este curso. El anagrama fácil, aquí, sería un proyecto que no puede fallar: una jardinerita, tres botes de basura, algo que nadie va a cuestionar. <strong>Un proyecto que no puede fallar es un proyecto que no valía la pena hacer.</strong> Si te califico con un número, te estoy pagando por escoger el anagrama fácil, y luego voy a pedirte que gestiones veinte mil pesos con gente esperando del otro lado.</p>
+      <p class="cita">¡Ojalá de niños nos enseñaran a luchar por ideales y no por calificaciones! Así de grandes, trabajaríamos por sueños y no por quincenas.</p>
+      <div class="ojo">
+        <strong>⚠️ Lo que <em>no</em> se está diciendo.</strong> No se está diciendo que evaluar esté mal. En este curso te van a evaluar todo el tiempo, con criterios publicados por adelantado y por escrito. Lo que se quita no es la evaluación: es <strong>el número como moneda de cambio</strong>. Aquí no se compran puntos, se acumula evidencia.
+      </div>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">📊</span> Qué recibes en lugar de un número <span class="reloj">⏱ 15 min</span></h4>
+      <p>Es una pregunta legítima: si me quitas el 8, ¿qué me das? Esto:</p>
+      <div class="contra">
+        <div class="mal">
+          <span class="rot">🔢 Con número</span>
+          <p style="margin:0"><strong>Presupuesto: 7.</strong></p>
+          <p style="margin:.5rem 0 0;font-size:.9rem">Ya está. ¿Qué haces el lunes con eso?</p>
+        </div>
+        <div class="bien">
+          <span class="rot">📝 En este curso</span>
+          <p style="margin:0"><strong>Presupuesto: aún no.</strong> Tres cosas:</p>
+          <p style="margin:.35rem 0 0;font-size:.9rem">1. Cotizaste la grava pero no el flete, y aquí el flete puede ser un tercio del costo.<br>
+          2. Tu partida de mano de obra supone faena gratuita. Eso se acuerda antes, no se supone.<br>
+          3. El cronograma pone la obra en septiembre, en plena lluvia.<br>
+          <em>Reintenta con esas tres.</em></p>
+        </div>
+      </div>
+      <p>La de la derecha tarda más en escribirse y más en leerse. También es la única de las dos que te dice qué hacer el lunes. Ese es todo el argumento.</p>
+      <p>El sistema completo se sostiene en tres piezas, y ninguna es un invento de este curso:</p>
+      <ul>
+        <li><strong>Retos con "bien" o "aún no".</strong> Cada herramienta clave tiene su reto con criterios publicados <em>antes</em>. "Aún no" no resta nada: significa reintentar, las veces que hagan falta, hasta que la herramienta sea tuya.</li>
+        <li><strong>El expediente.</strong> Una carpeta física que armas tú y donde se acumula todo. Es tu memoria del semestre y tu argumento en diciembre. <a href="../evaluacion/expediente-del-gestor.html">Ábrelo aquí</a> para ver qué secciones lleva.</li>
+        <li><strong>Coevaluación.</strong> Vas a revisar trabajo de tus compañeros con criterios visibles y ellos el tuyo. Dar buena retroalimentación también es una habilidad del oficio, y también cuenta como evidencia.</li>
+      </ul>
+      <p>Y hay un <strong>suelo público por unidad</strong>: una lista corta de lo que basta para no reprobar, visible desde hoy y sin letra chiquita. Está completa en <a href="../tu-calificacion.html">Tu calificación</a>, junto con la regla de los tres casos con la que sale el número del acta.</p>
+      <div class="dato">
+        <strong>🧱 El cortafuegos, dicho hoy y no después.</strong> El dinero y la calificación no se tocan. El fondo se asigna por su propio proceso, y ese proceso reparte dinero, no calificaciones. Se puede perder el fondo con un trabajo excelente: eso es una lección del oficio, no una sanción. Y ganarlo no le sube un décimo a nadie.
+      </div>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">🧯</span> Objeciones, en voz alta y ahora <span class="reloj">⏱ 15 min</span></h4>
+      <p class="pasa"><b>Qué pasa:</b> se abre el piso a la desconfianza. Quien crea que este sistema lo perjudica que lo diga de frente. Se responde una por una, sin defenderse, y lo que quede sin resolver se anota y se retoma al cerrar la unidad 1.</p>
+      <p>Estas tres ya están anticipadas porque salen siempre:</p>
+      <table class="veredicto">
+        <tr><th>Lo que estás pensando</th><th>La respuesta</th></tr>
+        <tr><td><strong>"¿Y si al final el profe se raja y me pone lo que se le antoje?"</strong></td><td>Por eso existe la regla de los tres casos. Tú propones tu calificación con tu expediente en la mesa. Si coincidimos, queda. Si la tuya es más baja, sube sin que hagas nada. Si es más alta, se conversa y defiendes tu caso. Tu calificación nunca baja por escrito ni por sorpresa.</td></tr>
+        <tr><td><strong>"Sin números no voy a saber cómo voy."</strong></td><td>Vas a saberlo mejor. El suelo de cada unidad es una lista pública que puedes revisar cualquier día, y cada reto te dice "bien" o "aún no" con las razones. Un 7 no te dice cómo vas: te dice cómo te fue.</td></tr>
+        <tr><td><strong>"Entonces esto es más fácil."</strong></td><td>Es distinto. Es imposible reprobar cumpliendo el suelo, y es imposible destacar sin evidencia. Aquí no hay dónde esconderse detrás de un promedio: la carpeta vacía no se disimula.</td></tr>
+      </table>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">🤖</span> El pacto de inteligencia artificial <span class="reloj">⏱ 20 min</span></h4>
+      <p>La regla corta cabe en seis palabras: <strong>la herramienta se usa y se dice.</strong></p>
+      <p>Nadie te va a pedir que no la uses. Te va a pedir que sepas para qué sirve y para qué no, y que lo declares. Cuatro casos de este curso, con veredicto:</p>
+      <table class="veredicto">
+        <tr><th>El caso</th><th>¿Va?</th><th>Por qué</th></tr>
+        <tr class="si"><td>Le pides que te explique qué es un marco lógico y te ponga ejemplos.</td><td class="v">✅ Libre</td><td>Eso es estudiar. Úsala todo lo que quieras y ni siquiera hace falta declararlo.</td></tr>
+        <tr class="si"><td>Le pides que te ayude a redactar las preguntas de la consulta comunitaria.</td><td class="v">✅ Con declaración</td><td>Va, pero el borrador que salga hay que probarlo con una persona de carne y hueso antes de aplicarlo. La IA no conoce a nadie en La Florida y escribe preguntas que suenan bien y no se entienden en voz alta.</td></tr>
+        <tr class="cuidado"><td>Le pides que te arme el presupuesto con precios de materiales.</td><td class="v">⚠️ Con cuidado</td><td>La estructura sí. Los precios no: se cotizan, no se inventan. Una cotización inventada es un dato falso dentro de un documento que va a llegar a un comité, y ahí ya no es una travesura escolar.</td></tr>
+        <tr class="no"><td>Le pides que te escriba la entrada de tu bitácora.</td><td class="v">❌ No</td><td>La bitácora es el registro de lo que <em>tú</em> pensaste esa semana. Si la escribe otro, deja de ser evidencia de algo y se convierte en relleno bonito.</td></tr>
+      </table>
+      <p><strong>Cómo se declara.</strong> Una línea al pie del documento, sin ceremonia. Tres datos: qué herramienta, para qué la usaste y qué cambiaste tú después.</p>
+      <div class="pasa">
+        <b>Modelo:</b> <em>Usé un asistente de IA para ordenar el borrador de estas ocho preguntas. Las probé con dos personas del ejido y reescribí las preguntas 3 y 6 porque nadie las entendía. La 7 la quité.</em>
+      </div>
+      <div class="dato">
+        <strong>💡 Por qué esto importa fuera de la escuela.</strong> En una solicitud de financiamiento real, un dato que no puedes sostener cuando te lo preguntan no solo tumba ese proyecto: te quema con esa ventanilla durante años. Declarar de dónde salió cada cosa no es un trámite escolar, es la costumbre que te va a permitir defender tu trabajo en una mesa donde no te conocen.
+      </div>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">✍️</span> Firma y armado del expediente <span class="reloj">⏱ 20 min</span></h4>
+      <p>Los dos pactos están aquí para leerlos completos. <strong>Firmar es escribir tu nombre y decir que estás de acuerdo</strong>, nada más solemne que eso, y solo tiene sentido si ya los discutiste:</p>
+      <ul>
+        <li>📄 <a href="../evaluacion/pacto-de-evaluacion.html"><strong>Pacto de evaluación</strong></a> · qué se evalúa, cómo, y qué le toca sostener a cada quien.</li>
+        <li>🤖 <a href="../evaluacion/pacto-de-ia.html"><strong>Pacto de uso de inteligencia artificial</strong></a> · los cuatro casos de arriba, la fórmula de declaración y qué pasa si se omite.</li>
+      </ul>
+      <p class="pasa"><b>Qué pasa:</b> se firman, se archivan como las dos primeras hojas de la carpeta y se rotulan sus secciones. Foto grupal de los pactos firmados para la sección "Lo que produjimos".</p>
+      <p>Las <strong>cinco secciones del expediente</strong>, para que rotules hoy y no andes buscando en octubre:</p>
+      <table class="veredicto">
+        <tr><th>Sección</th><th>Qué entra</th></tr>
+        <tr><td><strong>1. Pactos</strong></td><td>Los dos de hoy, y en la semana 2 tu contrato de gestión con tus dos compromisos del semestre.</td></tr>
+        <tr><td><strong>2. Bitácora</strong></td><td>Una entrada por semana, escrita por ti. Qué hiciste, qué se atoró, qué harías distinto. Es la sección que más pesa en diciembre.</td></tr>
+        <tr><td><strong>3. Anti-currículum</strong></td><td>La lista de los noes que vas a coleccionar este semestre. Empieza vacía y esa es la idea. Se explica en la semana 2.</td></tr>
+        <tr><td><strong>4. Evidencias por unidad</strong></td><td>Todo lo que produjiste: guías de observación, la consulta, el marco lógico, cotizaciones, comprobantes, fotos de la obra.</td></tr>
+        <tr><td><strong>5. Autoevaluaciones</strong></td><td>Las tres de ensayo (semanas 4, 11 y 14) y la que cuenta (semana 17).</td></tr>
+      </table>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">🎫</span> Ticket de salida, estreno <span class="reloj">⏱ 10 min</span></h4>
+      <p>Antes de irte contestas tres cosas: qué te llevas, qué quedó turbio y cómo estuvo el ritmo. Noventa segundos. <strong>Con nombre o sin él, como prefieras.</strong></p>
+      <p>Y aquí va el compromiso que hace que valga la pena contestarlo: <strong>lo que escriban se lee en voz alta el jueves siguiente</strong>, al abrir la sesión, y lo que quedó turbio se atiende ahí mismo antes de seguir. Va a pasar todas las semanas del semestre. Un ticket que nadie lee se deja de contestar a la tercera.</p>
+    </div>
+
+    <div class="bloque">
+      <h4><span class="em">❓</span> La pregunta de la semana que viene <span class="reloj">⏱ 5 min</span></h4>
+      <p>Se dice en voz alta y no se responde hoy:</p>
+      <p class="cita">¿Qué harías con veinte mil pesos que no son tuyos?<cite>Semana 1 · se abre el miércoles 5 de agosto</cite></p>
+      <p>Piénsala el fin de semana. El viernes que viene tu respuesta va a quedar sellada en un sobre con tu nombre y nadie lo va a abrir hasta finales de agosto, cuando la comunidad ya haya dicho lo que quiere.</p>
+    </div>
+
+    <div class="pie-dia">
+      <p><span class="rot">Trae</span> · la carpeta o folder del expediente y pluma. Las copias de los dos pactos las pone el curso, y también están arriba para leerlas antes.</p>
+      <p><span class="rot">Si el tiempo se acorta</span> · el bloque del expediente se puede terminar en casa con esta página abierta. Las objeciones no se recortan nunca.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====================== EL PROGRAMA ====================== -->
+
+<h2 class="corte" id="programa">🗺️ El programa del curso</h2>
+<p style="margin-top:.2rem;color:#68807a;font-size:.95rem">De aquí para abajo, la página deja de hablar de esta semana y habla del semestre completo. Queda abierta todo el año.</p>
 
 <h2>Lo que vas a poder hacer al final</h2>
 <div class="podras">
   <ul>
-    <li><strong>Escuchar antes de diseñar.</strong> Diseñar y levantar una consulta comunitaria que no prometa lo que no puedes cumplir, y aguantar que la respuesta no sea la que esperabas.</li>
-    <li><strong>Convertir una petición en un proyecto.</strong> Pasar de "la gente quiere sombra" a un proyecto con objetivo, actividades, indicadores, presupuesto y cronograma que se sostienen entre sí.</li>
-    <li><strong>Defender por escrito y en voz alta.</strong> Redactar una solicitud de financiamiento y sostenerla frente a un comité que no te conoce, no te debe nada y va a buscarle los agujeros.</li>
-    <li><strong>Manejar dinero ajeno sin quemarte.</strong> Ejercer un presupuesto real, comprobar cada peso, llevar un libro de cuentas que cualquiera pueda revisar y rendir cuentas en público.</li>
-    <li><strong>Ver la política del proyecto.</strong> Identificar quién tiene que decir que sí, quién puede tumbarlo y cómo se construyen los acuerdos que lo sostienen.</li>
-    <li><strong>Medir lo que importa.</strong> Distinguir lo que se cuenta fácil de lo que de verdad cambió, y saber quién cuida la obra cuando el proyecto se acabe.</li>
-    <li><strong>Pedir.</strong> Tocar puertas, aguantar noes y volver a pedir. Es la habilidad menos técnica de la lista y la que más veces va a decidir si tu proyecto existe.</li>
+    <li><strong>👂 Escuchar antes de diseñar.</strong> Diseñar y levantar una consulta comunitaria que no prometa lo que no puedes cumplir, y aguantar que la respuesta no sea la que esperabas.</li>
+    <li><strong>✏️ Convertir una petición en un proyecto.</strong> Pasar de "la gente quiere sombra" a un proyecto con objetivo, actividades, indicadores, presupuesto y cronograma que se sostienen entre sí.</li>
+    <li><strong>🎤 Defender por escrito y en voz alta.</strong> Redactar una solicitud de financiamiento y sostenerla frente a un comité que no te conoce, no te debe nada y va a buscarle los agujeros.</li>
+    <li><strong>🧾 Manejar dinero ajeno sin quemarte.</strong> Ejercer un presupuesto real, comprobar cada peso, llevar un libro de cuentas que cualquiera pueda revisar y rendir cuentas en público.</li>
+    <li><strong>🤝 Ver la política del proyecto.</strong> Identificar quién tiene que decir que sí, quién puede tumbarlo y cómo se construyen los acuerdos que lo sostienen.</li>
+    <li><strong>📏 Medir lo que importa.</strong> Distinguir lo que se cuenta fácil de lo que de verdad cambió, y saber quién cuida la obra cuando el proyecto se acabe.</li>
+    <li><strong>🔔 Pedir.</strong> Tocar puertas, aguantar noes y volver a pedir. Es la habilidad menos técnica de la lista y la que más veces va a decidir si tu proyecto existe.</li>
   </ul>
 </div>
 
-<h2>El programa, unidad por unidad</h2>
+<h2 id="unidades">📚 El programa, unidad por unidad</h2>
 <p style="font-size:.95rem; color:#68807a; margin-top:.2rem">Da clic en cada unidad para desplegarla.</p>
 
 <details class="unidad" open>
@@ -216,7 +428,7 @@
   </div>
 </details>
 
-<h2>Por qué esto le importa a un profesionista del campo</h2>
+<h2 id="oficio">🌾 Por qué esto le importa a un profesionista del campo</h2>
 
 <div class="tarjeta">
   <span class="etiqueta">La realidad del oficio</span>
@@ -233,50 +445,34 @@
 </div>
 
 <div class="tarjeta siembra">
-  <span class="etiqueta">La apuesta del curso</span>
-  <h3 style="margin-top:.2rem">Se aprende haciendo, con consecuencias</h3>
-  <p>Nadie aprende a gestionar proyectos leyendo sobre proyectos, igual que nadie aprende a malabarear leyendo sobre malabares. Por eso aquí las bolas son reales: una presa que existe, un fondo que se gasta, una comunidad que espera y un comité que va a dictaminar sin consideraciones. Se te van a caer varias. De eso se trata.</p>
-</div>
-
-<h2>Cómo se ve una semana típica</h2>
-<div class="tarjeta ritmo">
-  <dl>
-    <dt>Miércoles</dt>
-    <dd>Se abre la semana en este sitio. Trae la pregunta, las herramientas, el gimnasio y el detalle de las dos sesiones. Leerla antes de llegar al salón cambia por completo lo que puedes hacer el jueves.</dd>
-    <dt>Jueves · dos horas</dt>
-    <dd>Sesión de concepto y taller. Empieza retomando lo que quedó turbio en el ticket de la semana anterior, sigue con la herramienta nueva y termina practicándola. Cada jueves suena la campana del no.</dd>
-    <dt>Viernes · dos horas</dt>
-    <dd>Sesión de producción: se aplica lo del jueves al proyecto real, en el salón o en la presa. Cierra con el ticket de salida, que se contesta antes de irse.</dd>
-    <dt>Cuando puedas</dt>
-    <dd>El gimnasio. Ejercicios cortos que entrenan lo de la semana, sin calificación y sin entrega.</dd>
-  </dl>
-</div>
-
-<h2>Cómo se evalúa, en corto</h2>
-<div class="tarjeta">
-  <p>Durante el semestre ningún trabajo lleva número. Todo produce retroalimentación y evidencia, y esa evidencia se acumula en una carpeta física que armas tú: el <a href="../evaluacion/expediente-del-gestor.html">expediente del gestor</a>. La calificación del acta sale al final, en una conversación contigo, sostenida con lo que hay en esa carpeta.</p>
-  <p>No es un curso más fácil por eso. Es un curso donde no puedes esconderte detrás de un promedio: lo que sabes hacer se ve o no se ve. La versión completa, con las reglas y los mínimos, está en <a href="../tu-calificacion.html">Tu calificación</a>, siempre abierta y sin letra chiquita.</p>
-</div>
-
-<h2>Lo que este curso no es</h2>
-<div class="podras">
+  <span class="etiqueta">Lo que este curso no es</span>
+  <h3 style="margin-top:.2rem">Cuatro aclaraciones para que no haya sorpresas</h3>
   <ul>
-    <li><strong>No es un curso de software.</strong> No vas a salir certificado en ninguna metodología ni herramienta de gestión. Vas a salir sabiendo conseguir y ejercer recursos.</li>
+    <li><strong>No es un curso de software.</strong> No vas a salir certificado en ninguna metodología ni herramienta. Vas a salir sabiendo conseguir y ejercer recursos.</li>
     <li><strong>No es un curso de casos.</strong> No hay proyectos inventados para practicar. Hay uno real, con dinero real y gente esperando.</li>
-    <li><strong>No es un curso donde el profesor tenga la respuesta.</strong> Qué se construye en la presa lo decide la consulta, no el criterio de nadie en el salón.</li>
+    <li><strong>No es un curso donde el profesor tenga la respuesta.</strong> Qué se construye en la presa lo decide la consulta, no el criterio de nadie del salón.</li>
     <li><strong>No es un curso individual.</strong> Buena parte del trabajo es de equipo, con la fricción que eso trae. Manejar esa fricción también es contenido.</li>
   </ul>
 </div>
 
-<h2>Lo que necesitas traer el primer día</h2>
-<div class="tarjeta">
-  <p>Una carpeta o folder para el expediente, algo con qué escribir y disposición a preguntar obviedades en público. Nada más. El celular ayuda para el gimnasio y para el ticket de salida, pero no es indispensable: todo el material existe también en papel.</p>
+<h2 id="ritmo">🔁 Cómo se ve una semana típica</h2>
+<div class="tarjeta ritmo">
+  <dl>
+    <dt>🌐 Miércoles</dt>
+    <dd>Se abre la semana en este sitio. Trae la pregunta, el contenido de las dos sesiones, las herramientas y el gimnasio. Leerla antes de llegar al salón cambia por completo lo que puedes hacer el jueves.</dd>
+    <dt>🧠 Jueves · dos horas</dt>
+    <dd>Sesión de concepto y taller. Empieza retomando lo que quedó turbio en el ticket de la semana anterior, sigue con la herramienta nueva y termina practicándola. Cada jueves suena la campana del no.</dd>
+    <dt>🛠️ Viernes · dos horas</dt>
+    <dd>Sesión de producción: se aplica lo del jueves al proyecto real, en el salón o en la presa. Cierra con el ticket de salida, que se contesta antes de irse.</dd>
+    <dt>🏋️ Cuando puedas</dt>
+    <dd>El <a href="../gimnasio.html">gimnasio</a>. Ejercicios cortos que entrenan lo de la semana, sin calificación y sin entrega. Nunca se cierra.</dd>
+  </dl>
 </div>
 
 <div class="chapuzon">
   <h2>Antes de empezar</h2>
   <p>La primera pregunta en serio del curso llega la semana que viene y no es teórica: qué harías con veinte mil pesos que no son tuyos. Piénsala este fin de semana, porque tu respuesta va a quedar sellada en un sobre con tu nombre y nadie lo va a abrir hasta la semana 4, a finales de agosto, cuando la comunidad ya haya dicho lo que quiere. Ahí vas a saber qué tan lejos estabas.</p>
-  <p>Nadie planea fracasar. Pero la mayoría de los que fracasan no tenían un plan. Empecemos por ahí.</p>
+  <p>Nadie planea fracasar. Pero la mayoría de los que fracasan no tenían un plan. Empecemos por ahí. 🤹</p>
 </div>
 
 </main>

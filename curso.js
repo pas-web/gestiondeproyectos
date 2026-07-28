@@ -18,6 +18,8 @@
     { href: 'tu-calificacion.html', t: 'Tu calificación', d: 'Cómo se evalúa este curso, sin letra chiquita.' },
     { href: 'evaluacion/expediente-del-gestor.html', t: 'Expediente del gestor', d: 'La carpeta que armas todo el semestre y te llevas al final.' },
     { href: 'evaluacion/contrato-de-gestion.html', t: 'Mi contrato de gestión', d: 'Tus dos compromisos firmados del semestre.' },
+    { href: 'evaluacion/pacto-de-evaluacion.html', t: 'Pacto de evaluación', d: 'El acuerdo sobre cómo se califica. Se firma el 31 de julio.' },
+    { href: 'evaluacion/pacto-de-ia.html', t: 'Pacto de uso de IA', d: 'Qué sí, qué no y cómo se declara. Se firma el 31 de julio.' },
     { href: 'gimnasio.html', t: 'Todo el gimnasio', d: 'Los ejercicios de las diecisiete semanas, siempre abiertos.' }
   ];
 
@@ -96,7 +98,55 @@
     + 'table.minutos tr:last-child td{border-bottom:none}'
     + 'table.minutos td.m{width:4.6rem;font-family:Georgia,serif;color:var(--arena,#D9A441);font-weight:bold;white-space:nowrap}'
     + 'details.sesion .trae{margin:.9rem 0 0;padding-top:.7rem;border-top:1px solid var(--borde,#CFE3DD);font-size:.95rem;color:#45605a}'
-    + 'details.sesion .ajuste{margin:.5rem 0 0;font-size:.93rem;color:#68807a}';
+    + 'details.sesion .ajuste{margin:.5rem 0 0;font-size:.93rem;color:#68807a}'
+
+    /* ---- Formato de día 2.0: el contenido de la sesión vive en la página ---- */
+    + '.dia{background:#fff;border:1px solid var(--borde,#CFE3DD);border-radius:14px;margin:1.1rem 0 1.8rem;overflow:hidden}'
+    + '.dia>.cabeza{background:var(--profundo,#0B3C49);color:#EAF4F2;padding:1rem 1.3rem}'
+    + '.dia>.cabeza .cuando{font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;opacity:.72;font-weight:bold}'
+    + '.dia>.cabeza h3{font-family:Georgia,serif;font-size:1.5rem;line-height:1.2;margin:.2rem 0 .3rem;color:#fff}'
+    + '.dia>.cabeza .foco{margin:0;font-size:.98rem;opacity:.92;font-family:Georgia,serif;font-style:italic}'
+    + '.dia>.cuerpo{padding:.2rem 1.3rem 1.2rem}'
+    + '.bloque{border-top:1px solid var(--borde,#CFE3DD);padding-top:1.15rem;margin-top:1.15rem}'
+    + '.bloque:first-child{border-top:none;margin-top:.9rem;padding-top:0}'
+    + '.bloque>h4{display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap;font-family:Georgia,serif;color:var(--profundo,#0B3C49);font-size:1.18rem;line-height:1.3;margin:0 0 .55rem}'
+    + '.bloque>h4 .em{font-size:1.35rem;line-height:1;flex:none}'
+    + '.reloj{margin-left:auto;font-family:"Source Sans 3",system-ui,sans-serif;font-size:.7rem;font-weight:bold;letter-spacing:.07em;text-transform:uppercase;color:#7C6222;background:#FBEFD5;border:1px solid #E8D4A4;border-radius:999px;padding:.15rem .62rem;white-space:nowrap;flex:none}'
+    + '.bloque p{margin:.55rem 0}'
+    + '.bloque ul,.bloque ol{margin:.5rem 0;padding-left:1.25rem}'
+    + '.bloque li{margin:.35rem 0}'
+    + '.pasa{background:#EDF5F3;border-left:4px solid var(--marca,#0F6E6E);border-radius:0 10px 10px 0;padding:.7rem 1rem;margin:.7rem 0;font-size:.97rem}'
+    + '.pasa b{color:var(--profundo,#0B3C49)}'
+    + '.ojo{background:#FDF6E7;border-left:4px solid var(--arena,#D9A441);border-radius:0 10px 10px 0;padding:.75rem 1rem;margin:.9rem 0;font-size:.97rem;color:#5C4A1C}'
+    + '.dato{background:#F0F6FB;border-left:4px solid #3C7EA8;border-radius:0 10px 10px 0;padding:.75rem 1rem;margin:.9rem 0;font-size:.97rem;color:#1F4258}'
+    + '.cita{font-family:Georgia,serif;font-style:italic;font-size:1.22rem;line-height:1.45;color:var(--profundo,#0B3C49);border-left:5px solid var(--arena,#D9A441);margin:1.1rem 0;padding:.3rem 0 .3rem 1.1rem}'
+    + '.cita cite{display:block;font-size:.82rem;font-style:normal;font-family:"Source Sans 3",system-ui,sans-serif;color:#7d918c;margin-top:.45rem;letter-spacing:.03em}'
+    + '.flujo{display:flex;flex-wrap:wrap;align-items:stretch;gap:.4rem;margin:1rem 0}'
+    + '.flujo .paso{flex:1 1 8rem;background:#F7FAF9;border:1px solid var(--borde,#CFE3DD);border-radius:10px;padding:.6rem .7rem;text-align:center;font-size:.86rem;line-height:1.35;color:#45605a}'
+    + '.flujo .paso b{display:block;font-size:1.5rem;line-height:1.5;margin-bottom:.1rem}'
+    + '.flujo .paso .t{display:block;font-weight:bold;color:var(--profundo,#0B3C49);font-size:.92rem}'
+    + '.flujo .flecha{align-self:center;color:var(--arena,#D9A441);font-weight:bold;font-size:1.1rem;flex:none}'
+    + '.contra{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1rem 0}'
+    + '.contra>div{border-radius:12px;padding:.85rem 1rem;font-size:.95rem;line-height:1.5}'
+    + '.contra .mal{background:#FBF0EE;border:1px solid #EBCFC9;color:#6B2F22}'
+    + '.contra .bien{background:#EEF6F0;border:1px solid #C9E2CF;color:#1F4A2C}'
+    + '.contra .rot{display:block;font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;font-weight:bold;opacity:.75;margin-bottom:.3rem}'
+    + '@media(max-width:620px){.contra{grid-template-columns:1fr}}'
+    + 'table.veredicto{width:100%;border-collapse:collapse;margin:.8rem 0;font-size:.94rem}'
+    + 'table.veredicto th{background:#E4EFEB;color:var(--profundo,#0B3C49);text-align:left;padding:.5rem .65rem;border:1px solid var(--borde,#CFE3DD);font-size:.86rem;letter-spacing:.03em}'
+    + 'table.veredicto td{padding:.55rem .65rem;border:1px solid var(--borde,#CFE3DD);vertical-align:top;background:#fff}'
+    + 'table.veredicto td.v{text-align:center;white-space:nowrap;font-weight:bold;width:5.4rem}'
+    + 'table.veredicto tr.si td.v{background:#EEF6F0;color:#1F4A2C}'
+    + 'table.veredicto tr.cuidado td.v{background:#FDF6E7;color:#7C6222}'
+    + 'table.veredicto tr.no td.v{background:#FBF0EE;color:#6B2F22}'
+    + '.pie-dia{margin:1.4rem -1.3rem -1.2rem;padding:.95rem 1.3rem 1.1rem;background:#F7FAF9;border-top:1px solid var(--borde,#CFE3DD);font-size:.93rem;color:#5b7671}'
+    + '.pie-dia p{margin:.35rem 0}'
+    + '.pie-dia .rot{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:bold;color:var(--marca,#0F6E6E)}'
+    + '.llave{background:var(--profundo,#0B3C49);color:#EAF4F2;border-radius:12px;padding:.9rem 1.15rem;margin:1rem 0;font-size:1.02rem}'
+    + '.llave .rot{display:block;font-size:.71rem;letter-spacing:.12em;text-transform:uppercase;color:var(--arena,#D9A441);font-weight:bold;margin-bottom:.25rem}'
+    + '.indice{display:flex;flex-wrap:wrap;gap:.45rem;margin:.8rem 0 0}'
+    + '.indice a{display:inline-block;background:#fff;border:1px solid var(--borde,#CFE3DD);border-radius:999px;padding:.3rem .85rem;font-size:.88rem;text-decoration:none;color:var(--marca,#0F6E6E);font-weight:bold}'
+    + '.indice a:hover{background:#E4EFEB}';
 
   var st = document.createElement('style');
   st.textContent = css;
