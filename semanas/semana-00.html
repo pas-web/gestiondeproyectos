@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 0 · El programa · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+    background: var(--fondo); color: var(--texto);
+    line-height: 1.65; font-size: 1.05rem;
+  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
+  .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
+  .bajada { color: #45605a; margin-top: 0; }
+
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
+
+  .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
+  .podras ul { margin: .4rem 0 .2rem; padding-left: 1.2rem; }
+  .podras li { margin: .5rem 0; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; margin: .9rem 0; }
+  .tarjeta .etiqueta { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+  .siembra { border-left: 5px solid var(--arena); }
+
+  details.unidad { background: #fff; border: 1px solid var(--borde); border-radius: 12px; margin: .6rem 0; overflow: hidden; }
+  details.unidad summary { cursor: pointer; list-style: none; padding: .9rem 1.2rem; font-family: Georgia, serif; color: var(--profundo); font-size: 1.08rem; display: flex; align-items: baseline; gap: .6rem; }
+  details.unidad summary::-webkit-details-marker { display: none; }
+  details.unidad summary::before { content: "+"; font-family: Georgia, serif; color: var(--arena); font-weight: bold; font-size: 1.15rem; width: 1rem; flex: none; }
+  details.unidad[open] > summary::before { content: "\2013"; }
+  details.unidad summary .sub { margin-left: auto; font-size: .8rem; color: #8aa39c; font-family: 'Source Sans 3', system-ui, sans-serif; white-space: nowrap; }
+  details.unidad .cuerpo { padding: .2rem 1.2rem 1.1rem; }
+  details.unidad .guia { font-family: Georgia, serif; font-style: italic; color: var(--marca); margin: .2rem 0 .7rem; }
+  details.unidad ul { margin: .3rem 0 .6rem; padding-left: 1.2rem; }
+  details.unidad li { margin: .35rem 0; }
+  details.unidad .cierra { font-size: .93rem; color: #68807a; border-top: 1px dashed var(--borde); padding-top: .6rem; margin-bottom: 0; }
+
+  .ritmo dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
+  .ritmo dt:first-child { margin-top: .2rem; }
+  .ritmo dd { margin: .1rem 0 0; }
+
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon p { margin: .4rem 0; }
+  a { color: var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Semana 0 · El programa</div>
+  <div class="migas">Siempre abierta · Sin candado · Léela antes de la primera sesión</div>
+</header>
+
+<main>
+
+<p class="pregunta">¿Para qué te va a servir esta materia cuando ya nadie te esté calificando?</p>
+<p class="bajada">Esta página es el programa del curso, escrito para que lo entiendas y no para que lo firmes. Aquí está qué vas a aprender, en qué orden, con qué lo vas a demostrar y por qué le sirve a alguien que se va a dedicar a la producción agropecuaria sustentable. Si algo de lo que sigue no te queda claro, esa es exactamente la pregunta que hay que hacer el primer día.</p>
+
+<h2>El encargo del semestre</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">Lo que hay</span>
+  <h3 style="margin-top:.2rem">Una presa, un fondo y una comunidad</h3>
+  <p>A unos minutos del campus está la presa de La Florida. La gente la usa a su manera: alguien pesca, alguien pasea, alguien va a mirar el agua. No hay sombra pensada, ni dónde sentarse, ni nada para los niños. El encargo del semestre es convertir esa orilla en un espacio que la comunidad quiera usar.</p>
+  <p>Para eso hay un fondo de $20,000 que este grupo va a ejercer de verdad, con reglas, con comprobantes y con libro de cuentas público. No es un ejercicio de escritorio ni un caso de estudio: al final del semestre la presa va a estar distinta, o no, y las dos cosas van a haber sido decisión de ustedes.</p>
+  <p>Lo que se construya no lo decide el profesor. Lo decide la gente de La Florida, y en la unidad 1 vamos a ir a preguntárselo bien.</p>
+</div>
+
+<h2>Lo que vas a poder hacer al final</h2>
+<div class="podras">
+  <ul>
+    <li><strong>Escuchar antes de diseñar.</strong> Diseñar y levantar una consulta comunitaria que no prometa lo que no puedes cumplir, y aguantar que la respuesta no sea la que esperabas.</li>
+    <li><strong>Convertir una petición en un proyecto.</strong> Pasar de "la gente quiere sombra" a un proyecto con objetivo, actividades, indicadores, presupuesto y cronograma que se sostienen entre sí.</li>
+    <li><strong>Defender por escrito y en voz alta.</strong> Redactar una solicitud de financiamiento y sostenerla frente a un comité que no te conoce, no te debe nada y va a buscarle los agujeros.</li>
+    <li><strong>Manejar dinero ajeno sin quemarte.</strong> Ejercer un presupuesto real, comprobar cada peso, llevar un libro de cuentas que cualquiera pueda revisar y rendir cuentas en público.</li>
+    <li><strong>Ver la política del proyecto.</strong> Identificar quién tiene que decir que sí, quién puede tumbarlo y cómo se construyen los acuerdos que lo sostienen.</li>
+    <li><strong>Medir lo que importa.</strong> Distinguir lo que se cuenta fácil de lo que de verdad cambió, y saber quién cuida la obra cuando el proyecto se acabe.</li>
+    <li><strong>Pedir.</strong> Tocar puertas, aguantar noes y volver a pedir. Es la habilidad menos técnica de la lista y la que más veces va a decidir si tu proyecto existe.</li>
+  </ul>
+</div>
+
+<h2>El programa, unidad por unidad</h2>
+<p style="font-size:.95rem; color:#68807a; margin-top:.2rem">Da clic en cada unidad para desplegarla.</p>
+
+<details class="unidad" open>
+  <summary>Unidad 1 · Escuchar la presa<span class="sub">semanas 1 a 4 · agosto</span></summary>
+  <div class="cuerpo">
+    <p class="guia">¿Qué quiere la gente y cómo se sabe?</p>
+    <p>La unidad donde se resiste la tentación de llegar con la solución en la mano. Empieza distinguiendo las dos palabras que le dan nombre a la materia (manejar es llevar el proyecto por dentro, gestionar es conseguir por fuera lo que necesita) y termina con datos de campo levantados por ustedes.</p>
+    <ul>
+      <li><strong>Semana 1 · La presa y el fondo.</strong> El encargo, las reglas del juego y tu pronóstico sellado en un sobre.</li>
+      <li><strong>Semana 2 · Agencia.</strong> La proactividad como músculo entrenable, el anti-currículum y la primera visita a la presa.</li>
+      <li><strong>Semana 3 · Diseñar la consulta.</strong> Cómo se pregunta sin prometer, y cómo una pregunta mal hecha fabrica la respuesta que quería el que pregunta.</li>
+      <li><strong>Semana 4 · La consulta y el sobre.</strong> Salimos a consultar de verdad, y se abren los sobres de la semana 1 frente al grupo.</li>
+    </ul>
+    <p class="cierra">Lo que te llevas: una consulta levantada con método y la experiencia de comparar lo que creías con lo que la gente dijo.</p>
+  </div>
+</details>
+
+<details class="unidad">
+  <summary>Unidad 2 · Diseñar lo que pidieron<span class="sub">semanas 5 a 10 · septiembre y octubre</span></summary>
+  <div class="cuerpo">
+    <p class="guia">¿Cómo se convierte una petición en un proyecto que se sostiene?</p>
+    <p>La unidad más técnica del curso y la más larga. Aquí se aprende el oficio del papel: las reglas de un fondo, la lógica causal que sostiene una intervención, los indicadores, el presupuesto y la política que decide si el proyecto camina.</p>
+    <ul>
+      <li><strong>Semana 5 · Líneas y reglas del fondo.</strong> Cómo se reparte lo que no alcanza, y por qué las reglas de operación se leen antes de soñar.</li>
+      <li><strong>Semana 6 · Prototipo en la presa.</strong> Probar una idea barata antes de gastarle dinero.</li>
+      <li><strong>Semana 7 · La apuesta causal.</strong> Por qué crees que eso va a funcionar, y qué evidencia respalda tu apuesta.</li>
+      <li><strong>Semana 8 · Ingeniería del papel.</strong> Objetivos, indicadores y metas: cómo se mide una promesa sin hacer trampa.</li>
+      <li><strong>Semana 9 · La política del proyecto.</strong> Quién tiene que decir que sí, quién puede tumbarlo, y cómo se cierran acuerdos que aguantan.</li>
+      <li><strong>Semana 10 · Presupuesto y pre-pitch.</strong> Cuánto cuesta hacerlo de verdad, y cómo se defiende en cinco minutos.</li>
+    </ul>
+    <p class="cierra">Lo que te llevas: una solicitud de financiamiento completa, escrita por ti, lista para presentarse ante un comité.</p>
+  </div>
+</details>
+
+<details class="unidad">
+  <summary>Unidad 3 · Construir en la presa<span class="sub">semanas 11 a 14 · octubre y noviembre</span></summary>
+  <div class="cuerpo">
+    <p class="guia">¿Qué pasa cuando el plan se topa con la realidad?</p>
+    <p>La unidad donde el papel se convierte en obra y aparecen las cosas que ningún manual advierte: el proveedor que no llega, el permiso que faltaba, el acuerdo que cada quien entendió distinto y el dinero que se acaba antes que el trabajo.</p>
+    <ul>
+      <li><strong>Semana 11 · La Dictaminadora.</strong> Un comité real dictamina los proyectos del grupo. Algunos no pasan, y esa es parte de la clase.</li>
+      <li><strong>Semana 12 · La faena y el libro del fondo.</strong> Quién carga qué, y cómo se lleva un libro de cuentas que aguante que lo revisen.</li>
+      <li><strong>Semana 13 · El velorio del proyecto.</strong> Imaginar el proyecto ya fracasado para encontrar hoy lo que lo iba a matar.</li>
+      <li><strong>Semana 14 · Obra y comunicación.</strong> La obra no habla sola: cómo se cuenta lo que se hizo y a quién.</li>
+    </ul>
+    <p class="cierra">Lo que te llevas: obra ejecutada, cuentas comprobadas y la experiencia de que te dictaminen sin consideraciones.</p>
+  </div>
+</details>
+
+<details class="unidad">
+  <summary>Unidad 4 · Entregar la presa viva<span class="sub">semanas 15 a 17 · noviembre</span></summary>
+  <div class="cuerpo">
+    <p class="guia">¿Cómo se sabe que funcionó y quién lo cuida después?</p>
+    <p>El cierre. La pregunta incómoda de todo proyecto rural no es si se construyó, sino si sigue sirviendo tres años después. Aquí se mide, se audita y se entrega.</p>
+    <ul>
+      <li><strong>Semana 15 · Medir lo que importa.</strong> La diferencia entre contar lo fácil y medir el cambio, y quién se queda a cuidar la obra.</li>
+      <li><strong>Semana 16 · Auditoría y radar.</strong> Dónde quedó cada peso, y dónde están las convocatorias del año que entra.</li>
+      <li><strong>Semana 17 · La inauguración.</strong> Se entrega a la comunidad y cada quien sostiene su conferencia final.</li>
+    </ul>
+    <p class="cierra">Lo que te llevas: el expediente completo, la obra entregada y tu calificación acordada en la mesa.</p>
+  </div>
+</details>
+
+<h2>Por qué esto le importa a un profesionista del campo</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La realidad del oficio</span>
+  <h3 style="margin-top:.2rem">Casi todo lo que vas a hacer va a llamarse proyecto</h3>
+  <p>Un egresado de Producción Agropecuaria Sustentable rara vez trabaja solo con animales, suelo y plantas. Trabaja con grupos de productores que necesitan un módulo, con ejidos que discuten su agua, con comités que administran un recurso común, con dependencias que abren convocatorias y las cierran en tres semanas. Casi todo ese trabajo llega en forma de proyecto: alguien tiene que escribirlo, conseguir el dinero, ejercerlo, comprobarlo y explicar qué pasó.</p>
+  <p>Esa parte casi nunca se enseña, y es la que decide si el conocimiento técnico llega a la parcela o se queda en el cuaderno. Puedes saber exactamente cómo se diseña un sistema silvopastoril y no lograr que exista, porque no supiste conseguir los recursos ni sostener el acuerdo que lo hacía posible.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">Lo que se practica aquí</span>
+  <h3 style="margin-top:.2rem">Y dónde lo vas a volver a ver</h3>
+  <p>La consulta comunitaria de la unidad 1 es el mismo instrumento con el que se hace un diagnóstico participativo antes de cualquier programa de extensión. La ingeniería del papel de la unidad 2 es la que piden las reglas de operación de los programas federales y las convocatorias de la banca de desarrollo. El libro del fondo de la unidad 3 es la comprobación que exige cualquier instancia que te transfiera un peso. La medición de la unidad 4 es lo que separa un proyecto que se reporta como exitoso de uno que de verdad cambió algo.</p>
+  <p>Y en una Reserva de la Biosfera, donde casi ninguna decisión sobre el territorio es de una sola persona, la parte política del proyecto no es un adorno: es la condición para que exista.</p>
+</div>
+
+<div class="tarjeta siembra">
+  <span class="etiqueta">La apuesta del curso</span>
+  <h3 style="margin-top:.2rem">Se aprende haciendo, con consecuencias</h3>
+  <p>Nadie aprende a gestionar proyectos leyendo sobre proyectos, igual que nadie aprende a malabarear leyendo sobre malabares. Por eso aquí las bolas son reales: una presa que existe, un fondo que se gasta, una comunidad que espera y un comité que va a dictaminar sin consideraciones. Se te van a caer varias. De eso se trata.</p>
+</div>
+
+<h2>Cómo se ve una semana típica</h2>
+<div class="tarjeta ritmo">
+  <dl>
+    <dt>Miércoles</dt>
+    <dd>Se abre la semana en este sitio. Trae la pregunta, las herramientas, el gimnasio y el detalle de las dos sesiones. Leerla antes de llegar al salón cambia por completo lo que puedes hacer el jueves.</dd>
+    <dt>Jueves · dos horas</dt>
+    <dd>Sesión de concepto y taller. Empieza retomando lo que quedó turbio en el ticket de la semana anterior, sigue con la herramienta nueva y termina practicándola. Cada jueves suena la campana del no.</dd>
+    <dt>Viernes · dos horas</dt>
+    <dd>Sesión de producción: se aplica lo del jueves al proyecto real, en el salón o en la presa. Cierra con el ticket de salida, que se contesta antes de irse.</dd>
+    <dt>Cuando puedas</dt>
+    <dd>El gimnasio. Ejercicios cortos que entrenan lo de la semana, sin calificación y sin entrega.</dd>
+  </dl>
+</div>
+
+<h2>Cómo se evalúa, en corto</h2>
+<div class="tarjeta">
+  <p>Durante el semestre ningún trabajo lleva número. Todo produce retroalimentación y evidencia, y esa evidencia se acumula en una carpeta física que armas tú: el <a href="../evaluacion/expediente-del-gestor.html">expediente del gestor</a>. La calificación del acta sale al final, en una conversación contigo, sostenida con lo que hay en esa carpeta.</p>
+  <p>No es un curso más fácil por eso. Es un curso donde no puedes esconderte detrás de un promedio: lo que sabes hacer se ve o no se ve. La versión completa, con las reglas y los mínimos, está en <a href="../tu-calificacion.html">Tu calificación</a>, siempre abierta y sin letra chiquita.</p>
+</div>
+
+<h2>Lo que este curso no es</h2>
+<div class="podras">
+  <ul>
+    <li><strong>No es un curso de software.</strong> No vas a salir certificado en ninguna metodología ni herramienta de gestión. Vas a salir sabiendo conseguir y ejercer recursos.</li>
+    <li><strong>No es un curso de casos.</strong> No hay proyectos inventados para practicar. Hay uno real, con dinero real y gente esperando.</li>
+    <li><strong>No es un curso donde el profesor tenga la respuesta.</strong> Qué se construye en la presa lo decide la consulta, no el criterio de nadie en el salón.</li>
+    <li><strong>No es un curso individual.</strong> Buena parte del trabajo es de equipo, con la fricción que eso trae. Manejar esa fricción también es contenido.</li>
+  </ul>
+</div>
+
+<h2>Lo que necesitas traer el primer día</h2>
+<div class="tarjeta">
+  <p>Una carpeta o folder para el expediente, algo con qué escribir y disposición a preguntar obviedades en público. Nada más. El celular ayuda para el gimnasio y para el ticket de salida, pero no es indispensable: todo el material existe también en papel.</p>
+</div>
+
+<div class="chapuzon">
+  <h2>Antes de empezar</h2>
+  <p>La primera pregunta del curso no es teórica y te la vamos a hacer el jueves: qué harías con veinte mil pesos que no son tuyos. Piénsala. En cuatro semanas vas a saber qué tan lejos estabas de lo que la gente iba a pedir, porque tu respuesta va a estar sellada en un sobre con tu nombre.</p>
+  <p>Nadie planea fracasar. Pero la mayoría de los que fracasan no tenían un plan. Empecemos por ahí.</p>
+</div>
+
+</main>
+
+<script src="../curso.js"></script>
+
+</body>
+</html>

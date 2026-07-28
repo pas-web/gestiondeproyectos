@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todo el gimnasio · Gestión y Manejo de Proyectos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.65; font-size:1.05rem; }
+  header.curso { background:var(--profundo); color:#EAF4F2; padding:1.1rem 1.5rem; }
+  header.curso .curso-nombre { font-size:.85rem; letter-spacing:.12em; text-transform:uppercase; opacity:.75; }
+  header.curso .semana-titulo { font-family:Georgia,'Times New Roman',serif; font-size:1.9rem; margin:.2rem 0 0; font-weight:bold; }
+  header.curso .migas { font-size:.85rem; opacity:.75; margin-top:.3rem; }
+  main { max-width:780px; margin:0 auto; padding:1.5rem 1.2rem 4rem; }
+  .pregunta { font-family:Georgia,serif; font-size:1.5rem; line-height:1.3; color:var(--profundo); margin:1.4rem 0 .4rem; }
+  .pregunta::before { content:""; display:block; width:64px; height:5px; background:var(--arena); margin-bottom:.9rem; border-radius:3px; }
+  .bajada { color:#45605a; margin-top:0; }
+  .pista { font-size:.95rem; color:#68807a; margin:1.6rem 0 .6rem; }
+  details { background:#fff; border:1px solid var(--borde); border-radius:12px; margin:.6rem 0; overflow:hidden; }
+  summary { cursor:pointer; list-style:none; padding:.85rem 1.1rem; font-family:Georgia,serif; color:var(--profundo); font-size:1.05rem; display:flex; align-items:baseline; gap:.6rem; }
+  summary::-webkit-details-marker { display:none; }
+  summary::before { content:"+"; font-family:Georgia,serif; color:var(--arena); font-weight:bold; font-size:1.15rem; width:1rem; flex:none; }
+  details[open]>summary::before { content:"\2013"; }
+  summary .sub { margin-left:auto; font-size:.8rem; color:#8aa39c; font-family:'Source Sans 3',system-ui,sans-serif; white-space:nowrap; }
+  .cuerpo { padding:.2rem 1.1rem 1rem; }
+  .sem { padding:.6rem 0 .2rem; border-top:1px solid var(--borde); }
+  .sem:first-child { border-top:none; }
+  .sem h3 { color:var(--profundo); font-size:1.02rem; margin:.6rem 0 .1rem; }
+  .sem .q { font-family:Georgia,serif; font-style:italic; color:#68807a; margin:.1rem 0 .5rem; font-size:.93rem; }
+  .gimnasio-item { display:flex; gap:.8rem; align-items:baseline; padding:.5rem 0; border-bottom:1px dashed var(--borde); }
+  .gimnasio-item:last-child { border-bottom:none; }
+  .gimnasio-item .num { font-family:Georgia,serif; color:var(--arena); font-weight:bold; font-size:1.1rem; min-width:1.1rem; }
+  .gimnasio-item a { color:var(--marca); text-decoration:none; }
+  .gimnasio-item a:hover { text-decoration:underline; }
+  .nota { background:#fff; border-left:5px solid var(--arena); border-radius:12px; padding:1rem 1.3rem; margin:1.4rem 0; }
+  footer { text-align:center; font-size:.85rem; color:#8aa39c; padding:2rem 1rem; }
+  a { color:var(--marca); }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">Todo el gimnasio</div>
+  <div class="migas">Siempre abierto · 51 ejercicios · No se califican</div>
+</header>
+
+<main>
+
+<p class="pregunta">Los ejercicios no se entregan. Se usan.</p>
+<p class="bajada">Aquí están los ejercicios de las diecisiete semanas, juntos y sin candado. Cada uno abre en su propia página, funciona en el celular y no manda nada a ningún lado: lo que escribas se queda en tu pantalla, así que cópialo a tu bitácora si lo quieres conservar. Ninguno lleva número. Sirven para entrenar antes de la clase, para repasar después y para prepararte cuando algo quedó turbio.</p>
+
+<div class="nota">
+  <p style="margin:.2rem 0"><strong>Cómo se usa el gimnasio.</strong> Los ejercicios de una semana se entienden mejor después de leer su página, pero puedes entrar cuando quieras. Los que fallan te dan una pista antes que la respuesta: si te la dieran de inmediato no estarías entrenando nada.</p>
+</div>
+
+<p class="pista">Da clic en cualquier unidad para desplegar sus semanas.</p>
+
+  <details>
+    <summary>Unidad 1 · Escuchar la presa<span class="sub">semanas 1 a 4</span></summary>
+    <div class="cuerpo">
+    <div class="sem">
+      <h3>Semana 1 · La presa y el fondo</h3>
+      <p class="q">¿Qué harías con veinte mil pesos que no son tuyos?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-01/ejercicio-11-refranes-de-gestion.html"><strong>Refranes de gestión</strong></a> · Ocho refranes de los de tu casa, a ver de qué hablan en realidad: de manejar, de gestionar o de planear.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-01/ejercicio-22-manejo-o-gestion.html"><strong>¿Manejo o gestión?</strong></a> · Diez situaciones reales de proyectos rurales para afilar la distinción de la semana.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-01/ejercicio-32-el-ciclo-por-capas.html"><strong>El ciclo por capas</strong></a> · Arma el mapa del curso: ordena lo que le pasa a un proyecto desde la idea hasta el financiamiento.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 2 · Agencia</h3>
+      <p class="q">¿Qué pedirías si el no ya lo tuvieras?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-02/ejercicio-11-las-puertas-ocultas.html"><strong>Las puertas ocultas</strong></a> · Seis situaciones atoradas. Encuentra la movida agéntica en cada una.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-02/ejercicio-21-mi-primer-no.html"><strong>Mi primer no</strong></a> · Diseña una petición real esperando que te la nieguen. En este curso, eso es ganar.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-02/ejercicio-32-mirar-como-gestor.html"><strong>Mirar como gestor</strong></a> · La guía de observación para la visita del viernes a la presa.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 3 · Diseñar la consulta</h3>
+      <p class="q">¿Cómo se pregunta sin prometer?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-03/ejercicio-11-la-pregunta-tramposa.html"><strong>La pregunta tramposa</strong></a> · Ocho preguntas candidatas para la consulta. Unas sirven y otras traen trampa; atrapa cuál es cuál.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-03/ejercicio-21-cazar-a-la-ia.html"><strong>Cazarle las trampas a la IA</strong></a> · Un guion de consulta escrito por IA, con sus trampas escondidas. Márcalas todas.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-03/ejercicio-32-el-guion-de-mi-estacion.html"><strong>El guion de mi estación</strong></a> · Arma la apertura, las preguntas y el cierre de tu estación para el diseño fino del viernes.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 4 · La consulta y el sobre</h3>
+      <p class="q">¿Y si la respuesta no es la que esperabas?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-04/ejercicio-11-el-dia-de-la-consulta.html"><strong>El día de la consulta</strong></a> · Siete aprietos que pueden pasarte el viernes en la orilla. Decide qué haces en cada uno, antes de que te pasen de verdad.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-04/ejercicio-21-mis-dos-minutos.html"><strong>Mis dos minutos</strong></a> · La estructura para contar lo que escuchó tu estación. Se llena en cinco minutos al final de la consulta.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-04/ejercicio-32-el-registro-en-limpio.html"><strong>El registro en limpio</strong></a> · La misma noche del viernes, pasa tu registro crudo a limpio. Mañana ya no te vas a acordar; hoy sí.</div></div>
+    </div>
+    </div>
+  </details>
+  <details>
+    <summary>Unidad 2 · Diseñar lo que pidieron<span class="sub">semanas 5 a 10</span></summary>
+    <div class="cuerpo">
+    <div class="sem">
+      <h3>Semana 5 · Líneas y reglas del fondo</h3>
+      <p class="q">¿Cómo se reparte lo que no alcanza?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-05/ejercicio-11-la-letra-chiquita.html"><strong>La letra chiquita</strong></a> · Siete cláusulas de convocatorias reales. Descifra qué implica cada una antes de que una te descalifique.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-05/ejercicio-21-de-peticiones-a-lineas.html"><strong>De peticiones a líneas</strong></a> · Diez voces de una consulta. Acomoda cada una en su línea sin traicionar lo que dijo.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-05/ejercicio-32-mi-linea-mi-equipo.html"><strong>Mi línea, mi equipo</strong></a> · Tu postulación con evidencia, los oficios de tu equipo y tus tres preguntas para las reglas.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 6 · Prototipo en la presa</h3>
+      <p class="q">¿Cómo pruebas una idea antes de gastar un peso en ella?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-06/ejercicio-11-prototipo-barato.html"><strong>Prototipo barato</strong></a> · De la petición de la señora al mockup con lo que hay en tu casa.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-06/ejercicio-22-guia-observacion.html"><strong>Guía de observación</strong></a> · Qué contar y qué anotar durante las tres horas en la orilla: paradas, rodeos, fotos, preguntas que te hagan.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-06/ejercicio-32-prototipo-maqueta-proyecto.html"><strong>Prototipo vs. maqueta vs. proyecto</strong></a> · Ejercicio corto para no confundir el ensayo con la obra.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 7 · La apuesta causal</h3>
+      <p class="q">¿Por qué crees que eso va a funcionar?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-07/ejercicio-11-producto-o-cambio.html"><strong>¿Producto o cambio?</strong></a> · Ocho enunciados de proyectos de por acá. Acomódalos en su escalón antes de que te los acomoden en el pitch.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-07/ejercicio-21-la-cadena-rota.html"><strong>La cadena rota</strong></a> · Seis cadenas de resultados con falla escondida (una se salva). Diagnostica cuál es cuál.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-07/ejercicio-32-la-cadena-de-mi-componente.html"><strong>La cadena de mi componente</strong></a> · Arma tu apuesta eslabón por eslabón y deja listo el prompt para el duelo del viernes.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 8 · Ingeniería del papel</h3>
+      <p class="q">¿Cómo se mide una promesa?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-08/ejercicio-11-el-objetivo-en-la-lupa.html"><strong>El objetivo en la lupa</strong></a> · Siete objetivos con algo de menos (o de más). Diagnostica qué prueba reprueban.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-08/ejercicio-21-el-renglon-chueco.html"><strong>El renglón chueco</strong></a> · Seis renglones de marcos lógicos con falla escondida (uno se salva). El mismo ojo del duelo, en versión tabla.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-08/ejercicio-32-mi-marco-expres.html"><strong>Mi marco exprés</strong></a> · Arma la tabla de tu componente renglón por renglón y deja listo el prompt del duelo 2.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 9 · La política del proyecto</h3>
+      <p class="q">¿Quién tiene que decir que sí?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-09/ejercicio-11-el-tablero-del-manantial.html"><strong>El tablero del manantial</strong></a> · Siete involucrados del proyecto del manantial (el vecino de siempre del gimnasio). Ubica a cada quien en su zona y elige la jugada.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-09/ejercicio-21-el-mal-trato.html"><strong>El mal trato</strong></a> · Seis negociaciones: cinco salieron chuecas y una se salva. Ponle nombre a la falla antes de que te pase a ti.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-09/ejercicio-32-mi-mapa-y-mi-trato.html"><strong>Mi mapa y mi trato</strong></a> · Levanta el mapa de tu componente y deja armado el trato real de la semana. Es la materia prima del reto 3.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 10 · Presupuesto y pre-pitch</h3>
+      <p class="q">¿Cuánto cuesta hacerlo de verdad?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-10/ejercicio-11-el-presupuesto-agujerado.html"><strong>El presupuesto agujerado</strong></a> · Siete partidas del proyecto del manantial. Cinco traen agujero, una excede algo peor y una se salva.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-10/ejercicio-21-el-cronograma-iluso.html"><strong>El cronograma iluso</strong></a> · Seis renglones de calendario con falla escondida (uno se salva). Dependencias, jorobas y lluvia.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-10/ejercicio-32-mi-solicitud-y-mi-pitch.html"><strong>Mi solicitud y mi pitch</strong></a> · El checklist final de la solicitud y el guion de tus dos minutos. Se llena esta semana o no sirve.</div></div>
+    </div>
+    </div>
+  </details>
+  <details>
+    <summary>Unidad 3 · Construir en la presa<span class="sub">semanas 11 a 14</span></summary>
+    <div class="cuerpo">
+    <div class="sem">
+      <h3>Semana 11 · La Dictaminadora</h3>
+      <p class="q">¿Y si dicen que no?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-11/ejercicio-11-los-ojos-del-comite.html"><strong>Los ojos del comité</strong></a> · Seis preguntas de dictaminadores al proyecto del manantial. Adivina qué rubro está pesando cada una.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-11/ejercicio-21-la-respuesta-al-fallo.html"><strong>La respuesta al fallo</strong></a> · Seis respuestas a la retroalimentación: cinco fallan por algo con nombre y una se salva.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-11/ejercicio-32-mi-dia-ante-el-comite.html"><strong>Mi día ante el comité</strong></a> · El pitch afinado, las preguntas probables y tus tres planes: todo, parcial o nada.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 12 · La faena y el libro del fondo</h3>
+      <p class="q">¿Quién carga qué?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-12/ejercicio-11-el-pleito-del-yo-pense.html"><strong>El pleito del &quot;yo pensé&quot;</strong></a> · Seis descalabros de obra colectiva en el manantial. Diagnostica qué letra del RACI faltó en cada uno.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-12/ejercicio-21-el-libro-chueco.html"><strong>El libro chueco</strong></a> · Seis asientos del libro del fondo: cinco tienen falla con nombre y uno se salva. La auditoría de noviembre empieza aquí.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-12/ejercicio-32-mi-frente-y-mi-turno.html"><strong>Mi frente y mi turno</strong></a> · El desglose de tu obra, el RACI de tu equipo, tu faena y tu turno en el libro. La bitácora de la semana.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 13 · El velorio del proyecto</h3>
+      <p class="q">¿De qué va a morir tu proyecto?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-13/ejercicio-11-la-esquela-ajena.html"><strong>La esquela ajena</strong></a> · Seis proyectos difuntos de la región. Diagnostica la causa de muerte real detrás de la causa oficial.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-13/ejercicio-21-riesgo-supuesto-o-chamba.html"><strong>¿Riesgo, supuesto o chamba?</strong></a> · Siete enunciados que la gente mete a la columna equivocada. Clasifícalos y decide qué se hace con cada uno.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-13/ejercicio-32-mi-velorio.html"><strong>Mi velorio</strong></a> · La esquela de tu componente, tu lista, tu confesión y tus riesgos con vigía. Se llena el jueves, se usa hasta diciembre.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 14 · Obra y comunicación</h3>
+      <p class="q">¿La obra habla por sí sola?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-14/ejercicio-11-el-avance-contado.html"><strong>El avance contado</strong></a> · Seis reportes de última semana de obra. Distingue el avance real del que solo se cuenta.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-14/ejercicio-21-el-aviso-que-no-avisa.html"><strong>El aviso que no avisa</strong></a> · Seis avisos comunitarios con falla. Encuéntrasela antes de escribir el tuyo.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-14/ejercicio-32-mi-recta-final-y-mi-aviso.html"><strong>Mi recta final y mi aviso</strong></a> · Tu semáforo honesto, tu recorte con criterio, tu aviso y tu prompt del tercer duelo.</div></div>
+    </div>
+    </div>
+  </details>
+  <details>
+    <summary>Unidad 4 · Entregar la presa viva<span class="sub">semanas 15 a 17</span></summary>
+    <div class="cuerpo">
+    <div class="sem">
+      <h3>Semana 15 · Medir lo que importa</h3>
+      <p class="q">¿Cómo sabrás que funcionó?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-15/ejercicio-11-la-medicion-que-no-mide.html"><strong>La medición que no mide</strong></a> · Seis maneras de medir que no dicen nada (y una que sí). Diagnostica antes de armar tu plan.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-15/ejercicio-21-y-esto-quien-lo-cuida.html"><strong>¿Y esto quién lo cuida?</strong></a> · Seis bienes comunes de la región con su arreglo de cuidado. Encuentra por qué fallan o por qué aguantan.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-15/ejercicio-32-mi-despues.html"><strong>Mi después</strong></a> · Tu línea base, tus indicadores, tu plan de monitoreo y tu acuerdo de cuidado. Es el reto 6 y es lo que le dejas a la presa.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 16 · Auditoría y radar</h3>
+      <p class="q">¿Y el dinero dónde quedó?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-16/ejercicio-11-la-pregunta-dura.html"><strong>La pregunta dura</strong></a> · Seis preguntas de auditoría pública, de la justa a la envenenada. Elige la respuesta que rinde en vez de defender.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-16/ejercicio-21-aplico-o-no-aplico.html"><strong>¿Aplico o no aplico?</strong></a> · Seis convocatorias sobre la mesa y un solo perfil: el tuyo. Decide en minutos cuál va, cuál espera y cuál deforma tu proyecto.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-16/ejercicio-32-mi-rendicion-y-mi-radar.html"><strong>Mi rendición y mi radar</strong></a> · Tu parte del libro en limpio, tu pregunta temida con su respuesta, y tu radar 2027 armado.</div></div>
+    </div>
+    <div class="sem">
+      <h3>Semana 17 · La inauguración</h3>
+      <p class="q">¿Qué se queda y qué te llevas?</p>
+      <div class="gimnasio-item"><span class="num">1</span><div><a href="ejercicios/semana-17/ejercicio-11-la-caja-de-herramientas.html"><strong>La caja de herramientas</strong></a> · Seis situaciones de la vida real, después del curso. Reconoce qué herramienta del semestre pide cada una.</div></div>
+      <div class="gimnasio-item"><span class="num">2</span><div><a href="ejercicios/semana-17/ejercicio-21-el-numero-con-argumento.html"><strong>El número con argumento</strong></a> · Seis maneras de proponer tu calificación. Solo una aguanta la conferencia.</div></div>
+      <div class="gimnasio-item"><span class="num">3</span><div><a href="ejercicios/semana-17/ejercicio-32-mi-conferencia-final.html"><strong>Mi conferencia final</strong></a> · Tu semestre en evidencia: el contrato rendido, el anti-CV, tus pruebas, tu número y lo que te llevas.</div></div>
+    </div>
+    </div>
+  </details>
+
+<footer>Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</footer>
+
+</main>
+
+<script src="curso.js"></script>
+
+</body>
+</html>
