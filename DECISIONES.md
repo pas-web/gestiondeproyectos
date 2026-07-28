@@ -67,12 +67,19 @@ discutir el primer día se cobra caro en noviembre.
 2. **El contenido de la materia vive en la página semanal.** Cada día se escribe en
    prosa desarrollada, con el concepto explicado, ejemplos resueltos y tablas, al
    nivel del sitio de Etimologías. La tabla minuto a minuto queda prohibida como
-   forma principal: el tiempo se sugiere con la chapa de reloj de cada bloque.
+   forma principal: cada bloque abre con numeral grande en arena, título en Georgia
+   y una chapa discreta con los minutos.
    Estándar de referencia: `semanas/semana-00.html`.
-3. **Emojis y contraste tipográfico, sí.** Deroga la regla anterior de un solo emoji
-   por página. Un emoji por bloque de día como ancla visual, más los recursos de
-   contraste del formato 2.0: `.pasa`, `.ojo`, `.dato`, `.cita`, `.llave`, `.flujo`,
-   `.contra` y `table.veredicto`, todos definidos en `curso.js`.
+3. **El contraste se hace con tipografía, no con emojis.** El énfasis viaja en el
+   tamaño, el peso, el color y la caja. La firma visual del sitio es la **pieza en
+   caja** (`.piezas` con `.pz`), tomada de la ficha de disección de Etimologías: el
+   término clave en monoespaciada grande, su glosa en versalitas debajo y el
+   `= resultado` en Georgia. A eso se suman el numeral de bloque (`.n`), el término
+   inline `.tt` y los recortes de color `.pasa`, `.ojo`, `.dato`, `.cita`, `.llave`,
+   `.flujo`, `.contra` y `table.veredicto`, todos definidos en `curso.js`.
+   **Los emojis se quedan en su lugar ritual: uno por página como máximo**, el del
+   chapuzón al cierre. Nada de emoji decorativo en encabezados, listas, viñetas de
+   callout ni celdas de tabla: si algo necesita señal, se le da color y peso.
 4. **Los pactos se firman en papel y viven en el sitio.** Cada pacto es una página
    imprimible en `evaluacion/`, con las dos columnas de compromisos (lo que le toca
    al profesor y lo que le toca al estudiante) y firma por nombre.
