@@ -7,11 +7,13 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 51 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 1 (28 jul 2026): menú de navegación, Semana 0
-  como semana real con sesiones, página del gimnasio, detalle de sesiones de las
-  semanas 0, 1 y 2, y reparto de contenido entre la Semana 0 y la Semana 1.
-- **Siguiente paso acordado:** producir la sección "El jueves y el viernes" de las
-  semanas 3 a 17, en lotes por unidad, previa aprobación del formato piloto.
+- **Último bloque cerrado:** bloque 2 (28 jul 2026): formato de día 2.0 en la
+  Semana 0, los dos pactos como documentos firmables y la hoja de
+  retroalimentación de la materia. Antes, bloque 1 (28 jul 2026): menú de
+  navegación, Semana 0 como semana real, página del gimnasio, detalle de sesiones
+  de las semanas 0, 1 y 2, y reparto de contenido entre la Semana 0 y la 1.
+- **Siguiente paso acordado:** con el formato de día 2.0 aprobado en la Semana 0,
+  migrar las semanas 1 y 2 y después producir las semanas 3 a 17 en lotes por unidad.
 
 ## Dónde vive cada cosa
 
@@ -61,19 +63,31 @@ discutir el primer día se cobra caro en noviembre.
 ## Reglas de producción
 
 1. **Voz del sitio.** Tutea al estudiante, seca y cálida a la vez. Sin raya larga,
-   sin entusiasmo hueco. Un solo emoji por página, en su lugar ritual (el chapuzón).
-2. **El candado de goteo es pedagógico, no de seguridad.** Cada semana abre el
+   sin entusiasmo hueco.
+2. **El contenido de la materia vive en la página semanal.** Cada día se escribe en
+   prosa desarrollada, con el concepto explicado, ejemplos resueltos y tablas, al
+   nivel del sitio de Etimologías. La tabla minuto a minuto queda prohibida como
+   forma principal: el tiempo se sugiere con la chapa de reloj de cada bloque.
+   Estándar de referencia: `semanas/semana-00.html`.
+3. **Emojis y contraste tipográfico, sí.** Deroga la regla anterior de un solo emoji
+   por página. Un emoji por bloque de día como ancla visual, más los recursos de
+   contraste del formato 2.0: `.pasa`, `.ojo`, `.dato`, `.cita`, `.llave`, `.flujo`,
+   `.contra` y `table.veredicto`, todos definidos en `curso.js`.
+4. **Los pactos se firman en papel y viven en el sitio.** Cada pacto es una página
+   imprimible en `evaluacion/`, con las dos columnas de compromisos (lo que le toca
+   al profesor y lo que le toca al estudiante) y firma por nombre.
+5. **El candado de goteo es pedagógico, no de seguridad.** Cada semana abre el
    miércoles anterior a sus sesiones. `?preview` en la URL lo salta, para el profesor.
-3. **Los ejercicios son autocontenidos.** Un HTML por ejercicio, sin dependencias
+6. **Los ejercicios son autocontenidos.** Un HTML por ejercicio, sin dependencias
    externas, para que abran sin internet y se compartan por WhatsApp. Por eso el
    `curso.js` del menú NO se inyecta en `ejercicios/`.
-4. **Un solo lugar por dato.** Las semanas, unidades y recursos fijos viven en las
+7. **Un solo lugar por dato.** Las semanas, unidades y recursos fijos viven en las
    constantes de `curso.js`. Cambiar ahí actualiza portada y menú de golpe.
-5. **Ningún dato de estudiante al repositorio.** Nombres, calificaciones y
+8. **Ningún dato de estudiante al repositorio.** Nombres, calificaciones y
    seguimiento viven solo en herramientas locales del profesor.
-6. **Ningún trabajo lleva número durante el semestre.** El acta se acuerda al final,
+9. **Ningún trabajo lleva número durante el semestre.** El acta se acuerda al final,
    con el expediente en la mesa.
-7. **Credenciales fuera del repositorio y fuera del chat.** Si se usa un token de
+10. **Credenciales fuera del repositorio y fuera del chat.** Si se usa un token de
    GitHub para publicar, se revoca al terminar la sesión.
 
 ## Protocolo de la hoja de retroalimentación
@@ -88,17 +102,22 @@ ese bloque se trabaja completo hasta cerrarlo. Cada bloque termina en cuatro cos
 4. La pregunta explícita de si alguna de esas reglas aplica a *todos* los cursos y
    no solo a este.
 
-Columnas de la hoja: `#`, `Fecha`, `Semana`, `Sesión`, `Dónde vive`,
-`Qué pasó (observación cruda)`, `Qué haría distinto`, `Prioridad`, `Estado`,
-`Bloque`, `Qué cambió al aplicarlo`.
+Columnas de la hoja (archivo `Retroalimentacion_GestionDeProyectos.xlsx`, mismo
+formato que el de Etimologías): `Semana`, `Elemento`, `Observación`,
+`Ideas adicionales`, `Prioridad`, `Estado`, `Fecha captura`, `Respuesta de Claude`.
+El desplegable de `Elemento` trae: Plan de sesión, Página semanal, Ejercicio del
+gimnasio, Expediente, Pactos y evaluación, Salida de campo, El fondo, Sitio general
+y Otro. Las columnas A a G las llena el profesor; la H se pega desde el chat.
 
 Estados: `Pendiente` (anotada, sin tocar), `En bloque` (se está trabajando),
-`Aplicado` (el cambio está publicado), `Descartado` (se decidió no hacerlo, con
-la razón en la última columna).
+`Aplicado` (el cambio está publicado), `Descartado` (se decidió no hacerlo, con la
+razón en la última columna) y `Regla permanente` (se vuelve regla para todas las
+semanas futuras y se registra en este archivo).
 
 ## Pendientes
 
-- Sección "El jueves y el viernes" de las semanas 3 a 17.
+- Migrar las semanas 1 y 2 al formato de día 2.0.
+- Producir los días de las semanas 3 a 17 en el formato nuevo, en lotes por unidad.
 - Revisar si la semana 2 necesita ajuste ahora que la campana del no y el contrato
   de gestión ya no compiten con los pactos.
 - Montar el formulario del ticket de salida y colgarlo al pie de cada semana.
