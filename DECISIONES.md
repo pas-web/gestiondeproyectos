@@ -121,8 +121,39 @@ Estados: `Pendiente` (anotada, sin tocar), `En bloque` (se está trabajando),
 razón en la última columna) y `Regla permanente` (se vuelve regla para todas las
 semanas futuras y se registra en este archivo).
 
+## Bloque de retroalimentación del 29 de julio de 2026 (filas 2 a 7 de la hoja)
+
+Reglas nuevas que salen de este bloque y que aplican de aquí en adelante:
+
+- **El fondo es capital semilla, no el presupuesto.** Son $10,000, no $20,000, y se
+  nombran como contrapartida: el dinero que se pone para ir a buscar el resto. Se
+  menciona donde haga falta y no más; deja de ser el gancho del curso. En la
+  evaluación no se menciona.
+- **La pregunta ancla del curso no lleva monto.** Quedó "¿Qué harías con un dinero
+  que no es tuyo?", en `curso.js`, el gimnasio, la semana 0 y la semana 1. Si el
+  monto vuelve a cambiar, la pregunta no se toca.
+- **El home desarrolla el curso, no explica el sitio.** La portada argumenta para
+  qué sirve la materia y qué se sale sabiendo hacer, con la profundidad del inicio
+  de Etimologías. La mecánica del sitio (cuándo se abre una semana, qué pasa cada
+  día, que el gimnasio no cierra) se sacó de la portada: eso vive en la Semana 0.
+- **Barra de navegación persistente.** Todas las páginas que cargan `curso.js`
+  llevan arriba una barra fija con Inicio, Programa, Gimnasio, Expediente y Tu
+  calificación, más el botón de las semanas. Sustituye al botón flotante. Los
+  ejercicios del gimnasio siguen sin cargar el script, así que no la llevan.
+- **El expediente va por cuadernillos, uno por unidad.** Cuatro archivos
+  (`evaluacion/expediente-uN.html`), cada uno con portadilla, sus hojas de trabajo,
+  el suelo de esa unidad y su autoevaluación. `expediente-del-gestor.html` quedó
+  como índice que los reparte. No se imprime todo en agosto: se imprime el que
+  empieza. Las hojas transversales (anti-currículum, solicitudes reales, mapa de
+  evidencias) se pasan al cuadernillo en curso.
+- **No hay compromiso de leer los tickets de salida en voz alta.** El compromiso
+  que queda es leerlos todos y atender lo que quedó turbio, sin comprometer el
+  cómo ni el cuándo.
+
 ## Pendientes
 
+- Integrar en el home la imagen que va a entregar Eduardo (el bloque `figure.lamina`
+  ya está puesto y comentado en `index.html`).
 - Migrar las semanas 1 y 2 al formato de día 2.0.
 - Producir los días de las semanas 3 a 17 en el formato nuevo, en lotes por unidad.
 - Revisar si la semana 2 necesita ajuste ahora que la campana del no y el contrato
