@@ -13,20 +13,40 @@
   header.curso h1 { font-family:Georgia,'Times New Roman',serif; font-size:2rem; margin:.3rem 0 .2rem; }
   header.curso .arco { font-family:Georgia,serif; font-style:italic; color:var(--arena); font-size:1.1rem; }
   main { max-width:780px; margin:0 auto; padding:1.5rem 1.2rem 4rem; }
-  .intro { font-size:1.1rem; color:#45605a; }
+  .intro { font-size:1.12rem; color:#45605a; }
   .intro::before { content:""; display:block; width:64px; height:5px; background:var(--arena); margin-bottom:.9rem; border-radius:3px; }
-  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.35rem; margin:2.4rem 0 .6rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.42rem; margin:2.6rem 0 .6rem; }
+  h3 { font-family:Georgia,serif; color:var(--profundo); font-size:1.12rem; margin:1.6rem 0 .4rem; }
   .pista { font-size:.95rem; color:#68807a; margin:.2rem 0 .8rem; }
-  .ritmo { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.9rem 1.3rem; margin:.9rem 0 0; }
-  .ritmo dl { margin:0; }
-  .ritmo dt { font-weight:bold; color:var(--profundo); margin-top:.6rem; }
-  .ritmo dt:first-child { margin-top:0; }
-  .ritmo dd { margin:.1rem 0 0; color:#45605a; }
-  .arranque { display:block; background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:1rem 1.3rem; text-decoration:none; margin:1.2rem 0 0; }
+  p { margin:.75rem 0; }
+  .arranque { display:block; background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:1rem 1.3rem; text-decoration:none; margin:1.6rem 0 0; }
   .arranque strong { display:block; font-family:Georgia,serif; color:var(--arena); font-size:1.15rem; }
   .arranque span { font-size:.95rem; opacity:.9; }
   footer { text-align:center; font-size:.85rem; color:#8aa39c; padding:2rem 1rem; }
   a { color:var(--marca); }
+
+  /* Lámina ilustrada */
+  figure.lamina { margin:1.6rem 0; padding:0; }
+  figure.lamina img { width:100%; border-radius:12px; border:1px solid var(--borde); display:block; }
+  figure.lamina figcaption { font-family:Georgia,serif; font-style:italic; color:#5b7671; font-size:.95rem; margin-top:.5rem; line-height:1.45; }
+  figure.lamina figcaption span { display:block; font-style:normal; font-family:'Source Sans 3',system-ui,sans-serif; font-size:.8rem; color:#8aa39c; margin-top:.2rem; }
+
+  /* Lo que vas a saber hacer */
+  ul.logros { list-style:none; padding:0; margin:1rem 0; }
+  ul.logros li { background:#fff; border:1px solid var(--borde); border-left:4px solid var(--marca); border-radius:0 10px 10px 0; padding:.7rem 1rem; margin:.5rem 0; font-size:.99rem; }
+  ul.logros li b { color:var(--profundo); }
+
+  /* Tabla de unidades */
+  table.unidades { width:100%; border-collapse:collapse; margin:1rem 0; font-size:.95rem; background:#fff; }
+  table.unidades th { background:#E4EFEB; color:var(--profundo); text-align:left; padding:.55rem .7rem; border:1px solid var(--borde); font-size:.85rem; letter-spacing:.03em; }
+  table.unidades td { padding:.6rem .7rem; border:1px solid var(--borde); vertical-align:top; }
+  table.unidades td.s { white-space:nowrap; font-family:Georgia,serif; color:var(--arena); font-weight:bold; width:4.5rem; }
+  table.unidades td .q { display:block; font-family:Georgia,serif; font-style:italic; color:#68807a; font-size:.9rem; margin-top:.15rem; }
+  @media(max-width:620px){ table.unidades td.s{width:3.4rem} table.unidades{font-size:.9rem} }
+
+  .ojo { background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.8rem 1.05rem; margin:1.1rem 0; font-size:.98rem; color:#5C4A1C; }
+  .llave { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.95rem 1.2rem; margin:1.2rem 0; font-size:1.03rem; }
+  .llave .rot { display:block; font-size:.71rem; letter-spacing:.12em; text-transform:uppercase; color:var(--arena); font-weight:bold; margin-bottom:.25rem; }
 </style>
 </head>
 <body>
@@ -39,30 +59,118 @@
 
 <main>
 
-<p class="intro">Este curso no trabaja con casos inventados. Hay una presa real, un fondo real de $20,000 y una comunidad que va a decidir qué se hace con su orilla. Aquí vive todo lo que vas a necesitar: el programa completo, las dieciocho semanas del semestre, el gimnasio de ejercicios y las reglas de evaluación.</p>
+<p class="intro">Este curso no trabaja con casos inventados. Hay una presa real, la de La Florida, a minutos del campus. Hay una comunidad que va a decidir qué se hace con su orilla. Y hay un capital semilla para empezar a hacerlo. Durante cuatro meses ustedes van a escuchar, diseñar, conseguir, construir y rendir cuentas, en ese orden, que es el orden en que ocurren las cosas cuando son de verdad.</p>
+
+<!-- IMAGEN DEL HOME (pendiente): cuando Eduardo entregue la lámina, guardarla en assets/img/
+     y descomentar este bloque ajustando el nombre del archivo y el texto alternativo.
+<figure class="lamina">
+  <img src="assets/img/NOMBRE-DEL-ARCHIVO.webp" alt="Describir aquí lo que muestra la imagen.">
+  <figcaption>Pie de la lámina.
+  <span>Lámina del curso.</span></figcaption>
+</figure>
+-->
+
+<h2>¿Y esto para qué me sirve?</h2>
+
+<p>Pregunta justa, y conviene contestarla antes de empezar, no en diciembre.</p>
+
+<p><b>Casi todo el dinero que llega al campo llega en forma de proyecto.</b> Los apoyos federales, las concurrencias con el estado, los fondos de fundaciones, la cooperación internacional, hasta el recurso del municipio: nada de eso se entrega porque alguien lo necesite. Se entrega a quien lo solicita bien, en el formato correcto, en la fecha correcta y con la comprobación en regla. Puedes tener la mejor idea de la región y no ver un peso porque no supiste llenar el marco lógico. Pasa todos los días.</p>
+
+<p><b>Formular es una habilidad que se paga.</b> En cualquier organización del sector, la persona que sabe armar un proyecto y comprobarlo es la que no sobra. No es un talento: es un oficio con reglas, y las reglas se aprenden. Quien sale de aquí sabiendo hacer un presupuesto que cuadra, un cronograma que se sostiene y una solicitud que se entiende, sale con algo que se cotiza.</p>
+
+<p><b>Algún día vas a estar del otro lado del mostrador.</b> Vas a ser quien dictamine, quien decida a quién sí y a quién no, o quien tenga que decirle a un grupo que su proyecto no era viable. Entender cómo se evalúa un proyecto te sirve para formular mejor, y también para no dejarte deslumbrar por uno que se ve bonito y no se sostiene.</p>
+
+<p><b>Los proyectos casi nunca fracasan por falta de ideas.</b> Fracasan por razones aburridísimas: un permiso que nadie pidió, un proveedor que no factura, una comunidad a la que nunca se le preguntó, un calendario que ignoraba las lluvias, una comprobación que se juntó en diciembre. Buena parte de este curso consiste en aprender a ver venir esas cosas, que es una forma de respeto por la gente que espera del otro lado.</p>
+
+<p><b>Y porque preguntar antes de proponer no es obvio.</b> La costumbre del sector es llegar con la solución hecha y buscar a quién aplicársela. Aquí vamos al revés: primero se escucha, y lo que la gente pida es lo que se diseña, aunque no sea lo que tú habrías escogido. Eso cambia la manera de trabajar para toda la vida, y es más incómodo de lo que suena.</p>
+
+<div class="ojo">
+Y sí: una inteligencia artificial te redacta un proyecto en dos minutos. También un camión te sube a la cima del cerro. Nadie que se subió al camión se puso más fuerte. Lo que aquí se entrena es el criterio para saber si lo que salió sirve, y eso no se delega.
+</div>
+
+<h2>A dónde vamos juntos</h2>
+
+<p>Cuatro meses. Esto es lo que vas a poder hacer en diciembre y que hoy, seamos honestos, todavía no puedes:</p>
+
+<ul class="logros">
+  <li><b>Diseñar y levantar una consulta comunitaria</b> que sirva para decidir, sin prometer lo que no puedes cumplir y sin inducir la respuesta que te conviene.</li>
+  <li><b>Convertir una petición en un proyecto.</b> Pasar de "queremos que la presa esté bonita" a objetivos, componentes, actividades y una cadena de resultados que se aguanta preguntas.</li>
+  <li><b>Armar un marco lógico</b> y leer el de alguien más para encontrarle el renglón chueco.</li>
+  <li><b>Distinguir un producto de un cambio.</b> Sembrar doscientos árboles es un producto. Que sobrevivan tres años es un cambio. Casi nadie del sector tiene clara esa diferencia y por eso se celebran cosas que no sirvieron.</li>
+  <li><b>Presupuestar de verdad:</b> cotizar, meter lo que siempre se olvida, y explicar en qué se va cada peso sin ponerte nervioso.</li>
+  <li><b>Escribir una solicitud de financiamiento y defenderla</b> frente a un comité que puede decirte que no, y responder por escrito a un fallo sin agarrarlo personal.</li>
+  <li><b>Comprobar el gasto:</b> facturas, libro de cuentas y rendición pública ante la gente cuyo dinero ejerciste. Es la parte que nadie enseña y la que hunde más proyectos.</li>
+  <li><b>Anticipar cómo va a morir tu proyecto</b> antes de que empiece, y hacer algo al respecto.</li>
+  <li><b>Medir si funcionó</b> con indicadores que no mienten, y sostener el número con argumento.</li>
+  <li><b>Hablar en público de lo que hiciste</b> ante comunidad, autoridad y quien financió. Aquí lo que sabes se demuestra hablando, y lo vas a practicar tantas veces que va a dejar de darte miedo.</li>
+</ul>
+
+<p>Al final cada quien sale con su <b>expediente del gestor</b>: la carpeta con todo lo que formuló, gestionó, comprobó y defendió durante el semestre. No es un cuaderno de tareas. Es lo que vas a poder poner sobre la mesa cuando alguien te pregunte qué has hecho.</p>
+
+<div class="llave">
+  <span class="rot">La apuesta del curso</span>
+  Que en diciembre no tengas que decir "llevé una materia de proyectos", sino "gestioné uno, con dinero real y gente esperando".
+</div>
+
+<h2>El semestre de un vistazo</h2>
+
+<p>Cuatro unidades, diecisiete semanas de contenido y una Semana 0 de aterrizaje que además es el programa completo del curso.</p>
+
+<table class="unidades">
+  <thead>
+    <tr><th>Semanas</th><th>Unidad y pregunta</th><th>Qué sales sabiendo hacer</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="s">0</td>
+      <td><b><a href="semanas/semana-00.html">Aterrizaje</a></b><span class="q">¿En qué me estoy metiendo?</span></td>
+      <td>Entender el encargo, firmar los dos pactos y abrir tu expediente</td>
+    </tr>
+    <tr>
+      <td class="s">1 a 4</td>
+      <td><b>U1 · Escuchar la presa</b><span class="q">¿Qué quiere la gente y cómo se sabe?</span></td>
+      <td>Diseñar y levantar una consulta comunitaria, y aguantar que la respuesta no sea la que esperabas</td>
+    </tr>
+    <tr>
+      <td class="s">5 a 10</td>
+      <td><b>U2 · Diseñar lo que pidieron</b><span class="q">¿Cómo se convierte una petición en un proyecto que se sostiene?</span></td>
+      <td>Marco lógico, prototipo, presupuesto, cronograma y una solicitud que se defiende</td>
+    </tr>
+    <tr>
+      <td class="s">11 a 14</td>
+      <td><b>U3 · Construir en la presa</b><span class="q">¿Qué pasa cuando el plan se topa con la realidad?</span></td>
+      <td>Ejercer recursos, llevar libro de cuentas, responder a un fallo y sacar la obra</td>
+    </tr>
+    <tr>
+      <td class="s">15 a 17</td>
+      <td><b>U4 · Entregar la presa viva</b><span class="q">¿Cómo se sabe que funcionó y quién lo cuida después?</span></td>
+      <td>Medir resultados, auditar el gasto y entregar a la comunidad lo que se hizo</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>El dinero del curso</h2>
+
+<p>El grupo va a ejercer <b>$10,000 de capital semilla</b>. Vale la pena decir con precisión qué es y qué no es, porque de ahí sale la mitad del aprendizaje.</p>
+
+<p>No es el presupuesto del proyecto. Es la contrapartida: el dinero que se pone sobre la mesa para ir a buscar el resto. Así funciona casi todo en el sector, y por eso importa. Un fondo que ya alcanzaba para todo no te enseña a gestionar, te enseña a gastar. Con este, si el proyecto que la comunidad pidió cuesta más, alguien va a tener que salir a conseguir la diferencia, y ese alguien son ustedes.</p>
+
+<p>Es dinero real, con reglas, con comprobantes y con libro de cuentas público. Las reglas se destripan en la semana 5.</p>
+
+<h2>Y la calificación, ¿qué?</h2>
+
+<p>En este curso <b>ningún trabajo lleva número</b>. Durante el semestre nada se califica con puntos: todo produce retroalimentación y evidencia. El número que la universidad exige lo propones tú al final, con tu expediente enfrente y en una conversación conmigo. No es un regalo, es más exigente que un examen, porque tienes que sostener lo que dices.</p>
+
+<p>Está explicado sin letra chiquita en <a href="tu-calificacion.html">Tu calificación</a>, y se firma como acuerdo entre los dos en el <a href="evaluacion/pacto-de-evaluacion.html">pacto de evaluación</a>. Si algo no te convence, hay un rato reservado para reclamarlo.</p>
+
+<h2>Mapa del curso</h2>
+<p class="pista">Da clic en cualquier bloque para desplegarlo.</p>
+<div id="mapa-curso"></div>
 
 <a class="arranque" href="semanas/semana-00.html">
   <strong>Empieza por la Semana 0</strong>
   <span>El aterrizaje del curso, con sesiones el jueves 30 y el viernes 31 de julio. Qué vas a aprender, en qué orden y para qué te sirve como profesionista del campo.</span>
 </a>
-
-<h2>Cómo funciona</h2>
-<div class="ritmo">
-  <dl>
-    <dt>El miércoles se abre la semana</dt>
-    <dd>De la semana 1 en adelante, cada semana aparece en este sitio el miércoles anterior a las clases, con su pregunta, sus herramientas y su gimnasio. Antes de esa fecha está bajo candado, y es a propósito. La Semana 0 no tiene candado: está abierta desde ya.</dd>
-    <dt>El jueves y el viernes son las sesiones</dt>
-    <dd>Dos horas cada día. En la página de cada semana viene el detalle de qué pasa en cada sesión y qué tienes que llevar. Ábrelo antes de venir.</dd>
-    <dt>El gimnasio nunca se cierra</dt>
-    <dd>Los ejercicios de todas las semanas están siempre disponibles, entrenan y no califican. Se abren en el celular y funcionan sin internet una vez cargados.</dd>
-    <dt>Ningún trabajo lleva número</dt>
-    <dd>Durante el semestre nada se califica con puntos. Todo produce retroalimentación y evidencia, y el número del acta sale al final, contigo en la mesa. Está explicado sin letra chiquita en "Tu calificación".</dd>
-  </dl>
-</div>
-
-<h2>Mapa del curso</h2>
-<p class="pista">Da clic en cualquier bloque para desplegarlo.</p>
-<div id="mapa-curso"></div>
 
 <footer>Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</footer>
 

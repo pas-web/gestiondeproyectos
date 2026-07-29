@@ -16,11 +16,21 @@
   var FIJAS = [
     { href: 'semanas/semana-00.html', t: 'Semana 0 · Aterrizaje', d: 'El programa completo del curso. Sesiones del 30 y 31 de julio.' },
     { href: 'tu-calificacion.html', t: 'Tu calificación', d: 'Cómo se evalúa este curso, sin letra chiquita.' },
-    { href: 'evaluacion/expediente-del-gestor.html', t: 'Expediente del gestor', d: 'La carpeta que armas todo el semestre y te llevas al final.' },
+    { href: 'evaluacion/expediente-del-gestor.html', t: 'Expediente del gestor', d: 'La carpeta que armas todo el semestre, en un cuadernillo por unidad.' },
     { href: 'evaluacion/contrato-de-gestion.html', t: 'Mi contrato de gestión', d: 'Tus dos compromisos firmados del semestre.' },
     { href: 'evaluacion/pacto-de-evaluacion.html', t: 'Pacto de evaluación', d: 'El acuerdo sobre cómo se califica. Se firma el 31 de julio.' },
     { href: 'evaluacion/pacto-de-ia.html', t: 'Pacto de uso de IA', d: 'Qué sí, qué no y cómo se declara. Se firma el 31 de julio.' },
     { href: 'gimnasio.html', t: 'Todo el gimnasio', d: 'Los ejercicios de las diecisiete semanas, siempre abiertos.' }
+  ];
+
+  /* Barra de navegación: las secciones que se usan todo el semestre. */
+  var NAV = [
+    { href: 'index.html', t: 'Gestión de Proyectos', casa: true },
+    { href: 'index.html', t: 'Inicio' },
+    { href: 'semanas/semana-00.html', t: 'Programa' },
+    { href: 'gimnasio.html', t: 'Gimnasio' },
+    { href: 'evaluacion/expediente-del-gestor.html', t: 'Expediente' },
+    { href: 'tu-calificacion.html', t: 'Tu calificación' }
   ];
 
   var UNIDADES = [
@@ -31,7 +41,7 @@
   ];
 
   var SEMANAS = [
-    { n: 1, t: 'La presa y el fondo', abre: '2026-08-05', q: '¿Qué harías con veinte mil pesos que no son tuyos?' },
+    { n: 1, t: 'La presa y el fondo', abre: '2026-08-05', q: '¿Qué harías con un dinero que no es tuyo?' },
     { n: 2, t: 'Agencia', abre: '2026-08-12', q: '¿Qué pedirías si el no ya lo tuvieras?' },
     { n: 3, t: 'Diseñar la consulta', abre: '2026-08-19', q: '¿Cómo se pregunta sin prometer?' },
     { n: 4, t: 'La consulta y el sobre', abre: '2026-08-26', q: '¿Y si la respuesta no es la que esperabas?' },
@@ -74,8 +84,19 @@
     + '.mapa .fila .fecha{margin-left:auto;font-size:.78rem;color:#8aa39c;white-space:nowrap;flex:none}'
     + '.mapa .fila.cerrada a,.mapa .fila.cerrada .titulo{color:#8aa39c;font-weight:normal}'
     + '.mapa .fila .d{display:block;font-size:.88rem;color:#68807a}'
-    + '#btn-menu{position:fixed;top:.7rem;right:.7rem;z-index:60;background:var(--arena,#D9A441);color:#20160a;border:none;border-radius:999px;padding:.5rem 1rem;font:inherit;font-size:.9rem;font-weight:bold;cursor:pointer;box-shadow:0 2px 10px rgba(11,60,73,.25)}'
+    /* ---- Barra de navegación persistente ---- */
+    + '.nav-curso{position:sticky;top:0;z-index:60;background:var(--marca,#0F6E6E);box-shadow:0 1px 8px rgba(11,60,73,.18)}'
+    + '.nav-curso .nav-in{max-width:980px;margin:0 auto;display:flex;align-items:stretch;gap:.1rem;padding:0 .5rem;overflow-x:auto;scrollbar-width:none}'
+    + '.nav-curso .nav-in::-webkit-scrollbar{display:none}'
+    + '.nav-curso a{display:flex;align-items:center;white-space:nowrap;padding:.72rem .78rem;color:#DCEFEA;text-decoration:none;font-size:.94rem;font-weight:600;border-bottom:3px solid transparent}'
+    + '.nav-curso a:hover{color:#fff;background:rgba(255,255,255,.09)}'
+    + '.nav-curso a.aqui{color:#fff;border-bottom-color:var(--arena,#D9A441)}'
+    + '.nav-curso a.casa{font-family:Georgia,serif;font-weight:bold;color:#fff;padding-left:.4rem;padding-right:.9rem;margin-right:.15rem;border-right:1px solid rgba(255,255,255,.18)}'
+    + '.nav-curso .esp{flex:1 1 auto;min-width:.3rem}'
+    + '#btn-menu{flex:none;align-self:center;margin:.35rem .1rem .35rem .4rem;background:var(--arena,#D9A441);color:#20160a;border:none;border-radius:999px;padding:.42rem .95rem;font:inherit;font-size:.88rem;font-weight:bold;cursor:pointer;white-space:nowrap}'
     + '#btn-menu:hover{filter:brightness(1.06)}'
+    + '@media(max-width:620px){.nav-curso a{padding:.65rem .58rem;font-size:.88rem}.nav-curso a.casa{display:none}}'
+    + '@media print{.nav-curso{display:none!important}}'
     + '#panel-menu{position:fixed;inset:0;z-index:70;display:none}'
     + '#panel-menu.abierto{display:block}'
     + '#panel-menu .fondo{position:absolute;inset:0;background:rgba(11,60,73,.55)}'
@@ -223,12 +244,43 @@
     });
   }
 
+  /* Barra de navegación persistente, en todas las páginas del sitio. */
+  function montarBarra(btn) {
+    var nav = document.createElement('nav');
+    nav.className = 'nav-curso';
+    nav.setAttribute('aria-label', 'Navegación del curso');
+
+    var caja = document.createElement('div');
+    caja.className = 'nav-in';
+
+    var aqui = location.pathname.replace(/\/$/, '/index.html');
+
+    NAV.forEach(function (l) {
+      var a = document.createElement('a');
+      a.href = BASE + l.href;
+      a.textContent = l.t;
+      if (l.casa) a.className = 'casa';
+      else try {
+        if (new URL(a.href, location.href).pathname === aqui) a.className = 'aqui';
+      } catch (e) {}
+      caja.appendChild(a);
+    });
+
+    var esp = document.createElement('span');
+    esp.className = 'esp';
+    caja.appendChild(esp);
+    caja.appendChild(btn);
+
+    nav.appendChild(caja);
+    document.body.insertBefore(nav, document.body.firstChild);
+  }
+
   function montarPanel() {
     var btn = document.createElement('button');
     btn.id = 'btn-menu';
     btn.type = 'button';
     btn.setAttribute('aria-expanded', 'false');
-    btn.textContent = 'Menú del curso';
+    btn.textContent = 'Las semanas';
 
     var panel = document.createElement('div');
     panel.id = 'panel-menu';
@@ -239,8 +291,8 @@
       + '<a href="' + BASE + 'index.html" style="color:var(--marca,#0F6E6E);font-weight:bold">Portada del curso</a></p>'
       + '<div id="mapa-panel"></div></div>';
 
-    document.body.appendChild(btn);
     document.body.appendChild(panel);
+    montarBarra(btn);
     construirMapa(panel.querySelector('#mapa-panel'), false);
 
     function abrir() { panel.classList.add('abierto'); btn.setAttribute('aria-expanded', 'true'); }
@@ -252,9 +304,9 @@
   }
 
   function arrancar() {
+    montarPanel();
     var inline = document.getElementById('mapa-curso');
     if (inline) construirMapa(inline, true);
-    else montarPanel();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arrancar);
