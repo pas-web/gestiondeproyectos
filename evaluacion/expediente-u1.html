@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expediente 1 · Escuchar la presa · Gestión y Manejo de Proyectos · 2026</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.5; font-size:.97rem; }
+  .pagina { max-width:760px; margin:1rem auto; background:#fff; padding:2rem 2.3rem; border:1px solid var(--borde); }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.2rem 0 .3rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.25rem; margin:.2rem 0 .5rem; }
+  h3 { color:var(--profundo); font-size:1.02rem; margin:1rem 0 .3rem; }
+  .curso { font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--marca); font-weight:bold; }
+  p, li, td, th { font-size:.94rem; }
+  ul { padding-left:1.2rem; margin:.3rem 0; }
+  li { margin:.3rem 0; }
+  table { width:100%; border-collapse:collapse; margin:.5rem 0; }
+  th, td { border:1px solid var(--borde); padding:.45rem .55rem; text-align:left; vertical-align:top; }
+  th { background:#E4EFEB; color:var(--profundo); font-size:.86rem; }
+  .ejemplo td { color:#9ab0aa; font-style:italic; }
+  .clave { border-left:5px solid var(--arena); background:#FBF7EC; padding:.6rem .9rem; margin:.8rem 0; }
+  .linea-larga { border-bottom:1px solid var(--borde); height:1.5rem; }
+  .renglones div { border-bottom:1px solid var(--borde); height:1.7rem; }
+  .chk { display:flex; gap:.55rem; align-items:flex-start; padding:.3rem 0; }
+  .chk .caja { flex:none; width:1rem; height:1rem; border:1.5px solid var(--marca); border-radius:3px; margin-top:.2rem; }
+  .portada { text-align:center; padding:5rem 2.3rem 4rem; }
+  .portada .franja { width:80px; height:6px; background:var(--arena); margin:1.4rem auto; border-radius:3px; }
+  .portada h1 { font-size:2.1rem; }
+  .portada .nombre { margin-top:4rem; }
+  .portada .nombre .linea-larga { max-width:420px; margin:0 auto; }
+  .portada .nota { color:#68807a; font-size:.9rem; max-width:460px; margin:2.5rem auto 0; }
+  .pie { font-size:.78rem; color:#8aa39c; margin-top:1.4rem; border-top:1px dashed var(--borde); padding-top:.5rem; }
+  #btn-imprimir { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.7rem 1.1rem; font:inherit; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+  @media print {
+    body { background:#fff; }
+    .pagina { max-width:none; margin:0; border:none; padding:0 0 1rem; page-break-after:always; }
+    .pagina:last-child { page-break-after:auto; }
+    #btn-imprimir { display:none; }
+    @page { margin:1.6cm; }
+  }
+
+  .cuadernillos{display:grid;gap:.7rem;margin:1rem 0}
+  .cuadernillos a{display:block;background:#fff;border:1px solid var(--borde);border-left:5px solid var(--arena);border-radius:0 10px 10px 0;padding:.8rem 1rem;text-decoration:none;color:var(--texto)}
+  .cuadernillos a:hover{background:#F7FAF9}
+  .cuadernillos a b{display:block;font-family:Georgia,serif;color:var(--marca);font-size:1.08rem}
+  .cuadernillos a .cuando{display:block;font-size:.82rem;color:#8aa39c;text-transform:uppercase;letter-spacing:.08em;font-weight:bold;margin-bottom:.15rem}
+  .cuadernillos a .q{display:block;font-size:.9rem;color:#68807a;margin-top:.25rem}
+  .portadilla{text-align:center;padding:4rem 2.3rem 3rem}
+  .portadilla .franja{width:80px;height:6px;background:var(--arena);margin:1.2rem auto;border-radius:3px}
+  .portadilla h1{font-size:1.9rem}
+  .portadilla .preg{font-family:Georgia,serif;font-style:italic;color:#45605a;font-size:1.1rem}
+  .portadilla .guarda{max-width:430px;margin:2.6rem auto 0;text-align:left;background:#F7FAF9;border:1px solid var(--borde);border-radius:10px;padding:.9rem 1.1rem}
+  .portadilla .guarda b{display:block;font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;color:var(--marca);margin-bottom:.3rem}
+  .portadilla .nombre{margin-top:2.4rem}
+  .portadilla .nombre .linea-larga{max-width:380px;margin:0 auto}
+</style>
+</head>
+<body>
+
+<div class="pagina portadilla">
+  <div class="curso">Expediente del gestor · La presa que queremos</div>
+  <div class="franja"></div>
+  <p style="font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#8aa39c;font-weight:bold;margin:0">Cuadernillo 1 de 4 · Semanas 1 a 4</p>
+  <h1>Unidad 1 · Escuchar la presa</h1>
+  <p class="preg">¿Qué quiere la gente y cómo se sabe?</p>
+  <div class="guarda"><b>Qué se guarda aquí</b>
+    <div>· Dónde empiezo, tu punto de partida</div>
+    <div>· El mapa de evidencias del semestre</div>
+    <div>· El suelo de la unidad 1</div>
+    <div>· Autoevaluación 1, de ensayo</div>
+  </div>
+  <div class="nombre"><div class="linea-larga"></div><p style="font-size:.9rem;color:#68807a;margin-top:.3rem">Nombre del gestor o de la gestora</p></div>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Semana 1</div>
+  <h2>Dónde empiezo</h2>
+  <p>Tres preguntas, sin adornos. En diciembre vas a releer esta hoja y te va a dar gusto (o risa, que también sirve).</p>
+  <h3>Lo que ya sé hacer hoy</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Lo que quiero saber hacer en diciembre</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Personas que conozco que ya viven de proyectos (aunque sea de lejos)</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Mi pronóstico del sobre (cópialo aquí antes de sellarlo, para tu propio registro)</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <p class="pie">Fecha: __________ · Se llena en la semana 1</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Mapa de evidencias</div>
+  <h2>Qué es y dónde está</h2>
+  <p>No toda tu evidencia cabe en esta carpeta: hay fotos en el Drive del curso, hojas grandes en el salón, registros en la bitácora del equipo. Este mapa es el índice para encontrarla cuando la necesites (por ejemplo, para defender tu autoevaluación).</p>
+  <table>
+    <tr><th style="width:16%">Semana</th><th style="width:42%">Qué es la evidencia</th><th>Dónde está</th></tr>
+    <tr class="ejemplo"><td>S4</td><td>Foto del sobre abierto junto a los resultados de la consulta</td><td>Drive del curso · carpeta S4</td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+  </table>
+  <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · El suelo de esta unidad</div>
+  <h2>Tu checklist de no reprobar</h2>
+  <p>Esto es lo que basta cumplir en esta unidad para no reprobar la materia. Sin números y sin letra chiquita. Marca cada casilla cuando esté hecha; tu profesor lleva la misma lista.</p>
+  <h3>Unidad 1 · Escuchar la presa</h3>
+  <div class="chk"><span class="caja"></span><span>Contrato de gestión firmado (semana 2)</span></div>
+  <div class="chk"><span class="caja"></span><span>Participé en la consulta comunitaria (o hice la actividad compensatoria)</span></div>
+  <div class="chk"><span class="caja"></span><span>Sellé mi sobre en la semana 1</span></div>
+  <div class="chk"><span class="caja"></span><span>Presentación en parejas de la semana 4</span></div>
+  <div class="chk"><span class="caja"></span><span>Tickets de salida de la unidad respondidos</span></div>
+  <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Autoevaluación 1 (ensayo)</div>
+  <h2>Cierre de la unidad 1 · Semana 4</h2>
+  <p>Primera parada. Esta autoevaluación es ensayo: no produce calificación, produce práctica de mirarte con honestidad.</p>
+  <h3>Lo que hice esta unidad (con evidencia: cita tu mapa)</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Lo que me costó y cómo lo enfrenté</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <h3>Mi sobre contra la realidad: ¿qué tanto conocía a mi comunidad?</h3>
+  <div class="renglones"><div></div><div></div></div>
+  <h3>Si esta unidad llevara número, yo me pondría un ______ porque:</h3>
+  <div class="renglones"><div></div><div></div><div></div></div>
+  <div class="clave"><strong>Bloque para transcribir al formulario privado:</strong> nombre, unidad 1, calificación propuesta y la justificación de arriba en dos frases.</div>
+  <p class="pie">Fecha: __________ · La regla de los tres casos aplica desde el ensayo, para que la conozcas sin riesgo.</p>
+</div>
+<button id="btn-imprimir" onclick="window.print()">Imprimir</button>
+
+<script src="../curso.js"></script>
+
+</body>
+</html>
