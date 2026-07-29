@@ -152,9 +152,24 @@ Reglas nuevas que salen de este bloque y que aplican de aquí en adelante:
   `plan-y-realidad.webp`, que enmarca el semestre: el plan es una recta, la
   realidad sube dando tumbos y termina a la misma altura. Se conserva la versión
   sin rótulos por si se quiere proyectar limpia.
-- **No hay compromiso de leer los tickets de salida en voz alta.** El compromiso
-  que queda es leerlos todos y atender lo que quedó turbio, sin comprometer el
-  cómo ni el cuándo.
+- **No hay ningún compromiso sobre los tickets de salida.** Se quitó del pacto de
+  evaluación, de la Semana 0 y del plan de sesión de la Semana 1. El ticket sigue
+  existiendo como instrumento y se justifica solo (le sirve al estudiante para caer
+  en cuenta de qué entendió, y al curso para saber por dónde va el grupo), pero el
+  profesor no promete leerlos ni devolverlos.
+
+### Reglas transversales a todos los cursos de Eduardo
+
+Estas dos dejan de ser de esta materia y aplican a cualquier curso que se arme de
+aquí en adelante. Al diseñar otra materia, se dan por puestas.
+
+- **La portada de un curso argumenta la materia, no explica el sitio.** Para qué
+  sirve lo que se va a aprender y qué se sale sabiendo hacer, con ejemplos y con
+  la profundidad del inicio de Etimologías. La mecánica (cuándo abre una semana,
+  qué pasa cada día, qué está siempre disponible) vive en la semana de aterrizaje.
+- **El expediente o portafolio se imprime por unidad**, un cuadernillo a la vez
+  conforme avanza el semestre, nunca completo al inicio. Cada cuadernillo lleva
+  portadilla, sus hojas de trabajo, el suelo de esa unidad y su autoevaluación.
 
 ## Pendientes
 
