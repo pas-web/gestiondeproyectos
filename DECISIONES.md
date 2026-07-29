@@ -146,14 +146,18 @@ Reglas nuevas que salen de este bloque y que aplican de aquí en adelante:
   como índice que los reparte. No se imprime todo en agosto: se imprime el que
   empieza. Las hojas transversales (anti-currículum, solicitudes reales, mapa de
   evidencias) se pasan al cuadernillo en curso.
+- **Las láminas del home van rotuladas y en formato webp.** Se guardan en
+  `assets/img/`, dentro de un `figure.lamina` con texto alternativo descriptivo y
+  pie en dos niveles (la idea, y abajo una nota más chica). La primera es
+  `plan-y-realidad.webp`, que enmarca el semestre: el plan es una recta, la
+  realidad sube dando tumbos y termina a la misma altura. Se conserva la versión
+  sin rótulos por si se quiere proyectar limpia.
 - **No hay compromiso de leer los tickets de salida en voz alta.** El compromiso
   que queda es leerlos todos y atender lo que quedó turbio, sin comprometer el
   cómo ni el cuándo.
 
 ## Pendientes
 
-- Integrar en el home la imagen que va a entregar Eduardo (el bloque `figure.lamina`
-  ya está puesto y comentado en `index.html`).
 - Migrar las semanas 1 y 2 al formato de día 2.0.
 - Producir los días de las semanas 3 a 17 en el formato nuevo, en lotes por unidad.
 - Revisar si la semana 2 necesita ajuste ahora que la campana del no y el contrato
