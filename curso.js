@@ -13,6 +13,10 @@
 
   var DISPONIBLES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
+  /* URL del formulario del ticket de salida (Google Form). Mientras esté vacía,
+     el bloque del ticket no se muestra. Pégala entre las comillas y listo. */
+  var TICKET_URL = '';
+
   var FIJAS = [
     { href: 'semanas/semana-00.html', t: 'Semana 0 · Aterrizaje', d: 'El programa completo del curso. Sesiones del 30 y 31 de julio.' },
     { href: 'tu-calificacion.html', t: 'Tu calificación', d: 'Cómo se evalúa este curso, sin letra chiquita.' },
@@ -180,7 +184,26 @@
     + '.llave .rot{display:block;font-size:.71rem;letter-spacing:.12em;text-transform:uppercase;color:var(--arena,#D9A441);font-weight:bold;margin-bottom:.25rem}'
     + '.indice{display:flex;flex-wrap:wrap;gap:.45rem;margin:.8rem 0 0}'
     + '.indice a{display:inline-block;background:#fff;border:1px solid var(--borde,#CFE3DD);border-radius:999px;padding:.3rem .85rem;font-size:.88rem;text-decoration:none;color:var(--marca,#0F6E6E);font-weight:bold}'
-    + '.indice a:hover{background:#E4EFEB}';
+    + '.indice a:hover{background:#E4EFEB}'
+
+    /* ---- Barra lateral fija (pantallas anchas): el mapa siempre a la vista ---- */
+    + '.lado{display:none;position:fixed;top:0;left:0;bottom:0;width:21rem;overflow-y:auto;background:#fff;border-right:1px solid var(--borde,#CFE3DD);padding:1rem 1.1rem 2.5rem;z-index:50}'
+    + '.lado .lado-tit{font-family:Georgia,serif;font-size:1.05rem;margin:.2rem 0 .6rem}'
+    + '.lado .lado-tit a{color:var(--profundo,#0B3C49);text-decoration:none}'
+    + '.lado .lado-tit a:hover{color:var(--marca,#0F6E6E)}'
+    + '.mapa .fila.actual{background:#F3FAF7;border-radius:8px;padding-left:.45rem;padding-right:.45rem}'
+    + '.mapa .fila.actual a{color:var(--profundo,#0B3C49)}'
+    + '@media(min-width:1200px){body{padding-left:21rem}.lado{display:block}#btn-menu{display:none}}'
+    + '@media print{.lado{display:none!important}body{padding-left:0!important}}'
+
+    /* ---- Ticket de salida al pie de cada semana ---- */
+    + '.ticket-salida{display:flex;gap:1.1rem;align-items:center;background:#fff;border:1px solid var(--borde,#CFE3DD);border-left:5px solid var(--arena,#D9A441);border-radius:12px;padding:1rem 1.2rem;margin:1.6rem 0 0}'
+    + '.ticket-salida .rot{display:block;font-size:.72rem;letter-spacing:.11em;text-transform:uppercase;font-weight:bold;color:var(--marca,#0F6E6E);margin-bottom:.25rem}'
+    + '.ticket-salida p{margin:.2rem 0 .6rem;font-size:.95rem}'
+    + '.ticket-salida .btn{display:inline-block;background:var(--marca,#0F6E6E);color:#fff;text-decoration:none;font-weight:bold;font-size:.9rem;border-radius:999px;padding:.42rem 1rem}'
+    + '.ticket-salida .btn:hover{filter:brightness(1.08)}'
+    + '.ticket-salida .qr{width:120px;height:120px;flex:none;border:1px solid var(--borde,#CFE3DD);border-radius:8px}'
+    + '@media(max-width:540px){.ticket-salida .qr{display:none}}';
 
   var st = document.createElement('style');
   st.textContent = css;
@@ -194,10 +217,15 @@
 
   function xx(n) { return (n < 10 ? '0' : '') + n; }
 
+  function semanaActual() {
+    var m = location.pathname.match(/semana-(\d\d)\.html$/);
+    return m ? parseInt(m[1], 10) : null;
+  }
+
   function filaSemana(s) {
     var pub = DISPONIBLES.indexOf(s.n) !== -1;
     var d = document.createElement('div');
-    d.className = 'fila' + (pub ? '' : ' cerrada');
+    d.className = 'fila' + (pub ? '' : ' cerrada') + (semanaActual() === s.n ? ' actual' : '');
     d.innerHTML = '<span class="num">S' + s.n + '</span>'
       + '<div>' + (pub
         ? '<a href="' + BASE + 'semanas/semana-' + xx(s.n) + '.html">' + s.t + '</a>'
@@ -226,9 +254,11 @@
     dEmp.appendChild(cEmp);
     cont.appendChild(dEmp);
 
+    var actual = semanaActual();
     UNIDADES.forEach(function (u, i) {
       var det = document.createElement('details');
       if (abrirPrimera && i === 0) det.open = true;
+      if (actual !== null && actual >= u.de && actual <= u.a) det.open = true;
       det.innerHTML = '<summary>Unidad ' + u.n + ' · ' + u.t
         + '<span class="sub">semanas ' + u.de + ' a ' + u.a + '</span></summary>';
       var cuerpo = document.createElement('div');
@@ -303,8 +333,39 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
   }
 
+  /* Ticket de salida al pie de la semana, cuando el formulario ya existe. */
+  function montarTicket() {
+    if (!TICKET_URL) return;
+    var n = semanaActual();
+    if (n === null) return;
+    var cont = document.getElementById('wk-gate') || document.querySelector('main');
+    if (!cont) return;
+    var qr = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=' + encodeURIComponent(TICKET_URL);
+    var d = document.createElement('div');
+    d.className = 'ticket-salida';
+    d.innerHTML = '<div><span class="rot">Ticket de salida · Semana ' + n + '</span>'
+      + '<p>Noventa segundos antes de irte: qué te llevas, qué quedó turbio y cómo estuvo el ritmo. Con nombre o sin él, como prefieras.</p>'
+      + '<a class="btn" href="' + TICKET_URL + '" target="_blank" rel="noopener">Abrir el formulario</a></div>'
+      + '<img class="qr" alt="Código QR del formulario del ticket de salida" src="' + qr + '">';
+    cont.appendChild(d);
+  }
+
+  /* Barra lateral fija en pantallas anchas: el mapa completo siempre a la vista. */
+  function montarLado() {
+    var lado = document.createElement('aside');
+    lado.className = 'lado';
+    lado.setAttribute('aria-label', 'Mapa del curso');
+    lado.innerHTML = '<p class="lado-tit"><a href="' + BASE + 'index.html">Gestión y Manejo de Proyectos</a></p>';
+    var mapa = document.createElement('div');
+    lado.appendChild(mapa);
+    document.body.appendChild(lado);
+    construirMapa(mapa, false);
+  }
+
   function arrancar() {
     montarPanel();
+    montarLado();
+    montarTicket();
     var inline = document.getElementById('mapa-curso');
     if (inline) construirMapa(inline, true);
   }

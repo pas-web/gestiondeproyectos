@@ -170,6 +170,10 @@ aquí en adelante. Al diseñar otra materia, se dan por puestas.
 - **El expediente o portafolio se imprime por unidad**, un cuadernillo a la vez
   conforme avanza el semestre, nunca completo al inicio. Cada cuadernillo lleva
   portadilla, sus hojas de trabajo, el suelo de esa unidad y su autoevaluación.
+- **La declaración de IA entrega el prompt** (cuatro datos: herramienta, para
+  qué, qué cambió la persona, prompt transcrito o anexo), porque hay un oficio
+  detrás de un buen prompt y se revisa en clase. Vale para cualquier curso con
+  pacto de IA. Confirmada el 30 de julio de 2026.
 
 ## Bloques de retroalimentación del 29 y 30 de julio de 2026 (filas 8 a 30)
 
