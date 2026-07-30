@@ -193,7 +193,14 @@
     + '.lado .lado-tit a:hover{color:var(--marca,#0F6E6E)}'
     + '.mapa .fila.actual{background:#F3FAF7;border-radius:8px;padding-left:.45rem;padding-right:.45rem}'
     + '.mapa .fila.actual a{color:var(--profundo,#0B3C49)}'
-    + '@media(min-width:1200px){body{padding-left:21rem}.lado{display:block}#btn-menu{display:none}}'
+    + '.lado-links{display:flex;flex-direction:column;gap:.1rem;margin:.2rem 0 .9rem;padding-bottom:.8rem;border-bottom:1px solid var(--borde,#CFE3DD)}'
+    + '.lado-links a{display:block;padding:.32rem .55rem;border-radius:8px;color:var(--profundo,#0B3C49);text-decoration:none;font-size:.95rem;font-weight:600}'
+    + '.lado-links a:hover{background:#EDF5F3;color:var(--marca,#0F6E6E)}'
+    + '.lado-links a.aqui{background:#F3FAF7;color:var(--marca,#0F6E6E);border-left:3px solid var(--arena,#D9A441);border-radius:0 8px 8px 0}'
+    + '#btn-lado{display:none;flex:none;align-self:center;margin:.3rem .3rem .3rem 0;background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:8px;padding:.28rem .6rem;font-size:1.05rem;line-height:1;cursor:pointer}'
+    + '#btn-lado:hover{background:rgba(255,255,255,.14)}'
+    + '@media(min-width:1200px){body{padding-left:21rem}.lado{display:block}#btn-menu{display:none}#btn-lado{display:block}'
+    + 'html.lado-oculto body{padding-left:0}html.lado-oculto .lado{display:none}html.lado-oculto #btn-menu{display:block}}'
     + '@media print{.lado{display:none!important}body{padding-left:0!important}}'
 
     /* ---- Ticket de salida al pie de cada semana ---- */
@@ -208,6 +215,13 @@
   var st = document.createElement('style');
   st.textContent = css;
   document.head.appendChild(st);
+
+  /* La preferencia de mapa plegado se recuerda entre páginas. */
+  try {
+    if (localStorage.getItem('gestion-lado') === 'oculto') {
+      document.documentElement.classList.add('lado-oculto');
+    }
+  } catch (e) {}
 
   /* ---------- Construcción ---------- */
 
@@ -285,6 +299,17 @@
 
     var aqui = location.pathname.replace(/\/$/, '/index.html');
 
+    var btnLado = document.createElement('button');
+    btnLado.id = 'btn-lado';
+    btnLado.type = 'button';
+    btnLado.textContent = '☰';
+    btnLado.setAttribute('aria-label', 'Mostrar u ocultar el mapa del curso');
+    btnLado.addEventListener('click', function () {
+      var oculto = document.documentElement.classList.toggle('lado-oculto');
+      try { localStorage.setItem('gestion-lado', oculto ? 'oculto' : ''); } catch (e) {}
+    });
+    caja.appendChild(btnLado);
+
     NAV.forEach(function (l) {
       var a = document.createElement('a');
       a.href = BASE + l.href;
@@ -350,12 +375,28 @@
     cont.appendChild(d);
   }
 
-  /* Barra lateral fija en pantallas anchas: el mapa completo siempre a la vista. */
+  /* Barra lateral fija en pantallas anchas: secciones y mapa siempre a la vista. */
   function montarLado() {
     var lado = document.createElement('aside');
     lado.className = 'lado';
     lado.setAttribute('aria-label', 'Mapa del curso');
     lado.innerHTML = '<p class="lado-tit"><a href="' + BASE + 'index.html">Gestión y Manejo de Proyectos</a></p>';
+
+    var links = document.createElement('nav');
+    links.className = 'lado-links';
+    var aqui = location.pathname.replace(/\/$/, '/index.html');
+    NAV.forEach(function (l) {
+      if (l.casa) return;
+      var a = document.createElement('a');
+      a.href = BASE + l.href;
+      a.textContent = l.t;
+      try {
+        if (new URL(a.href, location.href).pathname === aqui) a.className = 'aqui';
+      } catch (e) {}
+      links.appendChild(a);
+    });
+    lado.appendChild(links);
+
     var mapa = document.createElement('div');
     lado.appendChild(mapa);
     document.body.appendChild(lado);
