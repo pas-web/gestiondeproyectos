@@ -15,7 +15,7 @@
 
   /* URL del formulario del ticket de salida (Google Form). Mientras esté vacía,
      el bloque del ticket no se muestra. Pégala entre las comillas y listo. */
-  var TICKET_URL = '';
+  var TICKET_URL = 'https://forms.gle/674ik4CafFpvVK6A8';
 
   var FIJAS = [
     { href: 'semanas/semana-00.html', t: 'Semana 0 · Aterrizaje', d: 'El programa completo del curso. Sesiones del 30 y 31 de julio.' },
