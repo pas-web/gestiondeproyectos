@@ -35,7 +35,7 @@
 <h1>La letra chiquita</h1>
 <p class="sub">Gimnasio · Semana 5 · Práctica libre, sin registro y sin nota.</p>
 
-<p>Siete cláusulas del tipo que aparece en convocatorias reales de este país (PROCODES, INAES, fondos municipales). Ninguna está ahí de adorno: cada una descalifica solicitudes todos los años. Descifra qué implica cada una para quien solicita.</p>
+<p>Diez cláusulas. Las primeras siete son del tipo que aparece en convocatorias reales de este país (PROCODES, INAES, fondos municipales); las últimas tres vienen copiadas palabra por palabra de los Lineamientos del PROCODES 2026 de la CONANP, el programa federal que opera en las áreas naturales protegidas, Sierra Gorda incluida. Ninguna está ahí de adorno: cada una descalifica solicitudes todos los años. Descifra qué implica cada una para quien solicita.</p>
 
 <div class="intro">
   La regla del oficio: las reglas de operación se leen <strong>dos veces</strong>. La primera para entender qué dicen; la segunda para encontrar lo que la primera se saltó. Este ejercicio entrena la segunda pasada.
@@ -107,7 +107,31 @@
             'Que si se acaban los folios te apuntan en lista de espera'],
       resp: 1,
       pista: 'Dos fechas de cierre en una misma frase. ¿Cuál de las dos no controlas?',
-      exp: 'El clásico: la fecha impresa dice 15 y la real puede ser el 2. "Hasta agotar folios" significa que el cierre depende de la demanda, no del calendario, y la demanda no la controlas. Traducción operativa: el expediente se termina ANTES de que abra la ventanilla y alguien va el primer día. En el mapeo hacia atrás, esta cláusula recorre todos los plazos del equipo dos semanas.' }
+      exp: 'El clásico: la fecha impresa dice 15 y la real puede ser el 2. "Hasta agotar folios" significa que el cierre depende de la demanda, no del calendario, y la demanda no la controlas. Traducción operativa: el expediente se termina ANTES de que abra la ventanilla y alguien va el primer día. En el mapeo hacia atrás, esta cláusula recorre todos los plazos del equipo dos semanas.' },
+    { c: '"La Dirección Regional o Dirección del ANP, según corresponda, tendrá un plazo de 3 días hábiles [...] para notificar a la persona solicitante cuando la documentación entregada se encuentre incompleta o existan correcciones a la solicitud; previniéndole que en caso de no cumplir con el requerimiento dentro de un plazo de 5 días hábiles [...] se desechará su solicitud." (Lineamientos PROCODES 2026, numeral 8.4)',
+      ops: ['Que entregar la solicitud es el final del trámite y ya solo queda esperar el dictamen',
+            'Que después de entregar viene una segunda ventana de vida o muerte: unos ocho días hábiles en los que alguien del equipo está localizable y con los papeles a la mano',
+            'Que si falta un documento la solicitud se rechaza de inmediato y sin aviso',
+            'Que los 5 días se pueden extender si avisas que el papel viene en camino'],
+      resp: 1,
+      pista: 'Cinco días hábiles para conseguir un papel que falta. ¿Y si ese papel depende de una asamblea que sesiona una vez al mes?',
+      exp: 'La prevención es una segunda oportunidad con cronómetro: te avisan qué falta y tienes cinco días hábiles, y lo que no llegue en ese plazo tira la solicitud completa. Por eso el expediente se arma con copias de sobra, y por eso los papeles lentos (el acta de asamblea, la anuencia, el comprobante a nombre de otro) se resuelven antes de entregar. En el calendario del equipo, después de la entrega quedan ocho días hábiles de guardia.' },
+    { c: '"En caso de que la persona solicitante no reciba notificación en el plazo anteriormente mencionado, se entenderá como no aprobada su solicitud." (Lineamientos PROCODES 2026, numeral 8.5)',
+      ops: ['Que si no te contestan es que siguen evaluando y conviene esperar',
+            'Que el silencio ya es una respuesta: pasado el plazo sin oficio, la solicitud quedó no aprobada, y llevar la cuenta de los días es trabajo del equipo',
+            'Que pueden reclamarte a ti por no haber preguntado',
+            'Que seguramente se traspapeló y conviene volver a meter la solicitud'],
+      resp: 1,
+      pista: 'Héctor Vera decía que los rechazos que más duelen son los que ni siquiera te contestan. Aquí eso está escrito como regla. ¿Quién lleva la cuenta de los días?',
+      exp: 'El silencio administrativo existe y está firmado: nadie te debe una llamada. El gestor anota la fecha del dictamen y cuenta los días hábiles por su cuenta; pasado el plazo, ese no se registra como cualquier otro, y se va a preguntar por las razones a la Dirección del ANP con el acta de dictamen enfrente, porque para el siguiente intento las razones valen más que el resultado.' },
+    { c: '"Se asignará el puntaje establecido a cada criterio específico de acuerdo con el cumplimiento de estos en cada solicitud, en caso contrario se asignará una calificación de cero puntos, en el entendido de que no se podrán fraccionar los puntos [...]. La calificación máxima por cada tipo de apoyo será de 52 puntos." Y más adelante: "El puntaje mínimo [...] no puede ser menor a 20 puntos." (Lineamientos PROCODES 2026, numeral 8.5)',
+      ops: ['Que acercarse a cumplir un criterio junta puntos parciales',
+            'Que cada criterio se cumple completo o vale cero: la solicitud se escribe con la tabla de calificación enfrente, palomeando criterio por criterio',
+            'Que 20 puntos de 52 es fácil y con la mitad de los criterios sobra',
+            'Que el puntaje depende del humor del comité ese día'],
+      resp: 1,
+      pista: 'No se fraccionan puntos. ¿De qué sirve cumplir un criterio al 90 por ciento?',
+      exp: 'Aquí está la tabla que el dictaminador tiene enfrente cuando lee tu solicitud, y la cláusula dice cómo la usa: sin medios puntos. Cumplir un criterio a medias paga exactamente lo mismo que ignorarlo. La lectura de dictaminador se vuelve operativa: se copia la tabla de criterios y donde no hay paloma clara se reescribe hasta que la haya. Y el mínimo de 20 avisa otra cosa: pasar la línea no asegura nada, porque el orden de prioridad se arma por puntaje y el dinero se acaba bajando por la lista.' }
   ];
 
   var cont = document.getElementById('casos');
