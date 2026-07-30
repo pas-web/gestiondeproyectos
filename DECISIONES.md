@@ -171,9 +171,43 @@ aquí en adelante. Al diseñar otra materia, se dan por puestas.
   conforme avanza el semestre, nunca completo al inicio. Cada cuadernillo lleva
   portadilla, sus hojas de trabajo, el suelo de esa unidad y su autoevaluación.
 
+## Bloques de retroalimentación del 29 y 30 de julio de 2026 (filas 8 a 30)
+
+- **La voz de los materiales renuncia al remate** y deja huecos para discutir.
+  Subió a reglas transversales. La Semana 0 completa ya pasó por ella: fuera
+  aforismos de cierre, antítesis con dos puntos en serie y anuncios de guion.
+- **No se anuncia lo que no se hará** ("nada de X hoy", "lo administrativo es
+  mañana"): se presenta solo lo que sí pasa. Vale para páginas y para los planes
+  de sesión.
+- **El ciclo del semestre se dice en seis verbos**: se escucha (S1-4), se diseña
+  (S5-8), se consigue (S9-11), se hace (S12-14), se mide (S15), se cuenta
+  (S16-17). Está dibujado en el bloque "A dónde vamos" de la Semana 0.
+- **El fondo es capital semilla de $10,000 y opera como palanca.** La
+  ministración se condiciona a contrapartida gestionada, en faenas o en monto
+  (cláusula 5.6 nueva). Sin tope fijo por componente: mínimo $2,000 y el
+  dictamen reparte por orden de calificación hasta agotar la Bolsa (cláusula
+  5.2). Reglas del fondo y Anexo 1 actualizados en la carpeta local; la condición
+  se anuncia desde la Semana 0, sección 4 del jueves.
+- **La declaración de IA pide el prompt**: cuatro datos en lugar de tres
+  (herramienta, para qué, qué cambiaste, prompt transcrito o anexo), porque hay
+  un oficio detrás de un buen prompt y se revisa en clase. Cambiado en el pacto
+  (ambas copias) y en la Semana 0.
+- **La familia del marco lógico quedó completa**: árbol de problemas (S5), árbol
+  de objetivos (S7), cadena nombrada también teoría del cambio (S7-S8) y marco
+  (S8). El PROCODES 2026 entra con tres cláusulas textuales en La letra chiquita
+  (S5) y la sesión "El donante también es actor" (S9); el plan de palanca vive en
+  S9, el presupuesto a dos columnas en S10 y los asientos en especie en S12 y S16.
+
 ## Pendientes
 
-- Migrar las semanas 1 y 2 al formato de día 2.0.
+- Migrar las semanas 1 y 2 al formato de día 2.0. El plan de sesión de la semana
+  1 además cuenta el arranque viejo ($20,000, pactos el viernes, el anuncio del
+  encargo que ya vive en la Semana 0): se corrigieron los montos, pero el plan
+  necesita rehacerse.
+- Menú de navegación tipo Etimologías en la portada (fila 2 de la hoja).
+- Integrar la imagen del home cuando Eduardo la entregue (fila 7).
+- Reimprimir las reglas del fondo y el Anexo 1 para la semana 5: cambiaron la
+  Bolsa, el tope y la cláusula de palanca.
 - Producir los días de las semanas 3 a 17 en el formato nuevo, en lotes por unidad.
 - Revisar si la semana 2 necesita ajuste ahora que la campana del no y el contrato
   de gestión ya no compiten con los pactos.
