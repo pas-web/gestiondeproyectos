@@ -7,18 +7,19 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 51 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 3 (31 jul 2026): formato de mazos de láminas
-  aprobado en la Semana 0 (sustituye al formato de día 2.0 como forma de la
-  sesión), con modo presentación en `curso.js`, notas del conductor, tecla A para
-  el apoyo y lámina de cierre con el QR del ticket. Antes, bloque 2 (28 jul 2026):
+- **Último bloque cerrado:** bloque 4 (31 jul 2026): los dos pactos pasan a
+  aceptación en línea, sin imprimir (regla 4 nueva). Antes, bloque 3
+  (31 jul 2026): formato de mazos de láminas aprobado en la Semana 0 (sustituye
+  al formato de día 2.0 como forma de la sesión), con modo presentación en
+  `curso.js`, notas del conductor, tecla A para el apoyo y lámina de cierre con
+  el QR del ticket; bloque 2 (28 jul 2026):
   formato de día 2.0, los dos pactos como documentos firmables y la hoja de
   retroalimentación de la materia; bloque 1 (28 jul 2026): menú de navegación,
   Semana 0 como semana real, página del gimnasio, detalle de sesiones de las
   semanas 0, 1 y 2, y reparto de contenido entre la Semana 0 y la 1.
-- **Siguiente paso acordado:** (1) rediseñar los dos pactos para firma digital,
-  sin imprimir; (2) guion de entrevista de 10 minutos para "Para llevar al campo"
-  de la Semana 0; (3) migrar las semanas 1 y 2 al formato de mazos y después
-  producir las semanas 3 a 17 en lotes por unidad.
+- **Siguiente paso acordado:** (1) guion de entrevista de 10 minutos para
+  "Para llevar al campo" de la Semana 0; (2) migrar las semanas 1 y 2 al formato
+  de mazos y después producir las semanas 3 a 17 en lotes por unidad.
 
 ## Dónde vive cada cosa
 
@@ -94,9 +95,15 @@ discutir el primer día se cobra caro en noviembre.
    **Los emojis se quedan en su lugar ritual: uno por página como máximo**, el del
    chapuzón al cierre. Nada de emoji decorativo en encabezados, listas, viñetas de
    callout ni celdas de tabla: si algo necesita señal, se le da color y peso.
-4. **Los pactos se firman en papel y viven en el sitio.** Cada pacto es una página
-   imprimible en `evaluacion/`, con las dos columnas de compromisos (lo que le toca
-   al profesor y lo que le toca al estudiante) y firma por nombre.
+4. **Los pactos se aceptan en línea, sin imprimir nada.** Cada pacto es una página
+   en `evaluacion/` con las dos columnas de compromisos y, al final, un bloque de
+   aceptación (`.acepta-pacto`, montado por `curso.js`): el estudiante escribe su
+   nombre completo, marca que leyó y está de acuerdo, y descarga una constancia
+   (archivo HTML chiquito con nombre, fecha y, en el de evaluación, su objeción).
+   El registro vive en el navegador del estudiante (localStorage) y en su
+   constancia; no viaja a ningún servidor ni le llega al profesor. La columna del
+   profesor queda comprometida por estar publicada en la página. El contrato de
+   gestión y el expediente siguen en papel.
 5. **El candado de goteo es pedagógico, no de seguridad.** Cada semana abre el
    miércoles anterior a sus sesiones. `?preview` en la URL lo salta, para el profesor.
 6. **Los ejercicios son autocontenidos.** Un HTML por ejercicio, sin dependencias
@@ -218,8 +225,6 @@ aquí en adelante. Al diseñar otra materia, se dan por puestas.
 
 ## Pendientes
 
-- Rediseñar los dos pactos para firma digital (sin imprimir): definir qué
-  evidencia de aceptación basta y dónde queda guardada.
 - Guion de entrevista de 10 minutos para el encargo "Para llevar al campo" de la
   Semana 0 (entrevistar a profesores de la carrera sobre manejar recursos
   públicos).

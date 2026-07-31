@@ -24,17 +24,10 @@
   .mio h3 { margin:.1rem 0 .5rem; color:var(--profundo); font-size:1.02rem; }
   .acuerdo { border:2px solid var(--profundo); border-radius:12px; padding:1.1rem 1.3rem; margin:1.6rem 0 0; background:#F7FAF9; }
   .acuerdo p { margin:.4rem 0; }
-  .linea-nombre { border-bottom:1.5px solid var(--texto); display:inline-block; min-width:19rem; }
-  .linea-corta { border-bottom:1.5px solid var(--texto); display:inline-block; min-width:7rem; }
-  .firmas { display:flex; gap:2rem; margin-top:2.2rem; }
-  .firma { flex:1; text-align:center; }
-  .firma .linea { border-top:1.5px solid var(--texto); margin-top:2.6rem; padding-top:.4rem; font-size:.9rem; }
-  #btn-imprimir { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.7rem 1.1rem; font:inherit; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); }
   a { color:var(--marca); }
   @media print {
     body { background:#fff; }
     .hoja { max-width:none; padding:0; }
-    #btn-imprimir { display:none; }
     @page { margin:1.6cm; }
   }
 </style>
@@ -44,7 +37,7 @@
 
 <div class="curso">Gestión y Manejo de Proyectos · UAQ Campus Concá · Agosto-diciembre 2026</div>
 <h1>Pacto de evaluación</h1>
-<p class="lema">Se firma el viernes 31 de julio, después de haberlo discutido y no antes.</p>
+<p class="lema">Se acepta el viernes 31 de julio, después de haberlo discutido y no antes.</p>
 
 <p>Este pacto describe cómo se evalúa esta materia. No es un reglamento que se acata: es un acuerdo entre dos partes que tienen obligaciones distintas y que se pueden reclamar entre sí. Léelo completo. Si algo no te convence, dilo en voz alta el viernes: para eso está reservado ese rato de la sesión.</p>
 
@@ -118,26 +111,20 @@
 <h2>6 · Mi objeción, si la tengo</h2>
 <div class="mio">
   <h3>Lo que no me convence de este sistema</h3>
-  <p>Escríbelo aunque firmes. Se retoma al cerrar la unidad 1, en septiembre, cuando ya lo hayas vivido unas semanas.</p>
-  <p style="border-bottom:1px solid var(--borde);height:1.6rem"></p>
-  <p style="border-bottom:1px solid var(--borde);height:1.6rem"></p>
-  <p style="border-bottom:1px solid var(--borde);height:1.6rem"></p>
+  <p>Escríbelo aunque aceptes. Queda guardado con tu aceptación y se retoma al cerrar la unidad 1, en septiembre, cuando ya lo hayas vivido unas semanas.</p>
+  <textarea id="objecion-pacto" placeholder="Puede quedar vacío, pero si algo te rechina, este es su lugar."></textarea>
 </div>
 
 <div class="acuerdo">
   <p><strong>Estoy de acuerdo con este pacto de evaluación.</strong> Lo leí completo, tuve oportunidad de discutirlo y entiendo cómo va a salir mi calificación final.</p>
-  <p style="margin-top:1.1rem">Nombre: <span class="linea-nombre"></span></p>
-  <p>Grupo: <span class="linea-corta"></span> &nbsp;&nbsp; Fecha: <span class="linea-corta"></span> de julio de 2026, Concá, Arroyo Seco, Querétaro.</p>
-  <div class="firmas">
-    <div class="firma"><div class="linea">Nombre y firma del estudiante</div></div>
-    <div class="firma"><div class="linea">Profesor</div></div>
-  </div>
+  <div class="acepta-pacto" data-pacto="evaluacion" data-titulo="Pacto de evaluación"></div>
 </div>
 
-<p style="margin-top:1.6rem;font-size:.9rem;color:#68807a">La versión ampliada del sistema, con el suelo de cada unidad, vive en <a href="../tu-calificacion.html">Tu calificación</a>. Este pacto firmado es la primera hoja de tu <a href="expediente-del-gestor.html">expediente del gestor</a>.</p>
+<p style="margin-top:1rem;font-size:.9rem;color:#68807a">La columna del profesor queda comprometida por el hecho de estar publicada en esta página: se puede reclamar cualquier día del semestre.</p>
+
+<p style="margin-top:1.6rem;font-size:.9rem;color:#68807a">La versión ampliada del sistema, con el suelo de cada unidad, vive en <a href="../tu-calificacion.html">Tu calificación</a>. Tu <a href="expediente-del-gestor.html">expediente del gestor</a> arranca esta misma semana.</p>
 
 </div>
-<button id="btn-imprimir" onclick="window.print()">Imprimir</button>
 
 <script src="../curso.js"></script>
 

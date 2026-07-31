@@ -28,17 +28,10 @@
   .modelo { background:#F0F6FB; border-left:4px solid #3C7EA8; padding:.75rem 1rem; margin:.9rem 0; font-style:italic; color:#1F4258; }
   .acuerdo { border:2px solid var(--profundo); border-radius:12px; padding:1.1rem 1.3rem; margin:1.6rem 0 0; background:#F7FAF9; }
   .acuerdo p { margin:.4rem 0; }
-  .linea-nombre { border-bottom:1.5px solid var(--texto); display:inline-block; min-width:19rem; }
-  .linea-corta { border-bottom:1.5px solid var(--texto); display:inline-block; min-width:7rem; }
-  .firmas { display:flex; gap:2rem; margin-top:2.2rem; }
-  .firma { flex:1; text-align:center; }
-  .firma .linea { border-top:1.5px solid var(--texto); margin-top:2.6rem; padding-top:.4rem; font-size:.9rem; }
-  #btn-imprimir { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.7rem 1.1rem; font:inherit; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); }
   a { color:var(--marca); }
   @media print {
     body { background:#fff; }
     .hoja { max-width:none; padding:0; }
-    #btn-imprimir { display:none; }
     @page { margin:1.6cm; }
   }
 </style>
@@ -48,7 +41,7 @@
 
 <div class="curso">Gestión y Manejo de Proyectos · UAQ Campus Concá · Agosto-diciembre 2026</div>
 <h1>Pacto de uso de inteligencia artificial</h1>
-<p class="lema">Se firma el viernes 31 de julio, después de haberlo discutido y no antes.</p>
+<p class="lema">Se acepta el viernes 31 de julio, después de haberlo discutido y no antes.</p>
 
 <p>En este curso la inteligencia artificial se usa. No está prohibida, no se persigue y no hay cacería. Lo que sí hay es una costumbre profesional que vas a necesitar el resto de tu vida laboral: saber de dónde salió cada cosa que firmas.</p>
 
@@ -124,18 +117,14 @@
 
 <div class="acuerdo">
   <p><strong>Estoy de acuerdo con este pacto de uso de inteligencia artificial.</strong> Lo leí completo, entiendo la diferencia entre usarla y esconderla, y me comprometo a declararla cuando la use.</p>
-  <p style="margin-top:1.1rem">Nombre: <span class="linea-nombre"></span></p>
-  <p>Grupo: <span class="linea-corta"></span> &nbsp;&nbsp; Fecha: <span class="linea-corta"></span> de julio de 2026, Concá, Arroyo Seco, Querétaro.</p>
-  <div class="firmas">
-    <div class="firma"><div class="linea">Nombre y firma del estudiante</div></div>
-    <div class="firma"><div class="linea">Profesor</div></div>
-  </div>
+  <div class="acepta-pacto" data-pacto="ia" data-titulo="Pacto de uso de inteligencia artificial"></div>
 </div>
 
-<p style="margin-top:1.6rem;font-size:.9rem;color:#68807a">Este pacto firmado es la segunda hoja de tu <a href="expediente-del-gestor.html">expediente del gestor</a>, junto al <a href="pacto-de-evaluacion.html">pacto de evaluación</a>.</p>
+<p style="margin-top:1rem;font-size:.9rem;color:#68807a">La columna del profesor queda comprometida por el hecho de estar publicada en esta página: se puede reclamar cualquier día del semestre.</p>
+
+<p style="margin-top:1.6rem;font-size:.9rem;color:#68807a">Este pacto se acepta junto al <a href="pacto-de-evaluacion.html">pacto de evaluación</a>, el viernes de la Semana 0.</p>
 
 </div>
-<button id="btn-imprimir" onclick="window.print()">Imprimir</button>
 
 <script src="../curso.js"></script>
 

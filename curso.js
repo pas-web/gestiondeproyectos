@@ -273,7 +273,27 @@
     + '#telon .barra button{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:8px;padding:.3rem .8rem;font:inherit;cursor:pointer}'
     + '#telon .barra button:hover{background:rgba(255,255,255,.22)}'
     + '#telon .barra .salir{margin-left:auto}'
-    + '@media print{#telon,.btn-presentar{display:none!important}}';
+    + '@media print{#telon,.btn-presentar{display:none!important}}'
+
+    /* ---- Aceptación digital de los pactos ---- */
+    + '.acepta-forma{margin-top:1rem}'
+    + '.acepta-forma label{display:block;font-weight:bold;color:var(--profundo,#0B3C49);margin:.8rem 0 .2rem;font-size:.95rem}'
+    + '.acepta-forma input[type=text]{display:block;width:100%;max-width:26rem;font:inherit;padding:.55rem .7rem;border:1.5px solid var(--borde,#CFE3DD);border-radius:8px;margin-top:.25rem}'
+    + '.acepta-forma input[type=text]:focus{outline:2px solid var(--marca,#0F6E6E);border-color:var(--marca,#0F6E6E)}'
+    + '.acepta-forma label.check{display:flex;align-items:flex-start;gap:.5rem;font-weight:normal;margin:1rem 0}'
+    + '.acepta-forma label.check input{width:1.15rem;height:1.15rem;margin-top:.2rem;flex:none}'
+    + '.btn-aceptar{background:var(--marca,#0F6E6E);color:#fff;border:none;border-radius:999px;padding:.6rem 1.5rem;font:inherit;font-size:1rem;font-weight:bold;cursor:pointer}'
+    + '.btn-aceptar:hover{filter:brightness(1.08)}'
+    + '.acepta-forma .aviso{color:#8A3B2B;font-weight:bold;margin:.5rem 0 0;min-height:1.2rem}'
+    + '.acepta-forma .nota,.acepta-hecho .nota{color:#68807a;font-size:.88rem;margin:.7rem 0 0}'
+    + '.acepta-hecho{background:#EEF6F0;border:2px solid #C9E2CF;border-radius:12px;padding:1rem 1.2rem;margin-top:1rem}'
+    + '.acepta-hecho .rot{display:block;font-size:.72rem;letter-spacing:.11em;text-transform:uppercase;font-weight:bold;color:#1F4A2C;margin-bottom:.3rem}'
+    + '.acepta-hecho p{margin:.4rem 0}'
+    + '.acepta-hecho .obj{font-size:.92rem;color:#45605a}'
+    + '.btn-constancia{background:var(--profundo,#0B3C49);color:#fff;border:none;border-radius:999px;padding:.5rem 1.2rem;font:inherit;font-size:.92rem;font-weight:bold;cursor:pointer;margin:.5rem .6rem 0 0}'
+    + '.btn-constancia:hover{filter:brightness(1.12)}'
+    + '.btn-borrar{background:none;border:none;color:#68807a;font:inherit;font-size:.85rem;text-decoration:underline;cursor:pointer;padding:.5rem 0 0}'
+    + '#objecion-pacto{display:block;width:100%;font:inherit;font-size:.95rem;padding:.6rem .7rem;border:1px solid var(--borde,#CFE3DD);border-radius:8px;min-height:5.2rem;resize:vertical}';
 
   var st = document.createElement('style');
   st.textContent = css;
@@ -554,11 +574,101 @@
     });
   }
 
+  /* Aceptación digital de los pactos: el estudiante escribe su nombre, marca
+     que está de acuerdo y descarga su constancia. El registro vive en su
+     navegador (localStorage) y en la constancia; no viaja a ningún servidor.
+     Se activa en cualquier <div class="acepta-pacto" data-pacto="..." data-titulo="...">. */
+  function montarAceptacion() {
+    var cajas = document.querySelectorAll('.acepta-pacto');
+    if (!cajas.length) return;
+
+    function esc(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+    function fechaLegible(iso) {
+      return new Date(iso).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    Array.prototype.forEach.call(cajas, function (caja) {
+      var id = caja.getAttribute('data-pacto');
+      var titulo = caja.getAttribute('data-titulo') || 'Pacto';
+      var clave = 'gestion-pacto-' + id;
+      var reg = null;
+      try { reg = JSON.parse(localStorage.getItem(clave) || 'null'); } catch (e) {}
+
+      function constancia(r) {
+        return '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">'
+          + '<title>Constancia · ' + esc(titulo) + '</title></head>'
+          + '<body style="font-family:Georgia,serif;max-width:640px;margin:2rem auto;padding:0 1rem;color:#1C2B28;line-height:1.6">'
+          + '<p style="font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#0F6E6E;font-weight:bold">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</p>'
+          + '<h1 style="color:#0B3C49">Constancia de aceptación</h1>'
+          + '<p style="font-size:1.15rem"><strong>' + esc(r.n) + '</strong> leyó y aceptó el <strong>' + esc(titulo) + '</strong> el ' + fechaLegible(r.f) + '.</p>'
+          + (r.o ? '<p><strong>Lo que dejó anotado que no le convence:</strong> ' + esc(r.o) + '</p>' : '')
+          + '<p>El texto completo del pacto vive en el sitio del curso:<br>'
+          + '<a href="' + location.href.split('?')[0] + '">' + location.href.split('?')[0] + '</a></p>'
+          + '<p style="color:#68807a;font-size:.9rem">Guarda este archivo donde no se pierda: es tu registro del pacto.</p>'
+          + '</body></html>';
+      }
+
+      function descarga() {
+        var blob = new Blob([constancia(reg)], { type: 'text/html' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'constancia-pacto-' + id + '.html';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+
+      function pintaHecho() {
+        caja.innerHTML = '<div class="acepta-hecho">'
+          + '<span class="rot">Pacto aceptado</span>'
+          + '<p><strong>' + esc(reg.n) + '</strong> aceptó este pacto el ' + fechaLegible(reg.f) + '.</p>'
+          + (reg.o ? '<p class="obj">Quedó anotado lo que no te convence: "' + esc(reg.o) + '". Se retoma al cerrar la unidad 1.</p>' : '')
+          + '<button type="button" class="btn-constancia">Descargar mi constancia</button>'
+          + '<button type="button" class="btn-borrar">¿Te equivocaste? Borrar y aceptar de nuevo</button>'
+          + '<p class="nota">La constancia es un archivo chiquito: descárgalo y mándatelo a tu propio WhatsApp, para tenerlo aunque cambies de teléfono.</p>'
+          + '</div>';
+        caja.querySelector('.btn-constancia').addEventListener('click', descarga);
+        caja.querySelector('.btn-borrar').addEventListener('click', function () {
+          try { localStorage.removeItem(clave); } catch (e) {}
+          reg = null;
+          pintaForma();
+        });
+      }
+
+      function pintaForma() {
+        caja.innerHTML = '<div class="acepta-forma">'
+          + '<label>Tu nombre completo'
+          + '<input type="text" class="nombre" autocomplete="name" placeholder="Como apareces en la lista del grupo"></label>'
+          + '<label class="check"><input type="checkbox" class="deacuerdo"> Leí este pacto completo, lo discutí en clase y estoy de acuerdo.</label>'
+          + '<button type="button" class="btn-aceptar">Aceptar el pacto</button>'
+          + '<p class="aviso"></p>'
+          + '<p class="nota">Tu aceptación se guarda en este navegador y en la constancia que descargues. No viaja a ningún servidor ni le llega a nadie.</p>'
+          + '</div>';
+        caja.querySelector('.btn-aceptar').addEventListener('click', function () {
+          var n = caja.querySelector('.nombre').value.replace(/\s+/g, ' ').trim();
+          var ok = caja.querySelector('.deacuerdo').checked;
+          var aviso = caja.querySelector('.aviso');
+          if (n.length < 5 || n.indexOf(' ') === -1) { aviso.textContent = 'Escribe tu nombre completo, con apellidos.'; return; }
+          if (!ok) { aviso.textContent = 'Marca la casilla si ya lo leíste y estás de acuerdo.'; return; }
+          var objEl = document.getElementById('objecion-pacto');
+          reg = { n: n, f: new Date().toISOString(), o: objEl ? objEl.value.trim() : '' };
+          try { localStorage.setItem(clave, JSON.stringify(reg)); } catch (e) {}
+          pintaHecho();
+        });
+      }
+
+      if (reg && reg.n) pintaHecho(); else pintaForma();
+    });
+  }
+
   function arrancar() {
     montarPanel();
     montarLado();
     montarTicket();
     montarTelon();
+    montarAceptacion();
     var inline = document.getElementById('mapa-curso');
     if (inline) construirMapa(inline, true);
   }
