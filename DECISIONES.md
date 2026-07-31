@@ -5,10 +5,15 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 ## Estado actual
 
-- **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 51 ejercicios
+- **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 52 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 4 (31 jul 2026): los dos pactos pasan a
-  aceptación en línea, sin imprimir (regla 4 nueva). Antes, bloque 3
+- **Último bloque cerrado:** bloque 5 (31 jul 2026): el guion de la entrevista a
+  profesores sobre manejo y comprobación de recursos quedó como ejercicio de la
+  Semana 0 en el gimnasio (`ejercicios/semana-00/`), enlazado desde la lámina
+  "Para llevar al campo". El encuadre que da el estudiante habla solo de recabar
+  experiencias, sin mencionar que el grupo manejará recursos. Antes, bloque 4
+  (31 jul 2026): los dos pactos pasan a
+  aceptación en línea, sin imprimir (regla 4 nueva); bloque 3
   (31 jul 2026): formato de mazos de láminas aprobado en la Semana 0 (sustituye
   al formato de día 2.0 como forma de la sesión), con modo presentación en
   `curso.js`, notas del conductor, tecla A para el apoyo y lámina de cierre con
@@ -17,9 +22,8 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
   retroalimentación de la materia; bloque 1 (28 jul 2026): menú de navegación,
   Semana 0 como semana real, página del gimnasio, detalle de sesiones de las
   semanas 0, 1 y 2, y reparto de contenido entre la Semana 0 y la 1.
-- **Siguiente paso acordado:** (1) guion de entrevista de 10 minutos para
-  "Para llevar al campo" de la Semana 0; (2) migrar las semanas 1 y 2 al formato
-  de mazos y después producir las semanas 3 a 17 en lotes por unidad.
+- **Siguiente paso acordado:** migrar las semanas 1 y 2 al formato de mazos y
+  después producir las semanas 3 a 17 en lotes por unidad.
 
 ## Dónde vive cada cosa
 
@@ -225,9 +229,6 @@ aquí en adelante. Al diseñar otra materia, se dan por puestas.
 
 ## Pendientes
 
-- Guion de entrevista de 10 minutos para el encargo "Para llevar al campo" de la
-  Semana 0 (entrevistar a profesores de la carrera sobre manejar recursos
-  públicos).
 - Migrar las semanas 1 y 2 al formato de mazos de láminas. El plan de sesión de
   la semana 1 además cuenta el arranque viejo ($20,000, pactos el viernes, el
   anuncio del encargo que ya vive en la Semana 0): se corrigieron los montos,

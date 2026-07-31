@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S0 · La entrevista de los recursos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.15rem; margin:1.6rem 0 .4rem; }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .paso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin:.8rem 0; }
+  .paso .cabeza { display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap; margin-bottom:.4rem; }
+  .paso .cabeza h3 { font-family:Georgia,serif; color:var(--profundo); font-size:1.08rem; margin:0; }
+  .reloj { margin-left:auto; font-size:.7rem; font-weight:bold; letter-spacing:.07em; text-transform:uppercase; color:#7C6222; background:#FBEFD5; border:1px solid #E8D4A4; border-radius:999px; padding:.15rem .62rem; white-space:nowrap; flex:none; }
+  .dicho { font-family:Georgia,serif; font-style:italic; background:#F7FAF9; border-left:4px solid var(--marca); border-radius:0 10px 10px 0; padding:.7rem 1rem; margin:.6rem 0; color:var(--profundo); }
+  .pregunta-grande { font-family:Georgia,serif; font-size:1.15rem; color:var(--profundo); margin:.3rem 0; }
+  .repregunta { font-size:.93rem; color:#68807a; margin:.3rem 0 0; }
+  .regla { background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.7rem 1rem; margin:.7rem 0; font-size:.95rem; color:#5C4A1C; }
+  .regla strong { color:#5C4A1C; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  .cuaderno ol { margin:.3rem 0; padding-left:1.3rem; }
+  .cuaderno li { margin:.3rem 0; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; font:inherit; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; }
+  body.proyector { font-size:1.45rem; }
+  body.proyector .pregunta-grande { font-size:1.6rem; }
+  body.proyector .dicho { font-size:1.5rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La entrevista de los recursos</h1>
+<p class="sub">Gimnasio · Semana 0 · Para llevar al campo · Diez minutos de charla, ni uno más.</p>
+
+<p>Pregúntale a un profesor de la carrera que haya manejado recursos de un programa público qué fue lo que más problemas le dio. Su respuesta se trae a clase: la vamos a necesitar en la unidad 3, cuando el dinero del proyecto sea de verdad. Si no alcanzas a ningún profesor, también sirve alguien de tu comunidad que haya manejado recursos de un programa (un comité de agua, un comisariado, un grupo de productores).</p>
+
+<div class="intro">
+  <strong>Lo que estás practicando sin darte cuenta:</strong> pedirle diez minutos a alguien ocupado, sostener una conversación con propósito y registrar lo que se dijo. Tres cosas que un gestor hace toda la semana.
+</div>
+
+<h2>El arranque</h2>
+<div class="paso">
+  <div class="cabeza"><h3>Pide la cita y da el contexto</h3><span class="reloj">1 min</span></div>
+  <p>Dilo con tus palabras o léelo tal cual:</p>
+  <div class="dicho">"Estoy cursando Gestión y Manejo de Proyectos. En el curso estamos recabando experiencias de profesores de la carrera en torno del manejo y la comprobación de recursos en proyectos: cómo fue en la práctica, qué costó trabajo, qué se aprendió. Me sirve su experiencia tal cual fue, no la versión de informe. ¿Me regala diez minutos?"</div>
+</div>
+
+<h2>Las tres preguntas</h2>
+<div class="paso">
+  <div class="cabeza"><h3>1 · Para situarnos</h3><span class="reloj">2 min</span></div>
+  <p class="pregunta-grande">¿Qué programa o fondo le tocó manejar, y para qué era?</p>
+</div>
+<div class="paso">
+  <div class="cabeza"><h3>2 · La central</h3><span class="reloj">4 min</span></div>
+  <p class="pregunta-grande">De todo lo que implicó manejar ese dinero, ¿qué fue lo que más problemas le dio?</p>
+  <p class="repregunta">Si se queda corto, solo dos repreguntas: <em>"¿Me puede dar un ejemplo de cómo pasó?"</em> y <em>"¿Cómo lo resolvió?"</em></p>
+</div>
+<div class="paso">
+  <div class="cabeza"><h3>3 · Para cerrar</h3><span class="reloj">2 min</span></div>
+  <p class="pregunta-grande">¿Qué le hubiera gustado saber antes de empezar?</p>
+</div>
+
+<h2>La despedida</h2>
+<div class="paso">
+  <div class="cabeza"><h3>Agradece y pide permiso</h3><span class="reloj">1 min</span></div>
+  <p>Pregunta si puedes contar su respuesta en clase, con su nombre o sin él, como prefiera. Y ofrécele el cierre del círculo:</p>
+  <div class="dicho">"Si le interesa, en unas semanas le cuento qué encontró el grupo."</div>
+</div>
+
+<h2>Las tres reglas del entrevistador</h2>
+<div class="regla"><strong>Deja que los ejemplos los ponga él.</strong> No le sugieras temas ni le completes las frases: lo valioso es qué menciona primero cuando nadie lo dirige.</div>
+<div class="regla"><strong>No corrijas ni discutas.</strong> Vienes a escuchar, no a demostrar lo que sabes. Si dice algo que te suena raro, anótalo: puede ser lo más interesante que te lleves.</div>
+<div class="regla"><strong>Anota textual.</strong> Las frases exactas valen más que tu resumen. "Perdí tres días por una factura" dice más que "tuvo problemas administrativos".</div>
+
+<div class="cuaderno">
+  <h2>Qué traes a clase, en tu libreta</h2>
+  <ol>
+    <li>A quién entrevistaste (o "un profesor de la carrera", si pidió reserva).</li>
+    <li>Su respuesta textual a la pregunta 2.</li>
+    <li>La frase que más te sorprendió de toda la charla.</li>
+  </ol>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+</main>
+</body>
+</html>
