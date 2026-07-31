@@ -7,13 +7,18 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 51 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 2 (28 jul 2026): formato de día 2.0 en la
-  Semana 0, los dos pactos como documentos firmables y la hoja de
-  retroalimentación de la materia. Antes, bloque 1 (28 jul 2026): menú de
-  navegación, Semana 0 como semana real, página del gimnasio, detalle de sesiones
-  de las semanas 0, 1 y 2, y reparto de contenido entre la Semana 0 y la 1.
-- **Siguiente paso acordado:** con el formato de día 2.0 aprobado en la Semana 0,
-  migrar las semanas 1 y 2 y después producir las semanas 3 a 17 en lotes por unidad.
+- **Último bloque cerrado:** bloque 3 (31 jul 2026): formato de mazos de láminas
+  aprobado en la Semana 0 (sustituye al formato de día 2.0 como forma de la
+  sesión), con modo presentación en `curso.js`, notas del conductor, tecla A para
+  el apoyo y lámina de cierre con el QR del ticket. Antes, bloque 2 (28 jul 2026):
+  formato de día 2.0, los dos pactos como documentos firmables y la hoja de
+  retroalimentación de la materia; bloque 1 (28 jul 2026): menú de navegación,
+  Semana 0 como semana real, página del gimnasio, detalle de sesiones de las
+  semanas 0, 1 y 2, y reparto de contenido entre la Semana 0 y la 1.
+- **Siguiente paso acordado:** (1) rediseñar los dos pactos para firma digital,
+  sin imprimir; (2) guion de entrevista de 10 minutos para "Para llevar al campo"
+  de la Semana 0; (3) migrar las semanas 1 y 2 al formato de mazos y después
+  producir las semanas 3 a 17 en lotes por unidad.
 
 ## Dónde vive cada cosa
 
@@ -64,11 +69,20 @@ discutir el primer día se cobra caro en noviembre.
 
 1. **Voz del sitio.** Tutea al estudiante, seca y cálida a la vez. Sin raya larga,
    sin entusiasmo hueco.
-2. **El contenido de la materia vive en la página semanal.** Cada día se escribe en
-   prosa desarrollada, con el concepto explicado, ejemplos resueltos y tablas, al
-   nivel del sitio de Etimologías. La tabla minuto a minuto queda prohibida como
-   forma principal: cada bloque abre con numeral grande en arena, título en Georgia
-   y una chapa discreta con los minutos.
+2. **La página semanal conduce la clase: cada día es un mazo de láminas.** La
+   página es el medio con el que el profesor guía la sesión proyectada, no un
+   texto que narra al lector. Una idea por lámina (`.lam`), con el elemento visual
+   como protagonista y la frase grande (`.di`) como lo que se proyecta; debajo, un
+   texto de apoyo breve (`.apoyo`) que conserva la sustancia para quien repasa.
+   El lenguaje no narra ("recorremos juntos..."): afirma, pregunta al aire o
+   instruye, con señales visibles (`.senal`: Actividad, Al aire, Se abre el piso,
+   En parejas, Para llevar al campo). Cada bloque del plan de sesión abre su
+   lámina con numeral en arena y chapa de minutos; las láminas intermedias van sin
+   numeral. El botón **Presentar** de cada mazo abre el telón (todo en `curso.js`):
+   pantalla completa, flechas o clicker para avanzar, tecla A oculta el apoyo,
+   tecla N muestra las notas del conductor (`.nota-conductor`, invisibles fuera
+   del telón), Esc sale. Un mazo con `data-ticket` cierra con la lámina del QR del
+   ticket de salida. La tabla minuto a minuto sigue prohibida como forma principal.
    Estándar de referencia: `semanas/semana-00.html`.
 3. **El contraste se hace con tipografía, no con emojis.** El énfasis viaja en el
    tamaño, el peso, el color y la caja. La firma visual del sitio es la **pieza en
@@ -204,10 +218,15 @@ aquí en adelante. Al diseñar otra materia, se dan por puestas.
 
 ## Pendientes
 
-- Migrar las semanas 1 y 2 al formato de día 2.0. El plan de sesión de la semana
-  1 además cuenta el arranque viejo ($20,000, pactos el viernes, el anuncio del
-  encargo que ya vive en la Semana 0): se corrigieron los montos, pero el plan
-  necesita rehacerse.
+- Rediseñar los dos pactos para firma digital (sin imprimir): definir qué
+  evidencia de aceptación basta y dónde queda guardada.
+- Guion de entrevista de 10 minutos para el encargo "Para llevar al campo" de la
+  Semana 0 (entrevistar a profesores de la carrera sobre manejar recursos
+  públicos).
+- Migrar las semanas 1 y 2 al formato de mazos de láminas. El plan de sesión de
+  la semana 1 además cuenta el arranque viejo ($20,000, pactos el viernes, el
+  anuncio del encargo que ya vive en la Semana 0): se corrigieron los montos,
+  pero el plan necesita rehacerse.
 - Menú de navegación tipo Etimologías en la portada (fila 2 de la hoja).
 - Integrar la imagen del home cuando Eduardo la entregue (fila 7).
 - Reimprimir las reglas del fondo y el Anexo 1 para la semana 5: cambiaron la

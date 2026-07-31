@@ -62,6 +62,7 @@
   .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -98,320 +99,404 @@
 </div>
 
 <h2 class="corte" id="jueves">Las dos sesiones de esta semana</h2>
-<p style="margin-top:.2rem;color:#68807a;font-size:.95rem">Cada bloque trae su duración aproximada. Léelas antes de venir si puedes; si no, quedan aquí para después.</p>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
 
 <!-- ====================== JUEVES ====================== -->
-<section class="dia">
-  <div class="cabeza">
-    <div class="cuando">Jueves 30 de julio · 2 horas</div>
-    <h3>El encargo</h3>
-    <p class="foco">Hoy no se lee ningún reglamento. Hoy se trata de que se te antoje.</p>
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves 30 de julio · 2 horas</div>
+      <h3>El encargo</h3>
+      <p class="foco">Hoy se trata de que se te antoje.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
   </div>
-  <div class="cuerpo">
 
-    <div class="bloque">
-      <h4><span class="n">1</span> Arranque sin trámites <span class="reloj">10 min</span></h4>
-      <p>El curso cabe en una frase: <strong>hay una presa, hay con qué empezar y hay una comunidad que va a decir qué quiere ahí.</strong></p>
+  <section class="lam">
+    <h4><span class="n">1</span> Arranque sin trámites <span class="reloj">10 min</span></h4>
+    <p class="di">Hay una presa, hay con qué empezar y hay una comunidad que va a decir qué quiere ahí.</p>
+    <p class="apoyo">El curso completo cabe en esa frase. Para los detalles hay diecisiete semanas.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> Se vale regarla <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad</span>
+    <p class="di">Tres bolas por persona. Tres rondas de intentarlo de verdad.</p>
+    <p class="apoyo">Se van a caer. Muchas veces. Al final platicamos qué se sintió.</p>
+    <p class="nota-conductor">Sacar las bolas antes de proyectar esta lámina. Cortar el juego a los diez minutos aunque esté prendido: la conversación vale más que el récord.</p>
+  </section>
+
+  <section class="lam">
+    <h4>Dos maneras de saber</h4>
+    <div class="piezas">
+      <span class="pz pz--clara">saber qué<small>se lee, se explica</small></span>
+      <span class="op">&#8800;</span>
+      <span class="pz pz--oscura">saber cómo<small>se ensaya, se falla</small></span>
+      <span class="eq">y esta materia es del segundo</span>
     </div>
-
-    <div class="bloque">
-      <h4><span class="n">2</span> Se vale regarla: tres bolas y el suelo <span class="reloj">20 min</span></h4>
-      <p class="pasa"><b>Qué pasa:</b> tres bolas por persona y tres rondas de intentarlo de verdad. Se van a caer. Muchas veces. Y después platicamos qué se sintió.</p>
-      <div class="piezas">
-        <span class="pz pz--clara">saber qué<small>se lee, se explica</small></span>
-        <span class="op">&#8800;</span>
-        <span class="pz pz--oscura">saber cómo<small>se ensaya, se falla</small></span>
-        <span class="eq">y esta materia es del segundo</span>
-      </div>
-      <p>Existen dos maneras distintas de saber algo. Una es <strong>saber qué</strong>: puedes explicar que un malabar de tres bolas es una cascada, que cada bola se lanza cuando la anterior llega a su punto más alto, que la vista se fija arriba y no en las manos. Puedes leer eso en dos minutos. La otra es <strong>saber cómo</strong>, y esa no se lee: se ensaya, y al ensayarla se falla.</p>
-      <p>La gestión de proyectos vive entera del segundo tipo. Puedes explicarme perfectamente qué es un marco lógico y no ser capaz de llenar uno que se sostenga. Puedes recitar cómo se comprueba un gasto y perder la factura de la grava.</p>
-      <div class="ojo">
-        <strong>La trampa que este ejercicio desarma.</strong> Leer un manual produce una sensación agradabilísima de competencia. Es falsa. Se llama ilusión de saber y se rompe en el primer intento real: el momento incómodo en que descubres que entendiste todo y no puedes hacer nada. Aquí preferimos que ese momento pase hoy, con bolas de tela, y no en noviembre con dinero público.
-      </div>
-      <p>Hay una cosa más, y es la que de verdad importa para el semestre. Cuando se te cae la bola, la caída <strong>no es el error: es el dato</strong>. Te dice que lanzaste muy alto, o muy cruzado, o demasiado pronto.</p>
-      <div class="llave">
-        <span class="rot">La regla del salón que se estrena hoy</span>
-        Aquí se puede ser malo en público. Vas a preguntar obviedades y vas a proponer ideas que no funcionan. Si hoy no te puedes caer delante de tus compañeros, en noviembre no vas a aguantar que un comité te diga que no.
-      </div>
+    <p class="apoyo">La cascada de tres bolas se explica en dos minutos: cada bola se lanza cuando la anterior llega a su punto más alto, la vista se fija arriba y no en las manos. Lanzarla es otra cosa. La gestión de proyectos vive entera del segundo saber: puedes recitar qué es un marco lógico y no poder llenar uno que se sostenga, explicar cómo se comprueba un gasto y perder la factura de la grava.</p>
+    <div class="ojo">
+      <strong>La ilusión de saber.</strong> Leer un manual produce una sensación agradabilísima de competencia, y es falsa: se rompe en el primer intento real. Aquí ese momento pasa hoy, con bolas de tela, y no en noviembre con dinero público.
     </div>
+  </section>
 
-    <div class="bloque">
-      <h4><span class="n">3</span> El proyecto <span class="reloj">25 min</span></h4>
-      <p>En la comunidad en la que vivo hay una presa. La gente la usa a su manera: alguien pesca, alguien pasea, alguien va nada más a mirar el agua. No hay sombra pensada, ni dónde sentarse, ni nada para los niños. El encargo del semestre es convertir esa orilla en un espacio que la comunidad quiera usar.</p>
-      <p>Para eso existe un capital semilla de $10,000 que este grupo va a ejercer de verdad, con reglas, con comprobantes y con libro de cuentas público. No alcanza para todo, y ese es justamente el punto: sirve de contrapartida para ir por lo que falta. No es un ejercicio de escritorio ni un caso de estudio. Al final del semestre la presa va a estar distinta, o no, y las dos cosas van a haber sido decisión de ustedes.</p>
-      <p class="pasa"><b>Qué pasa:</b> se abre el piso. Quien conozca la presa cuenta lo que ha visto ahí, y nadie corrige a nadie. Todo lo que salga se anota.</p>
-      <p>Y aquí aparece el primer contenido técnico del curso, porque lo que acabamos de hacer tiene nombre. Un proyecto se construye sobre <strong>tres capas de información</strong>, y ninguna sirve sola:</p>
-      <div class="piezas">
-        <span class="pz pz--clara">se ve<small>observación</small></span>
-        <span class="op">+</span>
-        <span class="pz pz--arena">se dice<small>consulta</small></span>
-        <span class="op">+</span>
-        <span class="pz pz--oscura">se cuenta<small>datos</small></span>
-        <span class="eq">= un proyecto que se sostiene</span>
-      </div>
-      <table class="veredicto">
-        <tr><th>Capa</th><th>De dónde sale</th><th>Para qué sirve y para qué no</th><th>Cuándo la levantamos</th></tr>
-        <tr>
-          <td><strong>1. Lo que se ve</strong></td>
-          <td>Observación directa, tus propios ojos.</td>
-          <td>Buenísima para hechos: dónde camina la gente, dónde hay sombra. Ciega para intenciones: nunca te dice <em>por qué</em>.</td>
-          <td>Semana 2, la salida a la presa.</td>
-        </tr>
-        <tr>
-          <td><strong>2. Lo que se dice</strong></td>
-          <td>Preguntarle a la gente.</td>
-          <td>La única fuente de deseos y prioridades. Pero está sesgada por quién se anima a hablar y por lo que cree que quieres oír.</td>
-          <td>Semanas 3 y 4, la consulta.</td>
-        </tr>
-        <tr>
-          <td><strong>3. Lo que se cuenta</strong></td>
-          <td>Datos, registros, mediciones.</td>
-          <td>Da magnitudes y permite comparar. No te dice qué significan para la gente que vive ahí.</td>
-          <td>Unidad 2 para diseñar y unidad 4 para medir.</td>
-        </tr>
-      </table>
-      <p>Hoy tenemos un pedacito de la capa 1, contada de segunda mano por su profe. Eso es todo. <strong>Con eso no se diseña nada</strong>, y sin embargo es exactamente el punto donde arranca cualquier proyecto real: alguien que sabe poco y tiene que decidir cómo averiguar más.</p>
-      <div class="ojo">
-        <strong>La tentación número uno.</strong> La mitad del trabajo del gestor consiste en aguantarse las ganas de resolver antes de haber escuchado. Si hoy sales de aquí pensando "hay que poner una palapa", perfecto: anótalo. Pero anótalo como <strong>hipótesis</strong>, no como plan. En la semana 4, cuando la comunidad ya haya hablado, vas a abrir un sobre con lo que creías hoy y comparar. La mitad del oficio consiste en aguantarse las ganas de resolver antes de haber escuchado.
-      </div>
+  <section class="lam">
+    <h4>Lo que enseña la bola en el suelo</h4>
+    <p class="di">La caída no es el error: es el dato.</p>
+    <p class="apoyo">Te dice que lanzaste muy alto, o muy cruzado, o demasiado pronto. Con eso se corrige el siguiente lanzamiento. Sin eso, solo se repite.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4>La regla del salón que se estrena hoy</h4>
+    <p class="di">Aquí se puede ser malo en público.</p>
+    <p class="apoyo">Vas a preguntar obviedades y vas a proponer ideas que no funcionan. Si hoy no te puedes caer delante de tus compañeros, en noviembre no vas a aguantar que un comité te diga que no.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> El proyecto <span class="reloj">25 min</span></h4>
+    <p class="di">Una presa, una orilla sin sombra y un encargo: convertirla en un espacio que la comunidad quiera usar.</p>
+    <p class="apoyo">La gente ya la usa a su manera: alguien pesca, alguien pasea, alguien va nada más a mirar el agua. No hay sombra pensada, ni dónde sentarse, ni nada para los niños. Hay un capital semilla de $10,000 que este grupo va a ejercer de verdad, con reglas, comprobantes y libro de cuentas público. No alcanza para todo, y ese es el punto: sirve de contrapartida para ir por lo que falta. Al final del semestre la presa va a estar distinta, o no, y las dos cosas van a haber sido decisión de ustedes.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal senal--aire">Se abre el piso</span>
+    <p class="di">¿Quién conoce la presa? ¿Qué has visto ahí?</p>
+    <p class="apoyo">Nadie corrige a nadie. Todo lo que salga se anota.</p>
+  </section>
+
+  <section class="lam">
+    <h4>Lo que acabamos de hacer tiene nombre</h4>
+    <div class="piezas">
+      <span class="pz pz--clara">se ve<small>observación</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--arena">se dice<small>consulta</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--oscura">se cuenta<small>datos</small></span>
+      <span class="eq">= un proyecto que se sostiene</span>
     </div>
+    <table class="veredicto">
+      <tr><th>Capa</th><th>De dónde sale</th><th>Para qué sirve y para qué no</th><th>Cuándo la levantamos</th></tr>
+      <tr>
+        <td><strong>1. Lo que se ve</strong></td>
+        <td>Observación directa, tus propios ojos.</td>
+        <td>Buenísima para hechos: dónde camina la gente, dónde hay sombra. Ciega para intenciones: nunca te dice <em>por qué</em>.</td>
+        <td>Semana 2, la salida a la presa.</td>
+      </tr>
+      <tr>
+        <td><strong>2. Lo que se dice</strong></td>
+        <td>Preguntarle a la gente.</td>
+        <td>La única fuente de deseos y prioridades. Pero está sesgada por quién se anima a hablar y por lo que cree que quieres oír.</td>
+        <td>Semanas 3 y 4, la consulta.</td>
+      </tr>
+      <tr>
+        <td><strong>3. Lo que se cuenta</strong></td>
+        <td>Datos, registros, mediciones.</td>
+        <td>Da magnitudes y permite comparar. No te dice qué significan para la gente que vive ahí.</td>
+        <td>Unidad 2 para diseñar y unidad 4 para medir.</td>
+      </tr>
+    </table>
+    <p class="apoyo">Hoy tenemos un pedacito de la capa 1, contado de segunda mano. Con eso no se diseña nada, y sin embargo es exactamente donde arranca cualquier proyecto real: alguien que sabe poco y tiene que decidir cómo averiguar más.</p>
+  </section>
 
-    <div class="bloque">
-      <h4><span class="n">4</span> El fondo: un dinero que no es de nadie del salón <span class="reloj">15 min</span></h4>
-      <p>Se nombra sin rodeos: <strong>el fondo existe, es del proyecto y no del profesor</strong>, y este grupo lo va a ejercer con comprobantes y con un libro de cuentas que cualquiera pueda revisar.</p>
-      <p>Y trae una condición que conviene saber desde hoy: <strong>el fondo solo se abre para el equipo que haya gestionado una contrapartida</strong>, en faenas o en monto. Los diez mil se usan como palanca, para ir por lo que falta, y conseguir ese "lo que falta" es de lo que más se practica en este curso.</p>
-      <p>Todo fondo del mundo, sea de diez mil pesos o de veinte millones, trae encima las mismas tres preguntas. Hoy solo se nombran, porque responderlas es literalmente el contenido de la semana 5:</p>
-      <div class="flujo">
-        <div class="paso"><b>1</b><span class="t">¿Quién decide?</span>en qué se gasta y con qué proceso</div>
-        <div class="paso"><b>2</b><span class="t">¿En qué se puede?</span>qué gastos son elegibles y cuáles no</div>
-        <div class="paso"><b>3</b><span class="t">¿Quién comprueba?</span>ante quién se rinde cuentas y cuándo</div>
-      </div>
-      <p>Y dos palabras que vas a oír todo el semestre y conviene separar desde hoy:</p>
-      <div class="piezas">
-        <span class="pz pz--arena">gastar<small>que el dinero salga</small></span>
-        <span class="op">&#8800;</span>
-        <span class="pz pz--oscura">comprobar<small>demostrar en qué salió</small></span>
-        <span class="eq">y solo la segunda cuenta</span>
-      </div>
-      <p>Comprobar es poder demostrar, con un papel que aguante que lo revisen, en qué salió cada peso. Un peso gastado sin comprobante se pierde dos veces: se fue, y además te lo van a cobrar.</p>
-      <div class="dato">
-        <strong>Para llevar al campo.</strong> Pregúntale a alguien que haya manejado recursos de un programa público qué fue lo que más problemas le dio. Vas a escuchar hablar de comprobación mucho antes que de técnica. Trae esa respuesta a clase: la vamos a necesitar en la unidad 3.
-      </div>
-      <p>Preguntas, las que salgan. Ninguna es tonta y varias no van a tener respuesta todavía.</p>
+  <section class="lam">
+    <h4>La tentación número uno</h4>
+    <p class="di">"Hay que poner una palapa."</p>
+    <p class="apoyo">Perfecto: anótalo. Pero anótalo como <strong>hipótesis</strong>, no como plan. En la semana 4, cuando la comunidad ya haya hablado, se abre un sobre con lo que creías hoy y se compara. La mitad del oficio consiste en aguantarse las ganas de resolver antes de haber escuchado.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">4</span> El fondo <span class="reloj">15 min</span></h4>
+    <p class="di">El fondo existe, es del proyecto y no del profesor.</p>
+    <p class="apoyo">Se ejerce con comprobantes y con un libro de cuentas que cualquiera pueda revisar. Y trae una condición que conviene saber desde hoy: <strong>solo se abre para el equipo que haya gestionado una contrapartida</strong>, en faenas o en monto. Los diez mil se usan como palanca para ir por lo que falta, y conseguir ese "lo que falta" es de lo que más se practica en este curso.</p>
+  </section>
+
+  <section class="lam">
+    <h4>Las tres preguntas de todo fondo</h4>
+    <div class="flujo">
+      <div class="paso"><b>1</b><span class="t">¿Quién decide?</span>en qué se gasta y con qué proceso</div>
+      <div class="paso"><b>2</b><span class="t">¿En qué se puede?</span>qué gastos son elegibles y cuáles no</div>
+      <div class="paso"><b>3</b><span class="t">¿Quién comprueba?</span>ante quién se rinde cuentas y cuándo</div>
     </div>
+    <p class="apoyo">De diez mil pesos o de veinte millones, todo fondo carga las mismas tres. Hoy solo se nombran: responderlas es el contenido de la semana 5.</p>
+  </section>
 
-    <div class="bloque">
-      <h4><span class="n">5</span> A dónde vamos <span class="reloj">20 min</span></h4>
-      <p>En este bloque recorremos juntos la mitad de abajo de esta misma página, que es el programa del curso: lo que vas a saber hacer en diciembre, las cuatro unidades y cómo es una semana cualquiera. Cada quien la abre en su celular, y de aquí en adelante así arranca cada semana: en el sitio, desde el miércoles.</p>
-      <p>El recorrido tiene un hilo. El semestre entero es un ciclo de proyecto, el mismo que se repite en el oficio a cualquier escala:</p>
-      <div class="flujo">
-        <div class="paso"><b>1</b><span class="t">se escucha</span>semanas 1 a 4</div>
-        <span class="flecha">&#8594;</span>
-        <div class="paso"><b>2</b><span class="t">se diseña</span>semanas 5 a 8</div>
-        <span class="flecha">&#8594;</span>
-        <div class="paso"><b>3</b><span class="t">se consigue</span>semanas 9 a 11</div>
-        <span class="flecha">&#8594;</span>
-        <div class="paso"><b>4</b><span class="t">se hace</span>semanas 12 a 14</div>
-        <span class="flecha">&#8594;</span>
-        <div class="paso"><b>5</b><span class="t">se mide</span>semana 15</div>
-        <span class="flecha">&#8594;</span>
-        <div class="paso"><b>6</b><span class="t">se cuenta</span>semanas 16 y 17</div>
-      </div>
-      <div class="piezas">
-        <span class="pz pz--oscura">gestión<small>conseguir de fuera</small></span>
-        <span class="op">+</span>
-        <span class="pz pz--clara">manejo<small>llevar por dentro</small></span>
-        <span class="eq">= el nombre de esta materia</span>
-      </div>
-      <div class="llave">
-        <span class="rot">Lo que se queda picando para el jueves que viene</span>
-        La materia se llama Gestión <em>y</em> Manejo de Proyectos, y esas dos palabras no son sinónimos ni adorno del nombre. Son dos oficios distintos, se hacen con manos distintas y casi todos los proyectos que fracasan lo hacen porque alguien confundió uno con el otro.
-      </div>
+  <section class="lam">
+    <h4>Dos palabras que se separan desde hoy</h4>
+    <div class="piezas">
+      <span class="pz pz--arena">gastar<small>que el dinero salga</small></span>
+      <span class="op">&#8800;</span>
+      <span class="pz pz--oscura">comprobar<small>demostrar en qué salió</small></span>
+      <span class="eq">y solo la segunda cuenta</span>
     </div>
+    <p class="apoyo">Comprobar es poder demostrar, con un papel que aguante que lo revisen, en qué salió cada peso. Un peso gastado sin comprobante se pierde dos veces: se fue, y además te lo van a cobrar.</p>
+  </section>
 
-    <div class="bloque">
-      <h4><span class="n">6</span> La pregunta que te llevas <span class="reloj">20 min</span></h4>
-      <p class="pasa"><b>Qué pasa:</b> en parejas, cinco minutos. <strong>Si mañana te entregaran el encargo completo, ¿por dónde empezarías?</strong> Después, tres respuestas en voz alta. No se corrige ninguna.</p>
-      <p>Todo lo que salga se escribe en una hoja grande que se queda pegada en el salón hasta diciembre. Mañana la vamos a releer para hacerle una cosa, y en la semana 17 la vamos a releer otra vez para reírnos un poco de nosotros mismos.</p>
+  <section class="lam lam--actividad">
+    <span class="senal senal--campo">Para llevar al campo</span>
+    <p class="di">Pregúntale a alguien que haya manejado recursos de un programa público qué fue lo que más problemas le dio.</p>
+    <p class="apoyo">Vas a escuchar hablar de comprobación mucho antes que de técnica. Trae esa respuesta a clase: la vamos a necesitar en la unidad 3.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Preguntas sobre el fondo, las que salgan.</p>
+    <p class="apoyo">Ninguna es tonta y varias no van a tener respuesta todavía.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">5</span> A dónde vamos <span class="reloj">20 min</span></h4>
+    <span class="senal">Ahora</span>
+    <p class="di">Abre esta página en tu celular y baja hasta "El programa del curso".</p>
+    <p class="apoyo">Así arranca cada semana de aquí a diciembre: en el sitio, desde el miércoles. El recorrido de hoy pasa por lo que vas a saber hacer al final, las cuatro unidades y cómo es una semana cualquiera.</p>
+  </section>
+
+  <section class="lam">
+    <h4>El semestre entero es un ciclo de proyecto</h4>
+    <div class="flujo">
+      <div class="paso"><b>1</b><span class="t">se escucha</span>semanas 1 a 4</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>2</b><span class="t">se diseña</span>semanas 5 a 8</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>3</b><span class="t">se consigue</span>semanas 9 a 11</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>4</b><span class="t">se hace</span>semanas 12 a 14</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>5</b><span class="t">se mide</span>semana 15</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>6</b><span class="t">se cuenta</span>semanas 16 y 17</div>
     </div>
+    <p class="apoyo">El mismo ciclo que se repite en el oficio, a cualquier escala.</p>
+  </section>
 
-</div>
+  <section class="lam">
+    <h4>El nombre de la materia, en dos piezas</h4>
+    <div class="piezas">
+      <span class="pz pz--oscura">gestión<small>conseguir de fuera</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--clara">manejo<small>llevar por dentro</small></span>
+      <span class="eq">= el nombre de esta materia</span>
+    </div>
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para el jueves que viene</span>
+      Gestión y manejo no son sinónimos ni adorno del nombre. Son dos oficios distintos, se hacen con manos distintas, y casi todos los proyectos que fracasan lo hacen porque alguien confundió uno con el otro.
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">6</span> La pregunta que te llevas <span class="reloj">20 min</span></h4>
+    <span class="senal">En parejas · 5 min</span>
+    <p class="di">Si mañana te entregaran el encargo completo, ¿por dónde empezarías?</p>
+    <p class="apoyo">Después, tres respuestas en voz alta; ninguna se corrige. Todo se escribe en una hoja grande que se queda pegada en el salón hasta diciembre: mañana le hacemos una cosa, y en la semana 17 la releemos para reírnos un poco de nosotros mismos.</p>
+    <p class="nota-conductor">Hoja grande y plumones listos desde antes. Anotar textual, sin parafrasear: las palabras exactas son las que van a dar risa en diciembre.</p>
+  </section>
 </section>
 
 <!-- ====================== VIERNES ====================== -->
-<section class="dia" id="viernes">
-  <div class="cabeza">
-    <div class="cuando">Viernes 31 de julio · 2 horas</div>
-    <h3>Cómo se evalúa este curso</h3>
-    <p class="foco">Hoy se vale llegar desconfiando. Se firma hasta el final, y solo después de haberlo discutido.</p>
+<section class="mazo" id="viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes 31 de julio · 2 horas</div>
+      <h3>Cómo se evalúa este curso</h3>
+      <p class="foco">Se vale llegar desconfiando. Se firma hasta el final, y solo después de haberlo discutido.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
   </div>
-  <div class="cuerpo">
 
-    <div class="bloque">
-      <h4><span class="n">1</span> Retomamos la hoja de ayer <span class="reloj">10 min</span></h4>
-      <p class="pasa"><b>Qué pasa:</b> se lee en voz alta lo que el grupo escribió en "por dónde empezarías" y se marca cada idea con uno de tres colores, según de qué tipo sea:</p>
-      <div class="piezas">
-        <span class="pz pz--clara">escuchar<small>"preguntarle a la gente qué quiere"</small></span>
-        <span class="pz pz--arena">diseñar<small>"una palapa con asadores"</small></span>
-        <span class="pz pz--oscura">conseguir<small>"pedirle material al municipio"</small></span>
-      </div>
-      <p>Cuando termine el marcado, la hoja va a quedar dividida en montones muy desiguales. De cuál hay mucho y de cuál casi no hay, de eso vamos a hablar viendo la hoja. Y ahí se queda pegada: en diciembre la volvemos a leer.</p>
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> La hoja de ayer <span class="reloj">10 min</span></h4>
+    <span class="senal">Actividad</span>
+    <p class="di">Se lee la hoja en voz alta y cada idea se marca con un color.</p>
+    <div class="piezas">
+      <span class="pz pz--clara">escuchar<small>"preguntarle a la gente qué quiere"</small></span>
+      <span class="pz pz--arena">diseñar<small>"una palapa con asadores"</small></span>
+      <span class="pz pz--oscura">conseguir<small>"pedirle material al municipio"</small></span>
     </div>
+    <p class="apoyo">Al terminar, la hoja queda dividida en montones muy desiguales. De cuál hay mucho y de cuál casi no hay: de eso hablamos viendo la hoja. Y ahí se queda pegada, hasta diciembre.</p>
+  </section>
 
-    <div class="bloque">
-      <h4><span class="n">2</span> Por qué aquí no hay números <span class="reloj">20 min</span></h4>
-      <p>Antes de explicar el sistema, una pregunta honesta, y conviene contestarla en voz alta: <strong>¿te ha pasado esto?</strong></p>
-      <div class="flujo">
-        <div class="paso"><b>😵‍💫</b><span class="t">atracón</span>estudias la noche anterior</div>
-        <span class="flecha">→</span>
-        <div class="paso"><b>🤢</b><span class="t">examen</span>lo devuelves todo</div>
-        <span class="flecha">→</span>
-        <div class="paso"><b>7️⃣</b><span class="t">número</span>sacas tu puntaje</div>
-        <span class="flecha">→</span>
-        <div class="paso"><b>🫥</b><span class="t">vacío</span>un mes después, nada</div>
-      </div>
-      <p>Eso tiene nombre: <strong>aprendizaje bulímico</strong>. Se traga a la fuerza y se devuelve completo. Y no es culpa de quien lo hace: si lo único que se mide es lo que aparece en el examen, atragantarse la noche anterior es la estrategia <em>racional</em>.</p>
-      <p>Lo incómodo es que la calificación no solo falla en enseñar. También cambia lo que te atreves a intentar, y hay un experimento clásico que lo enseña con una claridad brutal.</p>
-      <div class="dato">
-        <strong>El experimento de los anagramas.</strong> En 1978, Susan Harter puso a un grupo de niños a resolver anagramas de distintos grados de dificultad. Cuando no había calificación de por medio, los niños escogían anagramas <strong>al límite de su habilidad</strong> y reportaban disfrutarlos. Cuando se metió la calificación en la ecuación, los mismos niños escogieron consistentemente <strong>los más fáciles</strong>, reportaron menos placer y verbalizaron más ansiedad. Trabajando por calificación bajaron su desempeño <em>y</em> se sintieron peor.
-      </div>
-      <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama del experimento de los anagramas de Harter" style="width:100%;height:auto;margin:.6rem 0;">
-        <style>
-          .an-tit { font: bold 17px Georgia, serif; fill: #0B3C49; }
-          .an-eje { font: 12px 'Source Sans 3', sans-serif; fill: #68807a; }
-          .an-letra { font: bold 14px Georgia, serif; fill: #0B3C49; }
-          .an-nota { font: 13px 'Source Sans 3', sans-serif; fill: #1C2B28; }
-        </style>
-        <text x="20" y="30" class="an-tit">Sin calificación de por medio</text>
-        <rect x="20" y="48" width="52" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD"/><text x="46" y="73" class="an-letra" text-anchor="middle">OLS</text>
-        <rect x="84" y="48" width="64" height="40" rx="6" fill="#EDE8DA" stroke="#CFE3DD"/><text x="116" y="73" class="an-letra" text-anchor="middle">SAME</text>
-        <rect x="160" y="48" width="76" height="40" rx="6" fill="#E4D9BC" stroke="#CFE3DD"/><text x="198" y="73" class="an-letra" text-anchor="middle">TALPAA</text>
-        <rect x="248" y="48" width="96" height="40" rx="6" fill="#D9A441" stroke="#C08F2F"/><text x="296" y="73" class="an-letra" text-anchor="middle">RRETACAE</text>
-        <rect x="356" y="48" width="116" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD" stroke-dasharray="4 3"/><text x="414" y="73" class="an-letra" text-anchor="middle" opacity=".45">MOGARELÁP</text>
-        <circle cx="296" cy="42" r="5" fill="#0F6E6E"/>
-        <path d="M 296 42 Q 296 20 250 20" stroke="#0F6E6E" fill="none" stroke-width="2"/>
-        <text x="480" y="62" class="an-nota">eligen <tspan font-weight="bold">al límite de su habilidad</tspan></text>
-        <text x="480" y="80" class="an-nota">y dicen que lo disfrutan</text>
-        <text x="20" y="105" class="an-eje">fácil &#8594; difícil</text>
-        <text x="20" y="180" class="an-tit">Con calificación</text>
-        <rect x="20" y="198" width="52" height="40" rx="6" fill="#D9A441" stroke="#C08F2F"/><text x="46" y="223" class="an-letra" text-anchor="middle">OLS</text>
-        <rect x="84" y="198" width="64" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD"/><text x="116" y="223" class="an-letra" text-anchor="middle">SAME</text>
-        <rect x="160" y="198" width="76" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD"/><text x="198" y="223" class="an-letra" text-anchor="middle" opacity=".55">TALPAA</text>
-        <rect x="248" y="198" width="96" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD" stroke-dasharray="4 3"/><text x="296" y="223" class="an-letra" text-anchor="middle" opacity=".4">RRETACAE</text>
-        <rect x="356" y="198" width="116" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD" stroke-dasharray="4 3"/><text x="414" y="223" class="an-letra" text-anchor="middle" opacity=".3">MOGARELÁP</text>
-        <circle cx="46" cy="192" r="5" fill="#0F6E6E"/>
-        <path d="M 46 192 Q 46 170 90 170" stroke="#0F6E6E" fill="none" stroke-width="2"/>
-        <text x="480" y="212" class="an-nota">eligen <tspan font-weight="bold">los más fáciles</tspan>,</text>
-        <text x="480" y="230" class="an-nota">disfrutan menos y les va peor</text>
-        <text x="20" y="255" class="an-eje">fácil &#8594; difícil</text>
-        <text x="20" y="295" class="an-nota" font-style="italic">Los mismos niños, los mismos anagramas. Lo único que cambió fue el número esperándolos al final.</text>
-      </svg>
-      <p>Traduce eso a este curso. El anagrama fácil, aquí, sería un proyecto que no puede fallar: una jardinerita, tres botes de basura, algo que nadie va a cuestionar. <strong>Un proyecto que no puede fallar es un proyecto que no valía la pena hacer.</strong> Si te califico con un número, te estoy pagando por escoger el anagrama fácil, y luego voy a pedirte que gestiones dinero de verdad con gente esperando del otro lado.</p>
-      <p>Harter lo midió con niños y anagramas. Lo que estaba midiendo nos pasa a todos, a cualquier edad, y alguien lo dejó escrito como deseo:</p>
-      <p class="cita">¡Ojalá de niños nos enseñaran a luchar por ideales y no por calificaciones! Así de grandes, trabajaríamos por sueños y no por quincenas.</p>
-      <p>Este curso no puede arreglar eso para toda la escuela. Puede, durante un semestre, quitarte el anagrama fácil de la mesa. Eso es lo que sigue.</p>
-      <div class="ojo">
-        <strong>Lo que <em>no</em> se está diciendo.</strong> No se está diciendo que evaluar esté mal. En este curso te van a evaluar todo el tiempo, con criterios publicados por adelantado y por escrito. Lo que se quita es <strong>el número como moneda de cambio</strong>.
-      </div>
+  <section class="lam">
+    <h4><span class="n">2</span> Por qué aquí no hay números <span class="reloj">20 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">¿Te ha pasado?</p>
+    <div class="flujo">
+      <div class="paso"><b>1</b><span class="t">atracón</span>estudias la noche anterior</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>2</b><span class="t">examen</span>lo devuelves todo</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>3</b><span class="t">número</span>sacas tu puntaje</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>4</b><span class="t">vacío</span>un mes después, nada</div>
     </div>
+    <p class="apoyo">Eso tiene nombre: <strong>aprendizaje bulímico</strong>. Se traga a la fuerza y se devuelve completo. Y no es culpa de quien lo hace: si lo único que se mide es lo que aparece en el examen, atragantarse la noche anterior es la estrategia <em>racional</em>.</p>
+  </section>
 
-    <div class="bloque">
-      <h4><span class="n">3</span> Qué recibes en lugar de un número <span class="reloj">15 min</span></h4>
-      <p>Es una pregunta legítima: si me quitas el 8, ¿qué me das? Esto:</p>
-      <div class="contra">
-        <div class="mal">
-          <span class="rot">Con número</span>
-          <p style="margin:0"><strong>Presupuesto: 7.</strong></p>
-          <p style="margin:.5rem 0 0;font-size:.9rem">Ya está. ¿Qué haces el lunes con eso?</p>
-        </div>
-        <div class="bien">
-          <span class="rot">En este curso</span>
-          <p style="margin:0"><strong>Presupuesto: aún no.</strong> Tres cosas:</p>
-          <p style="margin:.35rem 0 0;font-size:.9rem">1. Cotizaste la grava pero no el flete, y aquí el flete puede ser un tercio del costo.<br>
-          2. Tu partida de mano de obra supone faena gratuita. Eso se acuerda antes, no se supone.<br>
-          3. El cronograma pone la obra en septiembre, en plena lluvia.<br>
-          <em>Reintenta con esas tres.</em></p>
-        </div>
-      </div>
-      <p>La de la derecha tarda más en escribirse y más en leerse. También es la única de las dos que te dice qué hacer el lunes.</p>
-      <div class="piezas">
-        <span class="pz pz--clara">bien<small>la herramienta ya es tuya</small></span>
-        <span class="op">/</span>
-        <span class="pz pz--arena">aún no<small>reintentas con las razones</small></span>
-        <span class="eq">no existe el reprobado parcial</span>
-      </div>
-      <p>El sistema completo se sostiene en tres piezas:</p>
-      <ul>
-        <li><strong>Retos con "bien" o "aún no".</strong> Cada herramienta clave tiene su reto con criterios publicados <em>antes</em>. "Aún no" no resta nada: significa reintentar, las veces que hagan falta, hasta que la herramienta sea tuya.</li>
-        <li><strong>El expediente.</strong> Una carpeta física que armas tú y donde se acumula todo. Es tu memoria del semestre y tu argumento en diciembre. <a href="../evaluacion/expediente-del-gestor.html">Ábrelo aquí</a> para ver qué secciones lleva.</li>
-        <li><strong>Coevaluación.</strong> Vas a revisar trabajo de tus compañeros con criterios visibles y ellos el tuyo. Dar buena retroalimentación también es una habilidad del oficio, y también cuenta como evidencia.</li>
-      </ul>
-      <p>Y hay un <strong>suelo público por unidad</strong>: una lista corta de lo que basta para no reprobar, visible desde hoy y sin letra chiquita. Está completa en <a href="../tu-calificacion.html">Tu calificación</a>, junto con la regla de los tres casos con la que sale el número del acta.</p>
-</div>
+  <section class="lam">
+    <h4>El experimento de los anagramas</h4>
+    <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama del experimento de los anagramas de Harter" style="width:100%;height:auto;margin:.6rem 0;">
+      <style>
+        .an-tit { font: bold 17px Georgia, serif; fill: #0B3C49; }
+        .an-eje { font: 12px 'Source Sans 3', sans-serif; fill: #68807a; }
+        .an-letra { font: bold 14px Georgia, serif; fill: #0B3C49; }
+        .an-nota { font: 13px 'Source Sans 3', sans-serif; fill: #1C2B28; }
+      </style>
+      <text x="20" y="30" class="an-tit">Sin calificación de por medio</text>
+      <rect x="20" y="48" width="52" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD"/><text x="46" y="73" class="an-letra" text-anchor="middle">OLS</text>
+      <rect x="84" y="48" width="64" height="40" rx="6" fill="#EDE8DA" stroke="#CFE3DD"/><text x="116" y="73" class="an-letra" text-anchor="middle">SAME</text>
+      <rect x="160" y="48" width="76" height="40" rx="6" fill="#E4D9BC" stroke="#CFE3DD"/><text x="198" y="73" class="an-letra" text-anchor="middle">TALPAA</text>
+      <rect x="248" y="48" width="96" height="40" rx="6" fill="#D9A441" stroke="#C08F2F"/><text x="296" y="73" class="an-letra" text-anchor="middle">RRETACAE</text>
+      <rect x="356" y="48" width="116" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD" stroke-dasharray="4 3"/><text x="414" y="73" class="an-letra" text-anchor="middle" opacity=".45">MOGARELÁP</text>
+      <circle cx="296" cy="42" r="5" fill="#0F6E6E"/>
+      <path d="M 296 42 Q 296 20 250 20" stroke="#0F6E6E" fill="none" stroke-width="2"/>
+      <text x="480" y="62" class="an-nota">eligen <tspan font-weight="bold">al límite de su habilidad</tspan></text>
+      <text x="480" y="80" class="an-nota">y dicen que lo disfrutan</text>
+      <text x="20" y="105" class="an-eje">fácil &#8594; difícil</text>
+      <text x="20" y="180" class="an-tit">Con calificación</text>
+      <rect x="20" y="198" width="52" height="40" rx="6" fill="#D9A441" stroke="#C08F2F"/><text x="46" y="223" class="an-letra" text-anchor="middle">OLS</text>
+      <rect x="84" y="198" width="64" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD"/><text x="116" y="223" class="an-letra" text-anchor="middle">SAME</text>
+      <rect x="160" y="198" width="76" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD"/><text x="198" y="223" class="an-letra" text-anchor="middle" opacity=".55">TALPAA</text>
+      <rect x="248" y="198" width="96" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD" stroke-dasharray="4 3"/><text x="296" y="223" class="an-letra" text-anchor="middle" opacity=".4">RRETACAE</text>
+      <rect x="356" y="198" width="116" height="40" rx="6" fill="#F7F5EF" stroke="#CFE3DD" stroke-dasharray="4 3"/><text x="414" y="223" class="an-letra" text-anchor="middle" opacity=".3">MOGARELÁP</text>
+      <circle cx="46" cy="192" r="5" fill="#0F6E6E"/>
+      <path d="M 46 192 Q 46 170 90 170" stroke="#0F6E6E" fill="none" stroke-width="2"/>
+      <text x="480" y="212" class="an-nota">eligen <tspan font-weight="bold">los más fáciles</tspan>,</text>
+      <text x="480" y="230" class="an-nota">disfrutan menos y les va peor</text>
+      <text x="20" y="255" class="an-eje">fácil &#8594; difícil</text>
+      <text x="20" y="295" class="an-nota" font-style="italic">Los mismos niños, los mismos anagramas. Lo único que cambió fue el número esperándolos al final.</text>
+    </svg>
+    <p class="apoyo">Susan Harter, 1978. Sin calificación de por medio, los niños escogían anagramas al límite de su habilidad y reportaban disfrutarlos. Con calificación, los mismos niños escogieron los más fáciles, disfrutaron menos y les fue peor. La calificación no solo falla en enseñar: cambia lo que te atreves a intentar.</p>
+  </section>
 
-    <div class="bloque">
-      <h4><span class="n">4</span> Objeciones, en voz alta y ahora <span class="reloj">15 min</span></h4>
-      <p class="pasa"><b>Qué pasa:</b> se abre el piso a la desconfianza. Quien crea que este sistema lo perjudica que lo diga de frente. Se responde una por una, sin defenderse, y lo que quede sin resolver se anota y se retoma al cerrar la unidad 1.</p>
-      <p>Estas tres ya están anticipadas porque salen siempre:</p>
-      <table class="veredicto">
-        <tr><th>Lo que estás pensando</th><th>La respuesta</th></tr>
-        <tr><td><strong>"¿Y si al final el profe se raja y me pone lo que se le antoje?"</strong></td><td>Por eso existe la regla de los tres casos. Tú propones tu calificación con tu expediente en la mesa. Si coincidimos, queda. Si la tuya es más baja, sube sin que hagas nada. Si es más alta, se conversa y defiendes tu caso. Tu calificación nunca baja por escrito ni por sorpresa.</td></tr>
-        <tr><td><strong>"Sin números no voy a saber cómo voy."</strong></td><td>Vas a saberlo mejor. El suelo de cada unidad es una lista pública que puedes revisar cualquier día, y cada reto te dice "bien" o "aún no" con las razones. Un 7 no te dice cómo vas: te dice cómo te fue.</td></tr>
-        <tr><td><strong>"Entonces esto es más fácil."</strong></td><td>Es distinto. Es imposible reprobar cumpliendo el suelo, y es imposible destacar sin evidencia. Aquí no hay dónde esconderse detrás de un promedio: la carpeta vacía no se disimula.</td></tr>
-      </table>
+  <section class="lam">
+    <h4>Traducido a este curso</h4>
+    <p class="di">Un proyecto que no puede fallar es un proyecto que no valía la pena hacer.</p>
+    <p class="apoyo">El anagrama fácil, aquí, sería un proyecto que nadie va a cuestionar: una jardinerita, tres botes de basura. Si te califico con un número, te estoy pagando por escoger el anagrama fácil, y luego voy a pedirte que gestiones dinero de verdad con gente esperando del otro lado.</p>
+  </section>
+
+  <section class="lam">
+    <p class="cita">¡Ojalá de niños nos enseñaran a luchar por ideales y no por calificaciones! Así de grandes, trabajaríamos por sueños y no por quincenas.</p>
+    <p class="apoyo">Este curso no puede arreglar eso para toda la escuela. Puede, durante un semestre, quitarte el anagrama fácil de la mesa.</p>
+    <div class="ojo">
+      <strong>Lo que <em>no</em> se está diciendo.</strong> No se está diciendo que evaluar esté mal. En este curso te van a evaluar todo el tiempo, con criterios publicados por adelantado y por escrito. Lo que se quita es <strong>el número como moneda de cambio</strong>.
     </div>
+  </section>
 
-    <div class="bloque">
-      <h4><span class="n">5</span> El pacto de inteligencia artificial <span class="reloj">20 min</span></h4>
-      <div class="piezas">
-        <span class="pz pz--oscura">se usa<small>no está prohibida</small></span>
-        <span class="op">+</span>
-        <span class="pz pz--clara">se dice<small>una línea al pie</small></span>
-        <span class="eq">= todo el pacto</span>
+  <section class="lam">
+    <h4><span class="n">3</span> Qué recibes en lugar de un número <span class="reloj">15 min</span></h4>
+    <div class="contra">
+      <div class="mal">
+        <span class="rot">Con número</span>
+        <p style="margin:0"><strong>Presupuesto: 7.</strong></p>
+        <p style="margin:.5rem 0 0;font-size:.9rem">Ya está. ¿Qué haces el lunes con eso?</p>
       </div>
-      <p>Nadie te va a pedir que no la uses. Te va a pedir que sepas para qué sirve y para qué no, y que lo declares. Cuatro casos de este curso, con veredicto:</p>
-      <table class="veredicto">
-        <tr><th>El caso</th><th>¿Va?</th><th>Por qué</th></tr>
-        <tr class="si"><td>Le pides que te explique qué es un marco lógico y te ponga ejemplos.</td><td class="v">Libre</td><td>Eso es estudiar. Úsala todo lo que quieras y ni siquiera hace falta declararlo.</td></tr>
-        <tr class="si"><td>Le pides que te ayude a redactar las preguntas de la consulta comunitaria.</td><td class="v">Con declaración</td><td>Va, pero el borrador que salga hay que probarlo con una persona de carne y hueso antes de aplicarlo. La IA no conoce a nadie en La Florida y escribe preguntas que suenan bien y no se entienden en voz alta.</td></tr>
-        <tr class="cuidado"><td>Le pides que te arme el presupuesto con precios de materiales.</td><td class="v">Con cuidado</td><td>La estructura sí. Los precios no: se cotizan, no se inventan. Una cotización inventada es un dato falso dentro de un documento que va a llegar a un comité, y ahí ya no es una travesura escolar.</td></tr>
-        <tr class="no"><td>Le pides que te escriba la entrada de tu bitácora.</td><td class="v">No</td><td>La bitácora es el registro de lo que <em>tú</em> pensaste esa semana. Si la escribe otro, deja de ser evidencia de algo y se convierte en relleno bonito.</td></tr>
-      </table>
-      <p><strong>Cómo se declara.</strong> Al pie del documento, sin ceremonia. Cuatro datos: qué herramienta, para qué la usaste, qué cambiaste tú después, y <strong>el prompt con el que le hablaste</strong>, transcrito o anexo. El prompt se entrega porque hay un oficio detrás de escribir uno bueno, y en clase los vamos a revisar juntos: de los prompts del grupo se aprende tanto como de lo que la IA devuelve.</p>
-      <div class="pasa">
-        <b>Modelo:</b> <em>Usé un asistente de IA para ordenar el borrador de estas ocho preguntas. Las probé con dos personas del ejido y reescribí las preguntas 3 y 6 porque nadie las entendía. La 7 la quité. Prompt: "Tengo estas ideas sueltas para consultar a una comunidad sobre el uso de la orilla de una presa. Ordénalas en preguntas abiertas, sin prometer nada y sin sugerir la respuesta."</em>
-      </div>
-      <div class="dato">
-        <strong>Por qué esto importa fuera de la escuela.</strong> En una solicitud de financiamiento real, un dato que no puedes sostener cuando te lo preguntan no solo tumba ese proyecto: te quema con esa ventanilla durante años. Declarar de dónde salió cada cosa no es un trámite escolar, es la costumbre que te va a permitir defender tu trabajo en una mesa donde no te conocen.
+      <div class="bien">
+        <span class="rot">En este curso</span>
+        <p style="margin:0"><strong>Presupuesto: aún no.</strong> Tres cosas:</p>
+        <p style="margin:.35rem 0 0;font-size:.9rem">1. Cotizaste la grava pero no el flete, y aquí el flete puede ser un tercio del costo.<br>
+        2. Tu partida de mano de obra supone faena gratuita. Eso se acuerda antes, no se supone.<br>
+        3. El cronograma pone la obra en septiembre, en plena lluvia.<br>
+        <em>Reintenta con esas tres.</em></p>
       </div>
     </div>
+    <p class="apoyo">La de la derecha tarda más en escribirse y más en leerse. También es la única de las dos que te dice qué hacer el lunes.</p>
+  </section>
 
-    <div class="bloque">
-      <h4><span class="n">6</span> Firma y armado del expediente <span class="reloj">20 min</span></h4>
-      <p>Los dos pactos están aquí para leerlos completos. <strong>Firmar es escribir tu nombre y decir que estás de acuerdo</strong>, nada más solemne que eso, y solo tiene sentido si ya los discutiste:</p>
-      <ul>
-        <li><a href="../evaluacion/pacto-de-evaluacion.html"><strong>Pacto de evaluación</strong></a> · qué se evalúa, cómo, y qué le toca sostener a cada quien.</li>
-        <li><a href="../evaluacion/pacto-de-ia.html"><strong>Pacto de uso de inteligencia artificial</strong></a> · los cuatro casos de arriba, la fórmula de declaración y qué pasa si se omite.</li>
-      </ul>
-      <p class="pasa"><b>Qué pasa:</b> se firman, se archivan como las dos primeras hojas de la carpeta y se rotulan sus secciones. Foto grupal de los pactos firmados para la sección "Lo que produjimos".</p>
-      <p>Las <strong>cinco secciones del expediente</strong>, para que rotules hoy y no andes buscando en octubre:</p>
-      <table class="veredicto">
-        <tr><th>Sección</th><th>Qué entra</th></tr>
-        <tr><td><strong>1. Pactos</strong></td><td>Los dos de hoy, y en la semana 2 tu contrato de gestión con tus dos compromisos del semestre.</td></tr>
-        <tr><td><strong>2. Bitácora</strong></td><td>Una entrada por semana, escrita por ti. Qué hiciste, qué se atoró, qué harías distinto. Es la sección que más pesa en diciembre.</td></tr>
-        <tr><td><strong>3. Anti-currículum</strong></td><td>La lista de los noes que vas a coleccionar este semestre. Empieza vacía y esa es la idea. Se explica en la semana 2.</td></tr>
-        <tr><td><strong>4. Evidencias por unidad</strong></td><td>Todo lo que produjiste: guías de observación, la consulta, el marco lógico, cotizaciones, comprobantes, fotos de la obra.</td></tr>
-        <tr><td><strong>5. Autoevaluaciones</strong></td><td>Las tres de ensayo (semanas 4, 11 y 14) y la que cuenta (semana 17).</td></tr>
-      </table>
+  <section class="lam">
+    <h4>El sistema completo, en tres piezas</h4>
+    <div class="piezas">
+      <span class="pz pz--clara">bien<small>la herramienta ya es tuya</small></span>
+      <span class="op">/</span>
+      <span class="pz pz--arena">aún no<small>reintentas con las razones</small></span>
+      <span class="eq">no existe el reprobado parcial</span>
     </div>
+    <ul>
+      <li><strong>Retos con "bien" o "aún no".</strong> Cada herramienta clave tiene su reto con criterios publicados <em>antes</em>. "Aún no" no resta nada: significa reintentar, las veces que hagan falta, hasta que la herramienta sea tuya.</li>
+      <li><strong>El expediente.</strong> Una carpeta física que armas tú y donde se acumula todo. Es tu memoria del semestre y tu argumento en diciembre. <a href="../evaluacion/expediente-del-gestor.html">Ábrelo aquí</a>.</li>
+      <li><strong>Coevaluación.</strong> Vas a revisar trabajo de tus compañeros con criterios visibles y ellos el tuyo. Dar buena retroalimentación también es una habilidad del oficio, y también cuenta como evidencia.</li>
+    </ul>
+    <p class="apoyo">Y hay un <strong>suelo público por unidad</strong>: la lista corta de lo que basta para no reprobar, visible desde hoy y sin letra chiquita. Está completa en <a href="../tu-calificacion.html">Tu calificación</a>, junto con la regla de los tres casos con la que sale el número del acta.</p>
+  </section>
 
-    <div class="bloque">
-      <h4><span class="n">7</span> Ticket de salida, estreno <span class="reloj">10 min</span></h4>
-      <p>Antes de irte contestas tres cosas: qué te llevas, qué quedó turbio y cómo estuvo el ritmo. Noventa segundos. <strong>Con nombre o sin él, como prefieras.</strong></p>
-      <p>No es una encuesta de satisfacción y no cuenta para nada. Sirve para dos cosas: a ti, para caer en cuenta de qué entendiste de verdad, que casi nunca es lo que uno cree al salir del salón; y a este curso, para saber por dónde va el grupo antes de que sea tarde. Va a pasar todas las semanas del semestre.</p>
+  <section class="lam lam--actividad">
+    <h4><span class="n">4</span> Objeciones, en voz alta y ahora <span class="reloj">15 min</span></h4>
+    <span class="senal senal--aire">Se abre el piso</span>
+    <p class="di">Quien crea que este sistema lo perjudica, que lo diga de frente.</p>
+    <p class="apoyo">Se responde una por una, sin defenderse. Lo que quede sin resolver se anota y se retoma al cerrar la unidad 1.</p>
+    <p class="nota-conductor">Aguantar el silencio inicial: contar hasta diez antes de rescatar. Si nadie habla, leer la primera objeción de la lámina siguiente y preguntar quién la comparte.</p>
+  </section>
+
+  <section class="lam">
+    <h4>Tres objeciones que salen siempre</h4>
+    <table class="veredicto">
+      <tr><th>Lo que estás pensando</th><th>La respuesta</th></tr>
+      <tr><td><strong>"¿Y si al final el profe se raja y me pone lo que se le antoje?"</strong></td><td>Por eso existe la regla de los tres casos. Tú propones tu calificación con tu expediente en la mesa. Si coincidimos, queda. Si la tuya es más baja, sube sin que hagas nada. Si es más alta, se conversa y defiendes tu caso. Tu calificación nunca baja por escrito ni por sorpresa.</td></tr>
+      <tr><td><strong>"Sin números no voy a saber cómo voy."</strong></td><td>Vas a saberlo mejor. El suelo de cada unidad es una lista pública que puedes revisar cualquier día, y cada reto te dice "bien" o "aún no" con las razones. Un 7 no te dice cómo vas: te dice cómo te fue.</td></tr>
+      <tr><td><strong>"Entonces esto es más fácil."</strong></td><td>Es distinto. Es imposible reprobar cumpliendo el suelo, y es imposible destacar sin evidencia. Aquí no hay dónde esconderse detrás de un promedio: la carpeta vacía no se disimula.</td></tr>
+    </table>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">5</span> El pacto de inteligencia artificial <span class="reloj">20 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--oscura">se usa<small>no está prohibida</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--clara">se dice<small>una línea al pie</small></span>
+      <span class="eq">= todo el pacto</span>
     </div>
+    <p class="apoyo">Nadie te va a pedir que no la uses. Te va a pedir que sepas para qué sirve y para qué no, y que lo declares.</p>
+  </section>
 
-</div>
+  <section class="lam">
+    <h4>Cuatro casos de este curso, con veredicto</h4>
+    <table class="veredicto">
+      <tr><th>El caso</th><th>¿Va?</th><th>Por qué</th></tr>
+      <tr class="si"><td>Le pides que te explique qué es un marco lógico y te ponga ejemplos.</td><td class="v">Libre</td><td>Eso es estudiar. Úsala todo lo que quieras y ni siquiera hace falta declararlo.</td></tr>
+      <tr class="si"><td>Le pides que te ayude a redactar las preguntas de la consulta comunitaria.</td><td class="v">Con declaración</td><td>Va, pero el borrador que salga hay que probarlo con una persona de carne y hueso antes de aplicarlo. La IA no conoce a nadie en La Florida y escribe preguntas que suenan bien y no se entienden en voz alta.</td></tr>
+      <tr class="cuidado"><td>Le pides que te arme el presupuesto con precios de materiales.</td><td class="v">Con cuidado</td><td>La estructura sí. Los precios no: se cotizan, no se inventan. Una cotización inventada es un dato falso dentro de un documento que va a llegar a un comité, y ahí ya no es una travesura escolar.</td></tr>
+      <tr class="no"><td>Le pides que te escriba la entrada de tu bitácora.</td><td class="v">No</td><td>La bitácora es el registro de lo que <em>tú</em> pensaste esa semana. Si la escribe otro, deja de ser evidencia de algo y se convierte en relleno bonito.</td></tr>
+    </table>
+  </section>
+
+  <section class="lam">
+    <h4>Cómo se declara</h4>
+    <p class="di">Al pie del documento, sin ceremonia: cuatro datos.</p>
+    <p class="apoyo">Qué herramienta, para qué la usaste, qué cambiaste tú después, y <strong>el prompt con el que le hablaste</strong>, transcrito o anexo. El prompt se entrega porque hay un oficio detrás de escribir uno bueno, y en clase los revisamos juntos: de los prompts del grupo se aprende tanto como de lo que la IA devuelve.</p>
+    <div class="pasa">
+      <b>Modelo:</b> <em>Usé un asistente de IA para ordenar el borrador de estas ocho preguntas. Las probé con dos personas del ejido y reescribí las preguntas 3 y 6 porque nadie las entendía. La 7 la quité. Prompt: "Tengo estas ideas sueltas para consultar a una comunidad sobre el uso de la orilla de una presa. Ordénalas en preguntas abiertas, sin prometer nada y sin sugerir la respuesta."</em>
+    </div>
+    <div class="dato">
+      <strong>Por qué esto importa fuera de la escuela.</strong> En una solicitud de financiamiento real, un dato que no puedes sostener cuando te lo preguntan no solo tumba ese proyecto: te quema con esa ventanilla durante años. Declarar de dónde salió cada cosa es la costumbre que te va a permitir defender tu trabajo en una mesa donde no te conocen.
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">6</span> Firma y armado del expediente <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad</span>
+    <p class="di">Leer completo, discutir, y solo entonces firmar.</p>
+    <ul>
+      <li><a href="../evaluacion/pacto-de-evaluacion.html"><strong>Pacto de evaluación</strong></a> · qué se evalúa, cómo, y qué le toca sostener a cada quien.</li>
+      <li><a href="../evaluacion/pacto-de-ia.html"><strong>Pacto de uso de inteligencia artificial</strong></a> · los cuatro casos, la fórmula de declaración y qué pasa si se omite.</li>
+    </ul>
+    <p class="apoyo">Firmar es escribir tu nombre y decir que estás de acuerdo, nada más solemne que eso. Los pactos firmados se archivan como las dos primeras hojas de la carpeta, y foto grupal de los pactos para "Lo que produjimos".</p>
+  </section>
+
+  <section class="lam">
+    <h4>Las cinco secciones del expediente</h4>
+    <p class="apoyo" style="margin-top:0">Para que rotules hoy y no andes buscando en octubre.</p>
+    <table class="veredicto">
+      <tr><th>Sección</th><th>Qué entra</th></tr>
+      <tr><td><strong>1. Pactos</strong></td><td>Los dos de hoy, y en la semana 2 tu contrato de gestión con tus dos compromisos del semestre.</td></tr>
+      <tr><td><strong>2. Bitácora</strong></td><td>Una entrada por semana, escrita por ti. Qué hiciste, qué se atoró, qué harías distinto. Es la sección que más pesa en diciembre.</td></tr>
+      <tr><td><strong>3. Anti-currículum</strong></td><td>La lista de los noes que vas a coleccionar este semestre. Empieza vacía y esa es la idea. Se explica en la semana 2.</td></tr>
+      <tr><td><strong>4. Evidencias por unidad</strong></td><td>Todo lo que produjiste: guías de observación, la consulta, el marco lógico, cotizaciones, comprobantes, fotos de la obra.</td></tr>
+      <tr><td><strong>5. Autoevaluaciones</strong></td><td>Las tres de ensayo (semanas 4, 11 y 14) y la que cuenta (semana 17).</td></tr>
+    </table>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">7</span> Ticket de salida, estreno <span class="reloj">10 min</span></h4>
+    <p class="di">Antes de irte: qué te llevas, qué quedó turbio y cómo estuvo el ritmo.</p>
+    <p class="apoyo">Noventa segundos, con nombre o sin él, como prefieras. No es una encuesta de satisfacción y no cuenta para nada. Sirve para dos cosas: a ti, para caer en cuenta de qué entendiste de verdad, que casi nunca es lo que uno cree al salir del salón; y al curso, para saber por dónde va el grupo antes de que sea tarde. Va a pasar todas las semanas del semestre.</p>
+  </section>
 </section>
 
 <!-- ====================== EL PROGRAMA ====================== -->

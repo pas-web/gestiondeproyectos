@@ -210,7 +210,70 @@
     + '.ticket-salida .btn{display:inline-block;background:var(--marca,#0F6E6E);color:#fff;text-decoration:none;font-weight:bold;font-size:.9rem;border-radius:999px;padding:.42rem 1rem}'
     + '.ticket-salida .btn:hover{filter:brightness(1.08)}'
     + '.ticket-salida .qr{width:120px;height:120px;flex:none;border:1px solid var(--borde,#CFE3DD);border-radius:8px}'
-    + '@media(max-width:540px){.ticket-salida .qr{display:none}}';
+    + '@media(max-width:540px){.ticket-salida .qr{display:none}}'
+
+    /* ---- Mazos de láminas: el día se conduce desde la página ---- */
+    + '.pista{margin-top:.2rem;color:#68807a;font-size:.95rem}'
+    + '.mazo{margin:.9rem 0 2.4rem}'
+    + '.mazo-cabeza{background:var(--profundo,#0B3C49);color:#EAF4F2;border-radius:14px;padding:1.05rem 1.3rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}'
+    + '.mazo-cabeza .cuando{font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;opacity:.72;font-weight:bold}'
+    + '.mazo-cabeza h3{font-family:Georgia,serif;font-size:1.5rem;line-height:1.2;margin:.15rem 0 .25rem;color:#fff}'
+    + '.mazo-cabeza .foco{margin:0;font-size:.98rem;opacity:.92;font-family:Georgia,serif;font-style:italic}'
+    + '.btn-presentar{margin-left:auto;align-self:center;background:var(--arena,#D9A441);color:#20160a;border:none;border-radius:999px;padding:.5rem 1.15rem;font:inherit;font-size:.92rem;font-weight:bold;cursor:pointer;white-space:nowrap}'
+    + '.btn-presentar:hover{filter:brightness(1.06)}'
+    + '.lam{background:#fff;border:1px solid var(--borde,#CFE3DD);border-radius:14px;padding:1.05rem 1.35rem 1.15rem;margin:.7rem 0}'
+    + '.lam>h4{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;font-family:Georgia,serif;color:var(--profundo,#0B3C49);font-size:1.18rem;line-height:1.3;margin:0 0 .5rem}'
+    + '.lam>h4 .n{font-family:Georgia,serif;font-weight:bold;font-size:1.7rem;line-height:.9;color:var(--arena,#D9A441);flex:none}'
+    + '.lam .di{font-family:Georgia,serif;font-size:clamp(1.3rem,3.4vw,1.85rem);line-height:1.35;color:var(--profundo,#0B3C49);margin:.5rem 0}'
+    + '.lam .apoyo{color:#45605a;font-size:.97rem}'
+    + '.lam--oscura{background:var(--profundo,#0B3C49);border-color:var(--profundo,#0B3C49);color:#EAF4F2}'
+    + '.lam--oscura>h4,.lam--oscura .di{color:#fff}'
+    + '.lam--oscura .apoyo{color:#C9DEDA}'
+    + '.lam--actividad{border-left:6px solid var(--marca,#0F6E6E)}'
+    + '.senal{display:inline-block;font-size:.7rem;font-weight:bold;letter-spacing:.11em;text-transform:uppercase;background:var(--marca,#0F6E6E);color:#fff;border-radius:999px;padding:.22rem .7rem;margin:.1rem 0 .35rem}'
+    + '.senal--aire{background:var(--arena,#D9A441);color:#20160a}'
+    + '.senal--campo{background:#3C7EA8}'
+    + '.nota-conductor{display:none}'
+    + '.lam--portada .cuando{font-size:.9rem;letter-spacing:.13em;text-transform:uppercase;opacity:.75;font-weight:bold}'
+    + '.lam--portada h3{font-family:Georgia,serif;font-size:clamp(2rem,5vw,3.2rem);margin:.4rem 0;color:#fff}'
+    + '.lam--portada .foco{font-family:Georgia,serif;font-style:italic;font-size:1.35rem;opacity:.92}'
+    + '.lam--ticket{text-align:center}'
+    + '.lam--ticket .qr-lam{width:min(52vh,420px);max-width:80%;border:1px solid var(--borde,#CFE3DD);border-radius:12px;margin:.8rem auto 0;display:block}'
+
+    /* ---- El telón: modo presentación a pantalla completa ---- */
+    + '#telon{position:fixed;inset:0;z-index:100;background:var(--fondo,#F2F7F5);display:none;flex-direction:column}'
+    + '#telon.abierto{display:flex}'
+    + '#telon .escenario{flex:1 1 auto;overflow:auto;display:flex;padding:clamp(.6rem,2.5vh,1.6rem) clamp(.8rem,3vw,2.2rem)}'
+    + '#telon .escenario>.lam{margin:auto;width:100%;max-width:1500px;min-height:min(78vh,100%);display:flex;flex-direction:column;justify-content:center;border:none;box-shadow:0 2px 24px rgba(11,60,73,.08);padding:2.4rem 3.4rem 2.6rem;font-size:1.4rem;line-height:1.6}'
+    + '#telon .escenario>.lam>h4{font-size:2.5rem}'
+    + '#telon .escenario>.lam>h4 .n{font-size:3.3rem}'
+    + '#telon .escenario>.lam .di{font-size:clamp(2rem,4.4vw,3.3rem)}'
+    + '#telon .escenario>.lam .apoyo{font-size:1.3rem}'
+    + '#telon .escenario>.lam .pz{font-size:clamp(1.9rem,4.2vw,3rem)}'
+    + '#telon .escenario>.lam .pz small{font-size:.72rem}'
+    + '#telon .escenario>.lam .piezas .eq{font-size:clamp(1.4rem,3vw,2.1rem)}'
+    + '#telon .escenario>.lam .flujo .paso{font-size:1.18rem}'
+    + '#telon .escenario>.lam .flujo .paso .t{font-size:1.4rem}'
+    + '#telon .escenario>.lam .flujo .paso b{font-size:2.1rem}'
+    + '#telon .escenario>.lam table.veredicto{font-size:1.22rem}'
+    + '#telon .escenario>.lam .senal{font-size:.95rem}'
+    + '#telon .escenario>.lam .cita{font-size:2.1rem}'
+    + '#telon .escenario>.lam .ojo,#telon .escenario>.lam .dato,#telon .escenario>.lam .pasa{font-size:1.22rem}'
+    + '#telon .escenario>.lam .llave{font-size:1.3rem}'
+    + '#telon .escenario>.lam .contra>div{font-size:1.2rem}'
+    + '#telon .escenario>.lam ul,#telon .escenario>.lam ol{font-size:1.25rem}'
+    + '#telon .escenario>.lam .reloj{font-size:.85rem}'
+    + '#telon .escenario>.lam.lam--portada{text-align:center;background:var(--profundo,#0B3C49);color:#EAF4F2}'
+    + '#telon.sin-apoyo .escenario>.lam .apoyo{display:none}'
+    + '#telon.con-notas .escenario>.lam .nota-conductor{display:block;background:#FBEFD5;border:1px dashed #C08F2F;border-radius:10px;padding:.6rem .9rem;margin:.9rem 0 0;font-size:1.05rem;color:#5C4A1C;text-align:left}'
+    + '#telon.con-notas .escenario>.lam .nota-conductor::before{content:"Nota del conductor";display:block;font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;font-weight:bold;margin-bottom:.2rem}'
+    + '#telon .barra{flex:none;display:flex;align-items:center;gap:.6rem;padding:.55rem 1rem;background:var(--profundo,#0B3C49);color:#DCEFEA;font-size:.9rem}'
+    + '#telon .barra .cont{font-family:Georgia,serif;font-weight:bold}'
+    + '#telon .barra .pista-teclas{opacity:.6;font-size:.82rem}'
+    + '#telon .barra button{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:8px;padding:.3rem .8rem;font:inherit;cursor:pointer}'
+    + '#telon .barra button:hover{background:rgba(255,255,255,.22)}'
+    + '#telon .barra .salir{margin-left:auto}'
+    + '@media print{#telon,.btn-presentar{display:none!important}}';
 
   var st = document.createElement('style');
   st.textContent = css;
@@ -403,10 +466,99 @@
     construirMapa(mapa, false);
   }
 
+  /* Modo presentación: cada mazo de láminas se proyecta una por una.
+     Teclas: flechas/espacio avanzan, A oculta el apoyo, N muestra las notas
+     del conductor, Esc sale. Un mazo con data-ticket cierra con el QR del
+     ticket de salida. */
+  function montarTelon() {
+    if (!document.querySelector('.mazo .btn-presentar')) return;
+
+    var telon = document.createElement('div');
+    telon.id = 'telon';
+    telon.innerHTML = '<div class="escenario"></div>'
+      + '<div class="barra">'
+      + '<button type="button" class="atras" aria-label="Lámina anterior">&#8592;</button>'
+      + '<button type="button" class="sigue" aria-label="Lámina siguiente">&#8594;</button>'
+      + '<span class="cont"></span>'
+      + '<span class="pista-teclas">flechas o espacio avanzan · A oculta el apoyo · N muestra notas · Esc sale</span>'
+      + '<button type="button" class="salir">Salir</button>'
+      + '</div>';
+    document.body.appendChild(telon);
+
+    var escenario = telon.querySelector('.escenario');
+    var cont = telon.querySelector('.cont');
+    var lams = [], idx = 0;
+
+    function pinta() {
+      escenario.innerHTML = '';
+      escenario.appendChild(lams[idx].cloneNode(true));
+      cont.textContent = (idx + 1) + ' / ' + lams.length;
+      escenario.scrollTop = 0;
+    }
+
+    function abrir(mazo) {
+      var cab = mazo.querySelector('.mazo-cabeza');
+      var portada = document.createElement('section');
+      portada.className = 'lam lam--portada';
+      portada.innerHTML = '<div class="cuando">' + cab.querySelector('.cuando').textContent + '</div>'
+        + '<h3>' + cab.querySelector('h3').textContent + '</h3>'
+        + '<p class="foco">' + cab.querySelector('.foco').textContent + '</p>';
+      lams = [portada].concat(Array.prototype.slice.call(mazo.querySelectorAll('.lam')));
+
+      if (TICKET_URL && mazo.hasAttribute('data-ticket')) {
+        var tk = document.createElement('section');
+        tk.className = 'lam lam--ticket';
+        tk.innerHTML = '<h4>Ticket de salida</h4>'
+          + '<p class="di">Qué te llevas · qué quedó turbio · cómo estuvo el ritmo</p>'
+          + '<img class="qr-lam" alt="Código QR del formulario del ticket de salida" src="https://api.qrserver.com/v1/create-qr-code/?size=520x520&data=' + encodeURIComponent(TICKET_URL) + '">'
+          + '<p class="apoyo">Noventa segundos, con nombre o sin él.</p>';
+        lams.push(tk);
+      }
+
+      idx = 0;
+      telon.classList.add('abierto');
+      document.body.style.overflow = 'hidden';
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(function () {});
+      }
+      pinta();
+    }
+
+    function cerrar() {
+      telon.classList.remove('abierto');
+      document.body.style.overflow = '';
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(function () {});
+      }
+    }
+
+    function sigue() { if (idx < lams.length - 1) { idx++; pinta(); } }
+    function atras() { if (idx > 0) { idx--; pinta(); } }
+
+    telon.querySelector('.sigue').addEventListener('click', sigue);
+    telon.querySelector('.atras').addEventListener('click', atras);
+    telon.querySelector('.salir').addEventListener('click', cerrar);
+
+    document.addEventListener('keydown', function (e) {
+      if (!telon.classList.contains('abierto')) return;
+      var k = e.key.toLowerCase();
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); sigue(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); atras(); }
+      else if (e.key === 'Escape') { cerrar(); }
+      else if (k === 'a') { telon.classList.toggle('sin-apoyo'); }
+      else if (k === 'n') { telon.classList.toggle('con-notas'); }
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.btn-presentar'), function (b) {
+      b.addEventListener('click', function () { abrir(b.closest('.mazo')); });
+    });
+  }
+
   function arrancar() {
     montarPanel();
     montarLado();
     montarTicket();
+    montarTelon();
     var inline = document.getElementById('mapa-curso');
     if (inline) construirMapa(inline, true);
   }
