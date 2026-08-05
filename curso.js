@@ -222,6 +222,9 @@
     + '.btn-presentar{margin-left:auto;align-self:center;background:var(--arena,#D9A441);color:#20160a;border:none;border-radius:999px;padding:.5rem 1.15rem;font:inherit;font-size:.92rem;font-weight:bold;cursor:pointer;white-space:nowrap}'
     + '.btn-presentar:hover{filter:brightness(1.06)}'
     + '.lam{background:#fff;border:1px solid var(--borde,#CFE3DD);border-radius:14px;padding:1.05rem 1.35rem 1.15rem;margin:.7rem 0}'
+    /* ---- Lámina de figura: ilustración a lo ancho ---- */
+    + '.lam--figura{text-align:center}'
+    + '.ilustracion{display:block;max-width:100%;height:auto;margin:.3rem auto;border-radius:10px}'
     + '.lam>h4{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;font-family:Georgia,serif;color:var(--profundo,#0B3C49);font-size:1.18rem;line-height:1.3;margin:0 0 .5rem}'
     + '.lam>h4 .n{font-family:Georgia,serif;font-weight:bold;font-size:1.7rem;line-height:.9;color:var(--arena,#D9A441);flex:none}'
     + '.lam .di{font-family:Georgia,serif;font-size:clamp(1.3rem,3.4vw,1.85rem);line-height:1.35;color:var(--profundo,#0B3C49);margin:.5rem 0}'
@@ -260,6 +263,7 @@
     + '#telon .escenario>.lam .cita{font-size:2.1rem}'
     + '#telon .escenario>.lam .ojo,#telon .escenario>.lam .dato,#telon .escenario>.lam .pasa{font-size:1.22rem}'
     + '#telon .escenario>.lam .llave{font-size:1.3rem}'
+    + '#telon .escenario>.lam .ilustracion{max-height:62vh;width:auto;max-width:100%;margin:.3rem auto}'
     + '#telon .escenario>.lam .contra>div{font-size:1.2rem}'
     + '#telon .escenario>.lam ul,#telon .escenario>.lam ol{font-size:1.25rem}'
     + '#telon .escenario>.lam .reloj{font-size:.85rem}'

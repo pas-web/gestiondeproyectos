@@ -20,23 +20,18 @@
     background: var(--fondo); color: var(--texto);
     line-height: 1.65; font-size: 1.05rem;
   }
-  header.curso {
-    background: var(--profundo); color: #EAF4F2;
-    padding: 1.1rem 1.5rem;
-  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
   header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
   header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
   header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
   main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
 
-  .pregunta {
-    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
-    color: var(--profundo); margin: 1.8rem 0 .4rem;
-  }
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
   h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -55,11 +50,8 @@
   .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
   .consulta dd { margin: .2rem 0 .4rem 0; }
 
-  .chapuzon {
-    background: var(--profundo); color: #EAF4F2;
-    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
-  }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
 
   .aviso-goteo {
@@ -68,6 +60,7 @@
     display: none;
   }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -83,7 +76,7 @@
 <div id="wk-gate" data-abre="2026-08-05">
 
 <p class="pregunta">¿Qué harías con un dinero que no es tuyo?</p>
-<p class="bajada">Este curso no trabaja con casos inventados. Hay una presa real (la de La Florida), un encargo real (habilitarla como espacio recreativo para la comunidad) y un fondo semilla que este grupo va a ejercer durante el semestre. La comunidad va a decidir qué se hace; ustedes van a diseñarlo, defenderlo y construirlo. La semana pasada firmaste las reglas del curso. Esta semana empieza el oficio: separar las dos palabras que le dan nombre a la materia, armar el mapa del ciclo de un proyecto y sellar en un sobre lo que tú crees que va a pedir la gente.</p>
+<p class="bajada">Este curso no trabaja con casos inventados. Hay una presa real (la de La Florida), un encargo real (habilitarla como espacio recreativo para la comunidad) y un fondo semilla que este grupo va a ejercer durante el semestre. La comunidad va a decidir qué se hace; ustedes van a diseñarlo, defenderlo y construirlo. La semana pasada firmaste las reglas del curso. Esta semana empieza el oficio: separar las dos palabras que le dan nombre a la materia, armar el mapa del ciclo de un proyecto, sellar en un sobre lo que tú crees que va a pedir la gente y estrenar una herramienta con la que este curso también se hace: la inteligencia artificial.</p>
 
 <h2>Esta semana podrás</h2>
 <div class="podras">
@@ -91,52 +84,236 @@
     <li>Distinguir manejo de gestión, la pareja de palabras que le da nombre a la materia.</li>
     <li>Señalar, en el encargo de la presa, qué trabajo es de manejar y qué trabajo es de gestionar.</li>
     <li>Armar la primera capa del ciclo del proyecto: de dónde sale una idea y qué le pasa hasta que consigue dinero.</li>
-    <li>Formular hipótesis sobre las reglas del fondo antes de conocerlas.</li>
+    <li>Ver por dentro cómo se construye este curso con ayuda de una inteligencia artificial.</li>
+    <li>Escribirle a una IA un encargo completo: contexto, tarea, formato y ejemplo.</li>
     <li>Sellar tu pronóstico sobre lo que pedirá la comunidad, en un sobre que nadie abrirá hasta la semana 4.</li>
   </ul>
 </div>
 
-<h2>El jueves y el viernes</h2>
-<p class="pista-ses">Da clic en cada día para ver el detalle de la sesión.</p>
+<h2 class="corte">Las dos sesiones de esta semana</h2>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
 
-<details class="sesion">
-  <summary>Jueves 6 de agosto · 2 horas<span class="sub">Manejo y gestión</span></summary>
-  <div class="cuerpo">
-    <p class="foco">Foco del día: separar las dos palabras y ver que el encargo de la presa las necesita las dos.</p>
-    <table class="minutos"><tbody>
-      <tr><td class="m">0-10</td><td><strong>La pregunta al pizarrón.</strong> "¿Qué harías con un dinero que no es tuyo?" Se recogen cuatro o cinco respuestas sueltas, sin juzgarlas ni corregirlas. Se anotan aparte: van a servir de contraste en la semana 4.</td></tr>
-      <tr><td class="m">10-35</td><td><strong>Manejo no es gestión.</strong> Exposición con la pareja de refranes: "el flojo y el que no planea trabajan dos veces" para el manejo, "a quien no habla, Dios no lo oye" para la gestión. Dos ejemplos del campo cercano, de preferencia de proyectos que el grupo conozca.</td></tr>
-      <tr><td class="m">35-55</td><td><strong>Gimnasio 1 · Refranes de gestión.</strong> En parejas, proyectado. Ocho refranes que hay que clasificar en manejar, gestionar o planear.</td></tr>
-      <tr><td class="m">55-65</td><td><strong>Respiro.</strong></td></tr>
-      <tr><td class="m">65-85</td><td><strong>Puesta en común.</strong> Tres columnas en el pizarrón con lo que salió del ejercicio. Se discuten solo los refranes donde el grupo se haya dividido: ahí está el aprendizaje, no en los que todos acertaron.</td></tr>
-      <tr><td class="m">85-112</td><td><strong>Los dos oficios en la presa.</strong> Con el encargo enfrente, el grupo levanta dos listas: qué trabajo de este proyecto es manejar y qué trabajo es gestionar. Se escriben en una hoja grande que se queda pegada en el salón todo el semestre y se va corrigiendo.</td></tr>
-      <tr><td class="m">112-120</td><td><strong>Cierre.</strong> Mañana se arma el mapa del curso, se destripan las hipótesis sobre el fondo y se sella el sobre. Traer la carpeta del expediente.</td></tr>
-    </tbody></table>
-    <p class="trae"><strong>Trae:</strong> la carpeta del expediente con los pactos ya archivados, cuaderno y pluma.</p>
-    <p class="ajuste">Si el tiempo se acorta: la puesta en común baja a diez minutos discutiendo solo dos refranes. Las dos listas de la presa no se recortan: son la referencia de todo el semestre.</p>
+<!-- ====================== JUEVES ====================== -->
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves 6 de agosto · 2 horas</div>
+      <h3>Manejo y gestión</h3>
+      <p class="foco">Separar las dos palabras y ver que el encargo de la presa las necesita las dos.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
   </div>
-</details>
 
-<details class="sesion">
-  <summary>Viernes 7 de agosto · 2 horas<span class="sub">El ciclo y el sobre</span></summary>
-  <div class="cuerpo">
-    <p class="foco">Foco del día: ver el mapa completo del curso y dejar tu pronóstico bajo llave.</p>
-    <table class="minutos"><tbody>
-      <tr><td class="m">0-15</td><td><strong>Gimnasio 2 · ¿Manejo o gestión?</strong> Diez situaciones de proyectos rurales, a mano alzada. Rápido, sin discutir cada una: solo las que partan al grupo por la mitad.</td></tr>
-      <tr><td class="m">15-45</td><td><strong>Gimnasio 3 · El ciclo por capas.</strong> Se arma el mapa del curso en el pizarrón: la idea, el diseño, el manejo y la evaluación, la gestión. Hoy solo la silueta, sin detalle. Se fotografía y se guarda para compararla con la versión de diciembre.</td></tr>
-      <tr><td class="m">45-58</td><td><strong>El expediente, en firme.</strong> Qué secciones lleva la carpeta y qué entra en cada una. Se abre la bitácora y se escribe la primera entrada: qué esperas de este curso.</td></tr>
-      <tr><td class="m">58-68</td><td><strong>Respiro.</strong></td></tr>
-      <tr><td class="m">68-88</td><td><strong>Las reglas del fondo: lo que no sabemos.</strong> Lluvia de hipótesis en el pizarrón sobre quién ejerce el fondo, en qué se puede gastar y quién lo vigila. No se corrige ninguna, ni siquiera las disparatadas. Se fotografía el pizarrón y se guarda cerrado hasta la semana 5.</td></tr>
-      <tr><td class="m">88-110</td><td><strong>El sobre.</strong> Cada quien escribe las tres cosas que cree que la comunidad va a pedir para la presa, firma la hoja, la mete en su sobre y lo cierra frente al grupo. Los sobres se guardan a la vista del salón hasta la semana 4.</td></tr>
-      <tr><td class="m">110-117</td><td><strong>Ticket de salida.</strong></td></tr>
-      <tr><td class="m">117-120</td><td><strong>Aviso.</strong> El viernes que viene se sale a la presa. Qué traer: zapato cerrado, agua, gorra y el celular cargado.</td></tr>
-    </tbody></table>
-    <p class="trae"><strong>Trae:</strong> la carpeta del expediente, cuaderno y pluma. Los sobres los pone el curso.</p>
-    <p class="ajuste">Si el tiempo se acorta: la lluvia de hipótesis sobre el fondo baja a diez minutos. El sobre no se recorta ni se manda de tarea: pierde todo su sentido si se llena en casa.</p>
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El ticket de la semana pasada <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Lo que el viernes quedó turbio, hoy se contesta en voz alta.</p>
+    <p class="apoyo">Así arranca cada jueves del semestre. El ticket se contesta porque se atiende: si lo que escribes desapareciera en un cajón, dejarías de escribirlo, y con razón.</p>
+    <p class="nota-conductor">Traer dos o tres respuestas del ticket ya elegidas. Leerlas textuales y responderlas ahí mismo, sin nombrar a nadie. Si algo requiere más tiempo, decir en qué semana se retoma.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">2</span> Manejo no es gestión <span class="reloj">25 min</span></h4>
+    <p class="di">"El flojo y el que no planea trabajan dos veces."</p>
+    <p class="apoyo">Ese refrán habla de manejo: el trabajo interno del proyecto. Planear, organizar, gastar bien, corregir a tiempo. El que no lo hace abre la zanja dos veces y repite el viaje a Jalpan porque faltó una cotización.</p>
+  </section>
+
+  <section class="lam">
+    <p class="di">"A quien no habla, Dios no lo oye."</p>
+    <p class="apoyo">Y este habla de gestión: conseguir por fuera lo que el proyecto necesita. Dinero, permisos, aliados, información. Se hace hablando, escribiendo y tocando puertas, y los proyectos que nadie pide no se financian.</p>
+  </section>
+
+  <section class="lam">
+    <h4>Las dos palabras, frente a frente</h4>
+    <div class="piezas">
+      <span class="pz pz--clara">manejo<small>llevar por dentro</small></span>
+      <span class="op">&#8800;</span>
+      <span class="pz pz--oscura">gestión<small>conseguir por fuera</small></span>
+      <span class="eq">y la presa necesita las dos</span>
+    </div>
+    <p class="apoyo">Se hacen con manos distintas y se echan a perder por razones distintas. El módulo de lombricultura perfectamente planeado que nunca consiguió el permiso del ejido se murió de gestión; el que consiguió todo y gastó el material en tres semanas sin cronograma se murió de manejo.</p>
+    <p class="nota-conductor">Aquí van los dos ejemplos del campo cercano, de preferencia de proyectos que el grupo conozca. Preguntar primero si alguien conoce un proyecto que se haya caído, y colgar la distinción de ese caso si sale.</p>
+  </section>
+
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-01/dos-oficios.webp" alt="Dibujo a tinta: una persona trabaja dentro de un corral con herramientas y otra toca una puerta afuera con papeles en la mano; rótulos manejo y gestión">
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">3</span> Gimnasio 1 · Refranes de gestión <span class="reloj">25 min</span></h4>
+    <span class="senal">Actividad · en parejas</span>
+    <p class="di">Ocho refranes de los de tu casa: ¿hablan de manejar, de gestionar o de planear?</p>
+    <p class="apoyo">Proyectado, con el <a href="../ejercicios/semana-01/ejercicio-11-refranes-de-gestion.html">ejercicio del gimnasio</a>. Los refranes que dividan al grupo se comentan ahí mismo, sobre la marcha: en los que todos aciertan no hay mucho que aprender.</p>
+    <p class="nota-conductor">Avanzar refrán por refrán con votación rápida a mano alzada antes de destapar. Detenerse solo donde el grupo se parta; en los unánimes, destapar y seguir. Sin columnas en el pizarrón: la discusión vive en el ejercicio.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">4</span> Gimnasio 2 · ¿Manejo o gestión? <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · a mano alzada</span>
+    <p class="di">Diez situaciones de proyectos rurales. Manejo o gestión, sin pensarlo tanto.</p>
+    <p class="apoyo">Rápido, con el <a href="../ejercicios/semana-01/ejercicio-22-manejo-o-gestion.html">ejercicio del gimnasio</a> proyectado. Se discuten solo las situaciones que partan al grupo por la mitad.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> Los dos oficios en la presa <span class="reloj">25 min</span></h4>
+    <span class="senal">Actividad</span>
+    <p class="di">Con el encargo enfrente: ¿qué trabajo de este proyecto es manejar y qué trabajo es gestionar?</p>
+    <p class="apoyo">El grupo levanta las dos listas en una hoja grande que se queda pegada en el salón todo el semestre. Se va a corregir muchas veces, y cada corrección va a ser una clase entera resumida en una flecha.</p>
+    <p class="nota-conductor">Hoja grande y plumones de dos colores listos desde antes. Anotar textual. Si el grupo se atora, sembrar con dos preguntas: quién tiene que dar permiso para tocar la orilla, y quién decide en qué se gasta el material. Esta hoja es la referencia del semestre: no recortarla aunque el tiempo apriete.</p>
+  </section>
+
+  <section class="lam">
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para mañana</span>
+      Mañana se dibuja el mapa completo del curso, se sella tu pronóstico en un sobre, y se abre el detrás de cámaras: este curso que estás viendo se construye con una inteligencia artificial, y vas a ver exactamente cómo.
+    </div>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">6</span> Cierre <span class="reloj">10 min</span></h4>
+    <p class="di">Mañana: el mapa del curso, el sobre y la máquina.</p>
+    <p class="apoyo">Traer la carpeta del expediente y el celular cargado: mañana se usa en serio.</p>
+  </section>
+</section>
+
+<!-- ====================== VIERNES ====================== -->
+<section class="mazo" id="mazo-viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes 7 de agosto · 2 horas</div>
+      <h3>El ciclo, la máquina y el sobre</h3>
+      <p class="foco">Ver el mapa completo del curso, aprender a encargarle trabajo a una IA y dejar tu pronóstico bajo llave.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
   </div>
-</details>
 
-<h2>Herramientas de la semana</h2>
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> Gimnasio 3 · El ciclo por capas <span class="reloj">30 min</span></h4>
+    <span class="senal">Actividad</span>
+    <p class="di">Hoy se dibuja la silueta del mapa que vamos a llenar todo el semestre.</p>
+    <div class="flujo">
+      <div class="paso"><b>1</b><span class="t">la idea</span>de dónde sale y cómo se afina</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>2</b><span class="t">el diseño</span>convertirla en plan que se sostenga</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>3</b><span class="t">manejo y evaluación</span>ejecutar, medir, corregir</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>4</b><span class="t">la gestión</span>conseguir recursos y rendir cuentas</div>
+    </div>
+    <p class="apoyo">Se arma en el pizarrón con el <a href="../ejercicios/semana-01/ejercicio-32-el-ciclo-por-capas.html">ejercicio del gimnasio</a>: solo la silueta, sin detalle. Se fotografía y se guarda para compararla con la versión de diciembre, que va a estar rayoneada por todas partes.</p>
+    <p class="nota-conductor">Dibujar la silueta grande, dejando aire adentro de cada momento: ese aire es el que se llena semana a semana. La foto va a "Lo que produjimos".</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> El expediente, en firme <span class="reloj">10 min</span></h4>
+    <span class="senal">Actividad</span>
+    <p class="di">Se abre la bitácora con la primera entrada: qué esperas de este curso.</p>
+    <p class="apoyo">Las cinco secciones de la carpeta quedaron explicadas <a href="semana-00.html">la semana pasada</a>. Hoy se rotulan y la bitácora estrena tinta. Esa primera entrada se relee en diciembre, y conviene escribirla en serio.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> Demo · Cómo se hace este curso con una IA <span class="reloj">20 min</span></h4>
+    <span class="senal">En pantalla</span>
+    <p class="di">Este curso que estás viendo se construye con una inteligencia artificial, y ahora vas a ver cómo.</p>
+    <p class="apoyo">Sin misticismo y sin publicidad: la máquina en su lugar de herramienta, con lo que hace bien y lo que no puede hacer.</p>
+    <p class="nota-conductor">Tener abiertas desde antes las tres pestañas: el proyecto de Claude, la hoja de retroalimentación en Drive y el skill. Proyectar en grande y navegar despacio: el punto es que vean el detrás de cámaras real, no una función espectacular.</p>
+  </section>
+
+  <section class="lam">
+    <h4>Tres cosas en pantalla</h4>
+    <div class="flujo">
+      <div class="paso"><b>1</b><span class="t">el proyecto</span>la IA trae cargado el contexto completo del curso</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>2</b><span class="t">la hoja de correcciones</span>lo que ustedes observan se anota, se procesa y se publica</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>3</b><span class="t">un skill</span>libros completos destilados para que la máquina trabaje con un método</div>
+    </div>
+    <p class="apoyo">La segunda pestaña es la importante: el curso que están viendo lo corrigen ustedes cada semana, y la máquina es la que aplica esas correcciones a los materiales. La tercera enseña algo menos conocido: a una IA se le puede enseñar un oficio dándole los libros del oficio.</p>
+  </section>
+
+  <section class="lam">
+    <h4>Anatomía de un buen prompt</h4>
+    <div class="piezas">
+      <span class="pz pz--clara">contexto<small>quién eres, de qué va</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--arena">encargo<small>qué quieres exactamente</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--clara">formato<small>cómo lo quieres recibir</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--oscura">ejemplo<small>una muestra de lo que sirve</small></span>
+      <span class="eq">= un encargo que sale a la primera</span>
+    </div>
+    <p class="apoyo">Con las mismas cuatro piezas se le pide un presupuesto a un albañil o una cotización a un vivero. El <a href="../ejercicios/semana-01/ejercicio-41-anatomia-del-prompt.html">gimnasio 4</a> entrena el diagnóstico: seis prompts escritos con prisa a los que hay que encontrarles la pieza que falta.</p>
+  </section>
+
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-01/anatomia-del-prompt.webp" alt="Dibujo a tinta: una persona entrega a un albañil una nota dividida en cuatro partes rotuladas contexto, encargo, formato y ejemplo">
+  </section>
+
+  <section class="lam">
+    <h4>El mismo encargo, dos veces</h4>
+    <div class="contra">
+      <div class="mal">
+        <span class="rot">Prompt flojo</span>
+        <p style="margin:0"><em>"Ayúdame con lo de la presa."</em></p>
+        <p style="margin:.5rem 0 0;font-size:.9rem">La máquina escoge por ti qué entender, y lo que escoja rara vez coincide con lo que traías en la cabeza.</p>
+      </div>
+      <div class="bien">
+        <span class="rot">Prompt completo</span>
+        <p style="margin:0;font-size:.9rem"><em>"Somos el comité de vecinos de La Florida [contexto]. Escribe la invitación a la faena de limpieza de la orilla, este domingo a las 8 [encargo]. Mensaje corto de WhatsApp, tono amable [formato], parecido a este que mandamos antes: 'Vecinos, les recordamos que…' [ejemplo]."</em></p>
+      </div>
+    </div>
+    <p class="apoyo">Se corren los dos en vivo y se comparan las respuestas. La diferencia se explica sola en pantalla.</p>
+    <p class="nota-conductor">Correr primero el flojo y dejar que el grupo le encuentre lo genérico antes de correr el completo. Si la conexión falla, escribir los dos prompts en el pizarrón y pedir al grupo que prediga qué va a devolver cada uno.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4>Dónde la máquina se queda afuera</h4>
+    <p class="di">El pacto de IA que aceptaste la semana pasada sigue mandando.</p>
+    <p class="apoyo">La bitácora y las autoevaluaciones se escriben con tu voz: son el registro de lo que tú pensaste, y si las escribe otro dejan de ser evidencia de algo. Los cuatro casos con veredicto y la fórmula para declarar el uso están en el <a href="../evaluacion/pacto-de-ia.html">pacto</a>, y se usan desde esta semana.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">4</span> El sobre <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad</span>
+    <p class="di">Escribe las tres cosas que tú crees que la comunidad va a pedir para la presa. Firma. Sella.</p>
+    <p class="apoyo">Los sobres se guardan a la vista del salón hasta la semana 4, cuando la consulta haya hablado. Se sella antes de tocar la IA, para que el pronóstico sea tuyo y no de la máquina. Escribe lo que de verdad crees, no lo que suena bien: la primera medición del curso es esta, y el medido eres tú.</p>
+    <p class="nota-conductor">Repartir sobres y hojas antes de proyectar esta lámina. Sellar frente al grupo, uno por uno, y engrapar los sobres en el corcho ahí mismo. Este bloque no se recorta ni se manda de tarea.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> Práctica · El sobre de la máquina <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · en parejas, con celular</span>
+    <p class="di">Ahora que tu pronóstico está sellado, pídele el suyo a una IA.</p>
+    <p class="apoyo">Cada pareja redacta su prompt con las cuatro piezas y se lo corre a la IA que tenga a la mano. Después se leen dos o tres prompts en voz alta: qué le dieron a la máquina y qué le faltó. El pronóstico mejor fundamentado se anota, se firma "La máquina" y se sella en su propio sobre, junto a los demás.</p>
+    <p class="nota-conductor">Un sobre extra listo para la máquina. Al comparar prompts, preguntar por las piezas: quién le dio contexto de La Florida, quién le pidió formato. Si dos parejas obtienen pronósticos muy distintos, leerlos ambos: la diferencia casi siempre viene del prompt, y esa es la lección.</p>
+  </section>
+
+  <section class="lam">
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para la semana 4</span>
+      El día que se abran los sobres van a hablar tres voces: lo que creyó cada quien, lo que calculó la máquina y lo que dijo la gente. Las dos primeras se sellaron hoy sin conocer a la comunidad. La tercera es a la que vamos a ir a preguntarle, y es la que manda.
+    </div>
+  </section>
+
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-01/tres-voces.webp" alt="Dibujo a tinta: dos sobres sellados clavados en un corcho, rotulados los tuyos y la máquina, y junto a una presa un grupo de personas con un globo de diálogo, rotuladas la gente">
+  </section>
+
+  <section class="lam">
+    <span class="senal senal--campo">La semana que viene</span>
+    <p class="di">El viernes que viene se sale a la presa.</p>
+    <p class="apoyo">Qué traer: zapato cerrado, agua, gorra y el celular cargado.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">6</span> Ticket de salida <span class="reloj">10 min</span></h4>
+    <p class="di">Antes de irte: qué te llevas, qué quedó turbio y cómo estuvo el ritmo.</p>
+    <p class="apoyo">Noventa segundos, con nombre o sin él. Lo que escribas aquí se lee el jueves que viene, en voz alta.</p>
+  </section>
+</section>
+
+<h2 class="corte">Herramientas de la semana</h2>
 
 <div class="tarjeta">
   <span class="etiqueta">La distinción</span>
@@ -150,16 +327,22 @@
   <p>A unos minutos del campus hay una presa que la gente usa a su manera: alguien pesca, alguien pasea, alguien va a mirar el agua. No hay sombra pensada, ni lugar para sentarse, ni nada para los niños. El encargo del semestre: convertir esa orilla en un espacio que la comunidad quiera usar. Qué debe tener no lo decides tú ni lo decide el profesor; lo decide la gente de La Florida, y se lo vamos a preguntar bien (a eso vamos en las semanas 3 y 4).</p>
 </div>
 
+<div class="tarjeta">
+  <span class="etiqueta">La herramienta</span>
+  <h3 style="margin-top:.2rem">La IA, vista por dentro</h3>
+  <p>Este curso se construye con ayuda de una inteligencia artificial: los ejercicios del gimnasio, las páginas semanales y hasta la hoja donde el profesor anota lo que ustedes corrigen pasan por ella. El viernes se abre ese detrás de cámaras y se practica el oficio de pedirle bien las cosas: darle contexto, un encargo claro, un formato y un ejemplo, igual que cuando se le pide un presupuesto a un albañil. Para cerrar, la ponemos a pronosticar lo que pedirá la comunidad, y su pronóstico se sella igual que los de ustedes. El <a href="../evaluacion/pacto-de-ia.html">pacto de IA</a> que aceptaste la semana pasada sigue mandando: la bitácora y las autoevaluaciones se escriben con tu voz.</p>
+</div>
+
 <div class="tarjeta siembra">
   <span class="etiqueta">El misterio</span>
   <h3 style="margin-top:.2rem">Las reglas del fondo</h3>
-  <p>El fondo existe y es del proyecto, no del profesor. Lo que todavía no sabes: cómo se decide quién lo ejerce, en qué se puede gastar y quién vigila cada peso. Esas reglas se destripan en la semana 5, y te conviene llegar con hipótesis. Pista: en el mundo real el dinero de los proyectos casi nunca lo reparte quien te cae bien.</p>
+  <p>El fondo existe y es del proyecto, no del profesor. Lo que todavía no sabes: cómo se decide quién lo ejerce, en qué se puede gastar y quién vigila cada peso. Esas reglas se destripan en la semana 5. Pista: en el mundo real el dinero de los proyectos casi nunca lo reparte quien te cae bien.</p>
 </div>
 
 <div class="tarjeta siembra">
   <span class="etiqueta">El sobre</span>
   <h3 style="margin-top:.2rem">Tu pronóstico, sellado</h3>
-  <p>Esta semana escribes las tres cosas que tú crees que la comunidad va a pedir para la presa, y las sellas en un sobre con tu nombre frente al grupo. Nadie lo abre hasta la semana 4, cuando la consulta haya hablado. Ahí sabremos quién conoce a su comunidad y quién diseñaba de oídas. No es adivinanza: es la primera medición del curso, y el medido eres tú.</p>
+  <p>Esta semana escribes las tres cosas que tú crees que la comunidad va a pedir para la presa, y las sellas en un sobre con tu nombre frente al grupo. Nadie lo abre hasta la semana 4, cuando la consulta haya hablado. Ahí sabremos quién conoce a su comunidad y quién diseñaba de oídas. No es adivinanza: es la primera medición del curso, y el medido eres tú. Este semestre la máquina también pronostica, y también se abre en la semana 4.</p>
 </div>
 
 <h2>El gimnasio</h2>
@@ -167,6 +350,7 @@
   <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-01/ejercicio-11-refranes-de-gestion.html"><strong>Refranes de gestión</strong></a> · Ocho refranes de los de tu casa, a ver de qué hablan en realidad: de manejar, de gestionar o de planear.</div></div>
   <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-01/ejercicio-22-manejo-o-gestion.html"><strong>¿Manejo o gestión?</strong></a> · Diez situaciones reales de proyectos rurales para afilar la distinción de la semana.</div></div>
   <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-01/ejercicio-32-el-ciclo-por-capas.html"><strong>El ciclo por capas</strong></a> · Arma el mapa del curso: ordena lo que le pasa a un proyecto desde la idea hasta el financiamiento.</div></div>
+  <div class="gimnasio-item"><span class="num">4</span><div><a href="../ejercicios/semana-01/ejercicio-41-anatomia-del-prompt.html"><strong>Anatomía del prompt</strong></a> · Seis prompts escritos con prisa: diagnostica qué pieza le falta a cada uno y arma el tuyo completo.</div></div>
 </div>
 
 <h2>Hoja de consulta</h2>
@@ -184,6 +368,12 @@
     <dd>$10,000 de capital semilla para arrancar lo que el proceso decida. No es premio ni beca, y tampoco es el presupuesto completo: es la contrapartida con la que se sale a buscar el resto. Tiene reglas (semana 5) y libro de cuentas público (más adelante).</dd>
     <dt>El sobre</dt>
     <dd>Tu pronóstico sellado de lo que pedirá la comunidad. Se firma, se sella y se guarda a la vista del grupo. Se abre en la semana 4, después de la consulta.</dd>
+    <dt>El sobre de la máquina</dt>
+    <dd>El pronóstico que una IA hace del mismo encargo, sellado el viernes después de los sobres del grupo. Se abre en la semana 4 con los demás, para comparar lo que creyó cada quien, lo que calculó la máquina y lo que dijo la gente.</dd>
+    <dt>Prompt</dt>
+    <dd>El encargo que se le escribe a una inteligencia artificial. Uno completo trae cuatro piezas: contexto (quién eres y de qué va el asunto), encargo (qué quieres exactamente), formato (cómo lo quieres recibir) y ejemplo (una muestra de lo que te sirve). Con esas mismas cuatro piezas se le pide un presupuesto a un albañil o una cotización a un vivero.</dd>
+    <dt>Skill</dt>
+    <dd>Instrucciones y materiales (manuales, libros, ejemplos propios) que se le cargan a una IA para que trabaje cierto tipo de tarea a la manera de uno. El viernes se enseña uno en vivo, armado destilando libros completos.</dd>
     <dt>El expediente del gestor</dt>
     <dd>Carpeta física que arrancaste la semana pasada con los pactos firmados y que alimentas todo el semestre: bitácora, registro de retos, evidencias por unidad, autoevaluaciones. Al final del curso te la llevas: es tu primer portafolio profesional, no un trámite.</dd>
     <dt>Ticket de salida</dt>
@@ -195,7 +385,7 @@
 
 <h2>Lo que produjimos</h2>
 <div class="tarjeta">
-  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán la foto de los sobres sellados, las dos listas de la presa (lo que es manejar y lo que es gestionar) y la primera capa del ciclo dibujada en el pizarrón. Esta sección se llena con lo que pase en el aula.</p>
+  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán la foto de los sobres sellados (incluido el de la máquina), las dos listas de la presa (lo que es manejar y lo que es gestionar), los mejores prompts de la práctica del viernes y la primera capa del ciclo dibujada en el pizarrón. Esta sección se llena con lo que pase en el aula.</p>
 </div>
 
 <div class="chapuzon">
