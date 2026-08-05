@@ -25,6 +25,8 @@
   .intro strong { color:var(--arena); }
   .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
   .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  .modelo { display:none; background:#E4EFEB; border-left:4px solid var(--marca); border-radius:0 8px 8px 0; padding:.7rem 1rem; margin-top:.7rem; font-size:.95rem; }
+  .modelo .pieza { color:var(--marca); font-weight:bold; font-size:.8rem; letter-spacing:.05em; }
   #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; }
   body.proyector { font-size:1.45rem; }
   body.proyector .prompt { font-size:1.5rem; }
@@ -35,59 +37,64 @@
 <h1>Anatomía del prompt</h1>
 <p class="sub">Gimnasio · Semana 1 · Práctica libre, sin registro y sin nota.</p>
 
-<p>Un buen encargo a una IA trae cuatro piezas, igual que un buen encargo a un albañil. Aquí hay seis prompts escritos con prisa: a cada uno le falta una pieza, y tu trabajo es diagnosticar cuál.</p>
+<p>A una IA se le encarga trabajo igual que a un albañil: si el encargo llega incompleto, el resultado llega chueco. Estos seis prompts los escribió gente con prisa. Diagnostica qué pieza le falta a cada uno.</p>
 
 <div class="intro">
-  Las cuatro piezas de la semana. <strong>Contexto:</strong> quién eres y de qué va el asunto. <strong>Encargo:</strong> qué quieres exactamente. <strong>Formato:</strong> cómo lo quieres recibir. <strong>Ejemplo:</strong> una muestra de lo que te sirve.
+  Las cuatro piezas de un prompt completo. <strong>Contexto:</strong> quién eres y de qué va el asunto. <strong>Encargo:</strong> qué quieres exactamente. <strong>Formato:</strong> cómo lo quieres recibir. <strong>Ejemplo:</strong> una muestra de lo que te sirve.
 </div>
 
 <div id="casos"></div>
 
 <div class="cuaderno">
-  <h2>El reto: arma el tuyo completo</h2>
-  <p>Piensa en un proyecto que exista (o haga falta) en tu propia comunidad: el agua, el camino, la capilla, la cancha. Escribe en tu cuaderno un prompt con las cuatro piezas pidiéndole a una IA que separe qué trabajos de ese proyecto son de manejo y cuáles de gestión. Revísalo con la lista: ¿le dijiste quién eres y de qué comunidad hablas?, ¿el encargo es uno solo y claro?, ¿le pediste un formato?, ¿le diste una muestra? Si tienes celular a la mano, córrelo y califica tú a la máquina: lo que te devuelva vale lo que valía tu prompt.</p>
+  <h2>Arma el tuyo</h2>
+  <p>Escribe en tu cuaderno un prompt completo, con las cuatro piezas, pidiéndole a una IA que te explique la diferencia entre manejo y gestión con ejemplos de tu propia comunidad. Revísalo con la lista: ¿le dijiste quién eres y de qué comunidad hablas?, ¿el encargo es uno solo y claro?, ¿le pediste un formato?, ¿le diste una muestra? Cuando lo tengas, pruébalo en tu celular y compara la respuesta con la de un prompt de una sola línea sobre lo mismo.</p>
+  <button class="opcion" onclick="document.getElementById('modelo').style.display='block'; this.disabled=true;">Ver un prompt modelo</button>
+  <div class="modelo" id="modelo">
+    <p><span class="pieza">CONTEXTO</span> Soy estudiante de la licenciatura PAS en Concá, Querétaro. Vivo en una comunidad donde hay un grupo de ahorro, un comité de agua y una huerta escolar. <span class="pieza">ENCARGO</span> Explícame la diferencia entre manejar un proyecto y gestionar un proyecto, con un ejemplo de cada una tomado de esos tres casos. <span class="pieza">FORMATO</span> Máximo media cuartilla, en lenguaje llano, sin tecnicismos. <span class="pieza">EJEMPLO</span> Del estilo que me sirve: "Manejar la huerta es decidir qué se siembra en marzo; gestionar la huerta es conseguir que el municipio preste el rotoplas."</p>
+  </div>
 </div>
 
 <button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
 
 <script>
   var casos = [
-    { p: '"Escríbeme la solicitud de apoyo. Formal, de una cuartilla, parecida a esta que te copio: ‘C. Presidente Municipal, por medio de la presente…’"',
-      resp: 'C',
-      pista: 'La máquina ya sabe qué hacer, cómo entregarlo y hasta tiene muestra. Lo que no sabe es quién habla ni de qué proyecto se trata.',
-      exp: 'Falta el contexto. ¿Apoyo para qué, pedido por quién, a nombre de qué grupo? Sin eso, la IA va a inventar un proyecto genérico y la solicitud va a sonar a machote. El contexto es la pieza que convierte un formato bonito en una carta que sí habla de lo tuyo.' },
-    { p: '"Somos un grupo de estudiantes de Concá que está armando un proyecto para una presa, con un fondo de $10,000. Queremos algo sobre difusión. Que sea breve."',
+    { r: '"Ayúdame con lo de la presa."',
       resp: 'E',
-      pista: 'Contexto sobra. Pero léelo como si fueras la máquina: ¿qué es exactamente "algo sobre difusión"?',
-      exp: 'Falta el encargo. "Algo sobre difusión" puede ser un cartel, un plan de redes, un guion de perifoneo o una lona. Cuando el encargo es difuso, la máquina escoge por ti, y lo que escoja rara vez coincide con lo que traías en la cabeza. Pide una cosa, y pídela con sustantivo.' },
-    { p: '"Soy tesorero de un grupo de ahorro de mi comunidad y en la asamblea del domingo tengo que explicar las cuentas del mes. Hazme el resumen: entraron $4,200, salieron $3,100, quedan $8,700 en caja."',
+      pista: 'La IA sabe que hay una presa. Lo que no sabe es qué se le está pidiendo hacer con ella.',
+      exp: 'Falta el encargo (y de paso casi todo lo demás). ¿Un plano? ¿Una carta? ¿Una lista de ideas? Con este prompt la IA va a escoger por ti, y lo que escoja rara vez coincide con lo que traías en la cabeza.' },
+    { r: '"Escríbeme una solicitud de apoyo formal, de una cuartilla, dirigida a la presidencia municipal de Arroyo Seco, para un proyecto de gallinas ponedoras."',
+      resp: 'C',
+      pista: 'El encargo está claro y el formato también. ¿La IA sabe quién firma, de qué comunidad y cuánto se pide?',
+      exp: 'Falta el contexto. Sin saber quién solicita, cuántas familias participan y qué monto o apoyo concreto se pide, la IA va a rellenar los huecos con datos inventados, y una solicitud con datos inventados se cae en la primera lectura.' },
+    { r: '"Somos el comité de vecinos de La Florida y queremos invitar a la comunidad a una faena de limpieza en la orilla de la presa este domingo a las 8 de la mañana. Escribe la invitación."',
       resp: 'F',
-      pista: 'Quién es, qué quiere y hasta los números están. ¿Pero en qué forma le sirve recibirlo: tabla, texto para leer en voz alta, cartel?',
-      exp: 'Falta el formato. Un resumen para leerse en asamblea no se parece a una tabla ni a un cartel para la puerta de la tienda. Si no dices cómo lo quieres recibir, te toca rehacer la respuesta a mano, y ese retrabajo era evitable con una línea más.' },
-    { p: '"Doy los avisos en el grupo de WhatsApp de mi ranchería. Escribe el aviso de la faena de limpieza del camino, este domingo a las 8; que lleven pala y machete. Mensaje corto y amable."',
+      pista: 'Contexto y encargo van completos. ¿En qué se va a entregar esa invitación?',
+      exp: 'Falta el formato. Un mensaje de WhatsApp, un cartel para la tienda y un texto para el perifoneo se escriben distinto. Si no lo dices, la IA entrega uno genérico que no sirve bien para ninguno de los tres.' },
+    { r: '"Soy promotor de un grupo de ahorro en la Sierra Gorda. Escribe tres consejos de ahorro para leer al abrir cada reunión, de dos renglones cada uno, con el tono que usamos en el grupo."',
       resp: 'J',
-      pista: 'Este prompt va a funcionar. La pregunta fina es: ¿el aviso va a sonar a tu grupo, o a un mensaje de oficina?',
-      exp: 'Falta el ejemplo. Con contexto, encargo y formato la máquina cumple, pero el tono lo pone ella. Pega un aviso de los que ya mandas ("Vecinos, les recordamos que…") y la respuesta sale hablando como habla tu comunidad. El ejemplo es la pieza que más gente olvida y la que más se nota cuando falta.' },
-    { p: '"Hazme diez preguntas para una encuesta, en lista numerada, preguntas cortas como esta: ‘¿Con qué frecuencia visita usted la presa?’"',
+      pista: 'Contexto, encargo y formato están. Hay una frase que la IA no puede cumplir porque le falta una muestra.',
+      exp: 'Falta el ejemplo. "El tono que usamos en el grupo" vive en tu cabeza, y la IA no puede adivinarlo. Con pegar un consejo que ya les haya funcionado, la máquina agarra el tono en una sola muestra.' },
+    { r: '"Soy secretaria del comité de agua de El Refugio. Redacta el aviso de que el martes 12 se suspende el servicio por mantenimiento del tanque, de 9 a 14 horas. Formato: mensaje corto de WhatsApp, tono amable, parecido a este que mandamos antes: Vecinos, les recordamos que este viernes toca faena en el tanque…"',
+      resp: 'X',
+      pista: 'Revisa las cuatro piezas una por una antes de contestar.',
+      exp: 'Está completo: dice quién escribe (contexto), qué quiere (encargo), en qué se entrega (formato) y cómo suena lo que le sirve (ejemplo). Un prompt así casi siempre queda a la primera, y ese "casi siempre" ahorra las cinco vueltas del prompt flojo.' },
+    { r: '"Quiero saber qué me conviene sembrar. Contéstame en una tabla con costos."',
       resp: 'C',
-      pista: 'Encargo claro, formato claro, muestra incluida. ¿Pero encuesta de qué, para quién y para decidir qué?',
-      exp: 'Falta el contexto. Una encuesta se diseña según quién la contesta y qué decisión alimenta, y nada de eso está dicho. Guarda esta lección: en las semanas 3 y 4 vas a diseñar una consulta de verdad, y ahí el "para qué pregunto" va a valer más que las preguntas.' },
-    { p: '"Somos el comité de padres de la primaria y vamos a organizar la kermés de septiembre para juntar fondos. Ayúdanos con la kermés. En lista de pasos, corta."',
-      resp: 'E',
-      pista: 'El grupo está presentado y el formato pedido. Subraya el verbo: "ayúdanos". ¿Ayudar a qué, exactamente?',
-      exp: 'Falta el encargo. "Ayúdanos con la kermés" abarca el programa, el presupuesto, el cartel, los permisos y las tandas de guisado. La IA va a contestar un poco de todo y nada completo. Un encargo por prompt: si necesitas tres cosas, son tres encargos.' }
+      pista: 'La respuesta depende de datos que solo tú tienes: dónde, con cuánta agua, con cuánta tierra, para qué.',
+      exp: 'Falta el contexto. Convenir depende del suelo, del agua disponible, de la superficie y de si es para vender o para comer. Sin eso, la tabla que recibas va a estar bien hecha y mal dirigida: costos correctos de cultivos que a lo mejor ni se dan en tu parcela.' }
   ];
+
+  var etiquetas = [ ['C','Contexto'], ['E','Encargo'], ['F','Formato'], ['J','Ejemplo'], ['X','Nada: está completo'] ];
 
   var cont = document.getElementById('casos');
   casos.forEach(function (c, i) {
     var d = document.createElement('div');
     d.className = 'caso';
-    d.innerHTML = '<div class="prompt">' + c.p + '</div>' +
-      '<div class="pregunta-caso">¿Qué pieza le falta?</div>' +
-      '<button class="opcion" onclick="responder(' + i + ',\'C\',this)">Contexto</button>' +
-      '<button class="opcion" onclick="responder(' + i + ',\'E\',this)">Encargo</button>' +
-      '<button class="opcion" onclick="responder(' + i + ',\'F\',this)">Formato</button>' +
-      '<button class="opcion" onclick="responder(' + i + ',\'J\',this)">Ejemplo</button>' +
+    var botones = etiquetas.map(function (e) {
+      return '<button class="opcion" onclick="responder(' + i + ',\'' + e[0] + '\',this)">' + e[1] + '</button>';
+    }).join('');
+    d.innerHTML = '<div class="prompt">' + c.r + '</div>' +
+      '<div class="pregunta-caso">¿Qué pieza le falta?</div>' + botones +
       '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
       '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
     cont.appendChild(d);
