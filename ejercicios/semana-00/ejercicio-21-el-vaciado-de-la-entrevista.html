@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S0 · El vaciado de la entrevista</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.15rem; margin:1.6rem 0 .4rem; }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .campo { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin:.8rem 0; }
+  .campo label.titulo { display:block; font-family:Georgia,serif; color:var(--profundo); font-size:1.05rem; font-weight:bold; margin-bottom:.15rem; }
+  .campo .pista { font-size:.88rem; color:#68807a; margin:.1rem 0 .5rem; }
+  .campo input[type=text], .campo textarea { display:block; width:100%; font:inherit; font-size:.98rem; padding:.55rem .7rem; border:1.5px solid var(--borde); border-radius:8px; background:#FDFEFE; }
+  .campo textarea { min-height:5.5rem; resize:vertical; }
+  .campo input:focus, .campo textarea:focus { outline:2px solid var(--marca); border-color:var(--marca); }
+  .campo .opciones label { display:flex; align-items:flex-start; gap:.5rem; margin:.4rem 0; cursor:pointer; }
+  .campo .opciones input { width:1.1rem; height:1.1rem; margin-top:.25rem; flex:none; }
+  .obligatorio { color:#8A3B2B; font-weight:bold; }
+  .regla { background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.7rem 1rem; margin:.7rem 0; font-size:.95rem; color:#5C4A1C; }
+  .botones { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.4rem; }
+  .botones button { border:none; border-radius:999px; padding:.65rem 1.4rem; font:inherit; font-weight:bold; cursor:pointer; }
+  #btn-correo { background:var(--marca); color:#fff; }
+  #btn-compartir { background:var(--profundo); color:#fff; }
+  #btn-copiar { background:#fff; color:var(--profundo); border:2px solid var(--borde); }
+  .botones button:hover { filter:brightness(1.08); }
+  #aviso { color:#8A3B2B; font-weight:bold; min-height:1.3rem; margin:.6rem 0 0; }
+  #hecho { display:none; background:#EEF6F0; border:2px solid #C9E2CF; border-radius:12px; padding:.9rem 1.2rem; margin-top:.8rem; }
+  #hecho .rot { display:block; font-size:.72rem; letter-spacing:.11em; text-transform:uppercase; font-weight:bold; color:#1F4A2C; margin-bottom:.3rem; }
+  .nota-guardado { font-size:.85rem; color:#68807a; font-style:italic; margin-top:1.2rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El vaciado de la entrevista</h1>
+<p class="sub">Gimnasio · Semana 0 · La segunda mitad de <a href="ejercicio-11-la-entrevista-de-los-recursos.html">La entrevista de los recursos</a>.</p>
+
+<p>Ya hiciste la entrevista; ahora vacíala aquí mientras la traes fresca. Con lo que el grupo entregue se arma el tablero de todas las entrevistas: qué programas aparecen, qué problema se repite y qué frases hay que oír completas. Ese análisis se hace en conjunto, y en la unidad 3, cuando el dinero del proyecto sea de verdad, esta colección va a ser oro.</p>
+
+<div class="intro">
+  <strong>Esta página no manda nada sola.</strong> Al final, el botón arma el mensaje con tus respuestas y tú lo envías desde tu propio correo o WhatsApp. Mientras escribes, se va guardando en tu teléfono: puedes llenarla sin señal y enviarla cuando la tengas.
+</div>
+
+<div class="regla"><strong>Textual quiere decir textual.</strong> En las respuestas de la persona entrevistada, escribe sus palabras, no tu resumen. "Perdí tres días por una factura" dice más que "tuvo problemas administrativos".</div>
+
+<h2>Quién y con quién</h2>
+
+<div class="campo">
+  <label class="titulo" for="f-nombre">Tu nombre <span class="obligatorio">*</span></label>
+  <input type="text" id="f-nombre" autocomplete="name">
+</div>
+
+<div class="campo">
+  <label class="titulo" for="f-quien">¿A quién entrevistaste? <span class="obligatorio">*</span></label>
+  <p class="pista">Nombre y cargo. Si pidió reserva, escribe "un profesor de la carrera" o "una persona de mi comunidad", sin el nombre.</p>
+  <input type="text" id="f-quien">
+</div>
+
+<div class="campo">
+  <span class="titulo">¿De dónde es su experiencia?</span>
+  <div class="opciones">
+    <label><input type="radio" name="f-tipo" value="Profesor/a de la carrera"> Profesor o profesora de la carrera</label>
+    <label><input type="radio" name="f-tipo" value="Alguien de la comunidad"> Alguien de mi comunidad (comité de agua, comisariado, grupo de productores…)</label>
+  </div>
+</div>
+
+<h2>Las tres preguntas</h2>
+
+<div class="campo">
+  <label class="titulo" for="f-p1">1 · ¿Qué programa o fondo le tocó manejar, y para qué era?</label>
+  <textarea id="f-p1"></textarea>
+</div>
+
+<div class="campo">
+  <label class="titulo" for="f-p2">2 · ¿Qué fue lo que más problemas le dio? <span class="obligatorio">*</span></label>
+  <p class="pista">La pregunta central. Lo más textual que puedas.</p>
+  <textarea id="f-p2"></textarea>
+</div>
+
+<div class="campo">
+  <label class="titulo" for="f-p2b">Si salieron: el ejemplo de cómo pasó, y cómo lo resolvió</label>
+  <textarea id="f-p2b"></textarea>
+</div>
+
+<div class="campo">
+  <label class="titulo" for="f-p3">3 · ¿Qué le hubiera gustado saber antes de empezar?</label>
+  <textarea id="f-p3"></textarea>
+</div>
+
+<h2>Lo que te llevas</h2>
+
+<div class="campo">
+  <label class="titulo" for="f-frase">La frase que más te sorprendió, textual <span class="obligatorio">*</span></label>
+  <textarea id="f-frase"></textarea>
+</div>
+
+<div class="campo">
+  <span class="titulo">¿Dio permiso de contar su respuesta en clase? <span class="obligatorio">*</span></span>
+  <div class="opciones">
+    <label><input type="radio" name="f-permiso" value="Sí, con su nombre"> Sí, con su nombre</label>
+    <label><input type="radio" name="f-permiso" value="Sí, sin su nombre"> Sí, pero sin su nombre</label>
+    <label><input type="radio" name="f-permiso" value="Prefirió que no"> Prefirió que no se cuente</label>
+  </div>
+</div>
+
+<div class="campo">
+  <label class="titulo" for="f-extra">Algo más que quieras anotar</label>
+  <p class="pista">Cómo estuvo la charla, qué te costó, qué preguntarías la próxima vez.</p>
+  <textarea id="f-extra"></textarea>
+</div>
+
+<div class="botones">
+  <button id="btn-correo" type="button">Enviar por correo</button>
+  <button id="btn-compartir" type="button">Compartir (WhatsApp u otra app)</button>
+  <button id="btn-copiar" type="button">Copiar todo</button>
+</div>
+<p id="aviso"></p>
+<div id="hecho">
+  <span class="rot">Vaciado armado</span>
+  <p id="hecho-texto"></p>
+</div>
+
+<p class="nota-guardado">Tus respuestas se guardan solas en este navegador mientras escribes. No viajan a ningún lado hasta que tú envíes el mensaje.</p>
+
+<script>
+(function () {
+  var CLAVE = 'gmp-vaciado-entrevista-s0';
+  var IDS = ['f-nombre','f-quien','f-p1','f-p2','f-p2b','f-p3','f-frase','f-extra'];
+  var RADIOS = ['f-tipo','f-permiso'];
+
+  function leerRadio(n) {
+    var m = document.querySelector('input[name="' + n + '"]:checked');
+    return m ? m.value : '';
+  }
+  function estado() {
+    var e = {};
+    IDS.forEach(function (id) { e[id] = document.getElementById(id).value; });
+    RADIOS.forEach(function (n) { e[n] = leerRadio(n); });
+    return e;
+  }
+  function guardar() {
+    try { localStorage.setItem(CLAVE, JSON.stringify(estado())); } catch (err) {}
+  }
+  function restaurar() {
+    var crudo;
+    try { crudo = localStorage.getItem(CLAVE); } catch (err) { return; }
+    if (!crudo) return;
+    var e;
+    try { e = JSON.parse(crudo); } catch (err) { return; }
+    IDS.forEach(function (id) { if (e[id]) document.getElementById(id).value = e[id]; });
+    RADIOS.forEach(function (n) {
+      if (!e[n]) return;
+      var m = document.querySelector('input[name="' + n + '"][value="' + e[n] + '"]');
+      if (m) m.checked = true;
+    });
+  }
+  restaurar();
+  IDS.forEach(function (id) { document.getElementById(id).addEventListener('input', guardar); });
+  RADIOS.forEach(function (n) {
+    Array.prototype.forEach.call(document.getElementsByName(n), function (r) { r.addEventListener('change', guardar); });
+  });
+
+  // El correo del profesor se arma aquí para no dejarlo en texto plano en la página.
+  var DESTINO = ['eduardo', '.', 'lusan', '@', 'gmail', '.', 'com'].join('');
+
+  function valida() {
+    var e = estado();
+    var faltan = [];
+    if (!e['f-nombre'].trim()) faltan.push('tu nombre');
+    if (!e['f-quien'].trim()) faltan.push('a quién entrevistaste');
+    if (!e['f-p2'].trim()) faltan.push('la pregunta central (2)');
+    if (!e['f-frase'].trim()) faltan.push('la frase que más te sorprendió');
+    if (!e['f-permiso']) faltan.push('el permiso para contarlo en clase');
+    var aviso = document.getElementById('aviso');
+    if (faltan.length) {
+      aviso.textContent = 'Antes de enviar falta: ' + faltan.join(', ') + '.';
+      return null;
+    }
+    aviso.textContent = '';
+    return e;
+  }
+
+  function armarTexto(e) {
+    var partes = [
+      'VACIADO DE LA ENTREVISTA DE LOS RECURSOS',
+      'Gestión y Manejo de Proyectos · Semana 0',
+      '',
+      'Entrevistó: ' + e['f-nombre'].trim(),
+      'Persona entrevistada: ' + e['f-quien'].trim() + (e['f-tipo'] ? ' (' + e['f-tipo'] + ')' : ''),
+      'Permiso para contarlo en clase: ' + e['f-permiso'],
+      '',
+      '1 · Programa o fondo que manejó, y para qué era:',
+      e['f-p1'].trim() || '(sin respuesta)',
+      '',
+      '2 · Lo que más problemas le dio (textual):',
+      e['f-p2'].trim(),
+      ''
+    ];
+    if (e['f-p2b'].trim()) partes.push('El ejemplo, y cómo lo resolvió:', e['f-p2b'].trim(), '');
+    partes.push('3 · Qué le hubiera gustado saber antes de empezar:', e['f-p3'].trim() || '(sin respuesta)', '');
+    partes.push('La frase que más me sorprendió:', '"' + e['f-frase'].trim() + '"');
+    if (e['f-extra'].trim()) partes.push('', 'Notas de quien entrevistó:', e['f-extra'].trim());
+    return partes.join('\n');
+  }
+
+  function marcaHecho(msj) {
+    document.getElementById('hecho').style.display = 'block';
+    document.getElementById('hecho-texto').textContent = msj;
+  }
+
+  document.getElementById('btn-correo').addEventListener('click', function () {
+    var e = valida();
+    if (!e) return;
+    var asunto = 'Vaciado de la entrevista · ' + e['f-nombre'].trim();
+    window.location.href = 'mailto:' + DESTINO
+      + '?subject=' + encodeURIComponent(asunto)
+      + '&body=' + encodeURIComponent(armarTexto(e));
+    marcaHecho('Se abrió tu app de correo con el mensaje listo. Revisa que se haya enviado; si el texto llegó cortado, usa mejor el botón de copiar y pégalo en el correo.');
+  });
+
+  document.getElementById('btn-compartir').addEventListener('click', function () {
+    var e = valida();
+    if (!e) return;
+    var texto = armarTexto(e);
+    if (navigator.share) {
+      navigator.share({ title: 'Vaciado de la entrevista', text: texto })
+        .then(function () { marcaHecho('Compartido. Mándaselo al profesor por el canal del grupo.'); })
+        .catch(function () {});
+    } else {
+      copiar(texto, 'Tu navegador no tiene el menú de compartir; el vaciado quedó copiado. Pégalo en WhatsApp y mándaselo al profesor.');
+    }
+  });
+
+  function copiar(texto, msj) {
+    function listo() { marcaHecho(msj); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(listo, function () { seleccionManual(texto); listo(); });
+    } else {
+      seleccionManual(texto);
+      listo();
+    }
+  }
+  function seleccionManual(texto) {
+    var ta = document.createElement('textarea');
+    ta.value = texto;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (err) {}
+    document.body.removeChild(ta);
+  }
+
+  document.getElementById('btn-copiar').addEventListener('click', function () {
+    var e = valida();
+    if (!e) return;
+    copiar(armarTexto(e), 'Copiado. Pégalo en un correo o en WhatsApp y mándaselo al profesor.');
+  });
+})();
+</script>
+
+</main>
+</body>
+</html>
