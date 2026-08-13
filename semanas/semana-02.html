@@ -20,23 +20,18 @@
     background: var(--fondo); color: var(--texto);
     line-height: 1.65; font-size: 1.05rem;
   }
-  header.curso {
-    background: var(--profundo); color: #EAF4F2;
-    padding: 1.1rem 1.5rem;
-  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
   header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
   header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
   header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
   main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
 
-  .pregunta {
-    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
-    color: var(--profundo); margin: 1.8rem 0 .4rem;
-  }
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
   h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -55,11 +50,8 @@
   .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
   .consulta dd { margin: .2rem 0 .4rem 0; }
 
-  .chapuzon {
-    background: var(--profundo); color: #EAF4F2;
-    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
-  }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
 
   .aviso-goteo {
@@ -68,6 +60,7 @@
     display: none;
   }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -95,67 +88,275 @@
   </ul>
 </div>
 
-<h2>El jueves y el viernes</h2>
-<p class="pista-ses">Da clic en cada día para ver el detalle de la sesión.</p>
+<h2 class="corte">Las dos sesiones de esta semana</h2>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
 
-<details class="sesion">
-  <summary>Jueves 13 de agosto · 2 horas<span class="sub">Concepto y taller</span></summary>
-  <div class="cuerpo">
-    <p class="foco">Foco del día: entender que la agencia se entrena, y empezar a entrenarla con dos aparatos concretos.</p>
-    <table class="minutos"><tbody>
-      <tr><td class="m">0-15</td><td><strong>El ticket de la Semana 0, en voz alta.</strong> Tres cosas dejó escritas el grupo y las tres se atienden hoy. <em>La duda de evaluación:</em> una unidad no es un parcial. Son cuatro unidades, cada una con su suelo en una lista pública (completa en <a href="../tu-calificacion.html">Tu calificación</a>); el expediente se imprime por cuadernillos, uno al arrancar cada unidad, y la primera autoevaluación de ensayo llega en la semana 4. <em>El ritmo:</em> hubo a quien la Semana 0 le corrió de más y se le juntó la información. Hoy la sesión trae menos piezas, y decir "alto, repite eso" es jugada legítima en cualquier minuto: para eso es el foso seguro. <em>La IA y el agua:</em> alguien escribió que le pesa que los centros de datos consuman tanta agua. Cierto, y quien lo escribió ya mira como gestor: toda solución brillante esconde costos, y el oficio es verlos antes de firmar. Ese hilo vuelve hoy mismo con el Expediente Kenia.</td></tr>
-      <tr><td class="m">15-25</td><td><strong>Estreno de la campana del no.</strong> Cómo funciona el ritual: cada jueves, quien haya pedido algo y le hayan dicho que no lo anuncia y el grupo aplaude. El aplauso no es consuelo, es reconocimiento de que alguien pidió de verdad. Hoy la toca el profesor con un no propio.</td></tr>
-      <tr><td class="m">25-40</td><td><strong>La agencia se entrena.</strong> Exposición corta: ver las puertas ocultas en las paredes y atreverse a girar la perilla. Dos movimientos, notar y moverse. El hallazgo incómodo: nadie nace agéntico, se practica pidiendo, preguntando y apareciéndose.</td></tr>
-      <tr><td class="m">40-58</td><td><strong>Gimnasio 1 · Las puertas ocultas.</strong> En tríos: seis situaciones atoradas donde hay que encontrar la movida agéntica. Se comparten dos en plenaria, de preferencia las que nadie vio.</td></tr>
-      <tr><td class="m">58-66</td><td><strong>Respiro.</strong></td></tr>
-      <tr><td class="m">66-80</td><td><strong>El anti-currículum.</strong> El caso de la lista publicada de universidades que no contrataron, posdoctorados negados y editoriales que rechazaron. Cada quien abre su hoja de anti-currículum en el expediente y escribe el primer no que ya trae de antes. Se proyecta el <a href="../ejercicios/semana-02/ideas-anti-cv.html">listado vivo de ideas</a>: lo que vaya saliendo en voz alta (becas, permisos, patrocinios, entrevistas, aventones) se captura ahí y al final se copia entero, para que cada quien se lleve ideas a su hoja.</td></tr>
-      <tr><td class="m">80-98</td><td><strong>Gimnasio 2 · Mi primer no.</strong> Diseñar una petición real, con destinatario y fecha, esperando que la nieguen. Se leen dos en voz alta y el grupo las hace más ambiciosas; las ideas que suelte la plenaria se suman al listado proyectado.</td></tr>
-      <tr><td class="m">98-110</td><td><strong>Expediente Kenia, entrega 1.</strong> Se cuenta el caso: manantiales protegidos, agua limpia saliendo del tubo, y la diarrea infantil casi sin bajar. Se corta ahí. Cada quien escribe su hipótesis en la bitácora. La respuesta llega en la semana 6.</td></tr>
-      <tr><td class="m">110-120</td><td><strong>Preparación de la salida.</strong> Se reparte el contrato de gestión para leerlo en casa y se avisa la logística de mañana: hora, punto de reunión y qué llevar.</td></tr>
-    </tbody></table>
-    <p class="trae"><strong>Trae:</strong> la carpeta del expediente con los pactos ya archivados, cuaderno y pluma.</p>
-    <p class="ajuste">Si el tiempo se acorta: el gimnasio 1 pasa a tarea. La campana y el Expediente Kenia no se recortan, porque los dos abren hilos que corren todo el semestre.</p>
+<!-- ====================== JUEVES ====================== -->
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves 13 de agosto · 2 horas</div>
+      <h3>La agencia se entrena</h3>
+      <p class="foco">Ver las puertas ocultas, atreverse a girar la perilla, y arrancar los dos aparatos que lo entrenan.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
   </div>
-</details>
 
-<details class="sesion">
-  <summary>Viernes 14 de agosto · 2 horas<span class="sub">Salida de campo a la presa</span></summary>
-  <div class="cuerpo">
-    <p class="foco">Foco del día: mirar la orilla con ojos de gestor, sin anunciar nada y sin prometer nada.</p>
-    <table class="minutos"><tbody>
-      <tr><td class="m">0-10</td><td><strong>Encuadre antes de salir.</strong> Las tres reglas de la visita: no se anuncia el proyecto, no se promete nada, no se pregunta todavía. Hoy solo se observa. Se abre el gimnasio 3 en el celular, que es la guía de observación.</td></tr>
-      <tr><td class="m">10-25</td><td><strong>Traslado.</strong> Se forman los cuatro equipos en el camino, uno por posta.</td></tr>
-      <tr><td class="m">25-40</td><td><strong>Posta 1 · Quién está y qué hace.</strong> Conteo y descripción de las personas presentes: qué hacen, con quién, cuánto se quedan.</td></tr>
-      <tr><td class="m">40-55</td><td><strong>Posta 2 · Recorridos y huellas.</strong> Por dónde camina la gente de verdad, no por dónde debería. Veredas marcadas, accesos, dónde se detienen, dónde se sientan aunque no haya dónde.</td></tr>
-      <tr><td class="m">55-70</td><td><strong>Posta 3 · Sombra, agua y basura.</strong> Qué sombra hay y a qué hora, dónde llega el agua en temporada, qué se acumula y quién lo recoge.</td></tr>
-      <tr><td class="m">70-85</td><td><strong>Posta 4 · Lo que no está.</strong> La posta más difícil: registrar ausencias. Quién no viene a la presa y por qué se puede suponer que no viene.</td></tr>
-      <tr><td class="m">85-100</td><td><strong>Círculo en la orilla.</strong> Cada equipo dice el hallazgo que más le sorprendió, en una frase. Se anotan todos: esta lista es la primera evidencia de campo del proyecto y se va a usar en la semana 3 para diseñar la consulta.</td></tr>
-      <tr><td class="m">100-112</td><td><strong>Regreso.</strong></td></tr>
-      <tr><td class="m">112-120</td><td><strong>Cierre.</strong> Ticket de salida desde el celular y recordatorio: el contrato de gestión se firma en casa y se trae el jueves, con los dos compromisos ya escritos.</td></tr>
-    </tbody></table>
-    <p class="trae"><strong>Trae:</strong> zapato cerrado, agua, gorra, celular cargado y la guía de observación abierta o impresa. Si va a hacer sol, protector.</p>
-    <p class="ajuste">Si el traslado toma más de quince minutos por lado, la observación baja a tres postas de veinte minutos y la posta 4 se reparte entre los cuatro equipos. Si el grupo se transporta por su cuenta y se cita directamente en la presa, se ganan veinticinco minutos de observación.</p>
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El ticket de la Semana 0 <span class="reloj">12 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Lo que quedó turbio el primer viernes, hoy se contesta en voz alta.</p>
+    <p class="apoyo">Este arranque no se salta ningún jueves. El ticket se sigue contestando porque se atiende: el día que lo que escribes desaparezca en un cajón, con toda razón vas a dejar de escribirlo. Del primer ticket salieron tres cosas, y las tres tienen respuesta hoy.</p>
+    <p class="nota-conductor">Leer textuales las tres respuestas elegidas del ticket de la Semana 0, sin nombrar a nadie: la duda de la evaluación, el aviso de ritmo y el comentario del agua. Cada una tiene su lámina enseguida. También leer una de las positivas, textual, sin comentarla.</p>
+  </section>
+
+  <section class="lam">
+    <p class="di">Una unidad no es un parcial.</p>
+    <p class="apoyo">Alguien preguntó, con toda razón, qué es una unidad y cuándo se revisa el suelo. El semestre tiene cuatro unidades, cada una con su suelo en una lista corta y pública: está completa en <a href="../tu-calificacion.html">Tu calificación</a>. El expediente se imprime por cuadernillos, uno al arrancar cada unidad, y el suelo se revisa al cerrar la suya. La primera autoevaluación, de ensayo y sin consecuencias, llega en la semana 4.</p>
+    <p class="nota-conductor">Abrir Tu calificación en pantalla y señalar la tabla del suelo. Si quedan caras de duda, ofrecer retomarlo al cierre de la unidad 1, que es donde el sistema se explica con lo ya vivido.</p>
+  </section>
+
+  <section class="lam">
+    <p class="di">¿Vamos muy rápido? "Alto, repite eso" es una jugada legítima.</p>
+    <p class="apoyo">Hubo a quien la Semana 0 le corrió de más y la información se le juntó. Se agradece que lo haya escrito: las sesiones de aquí en adelante traen menos piezas por día, y parar al profesor en cualquier minuto no cuesta nada. Para eso es el foso seguro.</p>
+    <p class="nota-conductor">Decirlo mirando al grupo completo, no buscando a quien lo escribió. Y cumplirlo: si hoy alguien pide el alto, agradecerlo en voz alta la primera vez.</p>
+  </section>
+
+  <section class="lam">
+    <p class="di">"Esos centros de datos están consumiendo mucha agua."</p>
+    <p class="apoyo">Alguien escribió que usa la IA y le pesa lo que cuesta: el agua que enfría los centros de datos. Es cierto, y esa mirada es la del oficio: preguntarse qué costos carga una solución que a todos les parece brillante. Hoy mismo, con el Expediente Kenia, ese músculo se pone a trabajar. ¿Qué otros costos ocultos se nos están pasando?</p>
+    <p class="nota-conductor">Dejar la pregunta final abierta un momento de verdad, no retórico. Si alguien engancha, dos minutos de conversación aquí valen más que llegar puntual a la campana.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> La campana del no, estreno <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Ritual · cada jueves</span>
+    <p class="di">Un no conseguido se anuncia, y el grupo aplaude.</p>
+    <div class="flujo">
+      <div class="paso"><b>1</b><span class="t">pediste</span>algo que importaba, a alguien de verdad</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>2</b><span class="t">te dijeron que no</span>o no te contestaron, que también cuenta</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>3</b><span class="t">lo anuncias el jueves</span>y suena la campana</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>4</b><span class="t">el grupo aplaude</span>y el no se anota en tu anti-currículum</div>
+    </div>
+    <p class="apoyo">El aplauso no es consuelo, es reconocimiento de que alguien pidió de verdad. Hoy la campana la toca el profesor, con un no propio y reciente. A partir del jueves que viene, el turno es de quien traiga uno.</p>
+    <p class="nota-conductor">Traer la campana física (o algo que suene con dignidad). Traer un no propio real, con detalle: qué se pidió, a quién, qué contestaron y qué se sintió. No pedir voluntarios hoy; el estreno carga el ritual y eso le toca al profesor. Este bloque no se recorta: abre un hilo que corre todo el semestre.</p>
+  </section>
+
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-02/la-campana-del-no.webp" alt="Dibujo a tinta: una persona toca una campana de mesa roja sosteniendo una carta con un tache, rotulada pediste de verdad, mientras tres figuras aplauden">
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> La agencia se entrena <span class="reloj">20 min</span></h4>
+    <p class="di">"Ver las puertas ocultas en las paredes de la vida, y atreverse a girar la perilla."</p>
+    <p class="apoyo">Así define la agencia Cate Hall, una abogada que se reinventó varias veces: dejó los tribunales, fue jugadora profesional de póker y hoy dirige una empresa de biotecnología. Cada vuelta empezó igual: notando una puerta que ya estaba ahí, y tocándola.</p>
+  </section>
+
+  <section class="lam">
+    <h4>Los dos músculos</h4>
+    <div class="piezas">
+      <span class="pz pz--clara">notar<small>la puerta existe</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--arena">moverse<small>girar la perilla</small></span>
+      <span class="eq">= agencia</span>
+    </div>
+    <p class="apoyo">Son músculos distintos y fallan por separado. Hay quien ve la puerta y no la toca, y hay quien tocaría con gusto la puerta que nunca vio. Los ejercicios de hoy entrenan los dos.</p>
+  </section>
+
+  <section class="lam">
+    <p class="di">Nadie nace agéntico.</p>
+    <p class="apoyo">Ese es el hallazgo incómodo para los que se dicen "es que yo no soy así": la agencia se practica pidiendo, preguntando y apareciéndose. Igual que los malabares de la Semana 0: tirando la bola, aunque se caiga.</p>
+  </section>
+
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-02/las-puertas-ocultas.webp" alt="Dibujo a tinta: una persona frente a una pared larga donde apenas se insinúan varias puertas en línea punteada, rotuladas notar; la persona gira la perilla de una puerta abierta, rotulada moverse">
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">4</span> Gimnasio 1 · Las puertas ocultas <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · en tríos</span>
+    <p class="di">Seis situaciones atoradas. ¿Dónde está la puerta que nadie ha tocado?</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-02/ejercicio-11-las-puertas-ocultas.html">ejercicio del gimnasio</a> proyectado. Cada trío busca la movida agéntica de cada situación y al final se comparten dos en plenaria, de preferencia las que nadie vio.</p>
+    <p class="nota-conductor">Al elegir qué se comparte, preguntar primero cuál situación les costó más: las movidas que nadie vio enseñan más que las obvias. Si el tiempo se acorta, este bloque pasa a tarea; la campana y el Expediente Kenia no se recortan.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">5</span> El anti-currículum <span class="reloj">15 min</span></h4>
+    <p class="di">Detrás de todo currículum exitoso hay una lista más larga de noes.</p>
+    <p class="apoyo">Un sociólogo mexicano, Héctor Vera, publicó una lista rara: las nueve universidades que no lo contrataron, los tres posdoctorados que le negaron, las editoriales que rechazaron sus libros. Su punto: esa lista demuestra que jugaste. La tuya arranca hoy y vive en tu expediente.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · individual</span>
+    <p class="di">Abre tu hoja de anti-currículum y escribe el primer no que ya traes de antes.</p>
+    <p class="apoyo">Una beca que no salió, un mensaje que nadie contestó, un equipo al que no te invitaron. Todos traemos uno. Se escribe sin adorno: qué pediste, a quién y qué pasó. La hoja imprimible vive en el <a href="../evaluacion/expediente-u3.html">expediente del gestor</a>: es de las que se llenan todo el semestre.</p>
+    <p class="nota-conductor">Escribir el propio en el pizarrón mientras ellos escriben el suyo, para que quede claro que la lista no es de alumnos. Nadie lee el suyo en voz alta hoy: la hoja es del expediente, no del grupo.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">¿Qué se puede pedir por aquí? Armemos el listado.</p>
+    <p class="apoyo">Se proyecta el <a href="../ejercicios/semana-02/ideas-anti-cv.html">listado vivo de ideas</a> y lo que salga en voz alta se captura ahí: becas, permisos, patrocinios, entrevistas, materiales prestados, aventones, descuentos, asesorías. Al final la lista se copia entera y se comparte al grupo, para que cada quien se lleve a su hoja las ideas que le queden.</p>
+    <p class="nota-conductor">Capturar textual, sin filtrar ni pulir: la edición mata la lluvia. El botón Copiar lista entrega una idea por línea, lista para pegarse en el WhatsApp del grupo antes de salir. El listado queda guardado en el navegador de la máquina del salón.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">6</span> Gimnasio 2 · Mi primer no <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · individual, se leen dos</span>
+    <p class="di">Diseña una petición real, con destinatario y fecha, esperando que te la nieguen.</p>
+    <div class="contra">
+      <div class="mal">
+        <span class="rot">Pedir a la segura</span>
+        <p style="margin:0;font-size:.9rem"><em>"¿Me prestas tu cuaderno para copiar los apuntes?"</em></p>
+        <p style="margin:.5rem 0 0;font-size:.9rem">Si el sí está garantizado, no se entrenó nada.</p>
+      </div>
+      <div class="bien">
+        <span class="rot">Pedir de verdad</span>
+        <p style="margin:0;font-size:.9rem"><em>"¿Me recibiría media hora el presidente del comité de agua para preguntarle cómo consiguieron el tanque?"</em></p>
+      </div>
+    </div>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-02/ejercicio-21-mi-primer-no.html">ejercicio del gimnasio</a>. Se leen dos peticiones en voz alta y el grupo las hace más ambiciosas; las ideas que suelte la plenaria se suman al listado proyectado. La petición sale de aquí con dueño y con fecha: si para el jueves ya tuviste respuesta, del tipo que sea, hay campana.</p>
+    <p class="nota-conductor">Al subir la ambición, cuidar que la petición siga siendo real y cumplible esta semana: más ambiciosa no quiere decir imposible. Anotar quién se comprometió a qué, para preguntarles el jueves sin exhibir a nadie.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">7</span> Expediente Kenia · Entrega 1 <span class="reloj">12 min</span></h4>
+    <p class="di">El agua salía limpia del tubo, y los niños se seguían enfermando.</p>
+    <p class="apoyo">Kenia rural, hace unos años: la diarrea infantil mataba y el agua de los manantiales salía contaminada. Varias organizaciones hicieron lo obvio y lo hicieron bien: protegieron los manantiales con obra, y el agua empezó a salir limpia. La diarrea infantil casi no bajó. La obra era correcta, el agua salía limpia, y los niños se seguían enfermando. Aquí se corta la historia. La respuesta llega en la semana 6.</p>
+    <p class="nota-conductor">Contar el caso como historia, con calma, y cortar exactamente donde dice la lámina. No adelantar nada aunque pregunten: la incomodidad de quedarse sin respuesta es parte del aparato. Este bloque no se recorta.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · en la bitácora</span>
+    <p class="di">Escribe tu hipótesis: ¿por qué no bajó la diarrea?</p>
+    <p class="apoyo">En tu bitácora, con tu letra y tu voz. Vale la pena apostar en serio: en la semana 6 vas a releer esta entrada con la respuesta enfrente, y la comparación es tuya.</p>
+  </section>
+
+  <section class="lam">
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para mañana</span>
+      Mañana se camina la orilla de la presa por primera vez. No vamos a anunciar nada ni a prometer nada: vamos a mirar. Lo que anotes mañana es la primera evidencia de campo del proyecto.
+    </div>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">8</span> Preparación de la salida <span class="reloj">8 min</span></h4>
+    <p class="di">El contrato de gestión se va contigo a casa.</p>
+    <p class="apoyo">Se reparte hoy para leerlo con calma: tus áreas de interés, tu lista de personas puente y los dos compromisos del semestre. También vive <a href="../evaluacion/contrato-de-gestion.html">en línea</a>, listo para imprimir, por si faltaste hoy o el papel se pierde. Se firma en casa y se trae el jueves que viene, con los dos compromisos ya escritos. Y la logística de mañana: hora y punto de reunión, zapato cerrado, agua, gorra, celular cargado y la <a href="../ejercicios/semana-02/ejercicio-32-mirar-como-gestor.html">guía de observación</a> abierta o impresa. Si va a hacer sol, protector.</p>
+    <p class="nota-conductor">Decir hora y punto de reunión exactos y mandarlos también por WhatsApp al salir. Confirmar el transporte hoy mismo: si el grupo se cita directamente en la presa, mañana se ganan veinticinco minutos de observación.</p>
+  </section>
+</section>
+
+<!-- ====================== VIERNES ====================== -->
+<section class="mazo" id="mazo-viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes 14 de agosto · 2 horas</div>
+      <h3>Salida de campo a la presa</h3>
+      <p class="foco">Mirar la orilla con ojos de gestor, sin anunciar nada y sin prometer nada.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
   </div>
-</details>
 
-<h2>Herramientas de la semana</h2>
+  <section class="lam lam--oscura">
+    <h4><span class="n">1</span> Encuadre antes de salir <span class="reloj">10 min</span></h4>
+    <p class="di">Hoy solo se observa.</p>
+    <div class="ojo">
+      <strong>Las tres reglas de la visita.</strong> No se anuncia el proyecto. No se promete nada. No se pregunta todavía. Las preguntas se diseñan con cuidado en la semana 3; una pregunta suelta hoy puede sembrar una expectativa que después cueste caro.
+    </div>
+    <p class="apoyo">Antes de subirse al transporte, cada quien abre el <a href="../ejercicios/semana-02/ejercicio-32-mirar-como-gestor.html">gimnasio 3</a> en el celular: esa es la guía de observación del día.</p>
+    <p class="nota-conductor">Repetir las tres reglas hasta que suenen a coro, y decir qué hacer si alguien de la comunidad pregunta qué andan haciendo: la verdad corta, "somos estudiantes de la UAQ y estamos conociendo la presa", sin una palabra más del proyecto.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">2</span> Traslado <span class="reloj">15 min</span></h4>
+    <p class="di">En el camino se forman los cuatro equipos, uno por posta.</p>
+    <p class="apoyo">Cada equipo llega a la orilla sabiendo qué le toca mirar. Las cuatro postas se recorren en paralelo, no en fila.</p>
+    <p class="nota-conductor">Formar los equipos en el transporte, no en la orilla: llegar a la presa con los papeles repartidos. Si el traslado toma más de quince minutos por lado, la observación baja a tres postas de veinte minutos y la posta 4 se reparte entre los cuatro equipos.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">3</span> Posta 1 · Quién está y qué hace <span class="reloj">15 min</span></h4>
+    <span class="senal senal--campo">En campo</span>
+    <p class="di">Cuenta y describe: quiénes están, qué hacen, con quién, cuánto se quedan.</p>
+    <p class="apoyo">Sin interpretar todavía. "Dos señores pescando desde hace más de una hora" es un dato; "a la gente le gusta pescar" es una conclusión, y las conclusiones hoy no entran en la libreta.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">4</span> Posta 2 · Recorridos y huellas <span class="reloj">15 min</span></h4>
+    <span class="senal senal--campo">En campo</span>
+    <p class="di">Por dónde camina la gente de verdad, no por dónde debería.</p>
+    <p class="apoyo">Veredas marcadas, accesos, dónde se detienen, dónde se sientan aunque no haya dónde. Las huellas no mienten: una vereda pisada vale más que cualquier opinión sobre por dónde conviene entrar.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> Posta 3 · Sombra, agua y basura <span class="reloj">15 min</span></h4>
+    <span class="senal senal--campo">En campo</span>
+    <p class="di">Qué sombra hay y a qué hora, dónde llega el agua en temporada, qué se acumula y quién lo recoge.</p>
+    <p class="apoyo">La sombra se anota con hora, porque se mueve. Del agua, buscar las marcas de hasta dónde sube. De la basura, importa tanto qué hay como si alguien la está recogiendo.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">6</span> Posta 4 · Lo que no está <span class="reloj">15 min</span></h4>
+    <span class="senal senal--campo">En campo</span>
+    <p class="di">La posta más difícil: registrar ausencias.</p>
+    <p class="apoyo">Quién no viene a la presa, y qué se puede suponer de por qué no viene. ¿Hay niños? ¿Hay mujeres solas? ¿Hay gente mayor? Cada ausencia es una hipótesis que la consulta de la semana 4 va a poner a prueba.</p>
+    <p class="nota-conductor">A esta posta conviene el equipo más observador, no el más rápido. Si una ausencia les parece obvia ("no hay niños porque no hay nada para niños"), pedirles que la escriban como suposición, no como hecho: ese matiz es el corazón de la posta.</p>
+  </section>
+
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-02/lo-que-no-esta.webp" alt="Dibujo a tinta: en la orilla de una presa, una persona pesca, rotulada lo que hay; a su lado, en línea punteada, un niño jugando, una banca y un árbol de sombra, rotulados lo que falta">
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">7</span> Círculo en la orilla <span class="reloj">15 min</span></h4>
+    <span class="senal senal--campo">En campo · plenaria</span>
+    <p class="di">Cada equipo dice el hallazgo que más le sorprendió, en una frase.</p>
+    <p class="apoyo">Se anotan todos, textuales. Esta lista es la primera evidencia de campo del proyecto y en la semana 3 se usa para diseñar la consulta: lo que hoy sorprende, mañana se pregunta.</p>
+    <p class="nota-conductor">Hacer el círculo mirando el agua, con las libretas abiertas. Anotar las frases textuales en la propia libreta y fotografiar las de los equipos: esto va a "Lo que produjimos". Si la conversación se enciende, dejarla correr recortando el regreso, no las postas.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">8</span> Regreso <span class="reloj">12 min</span></h4>
+    <p class="di">Las libretas cerradas ya no se corrigen: lo que se vio, se vio.</p>
+    <p class="apoyo">En el camino de vuelta se vale conversar lo que cada quien trae, pero las notas de campo quedan como quedaron. Su valor es ese: lo que se escribió frente a la cosa, no lo que se acomodó después.</p>
+  </section>
+
+  <section class="lam">
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para la semana 3</span>
+      Hoy trabajaron los ojos. La semana que viene toca lo delicado: diseñar las preguntas que la gente de La Florida va a contestar, y sobre cuyas respuestas se va a parar el proyecto entero. Primero los ojos, luego las preguntas.
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">9</span> Cierre y ticket <span class="reloj">8 min</span></h4>
+    <p class="di">Antes de bajarte: el ticket de salida, desde el celular.</p>
+    <p class="apoyo">Noventa segundos, con nombre o sin él. Lo que escribas se lee el jueves que viene, en voz alta. Y el recordatorio del jueves: el contrato de gestión llega firmado, con los dos compromisos ya escritos.</p>
+  </section>
+</section>
+
+<h2 class="corte">Herramientas de la semana</h2>
 
 <div class="tarjeta">
   <span class="etiqueta">La idea grande</span>
   <h3 style="margin-top:.2rem">La agencia se entrena</h3>
-  <p>Cate Hall, una abogada que se reinventó varias veces, la define así: agencia es la capacidad de ver las puertas ocultas en las paredes de la vida, y atreverse a girar la perilla. Dos movimientos: notar que la opción existe y actuar. Su hallazgo incómodo para los que se dicen "es que yo no soy así": nadie nace agéntico. Se practica pidiendo, preguntando, apareciéndose. Igual que el malabar de la semana pasada: tirando la bola.</p>
+  <p>Cate Hall, una abogada que se reinventó varias veces, la define así: agencia es la capacidad de ver las puertas ocultas en las paredes de la vida, y atreverse a girar la perilla. Dos movimientos: notar que la opción existe y actuar. Su hallazgo incómodo para los que se dicen "es que yo no soy así": nadie nace agéntico. Se practica pidiendo, preguntando, apareciéndose. Igual que los malabares de la Semana 0: tirando la bola.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El aparato</span>
   <h3 style="margin-top:.2rem">El anti-currículum</h3>
-  <p>Un sociólogo mexicano, Héctor Vera, publicó una lista rara: las nueve universidades que no lo contrataron, los tres posdoctorados que le negaron, las editoriales que rechazaron sus libros. Su punto: detrás de todo currículum exitoso hay una lista más larga de noes, y esa lista demuestra que jugaste. Esta semana arrancas la tuya en el expediente, y estrenamos el ritual que la alimenta: la campana del no, cada jueves. Un no conseguido se anuncia y se celebra, porque significa que pediste. Para que a nadie le falte qué pedir, el jueves armamos entre todos un <a href="../ejercicios/semana-02/ideas-anti-cv.html">listado de ideas</a> que se comparte al grupo.</p>
+  <p>Un sociólogo mexicano, Héctor Vera, publicó una lista rara: las nueve universidades que no lo contrataron, los tres posdoctorados que le negaron, las editoriales que rechazaron sus libros. Su punto: detrás de todo currículum exitoso hay una lista más larga de noes, y esa lista demuestra que jugaste. Esta semana arrancas la tuya en el <a href="../evaluacion/expediente-u3.html">expediente</a>, y estrenamos el ritual que la alimenta: la campana del no, cada jueves. Un no conseguido se anuncia y se celebra, porque significa que pediste. Para que a nadie le falte qué pedir, el jueves armamos entre todos un <a href="../ejercicios/semana-02/ideas-anti-cv.html">listado de ideas</a> que se comparte al grupo.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El compromiso</span>
   <h3 style="margin-top:.2rem">Tu contrato de gestión</h3>
-  <p>La agencia sin fecha es buena intención. El contrato de gestión te pide poco y en serio: tus áreas de interés, tu lista de personas y organizaciones puente, y dos compromisos firmados para el semestre: contactar al menos a una persona de tu lista (cómo y cuándo) y desarrollar una habilidad (cómo y cuándo). Va al expediente y se revisa al final. Es tuyo, no del profesor: tú eliges a quién y qué.</p>
+  <p>La agencia sin fecha es buena intención. El <a href="../evaluacion/contrato-de-gestion.html">contrato de gestión</a> te pide poco y en serio: tus áreas de interés, tu lista de personas y organizaciones puente, y dos compromisos firmados para el semestre: contactar al menos a una persona de tu lista (cómo y cuándo) y desarrollar una habilidad (cómo y cuándo). Va al expediente y se revisa al final. Es tuyo, no del profesor: tú eliges a quién y qué.</p>
 </div>
 
 <div class="tarjeta siembra">
@@ -174,6 +375,7 @@
   <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-02/ejercicio-11-las-puertas-ocultas.html"><strong>Las puertas ocultas</strong></a> · Seis situaciones atoradas. Encuentra la movida agéntica en cada una.</div></div>
   <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-02/ejercicio-21-mi-primer-no.html"><strong>Mi primer no</strong></a> · Diseña una petición real esperando que te la nieguen. En este curso, eso es ganar.</div></div>
   <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-02/ejercicio-32-mirar-como-gestor.html"><strong>Mirar como gestor</strong></a> · La guía de observación para la visita del viernes a la presa.</div></div>
+  <div class="gimnasio-item"><span class="num">+</span><div><a href="../ejercicios/semana-00/ejercicio-21-el-vaciado-de-la-entrevista.html"><strong>El vaciado de la entrevista</strong></a> · De la semana 0, y sigue abierto: si ya hiciste la entrevista de los recursos, vacíala aquí. Con las de todo el grupo se arma el tablero que vamos a analizar juntos.</div></div>
 </div>
 
 <h2>Hoja de consulta</h2>
@@ -195,12 +397,20 @@
     <dd>Todo aprendizaje pasa por un rato de ser malo en algo y preguntar obviedades en público. Ese foso se cruza chapoteando, no en silencio. Este salón es un foso seguro: aquí ser novato no cuesta nada.</dd>
     <dt>Reconocimiento del sitio</dt>
     <dd>Primera visita de campo: observar sin intervenir. Conductas, recorridos, usos, ausencias. Todavía no preguntamos nada a nadie (eso se diseña con cuidado en la semana 3): primero los ojos, luego las preguntas.</dd>
+    <dt>Expediente Kenia</dt>
+    <dd>Caso real por entregas que acompaña el semestre. La entrega 1 cuenta la obra bien hecha que no bajó la diarrea infantil, y se corta ahí. Tu hipótesis va en la bitácora; la respuesta llega en la semana 6.</dd>
   </dl>
 </div>
 
 <h2>Lo que produjimos</h2>
 <div class="tarjeta">
-  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán las primeras entradas del anti-CV grupal, los contratos firmados (el dato, no el contenido: eso es de cada quien) y las fotos y hallazgos del reconocimiento de la presa.</p>
+  <p style="color:#8aa39c; font-style:italic;">Esta vitrina se llena al cierre de la semana. Lo que va a llegar aquí:</p>
+  <ul style="color:#8aa39c; font-style:italic; margin:.4rem 0 .2rem;">
+    <li>Las primeras entradas del anti-CV grupal.</li>
+    <li>Cuántos contratos de gestión se firmaron (el dato, no el contenido: eso es de cada quien).</li>
+    <li>Las frases textuales del círculo en la orilla, tal como se dijeron.</li>
+    <li>Las fotos del reconocimiento de la presa.</li>
+  </ul>
 </div>
 
 <div class="chapuzon">
