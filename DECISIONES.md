@@ -7,7 +7,9 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 52 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 6 (20 ago 2026): la semana 3 reconstruida como
+- **Último bloque cerrado:** bloque 7 (20 ago 2026): la semana 4 reconstruida como
+  mazos de láminas; con ella la unidad 1 queda completa en el formato nuevo. Antes,
+  bloque 6 (20 ago 2026): la semana 3 reconstruida como
   mazos de láminas y el mapa de fuentes por semana para producir el resto del
   semestre (ver el bloque al final de este archivo). Antes, bloque 5 (31 jul 2026): el guion de la entrevista a
   profesores sobre manejo y comprobación de recursos quedó como ejercicio de la
@@ -24,8 +26,9 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
   retroalimentación de la materia; bloque 1 (28 jul 2026): menú de navegación,
   Semana 0 como semana real, página del gimnasio, detalle de sesiones de las
   semanas 0, 1 y 2, y reparto de contenido entre la Semana 0 y la 1.
-- **Siguiente paso acordado:** producir la semana 4 (cierra la unidad 1) y después
-  las semanas 5 a 17 en lotes por unidad, con el mapa de fuentes del bloque 6.
+- **Siguiente paso acordado:** producir el lote de la unidad 2 (semanas 5 a 10)
+  con el mapa de fuentes del bloque 6. La semana 5 abre comentando la
+  autoevaluación de ensayo que quedó de tarea del fin de semana de la S4.
 
 ## Dónde vive cada cosa
 
@@ -240,8 +243,11 @@ aquí en adelante. Al diseñar otra materia, se dan por puestas.
 - Integrar la imagen del home cuando Eduardo la entregue (fila 7).
 - Reimprimir las reglas del fondo y el Anexo 1 para la semana 5: cambiaron la
   Bolsa, el tope y la cláusula de palanca.
-- Producir los días de las semanas 4 a 17 en el formato nuevo, en lotes por
+- Producir los días de las semanas 5 a 17 en el formato nuevo, en lotes por
   unidad, siguiendo el mapa de fuentes del bloque 6.
+- Ilustraciones a tinta de la semana 4, cuando Eduardo las entregue. Candidatas:
+  los vecinos difíciles del ensayo, el pliego a media consulta, el sobre abierto
+  junto al agua.
 - Revisar si la semana 2 necesita ajuste ahora que la campana del no y el contrato
   de gestión ya no compiten con los pactos.
 - Definir si la vitrina de lo producido arranca este semestre o no.
@@ -296,3 +302,29 @@ de `vacios.md`), y cualquier cifra de campo que traiga es propuesta de trabajo,
 no dato bibliográfico. Si el proyecto real de los estudiantes toca la orilla,
 esas dos ausencias se nombran como tarea de gestión (pedir el dato a quien lo
 tiene), que es exactamente el oficio que el curso enseña.
+
+## Bloque 7 (20 de agosto de 2026): la semana 4 en mazos, la unidad 1 completa
+
+Jueves "El ensayo general": las tres brújulas (no prometer, registrar textual,
+código de auxilio), el ensayo como piloto de la hoja (PPS-15: "cuando las
+respuestas salen malas, la culpa es de la hoja"), el ensayo por estaciones con
+tarjetas de personaje en secreto (incluido un vecino amable, porque cerrar una
+conversación buena también se ensaya) y el protocolo del día. Viernes "La
+consulta en La Florida": el encuadre de invitado y no experto con las palabras
+prohibidas (KIC-11), la única promesa autorizada ("les traemos apuntado lo que
+salga hoy": KIC-11 + PPS-18), el pliego revisado a media consulta (THO-03 +
+PIP3-02), la respuesta incómoda, el círculo de los dos minutos, la apertura de
+los sobres junto al agua y el levantamiento como mensaje implícito (Acción sin
+Daño). Los tres ejercicios del gimnasio ya existían y no se tocaron.
+
+Decisiones que obligan hacia adelante:
+
+- **La autoevaluación de ensayo se lleva de tarea el fin de semana** (con el
+  cuadernillo de la unidad 1) y se comenta al abrir el jueves de la S5, junto
+  con el registro en limpio. La S5 se produce con ese arranque.
+- **"Promesa accidental" entra al vocabulario del curso** (hoja de consulta S4):
+  la expectativa sembrada sin querer o el rumor que corre en nombre del
+  proyecto. Reaparecerá en la S14 (obra y comunicación).
+- El suelo de la unidad 1 nombra "los dos minutos" (así se le dice al primer
+  peldaño) en lugar de "la presentación en parejas": el círculo se hace por
+  estaciones, no por parejas.

@@ -20,23 +20,18 @@
     background: var(--fondo); color: var(--texto);
     line-height: 1.65; font-size: 1.05rem;
   }
-  header.curso {
-    background: var(--profundo); color: #EAF4F2;
-    padding: 1.1rem 1.5rem;
-  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
   header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
   header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
   header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
   main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
 
-  .pregunta {
-    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
-    color: var(--profundo); margin: 1.8rem 0 .4rem;
-  }
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
   h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -55,11 +50,8 @@
   .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
   .consulta dd { margin: .2rem 0 .4rem 0; }
 
-  .chapuzon {
-    background: var(--profundo); color: #EAF4F2;
-    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
-  }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
 
   .aviso-goteo {
@@ -68,6 +60,7 @@
     display: none;
   }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -83,48 +76,216 @@
 <div id="wk-gate" data-abre="2026-08-26">
 
 <p class="pregunta">¿Y si la respuesta no es la que esperabas?</p>
-<p class="bajada">Tres semanas preparándote para dos horas: miraste la orilla, aprendiste a preguntar sin prometer, armaste el guion de tu estación. Esta semana se acaba la preparación. El jueves ensayamos completo, con vecinos difíciles incluidos. El viernes, la consulta de verdad en La Florida. Y cuando termine, junto a la presa, vuelve algo que sellaste hace un mes y que sigue engrapado en el aula: tu sobre.</p>
+<p class="bajada">Tres semanas preparándote para dos horas: miraste la orilla, aprendiste a preguntar sin prometer, armaste el guion de tu estación. Esta semana se acaba la preparación. El jueves se ensaya completo, con vecinos difíciles incluidos. El viernes, la consulta de verdad en La Florida. Y cuando termine, junto a la presa, vuelve algo que sellaste hace un mes y que sigue engrapado en el aula: tu sobre.</p>
 
 <h2>Esta semana podrás</h2>
 <div class="podras">
   <ul>
     <li>Correr tu guion completo bajo presión: el ensayo del jueves trae vecinos difíciles a propósito.</li>
     <li>Ejecutar tu rol en la consulta real: preguntar, registrar u observar, sin prometer nada.</li>
-    <li>Contar en público lo que tu estación escuchó: dos minutos, en parejas, ante el grupo. Primer peldaño de la escalera.</li>
-    <li>Cerrar la unidad 1 con tu primera autoevaluación (de ensayo: aquí se aprende a hacerla, no se juega nada).</li>
+    <li>Contar en público lo que tu estación escuchó: dos minutos, ahí mismo en la orilla. Primer peldaño de la escalera.</li>
+    <li>Cerrar la unidad 1 con tu primera autoevaluación, de ensayo: aquí se aprende a hacerla, no se juega nada.</li>
   </ul>
 </div>
 
-<h2>Herramientas de la semana</h2>
+<h2 class="corte">Las dos sesiones de esta semana</h2>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
+
+<!-- ====================== JUEVES ====================== -->
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves 27 de agosto · 2 horas</div>
+      <h3>El ensayo general</h3>
+      <p class="foco">Correr la consulta completa contra vecinos difíciles, arreglar la hoja mientras es barato, y dejar el protocolo del viernes cerrado.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El ticket de la semana pasada <span class="reloj">5 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Lo que el viernes quedó turbio, hoy se contesta en voz alta.</p>
+    <p class="apoyo">Este arranque no se salta ningún jueves. El ticket se sigue contestando porque se atiende: el día que lo que escribes desaparezca en un cajón, con toda razón vas a dejar de escribirlo.</p>
+    <p class="nota-conductor">Traer dos o tres respuestas elegidas, de preferencia las que hablen de nervios o dudas sobre la consulta: hoy es el día de resolverlas. Leerlas textuales, sin nombrar a nadie.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> La campana del no <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Ritual · cada jueves</span>
+    <p class="di">¿Quién pidió esta semana?</p>
+    <p class="apoyo">Un no conseguido se anuncia, suena la campana, el grupo aplaude y el no se anota en el anti-currículum. Los síes también se cuentan, con menos ceremonia y el mismo gusto.</p>
+    <p class="nota-conductor">Preguntar por las peticiones pendientes del listado de ideas sin exhibir a nadie. Si el tiempo aprieta hoy, la campana se acorta pero no se salta: el rito vive de su regularidad.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> El ensayo no es teatro <span class="reloj">10 min</span></h4>
+    <p class="di">Los equipos que ensayan no son los inseguros: son los que prefieren equivocarse barato.</p>
+    <p class="apoyo">Hoy cada estación corre su guion completo (apertura, preguntas, registro, cierre) contra vecinos interpretados con mala leche. Todo lo que truene hoy en el aula es un problema que el viernes ya no existe. Lo que truene el viernes, se paga frente a la gente.</p>
+  </section>
+
+  <section class="lam">
+    <div class="ojo">
+      <strong>Hoy también se ensaya la hoja.</strong> Los manuales de consulta lo dicen con todas sus letras: toda hoja se pilotea con un grupo parecido antes de salir, porque cuando las respuestas salen malas, casi nunca es culpa de quien contestó: es de la hoja. Este ensayo es nuestro piloto. Pregunta que se atore, se enrede o suene a oficina, se reescribe hoy mismo.
+    </div>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">4</span> Las tres brújulas del día <span class="reloj">10 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--oscura">no prometer<small>nada, a nadie, nunca</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--clara">registrar textual<small>lo que no se anota no existe</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--arena">pedir auxilio<small>a tiempo, con código</small></span>
+      <span class="eq">= el viernes en corto</span>
+    </div>
+    <p class="apoyo">La tercera brújula tiene frase hecha: "esa pregunta se la paso al profesor, ahorita se lo traigo". Es el código de auxilio, y usarlo es protocolo, no derrota: la conversación que te rebasa le toca a alguien más, y la persona queda mejor atendida, no peor.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> Gimnasio 1 · El día de la consulta <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · en tríos</span>
+    <p class="di">Siete aprietos que pueden pasarte el viernes. Decide qué haces ahora, que está barato.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-04/ejercicio-11-el-dia-de-la-consulta.html">ejercicio del gimnasio</a> proyectado: el señor que pregunta por el asador que "dicen que van a poner", la señora que pregunta cuánto dinero traen, el vecino que ya vio pasar tres programas que apuntaron y nunca volvieron. Ninguno es invento: así se ponen las consultas de verdad.</p>
+    <p class="nota-conductor">Detenerse en el aprieto del dinero: la respuesta ensayada (el fondo existe, sin cifra, sin promesa) tiene que salir de corrido el viernes. Y en el del vecino enojado, conectar con las puertas ocultas de la semana 2: el molesto con las instituciones es archivo vivo de promesas rotas, no una pared.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">6</span> El ensayo por estaciones <span class="reloj">35 min</span></h4>
+    <span class="senal">Actividad · por estación</span>
+    <p class="di">Tu estación monta, atiende y registra. Los demás llegan de vecinos, con mala leche.</p>
+    <p class="apoyo">Cada estación corre unos diez minutos completos: montaje exprés, apertura honesta, preguntas, registro, cierre. Los vecinos difíciles se reparten en secreto: el que pide promesas, la que va de salida con el nixtamal en la lumbre, el enojado, y también uno amable que nada más platica, porque saber cerrar una conversación buena también se ensaya. Al final de cada ronda, dos minutos de ajuste: qué pregunta se cae, qué falta en la hoja, qué se le olvidó al registro.</p>
+    <p class="nota-conductor">Repartir tarjetas de personaje en secreto antes de arrancar, una por vecino, incluido el amable. Cortar cada ronda a tiempo aunque esté buena: las tres estaciones tienen que pasar. Anotar en el pizarrón los ajustes acordados; ese pizarrón es el acta del ensayo.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">7</span> El protocolo del día <span class="reloj">15 min</span></h4>
+    <p class="di">Cuando hay protocolo, los nervios tienen menos espacio donde meterse.</p>
+    <p class="apoyo">Se cierra hoy, por escrito y en voz alta: hora y punto de reunión, transporte, quién saluda a la autoridad al llegar, dónde se monta cada estación, quién carga el pliego de quién falta, cuánto dura la consulta, cómo se levanta todo y cómo nos despedimos. Y la logística de siempre: zapato cerrado, agua, gorra, libreta, tu guion impreso o descargado, y el <a href="../ejercicios/semana-04/ejercicio-21-mis-dos-minutos.html">gimnasio 2</a> abierto en el celular desde antes de salir, porque en la orilla puede no haber señal.</p>
+    <p class="nota-conductor">Mandar hora y punto de reunión por WhatsApp al salir. Confirmar con la delegación de La Florida: los temas vivos (quedaron anotados desde la semana 3), el lugar de montaje y a quién se saluda primero. Materiales por estación en una sola bolsa por equipo, cerrada hoy.</p>
+  </section>
+
+  <section class="lam">
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para mañana</span>
+      Mañana la presa contesta. Tu opinión descansa y las orejas trabajan: la señal de que la consulta funcionó no es que la gente pida lo que esperabas, es que alguien pida algo que a nadie del equipo se le había ocurrido.
+    </div>
+  </section>
+</section>
+
+<!-- ====================== VIERNES ====================== -->
+<section class="mazo" id="mazo-viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes 28 de agosto · 2 horas</div>
+      <h3>La consulta en La Florida</h3>
+      <p class="foco">Ejecutar la consulta sin prometer nada, contar lo escuchado en dos minutos, y abrir los sobres junto al agua.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">1</span> Encuadre antes de salir <span class="reloj">10 min</span></h4>
+    <p class="di">Llegamos de invitados a casa ajena, no de expertos.</p>
+    <p class="apoyo">La gente de La Florida conoce su orilla de toda la vida; nosotros llevamos tres visitas. Cerrar esa brecha es responsabilidad del que llega, no del que vive ahí. Por eso hay palabras que hoy no se dicen en voz alta: "abandonado", "desaprovechado", "hay que activar esto". Describen la orilla desde afuera, y la gente las oye exactamente así. Si alguien pregunta qué andamos haciendo, la verdad corta: venimos a escuchar qué debería tener la orilla; no hay nada decidido.</p>
+    <p class="nota-conductor">Repasar el código de auxilio y las tres brújulas hasta que suenen a coro. Recordar quién carga el pliego y quién saluda a la autoridad. Los nervios de hoy son normales: el ensayo de ayer es la razón de que no manden.</p>
+  </section>
+
+  <section class="lam">
+    <div class="ojo">
+      <strong>La única promesa autorizada del día.</strong> "Les vamos a traer apuntado lo que salga hoy." Esa sí se hace, porque sí está en nuestra mano y porque cumplirla es la mejor carta de presentación del proyecto. Todo lo demás: nada se ofrece, nada se asegura.
+    </div>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">2</span> Traslado y montaje <span class="reloj">15 min</span></h4>
+    <p class="di">Se llega con los papeles repartidos y se monta en silencio de trabajo.</p>
+    <p class="apoyo">En el camino, último repaso por estación: apertura, preguntas, quién registra. Al llegar: saludo a la autoridad, montaje de las tres estaciones, el pliego a la vista de quien lo lleva. La consulta empieza cuando la primera persona se acerque, no cuando estemos listos nosotros.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">3</span> La consulta <span class="reloj">45 min</span></h4>
+    <span class="senal senal--campo">En campo</span>
+    <p class="di">Tu guion es el plan. La persona enfrente es la realidad.</p>
+    <p class="apoyo">El guion ordena, no manda: si la conversación se va a un lugar mejor, se va con ella y se regresa cuando se pueda. Frases textuales entre comillas, marcas en el mapa, la clave aparte para las marcas de los niños. Y la báscula de cada respuesta: los pedidos se anotan, las escenas se desmenuzan.</p>
+    <p class="nota-conductor">Rondar las tres estaciones sin atender ninguna: el profesor es el destino del código de auxilio y el que mira el reloj. Si la gente sigue llegando al final, la consulta no se corta: se recorta el círculo de los dos minutos, que puede hacerse en el transporte.</p>
+  </section>
+
+  <section class="lam">
+    <p class="di">A media consulta, el pliego: ¿quién falta?</p>
+    <p class="apoyo">Se mira sin ceremonia: qué grupos de la lista nombrada ya opinaron y cuáles tienen la casilla vacía. A los que faltan se les va a buscar, no a esperar: la tienda, la sombra de enfrente, los que miran de lejos sin acercarse. Una invitación directa y amable levanta más casillas que una hora de espera.</p>
+  </section>
+
+  <section class="lam">
+    <p class="di">La respuesta valiosa es la que no cabe en lo que imaginabas.</p>
+    <p class="apoyo">Si llevas tres semanas imaginando la orilla con mesas y sombra, ese es justo el filtro que hay que apagar. Si todo lo que escuchas confirma lo que pensabas, o tuviste mucha puntería o preguntaste chueco. La respuesta incómoda se registra textual, entre comillas, con más cariño si duele.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">4</span> El círculo de los dos minutos <span class="reloj">12 min</span></h4>
+    <span class="senal senal--campo">En campo · plenaria</span>
+    <p class="di">Cada estación cuenta lo suyo en dos minutos, con la libreta en la mano.</p>
+    <p class="apoyo">Con la estructura del <a href="../ejercicios/semana-04/ejercicio-21-mis-dos-minutos.html">gimnasio 2</a>, llenada en cinco minutos al cerrar la estación: lo que más se repitió, la frase textual que no esperábamos, lo que marca el mapa, la pregunta nueva, el remate. Se habla de lo que se escuchó, no de lo que opinas, y el remate no propone soluciones: para eso falta una semana entera. Es el primer peldaño de la escalera de contar en público, y se sube entre colegas que acaban de trabajar juntos.</p>
+    <p class="nota-conductor">Círculo mirando el agua, lejos de donde aún haya vecinos. Anotar las frases textuales que suelte cada estación: van a "Lo que produjimos". La escalera se nombra en una línea (parejas hoy, pre-pitch, comité, comunidad) sin cargarla de solemnidad.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">5</span> El sobre vuelve <span class="reloj">12 min</span></h4>
+    <p class="di">Nadie lo ha abierto. Se abre aquí, junto al agua.</p>
+    <p class="apoyo">En la primera semana escribiste tu pronóstico (las tres cosas que creías que la gente iba a pedir), lo sellaste con tu firma y lo viste quedar engrapado en el cartel. Hoy los sobres viajaron de regreso a la orilla. Se abren uno por uno, después de haber escuchado a la comunidad de verdad. Qué se hace con lo que digan, se decide aquí.</p>
+    <p class="nota-conductor">El sentido del ritual no se anuncia: se deja que la comparación hable sola. Pedir dos o tres voluntarios que lean su pronóstico en voz alta junto a lo que su estación escuchó; celebrar igual el acierto y el fallo (el fallo es la prueba de que la consulta hacía falta). Foto del sobre abierto junto a los registros: va al mapa de evidencias del expediente, carpeta S4 del Drive.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">6</span> Despedida y levantamiento <span class="reloj">8 min</span></h4>
+    <p class="di">La despedida es parte de la consulta, y la orilla queda como estaba.</p>
+    <p class="apoyo">Se agradece de persona a persona, se dice la única promesa autorizada (les traemos apuntado lo que salió hoy) y se levanta todo: estaciones, cinta, hasta la basura que no es nuestra. Cómo se va uno también manda un mensaje, y ese sí queremos mandarlo.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">7</span> Regreso <span class="reloj">10 min</span></h4>
+    <p class="di">Las libretas cerradas ya no se corrigen: lo que se escuchó, se escuchó.</p>
+    <p class="apoyo">En el camino se vale conversar lo que cada quien trae, y suele venir cargado. Las notas de campo quedan como quedaron; su valor es ese: lo que se escribió frente a la persona, no lo que se acomodó después.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">8</span> Cierre, ticket y el fin de semana <span class="reloj">5 min</span></h4>
+    <p class="di">Antes de bajarte: el ticket. Esta noche: el registro en limpio.</p>
+    <p class="apoyo">El ticket desde el celular, noventa segundos. Y dos pendientes con fecha: el <a href="../ejercicios/semana-04/ejercicio-32-el-registro-en-limpio.html">registro en limpio</a> se llena esta misma noche, porque a las 24 horas la mitad de los detalles ya se fue; y la autoevaluación de ensayo del <a href="../evaluacion/expediente-u1.html">cuadernillo de la unidad 1</a> se llena en casa con calma. Las dos cosas se traen el jueves: con ellas se abre la unidad 2.</p>
+  </section>
+</section>
+
+<h2 class="corte">Herramientas de la semana</h2>
 
 <div class="tarjeta">
   <span class="etiqueta">El método</span>
   <h3 style="margin-top:.2rem">El ensayo no es teatro</h3>
-  <p>Los equipos que ensayan no son los inseguros: son los que prefieren equivocarse barato. El jueves cada estación corre su guion completo (apertura, preguntas, registro, cierre) contra vecinos interpretados con mala leche: uno que pide promesas, uno que llega enojado, una señora con prisa. Todo lo que truene el jueves en el aula es un problema que el viernes ya no existe. Lo que truene el viernes, se paga frente a la gente.</p>
+  <p>Los equipos que ensayan no son los inseguros: son los que prefieren equivocarse barato. El jueves cada estación corre su guion completo contra vecinos interpretados con mala leche: uno que pide promesas, uno que llega enojado, una señora con prisa. Y se ensaya también la hoja, porque los manuales de consulta lo dicen derecho: cuando las respuestas salen malas, casi nunca es culpa de quien contestó, es de la hoja. Todo lo que truene el jueves en el aula es un problema que el viernes ya no existe.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">La actitud</span>
   <h3 style="margin-top:.2rem">Escuchar es el trabajo</h3>
-  <p>El viernes tu opinión descansa. Si llevas tres semanas imaginando la orilla con mesas y sombra, ese es justo el filtro que hay que apagar: la consulta no es para comprobar tu idea, es para enterarte de la de ellos. La señal de que funcionó no es que la gente pida lo que esperabas: es que alguien pida algo que a nadie del equipo se le había ocurrido. Ese día, la respuesta incómoda es la valiosa. Anótala textual, entre comillas, aunque no te guste.</p>
+  <p>El viernes tu opinión descansa. Llegamos de invitados a casa ajena, no de expertos: la gente conoce su orilla de toda la vida y cerrar la brecha es responsabilidad del que llega. Si llevas tres semanas imaginando la orilla con mesas y sombra, ese es justo el filtro que hay que apagar: la consulta no es para comprobar tu idea, es para enterarte de la de ellos. La señal de que funcionó es que alguien pida algo que a nadie del equipo se le había ocurrido. Ese día, la respuesta incómoda es la valiosa. Anótala textual, entre comillas, aunque no te guste.</p>
 </div>
 
 <div class="tarjeta siembra">
   <span class="etiqueta">La siembra se paga</span>
   <h3 style="margin-top:.2rem">El sobre vuelve</h3>
-  <p>En la primera semana escribiste tu pronóstico, lo sellaste con tu firma y lo viste quedar engrapado en el cartel. Nadie lo ha abierto. El viernes, cuando la consulta termine y la gente se haya despedido, los nueve sobres viajan de regreso a la orilla y se abren ahí, uno por uno. Qué se hace con lo que digan, se sabe en el momento. No te decimos más.</p>
+  <p>En la primera semana escribiste tu pronóstico, lo sellaste con tu firma y lo viste quedar engrapado en el cartel. Nadie lo ha abierto. El viernes, cuando la consulta termine y la gente se haya despedido, los sobres viajan de regreso a la orilla y se abren ahí, uno por uno. Qué se hace con lo que digan, se sabe en el momento. No te decimos más.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El peldaño</span>
   <h3 style="margin-top:.2rem">Contarlo en dos minutos</h3>
-  <p>Este semestre vas a contar tu proyecto cuatro veces, cada vez más alto: ante tu grupo, ante tus pares, ante un comité externo y ante la comunidad entera. El viernes subes el primer peldaño: en parejas, dos minutos, ahí mismo en la orilla: qué escuchó tu estación, la frase que no esperaban, lo que marca el mapa. Sin diapositivas y sin nervios de examen: es una ronda entre colegas que acaban de trabajar juntos.</p>
+  <p>Este semestre vas a contar tu proyecto cuatro veces, cada vez más alto: ante tu grupo, ante tus pares, ante un comité externo y ante la comunidad entera. El viernes subes el primer peldaño: dos minutos, ahí mismo en la orilla, con la libreta en la mano: qué escuchó tu estación, la frase que no esperaban, lo que marca el mapa. Sin diapositivas y sin nervios de examen: es una ronda entre colegas que acaban de trabajar juntos.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El cierre de unidad</span>
   <h3 style="margin-top:.2rem">Tu primera autoevaluación</h3>
-  <p>Con la consulta hecha, la unidad 1 se cierra y toca la primera autoevaluación del expediente. Es de ensayo: sirve para aprender a mirarte el trabajo, no produce ningún número. Revisas tu suelo de la unidad (contrato firmado, consulta, sobre, presentación, tickets), escribes qué hiciste bien y qué está aún no, y lo platicas si quieres. La única que cuenta para el acta es la de diciembre; estas son el gimnasio de aquella.</p>
+  <p>Con la consulta hecha, la unidad 1 se cierra y toca la primera autoevaluación del <a href="../evaluacion/expediente-u1.html">expediente</a>. Es de ensayo: sirve para aprender a mirarte el trabajo, no produce ningún número. Revisas tu suelo de la unidad (contrato firmado, consulta, sobre, dos minutos, tickets), escribes qué hiciste bien y qué está aún no, y lo platicas si quieres. La única que cuenta para el acta es la de diciembre; estas son el gimnasio de aquella. Se llena el fin de semana y se trae el jueves.</p>
 </div>
 
 <h2>El gimnasio</h2>
@@ -139,8 +300,16 @@
   <dl>
     <dt>Ensayo general</dt>
     <dd>Correr el proceso completo en condiciones parecidas a las reales, con fallas provocadas a propósito. No es para quedar bien: es para que el error salga barato. Lo que se corrige en ensayo cuesta minutos; lo que se corrige en campo cuesta confianza.</dd>
+    <dt>Piloto de la hoja</dt>
+    <dd>Probar el instrumento con un grupo parecido antes de usarlo en serio. La regla del gremio: cuando las respuestas salen malas, casi nunca es culpa de quien contestó, es de la hoja. Nuestro piloto es el ensayo del jueves.</dd>
     <dt>Protocolo del día</dt>
-    <dd>El acuerdo escrito de cómo corre el viernes: hora de llegada, montaje, quién saluda a la delegación, cuánto dura cada cosa, cómo se levanta todo y cómo nos despedimos. Cuando hay protocolo, los nervios tienen menos espacio donde meterse.</dd>
+    <dd>El acuerdo escrito de cómo corre el viernes: hora de llegada, montaje, quién saluda a la autoridad, cuánto dura cada cosa, cómo se levanta todo y cómo nos despedimos. Cuando hay protocolo, los nervios tienen menos espacio donde meterse.</dd>
+    <dt>Código de auxilio</dt>
+    <dd>La frase hecha para la conversación que te rebasa: "esa pregunta se la paso al profesor, ahorita se lo traigo". Pedir ayuda a tiempo es protocolo, no derrota: la persona queda mejor atendida, no peor.</dd>
+    <dt>La única promesa autorizada</dt>
+    <dd>"Les vamos a traer apuntado lo que salga hoy." Se hace porque está en nuestra mano y porque cumplirla es la mejor carta de presentación del proyecto. Todo lo demás: nada se ofrece, nada se asegura.</dd>
+    <dt>Promesa accidental</dt>
+    <dd>La expectativa que se siembra sin querer: un "estaría bueno, ¿no?" dicho al pasar, un rumor que ya corre ("dicen que van a poner asador"). Se registra igual que un hallazgo y se avisa al profesor: las promesas que otros hacen en tu nombre también son tuyas que desmontar.</dd>
     <dt>Frase textual</dt>
     <dd>Lo que la persona dijo, palabra por palabra, entre comillas. "Aquí veníamos a nadar de chicos, ya nadie se mete" vale oro; "la señora dijo que antes era mejor" vale poco. La frase textual carga el detalle, y el diseño se alimenta de detalles.</dd>
     <dt>La respuesta incómoda</dt>
@@ -148,17 +317,23 @@
     <dt>El sobre</dt>
     <dd>Tu pronóstico de la semana 1, sellado y firmado: las tres cosas que creías que la gente iba a pedir. El viernes se abre junto a la presa, después de escuchar a la comunidad de verdad. Lo que se hace con él, se sabe ahí.</dd>
     <dt>Peldaño</dt>
-    <dd>Cada subida de la escalera de contar en público: parejas ante el grupo (esta semana), pre-pitch entre pares, pitch ante comité externo, rendición pública ante la comunidad. Nadie llega a la cuarta sin haber pisado la primera; por eso la primera es chiquita y entre conocidos.</dd>
+    <dd>Cada subida de la escalera de contar en público: el círculo en la orilla (esta semana), pre-pitch entre pares, pitch ante comité externo, rendición pública ante la comunidad. Nadie llega a la cuarta sin haber pisado la primera; por eso la primera es chiquita y entre conocidos.</dd>
     <dt>Autoevaluación de ensayo</dt>
     <dd>Mirar tu propio trabajo de la unidad y ponerlo en palabras: qué está bien, qué está aún no, qué harías distinto. Se llama de ensayo porque no produce número: entrena el músculo para la única que sí cuenta, la de diciembre. Va en el expediente.</dd>
     <dt>Suelo de la unidad</dt>
-    <dd>La lista corta de cosas que garantizan que la unidad quedó caminada: en la unidad 1 son el contrato firmado, la consulta (o su compensatoria si faltaste con causa), el sobre, la presentación en parejas y los tickets. No es examen: es el piso donde se para lo que sigue.</dd>
+    <dd>La lista corta de cosas que garantizan que la unidad quedó caminada: en la unidad 1 son el contrato firmado, la consulta (o su compensatoria si faltaste con causa), el sobre, los dos minutos y los tickets. No es examen: es el piso donde se para lo que sigue.</dd>
   </dl>
 </div>
 
 <h2>Lo que produjimos</h2>
 <div class="tarjeta">
-  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán las fotos de la consulta, el mapa parlante ya rayado por la comunidad, el conteo de asistentes y las frases textuales que más van a dar de qué hablar en la semana 5.</p>
+  <p style="color:#8aa39c; font-style:italic;">Esta vitrina se llena al cierre de la semana. Lo que va a llegar aquí:</p>
+  <ul style="color:#8aa39c; font-style:italic; margin:.4rem 0 .2rem;">
+    <li>Las fotos de la consulta y del mapa parlante ya rayado por la comunidad.</li>
+    <li>El conteo de asistentes por grupo, según el pliego de quién falta.</li>
+    <li>Las frases textuales que más van a dar de qué hablar en la semana 5.</li>
+    <li>La foto de los sobres abiertos junto al agua.</li>
+  </ul>
 </div>
 
 <div class="chapuzon">
