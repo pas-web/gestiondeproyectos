@@ -7,7 +7,9 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 52 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 5 (31 jul 2026): el guion de la entrevista a
+- **Último bloque cerrado:** bloque 6 (20 ago 2026): la semana 3 reconstruida como
+  mazos de láminas y el mapa de fuentes por semana para producir el resto del
+  semestre (ver el bloque al final de este archivo). Antes, bloque 5 (31 jul 2026): el guion de la entrevista a
   profesores sobre manejo y comprobación de recursos quedó como ejercicio de la
   Semana 0 en el gimnasio (`ejercicios/semana-00/`), enlazado desde la lámina
   "Para llevar al campo". El encuadre que da el estudiante habla solo de recabar
@@ -22,8 +24,8 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
   retroalimentación de la materia; bloque 1 (28 jul 2026): menú de navegación,
   Semana 0 como semana real, página del gimnasio, detalle de sesiones de las
   semanas 0, 1 y 2, y reparto de contenido entre la Semana 0 y la 1.
-- **Siguiente paso acordado:** migrar las semanas 1 y 2 al formato de mazos y
-  después producir las semanas 3 a 17 en lotes por unidad.
+- **Siguiente paso acordado:** producir la semana 4 (cierra la unidad 1) y después
+  las semanas 5 a 17 en lotes por unidad, con el mapa de fuentes del bloque 6.
 
 ## Dónde vive cada cosa
 
@@ -229,17 +231,68 @@ aquí en adelante. Al diseñar otra materia, se dan por puestas.
 
 ## Pendientes
 
-- Migrar las semanas 1 y 2 al formato de mazos de láminas. El plan de sesión de
-  la semana 1 además cuenta el arranque viejo ($20,000, pactos el viernes, el
-  anuncio del encargo que ya vive en la Semana 0): se corrigieron los montos,
-  pero el plan necesita rehacerse.
+- Confirmar los temas vivos de La Florida con la autoridad local antes de la
+  consulta del viernes 28 de agosto (lo pide la lámina 4 del viernes de la S3).
+- Ilustraciones a tinta de la semana 3, cuando Eduardo las entregue. Candidatas:
+  la promesa de contrabando, el mosaico de la comunidad, la pared del parque de
+  perros.
 - Menú de navegación tipo Etimologías en la portada (fila 2 de la hoja).
 - Integrar la imagen del home cuando Eduardo la entregue (fila 7).
 - Reimprimir las reglas del fondo y el Anexo 1 para la semana 5: cambiaron la
   Bolsa, el tope y la cláusula de palanca.
-- Producir los días de las semanas 3 a 17 en el formato nuevo, en lotes por unidad.
+- Producir los días de las semanas 4 a 17 en el formato nuevo, en lotes por
+  unidad, siguiendo el mapa de fuentes del bloque 6.
 - Revisar si la semana 2 necesita ajuste ahora que la campana del no y el contrato
   de gestión ya no compiten con los pactos.
-- Montar el formulario del ticket de salida y colgarlo al pie de cada semana.
 - Definir si la vitrina de lo producido arranca este semestre o no.
 - Llenar las secciones "Lo que produjimos" conforme avance el curso.
+
+## Bloque 6 (20 de agosto de 2026): la semana 3 y el mapa de fuentes del semestre
+
+La semana 3 (Diseñar la consulta) quedó reconstruida como mazos de láminas:
+jueves "El oficio de preguntar" (Acción sin Daño, mensajes implícitos, la regla
+de no prometer, la entrevista apreciativa, gimnasios 1 y 2) y viernes "El diseño
+fino de la consulta" (la lista nombrada, el pliego de quién falta, los temas
+vivos, las tres estaciones, roles y registro, gimnasio 3). Los tres ejercicios
+del gimnasio ya existían y no se tocaron.
+
+### Las dos fuentes que alimentan la producción de aquí en adelante
+
+1. **El banco de patrones de espacio público** (skill `espacio-publico`, 150
+   fichas de seis libros y el corpus de PPS, hecho para la presa de Arroyo
+   Seco). El eje I (participación y consulta) alimentó la S3 y alimenta la S4.
+2. **«Acción sin Daño como aporte a la Construcción de Paz»** (Universidad
+   Nacional de Colombia / Synergia / COSUDE / GIZ / PNUD, 2011). Cinco etapas
+   metodológicas y 18 herramientas. Es la adaptación colombiana del Do No Harm
+   de Mary Anderson y le da columna ética al curso: entra por primera vez en la
+   S3 y reaparece por herramientas en las semanas siguientes.
+
+**Regla de producción nueva:** en las páginas del curso las fuentes se citan con
+narrativa (nombres, casos, años), nunca con ID de ficha ni sigla de herramienta.
+Los ID quedan en esta bitácora para poder rastrear.
+
+### Mapa de fuentes por semana (se consulta al producir cada lote)
+
+| Semana | Fuente principal |
+| --- | --- |
+| S4 · La consulta y el sobre | Pilotear la hoja y el ensayo (PPS-15: "cuando hay respuestas malas, la culpa es de la hoja"); el pliego de quién falta operando en campo (THO-03 + PIP3-02); la apertura honesta (KIC-11: invitado, no experto). |
+| S5 · Líneas y reglas del fondo | Herramienta 5 del manual (matriz de contexto: hechos, oportunidades, riesgos, actores) para leer las reglas del fondo como contexto y no como trámite. |
+| S6 · Prototipo en la presa | La temporada de prueba ligera, rápida y barata (KIC-21 + PIP1-04 + PPS-04); "cumplir lo prometido": de cada contacto con la comunidad sale algo visible antes del siguiente (PPS-18). Aquí se revela Kenia. |
+| S7 · La apuesta causal | Herramienta 9 del manual: la Cadena de Cambios, que es la teoría del cambio con nombre colombiano. Encaja exacta con el árbol de objetivos ya planeado. |
+| S8 · Ingeniería del papel | Herramientas 10 y 11 (indicadores de cambio y preguntas guía) + PPS-29: indicadores que cualquiera lee (mujeres por cada diez, mezcla de edades, quién recoge basura ajena). |
+| S9 · La política del proyecto | Herramientas 6 y 7 del manual: mapa de actores (posición / interés / necesidad, cuatro poderes) y radar de relaciones. Y convertir el pleito en propuesta: de estar en contra a estar a favor (KIC-31). |
+| S10 · Presupuesto y pre-pitch | Herramienta 16: qué efectos causa en el contexto la forma de usar los recursos (a quién se compra, a quién se contrata) + la columna del presupuesto chico: comprado, prestado, trocado o donado (PPS-22 + PPS-33). |
+| S11 · La Dictaminadora | Sin fuente nueva: corre con lo ya diseñado. |
+| S12 · La faena y el libro del fondo | Mensaje ético 4 del manual (el uso de los recursos habla por la organización, H15) + "nada se construye sin el nombre de quien lo va a mantener" (THO-12). |
+| S13 · El velorio del proyecto | Herramienta 12 (cambios no deseados en el contexto) y Herramienta 13 (efectos sobre conectores y divisores): el velorio con vocabulario de Acción sin Daño. |
+| S14 · Obra y comunicación | El cuarto abierto a pie de obra (PIP1-03) y los técnicos que van a la fiesta sin instrumento en la mano (PIP1-17). |
+| S15 · Medir lo que importa | La misma hoja, dos veces (PIP1-10 + PIP3-18 + PPS-12): línea base y comparación; si sube la gente sentada, comiendo y platicando, la obra sirvió; si solo sube la que pasa, no. |
+| S16 · Auditoría y radar | Herramientas 15 y 16: transparencia en el manejo de los recursos como mensaje ético, no como formalidad. |
+| S17 · La inauguración | Estrenar con película y comida, no con corte de listón (KIC-14) + Herramienta 17 (estrategia de salida: qué queda, quién sigue, con qué) + Etapa 5 del manual (sistematizar y aprender). |
+
+Dos límites que el propio banco declara y que conviene decir en clase cuando
+toque: sus fichas no cubren seguridad acuática ni calidad del agua (vacíos 2 y 3
+de `vacios.md`), y cualquier cifra de campo que traiga es propuesta de trabajo,
+no dato bibliográfico. Si el proyecto real de los estudiantes toca la orilla,
+esas dos ausencias se nombran como tarea de gestión (pedir el dato a quien lo
+tiene), que es exactamente el oficio que el curso enseña.

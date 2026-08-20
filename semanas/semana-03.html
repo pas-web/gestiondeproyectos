@@ -20,23 +20,18 @@
     background: var(--fondo); color: var(--texto);
     line-height: 1.65; font-size: 1.05rem;
   }
-  header.curso {
-    background: var(--profundo); color: #EAF4F2;
-    padding: 1.1rem 1.5rem;
-  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
   header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
   header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
   header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
   main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
 
-  .pregunta {
-    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
-    color: var(--profundo); margin: 1.8rem 0 .4rem;
-  }
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
   h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -55,11 +50,8 @@
   .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
   .consulta dd { margin: .2rem 0 .4rem 0; }
 
-  .chapuzon {
-    background: var(--profundo); color: #EAF4F2;
-    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
-  }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
 
   .aviso-goteo {
@@ -68,6 +60,7 @@
     display: none;
   }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -83,30 +76,260 @@
 <div id="wk-gate" data-abre="2026-08-19">
 
 <p class="pregunta">¿Cómo se pregunta sin prometer?</p>
-<p class="bajada">La semana pasada miraste la presa con ojos de gestor: conteos, recorridos, ausencias. Esta semana toca lo que sigue, y es más delicado: preguntar. La próxima semana la gente de La Florida va a decir qué debe tener su orilla, y el proyecto entero se va a parar sobre esas respuestas. Si la pregunta sale chueca, el proyecto sale chueco. Esta semana no vamos a la presa: diseñamos la consulta, pregunta por pregunta, rol por rol.</p>
+<p class="bajada">La semana pasada miraste la presa con ojos de gestor: conteos, recorridos, ausencias. Esta semana toca lo que sigue, y es más delicado: preguntar. La próxima semana la gente de La Florida va a decir qué debe tener su orilla, y el proyecto entero se va a parar sobre esas respuestas. Si la pregunta sale chueca, el proyecto sale chueco. El jueves se entrena el oficio de preguntar; el viernes se arma la consulta pieza por pieza: quiénes son la comunidad, qué temas no se pisan, y el guion de cada estación.</p>
 
 <h2>Esta semana podrás</h2>
 <div class="podras">
   <ul>
-    <li>Explicar por qué la consulta no es una encuesta ni un examen: es la comunidad definiendo qué debe tener su orilla.</li>
-    <li>Detectar preguntas que inducen la respuesta o que prometen de contrabando.</li>
-    <li>Formular preguntas apreciativas: empezar por lo que ya funciona, no por lo que falta.</li>
-    <li>Armar el guion de tu estación, tu rol y la logística de la consulta de la próxima semana.</li>
+    <li>Detectar preguntas que inducen la respuesta o que prometen de contrabando, incluidas las que escribe una IA con voz segura.</li>
+    <li>Formular preguntas apreciativas: pedir escenas, no pedidos.</li>
+    <li>Nombrar quiénes son "la comunidad" de La Florida y diseñar cómo llega cada grupo a la consulta, empezando por los que nunca llegan solos.</li>
+    <li>Armar el guion de tu estación, tu rol y el registro para la consulta de la próxima semana.</li>
   </ul>
 </div>
 
-<h2>Herramientas de la semana</h2>
+<h2 class="corte">Las dos sesiones de esta semana</h2>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
+
+<!-- ====================== JUEVES ====================== -->
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves 20 de agosto · 2 horas</div>
+      <h3>El oficio de preguntar</h3>
+      <p class="foco">Preguntar sin prometer y sin inducir: la regla más seria del semestre y la herramienta que la acompaña.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El ticket de la semana pasada <span class="reloj">5 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Lo que el viernes quedó turbio, hoy se contesta en voz alta.</p>
+    <p class="apoyo">Este arranque no se salta ningún jueves. El ticket se sigue contestando porque se atiende: el día que lo que escribes desaparezca en un cajón, con toda razón vas a dejar de escribirlo.</p>
+    <p class="nota-conductor">Traer dos o tres respuestas del ticket ya elegidas, de preferencia las que hablen de la salida a la presa. Leerlas textuales y responderlas ahí mismo, sin nombrar a nadie.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> La campana del no <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Ritual · cada jueves</span>
+    <p class="di">¿Quién pidió esta semana?</p>
+    <p class="apoyo">El jueves pasado salieron peticiones con dueño y con fecha. Hoy se cobran: si ya hubo respuesta, del tipo que sea, hay campana y hay aplauso. Y el no se anota en el anti-currículum, con orgullo.</p>
+    <p class="nota-conductor">Preguntar directo a quienes se comprometieron la semana pasada, sin exhibir: "¿alguien ya tuvo respuesta?". Si nadie trae nada, tocar la campana con un no propio y recordar que la petición sigue viva. Este bloque no se recorta.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">3</span> Una pregunta también puede hacer daño <span class="reloj">15 min</span></h4>
+    <p class="di">Las actuaciones bien intencionadas pueden provocar daños.</p>
+    <p class="apoyo">Eso descubrió Mary Anderson estudiando la ayuda humanitaria en zonas de guerra: proyectos con buen corazón que dejaban a la gente peor que antes. De su trabajo nació una escuela entera, Do No Harm, y en Colombia la convirtieron en manual para proyectos como el nuestro: la Acción sin Daño. Su punto para hoy es incómodo: la huella no empieza con la obra. Empieza con la manera de llegar, de preguntar y de irse. La consulta del próximo viernes es nuestra primera acción en La Florida, y puede hacer daño antes del primer peso gastado.</p>
+    <p class="nota-conductor">Contar a Anderson como historia, no como cita: investigadora estadounidense, años noventa, equipos de ayuda que empezaron a comparar sus fracasos. La frase de la lámina es casi textual del manual colombiano (2011). No adelantar el caso Kenia: aquel es de obra, este es de conducta.</p>
+  </section>
+
+  <section class="lam">
+    <p class="di">El mensaje no es lo que dices: es lo que la gente se lleva.</p>
+    <div class="piezas">
+      <span class="pz pz--clara">lo que dices<small>la apertura, las preguntas</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--arena">lo que haces sin decir<small>cómo llegas, a quién miras, qué omites</small></span>
+      <span class="eq">= el mensaje</span>
+    </div>
+    <p class="apoyo">El manual de Acción sin Daño los llama mensajes éticos implícitos: se transmiten con la forma de hacer y hasta con las omisiones. Preguntar solo a los hombres, retratar sin permiso, llegar con prisa de ciudad: cada uno manda un mensaje que ninguna palabra bonita corrige.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">4</span> La regla de no prometer <span class="reloj">10 min</span></h4>
+    <p class="di">En la consulta nada se promete.</p>
+    <div class="contra">
+      <div class="mal">
+        <span class="rot">Promesa de contrabando</span>
+        <p style="margin:0;font-size:.9rem"><em>"¿Les gustaría un asador techado junto al sabino?"</em></p>
+        <p style="margin:.5rem 0 0;font-size:.9rem">No pregunta: describe una obra y siembra la expectativa.</p>
+      </div>
+      <div class="bien">
+        <span class="rot">Pregunta que sí pregunta</span>
+        <p style="margin:0;font-size:.9rem"><em>"¿Dónde se acomoda la gente cuando viene en bola, y qué buscan de ese lugar?"</em></p>
+      </div>
+    </div>
+    <p class="apoyo">En la visita del viernes ya la practicaste sin saber su nombre: no anunciar, no ofrecer. La gente de las comunidades tiene memoria larga de proyectos que llegaron, preguntaron bonito, prometieron y se fueron. Project for Public Spaces, que lleva cincuenta años trabajando espacios públicos, lo dice al revés y por eso mismo: cumplir lo prometido es la herramienta más poderosa para construir confianza. El corolario es nuestro: no prometas lo que no está en tu mano cumplir.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> Gimnasio 1 · La pregunta tramposa <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · en tríos</span>
+    <p class="di">Ocho preguntas candidatas. Unas sirven y otras traen trampa: atrapa cuál es cuál.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-03/ejercicio-11-la-pregunta-tramposa.html">ejercicio del gimnasio</a> proyectado. Las trampas de esta semana: la inducida, la promesa de contrabando, la cerrada que mata la conversación, la doble pregunta y la jerga que nadie usa en la orilla.</p>
+    <p class="nota-conductor">En plenaria, pedir primero la que más discusión causó en los tríos. Si el tiempo aprieta, este bloque se recorta a cuatro preguntas y el resto queda de tarea; la apreciativa y el gimnasio 2 no se recortan.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">6</span> La entrevista apreciativa <span class="reloj">15 min</span></h4>
+    <p class="di">"Cuénteme de un día en que la orilla estuvo llena de gente. ¿Qué había ese día?"</p>
+    <p class="apoyo">La pregunta obvia ("¿qué le falta a la presa?") produce la respuesta obvia: una lista de obras, cada una con su factura. La apreciativa entra por el otro lado: pide la historia de una vez que las cosas salieron bien, y la desmenuza.</p>
+  </section>
+
+  <section class="lam">
+    <div class="contra">
+      <div class="mal">
+        <span class="rot">El pedido</span>
+        <p style="margin:0;font-size:.9rem"><em>"Faltan bancas."</em></p>
+        <p style="margin:.5rem 0 0;font-size:.9rem">Se anota, se convierte en factura, y no dice dónde, ni para quién, ni a qué hora.</p>
+      </div>
+      <div class="bien">
+        <span class="rot">La escena</span>
+        <p style="margin:0;font-size:.9rem"><em>"Ese día don Chuy trajo la lona, las señoras vendieron gorditas y nos quedamos hasta que oscureció."</em></p>
+        <p style="margin:.5rem 0 0;font-size:.9rem">Trae sombra, comida, horario y organización adentro.</p>
+      </div>
+    </div>
+    <p class="apoyo">Los pedidos se cobran; las escenas se diseñan. Por eso cada estación de la consulta lleva al menos una pregunta apreciativa en su guion.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">7</span> Gimnasio 2 · Cazarle las trampas a la IA <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · en parejas</span>
+    <p class="di">Un guion perfecto en veinte segundos, con siete trampas adentro.</p>
+    <p class="apoyo">Le pedimos a una IA un guion de consulta comunitaria y lo entregó bien redactado y con voz segura. Ese es justo el problema: la seguridad no es criterio. Con el <a href="../ejercicios/semana-03/ejercicio-21-cazar-a-la-ia.html">ejercicio del gimnasio</a>: siete líneas traen trampa (inducidas, promesas de contrabando, supuestos de ciudad, jerga) y tres se salvan. La IA no se equivoca con torpeza: se equivoca con elegancia.</p>
+    <p class="nota-conductor">Al revisar, detenerse en las trampas que casi nadie cazó y preguntar por qué se escaparon: la respuesta ("sonaba profesional") es la lección del semestre. Conectar con la declaración de IA del pacto: usarla se vale, firmar sin leer no.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">8</span> Tarea para mañana <span class="reloj">10 min</span></h4>
+    <span class="senal">Actividad · individual</span>
+    <p class="di">Tres preguntas candidatas para la consulta, ya pasadas por las tres pruebas.</p>
+    <p class="apoyo">Las tres pruebas antes de escribir cualquier pregunta: ¿describe una obra concreta? (promete), ¿trae la respuesta adentro? (induce), ¿la entendería tu abuela a la primera? (jerga). Se empiezan aquí y se terminan en casa; mañana van al pizarrón y las mejores entran al banco de preguntas del grupo.</p>
+  </section>
+
+  <section class="lam">
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para mañana</span>
+      Hoy entrenaste la pregunta suelta. Mañana se arma la consulta completa: quiénes son "la comunidad" de La Florida, qué temas no se pisan, y las tres estaciones con sus roles y su registro.
+    </div>
+  </section>
+</section>
+
+<!-- ====================== VIERNES ====================== -->
+<section class="mazo" id="mazo-viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes 21 de agosto · 2 horas</div>
+      <h3>El diseño fino de la consulta</h3>
+      <p class="foco">Quién es la comunidad, qué no se pisa, y el guion de cada estación: la consulta se arma pieza por pieza.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El pizarrón de preguntas <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Tus tres candidatas al pizarrón. La báscula decide.</p>
+    <p class="apoyo">Se leen en voz alta y el grupo les aplica las tres pruebas. Las que pasan entran al banco de preguntas; de ese banco salen los guiones de estación. Las que caen no se tiran: se reescriben ahí mismo, que es donde más se aprende.</p>
+    <p class="nota-conductor">No alcanza el tiempo para las de todos: pedir voluntarios y cuidar que pasen al menos una inducida y una promesa de contrabando, para cazarlas en vivo. El resto se revisa en el gimnasio 3.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">2</span> ¿Quién es "la comunidad"? <span class="reloj">15 min</span></h4>
+    <p class="di">"La comunidad" no existe en singular.</p>
+    <p class="apoyo">Existen los que pescan, las señoras que lavan, los de la telesecundaria, los que tienen ganado en la orilla, los que se fueron y vuelven en diciembre. Dan Pitera, que lleva veinte años haciendo diseño comunitario en Detroit, lo dice sin rodeos: los grupos se traslapan y hasta se oponen, y en todo proyecto hay que escribir la lista de cuáles participan. Su imagen es el mosaico, no el crisol: cada tesela conserva su color, y la imagen grande no existe sin ellas. Cuando el acta dice "se consultó a la comunidad" y la lista no existe, lo que se consultó fue a los que llegaron a la junta.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · plenaria</span>
+    <p class="di">La lista nombrada de La Florida: ¿a qué grupos tiene que oír esta consulta?</p>
+    <p class="apoyo">Se arma en el pizarrón con lo que vieron en el reconocimiento, posta por posta, incluida la 4: los que no estaban. Quién usa la presa, quién vive junto, quién vende, quién llega de fuera, quién ya no va y por qué. La lista se fotografía: es el primer insumo del diseño de la consulta.</p>
+    <p class="nota-conductor">Empujar más allá de los obvios: ¿los niños cuentan? ¿las personas mayores que ya no bajan a la orilla? ¿el que vive río abajo? Cada grupo que aparezca cambia el diseño: no todos van a llegar a las estaciones, y eso se resuelve en el siguiente bloque.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> El pliego de quién falta <span class="reloj">10 min</span></h4>
+    <p class="di">La consulta que solo oye a los que llegan no es consulta: es acta.</p>
+    <p class="apoyo">A toda convocatoria abierta llegan los mismos: los organizados, los que tienen tiempo, los que hablan en público. En un estudio de consulta en línea en Europa del Este juntaron 412 respuestas y casi ningún adulto mayor: la corrección fue salir a buscarlos cara a cara, hasta completar las casillas vacías. Nuestra versión: junto al registro va un pliego con los grupos de la lista nombrada, y una raya por cada persona de ese grupo que ya opinó. El pliego se mira a media consulta, y a los grupos con casilla vacía se les va a buscar a donde están.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">4</span> Los temas vivos <span class="reloj">10 min</span></h4>
+    <p class="di">Hay temas que pueden estallar. Se averiguan antes: no para tocarlos, para no pisarlos.</p>
+    <p class="apoyo">En Denver, una reunión de la ciudad con las naciones tribales terminó en tono agrio porque un funcionario ajeno al equipo tocó un tema que no conocía. El remedio costó un año: volver, escuchar y seguir yendo. La versión local se pregunta antes: la tierra que se inundó cuando se hizo el bordo, un pleito de linderos, un accidente en el agua. No se investiga de chismoso: se le pregunta derecho a la autoridad local, antes de la consulta.</p>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="apoyo">¿Qué temas de La Florida conviene saber antes de abrir la boca? Se anotan las hipótesis del grupo; la confirmación es tarea del profesor con la delegación.</p>
+    <p class="nota-conductor">Anotar la lista y confirmarla en corto con la autoridad de La Florida antes del viernes 28. Regla que viene del mismo caso: en la consulta, quien habla en nombre del proyecto es alguien que ya ha ido. Si un funcionario o directivo quiere tomar la palabra, se le entrega antes esta lista.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">5</span> Las tres estaciones <span class="reloj">25 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--clara">el mapa<small>la gente marca</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--arena">la mesa<small>la gente cuenta</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--roja">la pared<small>la gente propone</small></span>
+      <span class="eq">= la consulta</span>
+    </div>
+    <p class="apoyo">Tres estaciones en paralelo, para que cada quien entre por donde le acomode: no todos hablan en público, no todos dibujan, no todos se quedan una hora. Cada estación tiene su guion, sus roles y su registro.</p>
+  </section>
+
+  <section class="lam">
+    <h4>Estación 1 · El mapa parlante</h4>
+    <p class="di">El mapa grande se raya: por dónde entra, dónde se sienta, qué zona evita.</p>
+    <p class="apoyo">Un dibujo grande de la orilla sobre el que la gente marca directamente. Registra ubicaciones con una precisión que la pura conversación no alcanza: "allá" no sirve para diseñar, una cruz en el mapa sí. Quien atiende la estación invita a marcar y pregunta por cada marca: ¿qué hay ahí?, ¿a qué horas?, ¿desde cuándo?</p>
+  </section>
+
+  <section class="lam">
+    <h4>Estación 2 · La mesa de conversación</h4>
+    <p class="di">Las preguntas delicadas se hacen de a uno, no en plenaria.</p>
+    <p class="apoyo">Aquí vive la entrevista apreciativa, y también las preguntas que nadie contesta delante de sus vecinos: con quién le gusta y con quién no le gusta encontrarse en la orilla, si le tiene confianza a los que andamos moviendo esto. Conversación de dos o tres personas, sin formato de examen, con las respuestas anotadas sin nombre.</p>
+  </section>
+
+  <section class="lam">
+    <h4>Estación 3 · La pared de ideas</h4>
+    <p class="di">El menú siempre trae un parque de perros olvidado.</p>
+    <p class="apoyo">En una consulta en Detroit montaron un tablero con fotos de todo lo que un parque podía tener, para votar con calcomanías. Olvidaron una foto: la del parque para perros. Los organizadores se enteraron porque junto al tablero dejaron un rotafolio libre con crayones, y se llenó de "parque de perros, parque de perros, parque de perros". Por eso la pared de ideas es la estación del canal abierto: lo que no se nos ocurrió preguntar también tiene dónde caer. Se lee con el mismo cuidado que todo lo demás.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">6</span> Roles y registro <span class="reloj">15 min</span></h4>
+    <p class="di">Quien pregunta no anota. Quien anota no opina. Quien observa cuenta.</p>
+    <p class="apoyo">Tres roles por estación, y el tercero es el menos vistoso y el más valioso: alguien cuyo único trabajo es registrar. Frases textuales entre comillas, quién las dijo (edad aproximada, no nombre), marcas en el mapa, y el conteo del pliego. Lo que no se anota no existe: la memoria del equipo al día siguiente no es un medio de verificación.</p>
+  </section>
+
+  <section class="lam">
+    <div class="ojo">
+      <strong>La regla de la hoja corta.</strong> Cada pregunta se gana su lugar: mientras más corta la hoja, más gente contesta. Y cuando las respuestas salen malas, casi nunca es culpa de quien contestó: es de la hoja. Por eso el jueves que viene se ensaya todo, antes de estrenarlo con la gente.
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">7</span> Gimnasio 3 · El guion de mi estación <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · individual, luego por estación</span>
+    <p class="di">Tu apertura, tus preguntas y tu cierre: el borrador se arma hoy.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-03/ejercicio-32-el-guion-de-mi-estacion.html">ejercicio del gimnasio</a>: las preguntas salen del banco del pizarrón, la apertura es honesta y sin venta ("venimos a escuchar qué debería tener la orilla; no hay nada decidido"), y el registro queda definido antes de salir. Los equipos de cada estación se sientan juntos y reparten roles.</p>
+    <p class="nota-conductor">Cerrar el reparto hoy: estación y rol por persona, anotado. El jueves que viene el ensayo es con ese reparto, y cambiarlo el mismo día de la consulta cuesta caro. Materiales por estación también hoy: papel del mapa, plumones, tarjetas, cinta.</p>
+  </section>
+
+  <section class="lam">
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para la semana 4</span>
+      El jueves que viene se ensaya la consulta completa, con vecinos difíciles interpretados con mala leche. El viernes, la consulta de verdad en La Florida. Todo lo que truene en el ensayo es un problema que el viernes ya no existe.
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">8</span> Cierre y ticket <span class="reloj">5 min</span></h4>
+    <p class="di">Antes de salir: el ticket, desde el celular.</p>
+    <p class="apoyo">Noventa segundos, con nombre o sin él. Lo que escribas se lee el jueves que viene. Y el pendiente del fin de semana: tu guion de estación terminado, porque el ensayo empieza con él.</p>
+  </section>
+</section>
+
+<h2 class="corte">Herramientas de la semana</h2>
 
 <div class="tarjeta">
   <span class="etiqueta">La idea grande</span>
   <h3 style="margin-top:.2rem">El qué lo pone la comunidad</h3>
-  <p>El reconocimiento te dijo qué hay en la orilla. La consulta va a decir qué debe haber, y eso no lo decides tú ni lo decide el profe: lo decide quien usa la presa todos los días. Los cursos de diseño más citados del mundo (Stanford, MIT) mandan a sus equipos a esto mismo antes de permitirles dibujar una sola línea: el problema lo trae el socio, no el estudiante. Quien se salta este paso diseña de oídas, y los que diseñan de oídas terminan construyendo muelles donde nadie pesca.</p>
+  <p>El reconocimiento te dijo qué hay en la orilla. La consulta va a decir qué debe haber, y eso no lo decides tú ni lo decide el profe: lo decide quien usa la presa todos los días. La comunidad es la experta; el equipo llega, como dice el gremio del diseño comunitario, "un poco con amnesia": con los datos duros en la mano y sin una sola solución dibujada, porque llegar con las respuestas convierte la consulta en trámite de validación. Quien se salta este paso diseña de oídas, y los que diseñan de oídas terminan construyendo muelles donde nadie pesca.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">La regla</span>
   <h3 style="margin-top:.2rem">No prometer</h3>
-  <p>En la visita del viernes pasado ya la practicaste sin saber su nombre: no anunciar, no ofrecer. Ahora la regla formal, la más seria del semestre: en la consulta nada se promete. Y ojo, porque hay promesas de contrabando: "¿les gustaría un asador techado junto al sabino?" no pregunta, promete. La gente de las comunidades tiene memoria larga de proyectos que llegaron, preguntaron bonito, prometieron y se fueron. Una promesa rota cuesta más cara que un silencio, y la confianza no se repara con otra visita.</p>
+  <p>La más seria del semestre, y tiene escuela detrás: la Acción sin Daño, nacida de estudiar proyectos bien intencionados que dejaron a la gente peor. En la consulta nada se ofrece ni se asegura, y ojo con las promesas de contrabando: "¿les gustaría un asador techado junto al sabino?" no pregunta, promete. La gente de las comunidades tiene memoria larga de proyectos que llegaron, preguntaron bonito, prometieron y se fueron. Una promesa rota cuesta más cara que un silencio, y la confianza no se repara con otra visita.</p>
 </div>
 
 <div class="tarjeta">
@@ -115,15 +338,15 @@
   <p>La pregunta obvia ("¿qué le falta a la presa?") produce la respuesta obvia: una lista de obras, cada una con su factura. La entrevista apreciativa entra por el otro lado: "cuénteme de un día en que la orilla estuvo llena de gente, ¿qué había ese día?". La respuesta a "¿qué falta?" es un pedido; la respuesta a "¿qué pasaba ese día?" es una escena, con hora, sombra, comida y quién trajo a quién. Las escenas sí se pueden diseñar. Completa el juego con la distinción abierta/cerrada y neutra/inducida: el gimnasio te pone a afinar el oído.</p>
 </div>
 
+<div class="tarjeta">
+  <span class="etiqueta">El diseño fino</span>
+  <h3 style="margin-top:.2rem">La lista nombrada y el pliego de quién falta</h3>
+  <p>"La comunidad" no existe en singular: existen grupos que se traslapan y a veces se oponen, y la consulta se diseña con la lista escrita de cuáles tiene que oír. El viernes se arma la de La Florida y se convierte en pliego: una casilla por grupo, una raya por cada persona que ya opinó. La consulta no se cierra con casillas vacías; a los que faltan se les busca a donde están. Es la diferencia entre poder decir "esto lo dijo La Florida" y que alguien conteste, con razón, "eso lo decidieron cuatro".</p>
+</div>
+
 <div class="tarjeta siembra">
   <span class="etiqueta">La IA en su lugar</span>
   <p>Pídele a una IA un guion de consulta comunitaria y te lo entrega en veinte segundos, bien redactado y con voz segura. Ese es justo el problema: la seguridad no es criterio. En el guion van a venir preguntas que inducen, promesas de contrabando y supuestos de ciudad que en La Florida no aplican. El gimnasio 2 trae uno de esos guiones para que le caces las trampas. La velocidad es de la máquina; el criterio, para eso viniste al curso.</p>
-</div>
-
-<div class="tarjeta">
-  <span class="etiqueta">El diseño fino</span>
-  <h3 style="margin-top:.2rem">Estaciones, roles y registro</h3>
-  <p>El viernes armamos la consulta pieza por pieza: las estaciones (el mapa grande de la presa donde la gente marca, la mesa de conversación, la pared de ideas), los roles (quien pregunta, quien anota, quien observa) y el registro, porque un buen registro vale más que una buena memoria. De ahí sales con tu guion, tu rol y tu lista de materiales. La próxima semana se ensaya y se ejecuta.</p>
 </div>
 
 <h2>El gimnasio</h2>
@@ -138,6 +361,10 @@
   <dl>
     <dt>Consulta comunitaria</dt>
     <dd>El momento en que la comunidad define qué debe tener el proyecto. No es un trámite de firmas ni una encuesta de salida: es la fuente de las decisiones de diseño. Lo que ahí se diga manda sobre lo que a ti se te haya ocurrido.</dd>
+    <dt>Acción sin daño</dt>
+    <dd>El enfoque nacido con Mary Anderson y su equipo: toda intervención deja huella en el lugar donde entra, y las actuaciones bien intencionadas pueden provocar daños. Obliga a mirar no solo qué se hace sino cómo se llega, cómo se pregunta y cómo se va uno. La regla de no prometer es su hija directa.</dd>
+    <dt>Mensaje implícito</dt>
+    <dd>Lo que el proyecto comunica sin decirlo: con la forma de hacer y hasta con las omisiones. Preguntar solo a los hombres, retratar sin permiso, llegar con prisa. Se revisa igual que el guion, porque la gente lo lee igual que el guion.</dd>
     <dt>Needfinding</dt>
     <dd>Encontrar la necesidad antes de diseñar la solución. El orden importa: primero los ojos (reconocimiento), luego las preguntas (consulta), y solo después el lápiz. El problema lo trae la comunidad, no el estudiante.</dd>
     <dt>Diseño participativo</dt>
@@ -150,8 +377,16 @@
     <dd>La que trae la respuesta adentro: "¿verdad que hace falta más sombra?". Produce datos que confirman lo que ya pensabas, que es exactamente lo que no necesitas. Su antídoto es la pregunta neutra: "¿a qué horas se junta la gente aquí y dónde se acomoda?".</dd>
     <dt>Entrevista apreciativa</dt>
     <dd>Empezar por lo que ya funciona: pedir la historia de una vez que las cosas salieron bien y desmenuzar qué la hizo posible. Da material de diseño (escenas, no pedidos) y arranca la conversación por el orgullo en vez de la carencia.</dd>
+    <dt>La lista nombrada</dt>
+    <dd>Quiénes son "la comunidad" de este proyecto, escrito con nombres de grupo: los que pescan, las que lavan, los de la telesecundaria, los que se fueron y vuelven. Sin lista, "la comunidad" vuelve a ser quien llegó a la junta.</dd>
+    <dt>El pliego de quién falta</dt>
+    <dd>La lista nombrada convertida en registro visible: una casilla por grupo, una raya por persona que ya opinó. Hace evidente el hueco mientras todavía se puede llenar, y a los grupos de casilla vacía se les va a buscar a donde están.</dd>
+    <dt>Temas vivos</dt>
+    <dd>Los asuntos con carga histórica que una pregunta descuidada puede reventar: la tierra que se inundó, un pleito de linderos, un accidente. Se averiguan antes con la autoridad local, no para tocarlos: para no pisarlos por ignorancia.</dd>
     <dt>Mapa parlante</dt>
     <dd>Un mapa grande del sitio sobre el que la gente marca directamente: por dónde entra, dónde se sienta, qué zona evita, dónde le gustaría que pasara algo. Registra ubicaciones con una precisión que la pura conversación no alcanza.</dd>
+    <dt>El canal abierto</dt>
+    <dd>El espacio de la consulta donde cabe lo que no se nos ocurrió preguntar: la pared de ideas, el rotafolio libre. Todo menú trae un olvido, y el canal abierto es donde el olvido aparece. Se lee con el mismo cuidado que las respuestas del guion.</dd>
     <dt>El registro</dt>
     <dd>Lo que no se anota no existe. Cada estación lleva a alguien cuyo único trabajo es registrar: frases textuales, quién las dijo (edad aproximada, no nombre), marcas en el mapa. La memoria del equipo al día siguiente no es un medio de verificación.</dd>
   </dl>
@@ -159,13 +394,19 @@
 
 <h2>Lo que produjimos</h2>
 <div class="tarjeta">
-  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán el guion final de la consulta, el reparto de roles y el mapa base que viajará a La Florida.</p>
+  <p style="color:#8aa39c; font-style:italic;">Esta vitrina se llena al cierre de la semana. Lo que va a llegar aquí:</p>
+  <ul style="color:#8aa39c; font-style:italic; margin:.4rem 0 .2rem;">
+    <li>El banco de preguntas aprobadas por la báscula.</li>
+    <li>La lista nombrada de los grupos de La Florida.</li>
+    <li>El reparto de estaciones y roles, con nombres.</li>
+    <li>Los guiones de estación terminados, listos para el ensayo.</li>
+  </ul>
 </div>
 
 <div class="chapuzon">
   <h2>Aviéntate 🌊</h2>
-  <p>Preguntando se llega a Roma, dice el refrán, pero no dice cómo: hay preguntas que llevan a Roma y preguntas que te regresan al punto de salida con las manos llenas de lo que ya sabías.</p>
-  <p>La próxima semana la presa contesta. Esta semana, que la pregunta esté a la altura.</p>
+  <p>Mary Anderson se pasó años estudiando ayuda que salió mal, y no concluyó que fuera mejor no actuar: concluyó que se actúa sabiendo que uno deja huella, desde la primera pregunta.</p>
+  <p>Esta semana la huella es una pregunta. La próxima, la presa contesta.</p>
 </div>
 
 </div>
