@@ -7,7 +7,9 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 52 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 8 (20 ago 2026): la evaluación de la unidad 1
+- **Último bloque cerrado:** bloque 9 (20 ago 2026): el primer no entra al
+  cuadernillo y al suelo de la unidad 1, y el contrato de gestión se vuelve
+  llenable en línea. Antes, bloque 8 (20 ago 2026): la evaluación de la unidad 1
   consolidada: el cuadernillo 1 se llena en línea y se descarga, el suelo y la
   autoevaluación quedan explicados, y los vacíos detectados se resolvieron (ver
   el bloque al final). Antes, bloque 7 (20 ago 2026): la semana 4 reconstruida como
@@ -114,8 +116,9 @@ discutir el primer día se cobra caro en noviembre.
    (archivo HTML chiquito con nombre, fecha y, en el de evaluación, su objeción).
    El registro vive en el navegador del estudiante (localStorage) y en su
    constancia; no viaja a ningún servidor ni le llega al profesor. La columna del
-   profesor queda comprometida por estar publicada en la página. El contrato de
-   gestión y el expediente siguen en papel.
+   profesor queda comprometida por estar publicada en la página. Desde los bloques 8 y 9, el
+   expediente y el contrato de gestión también se llenan en línea (localStorage
+   + descarga, mecanismo del cuadernillo digital); el papel sigue valiendo.
 5. **El candado de goteo es pedagógico, no de seguridad.** Cada semana abre el
    miércoles anterior a sus sesiones. `?preview` en la URL lo salta, para el profesor.
 6. **Los ejercicios son autocontenidos.** Un HTML por ejercicio, sin dependencias
@@ -393,3 +396,32 @@ viven en `~/Descargas/imagenes-semana-03.md` y `~/Descargas/imagenes-semana-04.m
 en el HTML de las dos semanas, cada uno como lámina independiente
 (`.lam--figura`) para que la imagen no se corte en el telón: llegada la imagen
 a `assets/img/semana-0N/`, solo se descomenta.
+
+## Bloque 9 (20 de agosto de 2026): el primer no al suelo, el contrato en línea
+
+Pedido de Eduardo: que el ejercicio "Mi primer no" (S2) esté en el cuadernillo
+y en el suelo de la unidad 1, al menos su sistematización; y lo mismo el
+contrato de gestión.
+
+- **`contrato-de-gestion.html` es ahora llenable en línea** con el mecanismo
+  del cuadernillo digital (`data-cuadernillo="contrato"`): áreas, apoyo, tabla
+  de personas puente, habilidad, los dos compromisos, día y firma (el nombre
+  escrito hace las veces de firma; la copia descargada es la constancia; la
+  línea del testigo se firma en papel o se da por atendida al revisar el
+  suelo). El papel repartido en clase sigue valiendo igual. La regla 4 quedó
+  enmendada.
+- **El cuadernillo 1 gana la hoja "Mi primer no, sistematizado"** (semana 2):
+  qué pedí y a quién, la petición textual, cuándo y por qué canal, qué pasó
+  (sí, no o silencio), qué aprendí y si sonó la campana. Se llena entre las
+  semanas 2 y 5.
+- **El suelo de la unidad 1 pasa de 5 a 6 casillas:** entra "Mi primer no: la
+  petición real de la semana 2, hecha y sistematizada". El resultado no cuenta
+  (sí, no o silencio valen igual); el intento sí. **Decisión que amarra la
+  contabilidad del semestre: el primer no cuenta como la solicitud real 1** (el
+  suelo de la U3 ya pedía la "solicitud real 2", y el transversal pide dos en
+  el semestre; así cierran las cuentas). Plan B: hacerla y registrarla antes
+  del viernes de la semana 5.
+- Actualizados en cadena: la fila U1 de `tu-calificacion.html`, las láminas del
+  cierre de unidad y la hoja de consulta de la S4, y las menciones de la S2
+  (el contrato "se puede llenar directo" y la petición "se sistematiza en el
+  cuadernillo").
