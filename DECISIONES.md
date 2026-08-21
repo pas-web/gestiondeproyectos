@@ -425,10 +425,16 @@ contrato de gestión.
   cierre de unidad y la hoja de consulta de la S4, y las menciones de la S2
   (el contrato "se puede llenar directo" y la petición "se sistematiza en el
   cuadernillo").
-- **Adenda del mismo día: el suelo pasa de 6 a 7 casillas.** Entra "Subí mi
-  reporte de la guía de observación al Drive" (carpeta S2): la guía de "Mirar
-  como gestor" llena con sus ocho bloques, foto y croquis. Es individual (la
-  zona se trabajó en pareja, el reporte lo sube cada quien con su nombre; una
-  foto legible del cuaderno cuenta igual). Plan B: subirlo antes del viernes
-  de la semana 5. El destino del reporte quedó dicho también dentro del propio
-  ejercicio y en el gimnasio de la S2.
+- **Adenda del mismo día: el suelo pasa de 6 a 7 casillas.** Entra "El reporte
+  de mi ficha de observación está en el Drive" (carpeta S2). La visita del 14
+  de agosto se levantó con la **ficha de observación de La Florida**, un
+  instrumento aparte que hizo Eduardo (cinco áreas: cedral, área abierta,
+  vertedor, llanito, perímetro; conteo en tres momentos, mediciones con cinta,
+  fotos con clave, reporte de texto con etiquetas fijas). La ficha entró al
+  repo como `ejercicios/semana-02/ficha-observacion-la-florida.html`
+  (autocontenida, regla 6) y se enlaza desde el gimnasio de la S2 y desde el
+  suelo. El reporte es **uno por área con los nombres de la pareja**; cada
+  integrante marca su casilla cuando el de su área está arriba. Plan B:
+  subirlo antes del viernes de la semana 5. La guía "Mirar como gestor" del
+  gimnasio queda como entrenamiento de la mirada, no como el instrumento de la
+  visita.

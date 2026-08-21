@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<!--
+FICHA DE OBSERVACIÓN · PRESA LA FLORIDA
+Gestión y Manejo de Proyectos · UAQ Campus Concá · Agosto 2026
+
+DECISIONES INTERPRETATIVAS
+· Un solo archivo autocontenido, sin fuentes externas ni librerías: funciona
+  abierto desde WhatsApp o descargas, sin internet.
+· La ficha se tiñe del color de su área (verde sabino, ocre pasto, gris
+  concreto, verde llano, terracota bordo) para confirmar de un vistazo en
+  qué ficha se está trabajando.
+· Se eliminó lo que se obtiene sin estar en el sitio: croquis, clima del
+  día, trazado general del vaso. Se añadieron mediciones con cinta métrica
+  específicas por área; las dimensiones largo × ancho calculan superficie
+  automáticamente. Por indicación posterior se retiraron las mediciones
+  de árboles y las observaciones de fauna.
+· Cuatro ejes comunes compactados (personas, piso y sombra, naturaleza,
+  riesgos) + bloque de mediciones específico + dos preguntas para mirar
+  despacio (una común, una del área).
+· Conteo de personas en tres momentos con sello de hora automático;
+  cronómetro de visita en la barra superior, calibrado a 2 horas.
+· Registro fotográfico numerado: el botón de cámara junto a cada campo
+  asigna claves F1, F2... que el reporte lista con su campo de origen.
+· Guardado automático en el navegador; botón N/O por campo para
+  desalentar el dato inventado.
+· El reporte generado usa etiquetas fijas en texto plano, pensado para
+  cruzar las cinco fichas en el análisis posterior. Copiar, compartir
+  por WhatsApp o descargar .txt.
+· Verificación de faltantes: al generar el reporte se listan los campos
+  sin llenar ni marcar N/O, con opción de completar o continuar.
+· Recordatorios visuales en la barra superior a los minutos 55 y 110
+  para sellar los conteos de media visita y de salida.
+· El bloque de agua se omite en el área abierta; el reporte incluye fecha.
+· El eje de personas registra actividades en el conteo de tres momentos
+  (campo "¿Qué están haciendo?"); se retiró la tabla aparte de actividades.
+· Sección F · Actividades posibles: destila las ideas del grupo (carpeta
+  de Drive: lista "Conseguir" + "Diseño -La Florida-") en 14 elementos
+  ubicables físicamente, para que cada pareja evalúe cuáles caben en su
+  área (✓ / ✗ de un toque) y dónde. Las ideas no ubicables
+  (financiamiento, reglamento, gestiones) quedan fuera de la ficha.
+· Tipografía del sistema (sin descarga de fuentes) con jerarquía por peso
+  y espaciado; contraste alto y controles grandes para uso bajo el sol.
+-->
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ficha de observación · Presa La Florida</title>
+<style>
+  :root{
+    --papel:#F7F6F1;
+    --tarjeta:#FFFFFF;
+    --tinta:#20261F;
+    --gris:#6E7366;
+    --linea:#DCDACF;
+    --area:#4A5A50;          /* se sustituye al elegir área */
+    --area-suave:#EDEFEA;    /* se sustituye al elegir área */
+    --peligro:#8C3B2E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--papel);color:var(--tinta);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:17px;line-height:1.45;
+    padding-bottom:90px;
+  }
+  /* ---------- barra superior ---------- */
+  #topbar{
+    position:sticky;top:0;z-index:20;
+    background:var(--area);color:#fff;
+    padding:10px 14px;
+    display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  }
+  #topbar .sitio{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+  #topbar .areaNombre{font-weight:700;font-size:18px}
+  #topbar .reloj{font-variant-numeric:tabular-nums;font-size:15px;opacity:.95;white-space:nowrap}
+  /* ---------- estructura ---------- */
+  main{max-width:640px;margin:0 auto;padding:16px 14px}
+  h1{font-size:26px;line-height:1.15;font-weight:800;margin:10px 0 4px}
+  .sub{color:var(--gris);font-size:15px;margin-bottom:18px}
+  section.card{
+    background:var(--tarjeta);border:1px solid var(--linea);
+    border-radius:12px;padding:16px 14px;margin:14px 0;
+  }
+  section.card>h2{
+    font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--area);border-bottom:2px solid var(--area);
+    padding-bottom:6px;margin-bottom:14px;font-weight:800;
+  }
+  .intro{font-size:15px;color:var(--gris);margin-bottom:12px}
+  .mision{
+    background:var(--area-suave);border-left:4px solid var(--area);
+    padding:10px 12px;border-radius:0 8px 8px 0;
+    font-size:15px;margin-bottom:14px;
+  }
+  /* ---------- campos ---------- */
+  .campo{margin-bottom:16px}
+  .campo label{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
+  .campo .hint{font-weight:400;color:var(--gris);font-size:13.5px}
+  input[type=text],input[type=number],textarea,select{
+    width:100%;font:inherit;color:inherit;
+    background:#FDFDFB;border:1.5px solid var(--linea);border-radius:8px;
+    padding:10px 12px;min-height:44px;
+  }
+  textarea{min-height:84px;resize:vertical}
+  input:focus,textarea:focus,select:focus,button:focus-visible{
+    outline:3px solid var(--area);outline-offset:1px;border-color:var(--area);
+  }
+  .campo.esNO input,.campo.esNO textarea,.campo.esNO select{
+    background:#EFEEE8;color:var(--gris);text-decoration:line-through;
+  }
+  .fila-num{display:flex;align-items:center;gap:8px}
+  .fila-num input{flex:1}
+  .unidad{font-weight:700;color:var(--gris);min-width:34px}
+  .derivado{font-size:13.5px;color:var(--area);font-weight:600;margin-top:4px;min-height:1em}
+  /* botonera por campo */
+  .campo-acciones{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;align-items:center}
+  .mini{
+    font:inherit;font-size:13.5px;font-weight:600;
+    border:1.5px solid var(--linea);background:#fff;color:var(--gris);
+    border-radius:20px;padding:6px 12px;min-height:36px;cursor:pointer;
+  }
+  .mini.activo{background:var(--gris);border-color:var(--gris);color:#fff}
+  .mini.foto{border-color:var(--area);color:var(--area)}
+  .chipFoto{
+    display:inline-flex;align-items:center;
+    background:var(--area);color:#fff;font-size:13px;font-weight:700;
+    border-radius:20px;padding:5px 11px;border:none;cursor:pointer;min-height:32px;
+  }
+  /* ---------- tablas repetibles ---------- */
+  .rep .repFila{
+    border:1.5px solid var(--linea);border-radius:10px;
+    padding:10px;margin-bottom:10px;background:#FDFDFB;position:relative;
+  }
+  .rep .repFila .num{
+    position:absolute;top:-9px;left:10px;background:var(--area);color:#fff;
+    font-size:11px;font-weight:800;border-radius:10px;padding:1px 8px;
+  }
+  .rep .repFila input,.rep .repFila textarea{margin-bottom:8px}
+  .rep .repFila input:last-of-type{margin-bottom:0}
+  .quitarFila{
+    font:inherit;font-size:13px;color:var(--peligro);background:none;
+    border:none;cursor:pointer;padding:4px 0;text-decoration:underline;
+  }
+  .agregarFila{
+    font:inherit;font-size:15px;font-weight:700;width:100%;
+    border:2px dashed var(--area);color:var(--area);background:var(--area-suave);
+    border-radius:10px;padding:10px;cursor:pointer;min-height:44px;
+  }
+  /* ---------- conteo tres momentos ---------- */
+  .momento{
+    border:1.5px solid var(--linea);border-radius:10px;
+    padding:10px;margin-bottom:10px;background:#FDFDFB;
+  }
+  .momento .encabezado{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .momento .titulo{font-weight:700;font-size:15px}
+  .sello{
+    font:inherit;font-size:14px;font-weight:700;
+    background:var(--area);color:#fff;border:none;border-radius:8px;
+    padding:8px 14px;cursor:pointer;min-height:40px;
+  }
+  .sello.hecho{background:var(--area-suave);color:var(--area)}
+  .momento .cuerpo{display:flex;gap:8px}
+  .momento .cuerpo input[type=number]{width:110px}
+  .momento .cuerpo input[type=text]{flex:1}
+  /* ---------- tally ---------- */
+  .tally{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .tally .item{display:flex;align-items:center;gap:8px}
+  .tally .item span{flex:1;font-size:14.5px}
+  .tally .item input{width:74px;min-height:40px;text-align:center}
+  /* ---------- ideas del grupo ---------- */
+  .ideaFila{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 0;border-bottom:1px solid var(--linea);
+  }
+  .ideaFila:last-child{border-bottom:none}
+  .ideaFila span{flex:1;font-size:14.5px}
+  .ideaBtns{display:flex;gap:8px;flex-shrink:0}
+  .ideaBtns button{
+    width:48px;height:44px;border-radius:10px;font-size:19px;font-weight:800;
+    border:1.5px solid var(--linea);background:#fff;color:var(--gris);cursor:pointer;
+  }
+  .ideaBtns .ok.activo{background:#2F6B4B;border-color:#2F6B4B;color:#fff}
+  .ideaBtns .no.activo{background:var(--peligro);border-color:var(--peligro);color:#fff}
+  /* ---------- selección de área ---------- */
+  .areaCard{
+    width:100%;text-align:left;font:inherit;cursor:pointer;
+    border:2px solid var(--linea);border-radius:12px;background:#fff;
+    padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;
+    min-height:56px;
+  }
+  .areaCard .punto{width:22px;height:22px;border-radius:50%;flex-shrink:0}
+  .areaCard .nom{font-weight:700;font-size:17px}
+  .areaCard .desc{font-size:13.5px;color:var(--gris)}
+  .areaCard.elegida{border-color:var(--area);background:var(--area-suave)}
+  /* ---------- botones grandes ---------- */
+  .btn{
+    display:block;width:100%;font:inherit;font-size:17px;font-weight:800;
+    background:var(--area);color:#fff;border:none;border-radius:12px;
+    padding:15px;cursor:pointer;min-height:52px;margin-top:8px;
+  }
+  .btn.secundario{background:#fff;color:var(--area);border:2px solid var(--area)}
+  .btn:disabled{opacity:.45;cursor:default}
+  /* ---------- reporte ---------- */
+  #reporteTxt{
+    width:100%;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;
+    background:#20261F;color:#EDEFE8;border-radius:10px;
+    padding:14px;min-height:260px;border:none;white-space:pre;
+  }
+  .aviso{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+    background:var(--tinta);color:#fff;font-size:14.5px;font-weight:600;
+    padding:10px 18px;border-radius:24px;z-index:40;
+    opacity:0;transition:opacity .25s;pointer-events:none;max-width:90vw;text-align:center;
+  }
+  .aviso.visible{opacity:1}
+  .pieAcciones{margin-top:26px;border-top:1px solid var(--linea);padding-top:14px}
+  .pieAcciones .quitarFila{font-size:14px}
+  .oculto{display:none !important}
+  @media (prefers-reduced-motion:reduce){ .aviso{transition:none} }
+  @media print{
+    #topbar,.btn,.mini,.agregarFila,.quitarFila,.sello,.pieAcciones{display:none !important}
+    body{padding-bottom:0;background:#fff}
+    section.card{break-inside:avoid;border-color:#999}
+  }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div>
+    <div class="sitio">Presa La Florida</div>
+    <div class="areaNombre" id="tbArea">Ficha de observación</div>
+  </div>
+  <div class="reloj" id="tbReloj"></div>
+</div>
+
+<main>
+  <!-- PANTALLA 1 · portada y selección -->
+  <div id="pantallaInicio">
+    <h1>Ficha de observación de campo</h1>
+    <p class="sub">Gestión y Manejo de Proyectos · UAQ Campus Concá</p>
+
+    <section class="card">
+      <h2>Antes de empezar</h2>
+      <p class="intro">
+        El proyecto del semestre es habilitar la orilla de la presa como espacio
+        público, y una consulta comunitaria decidirá qué se construye. Hoy cada
+        pareja observa un área del sitio; al juntar las cinco fichas tendremos el
+        retrato completo. Anota únicamente lo que puedas observar hoy; si algo no
+        se puede observar, tócale su botón <strong>N/O</strong>. Registra lugares con
+        precisión: "junto al sabino grande del lado norte" dice más que "por allá".
+        Las fotos se toman con tu cámara normal; el botón 📷 de cada campo les
+        asigna una clave para encontrarlas después.
+      </p>
+      <div class="campo">
+        <label for="int1">Integrante 1</label>
+        <input type="text" id="int1" autocomplete="off">
+      </div>
+      <div class="campo">
+        <label for="int2">Integrante 2</label>
+        <input type="text" id="int2" autocomplete="off">
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Elige tu área</h2>
+      <div id="listaAreas"></div>
+      <button class="btn" id="btnComenzar" disabled>Comenzar observación</button>
+      <p class="intro" style="margin-top:10px">Al comenzar se sella la hora de
+      inicio y el área queda fija para toda la visita.</p>
+    </section>
+  </div>
+
+  <!-- PANTALLA 2 · la ficha (se construye con JS) -->
+  <div id="pantallaFicha" class="oculto"></div>
+
+  <!-- PANTALLA 3 · reporte -->
+  <div id="pantallaReporte" class="oculto">
+    <h1>Reporte generado</h1>
+    <p class="sub">Revisa el texto y compártelo tal cual: las etiquetas fijas
+    permiten cruzar las cinco fichas.</p>
+    <textarea id="reporteTxt" readonly></textarea>
+    <button class="btn" id="btnCopiar">Copiar reporte</button>
+    <button class="btn secundario" id="btnCompartir">Compartir</button>
+    <button class="btn secundario" id="btnDescargar">Descargar .txt</button>
+    <button class="btn secundario" id="btnVolver">Volver a la ficha</button>
+  </div>
+</main>
+
+<div class="aviso" id="aviso"></div>
+<script>
+/* ============ CONFIGURACIÓN ============ */
+const AREAS = {
+  cedral: {
+    nombre:'1 · El cedral', color:'#2F6B4B', suave:'#E7EFE9',
+    desc:'Los árboles grandes junto a la presa',
+    mision:'Tu misión: describir los árboles que dan identidad al sitio y el espacio que generan. Esta pareja produce la evidencia de qué vale la pena conservar a toda costa.',
+    especifico:[
+      {t:'num', id:'sombraExt', label:'Largo máximo de la mancha de sombra del cedral a esta hora', unit:'m'},
+      {t:'textarea', id:'estadoArb', label:'Estado de los árboles', hint:'Raíces expuestas, ramas secas, heridas, clavos, cuerdas amarradas, marcas'}
+    ],
+    pregunta:'¿Qué historia cuentan los troncos? Busca cicatrices, iniciales talladas, clavos viejos, marcas de fuego o de agua, y describe qué te dicen sobre la relación de la gente con estos árboles.'
+  },
+  abierta: {
+    nombre:'2 · Área abierta frente al cedral', color:'#A98328', suave:'#F3EEDD',
+    desc:'El terreno despejado donde cabría la gente',
+    mision:'Tu misión: dimensionar el espacio utilizable y sus obstáculos. Esta pareja produce la evidencia de cuánta gente y qué actividades caben en el sitio.',
+    especifico:[
+      {t:'dims', id:'dims', l1:'Largo utilizable', l2:'Ancho utilizable', hint:'Midan el rectángulo aprovechable más grande; si la cinta no alcanza, midan 10 m, cuenten pasos y usen sus pasos como regla'},
+      {t:'sel', id:'pendiente', label:'Pendiente del terreno', options:['Plano','Ligera inclinación','Inclinación pronunciada']},
+      {t:'repeat', id:'obstaculos', label:'Obstáculos dentro del área', hint:'Piedras grandes, hoyos, troncos, zanjas', cols:[
+        {k:'que', ph:'Obstáculo'},
+        {k:'donde', ph:'¿Dónde exactamente?'},
+        {k:'tam', ph:'Tamaño aprox. (con cinta si se puede)'}
+      ]},
+      {t:'textarea', id:'suelo', label:'Superficie del suelo', hint:'Pasto, tierra suelta, piedra, lodo; ¿cambia por zonas?'}
+    ],
+    pregunta:'Imagina un domingo con cincuenta personas en esta área: ¿dónde se acomodarían las familias, dónde jugarían los niños, y qué haría falta primero?'
+  },
+  vertedor: {
+    nombre:'3 · Vertedor de la presa', color:'#5B6673', suave:'#E9ECEF',
+    desc:'La estructura de concreto por donde sale el agua',
+    mision:'Tu misión: medir la estructura y documentar su estado. Esta pareja produce la evidencia técnica de qué hay que reparar y qué hay que respetar.',
+    especifico:[
+      {t:'num', id:'anchoCanal', label:'Ancho del canal del vertedor', unit:'m'},
+      {t:'num', id:'altCaida', label:'Altura de la caída', hint:'Si no es seguro medirla directo, estímenla contra la estatura de tu pareja parada abajo', unit:'m'},
+      {t:'num', id:'anchoMuro', label:'Espesor del muro o corona del vertedor', unit:'cm'},
+      {t:'repeat', id:'grietas', label:'Grietas', hint:'Una fila por grieta; midan con la cinta', cols:[
+        {k:'donde', ph:'¿Dónde está la grieta?'},
+        {k:'largo', ph:'Largo (m)'},
+        {k:'abertura', ph:'Abertura (cm)'}
+      ]},
+      {t:'textarea', id:'nivel', label:'Huellas del nivel que alcanza el agua', hint:'Manchas, líneas de color, material arrastrado y a qué altura'},
+      {t:'textarea', id:'concreto', label:'Estado del concreto', hint:'Descarapelado, varillas expuestas, hundimientos, reparaciones viejas'}
+    ],
+    pregunta:'¿Hasta dónde ha llegado el agua en sus mejores tiempos? Reúne todas las huellas que lo delatan y arma la escena de un día de presa llena.'
+  },
+  llanito: {
+    nombre:'4 · Llanito debajo de la presa', color:'#7C8F3A', suave:'#EFF1E2',
+    desc:'El terreno plano aguas abajo del bordo',
+    mision:'Tu misión: dimensionar el llano y leer qué hace el agua cuando baja. Esta pareja produce la evidencia de qué tan aprovechable y qué tan inundable es este espacio.',
+    especifico:[
+      {t:'dims', id:'dims', l1:'Largo del llano', l2:'Ancho del llano', hint:'Si la cinta no alcanza, midan 10 m, cuenten pasos y usen sus pasos como regla'},
+      {t:'sel', id:'humedad', label:'Humedad del suelo', options:['Seco','Húmedo','Encharcado']},
+      {t:'num', id:'distCauce', label:'Distancia del centro del llano al cauce o salida de agua más cercana', unit:'m'},
+      {t:'textarea', id:'crecidas', label:'Evidencia de crecidas', hint:'Ramas arrastradas, marcas de lodo en troncos, basura colgada en arbustos y a qué altura'},
+      {t:'textarea', id:'usoSuelo', label:'Señales de uso del llano', hint:'Huellas de personas o ganado, excremento, pasto comido, veredas'}
+    ],
+    pregunta:'¿Quién usa este llano cuando nadie mira? Lee las huellas del suelo y reconstruye un día normal aquí, sin visitantes de la universidad.'
+  },
+  perimetro: {
+    nombre:'5 · Perímetro de la presa', color:'#A25B3B', suave:'#F4E9E2',
+    desc:'El bordo y las orillas, caminándolos completos',
+    mision:'Tu misión: recorrer el contorno midiendo el bordo y registrando por dónde entra la gente en realidad. Esta pareja produce la evidencia de cómo se llega y por dónde se camina.',
+    especifico:[
+      {t:'num', id:'corona1', label:'Ancho de la corona del bordo · punto inicial', unit:'m'},
+      {t:'num', id:'corona2', label:'Ancho de la corona del bordo · punto medio', unit:'m'},
+      {t:'num', id:'corona3', label:'Ancho de la corona del bordo · punto final', unit:'m'},
+      {t:'num', id:'vereda', label:'Ancho de la vereda más usada', unit:'cm'},
+      {t:'repeat', id:'tramosDanados', label:'Tramos dañados del bordo', hint:'Una fila por tramo; midan la longitud del daño', cols:[
+        {k:'tramo', ph:'¿Qué tramo? (descríbelo)'},
+        {k:'longitud', ph:'Longitud del daño (m)'},
+        {k:'tipo', ph:'Tipo: grieta, hundimiento, erosión...'}
+      ]},
+      {t:'repeat', id:'entradas', label:'Entradas reales', hint:'Busca veredas marcadas por el paso, coincidan o no con las entradas oficiales', cols:[
+        {k:'cual', ph:'Entrada (descríbela)'},
+        {k:'quien', ph:'¿Quién la usa?'},
+        {k:'rueda', ph:'¿Pasaría una carriola o silla de ruedas?'}
+      ]},
+      {t:'tally', id:'llegadas', label:'¿Cómo llegó la gente durante la visita?', items:['A pie','Bicicleta','Moto','Coche o camioneta','Caballo o burro','Otro']}
+    ],
+    pregunta:'¿Por dónde entra realmente la gente? Compara las veredas marcadas por el paso con las entradas que "deberían" usarse y explica las diferencias.'
+  }
+};
+
+const EJES = [
+  {id:'personas', titulo:'A · Personas y usos', fields:[
+    {t:'conteo', id:'conteo', label:'Personas presentes en tu área'},
+    {t:'textarea', id:'huellasUso', label:'Huellas de usos que no están ocurriendo ahora', hint:'Restos de fogata, portería improvisada, envases, cuerdas, sillas dejadas: ¿qué dicen de otros días y horas?'}
+  ]},
+  {id:'piso', titulo:'B · Piso y sombra', fields:[
+    {t:'textarea', id:'piso', label:'¿Cómo está el piso donde camina la gente?', hint:'Firme, resbaloso, con piedra suelta; ¿dónde te costó caminar?'},
+    {t:'textarea', id:'sombra', label:'Sombra a esta hora', hint:'¿Dónde hay y de qué viene: árboles, construcciones?'},
+    {t:'textarea', id:'sentarse', label:'¿Dónde puede sentarse la gente hoy y sobre qué?', hint:'Piedras, troncos, bancas, el suelo'}
+  ]},
+  {id:'natura', titulo:'C · Naturaleza', fields:[
+    {t:'textarea', id:'vegetacion', label:'Vegetación de tu área', hint:'Qué domina, dónde se concentra, si da sombra, fruto o flor'},
+    {t:'textarea', id:'sonidos', label:'Cinco minutos en silencio', hint:'Quédense quietos en un punto fijo y anoten los sonidos del más fuerte al más leve'},
+    {t:'textarea', id:'agua', label:'Solo si tu área toca el agua', hint:'Color, olor, quieta o en movimiento, qué hay en la orilla, basura o espuma en el agua', soloAgua:true}
+  ]},
+  {id:'riesgos', titulo:'D · Riesgos', fields:[
+    {t:'repeat', id:'peligros', label:'Peligros', hint:'Todo lo que pueda lastimar: bordes sin protección, alambres, vidrios, hoyos, corrientes, animales', cols:[
+      {k:'que', ph:'Peligro'},
+      {k:'donde', ph:'¿Dónde exactamente?'},
+      {k:'afecta', ph:'¿A quién afecta más?'},
+      {k:'gravedad', ph:'Gravedad: alta / media / baja'}
+    ]},
+    {t:'repeat', id:'basura', label:'Basura', cols:[
+      {k:'tipo', ph:'Tipo: plástico, vidrio, lata, orgánica...'},
+      {k:'donde', ph:'¿Dónde se acumula?'},
+      {k:'cantidad', ph:'Cantidad: mucha / media / poca'}
+    ]},
+    {t:'textarea', id:'faena', label:'De lo que registraste, ¿qué se arregla con una faena de un día y qué necesita dinero o maquinaria?'}
+  ]}
+];
+
+EJES.push({id:'ideas', titulo:'F · Actividades posibles', fields:[
+  {t:'ideas', id:'ideasGrupo', label:'Ideas que juntamos en clase: ¿caben en tu área?', hint:'✓ si cabe aquí, ✗ si no; deja en blanco lo que no puedas evaluar', items:[
+    'Andador o sendero',
+    'Palapas y áreas de convivencia familiar',
+    'Asadores de barro o adobe',
+    'Zona de camping',
+    'Muelle de madera',
+    'Pesca recreativa (torneos)',
+    'Columpios y juegos',
+    'Bancas de madera local',
+    'Baños secos',
+    'Estacionamiento',
+    'Mural',
+    'Recorrido de historias con QR',
+    'Espacio para abrevar animales',
+    'Eventos comunitarios (kermés, feria)'
+  ]},
+  {t:'textarea', id:'ideasDonde', label:'Para las que sí caben, ¿dónde exactamente las pondrías?', hint:'Sé preciso: "el muelle donde la orilla es firme, junto a..."'},
+  {t:'textarea', id:'ideasNuevas', label:'¿Qué otra actividad imaginas aquí que no está en la lista?', hint:'Algo que solo se te ocurre viendo el sitio'}
+]});
+
+const PREGUNTA_COMUN = '¿Qué es lo más valioso de tu área y qué lo amenaza hoy? Descríbelo como se lo contarías a la asamblea de la comunidad.';
+const MOMENTOS = [
+  {id:'m0', titulo:'Al llegar'},
+  {id:'m1', titulo:'A media visita (~min 60)'},
+  {id:'m2', titulo:'Antes de irse'}
+];
+const CLAVE_LS = 'florida-ficha-v1';
+
+/* ============ ESTADO ============ */
+let S = {
+  area:null, int1:'', int2:'', inicio:null,
+  campos:{},        // id -> {v, no}  (valor / marcado N-O)
+  reps:{},          // id -> [ {colKey:valor,...}, ... ]
+  conteo:{},        // momentoId -> {hora, n, que}
+  tally:{},         // id -> {item:valor}
+  fotos:[]          // {f:'F1', campo:'etiqueta legible'}
+};
+
+/* ============ UTILIDADES ============ */
+const $ = s=>document.querySelector(s);
+function aviso(msg){
+  const a=$('#aviso'); a.textContent=msg; a.classList.add('visible');
+  clearTimeout(a._t); a._t=setTimeout(()=>a.classList.remove('visible'),2200);
+}
+function guardar(){ try{ localStorage.setItem(CLAVE_LS, JSON.stringify(S)); }catch(e){} }
+function horaTxt(d){ d=new Date(d); return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); }
+function pintarArea(){
+  const a=AREAS[S.area];
+  document.documentElement.style.setProperty('--area', a.color);
+  document.documentElement.style.setProperty('--area-suave', a.suave);
+  $('#tbArea').textContent=a.nombre;
+}
+
+/* ============ PANTALLA INICIAL ============ */
+function initPortada(){
+  const cont=$('#listaAreas');
+  Object.entries(AREAS).forEach(([id,a])=>{
+    const b=document.createElement('button');
+    b.className='areaCard'; b.type='button'; b.dataset.id=id;
+    b.innerHTML='<span class="punto" style="background:'+a.color+'"></span>'+
+      '<span><span class="nom">'+a.nombre+'</span><br><span class="desc">'+a.desc+'</span></span>';
+    b.addEventListener('click',()=>{
+      S.area=id; pintarArea();
+      cont.querySelectorAll('.areaCard').forEach(x=>x.classList.toggle('elegida', x.dataset.id===id));
+      validarComenzar();
+    });
+    cont.appendChild(b);
+  });
+  ['int1','int2'].forEach(id=>$('#'+id).addEventListener('input',e=>{S[id]=e.target.value; validarComenzar();}));
+  $('#btnComenzar').addEventListener('click',()=>{
+    S.inicio=Date.now(); guardar(); montarFicha();
+  });
+}
+function validarComenzar(){
+  $('#btnComenzar').disabled=!(S.area && (S.int1.trim()||S.int2.trim()));
+}
+
+/* ============ RELOJ ============ */
+let avisado55=false, avisado110=false;
+setInterval(()=>{
+  if(!S.inicio){ $('#tbReloj').textContent=''; return; }
+  const min=Math.floor((Date.now()-S.inicio)/60000);
+  if(min>=55&&min<60){
+    $('#tbReloj').textContent='⏱ conteo de media visita';
+    if(!avisado55){ avisado55=true; aviso('Toca sellar el conteo de media visita'); }
+  } else if(min>=110){
+    $('#tbReloj').textContent='⏱ conteo antes de irse';
+    if(!avisado110){ avisado110=true; aviso('Toca sellar el conteo antes de irse'); }
+  } else {
+    $('#tbReloj').textContent='min '+min+' / 120';
+  }
+},4000);
+
+/* ============ RENDER DE CAMPOS ============ */
+let contadorFoto=0;
+
+function botonFoto(idCampo, etiqueta, cont){
+  const zona=document.createElement('span');
+  const b=document.createElement('button');
+  b.type='button'; b.className='mini foto'; b.textContent='📷 anoté foto';
+  b.addEventListener('click',()=>{
+    contadorFoto++;
+    const clave='F'+contadorFoto;
+    S.fotos.push({f:clave, campo:etiqueta});
+    const chip=document.createElement('button');
+    chip.type='button'; chip.className='chipFoto'; chip.textContent=clave;
+    chip.title='Tocar para quitar';
+    chip.addEventListener('click',()=>{
+      if(confirm('¿Quitar la referencia '+clave+'?')){
+        S.fotos=S.fotos.filter(x=>x.f!==clave); chip.remove(); guardar();
+      }
+    });
+    zona.appendChild(chip);
+    guardar();
+    aviso('Toma la foto '+clave+' con tu cámara');
+  });
+  cont.appendChild(b); cont.appendChild(zona);
+  // restaurar chips previos
+  S.fotos.filter(x=>x.campo===etiqueta).forEach(x=>{
+    const chip=document.createElement('button');
+    chip.type='button'; chip.className='chipFoto'; chip.textContent=x.f;
+    chip.addEventListener('click',()=>{
+      if(confirm('¿Quitar la referencia '+x.f+'?')){
+        S.fotos=S.fotos.filter(y=>y.f!==x.f); chip.remove(); guardar();
+      }
+    });
+    zona.appendChild(chip);
+    const n=parseInt(x.f.slice(1)); if(n>contadorFoto) contadorFoto=n;
+  });
+}
+
+function botonNO(idCampo, wrap, cont){
+  const b=document.createElement('button');
+  b.type='button'; b.className='mini'; b.textContent='N/O';
+  b.title='No observado';
+  const aplicar=()=>{
+    const esNO=!!(S.campos[idCampo]&&S.campos[idCampo].no);
+    b.classList.toggle('activo',esNO); wrap.classList.toggle('esNO',esNO);
+  };
+  b.addEventListener('click',()=>{
+    S.campos[idCampo]=S.campos[idCampo]||{};
+    S.campos[idCampo].no=!S.campos[idCampo].no;
+    aplicar(); guardar();
+  });
+  cont.appendChild(b); aplicar();
+}
+
+function campoBase(f, etiqueta){
+  const wrap=document.createElement('div'); wrap.className='campo';
+  const lab=document.createElement('label'); lab.htmlFor='c_'+f.id;
+  lab.innerHTML=etiqueta+(f.hint?' <span class="hint">— '+f.hint+'</span>':'');
+  wrap.appendChild(lab);
+  return wrap;
+}
+
+function renderField(f, cont){
+  if(f.t==='conteo') return renderConteo(f,cont);
+  if(f.t==='repeat') return renderRepeat(f,cont);
+  if(f.t==='tally')  return renderTally(f,cont);
+  if(f.t==='ideas')  return renderIdeas(f,cont);
+  if(f.t==='dims')   return renderDims(f,cont);
+
+  const wrap=campoBase(f, f.label);
+  let input;
+  if(f.t==='textarea'){ input=document.createElement('textarea'); }
+  else if(f.t==='sel'){
+    input=document.createElement('select');
+    input.innerHTML='<option value="">— elige —</option>'+f.options.map(o=>'<option>'+o+'</option>').join('');
+  } else {
+    input=document.createElement('input');
+    input.type=(f.t==='num')?'number':'text';
+    if(f.t==='num'){ input.inputMode='decimal'; input.step='any'; input.min='0'; }
+  }
+  input.id='c_'+f.id;
+  const prev=S.campos[f.id]; if(prev&&prev.v!=null) input.value=prev.v;
+
+  let deriv=null;
+  if(f.t==='num'){
+    const fila=document.createElement('div'); fila.className='fila-num';
+    fila.appendChild(input);
+    const u=document.createElement('span'); u.className='unidad'; u.textContent=f.unit||'';
+    fila.appendChild(u); wrap.appendChild(fila);
+    if(f.derive){
+      deriv=document.createElement('div'); deriv.className='derivado'; wrap.appendChild(deriv);
+      const act=()=>{ const v=parseFloat(input.value); deriv.textContent=(isFinite(v)&&v>0)?f.derive(v):''; };
+      input.addEventListener('input',act); act();
+    }
+  } else wrap.appendChild(input);
+
+  input.addEventListener('input',()=>{
+    S.campos[f.id]=S.campos[f.id]||{}; S.campos[f.id].v=input.value; guardar();
+  });
+
+  const acc=document.createElement('div'); acc.className='campo-acciones';
+  botonNO(f.id, wrap, acc);
+  botonFoto(f.id, f.label, acc);
+  wrap.appendChild(acc);
+  cont.appendChild(wrap);
+}
+
+function renderDims(f, cont){
+  const wrap=campoBase({id:f.id, hint:f.hint}, f.l1+' × '+f.l2);
+  const mk=(sub,lab)=>{
+    const fila=document.createElement('div'); fila.className='fila-num'; fila.style.marginBottom='8px';
+    const inp=document.createElement('input'); inp.type='number'; inp.inputMode='decimal'; inp.step='any'; inp.min='0';
+    inp.placeholder=lab; inp.id='c_'+f.id+'_'+sub;
+    const prev=S.campos[f.id+'_'+sub]; if(prev&&prev.v!=null) inp.value=prev.v;
+    const u=document.createElement('span'); u.className='unidad'; u.textContent='m';
+    fila.appendChild(inp); fila.appendChild(u); wrap.appendChild(fila);
+    return inp;
+  };
+  const iL=mk('largo',f.l1), iA=mk('ancho',f.l2);
+  const deriv=document.createElement('div'); deriv.className='derivado'; wrap.appendChild(deriv);
+  const act=()=>{
+    const L=parseFloat(iL.value), A=parseFloat(iA.value);
+    deriv.textContent=(isFinite(L)&&isFinite(A)&&L>0&&A>0)?('Superficie aprox.: '+(L*A).toFixed(0)+' m²'):'';
+  };
+  [ [iL,'largo'], [iA,'ancho'] ].forEach(([inp,sub])=>{
+    inp.addEventListener('input',()=>{
+      S.campos[f.id+'_'+sub]={v:inp.value}; act(); guardar();
+    });
+  });
+  act();
+  const acc=document.createElement('div'); acc.className='campo-acciones';
+  botonFoto(f.id, f.l1+' × '+f.l2, acc);
+  wrap.appendChild(acc);
+  cont.appendChild(wrap);
+}
+
+function renderRepeat(f, cont){
+  const wrap=campoBase({id:f.id, hint:f.hint}, f.label);
+  const zona=document.createElement('div'); zona.className='rep'; wrap.appendChild(zona);
+  S.reps[f.id]=S.reps[f.id]||[];
+
+  function pintar(){
+    zona.innerHTML='';
+    S.reps[f.id].forEach((fila,ix)=>{
+      const div=document.createElement('div'); div.className='repFila';
+      const n=document.createElement('span'); n.className='num'; n.textContent=ix+1; div.appendChild(n);
+      f.cols.forEach(col=>{
+        const inp=document.createElement('input'); inp.type='text'; inp.placeholder=col.ph;
+        inp.value=fila[col.k]||'';
+        inp.addEventListener('input',()=>{ fila[col.k]=inp.value; guardar(); });
+        div.appendChild(inp);
+      });
+      const q=document.createElement('button'); q.type='button'; q.className='quitarFila'; q.textContent='Quitar fila';
+      q.addEventListener('click',()=>{
+        if(confirm('¿Quitar esta fila?')){ S.reps[f.id].splice(ix,1); guardar(); pintar(); }
+      });
+      div.appendChild(q);
+      zona.appendChild(div);
+    });
+    const add=document.createElement('button'); add.type='button'; add.className='agregarFila';
+    add.textContent='+ Agregar fila';
+    add.addEventListener('click',()=>{ S.reps[f.id].push({}); guardar(); pintar(); });
+    zona.appendChild(add);
+  }
+  if(S.reps[f.id].length===0) S.reps[f.id].push({});
+  pintar();
+  const acc=document.createElement('div'); acc.className='campo-acciones';
+  botonFoto(f.id, f.label, acc);
+  wrap.appendChild(acc);
+  cont.appendChild(wrap);
+}
+
+function renderConteo(f, cont){
+  const wrap=campoBase({id:f.id}, f.label);
+  MOMENTOS.forEach(m=>{
+    S.conteo[m.id]=S.conteo[m.id]||{};
+    const box=document.createElement('div'); box.className='momento';
+    const enc=document.createElement('div'); enc.className='encabezado';
+    const tit=document.createElement('span'); tit.className='titulo'; tit.textContent=m.titulo;
+    const sello=document.createElement('button'); sello.type='button'; sello.className='sello';
+    const pinta=()=>{
+      const h=S.conteo[m.id].hora;
+      sello.textContent=h?('Hora sellada: '+horaTxt(h)):'Sellar hora';
+      sello.classList.toggle('hecho',!!h);
+    };
+    sello.addEventListener('click',()=>{ S.conteo[m.id].hora=Date.now(); pinta(); guardar(); });
+    pinta();
+    enc.appendChild(tit); enc.appendChild(sello); box.appendChild(enc);
+    const cuerpo=document.createElement('div'); cuerpo.className='cuerpo';
+    const n=document.createElement('input'); n.type='number'; n.inputMode='numeric'; n.min='0'; n.placeholder='¿Cuántas?';
+    if(S.conteo[m.id].n!=null) n.value=S.conteo[m.id].n;
+    n.addEventListener('input',()=>{ S.conteo[m.id].n=n.value; guardar(); });
+    const que=document.createElement('input'); que.type='text'; que.placeholder='¿Qué están haciendo?';
+    if(S.conteo[m.id].que) que.value=S.conteo[m.id].que;
+    que.addEventListener('input',()=>{ S.conteo[m.id].que=que.value; guardar(); });
+    cuerpo.appendChild(n); cuerpo.appendChild(que); box.appendChild(cuerpo);
+    wrap.appendChild(box);
+  });
+  cont.appendChild(wrap);
+}
+
+function renderIdeas(f, cont){
+  const wrap=campoBase({id:f.id, hint:f.hint}, f.label);
+  const zona=document.createElement('div'); zona.className='ideas'; wrap.appendChild(zona);
+  S.tally[f.id]=S.tally[f.id]||{};
+  f.items.forEach(item=>{
+    const div=document.createElement('div'); div.className='ideaFila';
+    const sp=document.createElement('span'); sp.textContent=item;
+    const btns=document.createElement('div'); btns.className='ideaBtns';
+    const ok=document.createElement('button'); ok.type='button'; ok.className='ok'; ok.textContent='✓';
+    const no=document.createElement('button'); no.type='button'; no.className='no'; no.textContent='✗';
+    const pinta=()=>{
+      ok.classList.toggle('activo', S.tally[f.id][item]==='Sí');
+      no.classList.toggle('activo', S.tally[f.id][item]==='No');
+    };
+    ok.addEventListener('click',()=>{ S.tally[f.id][item]=(S.tally[f.id][item]==='Sí')?'':'Sí'; guardar(); pinta(); });
+    no.addEventListener('click',()=>{ S.tally[f.id][item]=(S.tally[f.id][item]==='No')?'':'No'; guardar(); pinta(); });
+    pinta();
+    btns.appendChild(ok); btns.appendChild(no);
+    div.appendChild(sp); div.appendChild(btns); zona.appendChild(div);
+  });
+  cont.appendChild(wrap);
+}
+
+function renderTally(f, cont){
+  const wrap=campoBase({id:f.id}, f.label);
+  const zona=document.createElement('div'); zona.className='tally'; wrap.appendChild(zona);
+  S.tally[f.id]=S.tally[f.id]||{};
+  f.items.forEach(item=>{
+    const div=document.createElement('div'); div.className='item';
+    const sp=document.createElement('span'); sp.textContent=item;
+    const inp=document.createElement('input'); inp.type='number'; inp.inputMode='numeric'; inp.min='0';
+    if(S.tally[f.id][item]!=null) inp.value=S.tally[f.id][item];
+    inp.addEventListener('input',()=>{ S.tally[f.id][item]=inp.value; guardar(); });
+    div.appendChild(sp); div.appendChild(inp); zona.appendChild(div);
+  });
+  cont.appendChild(wrap);
+}
+
+/* ============ MONTAR LA FICHA ============ */
+function montarFicha(){
+  pintarArea();
+  const a=AREAS[S.area];
+  const P=$('#pantallaFicha');
+  P.innerHTML='';
+  $('#pantallaInicio').classList.add('oculto');
+  $('#pantallaReporte').classList.add('oculto');
+  P.classList.remove('oculto');
+
+  const h=document.createElement('h1'); h.textContent=a.nombre; P.appendChild(h);
+  const sub=document.createElement('p'); sub.className='sub';
+  sub.textContent=[S.int1,S.int2].filter(Boolean).join(' y ')+' · inicio '+horaTxt(S.inicio);
+  P.appendChild(sub);
+  const mis=document.createElement('div'); mis.className='mision'; mis.textContent=a.mision; P.appendChild(mis);
+
+  EJES.forEach(eje=>{
+    const sec=document.createElement('section'); sec.className='card';
+    const t=document.createElement('h2'); t.textContent=eje.titulo; sec.appendChild(t);
+    eje.fields.filter(f=>!(f.soloAgua&&S.area==='abierta')).forEach(f=>renderField(f,sec));
+    P.appendChild(sec);
+  });
+
+  const secM=document.createElement('section'); secM.className='card';
+  const tM=document.createElement('h2'); tM.textContent='G · Mediciones con cinta · '+a.nombre.slice(4);
+  secM.appendChild(tM);
+  a.especifico.forEach(f=>renderField(f,secM));
+  P.appendChild(secM);
+
+  const secP=document.createElement('section'); secP.className='card';
+  const tP=document.createElement('h2'); tP.textContent='H · Para mirar despacio'; secP.appendChild(tP);
+  renderField({t:'textarea', id:'pregComun', label:PREGUNTA_COMUN}, secP);
+  renderField({t:'textarea', id:'pregArea', label:a.pregunta}, secP);
+  P.appendChild(secP);
+
+  const btn=document.createElement('button'); btn.className='btn'; btn.textContent='Generar reporte';
+  btn.addEventListener('click', revisarYGenerar);
+  P.appendChild(btn);
+
+  const pie=document.createElement('div'); pie.className='pieAcciones';
+  const rein=document.createElement('button'); rein.type='button'; rein.className='quitarFila';
+  rein.textContent='Reiniciar ficha (borra todo lo capturado)';
+  rein.addEventListener('click',()=>{
+    if(confirm('Se borrará todo lo capturado en este celular. ¿Reiniciar?') && confirm('¿De verdad? Esta acción no se puede deshacer.')){
+      localStorage.removeItem(CLAVE_LS); location.reload();
+    }
+  });
+  pie.appendChild(rein); P.appendChild(pie);
+}
+
+/* ============ REPORTE ============ */
+function vTxt(id){
+  const c=S.campos[id];
+  if(c&&c.no) return 'N/O';
+  return (c&&c.v!=null&&String(c.v).trim()!=='')?String(c.v).trim():'(sin registro)';
+}
+function linea(clave,valor){ return clave.toUpperCase()+': '+valor; }
+
+function listaFaltantes(){
+  const a=AREAS[S.area], faltan=[];
+  const vacio=id=>{ const c=S.campos[id]; return !(c&&(c.no||(c.v!=null&&String(c.v).trim()!==''))); };
+  const revisa=f=>{
+    if(f.soloAgua&&S.area==='abierta') return;
+    if(f.t==='conteo'){
+      MOMENTOS.forEach(m=>{ const c=S.conteo[m.id]||{};
+        if(!c.hora||c.n==null||c.n==='') faltan.push('Conteo · '+m.titulo); });
+      return;
+    }
+    if(f.t==='repeat'){
+      const filas=(S.reps[f.id]||[]).filter(fl=>f.cols.some(c=>(fl[c.k]||'').trim()!==''));
+      if(!filas.length) faltan.push(f.label);
+      return;
+    }
+    if(f.t==='tally'||f.t==='ideas'){
+      const t=S.tally[f.id]||{};
+      if(!f.items.some(i=>t[i]!=null&&t[i]!=='')) faltan.push(f.label);
+      return;
+    }
+    if(f.t==='dims'){
+      if(vacio(f.id+'_largo')||vacio(f.id+'_ancho')) faltan.push(f.l1+' × '+f.l2);
+      return;
+    }
+    if(vacio(f.id)) faltan.push(f.label);
+  };
+  EJES.forEach(e=>e.fields.forEach(revisa));
+  a.especifico.forEach(revisa);
+  if(vacio('pregComun')) faltan.push('Pregunta común (lo más valioso)');
+  if(vacio('pregArea')) faltan.push('Pregunta del área');
+  return faltan;
+}
+
+function revisarYGenerar(){
+  const faltan=listaFaltantes();
+  if(faltan.length){
+    const lista=faltan.slice(0,12).map(x=>'· '+x).join('\n')+(faltan.length>12?'\n· ...':'');
+    const seguir=confirm('Faltan '+faltan.length+' campos sin llenar ni marcar N/O:\n\n'+lista+'\n\n¿Generar el reporte de todos modos?');
+    if(!seguir){ aviso('Completa o marca N/O los campos pendientes'); return; }
+  }
+  generarReporte();
+}
+
+function generarReporte(){
+  const a=AREAS[S.area];
+  const L=[];
+  L.push('======================================');
+  L.push('FICHA DE OBSERVACIÓN · PRESA LA FLORIDA');
+  L.push('======================================');
+  L.push(linea('fecha', new Date().toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'})));
+  L.push(linea('área', a.nombre));
+  L.push(linea('equipo', [S.int1,S.int2].filter(Boolean).join(' y ')||'(sin nombres)'));
+  L.push(linea('inicio', horaTxt(S.inicio)));
+  L.push(linea('reporte generado', horaTxt(Date.now())));
+  L.push('');
+
+  EJES.forEach(eje=>{
+    L.push('---- '+eje.titulo.toUpperCase()+' ----');
+    eje.fields.filter(f=>!(f.soloAgua&&S.area==='abierta')).forEach(f=>agregarCampo(L,f));
+    L.push('');
+  });
+
+  L.push('---- G · MEDICIONES CON CINTA ----');
+  a.especifico.forEach(f=>agregarCampo(L,f));
+  L.push('');
+
+  L.push('---- H · PARA MIRAR DESPACIO ----');
+  L.push(linea('lo más valioso y su amenaza', vTxt('pregComun')));
+  L.push(linea('pregunta del área', vTxt('pregArea')));
+  L.push('');
+
+  if(S.fotos.length){
+    L.push('---- FOTOS ----');
+    S.fotos.forEach(x=>L.push(x.f+' → '+x.campo));
+    L.push('');
+  }
+  L.push('== FIN DE LA FICHA ==');
+
+  $('#reporteTxt').value=L.join('\n');
+  $('#pantallaFicha').classList.add('oculto');
+  $('#pantallaReporte').classList.remove('oculto');
+  window.scrollTo(0,0);
+}
+
+function agregarCampo(L,f){
+  if(f.t==='conteo'){
+    MOMENTOS.forEach(m=>{
+      const c=S.conteo[m.id]||{};
+      L.push(linea('conteo · '+m.titulo,
+        (c.hora?horaTxt(c.hora):'sin hora')+' · '+
+        (c.n!=null&&c.n!==''?c.n+' personas':'(sin conteo)')+
+        (c.que?' · '+c.que:'')));
+    });
+    return;
+  }
+  if(f.t==='repeat'){
+    const filas=(S.reps[f.id]||[]).filter(fl=>f.cols.some(c=>(fl[c.k]||'').trim()!==''));
+    L.push(f.label.toUpperCase()+': '+(filas.length? '' : '(sin registros)'));
+    filas.forEach((fl,ix)=>{
+      L.push('  '+(ix+1)+'. '+f.cols.map(c=>c.ph+': '+((fl[c.k]||'').trim()||'—')).join(' | '));
+    });
+    return;
+  }
+  if(f.t==='tally'){
+    const t=S.tally[f.id]||{};
+    const partes=f.items.map(i=>i+': '+((t[i]!=null&&t[i]!=='')?t[i]:'0'));
+    L.push(linea(f.label, partes.join(' · ')));
+    return;
+  }
+  if(f.t==='ideas'){
+    const t=S.tally[f.id]||{};
+    const con=f.items.filter(i=>t[i]);
+    L.push(f.label.toUpperCase()+': '+(con.length?'':'(sin evaluaciones)'));
+    con.forEach(i=>L.push('  · '+i+' → '+t[i]));
+    return;
+  }
+  if(f.t==='dims'){
+    const gL=vTxt(f.id+'_largo'), gA=vTxt(f.id+'_ancho');
+    L.push(linea(f.l1, gL+' m'));
+    L.push(linea(f.l2, gA+' m'));
+    const nL=parseFloat(gL), nA=parseFloat(gA);
+    if(isFinite(nL)&&isFinite(nA)) L.push(linea('superficie aprox.', (nL*nA).toFixed(0)+' m²'));
+    return;
+  }
+  let v=vTxt(f.id);
+  if(f.t==='num'&&v!=='N/O'&&v!=='(sin registro)'){
+    v=v+' '+(f.unit||'');
+    if(f.derive){ const n=parseFloat(vTxt(f.id)); if(isFinite(n)) v+=' ('+f.derive(n)+')'; }
+  }
+  L.push(linea(f.label, v));
+}
+
+/* ============ COPIAR / COMPARTIR / DESCARGAR ============ */
+function initReporteBtns(){
+  $('#btnCopiar').addEventListener('click',()=>{
+    const txt=$('#reporteTxt').value;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(()=>aviso('Reporte copiado'),()=>copiaManual());
+    } else copiaManual();
+  });
+  function copiaManual(){
+    const t=$('#reporteTxt'); t.removeAttribute('readonly'); t.select();
+    try{ document.execCommand('copy'); aviso('Reporte copiado'); }catch(e){ aviso('Mantén presionado el texto para copiarlo'); }
+    t.setAttribute('readonly',''); window.getSelection().removeAllRanges();
+  }
+  $('#btnCompartir').addEventListener('click',()=>{
+    const txt=$('#reporteTxt').value;
+    if(navigator.share){ navigator.share({text:txt}).catch(()=>{}); }
+    else aviso('Tu navegador no comparte directo: usa Copiar');
+  });
+  $('#btnDescargar').addEventListener('click',()=>{
+    const blob=new Blob([$('#reporteTxt').value],{type:'text/plain;charset=utf-8'});
+    const aEl=document.createElement('a');
+    aEl.href=URL.createObjectURL(blob);
+    aEl.download='ficha-'+S.area+'-la-florida.txt';
+    document.body.appendChild(aEl); aEl.click(); aEl.remove();
+  });
+  $('#btnVolver').addEventListener('click',()=>{
+    $('#pantallaReporte').classList.add('oculto');
+    $('#pantallaFicha').classList.remove('oculto');
+  });
+}
+
+/* ============ ARRANQUE ============ */
+(function(){
+  initPortada(); initReporteBtns();
+  let previo=null;
+  try{ previo=JSON.parse(localStorage.getItem(CLAVE_LS)); }catch(e){}
+  if(previo&&previo.area&&previo.inicio){
+    S=Object.assign(S,previo);
+    S.campos=previo.campos||{}; S.reps=previo.reps||{};
+    S.conteo=previo.conteo||{}; S.tally=previo.tally||{}; S.fotos=previo.fotos||[];
+    montarFicha();
+    aviso('Avance recuperado');
+  }
+})();
+
+</script>
+</body>
+</html>
