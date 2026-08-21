@@ -7,7 +7,10 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 52 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 7 (20 ago 2026): la semana 4 reconstruida como
+- **Último bloque cerrado:** bloque 8 (20 ago 2026): la evaluación de la unidad 1
+  consolidada: el cuadernillo 1 se llena en línea y se descarga, el suelo y la
+  autoevaluación quedan explicados, y los vacíos detectados se resolvieron (ver
+  el bloque al final). Antes, bloque 7 (20 ago 2026): la semana 4 reconstruida como
   mazos de láminas; con ella la unidad 1 queda completa en el formato nuevo. Antes,
   bloque 6 (20 ago 2026): la semana 3 reconstruida como
   mazos de láminas y el mapa de fuentes por semana para producir el resto del
@@ -236,6 +239,14 @@ aquí en adelante. Al diseñar otra materia, se dan por puestas.
 
 - Confirmar los temas vivos de La Florida con la autoridad local antes de la
   consulta del viernes 28 de agosto (lo pide la lámina 4 del viernes de la S3).
+- Decidir el canal definitivo de la autoevaluación transcrita: hoy el botón del
+  cuadernillo arma un correo a eduardo.lusan@gmail.com con asunto uniforme
+  «Autoevaluación U1 · Nombre» (mismo camino que el vaciado de la entrevista);
+  si Eduardo prefiere Google Form, se cambia el botón.
+- Al producir los cuadernillos 2 a 4, darles el mismo llenado en línea
+  (data-cuadernillo + data-exp, ya genérico en curso.js) y resolver ahí las
+  hojas transversales: el anti-currículum vive en el cuadernillo 3 pero se
+  estrena en la S2, y la hoja de solicitudes reales aún no existe en ninguno.
 - Ilustraciones a tinta de la semana 3, cuando Eduardo las entregue. Candidatas:
   la promesa de contrabando, el mosaico de la comunidad, la pared del parque de
   perros.
@@ -328,3 +339,57 @@ Decisiones que obligan hacia adelante:
 - El suelo de la unidad 1 nombra "los dos minutos" (así se le dice al primer
   peldaño) en lugar de "la presentación en parejas": el círculo se hace por
   estaciones, no por parejas.
+
+## Bloque 8 (20 de agosto de 2026): la evaluación de la unidad 1, consolidada
+
+Pedido de Eduardo: que el cuadernillo se pueda llenar y guardar en la página,
+no solo imprimir; que el suelo y la autoevaluación queden explicados (es la
+primera vez que el grupo los vive); y detectar vacíos.
+
+### Lo construido
+
+- **Cuadernillo digital genérico en `curso.js`** (`montarCuadernillo`): cualquier
+  página con `[data-cuadernillo]` guarda sus campos `[data-exp]` en localStorage
+  mientras se escribe, con barra fija: Descargar mi cuadernillo (archivo HTML
+  autocontenido con todo lo escrito, casillas incluidas), Imprimir y Borrar mis
+  respuestas. Misma filosofía que los pactos: nada viaja a ningún servidor
+  (regla 8 intacta). Sirve tal cual para los cuadernillos 2 a 4.
+- **`expediente-u1.html` rehecho:** portadilla con nombre capturable, página
+  nueva "Cómo funciona este cuadernillo" (incluye la advertencia de máquinas
+  compartidas), Dónde empiezo con textareas, mapa de evidencias con 10 filas
+  capturables, el suelo con casillas reales y cada punto explicado con su
+  evidencia y su plan B, página nueva "La autoevaluación, explicada", y la
+  autoevaluación 1 capturable con botón que arma el correo de transcripción.
+- **S4 jueves gana el bloque 7, "El cierre de la unidad, explicado"** (10 min,
+  dos láminas: el suelo es piso no techo; la autoevaluación produce práctica,
+  no número). El protocolo pasa a bloque 8; el jueves queda en 110 min.
+- **`expediente-del-gestor.html`** anuncia el llenado en línea.
+
+### Vacíos detectados y cómo se resolvieron
+
+1. **La compensatoria de la consulta no existía.** Definida en el suelo:
+   entrevista apreciativa a dos personas de la propia comunidad con el guion de
+   la estación, registro textual y en limpio, antes del viernes de la S5.
+   (Definición propuesta por Claude; Eduardo puede ajustarla.)
+2. **El "formulario privado" de la autoevaluación no existía.** Se armó por
+   mailto con asunto uniforme, como el vaciado de la entrevista. Queda en
+   pendientes decidir si se cambia a Google Form.
+3. **El punto de tickets del suelo era inauditable** (los tickets pueden ir
+   anónimos). Se volvió explícito que la casilla se marca bajo palabra.
+4. **El sobre no tenía plan para quien entró tarde.** Resuelto: se declara en
+   la autoevaluación y la casilla se da por cubierta.
+5. **La regla de los tres casos "desde el ensayo" no decía cómo opera sin
+   número.** Resuelto: comparación voluntaria de lecturas en cinco minutos,
+   sin registro de ninguna de las dos.
+6. **Hojas transversales:** el anti-currículum vive en el cuadernillo 3 pero se
+   estrena en la S2, y la hoja de solicitudes reales no existe aún. Se difiere
+   a la producción de los cuadernillos 2 a 4 (quedó en pendientes).
+
+### Ilustraciones
+
+Los prompts en inglés para Gemini de las semanas 3 y 4 (cuatro por semana)
+viven en `~/Descargas/imagenes-semana-03.md` y `~/Descargas/imagenes-semana-04.md`
+(carpeta local del profesor, no se suben). Los placeholders ya están comentados
+en el HTML de las dos semanas, cada uno como lámina independiente
+(`.lam--figura`) para que la imagen no se corte en el telón: llegada la imagen
+a `assets/img/semana-0N/`, solo se descomenta.

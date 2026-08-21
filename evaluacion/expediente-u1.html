@@ -19,45 +19,36 @@
   table { width:100%; border-collapse:collapse; margin:.5rem 0; }
   th, td { border:1px solid var(--borde); padding:.45rem .55rem; text-align:left; vertical-align:top; }
   th { background:#E4EFEB; color:var(--profundo); font-size:.86rem; }
+  td input { width:100%; border:none; font:inherit; font-size:.9rem; background:transparent; padding:.15rem .1rem; }
+  td input:focus { outline:2px solid var(--marca); border-radius:4px; }
   .ejemplo td { color:#9ab0aa; font-style:italic; }
   .clave { border-left:5px solid var(--arena); background:#FBF7EC; padding:.6rem .9rem; margin:.8rem 0; }
   .linea-larga { border-bottom:1px solid var(--borde); height:1.5rem; }
-  .renglones div { border-bottom:1px solid var(--borde); height:1.7rem; }
   .chk { display:flex; gap:.55rem; align-items:flex-start; padding:.3rem 0; }
-  .chk .caja { flex:none; width:1rem; height:1rem; border:1.5px solid var(--marca); border-radius:3px; margin-top:.2rem; }
-  .portada { text-align:center; padding:5rem 2.3rem 4rem; }
-  .portada .franja { width:80px; height:6px; background:var(--arena); margin:1.4rem auto; border-radius:3px; }
-  .portada h1 { font-size:2.1rem; }
-  .portada .nombre { margin-top:4rem; }
-  .portada .nombre .linea-larga { max-width:420px; margin:0 auto; }
-  .portada .nota { color:#68807a; font-size:.9rem; max-width:460px; margin:2.5rem auto 0; }
-  .pie { font-size:.78rem; color:#8aa39c; margin-top:1.4rem; border-top:1px dashed var(--borde); padding-top:.5rem; }
-  #btn-imprimir { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.7rem 1.1rem; font:inherit; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); }
-  @media print {
-    body { background:#fff; }
-    .pagina { max-width:none; margin:0; border:none; padding:0 0 1rem; page-break-after:always; }
-    .pagina:last-child { page-break-after:auto; }
-    #btn-imprimir { display:none; }
-    @page { margin:1.6cm; }
-  }
-
-  .cuadernillos{display:grid;gap:.7rem;margin:1rem 0}
-  .cuadernillos a{display:block;background:#fff;border:1px solid var(--borde);border-left:5px solid var(--arena);border-radius:0 10px 10px 0;padding:.8rem 1rem;text-decoration:none;color:var(--texto)}
-  .cuadernillos a:hover{background:#F7FAF9}
-  .cuadernillos a b{display:block;font-family:Georgia,serif;color:var(--marca);font-size:1.08rem}
-  .cuadernillos a .cuando{display:block;font-size:.82rem;color:#8aa39c;text-transform:uppercase;letter-spacing:.08em;font-weight:bold;margin-bottom:.15rem}
-  .cuadernillos a .q{display:block;font-size:.9rem;color:#68807a;margin-top:.25rem}
+  .chk input[type=checkbox] { flex:none; width:1.05rem; height:1.05rem; margin-top:.25rem; accent-color:var(--marca); }
+  .suelo-item { border-bottom:1px dashed var(--borde); padding:.45rem 0; }
+  .suelo-item:last-of-type { border-bottom:none; }
+  .suelo-item .como { display:block; font-size:.84rem; color:#68807a; margin:.1rem 0 0 1.6rem; }
   .portadilla{text-align:center;padding:4rem 2.3rem 3rem}
   .portadilla .franja{width:80px;height:6px;background:var(--arena);margin:1.2rem auto;border-radius:3px}
   .portadilla h1{font-size:1.9rem}
   .portadilla .preg{font-family:Georgia,serif;font-style:italic;color:#45605a;font-size:1.1rem}
-  .portadilla .guarda{max-width:430px;margin:2.6rem auto 0;text-align:left;background:#F7FAF9;border:1px solid var(--borde);border-radius:10px;padding:.9rem 1.1rem}
+  .portadilla .guarda{max-width:430px;margin:2.4rem auto 0;text-align:left;background:#F7FAF9;border:1px solid var(--borde);border-radius:10px;padding:.9rem 1.1rem}
   .portadilla .guarda b{display:block;font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;color:var(--marca);margin-bottom:.3rem}
-  .portadilla .nombre{margin-top:2.4rem}
-  .portadilla .nombre .linea-larga{max-width:380px;margin:0 auto}
+  .portadilla .nombre{margin-top:2.2rem;max-width:420px;margin-left:auto;margin-right:auto}
+  .pie { font-size:.78rem; color:#8aa39c; margin-top:1.4rem; border-top:1px dashed var(--borde); padding-top:.5rem; }
+  .btn-correo { background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.5rem 1.2rem; font:inherit; font-size:.92rem; font-weight:bold; cursor:pointer; margin-top:.5rem; }
+  .btn-correo:hover { filter:brightness(1.12); }
+  @media print {
+    body { background:#fff; }
+    .pagina { max-width:none; margin:0; border:none; padding:0 0 1rem; page-break-after:always; }
+    .pagina:last-child { page-break-after:auto; }
+    .btn-correo { display:none; }
+    @page { margin:1.6cm; }
+  }
 </style>
 </head>
-<body>
+<body data-cuadernillo="u1">
 
 <div class="pagina portadilla">
   <div class="curso">Expediente del gestor · La presa que queremos</div>
@@ -66,12 +57,28 @@
   <h1>Unidad 1 · Escuchar la presa</h1>
   <p class="preg">¿Qué quiere la gente y cómo se sabe?</p>
   <div class="guarda"><b>Qué se guarda aquí</b>
+    <div>· Cómo funciona este cuadernillo (léelo una vez)</div>
     <div>· Dónde empiezo, tu punto de partida</div>
     <div>· El mapa de evidencias del semestre</div>
-    <div>· El suelo de la unidad 1</div>
-    <div>· Autoevaluación 1, de ensayo</div>
+    <div>· El suelo de la unidad 1, explicado</div>
+    <div>· Autoevaluación 1, de ensayo, explicada</div>
   </div>
-  <div class="nombre"><div class="linea-larga"></div><p style="font-size:.9rem;color:#68807a;margin-top:.3rem">Nombre del gestor o de la gestora</p></div>
+  <div class="nombre">
+    <input type="text" class="exp-campo" data-exp="nombre" placeholder="Nombre del gestor o de la gestora" style="text-align:center;font-family:Georgia,serif;font-size:1.05rem">
+    <p style="font-size:.9rem;color:#68807a;margin-top:.3rem">Como apareces en la lista del grupo</p>
+  </div>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Cómo funciona</div>
+  <h2>Este cuadernillo se llena aquí, en papel, o en los dos</h2>
+  <p>Todo lo que escribas en esta página <strong>se guarda solo, en este navegador</strong>, mientras escribes. No viaja a ningún servidor, no le llega al profesor, no lo ve nadie: igual que tus pactos, el registro es tuyo.</p>
+  <ul>
+    <li><strong>Descargar mi cuadernillo</strong> (botón de abajo a la derecha) te baja un archivo con todo lo que llevas escrito. Mándatelo a tu propio WhatsApp o correo: así no dependes de este navegador ni de esta máquina.</li>
+    <li><strong>Imprimir</strong> sigue valiendo igual: puedes imprimirlo en blanco y llenarlo a mano, o imprimirlo ya lleno. La carpeta física del expediente existe de todos modos; lo que llenes aquí cuenta igual que lo que llenes con pluma.</li>
+    <li><strong>Ojo con las máquinas compartidas:</strong> si llenas esto en una computadora del campus, descarga tu copia y luego usa "Borrar mis respuestas", para que el siguiente no se encuentre lo tuyo.</li>
+  </ul>
+  <div class="clave"><strong>La regla de siempre:</strong> la evidencia que no registras no existe. Da igual el soporte; lo que no perdona este expediente es la hoja vacía.</div>
 </div>
 
 <div class="pagina">
@@ -79,14 +86,14 @@
   <h2>Dónde empiezo</h2>
   <p>Tres preguntas, sin adornos. En diciembre vas a releer esta hoja y te va a dar gusto (o risa, que también sirve).</p>
   <h3>Lo que ya sé hacer hoy</h3>
-  <div class="renglones"><div></div><div></div><div></div></div>
+  <textarea class="exp-campo" data-exp="empiezo-se" placeholder="Sin modestia y sin inflar: lo que ya traes."></textarea>
   <h3>Lo que quiero saber hacer en diciembre</h3>
-  <div class="renglones"><div></div><div></div><div></div></div>
+  <textarea class="exp-campo" data-exp="empiezo-dic" placeholder="Concreto: que se pueda comprobar si pasó o no."></textarea>
   <h3>Personas que conozco que ya viven de proyectos (aunque sea de lejos)</h3>
-  <div class="renglones"><div></div><div></div><div></div></div>
+  <textarea class="exp-campo" data-exp="empiezo-personas" placeholder="Nombres y de qué los conoces. Esta lista alimenta tu contrato de gestión."></textarea>
   <h3>Mi pronóstico del sobre (cópialo aquí antes de sellarlo, para tu propio registro)</h3>
-  <div class="renglones"><div></div><div></div><div></div></div>
-  <p class="pie">Fecha: __________ · Se llena en la semana 1</p>
+  <textarea class="exp-campo" data-exp="empiezo-sobre" placeholder="Las tres cosas que creías que la gente iba a pedir."></textarea>
+  <p class="pie">Se llena en la semana 1. Si entraste tarde al curso, llénala el día que llegues: tu punto de partida es ese.</p>
 </div>
 
 <div class="pagina">
@@ -96,49 +103,99 @@
   <table>
     <tr><th style="width:16%">Semana</th><th style="width:42%">Qué es la evidencia</th><th>Dónde está</th></tr>
     <tr class="ejemplo"><td>S4</td><td>Foto del sobre abierto junto a los resultados de la consulta</td><td>Drive del curso · carpeta S4</td></tr>
-    <tr><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td></tr>
+    <tr><td><input data-exp="mapa-1s"></td><td><input data-exp="mapa-1q"></td><td><input data-exp="mapa-1d"></td></tr>
+    <tr><td><input data-exp="mapa-2s"></td><td><input data-exp="mapa-2q"></td><td><input data-exp="mapa-2d"></td></tr>
+    <tr><td><input data-exp="mapa-3s"></td><td><input data-exp="mapa-3q"></td><td><input data-exp="mapa-3d"></td></tr>
+    <tr><td><input data-exp="mapa-4s"></td><td><input data-exp="mapa-4q"></td><td><input data-exp="mapa-4d"></td></tr>
+    <tr><td><input data-exp="mapa-5s"></td><td><input data-exp="mapa-5q"></td><td><input data-exp="mapa-5d"></td></tr>
+    <tr><td><input data-exp="mapa-6s"></td><td><input data-exp="mapa-6q"></td><td><input data-exp="mapa-6d"></td></tr>
+    <tr><td><input data-exp="mapa-7s"></td><td><input data-exp="mapa-7q"></td><td><input data-exp="mapa-7d"></td></tr>
+    <tr><td><input data-exp="mapa-8s"></td><td><input data-exp="mapa-8q"></td><td><input data-exp="mapa-8d"></td></tr>
+    <tr><td><input data-exp="mapa-9s"></td><td><input data-exp="mapa-9q"></td><td><input data-exp="mapa-9d"></td></tr>
+    <tr><td><input data-exp="mapa-10s"></td><td><input data-exp="mapa-10q"></td><td><input data-exp="mapa-10d"></td></tr>
   </table>
   <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
 </div>
 
 <div class="pagina">
   <div class="curso">Expediente del gestor · El suelo de esta unidad</div>
-  <h2>Tu checklist de no reprobar</h2>
-  <p>Esto es lo que basta cumplir en esta unidad para no reprobar la materia. Sin números y sin letra chiquita. Marca cada casilla cuando esté hecha; tu profesor lleva la misma lista.</p>
+  <h2>Tu checklist de no reprobar, explicado</h2>
+  <p>El suelo es <strong>piso, no techo</strong>: la lista corta de lo que basta cumplir para no reprobar la materia. No es la meta del curso, es la red de seguridad, y por eso es pública desde el primer día y no cambia a media unidad. Marca cada casilla cuando esté hecha; tu profesor lleva la misma lista, y las dos se ponen sobre la mesa al abrir la semana 5.</p>
   <h3>Unidad 1 · Escuchar la presa</h3>
-  <div class="chk"><span class="caja"></span><span>Contrato de gestión firmado (semana 2)</span></div>
-  <div class="chk"><span class="caja"></span><span>Participé en la consulta comunitaria (o hice la actividad compensatoria)</span></div>
-  <div class="chk"><span class="caja"></span><span>Sellé mi sobre en la semana 1</span></div>
-  <div class="chk"><span class="caja"></span><span>Los dos minutos del círculo en la orilla (semana 4)</span></div>
-  <div class="chk"><span class="caja"></span><span>Tickets de salida de la unidad respondidos</span></div>
+  <div class="suelo-item">
+    <label class="chk"><input type="checkbox" data-exp="suelo-contrato"><span><strong>Contrato de gestión firmado</strong> (semana 2)</span></label>
+    <span class="como">Su evidencia: el papel firmado en tu carpeta. Si aún no lo entregas, se entrega el jueves de la semana 5: tarde pero completo vale; ausente no.</span>
+  </div>
+  <div class="suelo-item">
+    <label class="chk"><input type="checkbox" data-exp="suelo-consulta"><span><strong>Participé en la consulta comunitaria</strong> (o hice la compensatoria)</span></label>
+    <span class="como">Su evidencia: tu registro en limpio. La compensatoria, si faltaste con causa: entrevista apreciativa a dos personas de tu propia comunidad con el guion de tu estación, registro textual incluido y pasado en limpio, entregada antes del viernes de la semana 5.</span>
+  </div>
+  <div class="suelo-item">
+    <label class="chk"><input type="checkbox" data-exp="suelo-sobre"><span><strong>Sellé mi sobre en la semana 1</strong></span></label>
+    <span class="como">Su evidencia: tu sobre estuvo en el cartel y se abrió en la orilla. Si entraste tarde y no hubo sobre tuyo, lo dices en la autoevaluación y la casilla se da por cubierta: no se te pide lo que no estuvo en tu mano.</span>
+  </div>
+  <div class="suelo-item">
+    <label class="chk"><input type="checkbox" data-exp="suelo-minutos"><span><strong>Los dos minutos del círculo en la orilla</strong> (semana 4)</span></label>
+    <span class="como">Su evidencia: estuviste en el círculo y tu estructura de "Mis dos minutos" quedó llena en la bitácora.</span>
+  </div>
+  <div class="suelo-item">
+    <label class="chk"><input type="checkbox" data-exp="suelo-tickets"><span><strong>Respondí los tickets de salida de la unidad</strong></span></label>
+    <span class="como">Esta casilla se marca bajo palabra: los tickets pueden ir sin nombre y nadie los audita. El sistema entero de este curso funciona sobre tu palabra; cuidarla también es parte del oficio.</span>
+  </div>
+  <div class="clave" style="margin-top:1rem"><strong>¿Te falta una casilla?</strong> No es drama, es pendiente: cada una trae escrito su plan B y su fecha límite. Lo que no existe es el "ya ni modo": el suelo se completa, no se negocia.</div>
   <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Antes de autoevaluarte</div>
+  <h2>La autoevaluación, explicada</h2>
+  <p>Es la primera vez que haces esto en el curso, así que va el mapa completo:</p>
+  <ul>
+    <li><strong>Es de ensayo.</strong> No produce calificación ni se archiva en ningún lado: produce práctica de mirarte con honestidad. Habrá otras dos de ensayo (semanas 11 y 14) y una que sí cuenta, la de diciembre, donde propones tu calificación con el expediente en la mesa. Estas tres son el gimnasio de aquella.</li>
+    <li><strong>Nadie te la recoge.</strong> El jueves de la semana 5 se abre un espacio para comentarla: compartir lo que escribiste es opcional, traerla hecha no.</li>
+    <li><strong>La regla de los tres casos se practica desde ahora, sin riesgo.</strong> Si quieres, le pides al profesor su lectura de tu unidad y la comparan cinco minutos: si coinciden, listo; si la tuya es más baja, él te dice por qué ve más; si la tuya es más alta, defiendes tu caso con evidencia. En el ensayo no queda registro de ninguna de las dos lecturas: es práctica del músculo, no acta.</li>
+    <li><strong>La honestidad va en las dos direcciones.</strong> Ponerte de menos no es humildad ni ponerte de más es confianza: las dos son puntería que todavía no tienes. Para eso se ensaya.</li>
+  </ul>
+  <div class="clave"><strong>Qué hace buena una autoevaluación:</strong> cita evidencia que existe ("mi registro en limpio, en la bitácora"; "la foto del mapa, Drive S4"), habla de hechos y no de intenciones, y el número que propone trae argumento. "Participé mucho" no es evidencia; "mi estación registró 14 frases textuales y yo anoté 6" sí.</div>
 </div>
 
 <div class="pagina">
   <div class="curso">Expediente del gestor · Autoevaluación 1 (ensayo)</div>
   <h2>Cierre de la unidad 1 · Semana 4</h2>
-  <p>Primera parada. Esta autoevaluación es ensayo: no produce calificación, produce práctica de mirarte con honestidad.</p>
+  <p>Primera parada. Se llena el fin de semana después de la consulta, con tu registro en limpio a la vista.</p>
   <h3>Lo que hice esta unidad (con evidencia: cita tu mapa)</h3>
-  <div class="renglones"><div></div><div></div><div></div></div>
+  <textarea class="exp-campo" data-exp="auto-hice" placeholder="Hechos con su evidencia, no intenciones."></textarea>
   <h3>Lo que me costó y cómo lo enfrenté</h3>
-  <div class="renglones"><div></div><div></div><div></div></div>
+  <textarea class="exp-campo" data-exp="auto-costo" placeholder="Lo difícil también es evidencia: de que estabas jugando."></textarea>
   <h3>Mi sobre contra la realidad: ¿qué tanto conocía a mi comunidad?</h3>
-  <div class="renglones"><div></div><div></div></div>
-  <h3>Si esta unidad llevara número, yo me pondría un ______ porque:</h3>
-  <div class="renglones"><div></div><div></div><div></div></div>
-  <div class="clave"><strong>Bloque para transcribir al formulario privado:</strong> nombre, unidad 1, calificación propuesta y la justificación de arriba en dos frases.</div>
-  <p class="pie">Fecha: __________ · La regla de los tres casos aplica desde el ensayo, para que la conozcas sin riesgo.</p>
+  <textarea class="exp-campo" data-exp="auto-sobre" placeholder="Qué acertaste, qué te sorprendió, y qué dice eso de diseñar de oídas."></textarea>
+  <h3>Si esta unidad llevara número, yo me pondría un
+    <input type="text" data-exp="auto-num" maxlength="3" style="width:3.2rem;border:none;border-bottom:2px solid var(--marca);font:inherit;text-align:center;font-weight:bold"> porque:</h3>
+  <textarea class="exp-campo" data-exp="auto-porque" placeholder="El argumento, en dos o tres frases. Este es el bloque que se transcribe."></textarea>
+  <div class="clave">
+    <strong>Bloque para transcribir al canal privado:</strong> nombre, unidad 1, calificación propuesta y tu justificación en dos frases. El botón lo arma por ti y abre tu propia app de correo: nada se manda solo, tú decides si le das enviar.
+    <br><button type="button" class="btn-correo no-descarga" id="btn-correo">Armar el correo al profesor</button>
+  </div>
+  <p class="pie">La regla de los tres casos aplica desde el ensayo, para que la conozcas sin riesgo.</p>
 </div>
-<button id="btn-imprimir" onclick="window.print()">Imprimir</button>
+
+<script>
+  // El botón del correo arma un mailto con lo ya guardado; no manda nada solo.
+  document.getElementById('btn-correo').addEventListener('click', function () {
+    var r = {};
+    try { r = JSON.parse(localStorage.getItem('gestion-exp-u1') || '{}'); } catch (e) {}
+    var n = (r['nombre'] || '').trim();
+    var num = (r['auto-num'] || '').trim();
+    var por = (r['auto-porque'] || '').trim();
+    var cuerpo = 'Nombre: ' + (n || '(sin nombre)') +
+      '\nUnidad: 1 · Escuchar la presa' +
+      '\nCalificación propuesta (ensayo): ' + (num || '(sin número)') +
+      '\n\nMi justificación:\n' + (por || '(sin justificación)');
+    location.href = 'mailto:eduardo.lusan@gmail.com?subject=' +
+      encodeURIComponent('Autoevaluación U1 · ' + (n || 'Sin nombre')) +
+      '&body=' + encodeURIComponent(cuerpo);
+  });
+</script>
 
 <script src="../curso.js"></script>
 

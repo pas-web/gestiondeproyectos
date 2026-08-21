@@ -297,7 +297,23 @@
     + '.btn-constancia{background:var(--profundo,#0B3C49);color:#fff;border:none;border-radius:999px;padding:.5rem 1.2rem;font:inherit;font-size:.92rem;font-weight:bold;cursor:pointer;margin:.5rem .6rem 0 0}'
     + '.btn-constancia:hover{filter:brightness(1.12)}'
     + '.btn-borrar{background:none;border:none;color:#68807a;font:inherit;font-size:.85rem;text-decoration:underline;cursor:pointer;padding:.5rem 0 0}'
-    + '#objecion-pacto{display:block;width:100%;font:inherit;font-size:.95rem;padding:.6rem .7rem;border:1px solid var(--borde,#CFE3DD);border-radius:8px;min-height:5.2rem;resize:vertical}';
+    + '#objecion-pacto{display:block;width:100%;font:inherit;font-size:.95rem;padding:.6rem .7rem;border:1px solid var(--borde,#CFE3DD);border-radius:8px;min-height:5.2rem;resize:vertical}'
+    /* Cuadernillo digital del expediente */
+    + '.exp-barra{position:fixed;right:.8rem;bottom:.8rem;background:#fff;border:1px solid var(--borde,#CFE3DD);border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.18);padding:.55rem .8rem;display:flex;gap:.55rem;align-items:center;flex-wrap:wrap;max-width:min(94vw,32rem);z-index:40}'
+    + '.exp-barra .sello{font-size:.78rem;color:#8aa39c}'
+    + '.exp-barra .sello.ok{color:#1F4A2C;font-weight:bold}'
+    + '.exp-barra button{font:inherit;font-size:.85rem;font-weight:bold;border:none;border-radius:999px;padding:.45rem .9rem;cursor:pointer}'
+    + '.exp-barra .b-desc{background:var(--profundo,#0B3C49);color:#fff}'
+    + '.exp-barra .b-imp{background:var(--marca,#0F6E6E);color:#fff}'
+    + '.exp-barra .b-borra{background:none;color:#68807a;text-decoration:underline;font-weight:normal}'
+    + '.exp-campo{display:block;width:100%;font:inherit;font-size:.94rem;color:var(--texto,#1C2B28);padding:.5rem .6rem;border:1px solid var(--borde,#CFE3DD);border-radius:8px;background:#FDFDFB;resize:vertical;min-height:4.4rem;overflow:hidden}'
+    + 'input.exp-campo{min-height:0;height:auto}'
+    + '.exp-campo:focus{outline:2px solid var(--marca,#0F6E6E);border-color:var(--marca,#0F6E6E)}'
+    + '.exp-valor{white-space:pre-wrap;border:1px solid var(--borde,#CFE3DD);border-radius:8px;padding:.5rem .6rem;min-height:1.5rem;background:#fff}'
+    + 'span.exp-valor{display:inline-block;min-width:7rem}'
+    + '.exp-chk-marca{font-size:1.05rem}'
+    + '.exp-descarga-nota{border:2px solid #C9E2CF;background:#EEF6F0;border-radius:10px;padding:.7rem 1rem;margin:1rem auto;max-width:760px;font-size:.88rem;color:#1F4A2C}'
+    + '@media print{.exp-barra{display:none}.exp-campo{background:#fff}}';
 
   var st = document.createElement('style');
   st.textContent = css;
@@ -667,12 +683,120 @@
     });
   }
 
+  /* Cuadernillo digital del expediente: en cualquier página con
+     [data-cuadernillo], los campos [data-exp] se guardan en el navegador
+     mientras se escriben, y una barra permite descargar la copia llena,
+     imprimir o borrar todo. Igual que los pactos: nada viaja a ningún
+     servidor ni le llega a nadie (regla 8). */
+  function montarCuadernillo() {
+    var raiz = document.querySelector('[data-cuadernillo]');
+    if (!raiz) return;
+    var id = raiz.getAttribute('data-cuadernillo');
+    var clave = 'gestion-exp-' + id;
+    var reg = {};
+    try { reg = JSON.parse(localStorage.getItem(clave) || '{}'); } catch (e) {}
+
+    var barra = document.createElement('div');
+    barra.className = 'exp-barra';
+    barra.innerHTML = '<span class="sello"></span>'
+      + '<button type="button" class="b-desc">Descargar mi cuadernillo</button>'
+      + '<button type="button" class="b-imp">Imprimir</button>'
+      + '<button type="button" class="b-borra">Borrar mis respuestas</button>';
+    document.body.appendChild(barra);
+    var sello = barra.querySelector('.sello');
+
+    var hayAlgo = Object.keys(reg).some(function (k) { return reg[k]; });
+    sello.textContent = hayAlgo ? 'Guardado en este navegador' : 'Se guarda solo, mientras escribes';
+    if (hayAlgo) sello.classList.add('ok');
+
+    var tmr = null;
+    function guarda() {
+      try { localStorage.setItem(clave, JSON.stringify(reg)); } catch (e) {}
+      sello.textContent = 'Guardado en este navegador';
+      sello.classList.add('ok');
+    }
+    function crece(c) {
+      if (c.tagName !== 'TEXTAREA') return;
+      c.style.height = 'auto';
+      c.style.height = Math.max(c.scrollHeight + 2, 70) + 'px';
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-exp]'), function (c) {
+      var k = c.getAttribute('data-exp');
+      if (c.type === 'checkbox') {
+        if (reg[k]) c.checked = true;
+        c.addEventListener('change', function () { reg[k] = c.checked; guarda(); });
+      } else {
+        if (reg[k]) c.value = reg[k];
+        crece(c);
+        c.addEventListener('input', function () {
+          reg[k] = c.value;
+          crece(c);
+          sello.textContent = 'Escribiendo\u2026';
+          sello.classList.remove('ok');
+          clearTimeout(tmr);
+          tmr = setTimeout(guarda, 600);
+        });
+      }
+    });
+
+    function fechaLegible(d) {
+      return d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    barra.querySelector('.b-desc').addEventListener('click', function () {
+      clearTimeout(tmr); guarda();
+      var doc = document.documentElement.cloneNode(true);
+      Array.prototype.forEach.call(
+        doc.querySelectorAll('script, .exp-barra, .nav-curso, #panel-menu, #telon, .lado, #btn-lado, .no-descarga'),
+        function (n) { n.remove(); }
+      );
+      Array.prototype.forEach.call(doc.querySelectorAll('[data-exp]'), function (c) {
+        var k = c.getAttribute('data-exp');
+        var rep;
+        if (c.type === 'checkbox') {
+          rep = document.createElement('span');
+          rep.className = 'exp-chk-marca';
+          rep.textContent = reg[k] ? '\u2611' : '\u2610';
+        } else {
+          rep = document.createElement(c.tagName === 'TEXTAREA' ? 'div' : 'span');
+          rep.className = 'exp-valor';
+          rep.textContent = reg[k] || '';
+        }
+        c.parentNode.replaceChild(rep, c);
+      });
+      var nota = document.createElement('div');
+      nota.className = 'exp-descarga-nota';
+      nota.textContent = 'Copia de tu cuadernillo, descargada el ' + fechaLegible(new Date())
+        + '. Lo que escribas despu\u00e9s en el sitio no se refleja aqu\u00ed: descarga otra copia cuando avances. '
+        + 'El cuadernillo vive en ' + location.href.split('?')[0];
+      var cuerpo = doc.querySelector('body');
+      cuerpo.insertBefore(nota, cuerpo.firstChild);
+      var blob = new Blob(['<!DOCTYPE html>\n' + doc.outerHTML], { type: 'text/html' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'expediente-' + id + '-mio.html';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    barra.querySelector('.b-imp').addEventListener('click', function () { window.print(); });
+
+    barra.querySelector('.b-borra').addEventListener('click', function () {
+      if (!window.confirm('Se borra todo lo que has escrito en este cuadernillo, en este navegador. \u00bfSeguro?')) return;
+      try { localStorage.removeItem(clave); } catch (e) {}
+      location.reload();
+    });
+  }
+
   function arrancar() {
     montarPanel();
     montarLado();
     montarTicket();
     montarTelon();
     montarAceptacion();
+    montarCuadernillo();
     var inline = document.getElementById('mapa-curso');
     if (inline) construirMapa(inline, true);
   }
