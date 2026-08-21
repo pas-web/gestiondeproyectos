@@ -425,3 +425,10 @@ contrato de gestión.
   cierre de unidad y la hoja de consulta de la S4, y las menciones de la S2
   (el contrato "se puede llenar directo" y la petición "se sistematiza en el
   cuadernillo").
+- **Adenda del mismo día: el suelo pasa de 6 a 7 casillas.** Entra "Subí mi
+  reporte de la guía de observación al Drive" (carpeta S2): la guía de "Mirar
+  como gestor" llena con sus ocho bloques, foto y croquis. Es individual (la
+  zona se trabajó en pareja, el reporte lo sube cada quien con su nombre; una
+  foto legible del cuaderno cuenta igual). Plan B: subirlo antes del viernes
+  de la semana 5. El destino del reporte quedó dicho también dentro del propio
+  ejercicio y en el gimnasio de la S2.
