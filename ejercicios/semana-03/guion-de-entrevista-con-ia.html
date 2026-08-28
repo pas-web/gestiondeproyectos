@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!--
+GUÍA AUTOGUIADA · GUIONES DE ENTREVISTA CON IA
+Consulta comunitaria · Presa La Florida
+Gestión y Manejo de Proyectos · UAQ Campus Concá · Agosto 2026
+
+DECISIONES INTERPRETATIVAS
+· Un solo archivo autocontenido, sin fuentes externas ni librerías: funciona
+  abierto desde WhatsApp o descargas, sin internet. Misma familia visual que
+  la ficha de observación (papel, tarjetas, un color de acento).
+· El color de acento es un azul petróleo distinto a los cinco colores de área,
+  porque este instrumento es del grupo entero, no de un área.
+· La secuencia obliga a pensar antes de pedir: el equipo clasifica las 28
+  preguntas que el propio grupo redactó (tres familias de PPS-15 + alertas)
+  antes de tocar la IA. La IA entra en el paso 4, con los dos insumos y un
+  prompt con anatomía completa (contexto + encargo + formato + ejemplo,
+  como en el microcurso de la semana 1).
+· El prompt lleva huecos [[ ]] siguiendo la convención de la guía de
+  fotomontajes; va en español porque el producto es texto en español.
+· La auditoría del paso 5 usa las mismas alertas del paso 2: lo que
+  aprendieron a detectar en sus preguntas lo aplican a las de la IA.
+· Piloto cruzado entre equipos (regla 7 de PPS-15) antes de la versión final.
+· Guardado automático en el navegador (localStorage); botón para copiar
+  cada bloque de prompt.
+· Regla transversal del proyecto, repetida donde hace falta: ningún
+  instrumento de consulta promete obras.
+· El pacto de IA del curso se recuerda al inicio: esta tarea es un uso
+  permitido; bitácora y autoevaluaciones siguen fuera.
+-->
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Guion de entrevista con IA · Presa La Florida</title>
+<style>
+:root{
+  --papel:#F7F6F1; --tarjeta:#FFFFFF; --tinta:#20261F; --gris:#6E7366;
+  --linea:#DCDACF; --acento:#2C5B6E; --acento-suave:#E8EFF1;
+  --alerta:#8C3B2E; --alerta-suave:#F5E9E6; --ok:#4A6B4F;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--papel);color:var(--tinta);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:17px;line-height:1.5;padding-bottom:80px}
+#topbar{position:sticky;top:0;z-index:20;background:var(--acento);color:#fff;
+  padding:10px 14px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+#topbar .sitio{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+#topbar .prog{font-variant-numeric:tabular-nums;font-size:14px;opacity:.95;white-space:nowrap}
+main{max-width:680px;margin:0 auto;padding:16px 14px}
+h1{font-size:27px;line-height:1.15;font-weight:800;margin:12px 0 6px}
+.sub{color:var(--gris);font-size:15px;margin-bottom:16px}
+section.card{background:var(--tarjeta);border:1px solid var(--linea);
+  border-radius:12px;padding:18px 16px;margin:16px 0}
+section.card>h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--acento);border-bottom:2px solid var(--acento);
+  padding-bottom:6px;margin-bottom:14px;font-weight:800}
+h3{font-size:17px;font-weight:700;margin:16px 0 6px}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 12px 22px}
+li{margin-bottom:6px}
+.mision{background:var(--acento-suave);border-left:4px solid var(--acento);
+  padding:10px 12px;border-radius:0 8px 8px 0;font-size:15px;margin:0 0 14px}
+.pacto{background:var(--alerta-suave);border-left:4px solid var(--alerta);
+  padding:10px 12px;border-radius:0 8px 8px 0;font-size:15px;margin:0 0 14px}
+.tiempo{display:inline-block;font-size:12.5px;letter-spacing:.06em;
+  color:var(--gris);border:1px solid var(--linea);border-radius:20px;
+  padding:2px 10px;margin-left:8px;vertical-align:middle;font-weight:400;text-transform:none}
+.hint{color:var(--gris);font-size:14px}
+textarea,input[type=text]{width:100%;font:inherit;color:inherit;background:#FDFDFB;
+  border:1.5px solid var(--linea);border-radius:8px;padding:9px 10px;margin-top:4px}
+textarea{min-height:64px;resize:vertical}
+.campo{margin-bottom:14px}
+.campo label{display:block;font-weight:600;font-size:15px;margin-bottom:4px}
+/* preguntas del grupo */
+.preg{border:1px solid var(--linea);border-radius:10px;padding:10px 12px;margin:10px 0;background:#FDFDFB}
+.preg .autor{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris);margin-bottom:3px}
+.preg.nueva{border-color:var(--acento);background:var(--acento-suave)}
+.preg.nueva .autor{color:var(--acento);font-weight:700}
+.preg .texto{font-size:15.5px;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;border:1.5px solid var(--linea);border-radius:20px;
+  padding:4px 11px;background:#fff;color:var(--gris);cursor:pointer;user-select:none}
+.chip.fam.on{background:var(--acento);border-color:var(--acento);color:#fff}
+.chip.al.on{background:var(--alerta);border-color:var(--alerta);color:#fff}
+.sep{border:0;border-top:1px dashed var(--linea);margin:16px 0}
+.retro{display:none;margin-top:8px;padding:8px 10px;border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.45}
+.retro.ok{display:block;background:#EDF2EC;border-left:4px solid var(--ok)}
+.retro.mal{display:block;background:var(--alerta-suave);border-left:4px solid var(--alerta)}
+#btnRevisar{display:block;margin:14px auto 4px;background:var(--acento);color:#fff;border:0;border-radius:8px;padding:10px 22px;font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+#resumenRevision{text-align:center;font-size:14px;color:var(--gris);margin-bottom:4px}
+/* prompt */
+.promptbox{position:relative;background:#22303A;color:#EAF0F2;border-radius:10px;
+  padding:14px 12px;font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:13.5px;line-height:1.55;white-space:pre-wrap;margin:8px 0 4px;overflow-x:auto}
+.promptbox .hueco{color:#F2C14E;font-weight:700}
+.copiar{position:sticky;float:right;top:56px;margin:-4px 0 6px 8px;
+  background:var(--acento);color:#fff;border:0;border-radius:8px;
+  padding:7px 14px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.copiar.hecho{background:var(--ok)}
+.check{display:flex;gap:10px;align-items:flex-start;margin:8px 0;font-size:15px}
+.check input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--acento)}
+.tablita{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 12px}
+.tablita th,.tablita td{border:1px solid var(--linea);padding:6px 8px;text-align:left;vertical-align:top}
+.tablita th{background:var(--acento-suave);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+.num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--acento);
+  color:#fff;font-weight:800;font-size:14px;align-items:center;justify-content:center;margin-right:8px;flex:none}
+footer{max-width:680px;margin:24px auto 0;padding:0 14px;color:var(--gris);font-size:13px}
+</style>
+</head>
+<body>
+<div id="topbar">
+  <span class="sitio">Presa La Florida · Consulta</span>
+  <span class="prog" id="prog">0 / 28 clasificadas</span>
+</div>
+<main>
+
+<h1>El guion de entrevista, con la IA de ayudante</h1>
+<p class="sub">Guía autoguiada por equipo · Gestión y Manejo de Proyectos · UAQ Campus Concá<br>
+Tiempo estimado: unas 2 horas. Se necesita: esta página, los dos insumos (.md) que están en el Drive del proyecto, un chat de IA y una selección de las preguntas que ustedes ya escribieron — que ya está aquí adentro.</p>
+
+<section class="card">
+<h2>Qué van a producir y por qué así</h2>
+<p>Cada equipo va a salir de aquí con un <strong>guion de entrevista guiada</strong>: la hoja con la que van a conversar con una persona de la comunidad sobre la presa. La observación de campo dijo cómo se ve el sitio una mañana de agosto; la entrevista pregunta lo que la observación no alcanza — quién viene y cuándo, qué recuerda la gente, qué le preocupa, qué propone.</p>
+<p>La IA entra como ayudante de redacción, no como autora del guion. Por eso el orden de esta guía: primero ustedes clasifican y critican las preguntas que el propio grupo escribió; después le piden a la IA con un prompt bien armado; al final auditan lo que devuelva con los mismos criterios que ya practicaron. Lo que la IA no sabe del sitio lo saben ustedes, que sí estuvieron ahí.</p>
+<div class="pacto"><strong>Pacto de IA del curso.</strong> Este ejercicio es un uso permitido y guiado de la IA. La bitácora y las autoevaluaciones siguen fuera del pacto: esas se escriben a mano propia, hoy y siempre.</div>
+<div class="mision"><strong>Regla del proyecto que manda sobre todo lo demás:</strong> ninguna pregunta puede prometer. Nada está decidido ni financiado más allá del anteproyecto. Se pregunta por lo que la gente vive, recuerda, teme y propone — no se anuncian obras.</div>
+</section>
+
+<section class="card">
+<h2><span class="num">1</span>Auditar su propio diagnóstico <span class="tiempo">~20 min</span></h2>
+<p>Cada equipo ya llenó un diagnóstico de su encuentro. Estos son los siete:</p>
+<table class="tablita">
+<tr><th>#</th><th>Encuentro</th><th>Con quién</th><th>Duración declarada</th></tr>
+<tr><td>1</td><td>Entrevista a mujeres</td><td>Mujeres de la comunidad</td><td>30 min</td></tr>
+<tr><td>2</td><td>Foro sobre el futuro de la presa</td><td>40 ejidatarios, casa ejidal</td><td>60 min</td></tr>
+<tr><td>3</td><td>Beneficiarios ganaderos</td><td>Ganadero que abreva su ganado</td><td>30 min</td></tr>
+<tr><td>4</td><td>Entrevista a adultos mayores</td><td>Persona mayor, en su casa</td><td>30 min</td></tr>
+<tr><td>5</td><td>Entrevista a líderes</td><td>12 líderes de la zona</td><td>120 min</td></tr>
+<tr><td>6</td><td>Delegada de La Florida</td><td>La delegada, en la delegación</td><td>30 min</td></tr>
+<tr><td>7</td><td>Personas que extraen agua</td><td>Quien saca agua, en la orilla</td><td>30 min</td></tr>
+</table>
+<p>Antes de tocar la IA, relean el diagnóstico de su equipo con tres preguntas encima:</p>
+<h3>a · ¿El propósito es escuchar o convencer?</h3>
+<p>Varios diagnósticos dicen cosas como "dar a conocer la idea del proyecto" o "esperamos que se sume". Un guion que busca convencer contamina lo que la gente responde: quien siente que le están vendiendo algo contesta lo que cree que quieren oír, o se cierra. La consulta va primero y limpia; informar del proyecto es un momento aparte, breve y honesto, al final — y sin prometer nada, porque nada está decidido.</p>
+<div class="campo"><label>Reescriban aquí el propósito de su encuentro en modo escucha (qué quieren <em>saber</em> de esta persona, no qué quieren que haga):</label>
+<textarea data-save="proposito" placeholder="Ej.: Saber cómo usa el agua de la presa, qué le estorbaría de un espacio con más visita y qué propondría..."></textarea></div>
+<h3>b · La duración es la misma para todos: 30 minutos máximo</h3>
+<p>Los diagnósticos traían duraciones distintas; quedó acordado que toda entrevista dura <strong>30 minutos como máximo</strong>, anunciados a la persona desde el saludo. Regla de dedo hablando despacio y dejando contestar de a de veras: una pregunta abierta toma de 2 a 3 minutos. Treinta minutos dan para <strong>8 a 10 preguntas</strong>, contando saludo y cierre. Si su entrevistado se anima a hablar largo, mejor: se cortan preguntas, no respuestas.</p>
+<h3>c · ¿Es una entrevista, o es otra cosa?</h3>
+<p>Un foro de 40 personas y un taller de 2 horas con 12 líderes no se resuelven con una hoja de preguntas: son sesiones facilitadas, con estructuras, tiempos y materiales, y se diseñan aparte con el profesor usando el diagnóstico completo. Los equipos 2 y 5 sí hacen esta guía — su producto aquí es la <strong>batería de preguntas</strong> que vivirá dentro de su sesión, con las mismas reglas que un guion de entrevista.</p>
+<div class="campo"><label>Nuestro entrevistado, en dos o tres renglones (quién es, qué relación tiene con la presa, por qué su voz importa — sáquenlo de su diagnóstico y afínenlo):</label>
+<textarea data-save="perfil" placeholder="Ej.: Ganadero de La Florida que baja su ganado a beber por la entrada del perímetro; el proyecto podría estorbarle..."></textarea></div>
+</section>
+
+<section class="card">
+<h2><span class="num">2</span>Clasificar las preguntas del grupo — sin IA <span class="tiempo">~30 min</span></h2>
+<p>De las 28 preguntas que el grupo redactó en el chat, aquí van <strong>diez</strong> — elegidas por interesantes y por representativas de lo que el grupo trae — más <strong>cinco nuevas</strong>, marcadas en color, que apuntan a huecos que las 28 dejaron sin tocar. Las 28 completas siguen en el chat del grupo por si su equipo quiere rescatar otra. El método de referencia [PPS-15] dice que toda pregunta de entrevista cae en una de <strong>tres familias</strong>:</p>
+<table class="tablita">
+<tr><th>Uso</th><td>Quién, con qué frecuencia, cuándo y por qué usa el lugar.</td></tr>
+<tr><th>Opinión</th><td>Actitudes, problemas: qué le gusta, qué le preocupa, qué le estorba.</td></tr>
+<tr><th>Sugerencia</th><td>Qué propone, qué conservaría, qué cambiaría.</td></tr>
+</table>
+<p>Toquen una familia por pregunta. Luego revisen si merece alguna <strong>alerta</strong>:</p>
+<table class="tablita">
+<tr><th>Doble</th><td>Pregunta dos cosas a la vez; hay que partirla.</td></tr>
+<tr><th>Dirigida</th><td>Empuja hacia una respuesta ("¿verdad que hace falta...?").</td></tr>
+<tr><th>Promete</th><td>Da por hecho que algo se va a construir.</td></tr>
+<tr><th>Jerga</th><td>Palabras de escuela o de urbanista que el entrevistado no usa.</td></tr>
+</table>
+<div id="mazo"></div>
+<button id="btnRevisar">Revisar nuestra clasificación</button>
+<div id="resumenRevision"></div>
+<p class="hint" style="text-align:center">La revisión compara contra una clave del profesor. Varias preguntas admiten más de una lectura; la nota de cada tarjeta lo dice. Pueden corregir y volver a revisar.</p>
+<hr class="sep">
+<div class="campo"><label>De estas 15, ¿cuáles tres o cuatro se quedan en su guion tal cual o casi? Apunten sus números:</label>
+<input type="text" data-save="elegidas" placeholder="Ej.: 4, 11, 22, 26"></div>
+<div class="campo"><label>¿Qué familia quedó más flaca en las del grupo? ¿Qué les dice eso de lo que el grupo trae en la cabeza?</label>
+<textarea data-save="familiaflaca"></textarea></div>
+</section>
+
+<section class="card">
+<h2><span class="num">3</span>Preparar los dos insumos <span class="tiempo">~5 min</span></h2>
+<p>En la carpeta del proyecto en Drive están dos archivos que van a adjuntar al chat de IA:</p>
+<ol>
+<li><strong>insumo-1-banco-de-patrones.md</strong> — las 150 preguntas de consulta del banco de patrones de espacio público, con el método de entrevista [PPS-15] y sus siete reglas.</li>
+<li><strong>insumo-2-analisis-de-contexto.md</strong> — lo que el grupo ya sabe: el encargo, los hallazgos de las cinco áreas, las 14 actividades evaluadas y, sobre todo, la lista de lo que la observación no pudo responder.</li>
+</ol>
+<p>El tercer insumo lo trae su equipo: <strong>su diagnóstico</strong>, con el propósito ya reescrito en modo escucha (paso 1a). Van a pegarlo dentro del prompt.</p>
+<p class="hint">Si su chat de IA no acepta archivos adjuntos, abran cada .md y peguen el texto completo antes del prompt.</p>
+</section>
+
+<section class="card">
+<h2><span class="num">4</span>Armar el prompt <span class="tiempo">~20 min</span></h2>
+<p>Un buen prompt trae las cuatro piezas del microcurso de la semana 1: <strong>contexto</strong> (qué debe saber la IA), <strong>encargo</strong> (qué le pides exactamente), <strong>formato</strong> (cómo quieres la salida) y <strong>ejemplo</strong> (una muestra del tono que buscas). El de abajo ya las trae; ustedes llenan los huecos <span style="color:#B8860B;font-weight:700">[[ así ]]</span>, borrando los corchetes.</p>
+<button class="copiar" onclick="copiar(this,'p1')">Copiar</button>
+<div class="promptbox" id="p1">Eres un asistente para diseñar entrevistas de consulta comunitaria. Te adjunto dos documentos: (1) un banco de 150 preguntas de consulta sobre espacio público, con el método de entrevista PPS-15 y sus siete reglas, y (2) el análisis de contexto del proyecto de la presa La Florida, en la Sierra Gorda de Querétaro. Léelos antes de responder.
+
+CONTEXTO ADICIONAL DE MI EQUIPO
+Este es el diagnóstico de nuestro encuentro (perfil, lugar, materiales, restricciones): <span class="hueco">[[ 1 · PEGA AQUÍ TU DIAGNÓSTICO COMPLETO ]]</span>
+Ojo: el propósito correcto del encuentro es este, y sustituye al que diga el diagnóstico: <span class="hueco">[[ 2 · PEGA EL PROPÓSITO EN MODO ESCUCHA QUE REESCRIBIERON EN EL PASO 1a ]]</span>
+Nuestro equipo observó en campo el área <span class="hueco">[[ 3 · TU ÁREA: Cedral / Área abierta / Vertedor / Llanito / Perímetro ]]</span> y esto es lo que más nos llamó la atención ahí: <span class="hueco">[[ 4 · DOS O TRES RENGLONES DE LO QUE VIERON USTEDES ]]</span>
+
+ENCARGO
+Genera un guion de ENTREVISTA GUIADA para ese perfil, de 8 a 10 preguntas, aplicable en máximo 30 minutos, anunciados desde el saludo. El guion debe:
+- Cubrir las tres familias del método (uso, opinión, sugerencia), ordenadas de lo fácil a lo difícil y de lo impersonal a lo personal.
+- Dirigirse sobre todo a los huecos listados en la sección 5 del análisis de contexto (lo que la observación no pudo responder).
+- Tomar o adaptar preguntas del banco cuando sirvan, citando su identificador entre corchetes como nota interna, por ejemplo [PPS-15] o [KIC-18].
+- Incluir estas preguntas nuestras, tal cual o mejoradas: <span class="hueco">[[ 5 · PEGA LAS 3-4 PREGUNTAS QUE ELIGIERON EN EL PASO 2 ]]</span>
+
+REGLAS ESTRICTAS
+- Ninguna pregunta promete ni da por hecho una obra. El proyecto está en consulta; nada está decidido ni financiado.
+- Español llano de la Sierra Gorda, sin tecnicismos. Una pregunta, un tema.
+- Preguntas abiertas con moderación; nada que dirija la respuesta ni que avergüence.
+- No inventes datos del sitio: usa solo lo que dicen los dos documentos y lo que te escribí.
+- El guion escucha primero; si la persona pregunta por el proyecto, la nota para el entrevistador dice qué responder con honestidad: hay un proceso de consulta en curso y nada está decidido ni financiado. Incluye esa nota al final del guion.
+
+FORMATO DE SALIDA
+1. Saludo y presentación (quiénes somos, para qué es, que es voluntario, duración anunciada de 30 minutos).
+2. Las preguntas numeradas, cada una con su familia entre paréntesis y, si viene del banco, su identificador.
+3. Cierre: pregunta final abierta del tipo "¿hay algo que no le pregunté y que usted quiera decir?", y agradecimiento.
+4. Al final, una lista breve: qué preguntas del banco consideraste y descartaste, y por qué.
+
+EJEMPLO DEL TONO QUE BUSCAMOS
+"¿Desde cuándo conoce o vive cerca de la presa?" — directa, llana, sin promesa.</div>
+<p class="hint">La lista final del formato (qué descartó y por qué) no es adorno: ahí se ve si la IA leyó los insumos o los ignoró.</p>
+</section>
+
+<section class="card">
+<h2><span class="num">5</span>Auditar lo que devuelva <span class="tiempo">~25 min</span></h2>
+<p>La IA propone; el equipo decide. Pasen la salida por esta lista, pregunta por pregunta — es la misma vara con la que midieron las 28 del grupo:</p>
+<div class="check"><input type="checkbox" data-save="a1"><span>¿Alguna pregunta <strong>promete</strong> o da por hecha una obra? ("cuando se construya...", "el parque que va a haber...")</span></div>
+<div class="check"><input type="checkbox" data-save="a2"><span>¿Hay <strong>jerga</strong>? ("espacio público", "equipamiento", "infraestructura", "gobernanza" no son palabras de la entrevista.)</span></div>
+<div class="check"><input type="checkbox" data-save="a3"><span>¿Alguna es <strong>doble</strong> o <strong>dirigida</strong>?</span></div>
+<div class="check"><input type="checkbox" data-save="a4"><span>¿<strong>Inventó</strong> algo del sitio que no está en los insumos ni en lo que ustedes escribieron?</span></div>
+<div class="check"><input type="checkbox" data-save="a5"><span>¿Las preguntas le hablan a <strong>su perfil</strong>, o le servirían igual a cualquiera? (Si le sirven igual a cualquiera, no leyó el perfil.)</span></div>
+<div class="check"><input type="checkbox" data-save="a6"><span>¿Cabe en <strong>30 minutos</strong> dicho en voz alta? Léanlo con cronómetro.</span></div>
+<div class="check"><input type="checkbox" data-save="a7"><span>¿Qué se le escapó que ustedes <strong>sí saben por haber estado en el sitio</strong>? Esa es la pregunta que solo su equipo puede escribir.</span></div>
+<div class="campo"><label>Con lo que encontraron, pidan la segunda vuelta. Pueden usar este arranque:</label></div>
+<button class="copiar" onclick="copiar(this,'p2')">Copiar</button>
+<div class="promptbox" id="p2">Revisamos tu guion y encontramos estos problemas: <span class="hueco">[[ 1 · LISTA LO QUE DETECTARON, CON EL NÚMERO DE PREGUNTA ]]</span>. Además queremos agregar esta pregunta que tú no podías saber, porque viene de lo que vimos en campo: <span class="hueco">[[ 2 · SU PREGUNTA PROPIA ]]</span>. Corrige el guion completo aplicando las mismas reglas estrictas del encargo original, sin cambiar lo que ya estaba bien.</div>
+</section>
+
+<section class="card">
+<h2><span class="num">6</span>Pilotear con otro equipo <span class="tiempo">~20 min</span></h2>
+<p>Regla siete del método: pilotear antes de salir, con alguien parecido al público — "cuando hay respuestas malas, la mayoría de las veces no es culpa de ellos: es tuya". Intercambien con otro equipo: una persona del otro equipo hace de su entrevistado (léanle el perfil primero, que actúe de a de veras), ustedes aplican el guion completo con cronómetro.</p>
+<div class="campo"><label>¿Dónde se trabó la conversación, qué pregunta hubo que explicar, cuánto duró?</label>
+<textarea data-save="piloto"></textarea></div>
+<div class="campo"><label>¿Qué cambiaron después del piloto?</label>
+<textarea data-save="cambios"></textarea></div>
+</section>
+
+<section class="card">
+<h2><span class="num">7</span>Versión final y entrega <span class="tiempo">~10 min</span></h2>
+<p>El guion final se entrega en la carpeta del equipo en el Drive del proyecto y se lleva impreso a la consulta. Debe traer:</p>
+<ul>
+<li>Encabezado: curso, equipo, perfil del entrevistado, fecha.</li>
+<li>Presentación y consentimiento: quiénes son, para qué es la conversación, que es voluntaria y que dura como máximo 30 minutos.</li>
+<li>Las preguntas numeradas, con familia e identificadores como notas internas.</li>
+<li>Cierre con la pregunta abierta final y el agradecimiento.</li>
+<li>Tres renglones al pie, escritos por el equipo sin IA: qué puso la IA, qué pusieron ustedes y qué decidió el piloto.</li>
+</ul>
+<p>En la entrevista real, las palabras exactas de la gente valen oro: apunten frases textuales, no resúmenes.</p>
+</section>
+
+</main>
+<footer>Guía autoguiada · Consulta comunitaria Presa La Florida · UAQ Campus Concá · 2026. Lo que escriban aquí se guarda solo en este teléfono o computadora.</footer>
+
+<script>
+const PREGUNTAS=[
+["Cristal","¿Qué personas considera que son las que más van a la presa?"],
+["Citlalli","¿Desde cuándo conoce o vive cerca de la presa?"],
+["Alejandro","¿Cómo creen que podríamos aprovechar el espacio para actividades familiares, considerando que ya tiene sombra, árboles altos y espacio para senderos?"],
+["Alejandro","¿Qué es lo que más les preocupa del estado actual del lugar y qué sería lo primero que cambiarían?"],
+["Eduardo R.","¿Qué actividades le gustaría que se realicen en la presa para beneficio de la comunidad?"],
+["Diego","¿Consideran que el lugar es para distraerse?"],
+["Guadalupe","¿Hay algo en ese espacio que le gustaría que se conservara tal como está?"],
+["Sin firma","¿Qué consideran que sería importante tomar en cuenta antes de realizar algún proyecto o actividad en los alrededores de la presa?"],
+["Sin firma","¿Cómo se organizan actualmente las personas de la comunidad para utilizar y cuidar el agua de la presa?"],
+["Emily","¿Qué importancia tiene esta presa para las personas de la comunidad?"],
+["Nueva · hueco: la memoria del agua","¿Hasta dónde ha visto usted que suba el agua de la presa, y en qué año fue?",1],
+["Nueva · hueco: los que no van","¿Conoce a alguien que nunca va a la presa? ¿Por qué cree que no va?",1],
+["Nueva · hueco: temores ante más visita","Si empezara a llegar más gente de fuera a la presa, ¿qué le preocuparía?",1],
+["Nueva · hueco: el agua como trabajo","¿Quiénes dependen hoy del agua de la presa para su trabajo o sus animales?",1],
+["Nueva · hueco: quién cuida","Cuando algo se descompone o se ensucia en la presa, ¿quién lo arregla o lo limpia?",1]
+];
+const FAM=["Uso","Opinión","Sugerencia"], AL=["Doble","Dirigida","Promete","Jerga"];
+const S=k=>localStorage.getItem("guion2_"+k), W=(k,v)=>localStorage.setItem("guion2_"+k,v);
+
+const mazo=document.getElementById("mazo");
+PREGUNTAS.forEach((q,i)=>{
+  const d=document.createElement("div");d.className="preg"+(q[2]?" nueva":"");
+  let chips='<div class="chips">';
+  FAM.forEach(f=>chips+=`<span class="chip fam" data-i="${i}" data-f="${f}">${f}</span>`);
+  chips+='<span style="width:8px"></span>';
+  AL.forEach(a=>chips+=`<span class="chip al" data-i="${i}" data-a="${a}">${a}</span>`);
+  chips+='</div>';
+  d.innerHTML=`<div class="autor">${i+1} · ${q[0]}</div><div class="texto">${q[1]}</div>${chips}`;
+  mazo.appendChild(d);
+});
+function actualizar(){
+  let n=0;
+  for(let i=0;i<PREGUNTAS.length;i++){if(S("f"+i))n++;}
+  document.getElementById("prog").textContent=n+" / "+PREGUNTAS.length+" clasificadas";
+}
+document.querySelectorAll(".chip.fam").forEach(c=>{
+  const i=c.dataset.i;
+  if(S("f"+i)===c.dataset.f)c.classList.add("on");
+  c.onclick=()=>{
+    document.querySelectorAll(`.chip.fam[data-i="${i}"]`).forEach(x=>x.classList.remove("on"));
+    if(S("f"+i)===c.dataset.f){W("f"+i,"");}else{c.classList.add("on");W("f"+i,c.dataset.f);}
+    actualizar();
+  };
+});
+document.querySelectorAll(".chip.al").forEach(c=>{
+  const k="a"+c.dataset.i+"_"+c.dataset.a;
+  if(S(k)==="1")c.classList.add("on");
+  c.onclick=()=>{c.classList.toggle("on");W(k,c.classList.contains("on")?"1":"");};
+});
+document.querySelectorAll("[data-save]").forEach(el=>{
+  const k=el.dataset.save;
+  if(el.type==="checkbox"){el.checked=S(k)==="1";el.onchange=()=>W(k,el.checked?"1":"");}
+  else{if(S(k))el.value=S(k);el.oninput=()=>W(k,el.value);}
+});
+actualizar();
+// ---- Clave de revisión: fam = familias aceptadas, al = alertas esperadas,
+// alOk = alertas toleradas (no restan), nota = retroalimentación breve.
+const CLAVE=[
+{fam:["Uso"],al:[],alOk:[],nota:"Uso limpia: pregunta quién viene, sin cargarle nada. Buen arranque de guion."},
+{fam:["Uso"],al:[],alOk:["Doble"],nota:"Uso, y de las mejores para abrir: fácil, impersonal, cualquiera la contesta. El \"conoce o vive\" apunta a un mismo dato, así que no cuenta como doble de a de veras."},
+{fam:["Sugerencia"],al:["Dirigida"],alOk:["Promete","Doble"],nota:"Sugerencia, pero dirigida: da por bueno \"aprovechar para actividades familiares\" y hasta le adelanta las razones (sombra, árboles, senderos). Quien la oye ya sabe qué respuesta se espera. También se vale marcarle Promete: el \"podríamos aprovechar\" da por venir una intervención."},
+{fam:["Opinión","Sugerencia"],al:["Doble"],alOk:[],nota:"Doble de libro: la preocupación es Opinión y lo que cambiaría es Sugerencia. Se parte en dos y las dos sirven."},
+{fam:["Sugerencia"],al:[],alOk:["Dirigida"],nota:"Sugerencia limpia, la abierta clásica del método [PPS-15]. El \"para beneficio de la comunidad\" apenas inclina; si se lo quitan, queda todavía más neutra."},
+{fam:["Opinión"],al:["Dirigida"],alOk:[],nota:"Opinión, pero cerrada y dirigida: se contesta con sí o no y ya trae la respuesta adentro. Abierta diría: ¿para qué usa usted este lugar, o para qué lo usaría?"},
+{fam:["Sugerencia"],al:[],alOk:[],nota:"Sugerencia valiosa y poco común: pregunta por lo que se conserva, no por lo que se agrega. De las que más protegen al sitio."},
+{fam:["Opinión","Sugerencia"],al:["Promete"],alOk:[],nota:"El \"antes de realizar algún proyecto\" da por hecho que el proyecto viene. Se arregla en condicional: si algún día se hiciera algo ahí, ¿qué habría que tomar en cuenta?"},
+{fam:["Uso"],al:[],alOk:[],nota:"Uso, en su rama de organización: cómo se reparte hoy el cuidado del agua. Toca el hueco de gobernanza que la observación no pudo ver."},
+{fam:["Opinión"],al:[],alOk:[],nota:"Opinión limpia y honda. Funciona mejor a media entrevista que al inicio: pide confianza para contestarse de verdad."},
+{fam:["Uso"],al:[],alOk:["Doble"],nota:"Uso, en su rama de memoria: pide un hecho recordado, no una opinión. El dónde y el año van pegados al mismo recuerdo, por eso la doble se tolera."},
+{fam:["Uso","Opinión"],al:[],alOk:["Doble"],nota:"Pregunta por el no-uso, que también es Uso; el \"por qué cree\" le mete Opinión y ambas lecturas valen. Está armada como pregunta y repregunta, no como doble atropellada."},
+{fam:["Opinión"],al:[],alOk:[],nota:"Opinión sobre un escenario. Ojo fino: dice \"si empezara\", en condicional — plantea sin prometer. Así se pregunta por el futuro sin dar nada por hecho."},
+{fam:["Uso"],al:[],alOk:[],nota:"Uso productivo del agua: quiénes dependen de ella. La respuesta dibuja a quiénes podría estorbar el proyecto, que es justo lo que hay que saber a tiempo."},
+{fam:["Uso"],al:[],alOk:[],nota:"Uso, rama de cuidado: quién arregla y quién limpia hoy. Lo que responda anticipa quién sostendría cualquier cosa que se haga."}
+];
+document.getElementById("btnRevisar").onclick=()=>{
+  let famOk=0, famRev=0, sin=0;
+  document.querySelectorAll(".preg").forEach((card,i)=>{
+    const k=CLAVE[i]; if(!k) return;
+    let r=card.querySelector(".retro");
+    if(!r){r=document.createElement("div");r.className="retro";card.appendChild(r);}
+    const fSel=S("f"+i);
+    const marcadas=AL.filter(a=>S("a"+i+"_"+a)==="1");
+    if(!fSel){sin++; r.className="retro mal"; r.textContent="Sin clasificar todavía. Elijan una familia antes de revisar. "+k.nota; return;}
+    const famBien=k.fam.includes(fSel);
+    const faltan=k.al.filter(a=>!marcadas.includes(a));
+    const sobran=marcadas.filter(a=>!k.al.includes(a)&&!k.alOk.includes(a));
+    const todoBien=famBien&&faltan.length===0&&sobran.length===0;
+    let msg="";
+    if(!famBien) msg+="La familia no es "+fSel+". ";
+    if(faltan.length) msg+="Se les fue una alerta: "+faltan.join(", ")+". ";
+    if(sobran.length) msg+="La alerta "+sobran.join(", ")+" no aplica aquí. ";
+    r.className="retro "+(todoBien?"ok":"mal");
+    r.textContent=(todoBien?"Bien. ":msg)+k.nota;
+    if(todoBien)famOk++; else famRev++;
+  });
+  const res=document.getElementById("resumenRevision");
+  res.textContent = sin>0
+    ? ("Faltan "+sin+" por clasificar · "+famOk+" bien · "+famRev+" por corregir")
+    : (famOk+" de "+CLAVE.length+" bien · "+famRev+" por corregir — corrijan y vuelvan a revisar");
+};
+function copiar(btn,id){
+  const t=document.getElementById(id).innerText;
+  const done=()=>{btn.textContent="Copiado";btn.classList.add("hecho");
+    setTimeout(()=>{btn.textContent="Copiar";btn.classList.remove("hecho");},2000);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done).catch(()=>fallback(t,done));}
+  else fallback(t,done);
+}
+function fallback(t,done){
+  const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);
+  ta.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>

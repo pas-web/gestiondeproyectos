@@ -7,7 +7,9 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 52 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 9 (20 ago 2026): el primer no entra al
+- **Último bloque cerrado:** bloque 10 (28 ago 2026): la guía del guion de
+  entrevista con IA entra al gimnasio de la semana 3, porque como HTML suelto
+  no abría en los iPhone del grupo. Antes, bloque 9 (20 ago 2026): el primer no entra al
   cuadernillo y al suelo de la unidad 1, y el contrato de gestión se vuelve
   llenable en línea. Antes, bloque 8 (20 ago 2026): la evaluación de la unidad 1
   consolidada: el cuadernillo 1 se llena en línea y se descarga, el suelo y la
@@ -438,3 +440,38 @@ contrato de gestión.
   subirlo antes del viernes de la semana 5. La guía "Mirar como gestor" del
   gimnasio queda como entrenamiento de la mirada, no como el instrumento de la
   visita.
+## Bloque 10 (28 de agosto de 2026): el guion de entrevista con IA entra a la semana 3
+
+Los equipos armaron su guion de entrevista para la consulta con una guía
+autoguiada de unas dos horas, que Eduardo produjo aparte. Venía como HTML suelto
+y se compartía por WhatsApp; los estudiantes con iPhone no lograban abrirlo, así
+que la guía entra al sitio como material de la semana 3:
+`ejercicios/semana-03/guion-de-entrevista-con-ia.html` (autocontenida, regla 6:
+sin fuentes externas, guardado en el navegador, funciona sin internet una vez
+abierta).
+
+- **La secuencia de la guía** obliga a pensar antes de pedir: (1) auditar el
+  diagnóstico del propio equipo y reescribir su propósito en modo escucha;
+  (2) clasificar sin IA quince preguntas —diez del banco que el grupo redactó y
+  cinco nuevas que apuntan a los huecos que las 28 dejaron— por familia (uso,
+  opinión, sugerencia) y por alerta (doble, dirigida, promete, jerga), con clave
+  del profesor y retroalimentación por tarjeta; (3) preparar los dos insumos;
+  (4) armar el prompt con la anatomía completa de la semana 1 (contexto, encargo,
+  formato, ejemplo) y huecos `[[ ]]`; (5) auditar la salida con las mismas
+  alertas del paso 2; (6) pilotear con otro equipo, que es la regla 7 del método
+  de entrevistas; (7) versión final al Drive del equipo.
+- **Dos acuerdos que la guía fija:** toda entrevista dura 30 minutos como máximo,
+  anunciados desde el saludo (de 8 a 10 preguntas), y ningún instrumento de
+  consulta promete obras. Los encuentros 2 (foro de 40 ejidatarios) y 5 (taller
+  con 12 líderes) no son entrevistas: se diseñan aparte con el profesor, y de
+  esta guía sacan su batería de preguntas.
+- **Los dos insumos siguen en el Drive, no en el repo**, por decisión del propio
+  insumo 1: el banco de patrones alimenta la conversación con la IA, no se
+  entrega ni se publica. Son `insumo-1-banco-de-patrones.md` (las 150 preguntas
+  del banco, con el método de entrevista y sus siete reglas) e
+  `insumo-2-analisis-de-contexto.md` (el encargo, los hallazgos de las cinco
+  áreas, las 14 actividades evaluadas y la lista de lo que la observación no
+  pudo responder).
+- **Enlazada desde tres puertas:** el gimnasio de la S3 y el índice de
+  `gimnasio.html` con la marca `+`, y la tarjeta "La IA en su lugar" de las
+  herramientas de la semana, que es donde el argumento de la guía ya vivía.
