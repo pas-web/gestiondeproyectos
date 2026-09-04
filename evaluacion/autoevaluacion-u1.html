@@ -80,6 +80,47 @@
                background:#F7FAF9; }
   .piso.completo .ley { background:var(--bienbg); color:var(--bien); font-weight:bold; }
 
+  /* --- la portada, con la regla de arena del sitio --- */
+  .abre { margin:.4rem 0 1.4rem; }
+  .abre .franja { width:64px; height:5px; background:var(--arena); border-radius:3px; margin-bottom:1rem; }
+  .abre h1 { font-size:2rem; line-height:1.15; margin:0 0 .5rem; }
+  .abre .pregunta { font-family:Georgia,serif; font-style:italic; color:#45605A; font-size:1.14rem;
+                    line-height:1.45; margin:0; }
+
+  /* --- el sobre que se abre --- */
+  .ritual { text-align:center; margin:1.4rem 0; }
+  .ritual.abierto .cerrado { display:none; }
+  .sobre-obj { position:relative; width:min(300px,86vw); height:190px; margin:0 auto 1rem; perspective:900px; }
+  .sobre-papel { position:absolute; inset:0; background:#F6EEDC; border:1px solid #E0CFA8;
+                 border-radius:6px; box-shadow:0 6px 18px rgba(11,60,73,.13); overflow:hidden; }
+  .sobre-papel::before, .sobre-papel::after { content:""; position:absolute; bottom:0; width:52%; height:130%;
+                 background:#F1E5CC; }
+  .sobre-papel::before { left:0; transform-origin:bottom left; transform:skewX(22deg); }
+  .sobre-papel::after { right:0; transform-origin:bottom right; transform:skewX(-22deg); }
+  .sobre-solapa { position:absolute; left:0; right:0; top:0; height:62%; background:#EFE1C2;
+                  border-bottom:1px solid #E0CFA8; clip-path:polygon(0 0, 100% 0, 50% 100%);
+                  transform-origin:top center; transition:transform .9s cubic-bezier(.5,-.25,.4,1.2); z-index:3; }
+  .ritual.abierto .sobre-solapa { transform:rotateX(-172deg); }
+  .sello { position:absolute; left:50%; top:52%; transform:translate(-50%,-50%); width:46px; height:46px;
+           border-radius:50%; background:var(--arena); color:#3A2A08; display:flex; align-items:center;
+           justify-content:center; font-family:Georgia,serif; font-weight:bold; font-size:.95rem;
+           box-shadow:0 2px 5px rgba(0,0,0,.2); z-index:4; transition:opacity .4s; }
+  .ritual.abierto .sello { opacity:0; }
+  .sobre-firma { position:absolute; left:0; right:0; bottom:.7rem; z-index:2; font-family:Georgia,serif;
+                 font-style:italic; color:#7A6740; font-size:.9rem; }
+  .ritual .cerrado p { color:var(--gris); font-size:.95rem; max-width:34rem; margin:.4rem auto; }
+  .tras-sobre { display:none; }
+  .tras-sobre.ver { display:block; }
+
+  /* --- la campana del no, para el "todavía no sé" --- */
+  .campana { display:none; align-items:flex-start; gap:.6rem; margin-top:.5rem; padding:.6rem .8rem;
+             background:#FBF7EC; border:1px dashed #DCC38C; border-radius:10px; }
+  .campana.ver { display:flex; animation:tanido .6s ease; }
+  @keyframes tanido { 0%{transform:scale(.96);opacity:0} 40%{transform:scale(1.02)} 100%{transform:scale(1);opacity:1} }
+  .campana svg { flex:none; margin-top:.15rem; }
+  .campana span { font-size:.9rem; color:#7A6740; line-height:1.5; }
+  .campana b { color:#8A6A1A; }
+
   /* --- el sobre --- */
   .sobre { display:grid; grid-template-columns:1fr; gap:.8rem; margin:.8rem 0; }
   @media (min-width:680px) { .sobre { grid-template-columns:1fr 1fr; } }
@@ -235,7 +276,11 @@
 <!-- ===================== 0 · PORTADA ===================== -->
 <section class="paso activa" data-titulo="Portada">
   <div class="curso">Cierre de la unidad 1 · Escuchar la presa</div>
-  <h1>La primera vez que te vas a mirar de frente</h1>
+  <div class="abre">
+    <div class="franja"></div>
+    <h1>La primera vez que te vas a mirar de frente</h1>
+    <p class="pregunta">¿Qué tanto conocías a tu comunidad antes de preguntarle?</p>
+  </div>
   <p class="entrada">Esta autoevaluación <strong>no produce ningún número</strong>. Nadie te la recoge, no se archiva y no vale para el acta. Existe por una sola razón: en diciembre vas a proponer tu calificación con tu expediente en la mesa, y aquello no puede ser la primera vez que haces esto.</p>
   <p class="entrada">Piénsalo como el ensayo del jueves antes de la consulta del viernes: todo lo que truene aquí es un problema que en diciembre ya no existe.</p>
 
@@ -305,6 +350,21 @@
   <p class="entrada">En la semana 1 escribiste las tres cosas que creías que la gente iba a pedir, sellaste el sobre con tu firma y lo viste quedar engrapado en el cartel. El viernes se abrió junto al agua, después de escuchar a la comunidad de verdad.</p>
   <p class="entrada">Esto es lo más parecido que este curso tiene a una medición honesta de ti mismo. Ponlo lado a lado.</p>
 
+  <div class="ritual" id="ritual">
+    <div class="cerrado">
+      <div class="sobre-obj">
+        <div class="sobre-papel"></div>
+        <div class="sobre-solapa"></div>
+        <div class="sello">S1</div>
+        <div class="sobre-firma">sellado en la semana 1</div>
+      </div>
+      <p>Nadie lo ha abierto. En el aula viajó de regreso a la orilla y se abrió junto al agua, después de escuchar a la gente de verdad. Aquí se abre otra vez, con calma.</p>
+      <div class="fila" style="justify-content:center"><button type="button" class="btn fuerte no-descarga" id="btnAbrirSobre">Abrir el sobre</button></div>
+    </div>
+  </div>
+  <input type="hidden" data-exp="sob-abierto">
+
+  <div class="tras-sobre" id="trasSobre">
   <div class="sobre">
     <div class="col predije">
       <h4>Lo que predije</h4>
@@ -332,6 +392,7 @@
 
   <label class="campo"><span>Qué dice todo esto sobre diseñar de oídas</span>
     <textarea data-exp="sob-dice" placeholder="En tus palabras. Dos o tres líneas."></textarea></label>
+  </div>
   <div id="ej-sobre"></div>
 </section>
 
@@ -371,6 +432,13 @@
 
   <label class="campo"><span>Lo que todavía no sé hacer, con el minuto exacto en que lo noté</span>
     <textarea data-exp="nosé" placeholder="No «me falta práctica». Sino: con quién, en qué momento, qué pasó."></textarea></label>
+  <div class="campana no-descarga" id="campana">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A6A1A" stroke-width="1.8"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>
+    </svg>
+    <span><b>Eso vale una campana.</b> En este curso se aplaude el no, porque pedir de verdad cuesta. Nombrar lo que todavía no sabes hacer cuesta lo mismo, y casi nadie lo escribe. Déjalo tal cual.</span>
+  </div>
 
   <label class="campo"><span>Mi primer no: qué me enseñó</span>
     <textarea data-exp="primerno" placeholder="Del canal, del tono, del momento, de ti. Si el resultado fue no, ¿preguntaste por qué? ¿ya está en tu anti-currículum?"></textarea></label>
@@ -676,6 +744,32 @@
     pintaRail();
   }
 
+  /* ---------------- el ritual del sobre ----------------
+     El sobre se selló en la semana 1 y se abrió junto al agua. Aquí se
+     abre otra vez: el gesto importa, así que la comparación no aparece
+     hasta que el estudiante lo abre. Se recuerda abierto. */
+  var ritual = document.getElementById('ritual');
+  var trasSobre = document.getElementById('trasSobre');
+  function pintaRitual() {
+    var abierto = val('sob-abierto') === 'si';
+    ritual.classList.toggle('abierto', abierto);
+    trasSobre.classList.toggle('ver', abierto);
+  }
+  document.getElementById('btnAbrirSobre').addEventListener('click', function () {
+    ritual.classList.add('abierto');
+    pon('sob-abierto', 'si');
+    setTimeout(function () {
+      trasSobre.classList.add('ver');
+      try { trasSobre.scrollIntoView({ behavior:'smooth', block:'center' }); } catch (e) {}
+    }, 620);
+  });
+
+  /* ---------------- la campana ---------------- */
+  var campanaEl = document.getElementById('campana');
+  function pintaCampana() {
+    campanaEl.classList.toggle('ver', val('nosé').length > 12);
+  }
+
   /* ---------------- el sobre ---------------- */
   var aciertosEl = document.getElementById('aciertos');
   var lecturaSobre = document.getElementById('lecturaSobre');
@@ -837,7 +931,7 @@
           n++;
         }
       });
-      pintaPiso(); pintaBandeja(); pintaChecks();
+      pintaPiso(); pintaBandeja(); pintaChecks(); pintaRitual(); pintaCampana();
       document.getElementById('avisoHered').textContent = n
         ? 'Traje ' + n + ' cosa(s). Revísalas: el pronóstico del sobre venía en un solo campo y quizá haya que repartirlo en los tres.'
         : 'No había nada nuevo que traer: ya lo tenías todo aquí.';
@@ -1141,6 +1235,7 @@
   document.addEventListener('input', function (e) {
     if (!e.target.hasAttribute || !e.target.hasAttribute('data-exp')) return;
     pintaRail();
+    pintaCampana();
     if (actual === 6) { pintaBandeja(); pintaChecks(); }
   });
 
@@ -1151,6 +1246,8 @@
   pintaNumero();
   pintaBandeja();
   pintaChecks();
+  pintaRitual();
+  pintaCampana();
   pintaEnviado();
   ir(0);
   }
