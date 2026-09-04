@@ -23,7 +23,7 @@
      docente/recolector.gs, con sus instrucciones.
      Mientras esta URL esté vacía, la autoevaluación manda por correo y la
      mesa pide que se peguen los códigos a mano: las dos siguen sirviendo. */
-  var RECOLECTOR_URL = '';
+  var RECOLECTOR_URL = 'https://script.google.com/macros/s/AKfycbz-M_AoafL63sudpLaySyzWGV_f3y8DNolotyplGuwer5mCpqvGL-8Rz8s7f8z7Xf_nHQ/exec';
   window.RECOLECTOR_URL = RECOLECTOR_URL;
 
   var FIJAS = [
