@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoevaluación 1 · de ensayo · Gestión y Manejo de Proyectos · 2026</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28;
+          --gris:#68807a; --bien:#1F6B4A; --bienbg:#EAF5EF; --ojo:#A15C12; --ojobg:#FBF1E4; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo);
+         color:var(--texto); line-height:1.6; font-size:1rem; }
+  main { max-width:760px; margin:0 auto; padding:1rem 1.1rem 8rem; }
+
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.75rem; line-height:1.2; margin:.1rem 0 .5rem; }
+  h2 { font-family:Georgia,serif; color:var(--profundo); font-size:1.45rem; line-height:1.25; margin:.1rem 0 .4rem; }
+  h3 { color:var(--marca); font-size:1.02rem; margin:1.5rem 0 .35rem; }
+  p { margin:.6rem 0; }
+  .entrada { color:#334743; }
+  .mini { font-size:.88rem; color:var(--gris); line-height:1.5; }
+  .curso { font-size:.76rem; letter-spacing:.13em; text-transform:uppercase; color:var(--marca); font-weight:bold; }
+  a { color:var(--marca); }
+
+  .tarjeta { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.95rem 1.15rem; margin:.8rem 0; }
+  .clave { border-left:5px solid var(--arena); background:#FBF7EC; padding:.75rem 1rem; margin:1rem 0; border-radius:0 10px 10px 0; }
+  .clave b { color:var(--profundo); }
+
+  label.campo { display:block; margin-top:1rem; }
+  label.campo > span { display:block; font-size:.76rem; font-weight:bold; letter-spacing:.06em;
+                       text-transform:uppercase; color:var(--profundo); margin-bottom:.25rem; }
+  input[type=text], textarea { width:100%; font:inherit; font-size:.97rem; color:var(--texto);
+    padding:.55rem .65rem; border:1px solid var(--borde); border-radius:8px; background:#FDFDFB; }
+  textarea { min-height:4.6rem; resize:vertical; }
+  input:focus, textarea:focus { outline:2px solid var(--marca); border-color:var(--marca); }
+
+  /* --- las cuatro clases de evidencia --- */
+  .clases { margin:.7rem 0; }
+  .clase { display:flex; gap:.75rem; align-items:flex-start; background:#fff; border:1px solid var(--borde);
+           border-radius:10px; padding:.7rem .85rem; margin-bottom:.5rem; }
+  .clase .n { flex:none; width:26px; height:26px; border-radius:50%; background:var(--marca); color:#fff;
+              font-weight:bold; font-size:.85rem; display:flex; align-items:center; justify-content:center; }
+  .clase b { display:block; color:var(--profundo); font-size:.98rem; line-height:1.35; }
+  .clase span.d { display:block; font-size:.88rem; color:var(--gris); line-height:1.5; margin-top:.15rem; }
+
+  /* --- los pares --- */
+  .par { border:1px solid var(--borde); border-radius:12px; overflow:hidden; margin-bottom:.6rem; background:#fff; }
+  .par .flojo { padding:.75rem .9rem; background:var(--ojobg); border-bottom:1px solid #F0DCC2; }
+  .par .et { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; font-weight:bold; }
+  .par .flojo .et { color:var(--ojo); }
+  .par .flojo p { margin:.2rem 0 0; color:#7A4712; font-style:italic; font-size:.98rem; }
+  .par .voltea { display:block; width:100%; border:none; background:#fff; color:var(--marca); font:inherit;
+                 font-size:.88rem; font-weight:bold; padding:.6rem .9rem; cursor:pointer; text-align:left; }
+  .par .voltea:hover { background:#EFF7F5; }
+  .par .fuerte { display:none; padding:.75rem .9rem; background:var(--bienbg); border-top:1px solid #CDE7D9; }
+  .par.abierto .fuerte { display:block; }
+  .par.abierto .voltea { display:none; }
+  .par .fuerte .et { color:var(--bien); }
+  .par .fuerte p { margin:.2rem 0 0; color:#1B4F38; font-size:.98rem; }
+  .par .porque { display:block; margin-top:.5rem; padding-top:.45rem; border-top:1px dashed #B9DCC8;
+                 font-size:.88rem; color:#2F5D48; }
+  .par .porque b { color:var(--bien); }
+
+  /* --- el suelo --- */
+  .casilla { display:flex; gap:.7rem; align-items:flex-start; width:100%; text-align:left; background:#fff;
+             border:2px dashed #C4D8D2; border-radius:11px; padding:.75rem .85rem; margin-bottom:.5rem;
+             font:inherit; cursor:pointer; transition:.15s; }
+  .casilla .caja { flex:none; width:24px; height:24px; border:2px solid #C4D8D2; border-radius:6px; background:#fff;
+                   display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold; }
+  .casilla b { display:block; color:var(--profundo); font-size:.98rem; line-height:1.35; }
+  .casilla .como { display:block; font-size:.86rem; color:var(--gris); line-height:1.5; margin-top:.15rem; }
+  .casilla.puesta { border-style:solid; border-color:var(--bien); background:var(--bienbg); }
+  .casilla.puesta .caja { background:var(--bien); border-color:var(--bien); }
+  .casilla.puesta .caja::after { content:"✓"; }
+  .piso { margin:1rem 0 .2rem; border:1px solid var(--borde); border-radius:10px; overflow:hidden; background:#fff; }
+  .piso .duelas { padding:.7rem .8rem 0; }
+  .piso .duela { height:12px; margin-bottom:4px; border-radius:2px;
+                 background:repeating-linear-gradient(90deg,#D9A441 0 20px,#C08F32 20px 22px); }
+  .piso .duela.falta { background:none; border:2px dashed #C4D8D2; }
+  .piso .ley { padding:.55rem .85rem; font-size:.9rem; color:var(--profundo); border-top:1px solid var(--borde);
+               background:#F7FAF9; }
+  .piso.completo .ley { background:var(--bienbg); color:var(--bien); font-weight:bold; }
+
+  /* --- el sobre --- */
+  .sobre { display:grid; grid-template-columns:1fr; gap:.8rem; margin:.8rem 0; }
+  @media (min-width:680px) { .sobre { grid-template-columns:1fr 1fr; } }
+  .sobre .col { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.85rem .95rem; }
+  .sobre .col.predije { border-top:4px solid var(--arena); }
+  .sobre .col.pidieron { border-top:4px solid var(--marca); }
+  .sobre .col h4 { margin:0 0 .1rem; font-size:.95rem; color:var(--profundo); }
+  .sobre .col .sub { font-size:.82rem; color:var(--gris); margin:0 0 .5rem; }
+  .aciertos { display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0; }
+  .aciertos button { flex:1 1 3rem; border:2px solid var(--borde); background:#fff; color:var(--profundo);
+                     border-radius:9px; padding:.5rem .2rem; font:inherit; font-size:1.3rem; font-weight:bold; cursor:pointer; }
+  .aciertos button.on { background:var(--marca); border-color:var(--marca); color:#fff; }
+  .lectura { border:1px solid var(--borde); border-radius:11px; background:#fff; padding:.8rem .95rem; margin:.7rem 0; }
+  .lectura b { display:block; color:var(--profundo); font-size:1.02rem; margin-bottom:.15rem; }
+  .lectura.bien { border-color:#BCDFCB; background:var(--bienbg); }
+  .lectura.bien b { color:var(--bien); }
+
+  /* --- la bandeja y el medidor --- */
+  .numeros { display:flex; gap:.4rem; flex-wrap:wrap; margin:.6rem 0 .2rem; }
+  .numeros button { flex:1 1 3rem; border:2px solid var(--borde); background:#fff; color:var(--profundo);
+                    border-radius:9px; padding:.5rem .2rem; font:inherit; font-size:1.4rem; font-weight:bold; cursor:pointer; }
+  .numeros button.on { background:var(--profundo); border-color:var(--profundo); color:#fff; }
+  .chip { display:block; width:100%; text-align:left; border:1px solid var(--borde); background:#fff;
+          border-radius:10px; padding:.55rem .7rem .55rem 2.2rem; margin-bottom:.4rem; font:inherit;
+          font-size:.92rem; color:var(--texto); cursor:pointer; position:relative; line-height:1.45; }
+  .chip::before { content:"+"; position:absolute; left:.6rem; top:50%; transform:translateY(-50%); width:20px; height:20px;
+                  border:1.5px solid var(--borde); border-radius:5px; display:flex; align-items:center;
+                  justify-content:center; font-weight:bold; color:var(--gris); background:#fff; font-size:.9rem; }
+  .chip.on { border-color:var(--marca); background:#EFF7F5; }
+  .chip.on::before { content:"✓"; background:var(--marca); border-color:var(--marca); color:#fff; }
+  .chip i { display:block; font-style:normal; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+            color:var(--marca); font-weight:bold; }
+  .propuesta { border:2px solid var(--profundo); border-radius:12px; background:#fff; padding:.9rem 1rem; margin:.9rem 0; }
+  .propuesta .enc { font-size:1.02rem; color:var(--profundo); font-weight:bold; margin-bottom:.4rem; }
+  .propuesta .enc em { font-style:normal; background:var(--arena); color:#fff; border-radius:6px; padding:0 .45rem; }
+  .checks { margin:.7rem 0; }
+  .check { display:flex; gap:.55rem; align-items:flex-start; font-size:.92rem; padding:.3rem 0; color:var(--gris); }
+  .check .m { flex:none; width:20px; height:20px; border-radius:50%; border:1.5px solid var(--borde); background:#fff;
+              display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:bold; color:#C4D8D2; }
+  .check.ok { color:var(--bien); }
+  .check.ok .m { background:var(--bien); border-color:var(--bien); color:#fff; }
+  .check.ok .m::after { content:"✓"; }
+  .check.alerta { color:var(--ojo); }
+  .check.alerta .m { background:var(--ojo); border-color:var(--ojo); color:#fff; }
+  .check.alerta .m::after { content:"!"; }
+
+  .btn { display:inline-block; border:none; border-radius:999px; padding:.6rem 1.3rem; font:inherit; font-size:.95rem;
+         font-weight:bold; cursor:pointer; text-decoration:none; }
+  .btn.fuerte { background:var(--profundo); color:#fff; }
+  .btn.suave { background:#fff; color:var(--marca); border:1px solid var(--borde); }
+  .fila { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.8rem; }
+
+  /* --- el ejemplo --- */
+  .btn-ej { display:inline-flex; align-items:center; gap:.35rem; border:1px dashed #DCC38C; background:#FBF7EC;
+            color:#8A6A1A; border-radius:999px; padding:.35rem .85rem; font:inherit; font-size:.85rem;
+            font-weight:bold; cursor:pointer; margin:.6rem 0 0; }
+  .ejemplo { display:none; border:1px dashed #DCC38C; background:#FBF7EC; border-radius:11px;
+             padding:.8rem .95rem; margin:.5rem 0 0; }
+  .ejemplo.ver { display:block; }
+  .ejemplo .et { font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:#8A6A1A; font-weight:bold; }
+  .ejemplo p { margin:.35rem 0; font-size:.93rem; color:#4A3D20; }
+  .ejemplo p.dice { background:#fff; border:1px solid #EADFC4; border-radius:8px; padding:.55rem .7rem;
+                    color:#2F2716; white-space:pre-wrap; }
+  .ejemplo .fija { display:block; margin-top:.5rem; padding-top:.45rem; border-top:1px dashed #E6D5A8;
+                   font-size:.87rem; color:#8A6A1A; font-style:italic; }
+
+  .pie { font-size:.8rem; color:#8aa39c; margin-top:1.6rem; border-top:1px dashed var(--borde); padding-top:.5rem; }
+
+  /* En la copia descargada y en papel, todo se ve seguido. */
+  @media print {
+    body { background:#fff; }
+    main { max-width:none; padding:0; }
+    .paso { page-break-inside:avoid; margin-bottom:1.2rem; }
+    .btn-ej, .par .voltea { display:none !important; }
+    .ejemplo, .par .fuerte { display:block !important; }
+    @page { margin:1.5cm; }
+  }
+</style>
+
+<style class="no-descarga">
+  /* La navegación por pasos vive aquí a propósito: al descargar el cuadernillo,
+     curso.js borra todo lo que lleve la clase no-descarga, así que la copia
+     sale como un documento seguido y completo. */
+  .paso { display:none; }
+  .paso.activa { display:block; animation:entra .25s ease; }
+  @keyframes entra { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+  .barra-pasos { position:sticky; top:0; z-index:40; background:var(--profundo); color:#EAF4F2;
+                 padding:.6rem 1.1rem .55rem; }
+  .barra-pasos .caja { max-width:760px; margin:0 auto; }
+  .barra-pasos .rot { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; opacity:.7; }
+  .barra-pasos .tit { font-family:Georgia,serif; font-size:1.05rem; font-weight:bold; }
+  .rail { display:flex; gap:.25rem; margin-top:.5rem; }
+  .rail button { flex:1; height:5px; border:none; border-radius:3px; background:rgba(255,255,255,.25);
+                 padding:0; cursor:pointer; }
+  .rail button.vista { background:rgba(255,255,255,.55); }
+  .rail button.lleno { background:#7FCBA9; }
+  .rail button.aqui { background:var(--arena); }
+
+  .pie-pasos { position:fixed; left:0; right:0; bottom:0; z-index:45; background:rgba(242,247,245,.96);
+               backdrop-filter:blur(6px); border-top:1px solid var(--borde); padding:.55rem 1.1rem; }
+  .pie-pasos .caja { max-width:760px; margin:0 auto; display:flex; align-items:center; gap:.5rem; }
+  .pie-pasos button { border:none; border-radius:9px; padding:.65rem .9rem; font:inherit; font-weight:bold;
+                      cursor:pointer; font-size:.95rem; }
+  .pie-pasos .atras { background:#fff; color:var(--profundo); border:1px solid var(--borde); flex:none; }
+  .pie-pasos .sig { background:var(--marca); color:#fff; flex:1; }
+  .pie-pasos .donde { flex:none; font-size:.78rem; color:var(--gris); min-width:3.2rem; text-align:center; }
+  .pie-pasos button:disabled { opacity:.35; cursor:default; }
+  body { padding-bottom:4.5rem; }
+
+  /* La barra de curso.js (descargar / imprimir / borrar) es fija abajo a la
+     derecha y chocaba con la navegación por pasos: se sube por encima. */
+  .exp-barra { bottom:4.6rem !important; z-index:44 !important; }
+  /* En pantalla chica la barra se aprieta a un solo renglón: esta página ya
+     tiene su propia navegación abajo y entre las dos se comían la lectura. */
+  @media (max-width:560px) {
+    .exp-barra { padding:.35rem .5rem; gap:.3rem; }
+    .exp-barra .sello { display:none; }
+    .exp-barra button { padding:.35rem .7rem !important; font-size:.82rem !important; }
+  }
+</style>
+</head>
+<body data-cuadernillo="autoeval-u1">
+
+<header class="barra-pasos no-descarga">
+  <div class="caja">
+    <div class="rot">Gestión y Manejo de Proyectos · Unidad 1</div>
+    <div class="tit">Autoevaluación 1 · de ensayo</div>
+    <div class="rail" id="rail"></div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== 0 · PORTADA ===================== -->
+<section class="paso activa" data-titulo="Portada">
+  <div class="curso">Cierre de la unidad 1 · Escuchar la presa</div>
+  <h1>La primera vez que te vas a mirar de frente</h1>
+  <p class="entrada">Esta autoevaluación <strong>no produce ningún número</strong>. Nadie te la recoge, no se archiva y no vale para el acta. Existe por una sola razón: en diciembre vas a proponer tu calificación con tu expediente en la mesa, y aquello no puede ser la primera vez que haces esto.</p>
+  <p class="entrada">Piénsalo como el ensayo del jueves antes de la consulta del viernes: todo lo que truene aquí es un problema que en diciembre ya no existe.</p>
+
+  <div class="clave"><b>La diferencia está en una palabra: <em>porque</em>.</b><br>
+    Esto no es pedirte que te pongas un número. Es pedirte que lo sostengas.</div>
+
+  <label class="campo"><span>Tu nombre</span>
+    <input type="text" data-exp="nombre" placeholder="Como apareces en la lista del grupo"></label>
+
+  <div class="tarjeta">
+    <p style="margin:.1rem 0"><strong>Cómo funciona esta pantalla</strong></p>
+    <p class="mini" style="margin:.35rem 0 0">Ocho pasos que se pasan con el dedo o con el botón de abajo. <strong>Se guarda solo</strong> en este navegador mientras escribes, no viaja a ningún lado, y con la barra de abajo puedes descargar tu copia o imprimirla. Tardas unos quince minutos, con tu registro en limpio a la vista.</p>
+    <p class="mini" style="margin:.5rem 0 0">Casi todos los pasos traen un botón <strong>Ver un ejemplo</strong>: es la autoevaluación de una gestora inventada, llenada completa. No la copies —se nota—, pero míralo antes de escribir el tuyo.</p>
+  </div>
+
+  <div id="heredar"></div>
+  <p class="pie">Se llena el fin de semana de la semana 4, después de la consulta. El jueves de la semana 5 se abre un espacio para comentarla: compartirla es opcional, traerla hecha no.</p>
+</section>
+
+<!-- ===================== 1 · QUÉ CUENTA ===================== -->
+<section class="paso" data-titulo="Qué cuenta">
+  <div class="curso">Paso 1 de 8</div>
+  <h2>Qué cuenta como argumento</h2>
+  <p class="entrada">Es la parte que nadie te ha enseñado, así que va despacio. Un argumento no es una frase bonita ni una promesa: es <strong>algo que se puede abrir y mirar</strong>. En este curso hay cuatro clases, y las cuatro salieron de estas cuatro semanas.</p>
+
+  <div class="clases">
+    <div class="clase"><span class="n">1</span><span><b>Algo que se puede abrir</b>
+      <span class="d">Una foto en el Drive, una hoja del salón, una página de tu bitácora, tu registro en limpio, el contrato firmado. Si el profesor puede decir «enséñamela» y tú puedes, es evidencia.</span></span></div>
+    <div class="clase"><span class="n">2</span><span><b>Tu sobre contra la realidad</b>
+      <span class="d">Lo único en todo el semestre que mide qué tanto conocías a tu comunidad <em>antes</em> de preguntarle. No hay otro instrumento igual, y es tuyo.</span></span></div>
+    <div class="clase"><span class="n">3</span><span><b>Un «todavía no sé» con su momento exacto</b>
+      <span class="d">No «me falta práctica», sino en qué minuto de qué día lo notaste. Esta es la que más sorprende: nombrar un hueco pesa más que afirmar que todo salió bien.</span></span></div>
+    <div class="clase"><span class="n">4</span><span><b>Algo que hiciste sin que nadie te lo pidiera</b>
+      <span class="d">Una petición de más, una persona que fuiste a buscar al pliego, una pregunta que le agregaste a la hoja. Es lo más difícil de discutir, porque no venía en ninguna instrucción.</span></span></div>
+  </div>
+
+  <h3>La misma idea, dicha de dos maneras</h3>
+  <p class="mini">Ocho frases que se oyen todos los semestres. Lee primero la floja y <strong>piensa cómo la dirías tú</strong> para que cuente; luego destápala. Es el mismo trato que con el sobre: primero apuestas, después abres.</p>
+  <div id="pares"></div>
+
+  <div class="clave"><b>La prueba de las tres preguntas.</b> Antes de escribir algo en tu porqué, pásalo por aquí: ¿<strong>se puede abrir</strong>? ¿tiene <strong>fecha o lugar</strong>? ¿podría decirlo <strong>cualquier otro del grupo</strong> sin cambiarle una palabra? Si a la última contestas que sí, no está argumentando por ti: está rellenando.</div>
+</section>
+
+<!-- ===================== 2 · EL SUELO ===================== -->
+<section class="paso" data-titulo="El suelo">
+  <div class="curso">Paso 2 de 8</div>
+  <h2>Tu suelo, casilla por casilla</h2>
+  <p class="entrada">El suelo es <strong>piso, no techo</strong>: la lista corta de lo que basta cumplir para no reprobar. No es la meta del curso, es la red de seguridad. Toca cada casilla que ya tengas cubierta; abajo se arma tu piso.</p>
+  <div id="suelo"></div>
+
+  <div class="piso" id="piso">
+    <div class="duelas" id="duelas"></div>
+    <div class="ley" id="pisoLey">Todavía no marcas ninguna casilla.</div>
+  </div>
+
+  <label class="campo" id="cajaFalta" style="display:none"><span>¿Qué te falta y cuándo lo cubres?</span>
+    <textarea data-exp="suelo-falta" placeholder="Cada casilla trae escrito su plan B y su fecha. Escribe la tuya aquí, con día."></textarea></label>
+
+  <div class="clave"><b>Ojo con lo que el suelo no es.</b> Cumplirlo no es el argumento de tu autoevaluación: es lo que te deja entrar a la conversación. «No falté nunca» y «entregué todo» son suelo, no mérito. Lo que argumenta es lo que hiciste estando.</div>
+  <div id="ej-suelo"></div>
+</section>
+
+<!-- ===================== 3 · EL SOBRE ===================== -->
+<section class="paso" data-titulo="El sobre">
+  <div class="curso">Paso 3 de 8</div>
+  <h2>Tu sobre contra la realidad</h2>
+  <p class="entrada">En la semana 1 escribiste las tres cosas que creías que la gente iba a pedir, sellaste el sobre con tu firma y lo viste quedar engrapado en el cartel. El viernes se abrió junto al agua, después de escuchar a la comunidad de verdad.</p>
+  <p class="entrada">Esto es lo más parecido que este curso tiene a una medición honesta de ti mismo. Ponlo lado a lado.</p>
+
+  <div class="sobre">
+    <div class="col predije">
+      <h4>Lo que predije</h4>
+      <p class="sub">Del sobre que sellaste en la semana 1.</p>
+      <label class="campo" style="margin-top:.4rem"><span>Una</span><input type="text" data-exp="sob-p1"></label>
+      <label class="campo"><span>Dos</span><input type="text" data-exp="sob-p2"></label>
+      <label class="campo"><span>Tres</span><input type="text" data-exp="sob-p3"></label>
+    </div>
+    <div class="col pidieron">
+      <h4>Lo que de verdad pidieron</h4>
+      <p class="sub">De tu registro en limpio, no de tu memoria.</p>
+      <label class="campo" style="margin-top:.4rem"><span>Una</span><input type="text" data-exp="sob-r1"></label>
+      <label class="campo"><span>Dos</span><input type="text" data-exp="sob-r2"></label>
+      <label class="campo"><span>Tres</span><input type="text" data-exp="sob-r3"></label>
+    </div>
+  </div>
+
+  <h3>¿Cuántas de tus tres le atinaron?</h3>
+  <div class="aciertos" id="aciertos"></div>
+  <input type="hidden" data-exp="sob-aciertos">
+  <div class="lectura" id="lecturaSobre"><b>Toca un número</b>La lectura aparece cuando digas cuántas acertaste. No hay respuesta buena: las dos orillas dicen algo.</div>
+
+  <label class="campo"><span>La que no se le había ocurrido a nadie del equipo</span>
+    <textarea data-exp="sob-nadie" placeholder="Lo que salió en la consulta y ninguno de ustedes había pensado. Si hubo, esta es la prueba de que la consulta sirvió."></textarea></label>
+
+  <label class="campo"><span>Qué dice todo esto sobre diseñar de oídas</span>
+    <textarea data-exp="sob-dice" placeholder="En tus palabras. Dos o tres líneas."></textarea></label>
+  <div id="ej-sobre"></div>
+</section>
+
+<!-- ===================== 4 · LA EVIDENCIA ===================== -->
+<section class="paso" data-titulo="La evidencia">
+  <div class="curso">Paso 4 de 8</div>
+  <h2>Lo que puedes abrir</h2>
+  <p class="entrada">Tres piezas de evidencia que se pueden mirar hoy mismo, con el «dónde está» completo: la carpeta del Drive, la página de la bitácora, la hoja del salón. Si no puedes decir dónde está, no cuenta todavía — y eso también es información.</p>
+  <p class="mini">Si ya llenaste el mapa de evidencias del <a href="expediente-u1.html">cuadernillo de la unidad</a>, cópialo de ahí: son las mismas.</p>
+
+  <div class="tarjeta">
+    <label class="campo" style="margin-top:.2rem"><span>Evidencia 1 · qué es</span><input type="text" data-exp="ev1q" placeholder="Ej.: la foto del mapa de mi estación con las marcas"></label>
+    <label class="campo"><span>Dónde está</span><input type="text" data-exp="ev1d" placeholder="Ej.: Drive del curso, carpeta S4"></label>
+  </div>
+  <div class="tarjeta">
+    <label class="campo" style="margin-top:.2rem"><span>Evidencia 2 · qué es</span><input type="text" data-exp="ev2q"></label>
+    <label class="campo"><span>Dónde está</span><input type="text" data-exp="ev2d"></label>
+  </div>
+  <div class="tarjeta">
+    <label class="campo" style="margin-top:.2rem"><span>Evidencia 3 · qué es</span><input type="text" data-exp="ev3q"></label>
+    <label class="campo"><span>Dónde está</span><input type="text" data-exp="ev3d"></label>
+  </div>
+
+  <label class="campo"><span>Lo que hice sin que nadie me lo pidiera</span>
+    <textarea data-exp="ev-extra" placeholder="Una petición de más, alguien que fuiste a buscar, una pregunta que le agregaste a la hoja. Si no hubo, se dice: también es dato."></textarea></label>
+  <div id="ej-evidencia"></div>
+</section>
+
+<!-- ===================== 5 · LO QUE ME COSTÓ ===================== -->
+<section class="paso" data-titulo="Lo que me costó">
+  <div class="curso">Paso 5 de 8</div>
+  <h2>Lo que me costó, y lo que todavía no sé hacer</h2>
+  <p class="entrada">Lo difícil también es evidencia: de que estabas jugando de verdad. Y un «todavía no sé» con su momento exacto vale más, en esta conversación, que cualquier lista de aciertos.</p>
+
+  <label class="campo"><span>Lo que me costó, y cómo lo enfrenté</span>
+    <textarea data-exp="costo" placeholder="Qué se te atoró, en qué momento, y qué hiciste con eso."></textarea></label>
+
+  <label class="campo"><span>Lo que todavía no sé hacer, con el minuto exacto en que lo noté</span>
+    <textarea data-exp="nosé" placeholder="No «me falta práctica». Sino: con quién, en qué momento, qué pasó."></textarea></label>
+
+  <label class="campo"><span>Mi primer no: qué me enseñó</span>
+    <textarea data-exp="primerno" placeholder="Del canal, del tono, del momento, de ti. Si el resultado fue no, ¿preguntaste por qué? ¿ya está en tu anti-currículum?"></textarea></label>
+  <div id="ej-costo"></div>
+</section>
+
+<!-- ===================== 6 · LA FRASE ===================== -->
+<section class="paso" data-titulo="El número">
+  <div class="curso">Paso 6 de 8</div>
+  <h2>El número que me pondría</h2>
+  <p class="entrada">Aquí no se juega nada: <strong>este número no va a ningún acta</strong>. Lo que se practica es sostenerlo. Elige, toca las piezas que quieras usar y la frase se arma sola con tus propias palabras; después la editas hasta que suene a ti.</p>
+
+  <h3>Si esta unidad llevara número, yo me pondría un…</h3>
+  <div class="numeros" id="numeros"></div>
+  <input type="hidden" data-exp="num">
+
+  <h3>Las piezas que tienes</h3>
+  <p class="mini">Salieron de lo que escribiste en los pasos anteriores. Toca las que quieras meter; tres o cuatro bastan si son buenas.</p>
+  <div id="bandeja"></div>
+
+  <div class="propuesta">
+    <div class="enc">Me pondría un <em id="numMuestra">—</em> porque:</div>
+    <textarea data-exp="porque" id="porque" placeholder="Toca piezas arriba y aparece aquí. O escríbela desde cero, si prefieres." style="min-height:8rem"></textarea>
+    <div class="fila"><button type="button" class="btn suave no-descarga" id="rearmar" style="font-size:.85rem;padding:.45rem .9rem">Rearmar con las piezas marcadas</button></div>
+  </div>
+
+  <h3>Antes de darlo por bueno</h3>
+  <div class="checks" id="checks"></div>
+  <div id="ej-frase"></div>
+</section>
+
+<!-- ===================== 7 · EL JUEVES ===================== -->
+<section class="paso" data-titulo="El jueves">
+  <div class="curso">Paso 7 de 8</div>
+  <h2>El jueves que viene, si quieres</h2>
+  <p class="entrada">En la semana 5 se abre un espacio para comentar esto. Traerlo hecho no es opcional; compartirlo sí. Y si quieres, ahí puedes practicar <strong>la regla de los tres casos</strong> sin ningún riesgo: le pides al profesor su lectura de tu unidad y las comparan cinco minutos.</p>
+
+  <div class="tarjeta">
+    <p style="margin:.1rem 0"><strong>Si coinciden</strong></p>
+    <p class="mini" style="margin:.15rem 0 0">Listo. En diciembre eso sería tu calificación y se asienta.</p>
+  </div>
+  <div class="tarjeta">
+    <p style="margin:.1rem 0"><strong>Si la tuya es más baja</strong></p>
+    <p class="mini" style="margin:.15rem 0 0">Él te dice por qué ve más. Pasa más seguido de lo que crees, y en diciembre la calificación sube sin que tengas que pedir nada.</p>
+  </div>
+  <div class="tarjeta">
+    <p style="margin:.1rem 0"><strong>Si la tuya es más alta</strong></p>
+    <p class="mini" style="margin:.15rem 0 0">Defiendes tu caso con evidencia, cinco minutos. Tu calificación nunca baja por escrito: cualquier desacuerdo se habla de frente, antes del acta.</p>
+  </div>
+
+  <p class="entrada">En el ensayo <strong>no queda registro de ninguna de las dos lecturas</strong>. Es práctica del músculo, no acta.</p>
+
+  <label class="campo"><span>Lo que quiero preguntarle al profesor el jueves</span>
+    <textarea data-exp="jueves" placeholder="Una duda concreta sobre tu unidad, tu evidencia o tu número. Vale también: «quiero oír su lectura de la mía»."></textarea></label>
+
+  <div class="clave"><b>La honestidad va en las dos direcciones.</b> Ponerte de menos no es humildad ni ponerte de más es confianza: las dos son puntería que todavía no tienes. Para eso se ensaya.</div>
+</section>
+
+<!-- ===================== 8 · CIERRE ===================== -->
+<section class="paso" data-titulo="Cierre">
+  <div class="curso">Paso 8 de 8</div>
+  <h2>Ya está</h2>
+  <p class="entrada">Guarda tu copia con el botón de abajo a la derecha —te baja un archivo con todo lo que escribiste— y mándatela a tu propio correo o WhatsApp. En diciembre vas a querer releer esto, y va a ser lo más útil que tengas.</p>
+
+  <div class="clave"><b>Si quieres, mándasela al profesor.</b> No hace falta: nadie la recoge. Pero si quieres su lectura antes del jueves, el botón arma el correo con lo que ya escribiste y lo abre en tu propia aplicación. Nada se manda solo; tú le das enviar.
+    <div class="fila"><button type="button" class="btn fuerte no-descarga" id="btn-correo">Armar el correo al profesor</button></div>
+  </div>
+
+  <div class="tarjeta">
+    <p style="margin:.1rem 0"><strong>El respaldo, por si cambias de aparato</strong></p>
+    <p class="mini" style="margin:.3rem 0 .5rem">Esto vive en <em>este</em> navegador. Si llenaste en una máquina del campus, o quieres seguir en tu teléfono, copia tu respaldo y pégalo allá.</p>
+    <div class="fila no-descarga">
+      <button type="button" class="btn suave" id="btn-resp">Copiar mi respaldo</button>
+      <button type="button" class="btn suave" id="btn-pegar">Pegar un respaldo</button>
+    </div>
+    <div id="cajaResp" style="display:none;margin-top:.7rem">
+      <textarea id="txtResp" placeholder="Empieza con GEST1·" style="font-family:ui-monospace,monospace;font-size:.78rem;min-height:5rem"></textarea>
+      <p class="mini" id="avisoResp"></p>
+      <div class="fila"><button type="button" class="btn fuerte no-descarga" id="btn-restaurar">Restaurar</button></div>
+    </div>
+  </div>
+
+  <p class="pie">Gestión y Manejo de Proyectos · 2026 · La primera de cuatro paradas. Las otras dos de ensayo caen en las semanas 11 y 14; la que cuenta, en diciembre.</p>
+</section>
+
+</main>
+
+<div class="pie-pasos no-descarga">
+  <div class="caja">
+    <button type="button" class="atras" id="btnAtras">Atrás</button>
+    <span class="donde" id="donde">inicio</span>
+    <button type="button" class="sig" id="btnSig">Empezar</button>
+  </div>
+</div>
+
+<script src="../curso.js"></script>
+<script>
+/* ============================================================
+   AUTOEVALUACIÓN 1 · de ensayo · Gestión y Manejo de Proyectos
+   ------------------------------------------------------------
+   Los campos los guarda curso.js (data-cuadernillo + data-exp),
+   que además pone la barra de descargar / imprimir / borrar.
+   Aquí arriba va solo lo que curso.js no hace: la navegación por
+   pasos, los pares de argumento, la lectura del sobre, la
+   bandeja de piezas, el medidor y el respaldo pegable.
+   ============================================================ */
+(function () {
+  'use strict';
+  function arranca() {
+
+  var CLAVE = 'gestion-exp-autoeval-u1';
+  var CLAVE_CUAD = 'gestion-exp-u1';
+  var PREFIJO = 'GEST1·';
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c];
+    });
+  }
+  function leer() {
+    try { return JSON.parse(localStorage.getItem(CLAVE) || '{}') || {}; } catch (e) { return {}; }
+  }
+  /* Del campo vivo, no de localStorage: curso.js guarda con 600 ms de
+     retraso y si leyéramos de ahí, todo iría un paso atrás. */
+  function val(k) {
+    var c = document.querySelector('[data-exp="' + k + '"]');
+    if (c && c.type !== 'checkbox') return (c.value || '').toString().trim();
+    var r = leer();
+    return (r[k] || '').toString().trim();
+  }
+  function pon(k, v) {
+    var c = document.querySelector('[data-exp="' + k + '"]');
+    if (!c) return;
+    c.value = v;
+    c.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  /* ---------------- los ocho pares ---------------- */
+  var PARES = [
+    { flojo:'Le eché muchas ganas a la consulta.',
+      fuerte:'En mi estación registré catorce frases textuales; seis las anoté yo. Están en la libreta, y la foto del mapa con las marcas está en el Drive, carpeta S4.',
+      porque:'La primera dice cómo te sentiste. La segunda se puede abrir y contar, y además dice dónde está.' },
+    { flojo:'Participé en todo.',
+      fuerte:'Estuve en la consulta, atendí la estación dos y en el círculo conté mis dos minutos con la libreta en la mano.',
+      porque:'«Todo» no se puede señalar; tres cosas con nombre sí. Ojo: eso es suelo. Te deja entrar a la conversación, todavía no es el argumento.' },
+    { flojo:'Hice mi petición pero me dijeron que no, así que no sirvió.',
+      fuerte:'Le pedí a la delegada la palapa dos horas. Me dijo que no porque el viernes había reunión; pregunté por qué y me ofreció el jueves. Sonó la campana y está en mi anti-currículum.',
+      porque:'El resultado no cuenta; el intento sí. Y preguntar por qué es lo que convierte un no en información en vez de en pared.' },
+    { flojo:'Me tocó registrar y registré.',
+      fuerte:'Registré textual aunque incomodara: cuando el señor dijo que «ya vinieron tres veces a apuntar», lo escribí entre comillas en vez de suavizarlo. Esa frase acabó en lo que produjimos.',
+      porque:'La frase incómoda anotada tal cual es la prueba de que no filtraste lo que oíste. Suavizarla habría sido más cómodo y menos cierto.' },
+    { flojo:'Mi sobre estuvo casi bien.',
+      fuerte:'De mis tres pronósticos le atinó uno, el de la sombra. Nadie del equipo había pensado en el alumbrado y salió en dos estaciones. La consulta sirvió justo para eso.',
+      porque:'Fallar el sobre no es fallar: es la prueba de que hacía falta preguntar. Acertar los tres sería lo sospechoso.' },
+    { flojo:'No pude subir el reporte porque se me complicó.',
+      fuerte:'Mi reporte de la ficha todavía no está en el Drive. Lo subo el miércoles antes de clase: ya tengo el texto, me falta pasarlo.',
+      porque:'Un pendiente con fecha es un plan. Un pendiente con excusa es un hueco. La casilla se cubre igual; lo que cambia es qué dice de ti.' },
+    { flojo:'Necesito buena calificación porque me esfuerzo mucho.',
+      fuerte:'—',
+      porque:'Esta no tiene versión buena, y menos aquí: en esta unidad no hay calificación que pedir. Si te preocupa el número de diciembre, dilo en la conversación como lo que es —una preocupación— y no como argumento.' },
+    { flojo:'Aprendí mucho de la comunidad.',
+      fuerte:'Aprendí que no sé cerrar una conversación. Con la señora que iba de salida seguí preguntando cuando ya se quería ir. Lo vi en el ensayo del jueves y volvió a pasarme el viernes.',
+      porque:'«Aprendí mucho» lo puede decir cualquiera del grupo sin cambiar una palabra. Nombrar lo que todavía no sabes hacer, con el momento exacto, solo lo puedes decir tú.' }
+  ];
+
+  /* ---------------- el suelo de la unidad 1 ---------------- */
+  var CASILLAS = [
+    { k:'s-contrato', t:'Contrato de gestión firmado',
+      d:'El papel en tu carpeta, o el contrato llenado en línea y descargado. Si falta: se entrega el jueves de la semana 5.' },
+    { k:'s-primerno', t:'Mi primer no: la petición real, hecha y sistematizada',
+      d:'Sí, no o silencio valen igual; lo que cuenta es haber pedido de verdad. Si falta: se hace y se registra antes del viernes de la semana 5.' },
+    { k:'s-reporte', t:'El reporte de mi ficha de observación está en el Drive',
+      d:'Carpeta S2, con los nombres de la pareja. Si falta: se sube antes del viernes de la semana 5.' },
+    { k:'s-consulta', t:'Participé en la consulta (o hice la compensatoria)',
+      d:'Tu registro en limpio. La compensatoria: dos entrevistas apreciativas en tu comunidad, con registro textual, antes del viernes de la semana 5.' },
+    { k:'s-sobre', t:'Sellé mi sobre en la semana 1',
+      d:'Estuvo en el cartel y se abrió en la orilla. Si entraste tarde y no hubo sobre tuyo, se dice aquí y la casilla se da por cubierta.' },
+    { k:'s-minutos', t:'Los dos minutos del círculo en la orilla',
+      d:'Estuviste en el círculo y tu estructura quedó llena en la bitácora.' },
+    { k:'s-tickets', t:'Respondí los tickets de salida de la unidad',
+      d:'Esta se marca bajo palabra: los tickets van sin nombre y nadie los audita. El sistema entero funciona sobre tu palabra.' }
+  ];
+
+  /* ---------------- el ejemplo, paso por paso ---------------- */
+  var EJEMPLOS = {
+    'ej-suelo': { t:'Así llenó su suelo',
+      d:['Marcó seis de siete. La que falta es el reporte del Drive, y en vez de justificarse le puso fecha.'],
+      dice:'Me falta el reporte de la ficha. Lo subo el miércoles antes de clase: ya tengo el texto, me falta pasarlo al Drive.',
+      fija:'Fíjate en que no explica por qué no lo subió. Explicarlo no cubre la casilla; la fecha sí.' },
+    'ej-sobre': { t:'Así leyó su sobre',
+      d:['Predijo: mesas, sombra y un asador. La gente pidió: sombra, alumbrado y que la orilla se limpie sola. Le atinó una.'],
+      dice:'De mis tres le atiné una, la sombra. El alumbrado no se le había ocurrido a nadie del equipo y salió en dos estaciones: la gente no quiere estar más rato, quiere poder regresarse de noche sin miedo. Eso no lo saca ningún diseño de escritorio.',
+      fija:'No se disculpa por haber fallado dos. Cuenta qué aprendió del fallo, que es exactamente el punto del sobre.' },
+    'ej-evidencia': { t:'Así nombró su evidencia',
+      d:['Tres piezas, cada una con su dónde. Ninguna dice «en mis apuntes».'],
+      dice:'1 · La foto del mapa de mi estación con las marcas de los niños → Drive del curso, carpeta S4.\n2 · Mi registro en limpio de catorce frases textuales → bitácora, páginas 8 y 9.\n3 · El contrato de gestión firmado → descargado y en mi carpeta.',
+      fija:'«Dónde está» con carpeta y número de página. Eso es lo que la vuelve abrible.' },
+    'ej-costo': { t:'Así nombró lo que no sabe',
+      d:['El paso que más pesa, y el que casi nadie escribe bien.'],
+      dice:'No sé cerrar una conversación. Con la señora que iba de salida con el nixtamal en la lumbre seguí preguntando cuando ya se quería ir; le quité tres minutos que no me tocaban. Lo vi en el ensayo del jueves, con la vecina difícil, y aun así volvió a pasarme el viernes.',
+      fija:'Con quién, en qué momento, y que ya lo había visto una vez. Eso es un hueco nombrado; «me falta práctica» no lo es.' },
+    'ej-frase': { t:'Su frase completa',
+      d:['Se puso un 8. Así quedó su porqué:'],
+      dice:'Cubrí seis de siete casillas del suelo y la que falta tiene fecha. De mis tres pronósticos del sobre le atiné una, y de ahí salió lo que más me sirvió: nadie del equipo había pensado en el alumbrado. Registré catorce frases textuales, seis mías, y están en la bitácora páginas 8 y 9. Todavía no sé cerrar una conversación: con la señora del nixtamal seguí preguntando cuando ya se quería ir, y ya me había pasado en el ensayo.',
+      fija:'Fíjate en lo que hace y en lo que no hace. No dice que se esforzó. No pide nada. Cita cosas que se pueden abrir, con número y con lugar. Y termina nombrando lo que no sabe hacer, sin disculparse. Se pone 8, no 10.' }
+  };
+
+  /* ---------------- pares ---------------- */
+  var cajaPares = document.getElementById('pares');
+  PARES.forEach(function (par) {
+    var sin = par.fuerte === '—';
+    var d = document.createElement('div');
+    d.className = 'par';
+    d.innerHTML =
+      '<div class="flojo"><span class="et">No cuenta</span><p>«' + esc(par.flojo) + '»</p></div>' +
+      '<button type="button" class="voltea no-descarga">' +
+        (sin ? '¿Cómo la dirías tú para que cuente?' : '¿Cómo la dirías tú? · destapar') + '</button>' +
+      '<div class="fuerte">' +
+        (sin ? '' : '<span class="et">Sí cuenta</span><p>«' + esc(par.fuerte) + '»</p>') +
+        '<span class="porque"><b>Por qué:</b> ' + esc(par.porque) + '</span>' +
+      '</div>';
+    d.querySelector('.voltea').addEventListener('click', function () { d.classList.add('abierto'); });
+    cajaPares.appendChild(d);
+  });
+
+  /* ---------------- ejemplos ---------------- */
+  Object.keys(EJEMPLOS).forEach(function (id) {
+    var slot = document.getElementById(id);
+    if (!slot) return;
+    var e = EJEMPLOS[id];
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn-ej no-descarga';
+    btn.textContent = 'Ver un ejemplo';
+    var caja = document.createElement('div');
+    caja.className = 'ejemplo';
+    caja.innerHTML = '<span class="et">Ejemplo · Tania, gestora inventada</span>' +
+      '<p><strong>' + esc(e.t) + '</strong></p>' +
+      (e.d || []).map(function (x) { return '<p>' + esc(x) + '</p>'; }).join('') +
+      (e.dice ? '<p class="dice">' + esc(e.dice) + '</p>' : '') +
+      (e.fija ? '<span class="fija">' + esc(e.fija) + '</span>' : '');
+    btn.addEventListener('click', function () {
+      var ab = caja.classList.toggle('ver');
+      btn.textContent = ab ? 'Cerrar el ejemplo' : 'Ver un ejemplo';
+    });
+    slot.appendChild(btn);
+    slot.appendChild(caja);
+  });
+
+  /* ---------------- el suelo ---------------- */
+  var cajaSuelo = document.getElementById('suelo');
+  var duelasEl = document.getElementById('duelas');
+  var pisoEl = document.getElementById('piso');
+  var pisoLey = document.getElementById('pisoLey');
+  var cajaFalta = document.getElementById('cajaFalta');
+  var marcas = {};
+
+  CASILLAS.forEach(function (c) {
+    var oculto = document.createElement('input');
+    oculto.type = 'checkbox';
+    oculto.setAttribute('data-exp', c.k);
+    oculto.style.display = 'none';
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'casilla';
+    b.innerHTML = '<span class="caja"></span><span><b>' + esc(c.t) + '</b>' +
+                  '<span class="como">' + esc(c.d) + '</span></span>';
+    b.addEventListener('click', function () {
+      oculto.checked = !oculto.checked;
+      oculto.dispatchEvent(new Event('change', { bubbles: true }));
+      marcas[c.k] = oculto.checked;
+      b.classList.toggle('puesta', oculto.checked);
+      pintaPiso();
+    });
+    cajaSuelo.appendChild(oculto);
+    cajaSuelo.appendChild(b);
+    c._btn = b; c._chk = oculto;
+  });
+
+  function cuentaSuelo() {
+    return CASILLAS.filter(function (c) { return c._chk.checked; }).length;
+  }
+  function pintaPiso() {
+    var n = cuentaSuelo(), T = CASILLAS.length;
+    duelasEl.innerHTML = CASILLAS.map(function (c) {
+      return '<div class="duela' + (c._chk.checked ? '' : ' falta') + '"></div>';
+    }).join('');
+    pisoEl.classList.toggle('completo', n === T);
+    pisoLey.textContent = n === 0 ? 'Todavía no marcas ninguna casilla.'
+      : n < T ? n + ' de ' + T + ' cubiertas. ' + (T - n === 1 ? 'Falta una: anótala' : 'Faltan ' + (T - n) + ': anótalas') + ' abajo, con fecha.'
+      : 'Suelo completo. No repruebas. Lo que sigue decide cuánto más.';
+    cajaFalta.style.display = (n > 0 && n < T) ? 'block' : 'none';
+    pintaRail();
+  }
+
+  /* ---------------- el sobre ---------------- */
+  var aciertosEl = document.getElementById('aciertos');
+  var lecturaSobre = document.getElementById('lecturaSobre');
+  var LECTURAS = {
+    '0': { t:'Ninguna de las tres', d:'La consulta hizo exactamente lo que tenía que hacer. Tres semanas imaginando la orilla y la gente pidió otra cosa: eso no es haber fallado, es haber descubierto que diseñar de oídas no funciona. Es de los mejores argumentos que puedes llevar.',
+           c:'de mis tres pronósticos del sobre no le atinó ninguno, y ahí está la prueba de que la consulta hacía falta' },
+    '1': { t:'Una de tres', d:'Lo normal, y lo sano. Algo intuías y mucho no. Lo que importa ahora no es la que acertaste: es qué salió que no estaba en tu sobre, y qué dice eso de tu comunidad.',
+           c:'de mis tres pronósticos del sobre le atiné uno; lo que aprendí salió de los dos que fallé' },
+    '2': { t:'Dos de tres', d:'Buena puntería. Pero cuidado con la conclusión fácil: acertar dos no prueba que conocías a tu comunidad, puede probar que tu estación preguntó de un modo que confirmaba lo que ya pensabas. ¿Salió algo que no esperabas? Si no salió nada, vale la pena mirarlo.',
+           c:'de mis tres pronósticos del sobre le atiné dos, y me quedé revisando si eso fue puntería o fue que pregunté confirmando' },
+    '3': { t:'Las tres', d:'Y aquí el curso te devuelve su propia frase: si todo lo que escuchaste confirma lo que ya pensabas, o tuviste mucha puntería o preguntaste chueco. Ninguna de las dos es mala noticia; las dos son cosas que conviene saber de uno mismo.',
+           c:'le atiné a las tres del sobre, y me quedé con la duda honesta de si fue puntería o pregunté confirmando lo que ya pensaba' }
+  };
+  ['0','1','2','3'].forEach(function (n) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = n;
+    b.addEventListener('click', function () { pon('sob-aciertos', n); pintaSobre(); });
+    aciertosEl.appendChild(b);
+  });
+  function pintaSobre() {
+    var v = val('sob-aciertos');
+    Array.prototype.forEach.call(aciertosEl.children, function (b) {
+      b.classList.toggle('on', b.textContent === v);
+    });
+    var L = LECTURAS[v];
+    if (!L) {
+      lecturaSobre.className = 'lectura';
+      lecturaSobre.innerHTML = '<b>Toca un número</b>La lectura aparece cuando digas cuántas acertaste. No hay respuesta buena: las dos orillas dicen algo.';
+    } else {
+      lecturaSobre.className = 'lectura' + (v === '0' || v === '1' ? ' bien' : '');
+      lecturaSobre.innerHTML = '<b>' + esc(L.t) + '</b>' + esc(L.d);
+    }
+    pintaRail();
+  }
+
+  /* ---------------- el número y la bandeja ---------------- */
+  var numerosEl = document.getElementById('numeros');
+  var numMuestra = document.getElementById('numMuestra');
+  var porqueEl = document.getElementById('porque');
+  var bandejaEl = document.getElementById('bandeja');
+  var checksEl = document.getElementById('checks');
+  var usadas = {};
+
+  [5,6,7,8,9,10].forEach(function (n) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = n;
+    b.addEventListener('click', function () { pon('num', String(n)); pintaNumero(); pintaChecks(); });
+    numerosEl.appendChild(b);
+  });
+  function pintaNumero() {
+    var v = val('num');
+    Array.prototype.forEach.call(numerosEl.children, function (b) { b.classList.toggle('on', b.textContent === v); });
+    numMuestra.textContent = v || '—';
+  }
+
+  function piezas() {
+    var out = [];
+    var L = LECTURAS[val('sob-aciertos')];
+    if (L) out.push({ id:'sobre', tipo:'el sobre', t:L.c });
+    if (val('sob-nadie')) out.push({ id:'nadie', tipo:'el sobre', t:'salió algo que a nadie del equipo se le había ocurrido: ' + val('sob-nadie') });
+    if (cuentaSuelo() === CASILLAS.length) out.push({ id:'suelo', tipo:'suelo', t:'cubrí las siete casillas del suelo de la unidad' });
+    else if (cuentaSuelo() && val('suelo-falta')) out.push({ id:'suelo2', tipo:'suelo', t:'cubrí ' + cuentaSuelo() + ' de ' + CASILLAS.length + ' casillas, y la que falta tiene fecha: ' + val('suelo-falta') });
+    [['ev1q','ev1d'],['ev2q','ev2d'],['ev3q','ev3d']].forEach(function (p, i) {
+      if (val(p[0])) out.push({ id:'ev'+i, tipo:'evidencia', t:val(p[0]) + (val(p[1]) ? ', en ' + val(p[1]) : '') });
+    });
+    if (val('ev-extra')) out.push({ id:'extra', tipo:'sin que me lo pidieran', t:val('ev-extra') });
+    if (val('primerno')) out.push({ id:'pn', tipo:'mi primer no', t:val('primerno') });
+    if (val('costo')) out.push({ id:'costo', tipo:'lo que me costó', t:val('costo') });
+    if (val('nosé')) out.push({ id:'nose', tipo:'todavía no sé', t:val('nosé') });
+    return out;
+  }
+
+  function pintaBandeja() {
+    var P = piezas();
+    if (!P.length) {
+      bandejaEl.innerHTML = '<p class="mini">Todavía no hay piezas: regresa a los pasos anteriores y escribe algo. Con dos o tres frases ya se arma esto solo.</p>';
+      return;
+    }
+    bandejaEl.innerHTML = '';
+    P.forEach(function (p) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip no-descarga' + (usadas[p.id] ? ' on' : '');
+      b.innerHTML = '<i>' + esc(p.tipo) + '</i>' + esc(p.t);
+      b.addEventListener('click', function () {
+        usadas[p.id] = !usadas[p.id];
+        b.classList.toggle('on', !!usadas[p.id]);
+        arma();
+      });
+      bandejaEl.appendChild(b);
+    });
+  }
+  function arma() {
+    var P = piezas().filter(function (p) { return usadas[p.id]; });
+    if (!P.length) { pintaChecks(); return; }
+    var t = P.map(function (p) {
+      var s = p.t.trim().replace(/[.;]+$/, '');
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    }).join('. ') + '.';
+    pon('porque', t);
+    pintaChecks();
+  }
+  document.getElementById('rearmar').addEventListener('click', arma);
+
+  function pintaChecks() {
+    var t = porqueEl.value || '', bajo = t.toLowerCase();
+    var abrible = /(drive|bit[áa]cora|carpeta|libreta|p[áa]gina|foto|registro|contrato|hoja|mapa|textual|s[0-9])/i.test(t);
+    var sobre = /(sobre|pron[óo]stic|atin|predij)/i.test(bajo) || !!usadas['sobre'] || !!usadas['nadie'];
+    var hueco = /(todav[íi]a no|no s[ée]|me falta|no supe|me cost)/i.test(bajo);
+    var veto = /(me esforc|necesito|para mi promedio|por favor|nunca falt|particip[ée] en todo)/i.test(bajo);
+    var largo = t.trim().length >= 140;
+    var lista = [
+      { ok: !!val('num'), t:'Elegiste un número.' },
+      { ok: abrible, t:'Tu porqué nombra algo que se puede abrir, con su dónde.' },
+      { ok: sobre, t:'Metiste tu sobre: es lo único que mide qué tanto conocías a tu comunidad.' },
+      { ok: hueco, t:'Dijiste algo que todavía no sabes hacer, sin disculparte por ello.' },
+      { ok: largo, t:'Tiene cuerpo: más de un renglón. Una frase de diez palabras no sostiene nada.' },
+      { ok: !veto, alerta: veto, t: veto
+          ? 'Hay algo que no cuenta como argumento («me esforcé», «necesito», «nunca falté»). Cámbialo por algo que se pueda abrir.'
+          : 'No metiste nada de lo que no cuenta como argumento.' }
+    ];
+    checksEl.innerHTML = lista.map(function (c) {
+      return '<div class="check' + (c.alerta ? ' alerta' : (c.ok ? ' ok' : '')) + '"><span class="m"></span><span>' + esc(c.t) + '</span></div>';
+    }).join('') +
+    '<p class="mini" style="margin-top:.5rem">Y una más que no revisa ninguna pantalla: <strong>léela en voz alta una vez</strong>. Si te da pena, no es la frase.</p>';
+  }
+
+  /* ---------------- heredar del cuadernillo ---------------- */
+  (function heredar() {
+    var caja = document.getElementById('heredar');
+    var cuad = {};
+    try { cuad = JSON.parse(localStorage.getItem(CLAVE_CUAD) || '{}') || {}; } catch (e) {}
+    var hay = ['nombre','empiezo-sobre','suelo-contrato','suelo-primerno','suelo-reporte',
+               'suelo-consulta','suelo-sobre','suelo-minutos','suelo-tickets','mapa-1q','pn-aprendi']
+      .some(function (k) { return cuad[k]; });
+    if (!hay) return;
+    caja.innerHTML = '<div class="clave"><b>Ya escribiste cosas en tu cuadernillo.</b> ' +
+      'Puedo traerlas aquí para que no las escribas dos veces: tu nombre, las casillas del suelo que ya marcaste, ' +
+      'tu pronóstico del sobre y lo que aprendiste de tu primer no. Lo que ya tengas escrito aquí no se toca.' +
+      '<div class="fila"><button type="button" class="btn fuerte no-descarga" id="btn-heredar">Traer lo del cuadernillo</button></div>' +
+      '<p class="mini" id="avisoHered" style="margin:.5rem 0 0"></p></div>';
+    document.getElementById('btn-heredar').addEventListener('click', function () {
+      var n = 0;
+      function trae(de, a) {
+        if (cuad[de] && !val(a)) { pon(a, cuad[de]); n++; }
+      }
+      trae('nombre', 'nombre');
+      trae('empiezo-sobre', 'sob-p1');
+      trae('pn-aprendi', 'primerno');
+      var mapa = [['mapa-1q','ev1q'],['mapa-1d','ev1d'],['mapa-2q','ev2q'],['mapa-2d','ev2d'],
+                  ['mapa-3q','ev3q'],['mapa-3d','ev3d']];
+      mapa.forEach(function (p) { trae(p[0], p[1]); });
+      CASILLAS.forEach(function (c) {
+        var viejo = 'suelo-' + c.k.slice(2);
+        if (cuad[viejo] && !c._chk.checked) {
+          c._chk.checked = true;
+          c._chk.dispatchEvent(new Event('change', { bubbles: true }));
+          c._btn.classList.add('puesta');
+          n++;
+        }
+      });
+      pintaPiso(); pintaBandeja(); pintaChecks();
+      document.getElementById('avisoHered').textContent = n
+        ? 'Traje ' + n + ' cosa(s). Revísalas: el pronóstico del sobre venía en un solo campo y quizá haya que repartirlo en los tres.'
+        : 'No había nada nuevo que traer: ya lo tenías todo aquí.';
+    });
+  })();
+
+  /* ---------------- respaldo pegable ---------------- */
+  function aB64(t) {
+    if (window.TextEncoder) {
+      var a = new TextEncoder().encode(t), b = '';
+      for (var i = 0; i < a.length; i++) b += String.fromCharCode(a[i]);
+      return btoa(b);
+    }
+    return btoa(unescape(encodeURIComponent(t)));
+  }
+  function deB64(b) {
+    var bin = atob(b);
+    if (window.TextDecoder) {
+      var a = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+      return new TextDecoder().decode(a);
+    }
+    return decodeURIComponent(escape(bin));
+  }
+  var cajaResp = document.getElementById('cajaResp');
+  var txtResp = document.getElementById('txtResp');
+  var avisoResp = document.getElementById('avisoResp');
+  document.getElementById('btn-resp').addEventListener('click', function () {
+    var c = PREFIJO + aB64(JSON.stringify(leer()));
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(c).then(function () {
+        cajaResp.style.display = 'none';
+        avisoResp.textContent = '';
+        alert('Respaldo copiado. Mándatelo a tu propio correo o WhatsApp.');
+      }, manual);
+    } else manual();
+    function manual() {
+      cajaResp.style.display = 'block';
+      txtResp.value = c;
+      avisoResp.textContent = 'Cópialo de aquí: selecciona todo y copia.';
+    }
+  });
+  document.getElementById('btn-pegar').addEventListener('click', function () {
+    cajaResp.style.display = 'block';
+    txtResp.value = '';
+    avisoResp.textContent = '';
+    txtResp.focus();
+  });
+  document.getElementById('btn-restaurar').addEventListener('click', function () {
+    var c = (txtResp.value || '').trim();
+    if (c.indexOf(PREFIJO) === 0) c = c.slice(PREFIJO.length);
+    c = c.replace(/\s+/g, '');
+    var d = null;
+    try { d = JSON.parse(deB64(c)); } catch (e) { d = null; }
+    if (!d || typeof d !== 'object' || Array.isArray(d)) {
+      avisoResp.textContent = 'Ese código no se entiende. Cópialo completo, desde GEST1· hasta el final.';
+      return;
+    }
+    if (!window.confirm('Esto reemplaza lo que tengas escrito aquí por lo del respaldo. ¿Va?')) return;
+    try { localStorage.setItem(CLAVE, JSON.stringify(d)); } catch (e) {}
+    location.reload();
+  });
+
+  /* ---------------- el correo ---------------- */
+  document.getElementById('btn-correo').addEventListener('click', function () {
+    var n = val('nombre'), num = val('num'), por = val('porque');
+    var cuerpo = 'Nombre: ' + (n || '(sin nombre)') +
+      '\nUnidad: 1 · Escuchar la presa' +
+      '\nCalificación que me pondría (ensayo): ' + (num || '(sin número)') +
+      '\n\nMi porqué:\n' + (por || '(sin escribir)');
+    location.href = 'mailto:eduardo.lusan@gmail.com?subject=' +
+      encodeURIComponent('Autoevaluación U1 · ' + (n || 'Sin nombre')) +
+      '&body=' + encodeURIComponent(cuerpo);
+  });
+
+  /* ---------------- navegación por pasos ---------------- */
+  var pasos = Array.prototype.slice.call(document.querySelectorAll('.paso'));
+  var TOTAL = pasos.length;
+  var actual = 0;
+  var rail = document.getElementById('rail');
+  var btnAtras = document.getElementById('btnAtras');
+  var btnSig = document.getElementById('btnSig');
+  var donde = document.getElementById('donde');
+
+  pasos.forEach(function (p, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Ir a ' + (p.getAttribute('data-titulo') || ('paso ' + i)));
+    b.addEventListener('click', function () { ir(i); });
+    rail.appendChild(b);
+  });
+
+  function conAlgo(i) {
+    switch (i) {
+      case 0: return !!val('nombre');
+      case 1: return true;
+      case 2: return cuentaSuelo() > 0;
+      case 3: return !!(val('sob-p1') || val('sob-aciertos') || val('sob-nadie'));
+      case 4: return !!(val('ev1q') || val('ev-extra'));
+      case 5: return !!(val('costo') || val('nosé') || val('primerno'));
+      case 6: return !!(val('num') && val('porque'));
+      case 7: return !!val('jueves');
+      case 8: return false;
+    }
+    return false;
+  }
+  function pintaRail() {
+    Array.prototype.forEach.call(rail.children, function (b, j) {
+      b.classList.toggle('lleno', conAlgo(j));
+      b.classList.toggle('aqui', j === actual);
+      b.classList.toggle('vista', j < actual);
+    });
+  }
+  function ir(i) {
+    actual = Math.max(0, Math.min(TOTAL - 1, i));
+    pasos.forEach(function (p, j) { p.classList.toggle('activa', j === actual); });
+    btnAtras.disabled = actual === 0;
+    btnSig.disabled = actual === TOTAL - 1;
+    btnSig.textContent = actual === 0 ? 'Empezar' : (actual === TOTAL - 2 ? 'Terminar' : 'Siguiente');
+    donde.textContent = actual === 0 ? 'inicio' : actual + ' / ' + (TOTAL - 1);
+    if (actual === 6) { pintaBandeja(); pintaChecks(); }
+    pintaRail();
+    window.scrollTo(0, 0);
+  }
+  btnAtras.addEventListener('click', function () { ir(actual - 1); });
+  btnSig.addEventListener('click', function () { ir(actual + 1); });
+
+  var x0 = null, y0 = null;
+  document.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) { x0 = null; return; }
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+  }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    x0 = null;
+    if (Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+    ir(actual + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  document.addEventListener('keydown', function (e) {
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName || '')) return;
+    if (e.key === 'ArrowRight') ir(actual + 1);
+    if (e.key === 'ArrowLeft') ir(actual - 1);
+  });
+
+  /* Cualquier cosa que se escriba repinta el rail y la bandeja. */
+  document.addEventListener('input', function (e) {
+    if (!e.target.hasAttribute || !e.target.hasAttribute('data-exp')) return;
+    pintaRail();
+    if (actual === 6) { pintaBandeja(); pintaChecks(); }
+  });
+
+  /* ---------------- arranque ---------------- */
+  CASILLAS.forEach(function (c) { c._btn.classList.toggle('puesta', c._chk.checked); });
+  pintaPiso();
+  pintaSobre();
+  pintaNumero();
+  pintaBandeja();
+  pintaChecks();
+  ir(0);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca);
+  else arranca();
+})();
+</script>
+
+</body>
+</html>
