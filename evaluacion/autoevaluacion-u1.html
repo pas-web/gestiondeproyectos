@@ -133,6 +133,72 @@
   .aciertos button { flex:1 1 3rem; border:2px solid var(--borde); background:#fff; color:var(--profundo);
                      border-radius:9px; padding:.5rem .2rem; font:inherit; font-size:1.3rem; font-weight:bold; cursor:pointer; }
   .aciertos button.on { background:var(--marca); border-color:var(--marca); color:#fff; }
+  /* --- la frase textual, paso 4 --- */
+  div.campo { display:block; margin-top:1rem; }
+  div.campo > span { display:block; font-size:.76rem; font-weight:bold; letter-spacing:.06em;
+                     text-transform:uppercase; color:var(--marca); margin-bottom:.25rem; }
+  .cita-caja { position:relative; background:#fff; border:1px solid var(--borde); border-left:5px solid var(--arena);
+               border-radius:0 12px 12px 0; padding:1rem 1.1rem .9rem 2.6rem; margin:.9rem 0; }
+  .cita-caja .comilla { position:absolute; left:.75rem; top:.45rem; font-family:Georgia,serif; font-size:3.2rem;
+                        line-height:1; color:var(--arena); opacity:.55; }
+  .cita-caja textarea { font-family:Georgia,serif; font-size:1.06rem; font-style:italic; color:var(--profundo); }
+  .cita-pie { margin-top:.55rem; padding-top:.55rem; border-top:1px dashed var(--borde); }
+
+  /* --- las tres brújulas --- */
+  .brujula { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.85rem 1rem; margin:.6rem 0; }
+  .brujula .reg { font-family:Georgia,serif; font-size:1.05rem; color:var(--profundo); font-weight:bold; }
+  .brujula .exp { font-size:.88rem; color:var(--gris); line-height:1.5; margin:.2rem 0 .6rem; display:block; }
+  .brujula .ops { display:flex; gap:.35rem; flex-wrap:wrap; }
+  .brujula .ops button { flex:1 1 6rem; border:2px solid var(--borde); background:#FBFDFC; color:var(--profundo);
+                         border-radius:9px; padding:.45rem .3rem; font:inherit; font-size:.84rem; cursor:pointer;
+                         line-height:1.25; }
+  .brujula .ops button.on { border-color:var(--marca); background:var(--marca); color:#fff; font-weight:bold; }
+  .brujula .ops button[data-v="fallo"].on { border-color:var(--arena); background:#F3E4C0; color:#5A430D; }
+  .brujula .donde-fallo { display:none; }
+  .brujula.contar .donde-fallo { display:block; }
+
+  /* --- la línea de la orilla --- */
+  .linea { position:relative; margin:1rem 0 1.2rem; padding-left:1.5rem; }
+  .linea::before { content:''; position:absolute; left:.42rem; top:.6rem; bottom:.6rem; width:2px; background:var(--borde); }
+  .hito { position:relative; margin:0 0 .45rem; }
+  .hito::before { content:''; position:absolute; left:-1.5rem; top:.85rem; width:.75rem; height:.75rem; border-radius:50%;
+                  background:#fff; border:2px solid var(--borde); z-index:1; }
+  .hito.tengo::before { background:var(--marca); border-color:var(--marca); }
+  .hito > button.cab { display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--borde);
+                       border-radius:10px; padding:.55rem .8rem; font:inherit; cursor:pointer; color:var(--texto); }
+  .hito > button.cab:hover { border-color:var(--marca); }
+  .hito.abierto > button.cab { border-radius:10px 10px 0 0; border-bottom-color:transparent; }
+  .hito .cuando { display:block; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--marca);
+                  font-weight:bold; }
+  .hito .qpaso { display:block; font-size:.97rem; color:var(--profundo); font-weight:bold; }
+  .hito .cuerpo { display:none; border:1px solid var(--borde); border-top:none; border-radius:0 0 10px 10px;
+                  background:#FBFDFC; padding:.15rem .8rem .8rem; }
+  .hito.abierto .cuerpo { display:block; }
+  .hito .cuerpo p { font-size:.9rem; margin:.5rem 0 .4rem; }
+  .hito .cuerpo .dejo { font-size:.76rem; letter-spacing:.05em; text-transform:uppercase; color:var(--gris);
+                        font-weight:bold; display:block; margin-top:.5rem; }
+  .hito .cuerpo ul { margin:.2rem 0 .5rem; padding-left:1.1rem; font-size:.9rem; }
+  .hito .cuerpo li { margin:.15rem 0; }
+  .hito .usar { border:1px solid var(--marca); background:#fff; color:var(--marca); border-radius:999px;
+                padding:.32rem .8rem; font:inherit; font-size:.83rem; font-weight:bold; cursor:pointer; }
+  .hito .usar:disabled { border-color:var(--borde); color:var(--gris); cursor:default; font-weight:normal; }
+
+  /* --- de dónde salió la evidencia --- */
+  .dedonde { display:flex; gap:.3rem; flex-wrap:wrap; margin-bottom:.3rem; }
+  .dedonde button { border:1px solid var(--borde); background:#fff; color:var(--gris); border-radius:999px;
+                  padding:.22rem .7rem; font:inherit; font-size:.8rem; cursor:pointer; }
+  .dedonde button:hover { border-color:var(--marca); color:var(--marca); }
+  .dedonde button.on { background:var(--marca); border-color:var(--marca); color:#fff; font-weight:bold; }
+
+  /* --- el contador de noes --- */
+  .contador { display:flex; gap:.35rem; flex-wrap:wrap; margin:.6rem 0; align-items:stretch; }
+  .contador button { flex:1 1 2.6rem; border:2px solid var(--borde); background:#fff; color:var(--profundo);
+                     border-radius:10px; padding:.5rem .2rem .3rem; font:inherit; cursor:pointer; text-align:center; }
+  .contador button .n { display:block; font-family:Georgia,serif; font-size:1.35rem; line-height:1; }
+  .contador button .cam { display:block; font-size:.95rem; line-height:1.1; height:1.1rem; opacity:.25; }
+  .contador button.on { border-color:var(--arena); background:#FBF3E0; }
+  .contador button.on .cam { opacity:1; }
+
   .lectura { border:1px solid var(--borde); border-radius:11px; background:#fff; padding:.8rem .95rem; margin:.7rem 0; }
   .lectura b { display:block; color:var(--profundo); font-size:1.02rem; margin-bottom:.15rem; }
   .lectura.bien { border-color:#BCDFCB; background:var(--bienbg); }
@@ -292,7 +358,7 @@
 
   <div class="tarjeta">
     <p style="margin:.1rem 0"><strong>Cómo funciona esta pantalla</strong></p>
-    <p class="mini" style="margin:.35rem 0 0">Ocho pasos que se pasan con el dedo o con el botón de abajo. <strong>Se guarda solo</strong> en este navegador mientras escribes, no viaja a ningún lado, y con la barra de abajo puedes descargar tu copia o imprimirla. Tardas unos quince minutos, con tu registro en limpio a la vista.</p>
+    <p class="mini" style="margin:.35rem 0 0">Nueve pasos que se pasan con el dedo o con el botón de abajo. <strong>Se guarda solo</strong> en este navegador mientras escribes, no viaja a ningún lado, y con la barra de abajo puedes descargar tu copia o imprimirla. Tardas unos quince minutos, con tu registro en limpio a la vista.</p>
     <p class="mini" style="margin:.5rem 0 0">Casi todos los pasos traen un botón <strong>Ver un ejemplo</strong>: es la autoevaluación de una gestora inventada, llenada completa. No la copies —se nota—, pero míralo antes de escribir el tuyo.</p>
   </div>
 
@@ -302,7 +368,7 @@
 
 <!-- ===================== 1 · QUÉ CUENTA ===================== -->
 <section class="paso" data-titulo="Qué cuenta">
-  <div class="curso">Paso 1 de 8</div>
+  <div class="curso">Paso 1 de 9</div>
   <h2>Qué cuenta como argumento</h2>
   <p class="entrada">Es la parte que nadie te ha enseñado, así que va despacio. Un argumento no es una frase bonita ni una promesa: es <strong>algo que se puede abrir y mirar</strong>. En este curso hay cuatro clases, y las cuatro salieron de estas cuatro semanas.</p>
 
@@ -326,7 +392,7 @@
 
 <!-- ===================== 2 · EL SUELO ===================== -->
 <section class="paso" data-titulo="El suelo">
-  <div class="curso">Paso 2 de 8</div>
+  <div class="curso">Paso 2 de 9</div>
   <h2>Tu suelo, casilla por casilla</h2>
   <p class="entrada">El suelo es <strong>piso, no techo</strong>: la lista corta de lo que basta cumplir para no reprobar. No es la meta del curso, es la red de seguridad. Toca cada casilla que ya tengas cubierta; abajo se arma tu piso.</p>
   <div id="suelo"></div>
@@ -345,7 +411,7 @@
 
 <!-- ===================== 3 · EL SOBRE ===================== -->
 <section class="paso" data-titulo="El sobre">
-  <div class="curso">Paso 3 de 8</div>
+  <div class="curso">Paso 3 de 9</div>
   <h2>Tu sobre contra la realidad</h2>
   <p class="entrada">En la semana 1 escribiste las tres cosas que creías que la gente iba a pedir, sellaste el sobre con tu firma y lo viste quedar engrapado en el cartel. El viernes se abrió junto al agua, después de escuchar a la comunidad de verdad.</p>
   <p class="entrada">Esto es lo más parecido que este curso tiene a una medición honesta de ti mismo. Ponlo lado a lado.</p>
@@ -396,24 +462,75 @@
   <div id="ej-sobre"></div>
 </section>
 
+<!-- ===================== 4 · EL VIERNES EN LA ORILLA ===================== -->
+<section class="paso" data-titulo="La orilla">
+  <div class="curso">Paso 4 de 9</div>
+  <h2>Lo que oíste, y cómo te portaste</h2>
+  <p class="entrada">Antes de contar lo que hiciste, una parada en lo que <em>escuchaste</em>. De todo el viernes, hay una frase que se te quedó pegada. Búscala en tu registro en limpio, no en tu memoria: el chiste es que esté <strong>textual</strong>.</p>
+
+  <div class="cita-caja">
+    <div class="comilla">&ldquo;</div>
+    <label class="campo" style="margin:0"><span>La frase que no se te olvida, tal cual la dijeron</span>
+      <textarea data-exp="frase-cita" rows="3" placeholder="Entre comillas y sin arreglarla. Si la dijo mal dicha, así va: eso es registrar textual."></textarea></label>
+    <div class="cita-pie">
+      <label class="campo" style="margin:0"><span>Quién la dijo</span>
+        <input type="text" data-exp="frase-quien" placeholder="Sin apellido si no lo sabes: «una señora de unos sesenta», «un niño de la estación 2»"></label>
+    </div>
+  </div>
+  <label class="campo"><span>Por qué esa y no otra</span>
+    <textarea data-exp="frase-porque" placeholder="Qué te movió, qué te desarmó, qué te hizo cambiar de opinión. Dos líneas."></textarea></label>
+  <p class="mini">Estas frases se juntan el jueves: el grupo entero pone las suyas en el pizarrón y se lee La Florida en voz de La Florida. Si no compartes la tuya, nadie la lee — pero escríbela igual, es tuya.</p>
+
+  <h3 style="margin-top:1.6rem">Las tres brújulas, de frente</h3>
+  <p class="entrada">Todo el curso se sostiene en tres reglas que se dicen fácil y se rompen fácil. Nadie las cumple perfecto la primera vez, y decir dónde se te fue vale más que decir que te salieron.</p>
+  <div id="brujulas"></div>
+  <div class="lectura" id="lecturaBrujulas"><b>Contéstalas y aquí sale la lectura</b>No hay respuesta buena. La que más sirve para el jueves es la honesta.</div>
+  <div id="ej-orilla"></div>
+</section>
+
 <!-- ===================== 4 · LA EVIDENCIA ===================== -->
 <section class="paso" data-titulo="La evidencia">
-  <div class="curso">Paso 4 de 8</div>
+  <div class="curso">Paso 5 de 9</div>
   <h2>Lo que puedes abrir</h2>
-  <p class="entrada">Tres piezas de evidencia que se pueden mirar hoy mismo, con el «dónde está» completo: la carpeta del Drive, la página de la bitácora, la hoja del salón. Si no puedes decir dónde está, no cuenta todavía — y eso también es información.</p>
-  <p class="mini">Si ya llenaste el mapa de evidencias del <a href="expediente-u1.html">cuadernillo de la unidad</a>, cópialo de ahí: son las mismas.</p>
+  <p class="entrada">Tres piezas de evidencia que se pueden mirar hoy mismo, con el «dónde está» completo. Si no puedes decir dónde está, no cuenta todavía — y eso también es información.</p>
+
+  <h3 style="margin-top:1.3rem">La línea de la orilla</h3>
+  <p class="entrada">Cinco semanas producen más cosas de las que uno se acuerda. Recórrela: cada parada te dice qué dejó por escrito, y si la tienes, se te va derecho a tus tres piezas.</p>
+  <div class="linea no-descarga" id="linea"></div>
+  <p class="mini">Si ya llenaste el mapa de evidencias del <a href="expediente-u1.html">cuadernillo de la unidad</a>, también puedes copiarlo de ahí: son las mismas.</p>
 
   <div class="tarjeta">
     <label class="campo" style="margin-top:.2rem"><span>Evidencia 1 · qué es</span><input type="text" data-exp="ev1q" placeholder="Ej.: la foto del mapa de mi estación con las marcas"></label>
-    <label class="campo"><span>Dónde está</span><input type="text" data-exp="ev1d" placeholder="Ej.: Drive del curso, carpeta S4"></label>
+    <div class="campo"><span>Dónde está</span>
+      <div class="dedonde no-descarga" data-para="ev1d">
+        <button type="button" data-pre="Drive del curso, carpeta ">Drive</button>
+        <button type="button" data-pre="Mi bitácora, página ">Bitácora</button>
+        <button type="button" data-pre="En el salón: ">Salón</button>
+        <button type="button" data-pre="">Otro</button>
+      </div>
+      <input type="text" data-exp="ev1d" placeholder="Toca de dónde y complétalo: carpeta, página, cuál"></div>
   </div>
   <div class="tarjeta">
     <label class="campo" style="margin-top:.2rem"><span>Evidencia 2 · qué es</span><input type="text" data-exp="ev2q"></label>
-    <label class="campo"><span>Dónde está</span><input type="text" data-exp="ev2d"></label>
+    <div class="campo"><span>Dónde está</span>
+      <div class="dedonde no-descarga" data-para="ev2d">
+        <button type="button" data-pre="Drive del curso, carpeta ">Drive</button>
+        <button type="button" data-pre="Mi bitácora, página ">Bitácora</button>
+        <button type="button" data-pre="En el salón: ">Salón</button>
+        <button type="button" data-pre="">Otro</button>
+      </div>
+      <input type="text" data-exp="ev2d"></div>
   </div>
   <div class="tarjeta">
     <label class="campo" style="margin-top:.2rem"><span>Evidencia 3 · qué es</span><input type="text" data-exp="ev3q"></label>
-    <label class="campo"><span>Dónde está</span><input type="text" data-exp="ev3d"></label>
+    <div class="campo"><span>Dónde está</span>
+      <div class="dedonde no-descarga" data-para="ev3d">
+        <button type="button" data-pre="Drive del curso, carpeta ">Drive</button>
+        <button type="button" data-pre="Mi bitácora, página ">Bitácora</button>
+        <button type="button" data-pre="En el salón: ">Salón</button>
+        <button type="button" data-pre="">Otro</button>
+      </div>
+      <input type="text" data-exp="ev3d"></div>
   </div>
 
   <label class="campo"><span>Lo que hice sin que nadie me lo pidiera</span>
@@ -423,7 +540,7 @@
 
 <!-- ===================== 5 · LO QUE ME COSTÓ ===================== -->
 <section class="paso" data-titulo="Lo que me costó">
-  <div class="curso">Paso 5 de 8</div>
+  <div class="curso">Paso 6 de 9</div>
   <h2>Lo que me costó, y lo que todavía no sé hacer</h2>
   <p class="entrada">Lo difícil también es evidencia: de que estabas jugando de verdad. Y un «todavía no sé» con su momento exacto vale más, en esta conversación, que cualquier lista de aciertos.</p>
 
@@ -440,6 +557,12 @@
     <span><b>Eso vale una campana.</b> En este curso se aplaude el no, porque pedir de verdad cuesta. Nombrar lo que todavía no sabes hacer cuesta lo mismo, y casi nadie lo escribe. Déjalo tal cual.</span>
   </div>
 
+  <h3 style="margin-top:1.6rem">Tu contador de noes</h3>
+  <p class="entrada">En este curso el no se aplaude, porque el no solo le llega a quien pidió. Un semestre sin ningún no casi siempre significa un semestre sin haber pedido nada de verdad. <strong>Esto no es una casilla del suelo</strong>: es tu anti-currículum, y crece hacia arriba.</p>
+  <div class="contador" id="contador"></div>
+  <input type="hidden" data-exp="noes-n">
+  <div class="lectura" id="lecturaNoes"><b>¿Cuántas veces pediste algo de verdad?</b>Cuenta las peticiones que hiciste tú, a alguien que podía decirte que no. No cuentan las que hizo tu equipo por ti.</div>
+
   <label class="campo"><span>Mi primer no: qué me enseñó</span>
     <textarea data-exp="primerno" placeholder="Del canal, del tono, del momento, de ti. Si el resultado fue no, ¿preguntaste por qué? ¿ya está en tu anti-currículum?"></textarea></label>
   <div id="ej-costo"></div>
@@ -447,7 +570,7 @@
 
 <!-- ===================== 6 · LA FRASE ===================== -->
 <section class="paso" data-titulo="El número">
-  <div class="curso">Paso 6 de 8</div>
+  <div class="curso">Paso 7 de 9</div>
   <h2>El número que me pondría</h2>
   <p class="entrada">Aquí no se juega nada: <strong>este número no va a ningún acta</strong>. Lo que se practica es sostenerlo. Elige, toca las piezas que quieras usar y la frase se arma sola con tus propias palabras; después la editas hasta que suene a ti.</p>
 
@@ -473,7 +596,7 @@
 
 <!-- ===================== 7 · EL JUEVES ===================== -->
 <section class="paso" data-titulo="El jueves">
-  <div class="curso">Paso 7 de 8</div>
+  <div class="curso">Paso 8 de 9</div>
   <h2>El jueves que viene, si quieres</h2>
   <p class="entrada">En la semana 5 se abre un espacio para comentar esto. Traerlo hecho no es opcional; compartirlo sí. Y si quieres, ahí puedes practicar <strong>la regla de los tres casos</strong> sin ningún riesgo: le pides al profesor su lectura de tu unidad y las comparan cinco minutos.</p>
 
@@ -632,6 +755,54 @@
       d:'Esta se marca bajo palabra: los tickets van sin nombre y nadie los audita. El sistema entero funciona sobre tu palabra.' }
   ];
 
+  /* ---------------- las tres brújulas ----------------
+     Las reglas que sostienen el trato con la comunidad. Se rompen fácil y
+     por eso se preguntan: decir dónde se te fue vale más que decir que
+     te salieron las tres. */
+  var BRUJULAS = [
+    { k:'br-prometer', reg:'No prometer nada, a nadie, nunca',
+      exp:'Ni «vamos a poner», ni «seguro que sí», ni «yo creo que se puede». La única promesa autorizada de todo el curso es una: «les vamos a traer apuntado lo que salga hoy».',
+      cuando:'¿En qué momento estuviste cerca de prometer algo? ¿Qué dijiste?' },
+    { k:'br-textual', reg:'Registrar textual, aunque incomode',
+      exp:'Entre comillas y sin suavizar. Si alguien dijo «ya vinieron tres veces a apuntar», eso se escribe, no se traduce a «hay cierta desconfianza».',
+      cuando:'¿Qué frase suavizaste, resumiste o dejaste fuera?' },
+    { k:'br-auxilio', reg:'Pedir auxilio en vez de inventar',
+      exp:'El código es una sola línea: «esa pregunta se la paso al profesor, ahorita se lo traigo». No sabe mal, no queda mal, y salva la consulta.',
+      cuando:'¿Qué pregunta contestaste de más, o te quedaste callado sin pasarla?' }
+  ];
+  var OPS_BR = [
+    { v:'salio', t:'Me salió' },
+    { v:'medias', t:'A medias' },
+    { v:'fallo', t:'Se me fue' }
+  ];
+
+  /* ---------------- la línea de la orilla ----------------
+     Cinco semanas producen más papel del que uno recuerda. Cada parada
+     dice qué dejó por escrito, y de ahí se surten las tres evidencias. */
+  var HITOS = [
+    { k:'h1', c:'Semana 1', t:'El sobre sellado',
+      d:'Escribiste las tres cosas que creías que la gente iba a pedir, firmaste el sobre y lo viste engraparse en el cartel del salón. Nadie lo abrió hasta la orilla.',
+      dejo:['mi sobre de la semana 1, abierto junto al agua', 'mis tres pronósticos, escritos de mi puño'] },
+    { k:'h2', c:'Semanas 1–2', t:'El contrato de gestión',
+      d:'El trato del curso, leído y firmado: qué pone cada quien, qué pasa si algo falla, y qué NO se va a hacer.',
+      dejo:['mi contrato de gestión firmado'] },
+    { k:'h3', c:'Semana 2', t:'La primera salida a La Florida',
+      d:'La primera vez que pisaste la orilla mirando como gestor y no como visitante: en pareja, con ficha, sin proponer nada.',
+      dejo:['mi ficha de observación de La Florida', 'mi reporte de la ficha, en el Drive del curso', 'mis fotos de lo que observé'] },
+    { k:'h4', c:'Semana 3', t:'El guion de la consulta',
+      d:'Tu equipo escribió las preguntas y luego se las auditó: preguntas que inducen, promesas de contrabando, supuestos de ciudad que en La Florida no aplican.',
+      dejo:['la hoja de consulta de mi equipo, con mi letra en ella', 'las preguntas que yo propuse para el guion', 'las trampas que cacé en el guion de la IA'] },
+    { k:'h5', c:'Semanas 3–4', t:'Mi primer no',
+      d:'Una petición real, a alguien de verdad, que podía decirte que no. Sí, no o silencio valían igual: lo que contaba era haber pedido.',
+      dejo:['mi petición sistematizada: a quién, por qué canal, qué pedí y qué contestaron', 'mi anti-currículum empezado'] },
+    { k:'h6', c:'Semana 4 · jueves', t:'El ensayo por estaciones',
+      d:'Los vecinos difíciles, repartidos en secreto, y tres rondas para que la hoja tronara en el aula y no en la orilla.',
+      dejo:['los ajustes del pizarrón, el acta del ensayo', 'mi hoja de consulta corregida después del ensayo'] },
+    { k:'h7', c:'Semana 4 · viernes', t:'La consulta en la orilla',
+      d:'El día entero: montaje, tu estación, el pliego de quién falta, el mapa marcado, el círculo de cierre junto al agua.',
+      dejo:['mi registro en limpio, con las frases textuales', 'la foto del mapa de mi estación con las marcas', 'mis dos minutos del círculo, en la bitácora', 'el pliego de quién falta, que me tocó cargar'] }
+  ];
+
   /* ---------------- el ejemplo, paso por paso ---------------- */
   var EJEMPLOS = {
     'ej-suelo': { t:'Así llenó su suelo',
@@ -650,6 +821,10 @@
       d:['El paso que más pesa, y el que casi nadie escribe bien.'],
       dice:'No sé cerrar una conversación. Con la señora que iba de salida con el nixtamal en la lumbre seguí preguntando cuando ya se quería ir; le quité tres minutos que no me tocaban. Lo vi en el ensayo del jueves, con la vecina difícil, y aun así volvió a pasarme el viernes.',
       fija:'Con quién, en qué momento, y que ya lo había visto una vez. Eso es un hueco nombrado; «me falta práctica» no lo es.' },
+    'ej-orilla': { t:'Así citó, y así se calificó las brújulas',
+      d:['La frase que se llevó del viernes, y de quién.'],
+      dice:'«Ya vinieron tres veces a apuntar. ¿Y luego? Nada.» — un señor de unos setenta, en la estación 2.\n\nLa escribí tal cual aunque me dio pena anotarla enfrente de él. Me cambió la idea de para qué veníamos: no venimos a que nos cuenten qué quieren, venimos a que nos crean.\n\nBrújulas: no prometer, me salió. Registrar textual, me salió. Pedir auxilio, se me fue: cuando preguntaron cuánto dinero traíamos dije «poquito» en vez de pasar la pregunta.',
+      fija:'Nota que la brújula que reprueba es la que más cuenta. «Se me fue, y dije poquito» es información; «las tres me salieron» no lo es.' },
     'ej-frase': { t:'Su frase completa',
       d:['Se puso un 8. Así quedó su porqué:'],
       dice:'Cubrí seis de siete casillas del suelo y la que falta tiene fecha. De mis tres pronósticos del sobre le atiné una, y de ahí salió lo que más me sirvió: nadie del equipo había pensado en el alumbrado. Registré catorce frases textuales, seis mías, y están en la bitácora páginas 8 y 9. Todavía no sé cerrar una conversación: con la señora del nixtamal seguí preguntando cuando ya se quería ir, y ya me había pasado en el ensayo.',
@@ -741,6 +916,175 @@
       : n < T ? n + ' de ' + T + ' cubiertas. ' + (T - n === 1 ? 'Falta una: anótala' : 'Faltan ' + (T - n) + ': anótalas') + ' abajo, con fecha.'
       : 'Suelo completo. No repruebas. Lo que sigue decide cuánto más.';
     cajaFalta.style.display = (n > 0 && n < T) ? 'block' : 'none';
+    pintaRail();
+  }
+
+  /* ---------------- las tres brújulas ---------------- */
+  var cajaBr = document.getElementById('brujulas');
+  var lecturaBr = document.getElementById('lecturaBrujulas');
+
+  BRUJULAS.forEach(function (b) {
+    var d = document.createElement('div');
+    d.className = 'brujula';
+    d.innerHTML =
+      '<span class="reg">' + esc(b.reg) + '</span>' +
+      '<span class="exp">' + esc(b.exp) + '</span>' +
+      '<div class="ops"></div>' +
+      '<input type="hidden" data-exp="' + b.k + '">' +
+      '<label class="campo donde-fallo" style="margin-top:.7rem"><span>' + esc(b.cuando) + '</span>' +
+      '<textarea data-exp="' + b.k + '-cuando" rows="2" placeholder="Con el momento, sin disculparte. Esto es lo que se conversa el jueves."></textarea></label>';
+    var ops = d.querySelector('.ops');
+    OPS_BR.forEach(function (o) {
+      var bt = document.createElement('button');
+      bt.type = 'button';
+      bt.setAttribute('data-v', o.v);
+      bt.textContent = o.t;
+      bt.addEventListener('click', function () {
+        pon(b.k, val(b.k) === o.v ? '' : o.v);
+        pintaBrujulas();
+      });
+      ops.appendChild(bt);
+    });
+    b._el = d;
+    cajaBr.appendChild(d);
+  });
+
+  function pintaBrujulas() {
+    var contestadas = 0, fallos = 0;
+    BRUJULAS.forEach(function (b) {
+      var v = val(b.k);
+      if (v) contestadas++;
+      if (v === 'medias' || v === 'fallo') fallos++;
+      Array.prototype.forEach.call(b._el.querySelectorAll('.ops button'), function (bt) {
+        bt.classList.toggle('on', bt.getAttribute('data-v') === v);
+      });
+      b._el.classList.toggle('contar', v === 'medias' || v === 'fallo');
+    });
+    if (contestadas < BRUJULAS.length) {
+      lecturaBr.className = 'lectura';
+      lecturaBr.innerHTML = '<b>Contéstalas y aquí sale la lectura</b>' +
+        'No hay respuesta buena. La que más sirve para el jueves es la honesta.';
+    } else if (fallos === 0) {
+      lecturaBr.className = 'lectura';
+      lecturaBr.innerHTML = '<b>Las tres te salieron</b>' +
+        'Puede ser cierto, y si lo es, qué bueno. Pero vale la pena volver a leerlas despacio: casi nadie sale limpio de su primera consulta, ' +
+        'y las tres se rompen sin darse cuenta. Si al releerlas te acuerdas de un momento dudoso, cámbialo: eso vale más que el tres de tres.';
+    } else {
+      lecturaBr.className = 'lectura bien';
+      lecturaBr.innerHTML = '<b>' + (fallos === 1 ? 'Una se te fue' : fallos + ' se te fueron') + '</b>' +
+        'Y lo dijiste, que es la parte difícil. Esto es exactamente lo que se lleva a la conversación del jueves: no la lista de lo que te salió, ' +
+        'sino el momento en que la regla se te rompió y qué harías distinto. Escríbelo con el momento exacto.';
+    }
+    pintaRail();
+  }
+
+  /* ---------------- la línea de la orilla ----------------
+     No pide marcar nada: sirve para acordarse. Cada parada dice qué dejó
+     por escrito, y «lo tengo» lo manda al primer hueco de evidencia. */
+  var lineaEl = document.getElementById('linea');
+  var EVPARES = [['ev1q','ev1d'],['ev2q','ev2d'],['ev3q','ev3d']];
+
+  HITOS.forEach(function (h) {
+    var d = document.createElement('div');
+    d.className = 'hito';
+    d.innerHTML =
+      '<button type="button" class="cab no-descarga">' +
+        '<span class="cuando">' + esc(h.c) + '</span>' +
+        '<span class="qpaso">' + esc(h.t) + '</span>' +
+      '</button>' +
+      '<div class="cuerpo">' +
+        '<p>' + esc(h.d) + '</p>' +
+        '<span class="dejo">Lo que dejó por escrito</span>' +
+        '<ul>' + h.dejo.map(function (x) {
+          return '<li>' + esc(x.charAt(0).toUpperCase() + x.slice(1)) +
+                 ' <button type="button" class="usar no-descarga" data-t="' + esc(x) + '">lo tengo</button></li>';
+        }).join('') + '</ul>' +
+      '</div>';
+    d.querySelector('.cab').addEventListener('click', function () { d.classList.toggle('abierto'); });
+    Array.prototype.forEach.call(d.querySelectorAll('.usar'), function (bt) {
+      bt.addEventListener('click', function () {
+        var texto = bt.getAttribute('data-t');
+        var hueco = null;
+        for (var i = 0; i < EVPARES.length; i++) {
+          if (!val(EVPARES[i][0])) { hueco = EVPARES[i]; break; }
+          if (val(EVPARES[i][0]) === texto) { hueco = 'ya'; break; }
+        }
+        if (hueco === 'ya') { bt.textContent = 'ya está abajo'; bt.disabled = true; return; }
+        if (!hueco) { bt.textContent = 'ya tienes tres'; return; }
+        pon(hueco[0], texto);
+        d.classList.add('tengo');
+        bt.textContent = 'puesta abajo ✓';
+        bt.disabled = true;
+        pintaDonde(); pintaRail();
+        var campo = document.querySelector('[data-exp="' + hueco[1] + '"]');
+        if (campo) { try { campo.scrollIntoView({ behavior:'smooth', block:'center' }); } catch (e) {} campo.focus(); }
+      });
+    });
+    lineaEl.appendChild(d);
+  });
+
+  /* ---------------- de dónde salió: Drive, bitácora, salón ---------------- */
+  var PREFIJOS = ['Drive del curso, carpeta ', 'Mi bitácora, página ', 'En el salón: '];
+  Array.prototype.forEach.call(document.querySelectorAll('.dedonde'), function (g) {
+    var k = g.getAttribute('data-para');
+    var campo = document.querySelector('[data-exp="' + k + '"]');
+    Array.prototype.forEach.call(g.querySelectorAll('button'), function (bt) {
+      bt.addEventListener('click', function () {
+        var pre = bt.getAttribute('data-pre');
+        var v = (campo.value || '');
+        /* Si ya traía otro prefijo, se cambia el prefijo y se respeta el detalle. */
+        PREFIJOS.forEach(function (px) { if (v.indexOf(px) === 0) v = v.slice(px.length); });
+        pon(k, pre + v);
+        pintaDonde();
+        try { campo.focus(); campo.setSelectionRange(campo.value.length, campo.value.length); } catch (e) {}
+      });
+    });
+  });
+  function pintaDonde() {
+    Array.prototype.forEach.call(document.querySelectorAll('.dedonde'), function (g) {
+      var v = val(g.getAttribute('data-para'));
+      Array.prototype.forEach.call(g.querySelectorAll('button'), function (bt) {
+        var pre = bt.getAttribute('data-pre');
+        bt.classList.toggle('on', pre ? v.indexOf(pre) === 0
+          : !!v && PREFIJOS.every(function (px) { return v.indexOf(px) !== 0; }));
+      });
+    });
+  }
+
+  /* ---------------- el contador de noes ---------------- */
+  var contadorEl = document.getElementById('contador');
+  var lecturaNoes = document.getElementById('lecturaNoes');
+  var NOES = ['0','1','2','3','4','5+'];
+  var LEENOES = {
+    '0': { t:'Ninguna', d:'Y aquí no hay regaño: hay una pregunta. Si en cinco semanas no le pediste nada a nadie que pudiera negártelo, la unidad te pasó por encima sin tocarte. La buena noticia es que se arregla esta semana, y el primer no del suelo está justo para eso.', bien:false },
+    '1': { t:'Una', d:'La del suelo. Está bien: es la que todos tenían que hacer y ya la hiciste. La siguiente ya es tuya, no del curso.', bien:false },
+    '2': { t:'Dos', d:'Ya hay una que nadie te pidió. Esa segunda es la que cuenta en la conversación: dice que pediste porque hacía falta, no porque venía en la lista.', bien:true },
+    '3': { t:'Tres', d:'Tres peticiones reales en cinco semanas es ritmo de gestor. Fíjate cuántas te dijeron que no y qué hiciste con cada una: ahí está la mitad del oficio.', bien:true },
+    '4': { t:'Cuatro', d:'Estás pidiendo más de lo que el curso te obliga, y eso es exactamente lo que el curso quería que pasara. Tu anti-currículum ya tiene cuerpo.', bien:true },
+    '5+': { t:'Cinco o más', d:'Ese número no se logra sin haber cobrado varios noes. Cuéntalos en la conversación con nombre y canal: son la mejor evidencia que tienes de que jugaste de verdad.', bien:true }
+  };
+  NOES.forEach(function (n) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.innerHTML = '<span class="n">' + n + '</span><span class="cam">🔔</span>';
+    b.setAttribute('data-n', n);
+    b.addEventListener('click', function () { pon('noes-n', val('noes-n') === n ? '' : n); pintaNoes(); });
+    contadorEl.appendChild(b);
+  });
+  function pintaNoes() {
+    var v = val('noes-n');
+    Array.prototype.forEach.call(contadorEl.children, function (b) {
+      b.classList.toggle('on', b.getAttribute('data-n') === v);
+    });
+    var L = LEENOES[v];
+    if (!L) {
+      lecturaNoes.className = 'lectura';
+      lecturaNoes.innerHTML = '<b>¿Cuántas veces pediste algo de verdad?</b>' +
+        'Cuenta las peticiones que hiciste tú, a alguien que podía decirte que no. No cuentan las que hizo tu equipo por ti.';
+    } else {
+      lecturaNoes.className = 'lectura' + (L.bien ? ' bien' : '');
+      lecturaNoes.innerHTML = '<b>' + esc(L.t) + '</b>' + esc(L.d);
+    }
     pintaRail();
   }
 
@@ -836,6 +1180,16 @@
       if (val(p[0])) out.push({ id:'ev'+i, tipo:'evidencia', t:val(p[0]) + (val(p[1]) ? ', en ' + val(p[1]) : '') });
     });
     if (val('ev-extra')) out.push({ id:'extra', tipo:'sin que me lo pidieran', t:val('ev-extra') });
+    if (val('frase-cita')) out.push({ id:'frase', tipo:'lo que oí', t:'me llevé una frase textual de la orilla: «' +
+      val('frase-cita').replace(/^[«"\u201c]+|[»"\u201d]+$/g, '') + '»' + (val('frase-quien') ? ', de ' + val('frase-quien') : '') });
+    BRUJULAS.forEach(function (b) {
+      var v = val(b.k), c = val(b.k + '-cuando');
+      if ((v === 'fallo' || v === 'medias') && c) {
+        out.push({ id:b.k, tipo:'una brújula que se me fue', t:b.reg.toLowerCase() + ': ' + c });
+      }
+    });
+    if (val('noes-n') && val('noes-n') !== '0') out.push({ id:'noes', tipo:'mi anti-currículum',
+      t:'pedí algo de verdad ' + (val('noes-n') === '1' ? 'una vez' : val('noes-n') + ' veces') + ' en esta unidad' });
     if (val('primerno')) out.push({ id:'pn', tipo:'mi primer no', t:val('primerno') });
     if (val('costo')) out.push({ id:'costo', tipo:'lo que me costó', t:val('costo') });
     if (val('nosé')) out.push({ id:'nose', tipo:'todavía no sé', t:val('nosé') });
@@ -879,6 +1233,7 @@
     var abrible = /(drive|bit[áa]cora|carpeta|libreta|p[áa]gina|foto|registro|contrato|hoja|mapa|textual|s[0-9])/i.test(t);
     var sobre = /(sobre|pron[óo]stic|atin|predij)/i.test(bajo) || !!usadas['sobre'] || !!usadas['nadie'];
     var hueco = /(todav[íi]a no|no s[ée]|me falta|no supe|me cost)/i.test(bajo);
+    var cita = /[«"\u201c].{8,}[»"\u201d]/.test(t) || !!usadas['frase'] || /(me dijo|dijo el|dijo la|dijo un)/i.test(bajo);
     var veto = /(me esforc|necesito|para mi promedio|por favor|nunca falt|particip[ée] en todo)/i.test(bajo);
     var largo = t.trim().length >= 140;
     var lista = [
@@ -886,6 +1241,7 @@
       { ok: abrible, t:'Tu porqué nombra algo que se puede abrir, con su dónde.' },
       { ok: sobre, t:'Metiste tu sobre: es lo único que mide qué tanto conocías a tu comunidad.' },
       { ok: hueco, t:'Dijiste algo que todavía no sabes hacer, sin disculparte por ello.' },
+      { ok: cita, t:'Metiste algo que oíste en la orilla, no solo lo que tú hiciste.' },
       { ok: largo, t:'Tiene cuerpo: más de un renglón. Una frase de diez palabras no sostiene nada.' },
       { ok: !veto, alerta: veto, t: veto
           ? 'Hay algo que no cuenta como argumento («me esforcé», «necesito», «nunca falté»). Cámbialo por algo que se pueda abrir.'
@@ -931,7 +1287,7 @@
           n++;
         }
       });
-      pintaPiso(); pintaBandeja(); pintaChecks(); pintaRitual(); pintaCampana();
+      pintaPiso(); pintaBandeja(); pintaChecks(); pintaRitual(); pintaCampana(); pintaDonde();
       document.getElementById('avisoHered').textContent = n
         ? 'Traje ' + n + ' cosa(s). Revísalas: el pronóstico del sobre venía en un solo campo y quizá haya que repartirlo en los tres.'
         : 'No había nada nuevo que traer: ya lo tenías todo aquí.';
@@ -1042,6 +1398,13 @@
     var f = CASILLAS.filter(function (c) { return !c._chk.checked; }).map(function (c) { return c.t; });
     return n + ' de ' + T + ' \u00b7 falta: ' + f.join(', ');
   }
+  function resumenBrujulas() {
+    var ETI = { salio:'me sali\u00f3', medias:'a medias', fallo:'se me fue' };
+    return BRUJULAS.filter(function (b) { return val(b.k); }).map(function (b) {
+      var c = val(b.k + '-cuando');
+      return b.reg + ': ' + ETI[val(b.k)] + (c && val(b.k) !== 'salio' ? ' (' + c + ')' : '');
+    }).join(' \u00b7 ');
+  }
   function resumenEvidencias() {
     var hay = 0, don = 0;
     [['ev1q','ev1d'],['ev2q','ev2d'],['ev3q','ev3d']].forEach(function (par) {
@@ -1075,14 +1438,14 @@
     }
     if (!val('num')) {
       avisa('falta', 'Todav\u00eda no eliges tu n\u00famero',
-        'Est\u00e1 en el paso 6. Aunque no cuente para nada, el ejercicio es ponerlo y sostenerlo.');
-      ir(6); destaca(document.getElementById('numeros'));
+        'Est\u00e1 en el paso 7. Aunque no cuente para nada, el ejercicio es ponerlo y sostenerlo.');
+      ir(7); destaca(document.getElementById('numeros'));
       return;
     }
     if (val('porque').length < 40) {
       avisa('falta', 'Falta tu porqu\u00e9',
-        'Un n\u00famero solo no se puede conversar. Toca las piezas del paso 6 y la frase se arma sola, o escr\u00edbela t\u00fa.');
-      ir(6); destaca(porqueEl); porqueEl.focus();
+        'Un n\u00famero solo no se puede conversar. Toca las piezas del paso 7 y la frase se arma sola, o escr\u00edbela t\u00fa.');
+      ir(7); destaca(porqueEl); porqueEl.focus();
       return;
     }
 
@@ -1099,6 +1462,9 @@
       evidencias: resumenEvidencias(),
       porque: val('porque'),
       nose: val('nos\u00e9'),
+      frase: val('frase-cita') + (val('frase-quien') ? ' \u2014 ' + val('frase-quien') : ''),
+      brujulas: resumenBrujulas(),
+      noes: val('noes-n'),
       codigo: codigoRespaldo()
     };
 
@@ -1150,6 +1516,9 @@
       '\nEl sobre: ' + (L ? L.t.toLowerCase() : '(sin llenar)') +
       '\nNúmero que me pondría (ensayo): ' + (num || '(sin número)') +
       '\n\nMi porqué:\n' + (por || '(sin escribir)') +
+      '\n\nLa frase que me llevé:\n' + (val('frase-cita') ? '«' + val('frase-cita') + '»' +
+        (val('frase-quien') ? ' — ' + val('frase-quien') : '') : '(sin escribir)') +
+      '\n\nLas tres brújulas:\n' + (resumenBrujulas() || '(sin contestar)') +
       '\n\nTodavía no sé hacer:\n' + (val('nosé') || '(sin escribir)') +
       '\n\n———— para el profesor ————\n' +
       'Debajo va el código con todo lo que llené. No hace falta leerlo:\n' +
@@ -1183,11 +1552,12 @@
       case 1: return true;
       case 2: return cuentaSuelo() > 0;
       case 3: return !!(val('sob-p1') || val('sob-aciertos') || val('sob-nadie'));
-      case 4: return !!(val('ev1q') || val('ev-extra'));
-      case 5: return !!(val('costo') || val('nosé') || val('primerno'));
-      case 6: return !!(val('num') && val('porque'));
-      case 7: return !!val('jueves');
-      case 8: return false;
+      case 4: return !!(val('frase-cita') || BRUJULAS.some(function (b) { return val(b.k); }));
+      case 5: return !!(val('ev1q') || val('ev-extra'));
+      case 6: return !!(val('costo') || val('nosé') || val('primerno') || val('noes-n'));
+      case 7: return !!(val('num') && val('porque'));
+      case 8: return !!val('jueves');
+      case 9: return false;
     }
     return false;
   }
@@ -1205,7 +1575,7 @@
     btnSig.disabled = actual === TOTAL - 1;
     btnSig.textContent = actual === 0 ? 'Empezar' : (actual === TOTAL - 2 ? 'Terminar' : 'Siguiente');
     donde.textContent = actual === 0 ? 'inicio' : actual + ' / ' + (TOTAL - 1);
-    if (actual === 6) { pintaBandeja(); pintaChecks(); }
+    if (actual === 7) { pintaBandeja(); pintaChecks(); }
     pintaRail();
     window.scrollTo(0, 0);
   }
@@ -1236,13 +1606,31 @@
     if (!e.target.hasAttribute || !e.target.hasAttribute('data-exp')) return;
     pintaRail();
     pintaCampana();
-    if (actual === 6) { pintaBandeja(); pintaChecks(); }
+    if (/^ev[123]d$/.test(e.target.getAttribute('data-exp'))) pintaDonde();
+    if (actual === 7) { pintaBandeja(); pintaChecks(); }
   });
 
-  /* ---------------- arranque ---------------- */
+  /* ---------------- arranque ----------------
+     curso.js restaura los campos y corre al final del body, es decir antes
+     de DOMContentLoaded, que es cuando arranca esto. Todo lo que la pantalla
+     crea sola —las casillas del suelo, las brújulas— nacía después y se
+     quedaba sin restaurar: quien cerraba la página perdía su suelo marcado.
+     Se rellena aquí, desde la misma memoria y sin pisar nada. */
+  (function restauraDinamicos() {
+    var r = leer();
+    Array.prototype.forEach.call(document.querySelectorAll('[data-exp]'), function (c) {
+      var k = c.getAttribute('data-exp');
+      if (!(k in r) || r[k] == null) return;
+      if (c.type === 'checkbox') c.checked = !!r[k];
+      else c.value = r[k];
+    });
+  })();
   CASILLAS.forEach(function (c) { c._btn.classList.toggle('puesta', c._chk.checked); });
   pintaPiso();
   pintaSobre();
+  pintaBrujulas();
+  pintaNoes();
+  pintaDonde();
   pintaNumero();
   pintaBandeja();
   pintaChecks();

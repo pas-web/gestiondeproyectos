@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio 4 · Los vecinos difíciles</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28;
+          --gris:#68807a; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo);
+         color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:720px; margin:0 auto; padding:1.2rem 1rem 5rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.55rem; margin:.8rem 0 .2rem; }
+  h2 { font-family:Georgia,serif; color:var(--profundo); font-size:1.25rem; margin:2rem 0 .5rem; }
+  h3 { color:var(--marca); font-size:1.02rem; margin:1.3rem 0 .3rem; }
+  .sub { color:#45605a; margin-top:0; }
+  p { margin:.6rem 0; }
+  .mini { font-size:.9rem; color:var(--gris); line-height:1.5; }
+
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:1rem 1.2rem; font-size:.97rem; }
+  .intro strong { color:var(--arena); }
+  .caja { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1rem 0; }
+  .clave { border-left:5px solid var(--arena); background:#FBF7EC; padding:.8rem 1.05rem; margin:1rem 0;
+           border-radius:0 10px 10px 0; }
+  .clave b { color:var(--profundo); }
+  ol, ul { padding-left:1.2rem; margin:.4rem 0; }
+  li { margin:.35rem 0; }
+
+  /* el reloj de la actividad */
+  .reloj-tabla { width:100%; border-collapse:collapse; margin:.6rem 0; background:#fff; }
+  .reloj-tabla th, .reloj-tabla td { border:1px solid var(--borde); padding:.45rem .6rem; text-align:left; font-size:.93rem; vertical-align:top; }
+  .reloj-tabla th { background:#E4EFEB; color:var(--profundo); font-size:.85rem; }
+  .reloj-tabla td:first-child { white-space:nowrap; font-variant-numeric:tabular-nums; color:var(--marca); font-weight:bold; width:5.5rem; }
+
+  /* el repartidor */
+  .repartidor { background:var(--profundo); border-radius:14px; padding:1.2rem; text-align:center; margin:1.2rem 0; }
+  .repartidor p { color:#B9D4CE; font-size:.93rem; margin:.3rem 0 .9rem; }
+  .btn { border:none; border-radius:999px; padding:.65rem 1.4rem; font:inherit; font-weight:bold; cursor:pointer; font-size:.98rem; }
+  .btn.arena { background:var(--arena); color:#3A2A08; }
+  .btn.suave { background:transparent; color:#EAF4F2; border:1px solid rgba(255,255,255,.4); }
+  .btn.marca { background:var(--marca); color:#fff; }
+  .fila { display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; margin-top:.7rem; }
+
+  .tarjeta { display:none; background:#F6EEDC; border:1px solid #E0CFA8; border-radius:12px; padding:1.1rem 1.2rem;
+             margin-top:1rem; text-align:left; box-shadow:0 4px 14px rgba(0,0,0,.18); }
+  .tarjeta.ver { display:block; animation:sale .35s ease; }
+  @keyframes sale { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+  .tarjeta .quien { font-family:Georgia,serif; font-size:1.25rem; color:#4A3D20; font-weight:bold; }
+  .tarjeta .rol { font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:#8A6A1A; font-weight:bold; }
+  .tarjeta dl { margin:.7rem 0 0; }
+  .tarjeta dt { font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:#8A6A1A; font-weight:bold; margin-top:.6rem; }
+  .tarjeta dd { margin:.1rem 0 0; font-size:.95rem; color:#3A3120; }
+  .tarjeta .frase { background:#fff; border:1px solid #EADFC4; border-radius:8px; padding:.55rem .75rem;
+                    font-style:italic; color:#2F2716; margin-top:.15rem; }
+  .tarjeta .prueba { margin-top:.9rem; padding-top:.6rem; border-top:1px dashed #DCC38C; font-size:.9rem; color:#7A6740; }
+  .tarjeta .prueba b { color:#8A6A1A; }
+
+  .personajes { display:grid; grid-template-columns:1fr; gap:.6rem; }
+  @media (min-width:700px) { .personajes { grid-template-columns:1fr 1fr; } }
+  .ficha-p { border:1px solid var(--borde); background:#fff; border-radius:11px; padding:.75rem .9rem; }
+  .ficha-p b { display:block; color:var(--profundo); font-size:1rem; }
+  .ficha-p span { display:block; font-size:.88rem; color:var(--gris); line-height:1.45; margin-top:.15rem; }
+  .ficha-p em { display:block; font-style:normal; font-size:.83rem; color:var(--marca); margin-top:.35rem; font-weight:bold; }
+
+  .obs { counter-reset:o; list-style:none; padding:0; }
+  .obs li { position:relative; padding:.5rem 0 .5rem 2.2rem; border-bottom:1px dashed var(--borde); font-size:.95rem; }
+  .obs li:last-child { border-bottom:none; }
+  .obs li::before { counter-increment:o; content:counter(o); position:absolute; left:0; top:.5rem; width:1.5rem; height:1.5rem;
+                    border-radius:50%; background:var(--marca); color:#fff; font-size:.8rem; font-weight:bold;
+                    display:flex; align-items:center; justify-content:center; }
+
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none;
+                   border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10;
+                   font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+  body.proyector main { max-width:1000px; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem;
+              font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  @media print { #btn-proyector, .repartidor { display:none; } }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Los vecinos difíciles</h1>
+<p class="sub">Gimnasio 4 · Semana 4 · El ensayo del jueves, antes de la consulta del viernes.</p>
+
+<div class="intro">
+  <p style="margin:.1rem 0"><strong>Esto no es teatro.</strong> Es el piloto de la hoja. Todos los manuales de consulta dicen lo mismo: una hoja se prueba con un grupo parecido antes de salir, porque cuando las respuestas salen malas casi nunca es culpa de quien contestó — es de la hoja.</p>
+  <p style="margin:.6rem 0 .1rem">Lo que truene hoy en el aula es un problema que mañana ya no existe. Lo que truene mañana, se paga frente a la gente.</p>
+</div>
+
+<h2>Cómo se corre</h2>
+<p>Tres rondas. En cada una, <strong>una estación atiende</strong> y todos los demás llegan de vecinos, con su tarjeta en secreto. Las tres estaciones pasan: si una ronda está buenísima, se corta igual.</p>
+
+<table class="reloj-tabla">
+  <tr><th>Reloj</th><th>Qué pasa</th></tr>
+  <tr><td>0:00 – 1:00</td><td>Se reparten las tarjetas en secreto (aquí abajo, cada quien en su celular). Nadie enseña la suya, ni siquiera a su equipo.</td></tr>
+  <tr><td>1:00 – 2:00</td><td>La estación monta: hoja, mapa, plumas, quién abre y quién registra. Montaje exprés, como en la orilla.</td></tr>
+  <tr><td>2:00 – 9:00</td><td>La ronda. Los vecinos llegan de a uno o de a dos, no todos juntos. Se corre el guion completo: apertura honesta, preguntas, registro, cierre.</td></tr>
+  <tr><td>9:00 – 11:00</td><td>Los dos minutos de ajuste. Tres preguntas, abajo. Lo acordado va al pizarrón.</td></tr>
+  <tr><td>—</td><td>Se cambia de estación y se vuelve a empezar. Las tarjetas se rebarajan.</td></tr>
+</table>
+
+<div class="clave"><b>El pizarrón es el acta del ensayo.</b> Todo ajuste acordado se anota ahí: pregunta que se cayó, línea que falta en la hoja, respuesta que hay que tener lista. Ese pizarrón se copia antes de salir del salón, y con eso se corrige la hoja hoy mismo.</div>
+
+<h2>Tu tarjeta, si te toca ser vecino</h2>
+
+<div class="repartidor">
+  <p>Tócalo una vez y te da tu personaje. <strong>No se lo enseñes a nadie</strong>: media gracia del ensayo es que la estación no sepa qué le va a llegar.</p>
+  <div class="fila">
+    <button type="button" class="btn arena" id="btn-dame">Dame mi personaje</button>
+    <button type="button" class="btn suave" id="btn-otro" style="display:none">Dame otro</button>
+    <button type="button" class="btn suave" id="btn-ocultar" style="display:none">Ocultar</button>
+  </div>
+  <div class="tarjeta" id="tarjeta"></div>
+</div>
+
+<div class="caja">
+  <h3 style="margin-top:.2rem">Las cuatro reglas del vecino</h3>
+  <ol>
+    <li><strong>Difícil no es imposible.</strong> Tu personaje complica, no sabotea. Si la estación lo hace bien, tú cedes: contestas, te quedas, das tu opinión. Un vecino que no cede no enseña nada.</li>
+    <li><strong>No inventes datos que nadie puede saber.</strong> Nada de «mi primo el ingeniero dice que la cortina está a punto de reventar». Complica con lo humano: prisa, desconfianza, insistencia, ganas de platicar.</li>
+    <li><strong>Sostén tu personaje aunque te dé pena.</strong> El que se ríe y se sale del papel le regala a su compañero un ensayo fácil y un viernes difícil.</li>
+    <li><strong>Al terminar la ronda, di lo que viste.</strong> En los dos minutos de ajuste hablas como compañero, no como personaje: qué te hizo sentir bien atendido y qué no.</li>
+  </ol>
+</div>
+
+<h2>Los nueve vecinos</h2>
+<p class="mini">Están aquí para el profesor y para quien quiera prepararse. Si te tocó uno, la tarjeta de arriba te lo dice con todo el detalle.</p>
+<div class="personajes" id="personajes"></div>
+
+<h2>Si no te toca vecino: la hoja del observador</h2>
+<p>En cada ronda hay una o dos personas que ni atienden ni actúan. Ese lugar no es descanso: es el que más ve. Cinco cosas que mirar, y nada más:</p>
+<ol class="obs">
+  <li><strong>¿Prometieron algo?</strong> Cualquier cosa. «Vamos a poner», «seguro que sí», «yo creo que se puede». Anótala textual: es lo más caro que puede pasar mañana.</li>
+  <li><strong>¿Qué pregunta se atoró?</strong> La que hubo que repetir, la que sacó un «¿cómo?», la que se contestó con otra cosa. Esa pregunta está mal escrita, no mal contestada.</li>
+  <li><strong>¿Registraron textual?</strong> Mira la libreta, no los oídos. ¿Hay comillas? ¿O hay resúmenes de lo que creyeron entender?</li>
+  <li><strong>¿Usaron el código de auxilio cuando tocaba?</strong> Y si no lo usaron, ¿en qué momento debieron?</li>
+  <li><strong>¿Cómo cerraron?</strong> ¿Agradecieron? ¿La persona se fue sabiendo qué va a pasar con lo que dijo?</li>
+</ol>
+
+<h2>Los dos minutos de ajuste</h2>
+<p>Al terminar cada ronda, tres preguntas y nada más. Van rápido y en voz alta:</p>
+<div class="caja">
+  <ol>
+    <li><strong>¿Qué pregunta se cayó?</strong> Se reescribe ahí mismo, en voz alta, hasta que suene a persona y no a oficina.</li>
+    <li><strong>¿Qué le falta a la hoja?</strong> Un espacio, una casilla, un renglón para lo que nadie previó.</li>
+    <li><strong>¿Qué se le olvidó al registro?</strong> Lo que se dijo y no quedó escrito. Eso, mañana, deja de existir.</li>
+  </ol>
+</div>
+
+<div class="clave"><b>Ojo con el aprieto del dinero.</b> Va a salir hoy y va a salir mañana. La respuesta ensayada tiene que salir de corrido, sin titubeo: <em>el fondo existe, todavía no hay cifra y no hay nada decidido; lo único que les podemos prometer es traerles apuntado lo que salga hoy.</em> Si a alguien no le sale fluida en el ensayo, se repite hasta que salga.</div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p style="margin:.2rem 0">Anota tres cosas de esta sesión y ya: <strong>la pregunta que se cayó</strong> en tu estación, <strong>la promesa</strong> que alguien estuvo a punto de hacer (o hizo), y <strong>lo que le agregaste a la hoja</strong>. Con esas tres, mañana tu estación sale mejor que hoy.</p>
+</div>
+
+</main>
+
+<button id="btn-proyector" type="button">Aa proyector</button>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Los nueve vecinos. Cada uno complica una cosa distinta de la hoja o del
+     oficio, y todos ceden si la estación hace bien su trabajo: un vecino que
+     no cede no enseña nada. El amable está a propósito: cerrar una
+     conversación buena también se ensaya. */
+  var VECINOS = [
+    { quien: 'El que ya vio pasar tres programas',
+      rol: 'desconfiado',
+      corto: 'Llega enojado. No cree en encuestas.',
+      prueba: 'Si lo tratan como pared o como archivo vivo de promesas rotas.',
+      entras: 'De brazos cruzados, sin acercarte del todo. Que te inviten a acercarte.',
+      quieres: 'Que alguien reconozca que ya vinieron antes y no volvieron. No quieres disculpas: quieres que lo anoten.',
+      frase: '«Ya vinieron tres veces a apuntar. ¿Y luego? Nada.»',
+      siprometen: 'Te enojas más. «Eso mismo dijeron los otros.» Si te prometen algo, la ronda ya se perdió y hay que decirlo en el ajuste.',
+      cedes: 'Si te escuchan sin defenderse, si no discuten contigo y si alguien anota lo que dijiste. Entonces te quedas y das la mejor información del día: tú conoces esa orilla mejor que nadie.',
+      tevas: 'Solo si te interrumpen o si te contestan «bueno, pero ahora sí es diferente».' },
+
+    { quien: 'La que va de salida',
+      rol: 'con prisa',
+      corto: 'Noventa segundos y se va. Trae el nixtamal en la lumbre.',
+      prueba: 'Si la hoja sirve en corto, y si saben cerrar sin retener a nadie.',
+      entras: 'Caminando, sin detenerte. Contestas de pie, con la bolsa del mandado en la mano.',
+      quieres: 'Ayudar, pero irte. Tienes cosas en la lumbre y no es pretexto.',
+      frase: '«A ver, rápido, ¿qué necesitan? Traigo el nixtamal en la lumbre.»',
+      siprometen: 'Ni lo oyes, vas de salida. Esta no es la que prueba las promesas.',
+      cedes: 'Contestas buenísimo si te preguntan lo importante primero. Das dos o tres cosas concretas y muy buenas si la pregunta es directa.',
+      tevas: 'A los noventa segundos, sí o sí. Si te sueltan el guion completo desde el principio, te vas sin haber dicho nada útil, y eso es justo lo que hay que aprender hoy.' },
+
+    { quien: 'El del asador',
+      rol: 'pide promesas',
+      corto: 'Oyó que van a poner un asador. Quiere confirmación.',
+      prueba: 'La primera brújula: no prometer nada, a nadie, nunca.',
+      entras: 'Contento, como si ya fuera un hecho. Das por sentado que vienen a construir.',
+      quieres: 'Que te confirmen el asador. Insistes dos veces, con distintas palabras.',
+      frase: '«Oiga, ¿y sí van a poner el asador? Porque dicen que sí.»',
+      siprometen: 'Te vas feliz y cuentas en todo el pueblo que ya está confirmado. En el ajuste lo dices en voz alta: eso es lo que pasa de verdad.',
+      cedes: 'Si te contestan honesto —que no hay nada decidido y que hoy solo vienen a escuchar—, te desinflas un poco pero te quedas y opinas.',
+      tevas: 'Si te dan largas sin contestar. «Ah, entonces ni saben.»' },
+
+    { quien: 'La que pregunta cuánto dinero traen',
+      rol: 'la cifra',
+      corto: 'Directa al grano: cuánto hay.',
+      prueba: 'La respuesta ensayada del dinero, que tiene que salir de corrido.',
+      entras: 'Tranquila, con una sola pregunta en la cabeza.',
+      quieres: 'Un número. Insistes: «pero más o menos», «¿son cien mil, un millón?».',
+      frase: '«¿Y cuánto dinero traen? Porque si no hay dinero, ¿para qué preguntan?»',
+      siprometen: 'Si te sueltan una cifra, aunque sea aproximada, la repites en voz alta como si fuera un compromiso. Eso es exactamente lo que pasa.',
+      cedes: 'Si te contestan que el fondo existe, que todavía no hay cifra y que no hay nada decidido, aceptas y sigues. Es una respuesta razonable y así se comporta la gente razonable.',
+      tevas: 'Si te esquivan la pregunta o cambian de tema sin contestarla.' },
+
+    { quien: 'El amable que no se va',
+      rol: 'se desvía',
+      corto: 'Encantador. Platica de todo menos de la orilla.',
+      prueba: 'Cerrar bien una conversación buena, sin ser grosero.',
+      entras: 'Feliz de que alguien lo escuche. Te sientas si hay dónde.',
+      quieres: 'Platicar. Cuentas de cuando la presa se llenó, de tu compadre, de cómo era esto antes.',
+      frase: '«Ay, qué bueno que vinieron. Mire, cuando yo era chamaco esto era otra cosa…»',
+      siprometen: 'Te da igual, tú vienes a platicar.',
+      cedes: 'Si te traen de vuelta con amabilidad —«qué interesante, y de eso que me cuenta, ¿qué le pondría hoy a la orilla?»— contestas al punto y das cosas buenas.',
+      tevas: 'Solo si te cierran bien: agradeciendo y diciéndote qué va a pasar con lo que dijiste. Si no te cierran, te quedas diez minutos y bloqueas la estación. Ese es el ejercicio.' },
+
+    { quien: 'La que contesta lo que cree que quieren oír',
+      rol: 'complaciente',
+      corto: 'Dice que sí a todo lo que le propongan.',
+      prueba: 'Si la estación pregunta abierto o va induciendo la respuesta.',
+      entras: 'Amable y dispuesta. Quieres quedar bien.',
+      quieres: 'No incomodar. Si te proponen algo, te parece buena idea. Todo te parece buena idea.',
+      frase: '«Sí, sí, lo que ustedes digan está bien.»',
+      siprometen: 'Agradeces mucho.',
+      cedes: 'Si te preguntan abierto —«¿qué hace usted aquí en la orilla?», «cuénteme la última vez que vino»—, sueltas cosas concretas y buenísimas. Solo con preguntas cerradas te vuelves un espejo.',
+      tevas: 'No te vas. El problema no es que te vayas: es que la estación se lleve puros síes que no valen nada.' },
+
+    { quien: 'El que habla por todos',
+      rol: 'la voz del pueblo',
+      corto: 'Nunca dice «yo»: dice «aquí todos queremos».',
+      prueba: 'Si piden la experiencia propia y si registran a quién representa.',
+      entras: 'Con autoridad. Puede que tengas algún cargo, o que creas que lo tienes.',
+      quieres: 'Hablar en nombre de la comunidad. Resumes lo que «la gente» quiere.',
+      frase: '«Aquí todos queremos lo mismo: que le pongan juegos para los niños.»',
+      siprometen: 'Lo tomas como acuerdo cerrado y lo comunicas como tal.',
+      cedes: 'Si te preguntan por ti —«¿y usted, cuándo fue la última vez que vino a la orilla?»— das un testimonio propio y muy bueno.',
+      tevas: 'No te vas. El riesgo es otro: que la estación se lleve tu resumen como si fuera la voz de todos, y ya no busque a nadie más.' },
+
+    { quien: 'Los dos niños del mapa',
+      rol: 'los que sí saben',
+      corto: 'Se acercan al mapa y quieren marcar.',
+      prueba: 'Si los atienden en serio y si usan la clave aparte para sus marcas.',
+      entras: 'Corriendo, directo al mapa, sin pedir permiso.',
+      quieres: 'Marcar dónde juegas, dónde te metes al agua, dónde no te dejan ir.',
+      frase: '«¿Puedo poner una crucecita? Ahí es donde nos metemos.»',
+      siprometen: 'Lo crees todo, y es lo peor que puede pasar.',
+      cedes: 'Si te dejan marcar y te preguntan por qué ahí, das la información que ningún adulto tiene: dónde se juega de verdad y dónde da miedo.',
+      tevas: 'Si te tratan como estorbo. Y ahí se pierde la mitad del mapa.' },
+
+    { quien: 'El que mira de lejos',
+      rol: 'no se acerca',
+      corto: 'Está ahí, a diez metros, y no se acerca solo.',
+      prueba: 'El pliego de quién falta: si van a buscarlo o lo esperan.',
+      entras: 'No entras. Te quedas cerca, mirando, con cara de nada.',
+      quieres: 'Que te inviten. Tienes opinión y buena, pero no vas a acercarte por tu cuenta.',
+      frase: '(no dices nada hasta que alguien se acerca a ti)',
+      siprometen: 'No aplica: no has llegado.',
+      cedes: 'Si alguien camina hacia ti y te invita con naturalidad, te acercas y das una de las mejores respuestas del día.',
+      tevas: 'A los cinco minutos, si nadie fue. Y esa casilla del pliego se queda vacía para siempre.' }
+  ];
+
+  /* --- el repartidor --- */
+  var tarjeta = document.getElementById('tarjeta');
+  var btnDame = document.getElementById('btn-dame');
+  var btnOtro = document.getElementById('btn-otro');
+  var btnOcultar = document.getElementById('btn-ocultar');
+  var ultimo = -1;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c];
+    });
+  }
+  function reparte() {
+    var i;
+    do { i = Math.floor(Math.random() * VECINOS.length); } while (i === ultimo && VECINOS.length > 1);
+    ultimo = i;
+    var v = VECINOS[i];
+    tarjeta.innerHTML =
+      '<div class="rol">' + esc(v.rol) + '</div>' +
+      '<div class="quien">' + esc(v.quien) + '</div>' +
+      '<dl>' +
+        '<dt>Cómo entras</dt><dd>' + esc(v.entras) + '</dd>' +
+        '<dt>Qué quieres</dt><dd>' + esc(v.quieres) + '</dd>' +
+        '<dt>Con qué abres</dt><dd class="frase">' + esc(v.frase) + '</dd>' +
+        '<dt>Si te prometen algo</dt><dd>' + esc(v.siprometen) + '</dd>' +
+        '<dt>Cuándo cedes</dt><dd>' + esc(v.cedes) + '</dd>' +
+        '<dt>Cuándo te vas</dt><dd>' + esc(v.tevas) + '</dd>' +
+      '</dl>' +
+      '<div class="prueba"><b>Lo que estás probando:</b> ' + esc(v.prueba) +
+      ' <span style="display:block;margin-top:.3rem">Esto último no se dice en voz alta hasta los dos minutos de ajuste.</span></div>';
+    tarjeta.classList.add('ver');
+    btnDame.style.display = 'none';
+    btnOtro.style.display = '';
+    btnOcultar.style.display = '';
+  }
+  btnDame.addEventListener('click', reparte);
+  btnOtro.addEventListener('click', reparte);
+  btnOcultar.addEventListener('click', function () {
+    tarjeta.classList.remove('ver');
+    btnDame.style.display = '';
+    btnDame.textContent = 'Ver mi personaje otra vez';
+    btnOtro.style.display = 'none';
+    btnOcultar.style.display = 'none';
+  });
+
+  /* --- la lista para el profesor --- */
+  var lista = document.getElementById('personajes');
+  VECINOS.forEach(function (v) {
+    var d = document.createElement('div');
+    d.className = 'ficha-p';
+    d.innerHTML = '<b>' + esc(v.quien) + '</b><span>' + esc(v.corto) + '</span>' +
+                  '<em>Prueba: ' + esc(v.prueba) + '</em>';
+    lista.appendChild(d);
+  });
+
+  document.getElementById('btn-proyector').addEventListener('click', function () {
+    document.body.classList.toggle('proyector');
+    this.textContent = document.body.classList.contains('proyector') ? 'Aa normal' : 'Aa proyector';
+  });
+})();
+</script>
+
+<script src="../../curso.js"></script>
+</body>
+</html>

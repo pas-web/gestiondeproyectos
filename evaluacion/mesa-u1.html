@@ -30,6 +30,59 @@
   .rot { font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--marca); font-weight:bold; }
 
   .panel { background:#fff; border:1px solid var(--borde); border-radius:14px; padding:1rem 1.2rem; margin:.9rem 0; }
+
+  /* --- el muro de frases --- */
+  .muro { display:grid; grid-template-columns:repeat(auto-fill,minmax(15rem,1fr)); gap:.7rem; margin:.8rem 0 .3rem; }
+  .voz { background:#FBF7EC; border:1px solid #E8DBBC; border-left:4px solid var(--arena); border-radius:0 11px 11px 0;
+         padding:.75rem .9rem; }
+  .voz q { display:block; font-family:Georgia,serif; font-size:1.02rem; font-style:italic; color:#3B3120;
+           line-height:1.45; quotes:'\201C' '\201D'; }
+  .voz .dijo { display:block; margin-top:.45rem; font-size:.8rem; color:#8A6A1A; font-weight:bold; }
+  .muro-vacio { font-size:.9rem; color:var(--gris); }
+
+  /* --- el sobre del grupo, enfrentado --- */
+  .enfr { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin:.7rem 0; }
+  @media (max-width:640px) { .enfr { grid-template-columns:1fr; } }
+  .enfr .mitad { border:1px solid var(--borde); border-radius:11px; padding:.7rem .85rem; }
+  .enfr .mitad.pre { background:#F4F0FA; border-color:#DDD2EE; }
+  .enfr .mitad.pid { background:#EAF4F0; border-color:#C6E2D6; }
+  .enfr .mitad h4 { margin:.1rem 0 .45rem; font-family:Georgia,serif; font-size:1rem; color:var(--profundo); }
+  .enfr .mitad ul { list-style:none; padding:0; margin:0; }
+  .enfr .mitad li { display:flex; align-items:baseline; gap:.45rem; padding:.22rem 0;
+                   border-bottom:1px dashed rgba(0,0,0,.08); font-size:.92rem; }
+  .enfr .mitad li:last-child { border-bottom:none; }
+  .enfr .mitad li .veces { flex:0 0 auto; background:rgba(0,0,0,.08); border-radius:999px; padding:.05rem .45rem;
+                          font-size:.75rem; font-weight:bold; font-variant-numeric:tabular-nums; }
+  .enfr .mitad li.solo .veces { opacity:.45; }
+  .enfr-nota { font-size:.9rem; color:var(--texto); background:#FBF7EC; border-left:4px solid var(--arena);
+               border-radius:0 9px 9px 0; padding:.6rem .85rem; margin:.5rem 0 0; }
+
+  /* --- la pregunta que le falta --- */
+  .lepregunto { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.85rem 1rem; margin:0 0 .9rem; }
+  .lepregunto .rot { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--arena);
+                     font-weight:bold; margin-bottom:.3rem; }
+  .lepregunto p { margin:.25rem 0; font-family:Georgia,serif; font-size:1.05rem; line-height:1.45; }
+  .lepregunto .pq { display:block; font-family:inherit; font-size:.82rem; color:#B9D4CE; margin-top:.35rem; font-style:normal; }
+
+  /* --- el marcador de la jornada --- */
+  .marcador { display:grid; grid-template-columns:repeat(auto-fit,minmax(7rem,1fr)); gap:.5rem; margin:.6rem 0 .2rem; }
+  .marcador .m { border:1px solid var(--borde); border-radius:11px; padding:.6rem .5rem; text-align:center; background:#fff; }
+  .marcador .m b { display:block; font-family:Georgia,serif; font-size:1.6rem; color:var(--profundo); line-height:1; }
+  .marcador .m span { display:block; font-size:.76rem; color:var(--gris); line-height:1.3; margin-top:.25rem; }
+  .marcador .m.hay { border-color:var(--marca); background:#F0F7F5; }
+  .marcador .m.hay b { color:var(--marca); }
+
+  /* --- modo proyección --- */
+  body.proyectando .barra .rot, body.proyectando .trato, body.proyectando #panelCarga,
+  body.proyectando #panelLista, body.proyectando #panelFicha, body.proyectando #panelGrupo,
+  body.proyectando #panelVacio, body.proyectando #btnCiegas, body.proyectando #btnVaciar,
+  body.proyectando .nav-curso, body.proyectando .lado, body.proyectando #btn-menu { display:none !important; }
+  body.proyectando { font-size:1.25rem; padding-left:0 !important; }
+  body.proyectando main { max-width:1400px; }
+  body.proyectando .muro { grid-template-columns:repeat(auto-fill,minmax(20rem,1fr)); }
+  body.proyectando .voz q { font-size:1.3rem; }
+  body.proyectando #btnProy { background:var(--arena); color:#3A2A08; border-color:var(--arena); }
+
   .trato { border-left:5px solid var(--arena); background:#FBF7EC; border-radius:0 12px 12px 0; padding:.85rem 1.1rem;
            margin:1rem 0; font-size:.95rem; }
   .trato b { color:var(--profundo); }
@@ -185,6 +238,7 @@
       <div class="tit">La mesa del jueves · Unidad 1</div>
     </div>
     <div class="fila" style="margin:0">
+      <button type="button" id="btnProy">Proyectar</button>
       <button type="button" id="btnCiegas" class="on">A ciegas: sí</button>
       <button type="button" id="btnVaciar">Vaciar</button>
     </div>
@@ -198,7 +252,7 @@
   <br><br>Y lo de siempre: todo esto vive <strong>solo en este navegador</strong>. Si estás en una máquina del campus, vacía al salir.
 </div>
 
-<section class="panel">
+<section class="panel" id="panelCarga">
   <h2 style="margin-top:.2rem">1 · Trae lo que te llegó</h2>
 
   <h3 style="margin-top:.3rem">Del recolector, que es lo rápido</h3>
@@ -250,8 +304,15 @@
 
 <section id="panelFicha"></section>
 
+<section class="panel" id="panelMuro" style="display:none">
+  <h2 style="margin-top:.2rem">3 · El muro de La Florida</h2>
+  <p class="mini">Lo que el grupo <em>oyó</em>, junto. Ningún nombre de estudiante aparece aquí: son las voces de la orilla, y por eso este panel se puede proyectar tal cual. Toca <strong>Proyectar</strong> arriba y se queda solo esto, en grande.</p>
+  <div id="muro"></div>
+  <div id="enfrentado"></div>
+</section>
+
 <section class="panel" id="panelGrupo" style="display:none">
-  <h2 style="margin-top:.2rem">3 · Lo que dice el grupo</h2>
+  <h2 style="margin-top:.2rem">4 · Lo que dice el grupo</h2>
   <p class="mini">No es para ellos: es tu lista de qué retomar. Nada de esto identifica a nadie.</p>
   <div id="grupo"></div>
   <label class="campo"><span>Lo que me llevo para clase (esto sí se guarda)</span>
@@ -334,6 +395,24 @@
     return decodeURIComponent(escape(bin));
   }
 
+  /* De un pedazo de correo saca el estado del estudiante. Va recortando por
+     grupos de base64 hasta que lo que decodifica es un JSON entero: así
+     aguanta la basura que el correo deje pegada al final del código. */
+  function leeCodigo(bruto) {
+    var b = String(bruto || '').replace(/[^A-Za-z0-9+/=]/g, '');
+    for (var n = b.length - (b.length % 4); n >= 40; n -= 4) {
+      var txt;
+      try { txt = deB64(b.slice(0, n)); } catch (e) { continue; }
+      var i = txt.lastIndexOf('}');
+      if (i < 0) continue;
+      try {
+        var d = JSON.parse(txt.slice(0, i + 1));
+        if (d && typeof d === 'object' && !Array.isArray(d)) return d;
+      } catch (e) {}
+    }
+    return null;
+  }
+
   function alta(nombre, extra) {
     var n = String(nombre || '').replace(/\s+/g, ' ').trim();
     if (!n) return null;
@@ -404,8 +483,7 @@
       filas.forEach(function (f) {
         var d = null;
         if (f.codigo && String(f.codigo).indexOf(PREFIJO) > -1) {
-          var b = String(f.codigo).slice(String(f.codigo).indexOf(PREFIJO) + PREFIJO.length).replace(/[^A-Za-z0-9+/=]/g, '');
-          try { d = JSON.parse(deB64(b)); } catch (e) { d = null; }
+          d = leeCodigo(String(f.codigo).slice(String(f.codigo).indexOf(PREFIJO) + PREFIJO.length));
         }
         if (alta(f.nombre, d ? { datos: d, fuente: 'recolector' } : { fuente: 'recolector' })) {
           n++; if (d) completas++;
@@ -428,22 +506,26 @@
   /* ---------- leer lo pegado ---------- */
   document.getElementById('btnLeer').addEventListener('click', function () {
     var t = document.getElementById('pegado').value || '';
-    var enc = t.match(/GEST1·[A-Za-z0-9+/=\s]{40,}/g) || [];
+    /* Se parte por el prefijo en vez de barrer con una sola expresión: las
+       letras de «GEST1» son base64 válidas, así que un match glotón se comía
+       el arranque del código siguiente y echaba a perder el anterior. Pegar
+       varios correos de golpe, que es lo normal, no funcionaba. */
+    var enc = t.split(PREFIJO).slice(1);
     if (!enc.length) {
       nota('No encontré ningún código. Tiene que empezar con GEST1· y venir completo; si el correo lo partió en renglones, no importa.');
       return;
     }
-    var ok = 0;
+    var ok = 0, rotos = 0;
     enc.forEach(function (bruto) {
-      var b = bruto.slice(PREFIJO.length).replace(/[^A-Za-z0-9+/=]/g, '');
-      var d = null;
-      try { d = JSON.parse(deB64(b)); } catch (e) { return; }
-      if (!d || typeof d !== 'object') return;
+      var d = leeCodigo(bruto);
+      if (!d) { rotos++; return; }
       if (alta(d.nombre || 'Sin nombre', { datos: d, fuente: 'correo' })) ok++;
     });
     document.getElementById('pegado').value = '';
     guardar(); pinta();
-    nota(ok ? (ok === 1 ? 'Una autoevaluación leída. Te la abrí abajo.' : ok + ' autoevaluaciones leídas. Te abrí la primera.') : 'Los códigos venían incompletos o cortados.');
+    nota((ok ? (ok === 1 ? 'Una autoevaluación leída. Te la abrí abajo.' : ok + ' autoevaluaciones leídas. Te abrí la primera.')
+             : 'Los códigos venían incompletos o cortados.') +
+         (rotos ? ' ' + rotos + ' no se pudieron leer: pide que te reenvíen el correo completo.' : ''));
     alaFicha();
   });
 
@@ -532,6 +614,75 @@
     } else if (todos.length) {
       pl.textContent = R.al[R.sel] ? 'Abierta la ficha de ' + R.al[R.sel].nombre + '. Toca otro nombre para cambiar.' : 'Toca un nombre para abrir su ficha.';
     } else pl.textContent = '';
+  }
+
+  /* ---------- la pregunta que le falta ----------
+     No es un diagnóstico: es el hueco más grande de lo que escribió, y la
+     pregunta que lo abre. Sirve para no llegar a la mesa con la misma
+     pregunta genérica para las veintitrés personas. */
+  function laPregunta(a, d) {
+    if (!d) {
+      return '<div class="lepregunto"><div class="rot">Por dónde entrarle</div>' +
+        '<p>«¿La tienes hecha? Enséñamela en el teléfono, no me la mandes.»</p>' +
+        '<span class="pq">No mandó nada, y mandarla era opcional. Lo que no era opcional es traerla hecha.</span></div>';
+    }
+    var evs = 0, conDonde = 0;
+    [['ev1q','ev1d'],['ev2q','ev2d'],['ev3q','ev3d']].forEach(function (par) {
+      if (d[par[0]]) { evs++; if (d[par[1]]) conDonde++; }
+    });
+    var faltan = CASILLAS.filter(function (c) { return !d[c[0]]; });
+    var BR = [['br-prometer','no prometer'],['br-textual','registrar textual'],['br-auxilio','pedir auxilio']];
+    var fallo = BR.filter(function (b) { return d[b[0]] === 'fallo' || d[b[0]] === 'medias'; });
+    var sinDecir = fallo.filter(function (b) { return !(d[b[0] + '-cuando'] || '').trim(); });
+
+    /* En orden de qué abre más conversación, no de qué está peor. */
+    var C = [];
+    if (!(d['nosé'] || '').trim())
+      C.push(['«¿Qué es lo que todavía no sabes hacer?» — y aguantar el silencio.',
+              'Dejó vacío el único campo que no se puede llenar con esfuerzo. Es el músculo de diciembre y no lo entrenó.']);
+    if (evs && conDonde === 0)
+      C.push(['«Ábreme una. Aquí, ahorita, en el teléfono.»',
+              'Nombró ' + evs + ' evidencia' + (evs === 1 ? '' : 's') + ' y ninguna dice dónde está. Se resuelve en treinta segundos o no existe.']);
+    if (!evs)
+      C.push(['«Enséñame una sola cosa que hiciste en estas cinco semanas.»',
+              'No nombró ninguna evidencia. Puede ser que no sepa qué cuenta, no que no tenga nada.']);
+    if (!(d['frase-cita'] || '').trim())
+      C.push(['«¿Qué te dijo alguien el viernes que se te quedó pegado?»',
+              'No trajo ninguna frase de la orilla. O no registró textual, o registró y no lo leyó de vuelta.']);
+    if (sinDecir.length)
+      C.push(['«Dijiste que ' + sinDecir[0][1] + ' se te fue. ¿Cuándo exactamente?»',
+              'Se marcó el fallo pero no dijo el momento. El momento es lo que se puede corregir.']);
+    if ((d['sob-aciertos'] || '') === '3')
+      C.push(['«¿Salió algo el viernes que no esperabas? ¿Nada?»',
+              'Le atinó a las tres del sobre. O mucha puntería, o su estación preguntó confirmando lo que ya pensaba.']);
+    if (d['noes-n'] === '0' || d['noes-n'] === '')
+      C.push(['«¿A quién le pediste algo que pudiera negártelo?»',
+              (d['noes-n'] === '0' ? 'Contestó que a nadie.' : 'No contestó el contador de noes.') +
+              ' Cinco semanas sin pedir nada es una unidad que le pasó por encima.']);
+    if (faltan.length > 2)
+      C.push(['«De las ' + faltan.length + ' que te faltan del suelo, ¿cuál cubres esta semana?»',
+              'Le faltan ' + faltan.length + ' casillas: ' + faltan.map(function (c) { return c[1]; }).join(', ') + '.']);
+    if (evs && conDonde && conDonde < evs)
+      C.push(['«Una de las que nombraste no dice dónde está. ¿Dónde está?»',
+              'Nombró ' + evs + ' y ' + (evs - conDonde) + ' se quedó sin su dónde. Se contesta en diez segundos, y si no se contesta, ya sabemos algo.']);
+    if (faltan.length && faltan.length <= 2 && !(d['suelo-falta'] || '').trim())
+      C.push(['«' + faltan.map(function (c) { return c[1]; }).join(' y ') + ': ¿qué día?»',
+              'Le falta' + (faltan.length === 1 ? '' : 'n') + ' del suelo y no escribió cuándo lo cubre. Un pendiente con fecha es un plan; sin fecha es un hueco.']);
+    if (fallo.length && !sinDecir.length)
+      C.push(['«Dijiste que ' + fallo[0][1] + ' se te fue, y contaste cuándo. ¿Qué habrías dicho en su lugar?»',
+              'Nombró el fallo con su momento, que es la parte difícil. Lo que falta es la reparación, y esa se ensaya en voz alta aquí mismo.']);
+    if ((d.porque || '').length < 120)
+      C.push(['«Cuéntamelo largo. Eso que escribiste cabe en un mensaje, no en una defensa.»',
+              'Su porqué es corto. En diciembre eso no sostiene un número, y el ensayo es justo para descubrirlo hoy.']);
+
+    if (!C.length)
+      C.push(['«¿Qué te habría faltado para ponerte un punto más?»',
+              'Trae todo lo que se pedía. Con este perfil, la conversación que rinde es la de arriba, no la de los huecos.']);
+
+    return '<div class="lepregunto"><div class="rot">La pregunta que le falta a esta persona</div>' +
+      '<p>' + esc(C[0][0]) + '</p><span class="pq">' + esc(C[0][1]) + '</span>' +
+      (C[1] ? '<span class="pq" style="margin-top:.5rem">Si esa se agota: ' + esc(C[1][0]) + '</span>' : '') +
+      '</div>';
   }
 
   /* ---------- ficha ---------- */
@@ -638,6 +789,8 @@
         '<p class="mini">Su porqué está a la izquierda, en grande.</p>';
     }
 
+    der = laPregunta(a, d) + der;
+
     der += '<div class="preguntas"><div class="rot">Las tres de siempre</div><ol>' +
       '<li>¿Qué sabes hacer hoy que no sabías hace cuatro semanas?</li>' +
       '<li>¿Con qué lo demuestras?</li>' +
@@ -704,6 +857,90 @@
     });
   }
 
+  /* ---------- el muro de La Florida ----------
+     Las frases textuales que trajo el grupo, juntas. Aquí no va ningún
+     nombre de estudiante: son voces de la orilla, y por eso se proyecta. */
+  function pintaMuro() {
+    var con = R.orden.map(function (id) { return R.al[id]; })
+      .filter(function (a) { return a && a.datos && (a.datos['frase-cita'] || '').trim(); });
+    var muro = document.getElementById('muro');
+    if (!con.length) {
+      muro.innerHTML = '<p class="muro-vacio">Todavía nadie trajo una frase textual. Aparecen aquí en cuanto lleguen: ' +
+        'es el paso 4 de su autoevaluación.</p>';
+    } else {
+      muro.innerHTML = '<div class="muro">' + con.map(function (a) {
+        var c = a.datos['frase-cita'].trim().replace(/^[«"\u201c]+|[»"\u201d]+$/g, '');
+        var q = (a.datos['frase-quien'] || '').trim();
+        return '<div class="voz"><q>' + esc(c) + '</q>' +
+               (q ? '<span class="dijo">' + esc(q) + '</span>' : '') + '</div>';
+      }).join('') + '</div>' +
+      '<p class="mini"><strong>' + con.length + '</strong> frase' + (con.length === 1 ? '' : 's') +
+      ' de la orilla. Léelas en voz alta antes de abrir cualquier ficha: es la única parte de este ejercicio ' +
+      'que no habla de ellos, sino de la gente.</p>';
+    }
+    pintaEnfrentado();
+  }
+
+  /* ---------- el sobre del grupo, enfrentado ----------
+     Lo que el grupo entero creyó, contra lo que la gente pidió. Las
+     repeticiones se juntan: si algo lo escribieron seis, eso es el dato. */
+  function pintaEnfrentado() {
+    var con = R.orden.map(function (id) { return R.al[id]; })
+      .filter(function (a) { return a && a.datos; });
+    var cont = document.getElementById('enfrentado');
+    function junta(claves) {
+      var mapa = {};
+      con.forEach(function (a) {
+        claves.forEach(function (k) {
+          var v = (a.datos[k] || '').trim();
+          if (!v) return;
+          var key = norm(v);
+          if (!key) return;
+          if (!mapa[key]) mapa[key] = { t: v, n: 0 };
+          mapa[key].n++;
+        });
+      });
+      return Object.keys(mapa).map(function (k) { return mapa[k]; })
+        .sort(function (x, y) { return y.n - x.n || x.t.localeCompare(y.t, 'es'); });
+    }
+    var pre = junta(['sob-p1','sob-p2','sob-p3']);
+    var pid = junta(['sob-r1','sob-r2','sob-r3']);
+    if (!pre.length && !pid.length) { cont.innerHTML = ''; return; }
+
+    function pinta(lista, clase, titulo, pie) {
+      return '<div class="mitad ' + clase + '"><h4>' + esc(titulo) + '</h4>' +
+        (lista.length
+          ? '<ul>' + lista.map(function (x) {
+              return '<li class="' + (x.n === 1 ? 'solo' : '') + '"><span class="veces">' + x.n +
+                     '</span><span>' + esc(x.t) + '</span></li>';
+            }).join('') + '</ul>'
+          : '<p class="mini">Nadie lo llenó todavía.</p>') +
+        '<p class="mini" style="margin-top:.5rem">' + esc(pie) + '</p></div>';
+    }
+
+    /* Lo que la comunidad pidió y a nadie del grupo se le había ocurrido. */
+    var enPre = {};
+    pre.forEach(function (x) { enPre[norm(x.t)] = true; });
+    var ciegos = pid.filter(function (x) { return !enPre[norm(x.t)] && x.n > 1; });
+
+    cont.innerHTML = '<h3 style="margin-top:1.4rem">El sobre del grupo, enfrentado</h3>' +
+      '<p class="mini">Todo lo que el grupo predijo en la semana 1, contra todo lo que la gente pidió el viernes. ' +
+      'El número dice cuántos escribieron lo mismo.</p>' +
+      '<div class="enfr">' +
+        pinta(pre, 'pre', 'Lo que creímos que iban a pedir', 'De los sobres sellados en la semana 1.') +
+        pinta(pid, 'pid', 'Lo que de verdad pidieron', 'De los registros en limpio del viernes.') +
+      '</div>' +
+      (ciegos.length
+        ? '<p class="enfr-nota"><strong>El punto ciego del grupo entero:</strong> ' +
+          ciegos.slice(0, 4).map(function (x) { return esc(x.t) + ' (' + x.n + ')'; }).join(', ') +
+          '. Lo pidieron varias personas de la comunidad y no estaba en ningún sobre. ' +
+          'Esto es lo que se proyecta y se lee en voz alta: es la prueba, en una diapositiva, de por qué no se diseña de oídas.</p>'
+        : (pre.length && pid.length
+            ? '<p class="enfr-nota">Por ahora no aparece nada que la gente haya pedido en repetidas ocasiones y que ningún sobre trajera. ' +
+              'Puede cambiar cuando lleguen más; si al final sigue igual, vale la pena preguntarle al grupo si la consulta preguntó confirmando.</p>'
+            : ''));
+  }
+
   /* ---------- el grupo ---------- */
   function pintaGrupo() {
     var cont = document.getElementById('grupo');
@@ -736,7 +973,31 @@
       return !(a.datos.ev1d || a.datos.ev2d || a.datos.ev3d);
     }).length;
 
-    cont.innerHTML =
+    var marcador = '';
+    var conversados = R.orden.map(function (id) { return R.al[id]; })
+      .filter(function (a) { return a && a.resultado; });
+    if (conversados.length) {
+      marcador = '<h3>El marcador de la jornada</h3>' +
+        '<p class="mini">Cómo terminaron las ' + conversados.length + ' conversaciones que ya tuviste. ' +
+        'Ningún número de nadie: solo en qué acabó cada una.</p><div class="marcador">' +
+        RESULTADOS.map(function (r) {
+          var n = conversados.filter(function (a) { return a.resultado === r[0]; }).length;
+          return '<div class="m' + (n ? ' hay' : '') + '"><b>' + n + '</b><span>' + esc(r[1]) + '</span></div>';
+        }).join('') + '</div>';
+      var vm = conversados.filter(function (a) { return a.resultado === 'vi-mas'; }).length;
+      var vn = conversados.filter(function (a) { return a.resultado === 'vi-menos'; }).length;
+      if (vm >= 2 && vm > vn * 2) {
+        marcador += '<p class="mini"><strong>Se están poniendo menos de lo que valen.</strong> ' +
+          'En ' + vm + ' de ' + conversados.length + ' tú veías más que ellos. Vale decirlo en voz alta al grupo: ' +
+          'subestimarse no es humildad, es un argumento mal armado, y en diciembre cuesta.</p>';
+      } else if (vn >= 2 && vn > vm * 2) {
+        marcador += '<p class="mini"><strong>Se están poniendo más de lo que sostienen.</strong> ' +
+          'En ' + vn + ' de ' + conversados.length + ' te tocó pedir que defendieran su caso. ' +
+          'Conviene volver sobre qué cuenta como argumento antes de la unidad 2.</p>';
+      }
+    }
+
+    cont.innerHTML = marcador +
       (Object.keys(falta).length
         ? barras(falta, 'Casillas del suelo que faltan', 'Sobre ' + con.length + ' autoevaluaciones leídas.')
         : '<h3>Casillas del suelo que faltan</h3><p class="mini">Ninguna: los ' + con.length + ' que leíste traen el suelo completo.</p>') +
@@ -749,6 +1010,14 @@
   }
 
   /* ---------- barra ---------- */
+  var btnProy = document.getElementById('btnProy');
+  btnProy.addEventListener('click', function () {
+    var on = document.body.classList.toggle('proyectando');
+    btnProy.textContent = on ? 'Salir de proyección' : 'Proyectar';
+    document.getElementById('panelMuro').style.display = on ? 'block' : (R.orden.length ? 'block' : 'none');
+    window.scrollTo(0, 0);
+  });
+
   var btnCiegas = document.getElementById('btnCiegas');
   function pintaCiegas() {
     btnCiegas.textContent = 'A ciegas: ' + (R.ciegas ? 'sí' : 'no');
@@ -779,7 +1048,9 @@
     document.getElementById('panelVacio').style.display = hay ? 'none' : 'block';
     document.getElementById('panelLista').style.display = hay ? 'block' : 'none';
     document.getElementById('panelGrupo').style.display = hay ? 'block' : 'none';
-    pintaLista(); pintaFicha(); pintaGrupo();
+    document.getElementById('panelMuro').style.display =
+      (hay || document.body.classList.contains('proyectando')) ? 'block' : 'none';
+    pintaLista(); pintaFicha(); pintaMuro(); pintaGrupo();
   }
   pintaCiegas();
   pinta();
