@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>La mesa del jueves · Unidad 1 · Gestión y Manejo de Proyectos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28;
+          --gris:#68807a; --bien:#1F6B4A; --bienbg:#EAF5EF; --ojo:#A15C12; --ojobg:#FBF1E4; --rojo:#9B3B2E; --rojobg:#FBF0EE; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo);
+         color:var(--texto); line-height:1.6; font-size:1rem; }
+
+  header.barra { position:sticky; top:0; z-index:40; background:var(--profundo); color:#EAF4F2; padding:.7rem 1.1rem; }
+  header.barra .caja { max-width:74rem; margin:0 auto; display:flex; align-items:center; justify-content:space-between;
+                       gap:.8rem; flex-wrap:wrap; }
+  header.barra .rot { font-size:.72rem; letter-spacing:.13em; text-transform:uppercase; opacity:.7; }
+  header.barra .tit { font-family:Georgia,serif; font-size:1.1rem; font-weight:bold; }
+  header.barra button { background:transparent; border:1px solid rgba(255,255,255,.35); color:#fff; border-radius:999px;
+                        font:inherit; font-size:.8rem; padding:.3rem .8rem; cursor:pointer; }
+  header.barra button.on { background:var(--arena); border-color:var(--arena); color:var(--profundo); font-weight:bold; }
+
+  main { max-width:74rem; margin:0 auto; padding:1.1rem 1.1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.1rem 0 .4rem; }
+  h2 { font-family:Georgia,serif; color:var(--profundo); font-size:1.25rem; margin:.1rem 0 .5rem; }
+  h3 { color:var(--marca); font-size:1rem; margin:1.2rem 0 .35rem; }
+  p { margin:.5rem 0; }
+  .mini { font-size:.88rem; color:var(--gris); line-height:1.5; }
+  .rot { font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--marca); font-weight:bold; }
+
+  .panel { background:#fff; border:1px solid var(--borde); border-radius:14px; padding:1rem 1.2rem; margin:.9rem 0; }
+  .trato { border-left:5px solid var(--arena); background:#FBF7EC; border-radius:0 12px 12px 0; padding:.85rem 1.1rem;
+           margin:1rem 0; font-size:.95rem; }
+  .trato b { color:var(--profundo); }
+
+  label.campo { display:block; margin-top:.8rem; }
+  label.campo > span { display:block; font-size:.74rem; font-weight:bold; letter-spacing:.06em; text-transform:uppercase;
+                       color:var(--profundo); margin-bottom:.2rem; }
+  input[type=text], textarea, select { width:100%; font:inherit; font-size:.97rem; padding:.55rem .65rem;
+    border:1px solid var(--borde); border-radius:8px; background:#FDFDFB; color:var(--texto); }
+  textarea { min-height:4rem; resize:vertical; }
+  input:focus, textarea:focus, select:focus { outline:2px solid var(--marca); border-color:var(--marca); }
+
+  .btn { border:none; border-radius:999px; padding:.55rem 1.2rem; font:inherit; font-weight:bold; cursor:pointer; font-size:.93rem; }
+  .btn.fuerte { background:var(--profundo); color:#fff; }
+  .btn.marca { background:var(--marca); color:#fff; }
+  .btn.suave { background:#fff; color:var(--marca); border:1px solid var(--borde); }
+  .btn.peligro { background:var(--rojobg); color:var(--rojo); border:1px solid #E3C4BD; }
+  .fila { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.8rem; }
+
+  /* --- lista --- */
+  .contadores { display:flex; gap:.45rem; flex-wrap:wrap; margin:.7rem 0; }
+  .cont { flex:1 1 7rem; border:1px solid var(--borde); border-radius:10px; background:#fff; padding:.5rem .7rem; }
+  .cont b { display:block; font-size:1.5rem; line-height:1.1; color:var(--profundo); }
+  .cont span { font-size:.74rem; color:var(--gris); display:block; line-height:1.3; }
+  .cont.alerta b { color:var(--ojo); }
+  .filtros { display:flex; gap:.35rem; flex-wrap:wrap; margin:.5rem 0 0; }
+  .filtros button { border:1px solid var(--borde); background:#fff; color:var(--profundo); border-radius:999px;
+                    padding:.28rem .8rem; font:inherit; font-size:.83rem; font-weight:bold; cursor:pointer; }
+  .filtros button.on { background:var(--profundo); color:#fff; border-color:var(--profundo); }
+  .lista { display:grid; grid-template-columns:repeat(auto-fill,minmax(15rem,1fr)); gap:.5rem; margin-top:.7rem; }
+  .alumno { text-align:left; border:1px solid var(--borde); background:#fff; border-radius:11px; padding:.55rem .7rem;
+            font:inherit; cursor:pointer; display:flex; align-items:center; gap:.6rem; }
+  .alumno:hover { border-color:var(--marca); }
+  .alumno.sel { border-color:var(--profundo); border-width:2px; background:#F7FAF9; }
+  .alumno .luz { flex:none; width:11px; height:11px; border-radius:50%; background:#D3E2DD; }
+  .alumno.hecho .luz { background:var(--bien); }
+  .alumno.falta { border-style:dashed; background:#F7FAF9; }
+  .alumno.falta .luz { background:#E0C9A8; }
+  .alumno .quien { flex:1; min-width:0; }
+  .alumno .quien b { display:block; font-size:.95rem; color:var(--profundo); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .alumno .quien span { display:block; font-size:.75rem; color:var(--gris); }
+
+  /* --- ficha --- */
+  .ficha { border:2px solid var(--profundo); border-radius:14px; background:#fff; overflow:hidden; margin:.9rem 0; }
+  .ficha .cabeza { background:var(--profundo); color:#EAF4F2; padding:.8rem 1.1rem; display:flex;
+                   justify-content:space-between; align-items:center; gap:.7rem; flex-wrap:wrap; }
+  .ficha .cabeza b { font-size:1.15rem; display:block; font-family:Georgia,serif; }
+  .ficha .cabeza span { font-size:.74rem; letter-spacing:.09em; text-transform:uppercase; opacity:.75; }
+  .ficha .cuerpo { padding:1.1rem; }
+  .dos { display:grid; grid-template-columns:1fr; gap:1.2rem; }
+  @media (min-width:900px) { .dos { grid-template-columns:1.2fr .8fr; } }
+
+  .sintesis { font-size:1rem; line-height:1.55; color:var(--profundo); background:#F2F7F5; border-radius:10px;
+              padding:.7rem .9rem; margin:0 0 .9rem; }
+  .sintesis b { color:var(--marca); }
+  .tiles { display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; margin-bottom:1rem; }
+  .tile { border:1px solid var(--borde); border-radius:10px; background:#fff; padding:.55rem .7rem; }
+  .tile .v { font-size:1.45rem; font-weight:bold; line-height:1.1; color:var(--profundo); }
+  .tile .v small { font-size:.85rem; color:var(--gris); font-weight:normal; }
+  .tile .e { font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gris); font-weight:bold; }
+  .tile.t-bien .v { color:var(--bien); }
+  .tile.t-ojo .v { color:var(--ojo); }
+
+  .cita { position:relative; background:#F2F7F5; border-left:5px solid var(--marca); border-radius:0 12px 12px 0;
+          padding:1rem 1.1rem 1rem 2.4rem; margin:1rem 0; }
+  .cita::before { content:"\201C"; position:absolute; left:.5rem; top:.05rem; font-family:Georgia,serif;
+                  font-size:3.3rem; color:var(--marca); opacity:.3; line-height:1; }
+  .cita p { margin:0; font-size:1.04rem; line-height:1.6; color:#26332F; white-space:pre-wrap; }
+  .cita .pie { display:block; margin-top:.5rem; font-size:.78rem; color:var(--gris); font-style:italic; }
+  .tapada { border:1px dashed #C4D8D2; border-radius:12px; padding:.9rem 1rem; margin:1rem 0; text-align:center;
+            color:var(--gris); font-size:.92rem; background:#F7FAF9; }
+
+  .bloque { margin:1rem 0; }
+  .bloque > .rotb { display:block; font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--marca); font-weight:bold; margin:0 0 .3rem; }
+  .bloque p { margin:.15rem 0 0; font-size:.96rem; line-height:1.55; color:#26332F; white-space:pre-wrap; }
+  .bloque .nada { color:#A9BCB6; font-style:italic; font-size:.92rem; }
+  .bloque.hueco { background:var(--ojobg); border-radius:10px; padding:.7rem .9rem; }
+  .bloque.hueco > .rotb { display:block; color:var(--ojo); }
+  .bloque.hueco p { color:#7A4712; }
+
+  .sobre2 { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin:.4rem 0; }
+  .sobre2 .col { border:1px solid var(--borde); border-radius:10px; padding:.6rem .75rem; background:#fff; }
+  .sobre2 .col.p { border-top:3px solid var(--arena); }
+  .sobre2 .col.r { border-top:3px solid var(--marca); }
+  .sobre2 .rots { display:block; margin:0 0 .3rem; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gris); }
+  .sobre2 ol { margin:0; padding-left:1.1rem; }
+  .sobre2 li { font-size:.9rem; line-height:1.4; margin:.15rem 0; }
+  .veredicto { border-radius:10px; padding:.6rem .85rem; font-size:.93rem; margin-top:.5rem; }
+  .veredicto.v-bien { background:var(--bienbg); color:#1B4F38; }
+  .veredicto.v-ojo { background:var(--ojobg); color:#7A4712; }
+
+  .evlista { margin:.3rem 0 0; padding:0; list-style:none; }
+  .evlista li { font-size:.9rem; line-height:1.45; padding:.3rem 0; border-bottom:1px solid var(--borde); }
+  .evlista li:last-child { border-bottom:none; }
+  .evlista li b { display:block; color:var(--profundo); }
+  .evlista li span { color:var(--gris); }
+  .evlista li span.sin { color:var(--ojo); font-style:italic; }
+
+  /* --- la lectura del profesor --- */
+  .lectura-caja { border:2px dashed #DCC38C; background:#FBF7EC; border-radius:12px; padding:.9rem 1rem; }
+  .lectura-caja .rot { color:#8A6A1A; }
+  .lectura-caja p { color:#4A3D20; font-size:.93rem; }
+  .nums { display:flex; gap:.35rem; flex-wrap:wrap; margin:.5rem 0; }
+  .nums button { flex:1 1 2.8rem; border:2px solid var(--borde); background:#fff; color:var(--profundo); border-radius:9px;
+                 padding:.45rem .2rem; font:inherit; font-size:1.25rem; font-weight:bold; cursor:pointer; }
+  .nums button.on { background:var(--profundo); border-color:var(--profundo); color:#fff; }
+  .destape { display:flex; gap:.9rem; align-items:center; flex-wrap:wrap; margin:.6rem 0; }
+  .destape .par2 { text-align:center; flex:1 1 5.5rem; }
+  .destape .par2 b { display:block; font-size:2.3rem; line-height:1; font-weight:bold; }
+  .destape .par2.mia b { color:var(--profundo); }
+  .destape .par2.suya b { color:var(--marca); }
+  .destape .par2 span { font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gris); }
+  .brecha { flex:1 1 10rem; border-radius:10px; padding:.55rem .8rem; font-size:.92rem; text-align:center; font-weight:bold; }
+  .brecha.igual { background:var(--bienbg); color:var(--bien); }
+  .brecha.sube { background:#EEF3FB; color:#2C5AA0; }
+  .brecha.baja { background:var(--ojobg); color:var(--ojo); }
+
+  .preguntas { background:#F2F7F5; border-radius:10px; padding:.7rem .9rem; margin:.8rem 0; }
+  .preguntas ol { margin:.3rem 0 0; padding-left:1.1rem; }
+  .preguntas li { font-size:.9rem; color:var(--profundo); margin-bottom:.15rem; }
+
+  .resu { display:block; width:100%; text-align:left; border:1px solid var(--borde); background:#fff;
+          border-radius:10px; padding:.5rem .75rem; margin-bottom:.35rem; font:inherit; cursor:pointer; }
+  .resu b { display:block; color:var(--profundo); font-size:.93rem; }
+  .resu span { display:block; font-size:.82rem; color:var(--gris); line-height:1.4; }
+  .resu.on { border-color:var(--profundo); border-width:2px; background:#F7FAF9; }
+
+  .barras { margin:.5rem 0; }
+  .barras .b { display:flex; align-items:center; gap:.5rem; margin-bottom:.25rem; font-size:.86rem; }
+  .barras .b .et { flex:1; color:var(--profundo); }
+  .barras .b .pista { flex:none; width:38%; height:15px; background:#E4EFEB; border-radius:3px; overflow:hidden; }
+  .barras .b .pista i { display:block; height:100%; background:var(--marca); }
+  .barras .b .n { flex:none; width:2rem; text-align:right; color:var(--gris); }
+
+  .vacio { border:2px dashed #C4D8D2; border-radius:14px; background:#fff; padding:1.3rem 1.4rem; margin:1rem 0; }
+  .pasos3 { display:grid; grid-template-columns:1fr; gap:.7rem; }
+  @media (min-width:760px) { .pasos3 { grid-template-columns:repeat(3,1fr); } }
+  .paso3 { display:flex; gap:.7rem; align-items:flex-start; background:#F2F7F5; border-radius:10px; padding:.8rem .9rem; }
+  .paso3 .n { flex:none; width:28px; height:28px; border-radius:50%; background:var(--marca); color:#fff;
+              font-weight:bold; display:flex; align-items:center; justify-content:center; }
+  .paso3 b { display:block; color:var(--profundo); font-size:.96rem; }
+  .paso3 span { display:block; font-size:.85rem; color:var(--gris); line-height:1.45; margin-top:.1rem; }
+
+  @media print { header.barra, .filtros, .fila, .btn, .lectura-caja { display:none !important; } body { background:#fff; } }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="caja">
+    <div>
+      <div class="rot">Gestión y Manejo de Proyectos · pantalla del profesor</div>
+      <div class="tit">La mesa del jueves · Unidad 1</div>
+    </div>
+    <div class="fila" style="margin:0">
+      <button type="button" id="btnCiegas" class="on">A ciegas: sí</button>
+      <button type="button" id="btnVaciar">Vaciar</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="trato">
+  <b>El trato de este curso, que esta pantalla respeta.</b> La autoevaluación de la unidad 1 es de ensayo: no produce número y <strong>no queda registro de ninguna de las dos lecturas</strong>. Por eso aquí tu número se borra al pasar al siguiente y nunca se exporta. Lo único que se guarda es con quién ya conversaste y lo que quieras anotarte a ti mismo sobre qué retomar en clase.
+  <br><br>Y lo de siempre: todo esto vive <strong>solo en este navegador</strong>. Si estás en una máquina del campus, vacía al salir.
+</div>
+
+<section class="panel">
+  <h2 style="margin-top:.2rem">1 · Trae lo que te llegó</h2>
+  <p class="mini">Los que te mandaron su autoevaluación por correo traen al final un código que empieza con <code>GEST1·</code>. No hace falta buscarlo: <strong>selecciona el correo completo y pégalo aquí</strong>, o pega varios de golpe. Yo saco los códigos.</p>
+  <label class="campo"><span>Pega aquí los correos, o los códigos sueltos</span>
+    <textarea id="pegado" placeholder="Pega el correo entero. Puedes pegar varios, uno tras otro." style="min-height:7rem;font-size:.86rem"></textarea></label>
+  <div class="fila"><button class="btn marca" type="button" id="btnLeer">Leer lo pegado</button></div>
+
+  <h3>La lista del grupo</h3>
+  <p class="mini">Para saber quién no te ha mandado nada. Un nombre por renglón.</p>
+  <label class="campo"><span>Nombres</span><textarea id="listaGrupo" placeholder="Un nombre por renglón" style="min-height:5rem"></textarea></label>
+  <div class="fila"><button class="btn suave" type="button" id="btnLista">Pasar lista</button>
+    <button class="btn suave" type="button" id="btnMano">Agregar uno a mano</button></div>
+  <p class="mini" id="aviso" style="margin-top:.7rem"></p>
+</section>
+
+<section class="vacio" id="panelVacio">
+  <h2 style="margin-top:.1rem">Todavía no hay nadie en la mesa</h2>
+  <p class="mini">Esta pantalla se llena cuando pegues lo que te llegó. Así funciona:</p>
+  <div class="pasos3">
+    <div class="paso3"><span class="n">1</span><span><b>Pega los correos</b><span>Aquí arriba. Selecciona el correo completo y pégalo: el código va al final y yo lo encuentro.</span></span></div>
+    <div class="paso3"><span class="n">2</span><span><b>Toca un nombre</b><span>Se abre su ficha con todo lo que escribió: su suelo, su sobre, su porqué, lo que dice que no sabe.</span></span></div>
+    <div class="paso3"><span class="n">3</span><span><b>Lean juntos</b><span>Tú escribes tu lectura antes de ver la suya. Al pasar al siguiente, tu número se borra: es el trato.</span></span></div>
+  </div>
+</section>
+
+<section class="panel" id="panelLista" style="display:none">
+  <h2 style="margin-top:.2rem">2 · La lista</h2>
+  <div class="contadores" id="contadores"></div>
+  <div class="filtros" id="filtros">
+    <button type="button" data-f="" class="on">Todos</button>
+    <button type="button" data-f="falta">No han mandado</button>
+    <button type="button" data-f="pendiente">Por conversar</button>
+    <button type="button" data-f="hecho">Conversados</button>
+  </div>
+  <p class="mini" id="pistaLista" style="margin:.6rem 0 0"></p>
+  <label class="campo"><span>Buscar</span><input type="text" id="buscar" placeholder="Escribe un nombre"></label>
+  <div class="lista" id="lista"></div>
+</section>
+
+<section id="panelFicha"></section>
+
+<section class="panel" id="panelGrupo" style="display:none">
+  <h2 style="margin-top:.2rem">3 · Lo que dice el grupo</h2>
+  <p class="mini">No es para ellos: es tu lista de qué retomar. Nada de esto identifica a nadie.</p>
+  <div id="grupo"></div>
+  <label class="campo"><span>Lo que me llevo para clase (esto sí se guarda)</span>
+    <textarea id="notaClase" placeholder="Qué retomar el jueves, qué quedó flojo en el grupo, qué explicar otra vez."></textarea></label>
+  <div class="fila"><button class="btn suave" type="button" id="btnImprimir">Imprimir esta pantalla</button></div>
+</section>
+
+</main>
+
+<script>
+/* ============================================================
+   LA MESA DEL JUEVES · Unidad 1 · Gestión y Manejo de Proyectos
+   ------------------------------------------------------------
+   Pantalla del profesor para el espacio de la semana 5. No guarda
+   nada dentro del archivo: lo que se pega vive en el localStorage
+   de este navegador.
+
+   Diferencia importante con la mesa de Etimologías: aquí la
+   autoevaluación es de ENSAYO y el curso promete que no queda
+   registro de ninguna de las dos lecturas. Por eso el número que
+   escribe el profesor es efímero: se borra al cambiar de persona
+   y no entra en ninguna exportación.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var CLAVE = 'gestion-mesa-u1';
+  var PREFIJO = 'GEST1·';
+
+  var CASILLAS = [
+    ['s-contrato', 'Contrato firmado'],
+    ['s-primerno', 'Mi primer no'],
+    ['s-reporte', 'Reporte en el Drive'],
+    ['s-consulta', 'Consulta o compensatoria'],
+    ['s-sobre', 'Sobre sellado'],
+    ['s-minutos', 'Los dos minutos'],
+    ['s-tickets', 'Tickets de salida']
+  ];
+  var SOBRE = {
+    '0': ['v-bien', 'No le atinó a ninguna. La consulta hizo justo lo que tenía que hacer.'],
+    '1': ['v-bien', 'Le atinó una de tres. Lo normal y lo sano.'],
+    '2': ['v-ojo', 'Le atinó dos. Vale preguntarle si salió algo que no esperaba.'],
+    '3': ['v-ojo', 'Le atinó a las tres. O mucha puntería, o preguntó confirmando lo que ya pensaba.']
+  };
+  var RESULTADOS = [
+    ['coincidimos', 'Coincidimos', 'Su lectura y la mía dicen lo mismo. Buena señal para diciembre.'],
+    ['vi-mas', 'Yo veía más', 'Se puso menos de lo que yo le pondría, y se lo dije con razones.'],
+    ['vi-menos', 'Yo veía menos', 'Se puso más. Lo conversamos cinco minutos y defendió su caso con evidencia.'],
+    ['no-quiso', 'No quiso compararla', 'Y está bien: compartirla es opcional. Trajo la suya hecha, que es lo que se pedía.'],
+    ['no-trajo', 'No la trajo', 'Se habló de eso. Lo que sigue es que la haga.']
+  ];
+
+  var R = { al: {}, orden: [], ciegas: true, sel: null, nota: '' };
+  try { var g = JSON.parse(localStorage.getItem(CLAVE) || 'null'); if (g && g.al) R = g; } catch (e) {}
+  if (R.ciegas === undefined) R.ciegas = true;
+
+  /* La lectura del profesor NO se guarda: vive aquí, en memoria, y se va
+     al cambiar de persona o al recargar. Es la promesa del curso. */
+  var lecturaViva = { id: null, num: '', destapado: false };
+
+  function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(R)); } catch (e) {} }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c];
+    });
+  }
+  function norm(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+  function slug(s) { return norm(s) || ('x' + Date.now()); }
+  function nota(t) { document.getElementById('aviso').textContent = t; }
+  function deB64(b) {
+    var bin = atob(b);
+    if (window.TextDecoder) {
+      var a = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+      return new TextDecoder().decode(a);
+    }
+    return decodeURIComponent(escape(bin));
+  }
+
+  function alta(nombre, extra) {
+    var n = String(nombre || '').replace(/\s+/g, ' ').trim();
+    if (!n) return null;
+    var id = slug(n);
+    if (!R.al[id]) { R.al[id] = { nombre: n }; R.orden.push(id); }
+    var a = R.al[id];
+    Object.keys(extra || {}).forEach(function (k) {
+      if (extra[k] !== undefined && extra[k] !== '' && extra[k] !== null) a[k] = extra[k];
+    });
+    return id;
+  }
+
+  /* ---------- leer lo pegado ---------- */
+  document.getElementById('btnLeer').addEventListener('click', function () {
+    var t = document.getElementById('pegado').value || '';
+    var enc = t.match(/GEST1·[A-Za-z0-9+/=\s]{40,}/g) || [];
+    if (!enc.length) {
+      nota('No encontré ningún código. Tiene que empezar con GEST1· y venir completo; si el correo lo partió en renglones, no importa.');
+      return;
+    }
+    var ok = 0;
+    enc.forEach(function (bruto) {
+      var b = bruto.slice(PREFIJO.length).replace(/[^A-Za-z0-9+/=]/g, '');
+      var d = null;
+      try { d = JSON.parse(deB64(b)); } catch (e) { return; }
+      if (!d || typeof d !== 'object') return;
+      if (alta(d.nombre || 'Sin nombre', { datos: d, fuente: 'correo' })) ok++;
+    });
+    document.getElementById('pegado').value = '';
+    guardar(); pinta();
+    nota(ok ? (ok === 1 ? 'Una autoevaluación leída. Te la abrí abajo.' : ok + ' autoevaluaciones leídas. Te abrí la primera.') : 'Los códigos venían incompletos o cortados.');
+    alaFicha();
+  });
+
+  document.getElementById('btnLista').addEventListener('click', function () {
+    var nombres = (document.getElementById('listaGrupo').value || '').split(/\r?\n/)
+      .map(function (l) { return l.split('\t')[0].replace(/^\s*\d+[.)\-\s]+/, '').trim(); })
+      .filter(function (n) { return n.length > 2; });
+    if (!nombres.length) { nota('No leí ningún nombre. Uno por renglón.'); return; }
+    var nuevos = 0, ya = 0;
+    nombres.forEach(function (n) {
+      var existia = !!R.al[slug(n)];
+      if (alta(n, existia ? {} : { fuente: 'lista' })) { existia ? ya++ : nuevos++; }
+    });
+    document.getElementById('listaGrupo').value = '';
+    guardar(); pinta();
+    nota('Lista pasada: ' + nuevos + ' nuevo(s), ' + ya + ' que ya estaba(n).');
+  });
+
+  document.getElementById('btnMano').addEventListener('click', function () {
+    var n = window.prompt('¿Cómo se llama?');
+    if (!n) return;
+    R.sel = alta(n, { fuente: 'a mano' });
+    guardar(); pinta(); alaFicha();
+  });
+
+  function alaFicha() {
+    setTimeout(function () {
+      var f = document.querySelector('.ficha') || document.getElementById('panelLista');
+      if (f) { try { f.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { f.scrollIntoView(); } }
+    }, 120);
+  }
+
+  /* ---------- lista ---------- */
+  var buscarEl = document.getElementById('buscar');
+  buscarEl.addEventListener('input', pintaLista);
+  var filtro = '';
+  Array.prototype.forEach.call(document.querySelectorAll('#filtros button'), function (b) {
+    b.addEventListener('click', function () {
+      filtro = b.getAttribute('data-f');
+      Array.prototype.forEach.call(document.querySelectorAll('#filtros button'), function (x) { x.classList.toggle('on', x === b); });
+      pintaLista();
+    });
+  });
+  function mando(a) { return !!a.datos; }
+  function estado(a) { return a.resultado ? 'hecho' : (mando(a) ? '' : 'falta'); }
+
+  function pintaLista() {
+    var q = norm(buscarEl.value);
+    var cont = document.getElementById('lista');
+    cont.innerHTML = '';
+    R.orden.forEach(function (id) {
+      var a = R.al[id];
+      if (!a) return;
+      if (q && norm(a.nombre).indexOf(q) === -1) return;
+      var e = estado(a);
+      if (filtro === 'falta' && e !== 'falta') return;
+      if (filtro === 'hecho' && e !== 'hecho') return;
+      if (filtro === 'pendiente' && (e === 'hecho' || e === 'falta')) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'alumno ' + e + (R.sel === id ? ' sel' : '');
+      var pie = e === 'falta' ? 'no ha mandado nada'
+        : (a.resultado ? 'conversado' : 'la mandó completa');
+      b.innerHTML = '<span class="luz"></span><span class="quien"><b>' + esc(a.nombre) + '</b><span>' + pie + '</span></span>';
+      b.addEventListener('click', function () {
+        if (R.sel !== id) lecturaViva = { id: id, num: '', destapado: false };
+        R.sel = id; guardar(); pinta();
+      });
+      cont.appendChild(b);
+    });
+
+    var todos = R.orden.map(function (id) { return R.al[id]; }).filter(Boolean);
+    var hechos = todos.filter(function (a) { return a.resultado; }).length;
+    var faltan = todos.filter(function (a) { return estado(a) === 'falta'; });
+    document.getElementById('contadores').innerHTML =
+      '<div class="cont"><b>' + todos.length + '</b><span>en la mesa</span></div>' +
+      '<div class="cont' + (faltan.length ? ' alerta' : '') + '"><b>' + faltan.length + '</b><span>no han mandado</span></div>' +
+      '<div class="cont"><b>' + (todos.length - hechos - faltan.length) + '</b><span>por conversar</span></div>' +
+      '<div class="cont"><b>' + hechos + '</b><span>conversados</span></div>';
+
+    var pl = document.getElementById('pistaLista');
+    if (faltan.length) {
+      pl.innerHTML = '<strong>' + faltan.length + ' sin mandar nada:</strong> ' +
+        faltan.map(function (a) { return esc(a.nombre); }).join(' · ') +
+        '. Compartirla es opcional, así que puede estar bien: pregúntales si la trajeron hecha.';
+    } else if (todos.length) {
+      pl.textContent = R.al[R.sel] ? 'Abierta la ficha de ' + R.al[R.sel].nombre + '. Toca otro nombre para cambiar.' : 'Toca un nombre para abrir su ficha.';
+    } else pl.textContent = '';
+  }
+
+  /* ---------- ficha ---------- */
+  function pintaFicha() {
+    var cont = document.getElementById('panelFicha');
+    var id = R.sel, a = id && R.al[id];
+    if (!a) { cont.innerHTML = ''; return; }
+    if (lecturaViva.id !== id) lecturaViva = { id: id, num: '', destapado: false };
+    var d = a.datos || null;
+    var tapado = R.ciegas && !lecturaViva.destapado && !a.resultado;
+
+    var izq = '';
+    if (d) {
+      var puestas = CASILLAS.filter(function (c) { return d[c[0]]; });
+      var faltan = CASILLAS.filter(function (c) { return !d[c[0]]; });
+      var S = SOBRE[(d['sob-aciertos'] || '').toString()];
+      var evs = [], conDonde = 0;
+      [['ev1q','ev1d'],['ev2q','ev2d'],['ev3q','ev3d']].forEach(function (p) {
+        if (!d[p[0]]) return;
+        if (d[p[1]]) conDonde++;
+        evs.push('<li><b>' + esc(d[p[0]]) + '</b>' +
+          (d[p[1]] ? '<span>' + esc(d[p[1]]) + '</span>' : '<span class="sin">no dijo dónde está</span>') + '</li>');
+      });
+
+      izq += '<p class="sintesis">' +
+        (faltan.length ? (faltan.length === 1 ? 'Le falta <b>una</b> casilla del suelo: ' : 'Le faltan <b>' + faltan.length + '</b> del suelo: ') + esc(faltan.map(function (c) { return c[1]; }).join(', ')) + '. '
+                       : 'Suelo <b>completo</b>. ') +
+        (S ? esc(S[1]) + ' ' : '') +
+        (evs.length
+          ? 'Nombró <b>' + evs.length + '</b> evidencia' + (evs.length === 1 ? '' : 's') +
+            (conDonde === evs.length ? ', todas con su dónde.' :
+             conDonde === 0 ? ', pero ninguna dice dónde está: así no se pueden abrir.' :
+             ', y ' + (evs.length - conDonde) + ' sin decir dónde está.')
+          : 'No nombró ninguna evidencia.') + '</p>';
+
+      izq += '<div class="tiles">' +
+        '<div class="tile ' + (faltan.length ? 't-ojo' : 't-bien') + '"><div class="v">' + puestas.length + '<small>/' + CASILLAS.length + '</small></div><div class="e">del suelo</div></div>' +
+        '<div class="tile"><div class="v">' + ((d['sob-aciertos'] || '—')) + '<small>/3</small></div><div class="e">del sobre</div></div>' +
+        '<div class="tile' + (evs.length && conDonde === evs.length ? ' t-bien' : (evs.length ? '' : ' t-ojo')) +
+          '"><div class="v">' + conDonde + '<small>/' + evs.length + '</small></div><div class="e">con su dónde</div></div>' +
+        '</div>';
+
+      if (tapado) {
+        izq += '<div class="tapada">Su número y su porqué se destapan cuando escribas tu lectura, ahí al lado. Primero tú.</div>';
+      } else if (d.porque) {
+        izq += '<div class="cita"><p>' + esc(d.porque) + '</p><span class="pie">' + esc(a.nombre) +
+               ', sobre por qué se pondría ' + esc(d.num || 'ese número') + '</span></div>';
+      } else {
+        izq += '<div class="tapada">No escribió su porqué. Es lo que más se practica aquí: pregúntaselo en voz alta.</div>';
+      }
+
+      izq += '<div class="bloque"><span class="rotb">Su sobre contra la realidad</span><div class="sobre2">' +
+        '<div class="col p"><span class="rots">Predijo</span><ol>' +
+          [1,2,3].map(function (i) { return d['sob-p'+i] ? '<li>' + esc(d['sob-p'+i]) + '</li>' : ''; }).join('') +
+        '</ol></div>' +
+        '<div class="col r"><span class="rots">Pidieron</span><ol>' +
+          [1,2,3].map(function (i) { return d['sob-r'+i] ? '<li>' + esc(d['sob-r'+i]) + '</li>' : ''; }).join('') +
+        '</ol></div></div>' +
+        (S ? '<div class="veredicto ' + S[0] + '">' + esc(S[1]) + '</div>' : '') +
+        (d['sob-nadie'] ? '<p style="margin-top:.5rem"><strong>Lo que a nadie se le había ocurrido:</strong> ' + esc(d['sob-nadie']) + '</p>' : '') +
+        '</div>';
+
+      izq += '<div class="bloque hueco"><span class="rotb">Lo que dice que todavía no sabe hacer</span>' +
+        (d['nosé'] ? '<p>' + esc(d['nosé']) + '</p>' : '<span class="nada">no nombró nada — es justo lo que hay que preguntarle</span>') +
+        '</div>';
+
+      izq += '<div class="bloque"><span class="rotb">Lo que puede abrir</span>' +
+        (evs.length ? '<ul class="evlista">' + evs.join('') + '</ul>' : '<span class="nada">no nombró ninguna</span>') +
+        (d['ev-extra'] ? '<p style="margin-top:.5rem"><strong>Sin que nadie se lo pidiera:</strong> ' + esc(d['ev-extra']) + '</p>' : '') +
+        '</div>';
+
+      if (d.costo) izq += '<div class="bloque"><span class="rotb">Lo que le costó</span><p>' + esc(d.costo) + '</p></div>';
+      if (d.primerno) izq += '<div class="bloque"><span class="rotb">Su primer no</span><p>' + esc(d.primerno) + '</p></div>';
+      if (d.jueves) izq += '<div class="bloque"><span class="rotb">Lo que quiere preguntarte hoy</span><p>' + esc(d.jueves) + '</p></div>';
+      if (d['suelo-falta']) izq += '<div class="bloque"><span class="rotb">Lo que le falta del suelo, con su fecha</span><p>' + esc(d['suelo-falta']) + '</p></div>';
+    } else {
+      izq = '<div class="bloque hueco"><span class="rotb">Todavía no te ha mandado nada</span><p>Puede estar bien: mandarla es opcional. ' +
+            'Lo que no es opcional es traerla hecha. Pregúntale primero si la tiene, y si la trae en el teléfono, ' +
+            'que te la enseñe: es el mismo contenido.</p></div>';
+    }
+
+    var der = '';
+    if (tapado) {
+      der = '<div class="lectura-caja"><div class="rot">Antes de destapar</div>' +
+        '<p><strong>¿Qué le pondrías tú?</strong> Escríbelo antes de ver el suyo. Es la regla de los tres casos, practicada: ' +
+        'si coinciden, listo; si el suyo es más bajo, tú le dices por qué ves más; si es más alto, defiende su caso.</p>' +
+        '<p style="font-size:.86rem"><strong>Esto no se guarda.</strong> Al pasar al siguiente se borra, y no sale en ninguna exportación. En el ensayo no queda registro de ninguna de las dos lecturas.</p>' +
+        '<div class="nums" id="nums"></div>' +
+        '<div class="fila"><button class="btn fuerte" type="button" id="btnDestapar">Destapar el suyo</button>' +
+        '<button class="btn suave" type="button" id="btnSaltar">Sin comparar</button></div></div>';
+    } else {
+      var mia = lecturaViva.num ? +lecturaViva.num : null;
+      var suya = (d && d.num) ? parseFloat(d.num) : null;
+      var br = '';
+      if (mia != null && suya != null) {
+        var dif = mia - suya;
+        br = Math.abs(dif) < 0.01 ? '<div class="brecha igual">Coinciden. En diciembre eso se asienta y ya.</div>'
+          : dif > 0 ? '<div class="brecha sube">Se puso ' + (Math.round(Math.abs(dif)*10)/10) + ' menos de lo que tú le pondrías. Dile por qué ves más.</div>'
+                    : '<div class="brecha baja">Se puso ' + (Math.round(Math.abs(dif)*10)/10) + ' más. Que defienda su caso con evidencia, cinco minutos.</div>';
+      }
+      der = '<div class="destape">' +
+        (mia != null ? '<div class="par2 mia"><b>' + esc(lecturaViva.num) + '</b><span>tu lectura</span></div>' : '') +
+        '<div class="par2 suya"><b>' + esc((d && d.num) || '—') + '</b><span>la suya</span></div>' + br + '</div>' +
+        '<p class="mini">Su porqué está a la izquierda, en grande.</p>';
+    }
+
+    der += '<div class="preguntas"><div class="rot">Las tres de siempre</div><ol>' +
+      '<li>¿Qué sabes hacer hoy que no sabías hace cuatro semanas?</li>' +
+      '<li>¿Con qué lo demuestras?</li>' +
+      '<li>¿Qué te falta todavía?</li></ol></div>' +
+      '<h3 style="margin-top:1rem">Cómo terminó</h3><div id="resultados"></div>' +
+      '<label class="campo"><span>Nota para mí (no es sobre su calificación)</span>' +
+      '<textarea id="fNota" placeholder="Qué retomar con esta persona, o qué me llevo para la clase.">' + esc(a.nota || '') + '</textarea></label>' +
+      '<div class="fila"><button class="btn marca" type="button" id="btnCerrar">Guardar y pasar al siguiente</button>' +
+      '<button class="btn peligro" type="button" id="btnQuitar">Quitar de la mesa</button></div>';
+
+    cont.innerHTML = '<div class="ficha"><div class="cabeza">' +
+      '<div><b>' + esc(a.nombre) + '</b><span>' + (d ? 'autoevaluación completa' : 'sin autoevaluación') + '</span></div>' +
+      (a.resultado ? '<span style="background:#fff;color:var(--profundo);border-radius:999px;padding:.2rem .8rem;font-size:.78rem;font-weight:bold">conversado</span>' : '') +
+      '</div><div class="cuerpo"><div class="dos"><div>' + izq + '</div><div>' + der + '</div></div></div></div>';
+
+    var numsEl = document.getElementById('nums');
+    if (numsEl) {
+      [5,6,7,8,9,10].forEach(function (n) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.textContent = n;
+        b.className = lecturaViva.num === String(n) ? 'on' : '';
+        b.addEventListener('click', function () { lecturaViva.num = String(n); pintaFicha(); });
+        numsEl.appendChild(b);
+      });
+      document.getElementById('btnDestapar').addEventListener('click', function () {
+        if (!lecturaViva.num) { alert('Escribe tu lectura primero: ese es el ejercicio.'); return; }
+        lecturaViva.destapado = true; pintaFicha();
+      });
+      document.getElementById('btnSaltar').addEventListener('click', function () {
+        lecturaViva.destapado = true; lecturaViva.num = ''; pintaFicha();
+      });
+    }
+
+    var res = document.getElementById('resultados');
+    RESULTADOS.forEach(function (r) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'resu' + (a.resultado === r[0] ? ' on' : '');
+      b.innerHTML = '<b>' + esc(r[1]) + '</b><span>' + esc(r[2]) + '</span>';
+      b.addEventListener('click', function () {
+        a.resultado = a.resultado === r[0] ? '' : r[0];
+        guardar(); pintaFicha(); pintaLista(); pintaGrupo();
+      });
+      res.appendChild(b);
+    });
+
+    document.getElementById('fNota').addEventListener('input', function () {
+      a.nota = this.value; guardar();
+    });
+    document.getElementById('btnCerrar').addEventListener('click', function () {
+      var i = R.orden.indexOf(id), sig = null;
+      for (var k = 1; k <= R.orden.length; k++) {
+        var c = R.orden[(i + k) % R.orden.length];
+        if (R.al[c] && !R.al[c].resultado && estado(R.al[c]) !== 'falta') { sig = c; break; }
+      }
+      lecturaViva = { id: null, num: '', destapado: false };   /* el trato: no queda registro */
+      R.sel = sig; guardar(); pinta(); window.scrollTo(0, 0);
+    });
+    document.getElementById('btnQuitar').addEventListener('click', function () {
+      if (!window.confirm('¿Quitar a ' + a.nombre + ' de la mesa?')) return;
+      delete R.al[id];
+      R.orden = R.orden.filter(function (x) { return x !== id; });
+      R.sel = null; guardar(); pinta();
+    });
+  }
+
+  /* ---------- el grupo ---------- */
+  function pintaGrupo() {
+    var cont = document.getElementById('grupo');
+    var con = R.orden.map(function (id) { return R.al[id]; }).filter(function (a) { return a && a.datos; });
+    if (!con.length) { cont.innerHTML = '<p class="mini">Aparece cuando leas la primera autoevaluación.</p>'; return; }
+
+    function barras(mapa, titulo, pie) {
+      var ks = Object.keys(mapa);
+      if (!ks.length) return '';
+      var max = Math.max.apply(null, ks.map(function (k) { return mapa[k]; }).concat([1]));
+      return '<h3>' + esc(titulo) + '</h3>' + (pie ? '<p class="mini">' + esc(pie) + '</p>' : '') +
+        '<div class="barras">' + ks.map(function (k) {
+          return '<div class="b"><span class="et">' + esc(k) + '</span><span class="pista"><i style="width:' +
+            Math.round(mapa[k] / max * 100) + '%"></i></span><span class="n">' + mapa[k] + '</span></div>';
+        }).join('') + '</div>';
+    }
+
+    var falta = {};
+    CASILLAS.forEach(function (c) {
+      var n = con.filter(function (a) { return !a.datos[c[0]]; }).length;
+      if (n) falta[c[1]] = n;
+    });
+    var sob = {};
+    con.forEach(function (a) {
+      var v = (a.datos['sob-aciertos'] || '').toString();
+      if (SOBRE[v]) sob[v + ' de 3'] = (sob[v + ' de 3'] || 0) + 1;
+    });
+    var sinHueco = con.filter(function (a) { return !(a.datos['nosé'] || '').trim(); }).length;
+    var sinDonde = con.filter(function (a) {
+      return !(a.datos.ev1d || a.datos.ev2d || a.datos.ev3d);
+    }).length;
+
+    cont.innerHTML =
+      (Object.keys(falta).length
+        ? barras(falta, 'Casillas del suelo que faltan', 'Sobre ' + con.length + ' autoevaluaciones leídas.')
+        : '<h3>Casillas del suelo que faltan</h3><p class="mini">Ninguna: los ' + con.length + ' que leíste traen el suelo completo.</p>') +
+      barras(sob, 'Cómo les fue con el sobre', 'Si casi todos atinaron tres, la consulta o la hoja preguntaron confirmando.') +
+      '<h3>Dos cosas que conviene mirar</h3>' +
+      '<p><strong>' + sinHueco + ' de ' + con.length + '</strong> no nombraron nada que todavía no sepan hacer. ' +
+      'Es el músculo más difícil y el que más rinde en diciembre: vale una vuelta en clase.</p>' +
+      '<p><strong>' + sinDonde + ' de ' + con.length + '</strong> no dijeron dónde está ninguna de sus evidencias. ' +
+      'Sin el «dónde está», la evidencia no se puede abrir y no cuenta.</p>';
+  }
+
+  /* ---------- barra ---------- */
+  var btnCiegas = document.getElementById('btnCiegas');
+  function pintaCiegas() {
+    btnCiegas.textContent = 'A ciegas: ' + (R.ciegas ? 'sí' : 'no');
+    btnCiegas.classList.toggle('on', !!R.ciegas);
+  }
+  btnCiegas.addEventListener('click', function () { R.ciegas = !R.ciegas; guardar(); pintaCiegas(); pinta(); });
+  document.getElementById('btnVaciar').addEventListener('click', function () {
+    if (!window.confirm('Se borra todo lo que hayas cargado en este navegador. ¿Seguro?')) return;
+    try { localStorage.removeItem(CLAVE); } catch (e) {}
+    location.reload();
+  });
+  document.getElementById('btnImprimir').addEventListener('click', function () { window.print(); });
+  var notaClase = document.getElementById('notaClase');
+  notaClase.value = R.nota || '';
+  notaClase.addEventListener('input', function () { R.nota = this.value; guardar(); });
+
+  /* ---------- pintar ---------- */
+  function pinta() {
+    var hay = R.orden.length > 0;
+    if (hay && (!R.sel || !R.al[R.sel])) {
+      var cand = null;
+      for (var i = 0; i < R.orden.length; i++) {
+        var x = R.al[R.orden[i]];
+        if (x && !x.resultado && estado(x) !== 'falta') { cand = R.orden[i]; break; }
+      }
+      R.sel = cand || R.orden[0];
+    }
+    document.getElementById('panelVacio').style.display = hay ? 'none' : 'block';
+    document.getElementById('panelLista').style.display = hay ? 'block' : 'none';
+    document.getElementById('panelGrupo').style.display = hay ? 'block' : 'none';
+    pintaLista(); pintaFicha(); pintaGrupo();
+  }
+  pintaCiegas();
+  pinta();
+})();
+</script>
+
+<script src="../curso.js"></script>
+</body>
+</html>

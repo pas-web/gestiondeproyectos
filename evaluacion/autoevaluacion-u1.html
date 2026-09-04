@@ -417,7 +417,7 @@
   <h2>Ya está</h2>
   <p class="entrada">Guarda tu copia con el botón de abajo a la derecha —te baja un archivo con todo lo que escribiste— y mándatela a tu propio correo o WhatsApp. En diciembre vas a querer releer esto, y va a ser lo más útil que tengas.</p>
 
-  <div class="clave"><b>Si quieres, mándasela al profesor.</b> No hace falta: nadie la recoge. Pero si quieres su lectura antes del jueves, el botón arma el correo con lo que ya escribiste y lo abre en tu propia aplicación. Nada se manda solo; tú le das enviar.
+  <div class="clave"><b>Si quieres, mándasela al profesor.</b> No hace falta: nadie la recoge. Pero si quieres su lectura el jueves, el botón arma el correo con todo lo que escribiste y lo abre en tu propia aplicación. Nada se manda solo: lo lees, y tú le das enviar.
     <div class="fila"><button type="button" class="btn fuerte no-descarga" id="btn-correo">Armar el correo al profesor</button></div>
   </div>
 
@@ -834,11 +834,14 @@
     }
     return decodeURIComponent(escape(bin));
   }
+  function codigoRespaldo() {
+    try { return PREFIJO + aB64(JSON.stringify(leer())); } catch (e) { return '(no se pudo generar el código)'; }
+  }
   var cajaResp = document.getElementById('cajaResp');
   var txtResp = document.getElementById('txtResp');
   var avisoResp = document.getElementById('avisoResp');
   document.getElementById('btn-resp').addEventListener('click', function () {
-    var c = PREFIJO + aB64(JSON.stringify(leer()));
+    var c = codigoRespaldo();
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(c).then(function () {
         cajaResp.style.display = 'none';
@@ -876,10 +879,19 @@
   /* ---------------- el correo ---------------- */
   document.getElementById('btn-correo').addEventListener('click', function () {
     var n = val('nombre'), num = val('num'), por = val('porque');
+    var suelo = cuentaSuelo() + ' de ' + CASILLAS.length;
+    var L = LECTURAS[val('sob-aciertos')];
     var cuerpo = 'Nombre: ' + (n || '(sin nombre)') +
       '\nUnidad: 1 · Escuchar la presa' +
-      '\nCalificación que me pondría (ensayo): ' + (num || '(sin número)') +
-      '\n\nMi porqué:\n' + (por || '(sin escribir)');
+      '\nSuelo: ' + suelo + ' casillas' +
+      '\nEl sobre: ' + (L ? L.t.toLowerCase() : '(sin llenar)') +
+      '\nNúmero que me pondría (ensayo): ' + (num || '(sin número)') +
+      '\n\nMi porqué:\n' + (por || '(sin escribir)') +
+      '\n\nTodavía no sé hacer:\n' + (val('nosé') || '(sin escribir)') +
+      '\n\n———— para el profesor ————\n' +
+      'Debajo va el código con todo lo que llené. No hace falta leerlo:\n' +
+      'se pega en la mesa de conversación y se abre solo.\n\n' +
+      codigoRespaldo();
     location.href = 'mailto:eduardo.lusan@gmail.com?subject=' +
       encodeURIComponent('Autoevaluación U1 · ' + (n || 'Sin nombre')) +
       '&body=' + encodeURIComponent(cuerpo);
