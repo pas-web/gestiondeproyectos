@@ -132,6 +132,24 @@
   .btn.suave { background:#fff; color:var(--marca); border:1px solid var(--borde); }
   .fila { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.8rem; }
 
+  /* --- el envío --- */
+  .estado { display:none; border:2px solid; border-radius:12px; padding:.85rem 1rem; margin:.8rem 0;
+            font-size:.95rem; line-height:1.55; }
+  .estado.ver { display:block; }
+  .estado b { display:block; font-size:1.02rem; margin-bottom:.15rem; }
+  .estado.falta { border-color:var(--ojo); background:var(--ojobg); color:#7A4712; }
+  .estado.falta b { color:var(--ojo); }
+  .estado.yendo { border-color:var(--profundo); background:#F2F7F5; color:var(--profundo); }
+  .estado.ok { border-color:#BCDFCB; background:var(--bienbg); color:#1B4F38; }
+  .estado.ok b { color:var(--bien); }
+  @keyframes sacude { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)}
+                      60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+  .estado.sacude { animation:sacude .42s ease; }
+  .destacado { outline:3px solid var(--ojo); outline-offset:3px; border-radius:9px; }
+  .red2 { border:1px solid var(--borde); background:#fff; border-radius:12px; padding:.8rem 1rem; margin:.8rem 0; }
+  .red2 > summary { cursor:pointer; font-weight:bold; color:var(--marca); font-size:.92rem; }
+  .red2[open] > summary { margin-bottom:.5rem; }
+
   /* --- el ejemplo --- */
   .btn-ej { display:inline-flex; align-items:center; gap:.35rem; border:1px dashed #DCC38C; background:#FBF7EC;
             color:#8A6A1A; border-radius:999px; padding:.35rem .85rem; font:inherit; font-size:.85rem;
@@ -368,6 +386,7 @@
   <h3>Si esta unidad llevara número, yo me pondría un…</h3>
   <div class="numeros" id="numeros"></div>
   <input type="hidden" data-exp="num">
+  <input type="hidden" data-exp="enviado">
 
   <h3>Las piezas que tienes</h3>
   <p class="mini">Salieron de lo que escribiste en los pasos anteriores. Toca las que quieras meter; tres o cuatro bastan si son buenas.</p>
@@ -417,9 +436,18 @@
   <h2>Ya está</h2>
   <p class="entrada">Guarda tu copia con el botón de abajo a la derecha —te baja un archivo con todo lo que escribiste— y mándatela a tu propio correo o WhatsApp. En diciembre vas a querer releer esto, y va a ser lo más útil que tengas.</p>
 
-  <div class="clave"><b>Si quieres, mándasela al profesor.</b> No hace falta: nadie la recoge. Pero si quieres su lectura el jueves, el botón arma el correo con todo lo que escribiste y lo abre en tu propia aplicación. Nada se manda solo: lo lees, y tú le das enviar.
-    <div class="fila"><button type="button" class="btn fuerte no-descarga" id="btn-correo">Armar el correo al profesor</button></div>
+  <div class="clave"><b>Si quieres, mándasela al profesor.</b> No hace falta: nadie la recoge y esto no produce número. Pero si quieres su lectura el jueves, mándala y la va a tener enfrente cuando conversen.
+    <div class="fila"><button type="button" class="btn fuerte no-descarga" id="btn-enviar">Mandársela al profesor</button></div>
+    <p class="mini" style="margin:.5rem 0 0" id="pista-envio">Se va lo que llenaste en estos ocho pasos. Lo lee <strong>únicamente el profesor</strong>. Sigue sin producir número: es de ensayo.</p>
   </div>
+
+  <div class="estado no-descarga" id="estadoEnvio"></div>
+
+  <details class="red2 no-descarga">
+    <summary>¿No se mandó, o prefieres el correo?</summary>
+    <p class="mini">El correo de siempre sigue aquí, y no necesita que el envío haya funcionado. Arma el mensaje con todo lo que escribiste y lo abre en tu propia aplicación: nada se manda solo, tú le das enviar.</p>
+    <div class="fila"><button type="button" class="btn suave" id="btn-correo">Armar el correo al profesor</button></div>
+  </details>
 
   <div class="tarjeta">
     <p style="margin:.1rem 0"><strong>El respaldo, por si cambias de aparato</strong></p>
@@ -834,8 +862,20 @@
     }
     return decodeURIComponent(escape(bin));
   }
+  /* El estado completo, tomado de los campos vivos. Antes se armaba desde
+     localStorage y salía vacío o atrasado: curso.js guarda 600 ms después
+     de la última tecla, y quien llenaba y mandaba de corrido perdía todo. */
+  function estadoActual() {
+    var o = {};
+    try { o = JSON.parse(localStorage.getItem(CLAVE) || '{}') || {}; } catch (e) {}
+    Array.prototype.forEach.call(document.querySelectorAll('[data-exp]'), function (c) {
+      var k = c.getAttribute('data-exp');
+      o[k] = (c.type === 'checkbox') ? c.checked : c.value;
+    });
+    return o;
+  }
   function codigoRespaldo() {
-    try { return PREFIJO + aB64(JSON.stringify(leer())); } catch (e) { return '(no se pudo generar el código)'; }
+    try { return PREFIJO + aB64(JSON.stringify(estadoActual())); } catch (e) { return '(no se pudo generar el código)'; }
   }
   var cajaResp = document.getElementById('cajaResp');
   var txtResp = document.getElementById('txtResp');
@@ -874,6 +914,135 @@
     if (!window.confirm('Esto reemplaza lo que tengas escrito aquí por lo del respaldo. ¿Va?')) return;
     try { localStorage.setItem(CLAVE, JSON.stringify(d)); } catch (e) {}
     location.reload();
+  });
+
+  /* ---------------- el envío al recolector ----------------
+     Va como POST de formulario a un iframe escondido: sin CORS no se puede
+     leer la respuesta, así que la confirmación se apoya en que el iframe
+     cargue. Por eso el correo de abajo nunca se quita de la página. */
+  var TIPO = 'autoeval-u1';
+  var btnEnviar = document.getElementById('btn-enviar');
+  var estadoEl = document.getElementById('estadoEnvio');
+  var pistaEnvio = document.getElementById('pista-envio');
+  var tDest = null;
+
+  function avisa(clase, titulo, cuerpo) {
+    estadoEl.className = 'estado no-descarga ver ' + clase;
+    estadoEl.innerHTML = '<b>' + esc(titulo) + '</b>' + cuerpo;
+    if (clase === 'falta') {
+      estadoEl.classList.add('sacude');
+      setTimeout(function () { estadoEl.classList.remove('sacude'); }, 500);
+    }
+    try { estadoEl.scrollIntoView({ behavior:'smooth', block:'center' }); } catch (e) { estadoEl.scrollIntoView(); }
+  }
+  function destaca(el) {
+    if (!el) return;
+    clearTimeout(tDest);
+    el.classList.add('destacado');
+    tDest = setTimeout(function () { el.classList.remove('destacado'); }, 3200);
+    try { el.scrollIntoView({ behavior:'smooth', block:'center' }); } catch (e) {}
+  }
+  function resumenSuelo() {
+    var n = cuentaSuelo(), T = CASILLAS.length;
+    if (n === T) return T + ' de ' + T + ' \u00b7 completo';
+    var f = CASILLAS.filter(function (c) { return !c._chk.checked; }).map(function (c) { return c.t; });
+    return n + ' de ' + T + ' \u00b7 falta: ' + f.join(', ');
+  }
+  function resumenEvidencias() {
+    var hay = 0, don = 0;
+    [['ev1q','ev1d'],['ev2q','ev2d'],['ev3q','ev3d']].forEach(function (par) {
+      if (val(par[0])) { hay++; if (val(par[1])) don++; }
+    });
+    return hay + ' nombrada(s), ' + don + ' con su d\u00f3nde';
+  }
+  function pintaEnviado() {
+    if (!val('enviado') || !btnEnviar) return;
+    avisa('ok', 'Ya se la mandaste', 'Sali\u00f3 de este tel\u00e9fono el ' + esc(val('enviado')) +
+      '. Si le mueves a algo, vuelve a mandarla: cuenta la m\u00e1s reciente.');
+    btnEnviar.textContent = 'Volver a mandarla';
+  }
+
+  if (btnEnviar) btnEnviar.addEventListener('click', function () {
+    var url = (window.RECOLECTOR_URL || '').trim();
+    if (!url) {
+      avisa('falta', 'El recolector todav\u00eda no est\u00e1 conectado',
+        'Usa el correo de aqu\u00ed abajo, que hace lo mismo. (Nota para el profesor: falta pegar la URL en <code>curso.js</code>, en <code>RECOLECTOR_URL</code>.)');
+      document.querySelector('.red2').open = true;
+      return;
+    }
+    if (!val('nombre')) {
+      avisa('falta', 'Falta tu nombre', 'Sin \u00e9l, el profesor no sabe de qui\u00e9n es esto. Est\u00e1 en la portada; te llevo.');
+      setTimeout(function () {
+        ir(0);
+        var el = document.querySelector('[data-exp="nombre"]');
+        destaca(el); if (el) el.focus();
+      }, 900);
+      return;
+    }
+    if (!val('num')) {
+      avisa('falta', 'Todav\u00eda no eliges tu n\u00famero',
+        'Est\u00e1 en el paso 6. Aunque no cuente para nada, el ejercicio es ponerlo y sostenerlo.');
+      ir(6); destaca(document.getElementById('numeros'));
+      return;
+    }
+    if (val('porque').length < 40) {
+      avisa('falta', 'Falta tu porqu\u00e9',
+        'Un n\u00famero solo no se puede conversar. Toca las piezas del paso 6 y la frase se arma sola, o escr\u00edbela t\u00fa.');
+      ir(6); destaca(porqueEl); porqueEl.focus();
+      return;
+    }
+
+    avisa('yendo', 'Mand\u00e1ndola\u2026', 'Aguanta un segundo, no cierres la p\u00e1gina.');
+    btnEnviar.disabled = true;
+    btnEnviar.textContent = 'Mandando\u2026';
+
+    var datos = {
+      tipo: TIPO,
+      nombre: val('nombre'),
+      num: val('num'),
+      suelo: resumenSuelo(),
+      sobre: (LECTURAS[val('sob-aciertos')] || {}).t || '',
+      evidencias: resumenEvidencias(),
+      porque: val('porque'),
+      nose: val('nos\u00e9'),
+      codigo: codigoRespaldo()
+    };
+
+    var marco = document.createElement('iframe');
+    marco.name = 'envio-autoeval-u1';
+    marco.style.display = 'none';
+    document.body.appendChild(marco);
+    var f = document.createElement('form');
+    f.method = 'POST'; f.action = url; f.target = marco.name; f.style.display = 'none';
+    Object.keys(datos).forEach(function (k) {
+      var i = document.createElement('input');
+      i.type = 'hidden'; i.name = k; i.value = datos[k] == null ? '' : datos[k];
+      f.appendChild(i);
+    });
+    document.body.appendChild(f);
+
+    var listo = false;
+    function acabo(bien) {
+      if (listo) return;
+      listo = true;
+      btnEnviar.disabled = false;
+      if (bien) {
+        pon('enviado', new Date().toLocaleDateString('es-MX', { day:'numeric', month:'long', year:'numeric' }));
+        btnEnviar.textContent = 'Volver a mandarla';
+        avisa('ok', 'Se la mandaste', 'Le llega a tu profesor y nadie m\u00e1s la ve. Sigue sin producir n\u00famero: el jueves, si quieres, la comparan.');
+        pistaEnvio.textContent = 'Sali\u00f3 de este tel\u00e9fono. Solo la ve el profesor.';
+      } else {
+        btnEnviar.textContent = 'Mand\u00e1rsela al profesor';
+        avisa('falta', 'No se pudo mandar',
+          'Puede ser el internet. Vuelve a intentarlo, o usa el correo de aqu\u00ed abajo, que ya te lo abr\u00ed: cuenta exactamente igual.');
+        document.querySelector('.red2').open = true;
+      }
+      setTimeout(function () { try { f.remove(); marco.remove(); } catch (e) {} }, 1500);
+    }
+    marco.addEventListener('load', function () { acabo(true); });
+    marco.addEventListener('error', function () { acabo(false); });
+    setTimeout(function () { acabo(false); }, 12000);
+    f.submit();
   });
 
   /* ---------------- el correo ---------------- */
@@ -982,6 +1151,7 @@
   pintaNumero();
   pintaBandeja();
   pintaChecks();
+  pintaEnviado();
   ir(0);
   }
 

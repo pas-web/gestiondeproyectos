@@ -200,7 +200,18 @@
 
 <section class="panel">
   <h2 style="margin-top:.2rem">1 · Trae lo que te llegó</h2>
-  <p class="mini">Los que te mandaron su autoevaluación por correo traen al final un código que empieza con <code>GEST1·</code>. No hace falta buscarlo: <strong>selecciona el correo completo y pégalo aquí</strong>, o pega varios de golpe. Yo saco los códigos.</p>
+
+  <h3 style="margin-top:.3rem">Del recolector, que es lo rápido</h3>
+  <p class="mini">Se conecta con la hoja de cálculo a la que los estudiantes mandan su autoevaluación y se trae a todos los que hayan enviado, con su ficha completa. La clave se guarda en este navegador. Puedes volver a tocarlo cuando lleguen más: no se duplica nadie.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.5rem">
+    <label class="campo"><span>Dirección del recolector</span><input type="text" id="jUrl" placeholder="https://script.google.com/macros/s/…/exec"></label>
+    <label class="campo"><span>Clave</span><input type="text" id="jClave" placeholder="la que pusiste en CLAVE_MESA"></label>
+  </div>
+  <div class="fila"><button class="btn marca" type="button" id="btnJalar">Traer a todos</button></div>
+  <p class="mini" id="jAviso" style="margin-top:.5rem"></p>
+
+  <h3>O pegando los correos, si prefieres</h3>
+  <p class="mini">Los que te la manden por correo traen al final un código que empieza con <code>GEST1·</code>. No hace falta buscarlo: <strong>selecciona el correo completo y pégalo aquí</strong>, o pega varios de golpe. Yo saco los códigos.</p>
   <label class="campo"><span>Pega aquí los correos, o los códigos sueltos</span>
     <textarea id="pegado" placeholder="Pega el correo entero. Puedes pegar varios, uno tras otro." style="min-height:7rem;font-size:.86rem"></textarea></label>
   <div class="fila"><button class="btn marca" type="button" id="btnLeer">Leer lo pegado</button></div>
@@ -217,7 +228,7 @@
   <h2 style="margin-top:.1rem">Todavía no hay nadie en la mesa</h2>
   <p class="mini">Esta pantalla se llena cuando pegues lo que te llegó. Así funciona:</p>
   <div class="pasos3">
-    <div class="paso3"><span class="n">1</span><span><b>Pega los correos</b><span>Aquí arriba. Selecciona el correo completo y pégalo: el código va al final y yo lo encuentro.</span></span></div>
+    <div class="paso3"><span class="n">1</span><span><b>Trae al grupo</b><span>Aquí arriba, del recolector con tu clave. O pegando los correos, si prefieres: el código va al final y yo lo encuentro.</span></span></div>
     <div class="paso3"><span class="n">2</span><span><b>Toca un nombre</b><span>Se abre su ficha con todo lo que escribió: su suelo, su sobre, su porqué, lo que dice que no sabe.</span></span></div>
     <div class="paso3"><span class="n">3</span><span><b>Lean juntos</b><span>Tú escribes tu lectura antes de ver la suya. Al pasar al siguiente, tu número se borra: es el trato.</span></span></div>
   </div>
@@ -334,6 +345,85 @@
     });
     return id;
   }
+
+  /* ---------- traer del recolector ----------
+     Va por JSONP: una página estática no puede hacer CORS contra Apps
+     Script. La dirección y la clave viven en una llave aparte, para que
+     la clave no se cuele en nada que el profesor comparta. */
+  var CLAVE_CONEXION = 'gestion-mesa-conexion';
+  var jUrl = document.getElementById('jUrl');
+  var jClave = document.getElementById('jClave');
+  var jAviso = document.getElementById('jAviso');
+  var jSec = 0;
+
+  (function cargaConexion() {
+    var c = {};
+    try { c = JSON.parse(localStorage.getItem(CLAVE_CONEXION) || '{}') || {}; } catch (e) {}
+    jUrl.value = c.url || (window.RECOLECTOR_URL || '');
+    jClave.value = c.clave || '';
+    if (!jUrl.value) {
+      jAviso.textContent = 'Todavía no hay recolector conectado. Pega aquí la URL de la aplicación web, o mejor: ponla una sola vez en curso.js, en RECOLECTOR_URL, y aparece sola en todas partes.';
+    }
+  })();
+  function guardaConexion() {
+    try { localStorage.setItem(CLAVE_CONEXION, JSON.stringify({ url: jUrl.value.trim(), clave: jClave.value.trim() })); } catch (e) {}
+  }
+  jUrl.addEventListener('change', guardaConexion);
+  jClave.addEventListener('change', guardaConexion);
+
+  document.getElementById('btnJalar').addEventListener('click', function () {
+    var url = jUrl.value.trim(), clave = jClave.value.trim();
+    if (!url) { jAviso.textContent = 'Falta la dirección del recolector.'; return; }
+    if (!clave) { jAviso.textContent = 'Falta la clave. Es la que escribiste en CLAVE_MESA, dentro del script de la hoja.'; return; }
+    guardaConexion();
+
+    var btn = this;
+    btn.disabled = true; btn.textContent = 'Trayendo…';
+    jAviso.textContent = '';
+
+    var cb = 'mesaG1_' + (++jSec) + '_' + Date.now();
+    var et = document.createElement('script');
+    var listo = false;
+    function acabo(msg, ok) {
+      if (listo) return;
+      listo = true;
+      btn.disabled = false; btn.textContent = 'Traer a todos';
+      jAviso.textContent = msg;
+      jAviso.style.color = ok ? 'var(--bien)' : 'var(--ojo)';
+      try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+      try { et.remove(); } catch (e) {}
+    }
+    window[cb] = function (r) {
+      if (!r || r.error === 'clave') {
+        acabo('El recolector no reconoció la clave. Revísala en el script de la hoja, en CLAVE_MESA.', false);
+        return;
+      }
+      var filas = (r && r.filas) || [];
+      if (!filas.length) { acabo('El recolector contestó, pero todavía no ha mandado nadie.', true); return; }
+      var n = 0, completas = 0;
+      filas.forEach(function (f) {
+        var d = null;
+        if (f.codigo && String(f.codigo).indexOf(PREFIJO) > -1) {
+          var b = String(f.codigo).slice(String(f.codigo).indexOf(PREFIJO) + PREFIJO.length).replace(/[^A-Za-z0-9+/=]/g, '');
+          try { d = JSON.parse(deB64(b)); } catch (e) { d = null; }
+        }
+        if (alta(f.nombre, d ? { datos: d, fuente: 'recolector' } : { fuente: 'recolector' })) {
+          n++; if (d) completas++;
+        }
+      });
+      guardar(); pinta();
+      acabo(n + ' en la mesa' + (completas ? ', ' + completas + ' con su ficha completa' : '') +
+            '. Te abrí la primera aquí abajo.', true);
+      alaFicha();
+    };
+    et.src = url + (url.indexOf('?') > -1 ? '&' : '?') + 'autoevaluaciones=1&tipo=autoeval-u1&clave=' +
+             encodeURIComponent(clave) + '&callback=' + cb;
+    et.onerror = function () {
+      acabo('No se pudo conectar. Revisa la dirección, y que el script esté implementado con acceso «cualquier persona».', false);
+    };
+    setTimeout(function () { acabo('El recolector no contestó a tiempo. Vuelve a intentarlo, o pega los correos aquí abajo.', false); }, 20000);
+    document.body.appendChild(et);
+  });
 
   /* ---------- leer lo pegado ---------- */
   document.getElementById('btnLeer').addEventListener('click', function () {

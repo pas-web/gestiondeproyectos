@@ -17,6 +17,15 @@
      el bloque del ticket no se muestra. Pégala entre las comillas y listo. */
   var TICKET_URL = 'https://forms.gle/674ik4CafFpvVK6A8';
 
+  /* Recolector de autoevaluaciones: la aplicación web de Apps Script que
+     recibe lo que mandan los estudiantes al cerrar cada unidad y se lo
+     devuelve a la mesa del profesor. El código del recolector vive en
+     docente/recolector.gs, con sus instrucciones.
+     Mientras esta URL esté vacía, la autoevaluación manda por correo y la
+     mesa pide que se peguen los códigos a mano: las dos siguen sirviendo. */
+  var RECOLECTOR_URL = '';
+  window.RECOLECTOR_URL = RECOLECTOR_URL;
+
   var FIJAS = [
     { href: 'semanas/semana-00.html', t: 'Semana 0 · Aterrizaje', d: 'El programa completo del curso. Sesiones del 30 y 31 de julio.' },
     { href: 'tu-calificacion.html', t: 'Tu calificación', d: 'Cómo se evalúa este curso, sin letra chiquita.' },
