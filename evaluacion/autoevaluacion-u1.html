@@ -277,8 +277,10 @@
   @media print {
     body { background:#fff; }
     main { max-width:none; padding:0; }
-    .paso { page-break-inside:avoid; margin-bottom:1.2rem; }
-    .btn-ej, .par .voltea { display:none !important; }
+    .paso { display:block !important; page-break-inside:avoid; margin-bottom:1.2rem; }
+    .btn-ej, .par .voltea, .barra-pasos, .pie-pasos, .dedonde, #heredar,
+    .linea .usar, .campana { display:none !important; }
+    .hito .cuerpo { display:block !important; }
     .ejemplo, .par .fuerte { display:block !important; }
     @page { margin:1.5cm; }
   }
@@ -495,7 +497,7 @@
   <p class="entrada">Tres piezas de evidencia que se pueden mirar hoy mismo, con el «dónde está» completo. Si no puedes decir dónde está, no cuenta todavía — y eso también es información.</p>
 
   <h3 style="margin-top:1.3rem">La línea de la orilla</h3>
-  <p class="entrada">Cinco semanas producen más cosas de las que uno se acuerda. Recórrela: cada parada te dice qué dejó por escrito, y si la tienes, se te va derecho a tus tres piezas.</p>
+  <p class="entrada">Cuatro semanas producen más cosas de las que uno se acuerda. Recórrela: cada parada te dice qué dejó por escrito, y si la tienes, se te va derecho a tus tres piezas.</p>
   <div class="linea no-descarga" id="linea"></div>
   <p class="mini">Si ya llenaste el mapa de evidencias del <a href="expediente-u1.html">cuadernillo de la unidad</a>, también puedes copiarlo de ahí: son las mismas.</p>
 
@@ -623,13 +625,13 @@
 
 <!-- ===================== 8 · CIERRE ===================== -->
 <section class="paso" data-titulo="Cierre">
-  <div class="curso">Paso 8 de 8</div>
+  <div class="curso">Paso 9 de 9</div>
   <h2>Ya está</h2>
   <p class="entrada">Guarda tu copia con el botón de abajo a la derecha —te baja un archivo con todo lo que escribiste— y mándatela a tu propio correo o WhatsApp. En diciembre vas a querer releer esto, y va a ser lo más útil que tengas.</p>
 
   <div class="clave"><b>Si quieres, mándasela al profesor.</b> No hace falta: nadie la recoge y esto no produce número. Pero si quieres su lectura el jueves, mándala y la va a tener enfrente cuando conversen.
     <div class="fila"><button type="button" class="btn fuerte no-descarga" id="btn-enviar">Mandársela al profesor</button></div>
-    <p class="mini" style="margin:.5rem 0 0" id="pista-envio">Se va lo que llenaste en estos ocho pasos. Lo lee <strong>únicamente el profesor</strong>. Sigue sin producir número: es de ensayo.</p>
+    <p class="mini" style="margin:.5rem 0 0" id="pista-envio">Se va lo que llenaste en estos nueve pasos. Lo lee <strong>únicamente el profesor</strong>. Sigue sin producir número: es de ensayo.</p>
   </div>
 
   <div class="estado no-descarga" id="estadoEnvio"></div>
@@ -777,7 +779,7 @@
   ];
 
   /* ---------------- la línea de la orilla ----------------
-     Cinco semanas producen más papel del que uno recuerda. Cada parada
+     Cuatro semanas producen más papel del que uno recuerda. Cada parada
      dice qué dejó por escrito, y de ahí se surten las tres evidencias. */
   var HITOS = [
     { k:'h1', c:'Semana 1', t:'El sobre sellado',
@@ -1056,10 +1058,10 @@
   var lecturaNoes = document.getElementById('lecturaNoes');
   var NOES = ['0','1','2','3','4','5+'];
   var LEENOES = {
-    '0': { t:'Ninguna', d:'Y aquí no hay regaño: hay una pregunta. Si en cinco semanas no le pediste nada a nadie que pudiera negártelo, la unidad te pasó por encima sin tocarte. La buena noticia es que se arregla esta semana, y el primer no del suelo está justo para eso.', bien:false },
+    '0': { t:'Ninguna', d:'Y aquí no hay regaño: hay una pregunta. Si en estas cuatro semanas no le pediste nada a nadie que pudiera negártelo, la unidad te pasó por encima sin tocarte. La buena noticia es que se arregla esta semana, y el primer no del suelo está justo para eso.', bien:false },
     '1': { t:'Una', d:'La del suelo. Está bien: es la que todos tenían que hacer y ya la hiciste. La siguiente ya es tuya, no del curso.', bien:false },
     '2': { t:'Dos', d:'Ya hay una que nadie te pidió. Esa segunda es la que cuenta en la conversación: dice que pediste porque hacía falta, no porque venía en la lista.', bien:true },
-    '3': { t:'Tres', d:'Tres peticiones reales en cinco semanas es ritmo de gestor. Fíjate cuántas te dijeron que no y qué hiciste con cada una: ahí está la mitad del oficio.', bien:true },
+    '3': { t:'Tres', d:'Tres peticiones reales en cuatro semanas es ritmo de gestor. Fíjate cuántas te dijeron que no y qué hiciste con cada una: ahí está la mitad del oficio.', bien:true },
     '4': { t:'Cuatro', d:'Estás pidiendo más de lo que el curso te obliga, y eso es exactamente lo que el curso quería que pasara. Tu anti-currículum ya tiene cuerpo.', bien:true },
     '5+': { t:'Cinco o más', d:'Ese número no se logra sin haber cobrado varios noes. Cuéntalos en la conversación con nombre y canal: son la mejor evidencia que tienes de que jugaste de verdad.', bien:true }
   };

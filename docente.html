@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Las pantallas del profesor · Gestión y Manejo de Proyectos</title>
+<style>
+  /* Esta página NO carga curso.js a propósito: no lleva menú, no entra al
+     índice del curso y no debe verse como parte del sitio del estudiante. */
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --gris:#68807a; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo);
+         color:var(--texto); line-height:1.6; }
+  main { max-width:760px; margin:0 auto; padding:1.6rem 1rem 4rem; }
+  .rot { font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--marca); font-weight:bold; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.7rem; margin:.3rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  h2 { font-family:Georgia,serif; color:var(--profundo); font-size:1.15rem; margin:2rem 0 .4rem; }
+  p { margin:.6rem 0; }
+  code { background:#E4EFEB; padding:.1rem .35rem; border-radius:4px; font-size:.9em; }
+  .mini { font-size:.88rem; color:var(--gris); line-height:1.5; }
+
+  .puerta { display:block; background:var(--profundo); border-radius:14px; padding:1.2rem 1.3rem; margin:1.2rem 0;
+            text-decoration:none; }
+  .puerta .et { display:block; font-size:.72rem; letter-spacing:.11em; text-transform:uppercase;
+                color:var(--arena); font-weight:bold; }
+  .puerta b { display:block; font-family:Georgia,serif; font-size:1.35rem; color:#fff; margin:.2rem 0 .3rem; }
+  .puerta span.d { display:block; font-size:.94rem; color:#CBE3DE; line-height:1.5; }
+  .puerta .cta { display:block; margin-top:.7rem; color:var(--arena); font-weight:bold; font-size:.9rem; }
+  .puerta:hover b { text-decoration:underline; }
+
+  .trato { background:#FBF7EC; border-left:5px solid var(--arena); border-radius:0 11px 11px 0;
+           padding:.9rem 1.1rem; margin:1.2rem 0; font-size:.95rem; color:#5C4A1C; }
+  .trato b { color:var(--profundo); }
+  .pasos { counter-reset:p; list-style:none; padding:0; margin:.6rem 0; }
+  .pasos li { position:relative; padding:.5rem 0 .5rem 2.2rem; border-bottom:1px dashed var(--borde); font-size:.95rem; }
+  .pasos li:last-child { border-bottom:none; }
+  .pasos li::before { counter-increment:p; content:counter(p); position:absolute; left:0; top:.55rem;
+                      width:1.5rem; height:1.5rem; border-radius:50%; background:var(--marca); color:#fff;
+                      font-size:.8rem; font-weight:bold; display:flex; align-items:center; justify-content:center; }
+  .nota-op { border:1px solid var(--borde); background:#fff; border-radius:11px; padding:.8rem 1rem; margin:1rem 0;
+           font-size:.92rem; }
+  .pie { font-size:.8rem; color:#8aa39c; margin-top:2.5rem; border-top:1px dashed var(--borde); padding-top:.6rem; }
+</style>
+</head>
+<body>
+<main>
+
+<div class="rot">Gestión y Manejo de Proyectos · UAQ Campus Concá</div>
+<h1>Las pantallas del profesor</h1>
+<p class="sub">Esta página no está enlazada desde el sitio ni la indexan los buscadores. Guárdala en tus marcadores.</p>
+
+<a class="puerta" href="evaluacion/mesa-u1.html">
+  <span class="et">Cierre de la unidad 1</span>
+  <b>La mesa del jueves</b>
+  <span class="d">Trae al grupo entero desde el recolector con tu clave y te abre la ficha de cada quien: su suelo casilla por casilla, su sobre contra lo que la gente pidió, su porqué en grande, lo que dice que todavía no sabe hacer, y la pregunta que le falta a esa persona en particular. Además junta el muro de frases de La Florida y el punto ciego del grupo, para proyectar.</span>
+  <span class="cta">Abrir la mesa →</span>
+</a>
+
+<div class="trato">
+  <b>Lo que esta pantalla promete, y cumple.</b> La autoevaluación de la unidad 1 es de ensayo: no produce número y <strong>no queda registro de ninguna de las dos lecturas</strong>. Por eso tu número vive solo en memoria, se borra al pasar al siguiente y no sale en ninguna exportación. Lo único que se guarda es con quién ya conversaste y lo que quieras anotarte a ti mismo sobre qué retomar en clase.
+</div>
+
+<h2>Para encenderla</h2>
+<ol class="pasos">
+  <li>Abre la mesa y ve al panel <strong>1 · Trae lo que te llegó</strong>.</li>
+  <li>En <strong>Dirección del recolector</strong>, pega la URL <code>/exec</code> de tu aplicación de Apps Script. Es la misma que vive en <code>curso.js</code>, en <code>RECOLECTOR_URL</code>.</li>
+  <li>En <strong>Clave</strong>, la que pusiste en <code>CLAVE_MESA</code> dentro del script de la hoja de cálculo. No está escrita en ningún lado del sitio: solo tú la tienes.</li>
+  <li>Toca <strong>Traer a todos</strong>. Los dos campos se guardan en ese navegador; solo se escriben una vez.</li>
+</ol>
+
+<div class="nota-op">
+  <p style="margin:.1rem 0"><strong>Si estás en una máquina del campus</strong>, dale <strong>Vaciar</strong> al salir: todo vive en el navegador, incluida tu clave.</p>
+  <p class="mini" style="margin:.5rem 0 0">Quien te la mande por correo en vez de por el recolector trae un código que empieza con <code>GEST1·</code>. No hace falta buscarlo: pega el correo completo en el mismo panel y la mesa lo encuentra sola. Puedes pegar varios de golpe.</p>
+</div>
+
+<h2>Dónde vive el resto</h2>
+<p>El código del recolector está en <code>docente/recolector.gs</code>, dentro del repositorio pero fuera de lo que se publica: la carpeta <code>docente/</code> está en el <code>.gitignore</code> a propósito, porque ahí van tu clave y los datos del grupo. Sus instrucciones de instalación van en el encabezado del propio archivo.</p>
+<p class="mini">Si algún día cambias la clave: se edita en <code>CLAVE_MESA</code>, se vuelve a implementar el script con <strong>versión nueva</strong> (si no, el enlace sigue sirviendo el código viejo) y se escribe la nueva en la mesa.</p>
+
+<p class="pie">Gestión y Manejo de Proyectos · 2026 · pantallas del profesor. Las de las unidades 2, 3 y 4 se agregarán aquí cuando existan.</p>
+
+</main>
+</body>
+</html>

@@ -32,28 +32,30 @@
   .portada .nombre .linea-larga { max-width:420px; margin:0 auto; }
   .portada .nota { color:#68807a; font-size:.9rem; max-width:460px; margin:2.5rem auto 0; }
   .pie { font-size:.78rem; color:#8aa39c; margin-top:1.4rem; border-top:1px dashed var(--borde); padding-top:.5rem; }
-  #btn-imprimir { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.7rem 1.1rem; font:inherit; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); }
   @media print {
     body { background:#fff; }
     .pagina { max-width:none; margin:0; border:none; padding:0 0 1rem; page-break-after:always; }
     .pagina:last-child { page-break-after:auto; }
-    #btn-imprimir { display:none; }
     @page { margin:1.6cm; }
   }
 
-  .cuadernillos{display:grid;gap:.7rem;margin:1rem 0}
-  .cuadernillos a{display:block;background:#fff;border:1px solid var(--borde);border-left:5px solid var(--arena);border-radius:0 10px 10px 0;padding:.8rem 1rem;text-decoration:none;color:var(--texto)}
-  .cuadernillos a:hover{background:#F7FAF9}
-  .cuadernillos a b{display:block;font-family:Georgia,serif;color:var(--marca);font-size:1.08rem}
-  .cuadernillos a .cuando{display:block;font-size:.82rem;color:#8aa39c;text-transform:uppercase;letter-spacing:.08em;font-weight:bold;margin-bottom:.15rem}
-  .cuadernillos a .q{display:block;font-size:.9rem;color:#68807a;margin-top:.25rem}
-  .ahora{background:var(--profundo);border-radius:12px;padding:.9rem 1.1rem;margin:1.2rem 0}
-  .ahora .et{display:block;font-size:.72rem;letter-spacing:.11em;text-transform:uppercase;color:var(--arena);font-weight:bold}
-  .ahora a{display:block;text-decoration:none;margin-top:.35rem}
-  .ahora a b{display:block;font-family:Georgia,serif;font-size:1.15rem;color:#fff}
-  .ahora a:hover b{text-decoration:underline}
-  .ahora a .q{display:block;font-size:.92rem;color:#CBE3DE;line-height:1.5;margin-top:.25rem}
-  .ahora .mini{font-size:.85rem;color:#9FC2BB;line-height:1.5;margin:.6rem 0 0}
+  /* La rejilla de instrumentos. El prefijo pl- está libre: curso.js no lo usa. */
+  .pl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:.9rem;margin:1.2rem 0}
+  .pl-card{display:block;border:1px solid var(--borde);border-radius:.9rem;padding:1rem 1.1rem;background:#fff;
+           text-decoration:none;transition:box-shadow .15s,transform .15s}
+  .pl-card:hover{box-shadow:0 3px 12px rgba(11,60,73,.14);transform:translateY(-1px)}
+  .pl-card.viva{border-color:var(--marca);box-shadow:0 2px 10px rgba(15,110,110,.12)}
+  .pl-tag{display:inline-block;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;
+          color:var(--marca);font-weight:700}
+  .pl-card b{display:block;color:var(--profundo);font-family:Georgia,serif;font-size:1.12rem;margin:.15rem 0 .3rem}
+  .pl-desc{display:block;color:#45605a;font-size:.88rem;line-height:1.5}
+  .pl-cta{display:block;margin-top:.6rem;color:var(--marca);font-weight:700;font-size:.85rem}
+  .luego{display:grid;gap:.5rem;margin:.8rem 0 0}
+  .luego a{display:block;background:#fff;border:1px solid var(--borde);border-left:4px solid var(--borde);
+           border-radius:0 9px 9px 0;padding:.6rem .85rem;text-decoration:none;color:var(--texto);font-size:.93rem}
+  .luego a:hover{border-left-color:var(--arena)}
+  .luego a b{color:var(--profundo);font-family:Georgia,serif;display:block;font-size:1rem}
+  .luego a span{display:block;font-size:.85rem;color:#68807a;margin-top:.1rem}
   .portadilla{text-align:center;padding:4rem 2.3rem 3rem}
   .portadilla .franja{width:80px;height:6px;background:var(--arena);margin:1.2rem auto;border-radius:3px}
   .portadilla h1{font-size:1.9rem}
@@ -70,21 +72,50 @@
   <div class="curso">Gestión y Manejo de Proyectos · UAQ Campus Concá · Agosto-diciembre 2026</div>
   <h1>Expediente del gestor</h1>
   <p style="font-family:Georgia,serif;font-size:1.1rem;color:#45605a;margin-top:0">La presa que queremos</p>
-  <p>Esta carpeta es tuya. Se alimenta cada semana y en diciembre te la llevas: es la evidencia de lo que sabes hacer, tu primer portafolio profesional. Trátala como lo que es.</p>
-  <p>Va por partes, <strong>un cuadernillo por unidad</strong>. No imprimas todo en agosto: imprime el que empieza y engrápalo al final de lo que ya tienes. Al terminar el semestre los cuatro juntos son el expediente completo.</p>
-  <p>Cada cuadernillo también <strong>se llena en línea</strong>: la página guarda lo que escribas en tu navegador (a nadie más le llega) y te deja descargar tu copia llena o imprimirla. Papel, pantalla o los dos: cuenta igual. El cuadernillo 1 ya funciona así.</p>
-  <div class="cuadernillos">
-    <a href="expediente-u1.html"><span class="cuando">Cuadernillo 1 · semanas 1 a 4</span><b>Unidad 1 · Escuchar la presa</b><span class="q">¿Qué quiere la gente y cómo se sabe?</span></a>
-    <a href="expediente-u2.html"><span class="cuando">Cuadernillo 2 · semanas 5 a 10</span><b>Unidad 2 · Diseñar lo que pidieron</b><span class="q">¿Cómo se convierte una petición en un proyecto que se sostiene?</span></a>
-    <a href="expediente-u3.html"><span class="cuando">Cuadernillo 3 · semanas 11 a 14</span><b>Unidad 3 · Construir en la presa</b><span class="q">¿Qué pasa cuando el plan se topa con la realidad?</span></a>
-    <a href="expediente-u4.html"><span class="cuando">Cuadernillo 4 · semanas 15 a 17</span><b>Unidad 4 · Entregar la presa viva</b><span class="q">¿Cómo se sabe que funcionó y quién lo cuida después?</span></a>
+  <p>Esta carpeta es tuya, y va en dos superficies que cuentan igual: <strong>las pantallas de cierre</strong>, que se llenan desde el teléfono y se guardan solas, y <strong>el cuadernillo en papel</strong>, uno por unidad. Se alimenta cada semana y en diciembre te la llevas: es la evidencia de lo que sabes hacer, tu primer portafolio profesional.</p>
+
+  <h2 style="margin-top:1.5rem">Dónde se hace</h2>
+
+  <div class="pl-grid">
+    <a class="pl-card viva" href="autoevaluacion-u1.html">
+      <span class="pl-tag">se llena desde el teléfono · cierre de la unidad 1</span>
+      <b>Tu primer cierre</b>
+      <span class="pl-desc">Nueve pasos que se hojean con el dedo. Armas tu suelo tocando casillas y el piso se dibuja abajo; el sobre que sellaste en la semana 1 se abre con su ritual y se pone al lado de lo que la gente pidió de verdad; escribes la frase que te trajiste de la orilla y contestas las tres brújulas de frente; recorres la línea de la unidad y de ahí sacas tus evidencias; cuentas tus noes. Al final, las piezas de lo que escribiste se juntan solas en el porqué que vas a sostener. Trae un ejemplo llenado en casi todos los pasos, se guarda mientras escribes y baja un respaldo que se copia. También se imprime, para quien prefiera papel.</span>
+      <span class="pl-cta">Abrirla y llenarla →</span>
+    </a>
+
+    <a class="pl-card" href="expediente-u1.html">
+      <span class="pl-tag">cuadernillo · unidad 1</span>
+      <b>El cuadernillo de la unidad 1</b>
+      <span class="pl-desc">Escuchar la presa. Dónde empiezo, mi primer no sistematizado, el mapa de evidencias del semestre y el suelo de la unidad explicado casilla por casilla. Se llena a mano o en la pantalla: guarda lo que escribas y te deja descargar tu copia.</span>
+      <span class="pl-cta">Verlo y llenarlo →</span>
+    </a>
+
+    <a class="pl-card" href="contrato-de-gestion.html">
+      <span class="pl-tag">se llena y se firma · semana 2</span>
+      <b>Mi contrato de gestión</b>
+      <span class="pl-desc">Tus dos compromisos del semestre, escritos por ti y firmados. Va hasta el frente de la carpeta, antes del cuadernillo 1.</span>
+      <span class="pl-cta">Abrirlo y firmarlo →</span>
+    </a>
+
+    <a class="pl-card" href="pacto-de-evaluacion.html">
+      <span class="pl-tag">se firman desde el teléfono</span>
+      <b>Los dos pactos</b>
+      <span class="pl-desc">El <a href="pacto-de-evaluacion.html">pacto de evaluación</a>, que es el acuerdo sobre cómo se califica, y el <a href="pacto-de-ia.html">pacto de uso de IA</a>. Se firman la primera semana y su constancia vive en tu teléfono, no en la carpeta.</span>
+      <span class="pl-cta">Verlos y firmarlos →</span>
+    </a>
   </div>
-  <div class="ahora">
-    <span class="et">Abierta ahora · cierre de la unidad 1</span>
-    <a href="autoevaluacion-u1.html"><b>Autoevaluación 1, de ensayo</b>
-      <span class="q">Nueve pasos que se hojean desde el teléfono y se guardan solos: qué cuenta como argumento, tu suelo casilla por casilla, tu sobre contra lo que de verdad pidió la gente, la frase que te trajiste de la orilla, y el número que te pondrías con su porqué armado con tus propias frases.</span></a>
-    <p class="mini">No produce número, nadie te la recoge y no va al acta. Se llena el fin de semana después de la consulta. Si ya escribiste cosas en el cuadernillo 1, la pantalla te las trae de un botón para que no las escribas dos veces.</p>
+
+  <div class="ojo">El papel no es el repuesto. En la orilla no hay señal, y hay quien piensa mejor con pluma: lo que llenes a mano cuenta exactamente igual que lo que llenes en la pantalla, y el profesor lleva copias impresas a clase. Todo esto se imprime desde el navegador con Ctrl/Cmd + P.</div>
+
+  <h2 style="margin-top:1.6rem">Los cuadernillos que vienen</h2>
+  <p>Por ahora existen en papel. Cada uno abrirá su propia pantalla de cierre cuando llegue su unidad; mientras tanto, la unidad se cierra en su cuadernillo.</p>
+  <div class="luego">
+    <a href="expediente-u2.html"><b>Unidad 2 · Diseñar lo que pidieron</b><span>Semanas 5 a 10 · ¿Cómo se convierte una petición en un proyecto que se sostiene?</span></a>
+    <a href="expediente-u3.html"><b>Unidad 3 · Construir en la presa</b><span>Semanas 11 a 14 · ¿Qué pasa cuando el plan se topa con la realidad?</span></a>
+    <a href="expediente-u4.html"><b>Unidad 4 · Entregar la presa viva</b><span>Semanas 15 a 17 · ¿Cómo se sabe que funcionó y quién lo cuida después?</span></a>
   </div>
+  <p class="mini" style="font-size:.88rem;color:#68807a">No imprimas todo en agosto: imprime el que empieza y engrápalo al final de lo que ya tienes. Al terminar el semestre los cuatro juntos son el expediente completo.</p>
 
   <div class="clave"><strong>"Aún no" no es "mal".</strong> Cuando un reto salga "aún no", se reintenta las veces que haga falta, sin castigo. Lo único que este expediente no perdona es la hoja vacía: la evidencia que no registras no existe.</div>
   <h2 style="margin-top:1.6rem">El orden de la carpeta</h2>

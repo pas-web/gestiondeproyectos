@@ -28,6 +28,18 @@
   th { background:#E4EFEB; color:var(--profundo); }
   a { color:var(--marca); }
   .volver { display:inline-block; margin-top:2rem; font-weight:bold; }
+
+  /* La rejilla de instrumentos, igual que en el expediente del gestor. */
+  .pl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:.9rem;margin:1.2rem 0}
+  .pl-card{display:block;border:1px solid var(--borde);border-radius:.9rem;padding:1rem 1.1rem;background:#fff;
+           text-decoration:none;transition:box-shadow .15s,transform .15s}
+  .pl-card:hover{box-shadow:0 3px 12px rgba(11,60,73,.14);transform:translateY(-1px)}
+  .pl-card.viva{border-color:var(--marca);box-shadow:0 2px 10px rgba(15,110,110,.12)}
+  .pl-tag{display:inline-block;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;
+          color:var(--marca);font-weight:700}
+  .pl-card b{display:block;color:var(--profundo);font-family:Georgia,serif;font-size:1.12rem;margin:.15rem 0 .3rem}
+  .pl-desc{display:block;color:#45605a;font-size:.88rem;line-height:1.5}
+  .pl-cta{display:block;margin-top:.6rem;color:var(--marca);font-weight:700;font-size:.85rem}
 </style>
 </head>
 <body>
@@ -54,7 +66,7 @@
 <div class="tarjeta">
   <span class="etiqueta">Expediente</span>
   <h3>Tu carpeta de evidencia</h3>
-  <p>Carpeta física que arrancas la primera semana: contrato de gestión, registro de retos, anti-currículum, solicitudes reales, bitácora, autoevaluaciones. (Los dos pactos se aceptan en línea y su constancia vive en tu teléfono.) Es tu memoria del semestre y tu mejor argumento en la conferencia final. En diciembre te la llevas: es tu primer portafolio profesional.</p>
+  <p>Papel y pantalla, y las dos cuentan igual: un cuadernillo por unidad que puedes tener en las manos, y las pantallas de cierre que se llenan desde el teléfono. Dentro va todo lo que arrancas la primera semana: contrato de gestión, registro de retos, anti-currículum, solicitudes reales, bitácora, autoevaluaciones. (Los dos pactos se aceptan en línea y su constancia vive en tu teléfono.) Es tu memoria del semestre y tu mejor argumento en la conferencia final. En diciembre te la llevas: es tu primer portafolio profesional.</p>
 </div>
 
 <div class="tarjeta">
@@ -81,7 +93,7 @@
   <span class="etiqueta">Autoevaluación</span>
   <h3>Cuatro paradas, una que cuenta</h3>
   <p>En las semanas 4, 11 y 14 harás autoevaluaciones de ensayo: sin consecuencias, para practicar mirarte con honestidad. En la semana 17 llega la que cuenta: propones tu calificación final con tu expediente como argumento, en una conferencia individual de cinco minutos.</p>
-  <p><strong>La primera ya está abierta:</strong> <a href="evaluacion/autoevaluacion-u1.html">Autoevaluación 1, de ensayo</a> — nueve pasos que se hojean desde el teléfono y se guardan solos. No produce número y nadie te la recoge; existe para que en diciembre no sea la primera vez que haces esto.</p>
+  <p>La primera es <a href="evaluacion/autoevaluacion-u1.html"><strong>tu primer cierre</strong></a>, el de la unidad 1: nueve pasos que se hojean desde el teléfono y se guardan solos. No produce número y nadie te la recoge; existe para que en diciembre no sea la primera vez que haces esto.</p>
 </div>
 
 <div class="tarjeta clave">
@@ -103,6 +115,32 @@
   <p>La respuesta corta: porque los puntos entrenan para juntar puntos, y este curso entrena para gestionar proyectos reales, donde nadie te pone 85. La respuesta larga te la debe el profesor al cierre de la unidad 1, cuando ya hayas vivido el sistema unas semanas.</p>
   <h3>¿Esto es más fácil o más difícil?</h3>
   <p>Distinto. Es imposible reprobar cumpliendo el suelo, y es imposible destacar sin evidencia. El sistema no perdona la carpeta vacía.</p>
+</div>
+
+<h2>Dónde se hace todo esto</h2>
+<p>Las piezas de arriba no son teoría: cada una tiene su hoja o su pantalla, y están todas aquí.</p>
+
+<div class="pl-grid">
+  <a class="pl-card viva" href="evaluacion/autoevaluacion-u1.html">
+    <span class="pl-tag">se llena desde el teléfono · cierre de la unidad 1</span>
+    <b>Tu primer cierre</b>
+    <span class="pl-desc">Nueve pasos que se hojean con el dedo. Armas tu suelo tocando casillas, abres el sobre que sellaste en la semana 1 y lo pones al lado de lo que la gente pidió de verdad, escribes la frase que te trajiste de la orilla, contestas las tres brújulas y cuentas tus noes. Al final, las piezas de lo que escribiste se juntan solas en el porqué que vas a sostener. No produce número y nadie te la recoge: es el gimnasio de la conferencia de diciembre.</span>
+    <span class="pl-cta">Abrirla y llenarla →</span>
+  </a>
+
+  <a class="pl-card" href="evaluacion/expediente-del-gestor.html">
+    <span class="pl-tag">papel y pantalla · uno por unidad</span>
+    <b>El expediente del gestor</b>
+    <span class="pl-desc">La carpeta completa: los cuatro cuadernillos, el contrato de gestión y el orden en que van. Es tu memoria del semestre y tu mejor argumento en diciembre.</span>
+    <span class="pl-cta">Verlo y llenarlo →</span>
+  </a>
+
+  <a class="pl-card" href="evaluacion/pacto-de-evaluacion.html">
+    <span class="pl-tag">se firma desde el teléfono</span>
+    <b>El pacto de evaluación</b>
+    <span class="pl-desc">Este sistema no se impone: se acuerda. Aquí está lo que pone cada quien, y se firma en la primera semana. También está el <a href="evaluacion/pacto-de-ia.html">pacto de uso de IA</a>.</span>
+    <span class="pl-cta">Leerlo y firmarlo →</span>
+  </a>
 </div>
 
 <a class="volver" href="index.html">Volver a la portada del curso</a>

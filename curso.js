@@ -29,7 +29,8 @@
   var FIJAS = [
     { href: 'semanas/semana-00.html', t: 'Semana 0 · Aterrizaje', d: 'El programa completo del curso. Sesiones del 30 y 31 de julio.' },
     { href: 'tu-calificacion.html', t: 'Tu calificación', d: 'Cómo se evalúa este curso, sin letra chiquita.' },
-    { href: 'evaluacion/expediente-del-gestor.html', t: 'Expediente del gestor', d: 'La carpeta que armas todo el semestre, en un cuadernillo por unidad.' },
+    { href: 'evaluacion/autoevaluacion-u1.html', t: 'Tu primer cierre', d: 'La autoevaluación de la unidad 1: nueve pasos que se hojean desde el teléfono. Siempre abierta.' },
+    { href: 'evaluacion/expediente-del-gestor.html', t: 'Expediente del gestor', d: 'Dónde se hace todo: las pantallas de cierre y el cuadernillo en papel, que cuentan igual.' },
     { href: 'evaluacion/contrato-de-gestion.html', t: 'Mi contrato de gestión', d: 'Tus dos compromisos firmados del semestre.' },
     { href: 'evaluacion/pacto-de-evaluacion.html', t: 'Pacto de evaluación', d: 'El acuerdo sobre cómo se califica. Se firma el 31 de julio.' },
     { href: 'evaluacion/pacto-de-ia.html', t: 'Pacto de uso de IA', d: 'Qué sí, qué no y cómo se declara. Se firma el 31 de julio.' },
