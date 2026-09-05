@@ -11,7 +11,10 @@
 
   /* ---------- Datos del curso ---------- */
 
-  var DISPONIBLES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  /* EL INTERRUPTOR DEL CURSO. Para abrir una semana, agrega su número aquí y
+     sube el cambio. Se abre por CONTENIDO —cuando el grupo llega— y no por
+     fecha: si vamos adelantados se adelanta, y si algo nos retrasa espera. */
+  var DISPONIBLES = [0, 1, 2, 3, 4, 5];
 
   /* URL del formulario del ticket de salida (Google Form). Mientras esté vacía,
      el bloque del ticket no se muestra. Pégala entre las comillas y listo. */
@@ -27,13 +30,13 @@
   window.RECOLECTOR_URL = RECOLECTOR_URL;
 
   var FIJAS = [
-    { href: 'semanas/semana-00.html', t: 'Semana 0 · Aterrizaje', d: 'El programa completo del curso. Sesiones del 30 y 31 de julio.' },
+    { href: 'semanas/semana-00.html', t: 'Semana 0 · Aterrizaje', d: 'El programa completo del curso: las dos sesiones de aterrizaje.' },
     { href: 'tu-calificacion.html', t: 'Tu calificación', d: 'Cómo se evalúa este curso, sin letra chiquita.' },
     { href: 'evaluacion/autoevaluacion-u1.html', t: 'Tu primer cierre', d: 'La autoevaluación de la unidad 1: nueve pasos que se hojean desde el teléfono. Siempre abierta.' },
     { href: 'evaluacion/expediente-del-gestor.html', t: 'Expediente del gestor', d: 'Dónde se hace todo: las pantallas de cierre y el cuadernillo en papel, que cuentan igual.' },
     { href: 'evaluacion/contrato-de-gestion.html', t: 'Mi contrato de gestión', d: 'Tus dos compromisos firmados del semestre.' },
-    { href: 'evaluacion/pacto-de-evaluacion.html', t: 'Pacto de evaluación', d: 'El acuerdo sobre cómo se califica. Se firma el 31 de julio.' },
-    { href: 'evaluacion/pacto-de-ia.html', t: 'Pacto de uso de IA', d: 'Qué sí, qué no y cómo se declara. Se firma el 31 de julio.' },
+    { href: 'evaluacion/pacto-de-evaluacion.html', t: 'Pacto de evaluación', d: 'El acuerdo sobre cómo se califica. Se firma en el aterrizaje, después de discutirlo.' },
+    { href: 'evaluacion/pacto-de-ia.html', t: 'Pacto de uso de IA', d: 'Qué sí, qué no y cómo se declara. Se firma en el aterrizaje.' },
     { href: 'gimnasio.html', t: 'Todo el gimnasio', d: 'Los ejercicios de las diecisiete semanas, siempre abiertos.' }
   ];
 
@@ -55,23 +58,23 @@
   ];
 
   var SEMANAS = [
-    { n: 1, t: 'La presa y el fondo', abre: '2026-08-05', q: '¿Qué harías con un dinero que no es tuyo?' },
-    { n: 2, t: 'Agencia', abre: '2026-08-12', q: '¿Qué pedirías si el no ya lo tuvieras?' },
-    { n: 3, t: 'Diseñar la consulta', abre: '2026-08-19', q: '¿Cómo se pregunta sin prometer?' },
-    { n: 4, t: 'La consulta y el sobre', abre: '2026-08-26', q: '¿Y si la respuesta no es la que esperabas?' },
-    { n: 5, t: 'Líneas y reglas del fondo', abre: '2026-09-02', q: '¿Cómo se reparte lo que no alcanza?' },
-    { n: 6, t: 'Prototipo en la presa', abre: '2026-09-09', q: '¿Cómo pruebas una idea antes de gastar un peso en ella?' },
-    { n: 7, t: 'La apuesta causal', abre: '2026-09-16', q: '¿Por qué crees que eso va a funcionar?' },
-    { n: 8, t: 'Ingeniería del papel', abre: '2026-09-23', q: '¿Cómo se mide una promesa?' },
-    { n: 9, t: 'La política del proyecto', abre: '2026-09-30', q: '¿Quién tiene que decir que sí?' },
-    { n: 10, t: 'Presupuesto y pre-pitch', abre: '2026-10-07', q: '¿Cuánto cuesta hacerlo de verdad?' },
-    { n: 11, t: 'La Dictaminadora', abre: '2026-10-14', q: '¿Y si dicen que no?' },
-    { n: 12, t: 'La faena y el libro del fondo', abre: '2026-10-21', q: '¿Quién carga qué?' },
-    { n: 13, t: 'El velorio del proyecto', abre: '2026-10-28', q: '¿De qué va a morir tu proyecto?' },
-    { n: 14, t: 'Obra y comunicación', abre: '2026-11-04', q: '¿La obra habla por sí sola?' },
-    { n: 15, t: 'Medir lo que importa', abre: '2026-11-11', q: '¿Cómo sabrás que funcionó?' },
-    { n: 16, t: 'Auditoría y radar', abre: '2026-11-18', q: '¿Y el dinero dónde quedó?' },
-    { n: 17, t: 'La inauguración', abre: '2026-11-25', q: '¿Qué se queda y qué te llevas?' }
+    { n: 1, t: 'La presa y el fondo', q: '¿Qué harías con un dinero que no es tuyo?' },
+    { n: 2, t: 'Agencia', q: '¿Qué pedirías si el no ya lo tuvieras?' },
+    { n: 3, t: 'Diseñar la consulta', q: '¿Cómo se pregunta sin prometer?' },
+    { n: 4, t: 'La consulta y el sobre', q: '¿Y si la respuesta no es la que esperabas?' },
+    { n: 5, t: 'Líneas y reglas del fondo', q: '¿Cómo se reparte lo que no alcanza?' },
+    { n: 6, t: 'Prototipo en la presa', q: '¿Cómo pruebas una idea antes de gastar un peso en ella?' },
+    { n: 7, t: 'La apuesta causal', q: '¿Por qué crees que eso va a funcionar?' },
+    { n: 8, t: 'Ingeniería del papel', q: '¿Cómo se mide una promesa?' },
+    { n: 9, t: 'La política del proyecto', q: '¿Quién tiene que decir que sí?' },
+    { n: 10, t: 'Presupuesto y pre-pitch', q: '¿Cuánto cuesta hacerlo de verdad?' },
+    { n: 11, t: 'La Dictaminadora', q: '¿Y si dicen que no?' },
+    { n: 12, t: 'La faena y el libro del fondo', q: '¿Quién carga qué?' },
+    { n: 13, t: 'El velorio del proyecto', q: '¿De qué va a morir tu proyecto?' },
+    { n: 14, t: 'Obra y comunicación', q: '¿La obra habla por sí sola?' },
+    { n: 15, t: 'Medir lo que importa', q: '¿Cómo sabrás que funcionó?' },
+    { n: 16, t: 'Auditoría y radar', q: '¿Y el dinero dónde quedó?' },
+    { n: 17, t: 'La inauguración', q: '¿Qué se queda y qué te llevas?' }
   ];
 
   window.CURSO = { BASE: BASE, DISPONIBLES: DISPONIBLES, SEMANAS: SEMANAS, UNIDADES: UNIDADES, FIJAS: FIJAS };
@@ -338,10 +341,6 @@
 
   /* ---------- Construcción ---------- */
 
-  function fecha(iso) {
-    return new Date(iso + 'T12:00:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'long' });
-  }
-
   function xx(n) { return (n < 10 ? '0' : '') + n; }
 
   function semanaActual() {
@@ -358,7 +357,7 @@
         ? '<a href="' + BASE + 'semanas/semana-' + xx(s.n) + '.html">' + s.t + '</a>'
         : '<span class="titulo">' + s.t + '</span>')
       + '<span class="q">' + s.q + '</span></div>'
-      + '<span class="fecha">abre el ' + fecha(s.abre) + '</span>';
+      + '<span class="fecha">' + (pub ? '' : 'cuando lleguemos') + '</span>';
     return d;
   }
 

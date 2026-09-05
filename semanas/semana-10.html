@@ -75,12 +75,12 @@
 <header class="curso">
   <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
   <div class="semana-titulo">Semana 10 · Presupuesto y pre-pitch</div>
-  <div class="migas">Unidad 2 · Diseñar lo que pidieron · Se abre el miércoles 7 de octubre</div>
+  <div class="migas">Unidad 2 · Diseñar lo que pidieron · Semana 10 de 17</div>
 </header>
 
 <main>
 
-<div id="wk-gate" data-abre="2026-10-07">
+<div id="wk-gate" data-semana="10">
 
 <p class="pregunta">¿Cuánto cuesta hacerlo de verdad?</p>
 <p class="bajada">Esta es la semana en que el proyecto deja de ser tuyo. El jueves se arma el presupuesto con cotizaciones de a de veras y un cronograma que quepa en cuatro semanas. El viernes se ensaya el pitch entre pares, se corrige lo que la Troika encuentre, y a las 14:00 la solicitud se entrega en mano. Después de esa hora, ya no hay nada que pulir: solo esperar al Comité.</p>
@@ -124,7 +124,7 @@
 <div class="tarjeta">
   <span class="etiqueta">La hora</span>
   <h3 style="margin-top:.2rem">La entrega: viernes 9, 14:00, en mano</h3>
-  <p>Como lo dicen las reglas desde septiembre: la solicitud completa, impresa y en mano, el viernes 9 de octubre a las 14:00. Completa quiere decir: las diez secciones del Anexo 1 llenas, el presupuesto con sus cotizaciones anexas, el cronograma, la contrapartida cuantificada, la carta compromiso con sus tres firmas y la anuencia de la delegación. No hay prórroga porque en las convocatorias reales no la hay: el sistema se cierra a la hora que se cierra, con tu proyecto adentro o afuera. Entregar a tiempo también es una habilidad, y se aprende entregando.</p>
+  <p>Como lo dicen las reglas desde septiembre: la solicitud completa, impresa y en mano, el viernes de esta semana a las 14:00. Completa quiere decir: las diez secciones del Anexo 1 llenas, el presupuesto con sus cotizaciones anexas, el cronograma, la contrapartida cuantificada, la carta compromiso con sus tres firmas y la anuencia de la delegación. No hay prórroga porque en las convocatorias reales no la hay: el sistema se cierra a la hora que se cierra, con tu proyecto adentro o afuera. Entregar a tiempo también es una habilidad, y se aprende entregando.</p>
 </div>
 
 <h2>El gimnasio</h2>
@@ -156,7 +156,7 @@
     <dt>Pre-pitch (Troika)</dt>
     <dd>El ensayo del dictamen entre pares: dos minutos de pitch, y luego tu equipo escucha de espaldas mientras los demás discuten tu proyecto con toda libertad. La regla de oro del que escucha: no defenderse, apuntar. Lo que no se entendió hoy se corrige hoy; el jueves 15 ya no.</dd>
     <dt>La entrega en mano</dt>
-    <dd>Viernes 9 de octubre, 14:00, impresa y completa: diez secciones, cotizaciones anexas, contrapartida cuantificada, tres firmas y anuencia. La hora es la hora, como en toda convocatoria real. El proyecto entregado a tiempo con un defecto vive; el proyecto perfecto entregado a las 14:10 no existe.</dd>
+    <dd>El viernes de esta semana, 14:00, impresa y completa: diez secciones, cotizaciones anexas, contrapartida cuantificada, tres firmas y anuencia. La hora es la hora, como en toda convocatoria real. El proyecto entregado a tiempo con un defecto vive; el proyecto perfecto entregado a las 14:10 no existe.</dd>
   </dl>
 </div>
 
@@ -175,29 +175,35 @@
 
 <div class="aviso-goteo" id="aviso-goteo">
   <p style="font-family:Georgia,serif; font-size:1.2rem; margin:.2rem 0;">Esta semana todavía no abre.</p>
-  <p>Disponible a partir del <strong id="fecha-abre"></strong>. Mientras tanto puedes entrar a <a href="../gimnasio.html">todo el gimnasio</a>, a <a href="semana-00.html">la Semana 0</a> y a <a href="../tu-calificacion.html">Tu calificación</a>, que están siempre abiertos.</p>
+  <p>Se abre cuando el grupo llegue aquí, no en una fecha: si vamos adelantados se adelanta, y si algo nos retrasa espera. Mientras tanto puedes entrar a <a href="../gimnasio.html">todo el gimnasio</a>, a <a href="semana-00.html">la Semana 0</a>, a <a href="../tu-calificacion.html">Tu calificación</a> y a <a href="../evaluacion/expediente-del-gestor.html">tu expediente</a>, que están siempre abiertos.</p>
 </div>
-
-<script>
-  // Candado de goteo: pedagógico, no de seguridad.
-  (function () {
-    var gate = document.getElementById('wk-gate');
-    var abre = new Date(gate.dataset.abre + 'T00:00:00-06:00');
-    var hoy = new Date();
-    // Modo vista previa para el profesor: agregar ?preview a la URL.
-    var PREVIEW = /[?&]preview/.test(window.location.search);
-    if (!PREVIEW && hoy < abre) {
-      gate.style.display = 'none';
-      document.getElementById('aviso-goteo').style.display = 'block';
-      document.getElementById('fecha-abre').textContent =
-        abre.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
-    }
-  })();
-</script>
 
 </main>
 
 <script src="../curso.js"></script>
+
+<script>
+  /* Candado de goteo: pedagógico, no de seguridad, y por CONTENIDO.
+     Antes comparaba una fecha contra el reloj, así que cuando el grupo iba
+     adelantado el sitio escondía la semana que se estaba dando, y cuando iba
+     atrasado abría semanas que nadie había visto. Ahora la única fuente es
+     DISPONIBLES, en curso.js: se abre una semana agregando su número ahí.
+     Va después de curso.js para que window.CURSO ya exista; si por lo que sea
+     no cargó, la semana se abre (falla del lado de dejar pasar). */
+  (function () {
+    var gate = document.getElementById('wk-gate');
+    if (!gate) return;
+    var n = parseInt(gate.dataset.semana, 10);
+    var lista = (window.CURSO && window.CURSO.DISPONIBLES) || null;
+    var abierta = !lista || lista.indexOf(n) !== -1;
+    // Modo vista previa para el profesor: agregar ?preview a la URL.
+    var PREVIEW = /[?&]preview/.test(window.location.search);
+    if (!PREVIEW && !abierta) {
+      gate.style.display = 'none';
+      document.getElementById('aviso-goteo').style.display = 'block';
+    }
+  })();
+</script>
 
 </body>
 </html>
