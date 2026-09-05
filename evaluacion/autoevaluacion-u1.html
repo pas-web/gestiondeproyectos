@@ -71,14 +71,44 @@
   .casilla.puesta { border-style:solid; border-color:var(--bien); background:var(--bienbg); }
   .casilla.puesta .caja { background:var(--bien); border-color:var(--bien); }
   .casilla.puesta .caja::after { content:"✓"; }
-  .piso { margin:1rem 0 .2rem; border:1px solid var(--borde); border-radius:10px; overflow:hidden; background:#fff; }
-  .piso .duelas { padding:.7rem .8rem 0; }
-  .piso .duela { height:12px; margin-bottom:4px; border-radius:2px;
-                 background:repeating-linear-gradient(90deg,#D9A441 0 20px,#C08F32 20px 22px); }
-  .piso .duela.falta { background:none; border:2px dashed #C4D8D2; }
-  .piso .ley { padding:.55rem .85rem; font-size:.9rem; color:var(--profundo); border-top:1px solid var(--borde);
-               background:#F7FAF9; }
-  .piso.completo .ley { background:var(--bienbg); color:var(--bien); font-weight:bold; }
+  /* --- La cortina de la presa ---
+     El suelo de la unidad, dibujado como lo que el curso tiene enfrente: una
+     cortina de siete compuertas. Lo que falta no es un hueco abstracto, es
+     agua que se va, y el embalse baja con cada fuga. Cuando cierran las
+     siete, retiene. */
+  .presa { position:relative; margin:1.1rem 0 .2rem; border:1px solid var(--borde);
+           border-radius:12px; overflow:hidden; background:#DCEAE7; }
+  .presa .embalse { position:relative; height:44px; overflow:hidden;
+                    background:linear-gradient(#BEE0E6, #7FB8C4 55%, #4E8FA0);
+                    transition:height .45s cubic-bezier(.4,0,.2,1); }
+  .presa .embalse::after { content:''; position:absolute; left:-50%; right:-50%; top:5px; height:9px;
+                           background:radial-gradient(ellipse at center, rgba(255,255,255,.6) 0 40%, transparent 42%)
+                                      0 0/24px 9px repeat-x;
+                           animation:onda 7s linear infinite; }
+  @keyframes onda { to { transform:translateX(24px); } }
+  .presa .nivel { position:absolute; left:.7rem; top:.45rem; font-size:.68rem; letter-spacing:.09em;
+                  text-transform:uppercase; font-weight:bold; color:#0B3C49; opacity:.7; z-index:2; }
+
+  .presa .cortina { position:relative; display:flex; gap:2px; padding:0 .5rem; background:#0B3C49; z-index:3; }
+  .presa .compuerta { position:relative; flex:1 1 0; height:32px; border-radius:2px 2px 0 0;
+                      background:linear-gradient(#3E7F6B, #2A5B4C);
+                      box-shadow:inset 0 1px 0 rgba(255,255,255,.22), inset 0 -3px 0 rgba(0,0,0,.15); }
+  .presa .compuerta.falta { background:rgba(0,0,0,.32); box-shadow:inset 0 0 0 1px rgba(190,224,230,.35); }
+  /* el agua que se va por lo que falta: cae dentro del cauce */
+  .presa .compuerta.falta::after { content:''; position:absolute; left:26%; right:26%; top:2px; height:56px;
+                                   border-radius:0 0 40% 40%;
+                                   background:linear-gradient(rgba(214,238,242,.15), rgba(214,238,242,.95) 45%, rgba(214,238,242,.1));
+                                   animation:fuga .85s linear infinite; }
+  @keyframes fuga { from { background-position:0 -56px; opacity:.55; } to { background-position:0 56px; opacity:1; } }
+  .presa .cauce { position:relative; height:30px; background:linear-gradient(#0B3C49, #10505F); }
+  .presa .ley { padding:.6rem .9rem; font-size:.9rem; color:var(--profundo); background:#fff;
+                border-top:1px solid var(--borde); }
+  .presa.llena .ley { background:var(--bienbg); color:var(--bien); font-weight:bold; }
+  @media (prefers-reduced-motion:reduce) {
+    .presa .embalse::after, .presa .compuerta.falta::after { animation:none; }
+    .presa .embalse { transition:none; }
+  }
+
 
   /* --- la portada, con la regla de arena del sitio --- */
   .abre { margin:.4rem 0 1.4rem; }
@@ -157,31 +187,42 @@
   .brujula .donde-fallo { display:none; }
   .brujula.contar .donde-fallo { display:block; }
 
-  /* --- la línea de la orilla --- */
-  .linea { position:relative; margin:1rem 0 1.2rem; padding-left:1.5rem; }
-  .linea::before { content:''; position:absolute; left:.42rem; top:.6rem; bottom:.6rem; width:2px; background:var(--borde); }
-  .hito { position:relative; margin:0 0 .45rem; }
-  .hito::before { content:''; position:absolute; left:-1.5rem; top:.85rem; width:.75rem; height:.75rem; border-radius:50%;
-                  background:#fff; border:2px solid var(--borde); z-index:1; }
-  .hito.tengo::before { background:var(--marca); border-color:var(--marca); }
-  .hito > button.cab { display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--borde);
-                       border-radius:10px; padding:.55rem .8rem; font:inherit; cursor:pointer; color:var(--texto); }
-  .hito > button.cab:hover { border-color:var(--marca); }
-  .hito.abierto > button.cab { border-radius:10px 10px 0 0; border-bottom-color:transparent; }
-  .hito .cuando { display:block; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--marca);
-                  font-weight:bold; }
-  .hito .qpaso { display:block; font-size:.97rem; color:var(--profundo); font-weight:bold; }
-  .hito .cuerpo { display:none; border:1px solid var(--borde); border-top:none; border-radius:0 0 10px 10px;
-                  background:#FBFDFC; padding:.15rem .8rem .8rem; }
-  .hito.abierto .cuerpo { display:block; }
-  .hito .cuerpo p { font-size:.9rem; margin:.5rem 0 .4rem; }
-  .hito .cuerpo .dejo { font-size:.76rem; letter-spacing:.05em; text-transform:uppercase; color:var(--gris);
-                        font-weight:bold; display:block; margin-top:.5rem; }
-  .hito .cuerpo ul { margin:.2rem 0 .5rem; padding-left:1.1rem; font-size:.9rem; }
-  .hito .cuerpo li { margin:.15rem 0; }
-  .hito .usar { border:1px solid var(--marca); background:#fff; color:var(--marca); border-radius:999px;
-                padding:.32rem .8rem; font:inherit; font-size:.83rem; font-weight:bold; cursor:pointer; }
-  .hito .usar:disabled { border-color:var(--borde); color:var(--gris); cursor:default; font-weight:normal; }
+  /* --- el mapa de la unidad --- */
+  .grupo-ev { margin:1.1rem 0 0; }
+  .grupo-ev > h4 { margin:0 0 .4rem; font-family:Georgia,serif; font-size:1.02rem; color:var(--profundo);
+                   padding-bottom:.3rem; border-bottom:2px solid var(--borde); }
+  .cap { border:1px solid var(--borde); background:#fff; border-radius:11px; padding:.7rem .85rem; margin:.45rem 0; }
+  .cap.si { border-color:var(--bien); background:var(--bienbg); }
+  .cap.no { border-style:dashed; }
+  .cap .qsé { display:block; font-size:.96rem; color:var(--profundo); line-height:1.4; }
+  .cap .donde-fue { display:block; font-size:.78rem; letter-spacing:.04em; color:var(--marca);
+                    font-weight:bold; margin-top:.25rem; }
+  .cap .ops { display:flex; gap:.35rem; margin:.55rem 0 0; }
+  .cap .ops button { border:2px solid var(--borde); background:#FBFDFC; color:var(--profundo); border-radius:8px;
+                     padding:.3rem .75rem; font:inherit; font-size:.83rem; cursor:pointer; }
+  .cap .ops button.on { border-color:var(--bien); background:var(--bien); color:#fff; font-weight:bold; }
+  .cap .ops button[data-v="no"].on { border-color:var(--arena); background:#F3E4C0; color:#5A430D; }
+  .cap .con-que { display:none; margin:.5rem 0 0; }
+  .cap .con-que > span { display:block; font-size:.72rem; font-weight:bold; letter-spacing:.06em;
+                         text-transform:uppercase; color:var(--marca); margin-bottom:.2rem; }
+  .cap .ligas { display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.5rem; }
+  .cap .ligas a { display:inline-block; font-size:.8rem; color:var(--marca); text-decoration:none;
+                  border:1px solid var(--borde); border-radius:999px; padding:.16rem .6rem; background:#fff; }
+  .cap .ligas a:hover { border-color:var(--marca); background:#F0F7F5; }
+  .cap .usar { border:1px solid var(--marca); background:#fff; color:var(--marca); border-radius:999px;
+               padding:.28rem .7rem; font:inherit; font-size:.8rem; font-weight:bold; cursor:pointer; margin-top:.5rem; }
+  .cap .usar:disabled { border-color:var(--borde); color:var(--gris); cursor:default; font-weight:normal; }
+  .marcador-ev { position:sticky; top:0; z-index:4; background:var(--profundo); color:#EAF4F2; border-radius:10px;
+                 padding:.5rem .85rem; font-size:.9rem; margin:.8rem 0 .2rem; }
+  .marcador-ev b { color:var(--arena); }
+  /* los enlaces de cada casilla del suelo */
+  .casilla-liga { margin:-.2rem 0 .5rem 2.2rem; }
+  .casilla-liga .rot { display:block; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase;
+                       color:var(--gris); font-weight:bold; margin-bottom:.2rem; }
+  .casilla-liga a { display:inline-block; font-size:.8rem; color:var(--marca); text-decoration:none;
+                    border:1px solid var(--borde); border-radius:999px; padding:.14rem .55rem;
+                    margin:0 .25rem .25rem 0; background:#fff; }
+  .casilla-liga a:hover { border-color:var(--marca); background:#F0F7F5; }
 
   /* --- de dónde salió la evidencia --- */
   .dedonde { display:flex; gap:.3rem; flex-wrap:wrap; margin-bottom:.3rem; }
@@ -396,12 +437,14 @@
 <section class="paso" data-titulo="El suelo">
   <div class="curso">Paso 2 de 9</div>
   <h2>Tu suelo, casilla por casilla</h2>
-  <p class="entrada">El suelo es <strong>piso, no techo</strong>: la lista corta de lo que basta cumplir para no reprobar. No es la meta del curso, es la red de seguridad. Toca cada casilla que ya tengas cubierta; abajo se arma tu piso.</p>
+  <p class="entrada">El suelo es <strong>piso, no techo</strong>: la lista corta de lo que basta cumplir para no reprobar. No es la meta del curso, es la red de seguridad. Toca cada casilla que ya tengas cubierta y mira la cortina de abajo: cada casilla es una compuerta, y por las que faltan se va el agua.</p>
   <div id="suelo"></div>
 
-  <div class="piso" id="piso">
-    <div class="duelas" id="duelas"></div>
-    <div class="ley" id="pisoLey">Todavía no marcas ninguna casilla.</div>
+  <div class="presa" id="piso">
+    <div class="embalse"><span class="nivel" id="presaNivel">el embalse</span></div>
+    <div class="cortina" id="duelas"></div>
+    <div class="cauce"></div>
+    <div class="ley" id="pisoLey">Todavía no cierras ninguna compuerta: el agua se va toda.</div>
   </div>
 
   <label class="campo" id="cajaFalta" style="display:none"><span>¿Qué te falta y cuándo lo cubres?</span>
@@ -496,9 +539,10 @@
   <h2>Lo que puedes abrir</h2>
   <p class="entrada">Tres piezas de evidencia que se pueden mirar hoy mismo, con el «dónde está» completo. Si no puedes decir dónde está, no cuenta todavía — y eso también es información.</p>
 
-  <h3 style="margin-top:1.3rem">La línea de la orilla</h3>
-  <p class="entrada">Cuatro semanas producen más cosas de las que uno se acuerda. Recórrela: cada parada te dice qué dejó por escrito, y si la tienes, se te va derecho a tus tres piezas.</p>
-  <div class="linea no-descarga" id="linea"></div>
+  <h3 style="margin-top:1.3rem">El mapa de la unidad</h3>
+  <p class="entrada">Veinte cosas que la unidad te enseñó a hacer, semana por semana. Recórrelas y marca las que sí sabes hacer hoy; cada una trae el enlace a donde se hizo, para que entres a cotejar — o a hacerlo, si te faltó. Las que marques se te ofrecen para tus tres piezas de evidencia.</p>
+  <div class="marcador-ev no-descarga" id="marcadorEv"></div>
+  <div class="mapa-ev" id="linea"></div>
   <p class="mini">Si ya llenaste el mapa de evidencias del <a href="expediente-u1.html">cuadernillo de la unidad</a>, también puedes copiarlo de ahí: son las mismas.</p>
 
   <div class="tarjeta">
@@ -742,17 +786,29 @@
   /* ---------------- el suelo de la unidad 1 ---------------- */
   var CASILLAS = [
     { k:'s-contrato', t:'Contrato de gestión firmado',
-      d:'El papel en tu carpeta, o el contrato llenado en línea y descargado. Si falta: se entrega el jueves de la semana 5.' },
+      d:'El papel en tu carpeta, o el contrato llenado en línea y descargado. Si falta: se entrega el jueves de la semana 5.',
+      rot:"Dónde se llena, se descarga y se cierra",
+      e:[["Mi contrato de gestión · llénalo aquí y descarga tu copia", "contrato-de-gestion.html"], ["El expediente de la unidad · qué evidencia pide y cuál es su plan B", "expediente-u1.html"], ["Semana 2 · el día que se repartió el contrato para firmarlo en casa", "../semanas/semana-02.html"]] },
     { k:'s-primerno', t:'Mi primer no: la petición real, hecha y sistematizada',
-      d:'Sí, no o silencio valen igual; lo que cuenta es haber pedido de verdad. Si falta: se hace y se registra antes del viernes de la semana 5.' },
+      d:'Sí, no o silencio valen igual; lo que cuenta es haber pedido de verdad. Si falta: se hace y se registra antes del viernes de la semana 5.',
+      rot:"Dónde se diseñó la petición y dónde queda registrada",
+      e:[["Mi primer no · el gimnasio donde se diseña la petición", EJ + "semana-02/ejercicio-21-mi-primer-no.html"], ["Mi contrato de gestión · de ahí sale tu lista de personas puente", "contrato-de-gestion.html"], ["Ideas para el anti-currículum · el listado vivo del grupo", EJ + "semana-02/ideas-anti-cv.html"], ["El expediente de la unidad · la hoja «Mi primer no, sistematizado»", "expediente-u1.html"]] },
     { k:'s-reporte', t:'El reporte de mi ficha de observación está en el Drive',
-      d:'Carpeta S2, con los nombres de la pareja. Si falta: se sube antes del viernes de la semana 5.' },
+      d:'Carpeta S2, con los nombres de la pareja. Si falta: se sube antes del viernes de la semana 5.',
+      rot:"Con qué se levantó la ficha y de dónde sale el reporte",
+      e:[["Ficha de observación de La Florida · la que se llenó en pareja, por áreas", EJ + "semana-02/ficha-observacion-la-florida.html"], ["Mirar como gestor · la guía que entrena la mirada antes de bajar a la orilla", EJ + "semana-02/ejercicio-32-mirar-como-gestor.html"], ["Semana 2 · la primera salida a La Florida, y a qué carpeta va el reporte", "../semanas/semana-02.html"]] },
     { k:'s-consulta', t:'Participé en la consulta (o hice la compensatoria)',
-      d:'Tu registro en limpio. La compensatoria: dos entrevistas apreciativas en tu comunidad, con registro textual, antes del viernes de la semana 5.' },
+      d:'Tu registro en limpio. La compensatoria: dos entrevistas apreciativas en tu comunidad, con registro textual, antes del viernes de la semana 5.',
+      rot:"Dónde se hizo la consulta, y con qué se cubre si faltaste",
+      e:[["El día de la consulta · los siete aprietos de la orilla", EJ + "semana-04/ejercicio-11-el-dia-de-la-consulta.html"], ["El registro en limpio · el que vale como evidencia de tu estación", EJ + "semana-04/ejercicio-32-el-registro-en-limpio.html"], ["El guion de mi estación · con él se hacen las dos entrevistas de la compensatoria", EJ + "semana-03/ejercicio-32-el-guion-de-mi-estacion.html"], ["Semana 4 · el viernes de la consulta en la orilla, hora por hora", "../semanas/semana-04.html"]] },
     { k:'s-sobre', t:'Sellé mi sobre en la semana 1',
-      d:'Estuvo en el cartel y se abrió en la orilla. Si entraste tarde y no hubo sobre tuyo, se dice aquí y la casilla se da por cubierta.' },
+      d:'Estuvo en el cartel y se abrió en la orilla. Si entraste tarde y no hubo sobre tuyo, se dice aquí y la casilla se da por cubierta.',
+      rot:"Dónde se selló y dónde se abrió",
+      e:[["Semana 1 · el día que sellaste tu pronóstico y lo viste engraparse", "../semanas/semana-01.html"], ["El expediente de la unidad · ahí copiaste tu pronóstico antes de sellarlo", "expediente-u1.html"], ["Semana 4 · el sobre vuelve a la orilla y se abre junto al agua", "../semanas/semana-04.html"]] },
     { k:'s-minutos', t:'Los dos minutos del círculo en la orilla',
-      d:'Estuviste en el círculo y tu estructura quedó llena en la bitácora.' },
+      d:'Estuviste en el círculo y tu estructura quedó llena en la bitácora.',
+      rot:"Con qué se prepararon los dos minutos, y dónde se dijeron",
+      e:[["Mis dos minutos · la estructura de cinco huecos que se llena antes de hablar", EJ + "semana-04/ejercicio-21-mis-dos-minutos.html"], ["Los vecinos difíciles · el ensayo donde tu estación se probó antes de salir", EJ + "semana-04/ejercicio-41-los-vecinos-dificiles.html"], ["Semana 4 · el círculo de los dos minutos, mirando el agua", "../semanas/semana-04.html"]] },
     { k:'s-tickets', t:'Respondí los tickets de salida de la unidad',
       d:'Esta se marca bajo palabra: los tickets van sin nombre y nadie los audita. El sistema entero funciona sobre tu palabra.' }
   ];
@@ -778,31 +834,80 @@
     { v:'fallo', t:'Se me fue' }
   ];
 
-  /* ---------------- la línea de la orilla ----------------
-     Cuatro semanas producen más papel del que uno recuerda. Cada parada
-     dice qué dejó por escrito, y de ahí se surten las tres evidencias. */
-  var HITOS = [
-    { k:'h1', c:'Semana 1', t:'El sobre sellado',
-      d:'Escribiste las tres cosas que creías que la gente iba a pedir, firmaste el sobre y lo viste engraparse en el cartel del salón. Nadie lo abrió hasta la orilla.',
-      dejo:['mi sobre de la semana 1, abierto junto al agua', 'mis tres pronósticos, escritos de mi puño'] },
-    { k:'h2', c:'Semanas 1–2', t:'El contrato de gestión',
-      d:'El trato del curso, leído y firmado: qué pone cada quien, qué pasa si algo falla, y qué NO se va a hacer.',
-      dejo:['mi contrato de gestión firmado'] },
-    { k:'h3', c:'Semana 2', t:'La primera salida a La Florida',
-      d:'La primera vez que pisaste la orilla mirando como gestor y no como visitante: en pareja, con ficha, sin proponer nada.',
-      dejo:['mi ficha de observación de La Florida', 'mi reporte de la ficha, en el Drive del curso', 'mis fotos de lo que observé'] },
-    { k:'h4', c:'Semana 3', t:'El guion de la consulta',
-      d:'Tu equipo escribió las preguntas y luego se las auditó: preguntas que inducen, promesas de contrabando, supuestos de ciudad que en La Florida no aplican.',
-      dejo:['la hoja de consulta de mi equipo, con mi letra en ella', 'las preguntas que yo propuse para el guion', 'las trampas que cacé en el guion de la IA'] },
-    { k:'h5', c:'Semanas 3–4', t:'Mi primer no',
-      d:'Una petición real, a alguien de verdad, que podía decirte que no. Sí, no o silencio valían igual: lo que contaba era haber pedido.',
-      dejo:['mi petición sistematizada: a quién, por qué canal, qué pedí y qué contestaron', 'mi anti-currículum empezado'] },
-    { k:'h6', c:'Semana 4 · jueves', t:'El ensayo por estaciones',
-      d:'Los vecinos difíciles, repartidos en secreto, y tres rondas para que la hoja tronara en el aula y no en la orilla.',
-      dejo:['los ajustes del pizarrón, el acta del ensayo', 'mi hoja de consulta corregida después del ensayo'] },
-    { k:'h7', c:'Semana 4 · viernes', t:'La consulta en la orilla',
-      d:'El día entero: montaje, tu estación, el pliego de quién falta, el mapa marcado, el círculo de cierre junto al agua.',
-      dejo:['mi registro en limpio, con las frases textuales', 'la foto del mapa de mi estación con las marcas', 'mis dos minutos del círculo, en la bitácora', 'el pliego de quién falta, que me tocó cargar'] }
+  /* ---------------- el mapa de la unidad ----------------
+     Veinte capacidades, agrupadas por semana, cada una con el enlace a
+     donde se hizo: se entra a cotejar, o a hacerlo si faltó. Las rutas
+     están verificadas una por una contra el disco. */
+  var EJ = '../ejercicios/';
+  var EVID = [
+    { s:"Semana 1 · La presa y el fondo", l:[
+      { k:"e1", t:"Decidir, ante un movimiento concreto de un proyecto, si es manejo (llevarlo por dentro: planear, repartir, gastar bien, corregir) o gestión (conseguir por fuera: dinero, permisos, aliados, información)",
+        f:"Jueves de la semana 1 · manejo no es gestión",
+        e:[["Refranes de gestión", EJ + "semana-01/ejercicio-11-refranes-de-gestion.html"], ["¿Manejo o gestión?", EJ + "semana-01/ejercicio-22-manejo-o-gestion.html"]] },
+      { k:"e2", t:"Repartir el encargo de la presa en dos listas: qué trabajo hay que manejar y qué trabajo hay que gestionar, y sostener con argumentos por qué cada cosa cayó de ese lado",
+        f:"Jueves de la semana 1 · los dos oficios en la presa, la hoja grande del salón",
+        e:[["La semana 1, lámina por lámina", "../semanas/semana-01.html"]] },
+      { k:"e3", t:"Escribir tu pronóstico de lo que va a pedir la comunidad, firmarlo y sellarlo antes de haber ido a preguntar, sabiendo que el medido eres tú",
+        f:"Jueves de la semana 1 · el sobre",
+        e:[["Expediente de la unidad 1 · Dónde empiezo", "expediente-u1.html"]] },
+      { k:"e4", t:"Ubicar cualquier escena de un proyecto en su momento del ciclo (idea, diseño, manejo y evaluación, gestión) y detectar cuál capa se saltaron",
+        f:"Viernes de la semana 1 · el ciclo dibujado por capas",
+        e:[["El ciclo por capas", EJ + "semana-01/ejercicio-32-el-ciclo-por-capas.html"]] },
+      { k:"e5", t:"Encargarle trabajo a una IA con las cuatro piezas completas (contexto, encargo, formato y ejemplo) y diagnosticar qué pieza le falta a un prompt flojo",
+        f:"Viernes de la semana 1 · la máquina por dentro y el sobre de la máquina",
+        e:[["Anatomía del prompt", EJ + "semana-01/ejercicio-41-anatomia-del-prompt.html"]] },
+    ]},
+    { s:"Semana 2 · La agencia y la primera orilla", l:[
+      { k:"e6", t:"Encontrar la puerta oculta de una situación atorada: nombrar la movida concreta, con destinatario y con fecha, que crea una opción nueva en vez de esperar, repetir lo que ya no funcionó o pasarle el problema a otro",
+        f:"Jueves de la semana 2 · la agencia se entrena, en tríos",
+        e:[["Las puertas ocultas", EJ + "semana-02/ejercicio-11-las-puertas-ocultas.html"]] },
+      { k:"e7", t:"Pedir algo real a una persona con nombre que puede negármelo, redactar la petición en cuatro líneas sin disculparme por existir, y dejar escrito de antemano qué haré con el no",
+        f:"Jueves de la semana 2 · el estreno de la campana del no",
+        e:[["Mi primer no", EJ + "semana-02/ejercicio-21-mi-primer-no.html"], ["Ideas para el anti-currículum", EJ + "semana-02/ideas-anti-cv.html"]] },
+      { k:"e8", t:"Firmar dos compromisos verificables para el semestre —contactar a alguien de mi lista de personas puente y desarrollar una habilidad— cada uno con su cómo y su cuándo",
+        f:"Jueves de la semana 2 · el contrato de gestión se va a casa",
+        e:[["El contrato de gestión", "contrato-de-gestion.html"]] },
+      { k:"e9", t:"Mirar la orilla sin anunciar ni prometer nada, y anotar lo que se ve separando el dato de la conclusión: quién está, por dónde camina la gente de verdad, qué sombra hay a esta hora y qué no está",
+        f:"Viernes de la semana 2 · la primera salida a La Florida",
+        e:[["Mirar como gestor", EJ + "semana-02/ejercicio-32-mirar-como-gestor.html"]] },
+      { k:"e10", t:"Levantar en pareja la evidencia de un área de la presa —medirla con cinta, contar quién está en tres momentos, registrar peligros, basura y huellas de uso— y entregar el reporte que se cruza con el de las otras áreas",
+        f:"Viernes de la semana 2 · la ficha por áreas, en la orilla",
+        e:[["Ficha de observación de La Florida", EJ + "semana-02/ficha-observacion-la-florida.html"]] },
+    ]},
+    { s:"Semana 3 · Preguntar sin prometer", l:[
+      { k:"e11", t:"Diagnosticar una pregunta de consulta y nombrar su trampa —inducida, promesa de contrabando, cerrada, doble o jerga— y reescribirla neutra",
+        f:"Jueves de la semana 3 · el oficio de preguntar, con las tres pruebas encima de cada pregunta",
+        e:[["La pregunta tramposa", EJ + "semana-03/ejercicio-11-la-pregunta-tramposa.html"], ["Cazarle las trampas a la IA", EJ + "semana-03/ejercicio-21-cazar-a-la-ia.html"]] },
+      { k:"e12", t:"Auditar un guion de consulta escrito por una IA y cazarle las trampas que la buena redacción esconde",
+        f:"Jueves de la semana 3 · el gimnasio de cazarle las trampas a la IA",
+        e:[["Cazarle las trampas a la IA", EJ + "semana-03/ejercicio-21-cazar-a-la-ia.html"], ["El guion de entrevista, con la IA de ayudante", EJ + "semana-03/guion-de-entrevista-con-ia.html"]] },
+      { k:"e13", t:"Formular una pregunta apreciativa: pedir la escena de un día que salió bien en vez del pedido de una obra",
+        f:"Jueves de la semana 3 · la entrevista apreciativa, antes de llevar las candidatas al pizarrón",
+        e:[["La pregunta tramposa", EJ + "semana-03/ejercicio-11-la-pregunta-tramposa.html"]] },
+      { k:"e14", t:"Nombrar por grupos a la comunidad de La Florida y convertir esa lista en el pliego de quién falta, para ir a buscar a los de casilla vacía",
+        f:"Viernes de la semana 3 · el diseño fino, cuando se armó en plenaria la lista nombrada",
+        e:[["La semana 3, lámina por lámina", "../semanas/semana-03.html"]] },
+      { k:"e15", t:"Armar el guion completo de mi estación: apertura honesta sin venta, preguntas del banco, registro textual y cierre sin promesas",
+        f:"Viernes de la semana 3 · el reparto de estaciones y roles, antes del ensayo",
+        e:[["El guion de mi estación", EJ + "semana-03/ejercicio-32-el-guion-de-mi-estacion.html"], ["El guion de entrevista, con la IA de ayudante", EJ + "semana-03/guion-de-entrevista-con-ia.html"]] },
+    ]},
+    { s:"Semana 4 · El ensayo, la consulta y el sobre", l:[
+      { k:"e16", t:"Correr el guion completo de tu estación contra un vecino difícil y corregir la hoja ahí mismo: la pregunta que se cayó, la casilla que le faltaba, lo que el registro se comió",
+        f:"Jueves de la semana 4 · el ensayo por estaciones, con los vecinos difíciles repartidos en secreto",
+        e:[["Los vecinos difíciles", EJ + "semana-04/ejercicio-41-los-vecinos-dificiles.html"]] },
+      { k:"e17", t:"Atender a un vecino sin prometerle nada: contestar de frente el asador que \"dicen que van a poner\", la cifra del fondo y al que ya vio pasar tres programas, y soltar el código de auxilio cuando la conversación te rebasa",
+        f:"Jueves de la semana 4 · el gimnasio de los aprietos, y el viernes frente a la gente en la orilla",
+        e:[["El día de la consulta", EJ + "semana-04/ejercicio-11-el-dia-de-la-consulta.html"]] },
+      { k:"e18", t:"Contar en público, en dos minutos y con la libreta en la mano, lo que escuchó tu estación: lo que más se repitió, la frase textual que no esperaban, lo que marca el mapa, sin opinar y sin proponer soluciones",
+        f:"Viernes de la semana 4 · el círculo de los dos minutos, junto al agua, primer peldaño de la escalera",
+        e:[["Mis dos minutos", EJ + "semana-04/ejercicio-21-mis-dos-minutos.html"]] },
+      { k:"e19", t:"Pasar tu registro crudo a limpio la misma noche: datos duros, frases textuales entre comillas, conteo de menciones, la respuesta incómoda, las ausencias y las promesas accidentales que hay que desmontar",
+        f:"Viernes de la semana 4 · la misma noche de la consulta, antes de que se vayan los detalles",
+        e:[["El registro en limpio", EJ + "semana-04/ejercicio-32-el-registro-en-limpio.html"]] },
+      { k:"e20", t:"Poner tu pronóstico sellado junto a lo que la comunidad pidió de verdad, y nombrar en qué le atinaste y en qué no sin maquillar el fallo",
+        f:"Viernes de la semana 4 · cuando el sobre volvió a la orilla y se abrió junto al agua",
+        e:[["La semana 4, lámina por lámina", "../semanas/semana-04.html"], ["El expediente de la unidad · ahí copiaste tu pronóstico", "expediente-u1.html"]] },
+    ]},
   ];
 
   /* ---------------- el ejemplo, paso por paso ---------------- */
@@ -902,21 +1007,40 @@
     });
     cajaSuelo.appendChild(oculto);
     cajaSuelo.appendChild(b);
+    /* Dónde se hizo: para entrar a cotejar, o a hacerlo si faltó. */
+    if (c.e && c.e.length) {
+      var liga = document.createElement('div');
+      liga.className = 'casilla-liga no-descarga';
+      liga.innerHTML = '<span class="rot">' + esc(c.rot || 'dónde se hizo') + '</span>' +
+        c.e.map(function (x) { return '<a href="' + esc(x[1]) + '">' + esc(x[0]) + '</a>'; }).join('');
+      cajaSuelo.appendChild(liga);
+    }
     c._btn = b; c._chk = oculto;
   });
 
   function cuentaSuelo() {
     return CASILLAS.filter(function (c) { return c._chk.checked; }).length;
   }
+  var presaNivel = document.getElementById('presaNivel');
+
   function pintaPiso() {
-    var n = cuentaSuelo(), T = CASILLAS.length;
+    var n = cuentaSuelo(), T = CASILLAS.length, f = T - n;
+    /* Cada casilla es una compuerta, y lleva su nombre encima: al pasar el dedo
+       o el ratón se sabe cuál es la que está dejando ir el agua. */
     duelasEl.innerHTML = CASILLAS.map(function (c) {
-      return '<div class="duela' + (c._chk.checked ? '' : ' falta') + '"></div>';
+      return '<div class="compuerta ' + (c._chk.checked ? 'puesta' : 'falta') +
+             '" title="' + esc(c.t) + '"></div>';
     }).join('');
-    pisoEl.classList.toggle('completo', n === T);
-    pisoLey.textContent = n === 0 ? 'Todavía no marcas ninguna casilla.'
-      : n < T ? n + ' de ' + T + ' cubiertas. ' + (T - n === 1 ? 'Falta una: anótala' : 'Faltan ' + (T - n) + ': anótalas') + ' abajo, con fecha.'
-      : 'Suelo completo. No repruebas. Lo que sigue decide cuánto más.';
+    pisoEl.classList.toggle('llena', n === T);
+    /* El nivel sube con cada compuerta cerrada: se ve el progreso, no solo el final. */
+    pisoEl.querySelector('.embalse').style.height = (40 + Math.round(n / T * 58)) + 'px';
+    presaNivel.textContent = n === T ? 'el embalse, lleno' : 'el embalse';
+    pisoLey.textContent = n === 0
+      ? 'Todavía no cierras ninguna compuerta: el agua se va toda.'
+      : n < T
+        ? n + ' de ' + T + ' cerradas. ' + (f === 1 ? 'Por la que falta' : 'Por las ' + f + ' que faltan') +
+          ' se sigue yendo el agua: ' + (f === 1 ? 'anótala' : 'anótalas') + ' abajo, con fecha.'
+        : 'Las siete cerradas: la presa retiene. Eso es no reprobar, y nada más. Lo que sigue decide cuánto más.';
     cajaFalta.style.display = (n > 0 && n < T) ? 'block' : 'none';
     pintaRail();
   }
@@ -984,46 +1108,99 @@
      No pide marcar nada: sirve para acordarse. Cada parada dice qué dejó
      por escrito, y «lo tengo» lo manda al primer hueco de evidencia. */
   var lineaEl = document.getElementById('linea');
+  var marcadorEv = document.getElementById('marcadorEv');
   var EVPARES = [['ev1q','ev1d'],['ev2q','ev2d'],['ev3q','ev3d']];
+  var TOTAL_EV = EVID.reduce(function (a, g) { return a + g.l.length; }, 0);
 
-  HITOS.forEach(function (h) {
-    var d = document.createElement('div');
-    d.className = 'hito';
-    d.innerHTML =
-      '<button type="button" class="cab no-descarga">' +
-        '<span class="cuando">' + esc(h.c) + '</span>' +
-        '<span class="qpaso">' + esc(h.t) + '</span>' +
-      '</button>' +
-      '<div class="cuerpo">' +
-        '<p>' + esc(h.d) + '</p>' +
-        '<span class="dejo">Lo que dejó por escrito</span>' +
-        '<ul>' + h.dejo.map(function (x) {
-          return '<li>' + esc(x.charAt(0).toUpperCase() + x.slice(1)) +
-                 ' <button type="button" class="usar no-descarga" data-t="' + esc(x) + '">lo tengo</button></li>';
-        }).join('') + '</ul>' +
-      '</div>';
-    d.querySelector('.cab').addEventListener('click', function () { d.classList.toggle('abierto'); });
-    Array.prototype.forEach.call(d.querySelectorAll('.usar'), function (bt) {
-      bt.addEventListener('click', function () {
-        var texto = bt.getAttribute('data-t');
+  /* Cada capacidad se marca sí o todavía no, trae los enlaces a donde se hizo,
+     y si la marcas se ofrece para llenar una de tus tres piezas. */
+  EVID.forEach(function (g) {
+    var caja = document.createElement('div');
+    caja.className = 'grupo-ev';
+    caja.innerHTML = '<h4>' + esc(g.s) + '</h4>';
+    g.l.forEach(function (f) {
+      var d = document.createElement('div');
+      d.className = 'cap';
+      d.innerHTML =
+        '<span class="qsé">' + esc(f.t) + '</span>' +
+        '<span class="donde-fue">' + esc(f.f) + '</span>' +
+        '<input type="hidden" data-exp="' + f.k + '">' +
+        '<div class="ops no-descarga"></div>' +
+        '<label class="con-que"><span>¿Con qué lo demuestras?</span>' +
+        '<input type="text" data-exp="' + f.k + '-t" placeholder="La pieza que se puede abrir: la hoja, la foto, el reporte, la página de tu bitácora."></label>' +
+        (f.e.length
+          ? '<div class="ligas no-descarga">' + f.e.map(function (x) {
+              return '<a href="' + esc(x[1]) + '">' + esc(x[0]) + '</a>';
+            }).join('') + '</div>'
+          : '');
+      var ops = d.querySelector('.ops');
+      [['si','Sí lo sé hacer'], ['no','Todavía no']].forEach(function (o) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('data-v', o[0]);
+        b.textContent = o[1];
+        b.addEventListener('click', function () {
+          pon(f.k, val(f.k) === o[0] ? '' : o[0]);
+          pintaEv();
+        });
+        ops.appendChild(b);
+      });
+      var usar = document.createElement('button');
+      usar.type = 'button';
+      usar.className = 'usar no-descarga';
+      usar.textContent = 'usarla de evidencia';
+      usar.addEventListener('click', function () {
+        var texto = val(f.k + '-t');
+        if (!texto) {
+          var campoT = f._el.querySelector('[data-exp="' + f.k + '-t"]');
+          usar.textContent = 'primero dime con qué';
+          destaca(campoT); if (campoT) campoT.focus();
+          setTimeout(function () { usar.textContent = 'usarla de evidencia'; }, 3000);
+          return;
+        }
         var hueco = null;
         for (var i = 0; i < EVPARES.length; i++) {
-          if (!val(EVPARES[i][0])) { hueco = EVPARES[i]; break; }
           if (val(EVPARES[i][0]) === texto) { hueco = 'ya'; break; }
+          if (!val(EVPARES[i][0])) { hueco = EVPARES[i]; break; }
         }
-        if (hueco === 'ya') { bt.textContent = 'ya está abajo'; bt.disabled = true; return; }
-        if (!hueco) { bt.textContent = 'ya tienes tres'; return; }
+        if (hueco === 'ya') { usar.textContent = 'ya está abajo'; usar.disabled = true; return; }
+        if (!hueco) { usar.textContent = 'ya tienes tres'; return; }
         pon(hueco[0], texto);
-        d.classList.add('tengo');
-        bt.textContent = 'puesta abajo ✓';
-        bt.disabled = true;
+        usar.textContent = 'puesta abajo ✓';
+        usar.disabled = true;
         pintaDonde(); pintaRail();
         var campo = document.querySelector('[data-exp="' + hueco[1] + '"]');
         if (campo) { try { campo.scrollIntoView({ behavior:'smooth', block:'center' }); } catch (e) {} campo.focus(); }
       });
+      d.appendChild(usar);
+      f._el = d;
+      f._usar = usar;
+      caja.appendChild(d);
     });
-    lineaEl.appendChild(d);
+    lineaEl.appendChild(caja);
   });
+
+  function pintaEv() {
+    var si = 0, no = 0;
+    EVID.forEach(function (g) {
+      g.l.forEach(function (f) {
+        var v = val(f.k);
+        if (v === 'si') si++; else if (v === 'no') no++;
+        f._el.classList.toggle('si', v === 'si');
+        f._el.classList.toggle('no', v === 'no');
+        Array.prototype.forEach.call(f._el.querySelectorAll('.ops button'), function (b) {
+          b.classList.toggle('on', b.getAttribute('data-v') === v);
+        });
+        f._el.querySelector('.con-que').style.display = (v === 'si') ? 'block' : 'none';
+        f._usar.style.display = (v === 'si' && val(f.k + '-t')) ? '' : 'none';
+      });
+    });
+    marcadorEv.innerHTML = si
+      ? '<b>' + si + ' de ' + TOTAL_EV + '</b> marcadas como que sí sabes hacer' +
+        (no ? ' · <b>' + no + '</b> que todavía no, y esas valen en la conversación' : '')
+      : 'Ninguna marcada todavía. No hay que marcarlas todas: hay que ser honesto.';
+    pintaRail();
+  }
 
   /* ---------------- de dónde salió: Drive, bitácora, salón ---------------- */
   var PREFIJOS = ['Drive del curso, carpeta ', 'Mi bitácora, página ', 'En el salón: '];
@@ -1190,6 +1367,19 @@
         out.push({ id:b.k, tipo:'una brújula que se me fue', t:b.reg.toLowerCase() + ': ' + c });
       }
     });
+    var noSe = [];
+    EVID.forEach(function (g) { g.l.forEach(function (f) { if (val(f.k) === 'no') noSe.push(f.t); }); });
+    if (noSe.length) out.push({ id:'mapano', tipo:'del mapa de la unidad',
+      t:'de las ' + TOTAL_EV + ' cosas de la unidad hay ' + noSe.length +
+        (noSe.length === 1 ? ' que todavía no sé hacer: ' : ' que todavía no sé hacer, entre ellas: ') +
+        noSe[0].charAt(0).toLowerCase() + noSe[0].slice(1) });
+    var siSe = 0, conQue = [];
+    EVID.forEach(function (g) { g.l.forEach(function (f) {
+      if (val(f.k) === 'si') { siSe++; if (val(f.k + '-t')) conQue.push(val(f.k + '-t')); }
+    }); });
+    if (siSe) out.push({ id:'mapasi', tipo:'del mapa de la unidad',
+      t:'de las ' + TOTAL_EV + ' cosas que la unidad enseñó a hacer marqué ' + siSe + ' que sí sé hacer hoy' +
+        (conQue.length ? ', y ' + conQue.length + ' con la pieza que lo demuestra' : '') });
     if (val('noes-n') && val('noes-n') !== '0') out.push({ id:'noes', tipo:'mi anti-currículum',
       t:'pedí algo de verdad ' + (val('noes-n') === '1' ? 'una vez' : val('noes-n') + ' veces') + ' en esta unidad' });
     if (val('primerno')) out.push({ id:'pn', tipo:'mi primer no', t:val('primerno') });
@@ -1555,7 +1745,8 @@
       case 2: return cuentaSuelo() > 0;
       case 3: return !!(val('sob-p1') || val('sob-aciertos') || val('sob-nadie'));
       case 4: return !!(val('frase-cita') || BRUJULAS.some(function (b) { return val(b.k); }));
-      case 5: return !!(val('ev1q') || val('ev-extra'));
+      case 5: return !!(val('ev1q') || val('ev-extra')) ||
+        EVID.some(function (g) { return g.l.some(function (f) { return val(f.k); }); });
       case 6: return !!(val('costo') || val('nosé') || val('primerno') || val('noes-n'));
       case 7: return !!(val('num') && val('porque'));
       case 8: return !!val('jueves');
@@ -1631,6 +1822,7 @@
   pintaPiso();
   pintaSobre();
   pintaBrujulas();
+  pintaEv();
   pintaNoes();
   pintaDonde();
   pintaNumero();

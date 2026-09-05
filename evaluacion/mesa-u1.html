@@ -351,6 +351,32 @@
     ['s-minutos', 'Los dos minutos'],
     ['s-tickets', 'Tickets de salida']
   ];
+  /* Los rótulos cortos del mapa de la unidad, para poder decir en la ficha
+     CUÁLES marcó que todavía no sabe hacer. El texto largo vive en la
+     autoevaluación; aquí basta el nombre. */
+  var CAPS = {
+    e1: "Decidir, ante un movimiento concreto de un proyecto, si es manejo o…",
+    e2: "Repartir el encargo de la presa en dos listas",
+    e3: "Escribir tu pronóstico de lo que va a pedir la comunidad, firmarlo y…",
+    e4: "Ubicar cualquier escena de un proyecto en su momento del ciclo y…",
+    e5: "Encargarle trabajo a una IA con las cuatro piezas completas y…",
+    e6: "Encontrar la puerta oculta de una situación atorada",
+    e7: "Pedir algo real a una persona con nombre que puede negármelo,…",
+    e8: "Firmar dos compromisos verificables para el semestre cada uno con su…",
+    e9: "Mirar la orilla sin anunciar ni prometer nada",
+    e10: "Levantar en pareja la evidencia de un área de la presa y entregar el…",
+    e11: "Diagnosticar una pregunta de consulta y nombrar su trampa y…",
+    e12: "Auditar un guion de consulta escrito por una IA y cazarle las trampas…",
+    e13: "Formular una pregunta apreciativa",
+    e14: "Nombrar por grupos a la comunidad de La Florida y convertir esa lista…",
+    e15: "Armar el guion completo de mi estación",
+    e16: "Correr el guion completo de tu estación contra un vecino difícil y…",
+    e17: "Atender a un vecino sin prometerle nada",
+    e18: "Contar en público, en dos minutos y con la libreta en la mano, lo que…",
+    e19: "Pasar tu registro crudo a limpio la misma noche",
+    e20: "Poner tu pronóstico sellado junto a lo que la comunidad pidió de verdad",
+  };
+
   var SOBRE = {
     '0': ['v-bien', 'No le atinó a ninguna. La consulta hizo justo lo que tenía que hacer.'],
     '1': ['v-bien', 'Le atinó una de tres. Lo normal y lo sano.'],
@@ -668,6 +694,20 @@
     if (faltan.length && faltan.length <= 2 && !(d['suelo-falta'] || '').trim())
       C.push(['«' + faltan.map(function (c) { return c[1]; }).join(' y ') + ': ¿qué día?»',
               'Le falta' + (faltan.length === 1 ? '' : 'n') + ' del suelo y no escribió cuándo lo cubre. Un pendiente con fecha es un plan; sin fecha es un hueco.']);
+    var mSi = 0, mNo = 0, mPieza = 0;
+    Object.keys(CAPS).forEach(function (k) {
+      if (d[k] === 'si') { mSi++; if (d[k + '-t']) mPieza++; }
+      else if (d[k] === 'no') mNo++;
+    });
+    if (mSi && !mPieza)
+      C.push(['«Marcaste ' + mSi + ' cosas que sabes hacer. Enséñame una.»',
+              'No le puso pieza a ninguna. Marcar es gratis; enseñar es lo que cuesta, y es lo que se le va a pedir en diciembre.']);
+    if (mSi + mNo === 0)
+      C.push(['«Vamos juntos por el mapa de la unidad, ahorita.»',
+              'No marcó ninguna de las ' + Object.keys(CAPS).length + ' capacidades. O no llegó a ese paso, o no supo qué contestar: las dos se arreglan haciéndolo enfrente.']);
+    if (mNo === 0 && mSi > 15)
+      C.push(['«¿Ninguna de las veinte se te dificulta? Piénsalo otra vez.»',
+              'Marcó ' + mSi + ' de ' + Object.keys(CAPS).length + ' y ni una en "todavía no". Puede ser cierto, y casi nunca lo es.']);
     if (fallo.length && !sinDecir.length)
       C.push(['«Dijiste que ' + fallo[0][1] + ' se te fue, y contaste cuándo. ¿Qué habrías dicho en su lugar?»',
               'Nombró el fallo con su momento, que es la parte difícil. Lo que falta es la reparación, y esa se ensaya en voz alta aquí mismo.']);
@@ -753,6 +793,33 @@
         (evs.length ? '<ul class="evlista">' + evs.join('') + '</ul>' : '<span class="nada">no nombró ninguna</span>') +
         (d['ev-extra'] ? '<p style="margin-top:.5rem"><strong>Sin que nadie se lo pidiera:</strong> ' + esc(d['ev-extra']) + '</p>' : '') +
         '</div>';
+
+      /* El mapa de la unidad: 20 capacidades que el estudiante marcó sí o
+         todavía no. Lo que rinde en la conversación son las que dijo que no. */
+      var evSi = [], evNo = [];
+      Object.keys(CAPS).forEach(function (k) {
+        if (d[k] === 'si') evSi.push({ k:k, t:CAPS[k], c:d[k + '-t'] || '' });
+        else if (d[k] === 'no') evNo.push({ k:k, t:CAPS[k] });
+      });
+      if (evSi.length || evNo.length) {
+        var conPieza = evSi.filter(function (x) { return x.c; }).length;
+        izq += '<div class="bloque"><span class="rotb">Su mapa de la unidad</span>' +
+          '<p class="resu"><b>' + evSi.length + '</b> de ' + Object.keys(CAPS).length +
+          ' marcadas como que sí sabe hacer' +
+          (conPieza ? ', <b>' + conPieza + '</b> con la pieza que lo demuestra' : ', ninguna con pieza que lo demuestre') +
+          (evNo.length ? ' · <b>' + evNo.length + '</b> que todavía no' : '') + '</p>' +
+          (evNo.length
+            ? '<span class="rots">Lo que dice que todavía no sabe hacer</span><ul class="evlista">' +
+              evNo.map(function (x) { return '<li><b>' + esc(x.t) + '</b></li>'; }).join('') + '</ul>'
+            : '') +
+          (conPieza
+            ? '<span class="rots">Lo que puede enseñar</span><ul class="evlista">' +
+              evSi.filter(function (x) { return x.c; }).map(function (x) {
+                return '<li><b>' + esc(x.t) + '</b><span>' + esc(x.c) + '</span></li>';
+              }).join('') + '</ul>'
+            : '') +
+          '</div>';
+      }
 
       if (d.costo) izq += '<div class="bloque"><span class="rotb">Lo que le costó</span><p>' + esc(d.costo) + '</p></div>';
       if (d.primerno) izq += '<div class="bloque"><span class="rotb">Su primer no</span><p>' + esc(d.primerno) + '</p></div>';
@@ -968,6 +1035,17 @@
       var v = (a.datos['sob-aciertos'] || '').toString();
       if (SOBRE[v]) sob[v + ' de 3'] = (sob[v + ' de 3'] || 0) + 1;
     });
+    /* Lo que más gente marcó como "todavía no": es la clase que falta dar. */
+    var atoradas = {};
+    con.forEach(function (a) {
+      Object.keys(CAPS).forEach(function (k) {
+        if (a.datos[k] === 'no') atoradas[CAPS[k]] = (atoradas[CAPS[k]] || 0) + 1;
+      });
+    });
+    var topAtoradas = Object.keys(atoradas).sort(function (x, y) { return atoradas[y] - atoradas[x]; }).slice(0, 5);
+    var mapaAtorado = {};
+    topAtoradas.forEach(function (t) { mapaAtorado[t] = atoradas[t]; });
+
     var sinHueco = con.filter(function (a) { return !(a.datos['nosé'] || '').trim(); }).length;
     var sinDonde = con.filter(function (a) {
       return !(a.datos.ev1d || a.datos.ev2d || a.datos.ev3d);
@@ -1002,6 +1080,9 @@
         ? barras(falta, 'Casillas del suelo que faltan', 'Sobre ' + con.length + ' autoevaluaciones leídas.')
         : '<h3>Casillas del suelo que faltan</h3><p class="mini">Ninguna: los ' + con.length + ' que leíste traen el suelo completo.</p>') +
       barras(sob, 'Cómo les fue con el sobre', 'Si casi todos atinaron tres, la consulta o la hoja preguntaron confirmando.') +
+      (topAtoradas.length
+        ? barras(mapaAtorado, 'Lo que más se les atoró', 'De las ' + Object.keys(CAPS).length + ' capacidades de la unidad, las que más gente marcó como «todavía no». Esta lista es tu programa de repaso.')
+        : '') +
       '<h3>Dos cosas que conviene mirar</h3>' +
       '<p><strong>' + sinHueco + ' de ' + con.length + '</strong> no nombraron nada que todavía no sepan hacer. ' +
       'Es el músculo más difícil y el que más rinde en diciembre: vale una vuelta en clase.</p>' +
