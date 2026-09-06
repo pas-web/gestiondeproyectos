@@ -131,11 +131,14 @@
                   border-bottom:1px solid #E0CFA8; clip-path:polygon(0 0, 100% 0, 50% 100%);
                   transform-origin:top center; transition:transform .9s cubic-bezier(.5,-.25,.4,1.2); z-index:3; }
   .ritual.abierto .sobre-solapa { transform:rotateX(-172deg); }
-  .sello { position:absolute; left:50%; top:52%; transform:translate(-50%,-50%); width:46px; height:46px;
+  /* Acotado al sobre a propósito: la barra de curso.js también trae un
+     span.sello («Se guarda solo…») y con la regla suelta salía como un
+     óvalo naranja encimado en la lectura. */
+  .sobre-obj .sello { position:absolute; left:50%; top:52%; transform:translate(-50%,-50%); width:46px; height:46px;
            border-radius:50%; background:var(--arena); color:#3A2A08; display:flex; align-items:center;
            justify-content:center; font-family:Georgia,serif; font-weight:bold; font-size:.95rem;
            box-shadow:0 2px 5px rgba(0,0,0,.2); z-index:4; transition:opacity .4s; }
-  .ritual.abierto .sello { opacity:0; }
+  .ritual.abierto .sobre-obj .sello { opacity:0; }
   .sobre-firma { position:absolute; left:0; right:0; bottom:.7rem; z-index:2; font-family:Georgia,serif;
                  font-style:italic; color:#7A6740; font-size:.9rem; }
   .ritual .cerrado p { color:var(--gris); font-size:.95rem; max-width:34rem; margin:.4rem auto; }
@@ -358,19 +361,36 @@
   .pie-pasos button:disabled { opacity:.35; cursor:default; }
   body { padding-bottom:4.5rem; }
 
-  /* La barra de curso.js (descargar / imprimir / borrar) es fija abajo a la
-     derecha y chocaba con la navegación por pasos: se sube por encima. */
-  .exp-barra { bottom:4.6rem !important; z-index:44 !important; }
-  /* En pantalla chica la barra se aprieta a un solo renglón: esta página ya
-     tiene su propia navegación abajo y entre las dos se comían la lectura. */
-  @media (max-width:560px) {
-    .exp-barra { padding:.35rem .5rem; gap:.3rem; }
-    .exp-barra .sello { display:none; }
-    .exp-barra button { padding:.35rem .7rem !important; font-size:.82rem !important; }
-  }
+  /* La barra de curso.js (descargar / imprimir / borrar) nace fija abajo a la
+     derecha y se encimaba con la lectura desde la portada, sobre todo en el
+     celular. Aquí no flota: al arrancar se muda al paso 9, que es donde se
+     guarda la copia, y ahí se ve seguida, como parte de la página. */
+  .exp-barra { display:none !important; }
+  #barra-final .exp-barra { display:flex !important; position:static !important; box-shadow:none !important;
+                            max-width:none !important; margin:.6rem 0 0; padding:.6rem .7rem; }
+  #barra-final .exp-barra .sello { width:100%; font-size:.78rem; }
 </style>
 </head>
 <body data-cuadernillo="autoeval-u1">
+<script>
+/* Modo recorrido (?demo): lo abre autoevaluacion-u1-recorrido.html dentro de
+   un teléfono dibujado. Corre antes que curso.js a propósito: cambia la llave
+   de guardado, para no pisar la autoevaluación real del estudiante, y deja en
+   esa llave el ejemplo que llega en el hash (#ejemplo=base64, el mismo formato
+   del respaldo), que curso.js restaura al arrancar como si fuera lo guardado. */
+(function () {
+  if (!/(^|[?&])demo(=|&|$)/.test(location.search)) return;
+  document.body.setAttribute('data-cuadernillo', 'autoeval-u1-demo');
+  var m = (location.hash || '').match(/ejemplo=([^&]+)/);
+  if (!m) return;
+  try {
+    var bin = atob(decodeURIComponent(m[1])), a = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+    localStorage.setItem('gestion-exp-autoeval-u1-demo', JSON.stringify(JSON.parse(new TextDecoder().decode(a))));
+  } catch (e) {}
+  try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+})();
+</script>
 
 <header class="barra-pasos no-descarga">
   <div class="caja">
@@ -401,7 +421,7 @@
 
   <div class="tarjeta">
     <p style="margin:.1rem 0"><strong>Cómo funciona esta pantalla</strong></p>
-    <p class="mini" style="margin:.35rem 0 0">Nueve pasos que se pasan con el dedo o con el botón de abajo. <strong>Se guarda solo</strong> en este navegador mientras escribes, no viaja a ningún lado, y con la barra de abajo puedes descargar tu copia o imprimirla. Tardas unos quince minutos, con tu registro en limpio a la vista.</p>
+    <p class="mini" style="margin:.35rem 0 0">Nueve pasos que se pasan con el dedo o con el botón de abajo. <strong>Se guarda solo</strong> en este navegador mientras escribes, no viaja a ningún lado, y al final, en el paso 9, puedes descargar tu copia o imprimirla. Tardas unos quince minutos, con tu registro en limpio a la vista.</p>
     <p class="mini" style="margin:.5rem 0 0">Casi todos los pasos traen un botón <strong>Ver un ejemplo</strong>: es la autoevaluación de una gestora inventada, llenada completa. No la copies —se nota—, pero míralo antes de escribir el tuyo.</p>
   </div>
 
@@ -671,7 +691,9 @@
 <section class="paso" data-titulo="Cierre">
   <div class="curso">Paso 9 de 9</div>
   <h2>Ya está</h2>
-  <p class="entrada">Guarda tu copia con el botón de abajo a la derecha —te baja un archivo con todo lo que escribiste— y mándatela a tu propio correo o WhatsApp. En diciembre vas a querer releer esto, y va a ser lo más útil que tengas.</p>
+  <p class="entrada">Guarda tu copia con el botón de aquí abajo —te baja un archivo con todo lo que escribiste— y mándatela a tu propio correo o WhatsApp. En diciembre vas a querer releer esto, y va a ser lo más útil que tengas.</p>
+  <!-- Aquí se muda la barra de curso.js (descargar / imprimir / borrar) al arrancar. -->
+  <div id="barra-final" class="no-descarga"></div>
 
   <div class="clave"><b>Si quieres, mándasela al profesor.</b> No hace falta: nadie la recoge y esto no produce número. Pero si quieres su lectura el jueves, mándala y la va a tener enfrente cuando conversen.
     <div class="fila"><button type="button" class="btn fuerte no-descarga" id="btn-enviar">Mandársela al profesor</button></div>
@@ -728,7 +750,10 @@
   'use strict';
   function arranca() {
 
-  var CLAVE = 'gestion-exp-autoeval-u1';
+  /* Con ?demo el arranque del body cambia data-cuadernillo a autoeval-u1-demo:
+     la llave sale de ahí para que curso.js y esto guarden en el mismo lugar. */
+  var DEMO = /(^|[?&])demo(=|&|$)/.test(location.search);
+  var CLAVE = 'gestion-exp-' + document.body.getAttribute('data-cuadernillo');
   var CLAVE_CUAD = 'gestion-exp-u1';
   var PREFIJO = 'GEST1·';
 
@@ -1447,6 +1472,7 @@
 
   /* ---------------- heredar del cuadernillo ---------------- */
   (function heredar() {
+    if (DEMO) return; /* el recorrido no toca el cuadernillo real del estudiante */
     var caja = document.getElementById('heredar');
     var cuad = {};
     try { cuad = JSON.parse(localStorage.getItem(CLAVE_CUAD) || '{}') || {}; } catch (e) {}
@@ -1645,6 +1671,18 @@
     btnEnviar.disabled = true;
     btnEnviar.textContent = 'Mandando\u2026';
 
+    if (DEMO) {
+      /* En el recorrido no sale nada de aqu\u00ed: se ense\u00f1a qu\u00e9 pasa y ya. */
+      setTimeout(function () {
+        btnEnviar.disabled = false;
+        pon('enviado', new Date().toLocaleDateString('es-MX', { day:'numeric', month:'long', year:'numeric' }));
+        btnEnviar.textContent = 'Volver a mandarla';
+        avisa('ok', 'As\u00ed se ve cuando sale', 'Esto es un recorrido: no se mand\u00f3 nada. En tu autoevaluaci\u00f3n de verdad, aqu\u00ed le llega al profesor y nadie m\u00e1s la ve.');
+        pistaEnvio.textContent = 'En el recorrido no sale de aqu\u00ed. En la de verdad, solo la ve el profesor.';
+      }, 900);
+      return;
+    }
+
     var datos = {
       tipo: TIPO,
       nombre: val('nombre'),
@@ -1771,6 +1809,7 @@
     if (actual === 7) { pintaBandeja(); pintaChecks(); }
     pintaRail();
     window.scrollTo(0, 0);
+    avisaRecorrido();
   }
   btnAtras.addEventListener('click', function () { ir(actual - 1); });
   btnSig.addEventListener('click', function () { ir(actual + 1); });
@@ -1802,6 +1841,56 @@
     if (/^ev[123]d$/.test(e.target.getAttribute('data-exp'))) pintaDonde();
     if (actual === 7) { pintaBandeja(); pintaChecks(); }
   });
+
+  /* ---------------- la barra de descargar, al final ----------------
+     curso.js la cuelga del body como barra fija; aquí se muda al paso 9,
+     que es donde se guarda la copia, y el CSS de arriba la vuelve estática. */
+  (function () {
+    var barra = document.querySelector('.exp-barra');
+    var sitio = document.getElementById('barra-final');
+    if (barra && sitio) sitio.appendChild(barra);
+  })();
+
+  /* ---------------- el recorrido (solo con ?demo) ----------------
+     El recorrido vive en autoevaluacion-u1-recorrido.html y mete esta
+     página en un iframe. Se hablan por postMessage, que funciona aunque
+     el origen no coincida: él manda {ir, sel, margen, sello} y esta página
+     le avisa en qué paso va, devolviendo el sello de la carga en curso. */
+  var selloRecorrido = null;
+  function avisaRecorrido() {
+    if (!DEMO) return;
+    try { parent.postMessage({ demo:'gestion-autoeval-u1', sello:selloRecorrido, paso:actual }, '*'); } catch (e) {}
+  }
+  /* Deslizar a mano: el scroll suave del navegador se cancela dentro del
+     iframe cuando la distancia es larga, y este no. */
+  function desliza(y) {
+    y = Math.max(0, Math.min(y, document.documentElement.scrollHeight - window.innerHeight));
+    var y0 = window.pageYOffset, dy = y - y0, t0 = null;
+    if (!dy) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { window.scrollTo(0, y); return; }
+    function paso(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / 380), e = 1 - Math.pow(1 - p, 3);
+      window.scrollTo(0, y0 + dy * e);
+      if (p < 1) requestAnimationFrame(paso);
+    }
+    requestAnimationFrame(paso);
+  }
+  if (DEMO) {
+    var tit = document.querySelector('.barra-pasos .tit');
+    if (tit) tit.textContent += ' · recorrido';
+    window.addEventListener('message', function (e) {
+      var m = e.data;
+      if (!m || m.demo !== 'gestion-autoeval-u1') return;
+      selloRecorrido = m.sello;
+      if (typeof m.ir === 'number') ir(m.ir);
+      if (m.sel) setTimeout(function () {
+        var el = document.querySelector(m.sel);
+        if (el) desliza(el.getBoundingClientRect().top + window.pageYOffset - (m.margen || 88));
+      }, 80);
+      if (m.destaca) destaca(document.querySelector(m.destaca));
+    });
+  }
 
   /* ---------------- arranque ----------------
      curso.js restaura los campos y corre al final del body, es decir antes

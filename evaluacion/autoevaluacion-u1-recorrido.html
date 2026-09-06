@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Recorrido por tu primer cierre · Gestión y Manejo de Proyectos · 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="La autoevaluación de la unidad 1 explicada pantalla por pantalla, con el ejemplo de una gestora inventada. Nada se manda ni toca tu autoevaluación real.">
+<meta name="theme-color" content="#0B3C49">
+<style>
+/* ============ Página (fuera del teléfono) ============ */
+:root{
+  --bg:#F2F7F5; --panel:#ffffff; --ink:#1C2B28; --muted:#68807a; --line:#CFE3DD;
+  --accent:#0F6E6E; --accent-ink:#ffffff; --profundo:#0B3C49; --arena:#A15C12;
+  --glow:rgba(15,110,110,.18); --hint:#FBF1E4; --hint-ink:#6b3f0c; --focus:#A15C12;
+  --bezel:#141414; --shadow:rgba(11,60,73,.35); --done:#7FCBA9;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c1a1e; --panel:#122629; --ink:#ecf4f2; --muted:#a9c1bb; --line:#24413f;
+    --accent:#5fc4c4; --accent-ink:#06282c; --profundo:#bfe3e3; --arena:#f0b56a;
+    --glow:rgba(95,196,196,.14); --hint:rgba(240,181,106,.13); --hint-ink:#f4d3a8; --focus:#f0b56a;
+    --bezel:#0a0a0a; --shadow:rgba(0,0,0,.6); --done:#3f8f6a;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c1a1e; --panel:#122629; --ink:#ecf4f2; --muted:#a9c1bb; --line:#24413f;
+  --accent:#5fc4c4; --accent-ink:#06282c; --profundo:#bfe3e3; --arena:#f0b56a;
+  --glow:rgba(95,196,196,.14); --hint:rgba(240,181,106,.13); --hint-ink:#f4d3a8; --focus:#f0b56a;
+  --bezel:#0a0a0a; --shadow:rgba(0,0,0,.6); --done:#3f8f6a;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.page{min-height:100vh;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:18px;padding:12px 28px;border-bottom:1px solid var(--line);background:var(--panel)}
+.top .marca{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);font-weight:700;line-height:1.3}
+.top h1{font-family:Georgia,serif;font-size:18px;line-height:1.2;margin:0;font-weight:700;color:var(--profundo)}
+.top .sub{font-size:13px;color:var(--muted);margin-top:2px}
+.badge{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);padding:8px 12px;border-radius:999px;color:var(--muted);white-space:nowrap}
+.stage{flex:1;display:grid;grid-template-columns:400px minmax(0,1fr);gap:28px;padding:24px 28px 20px}
+.panel{display:flex;flex-direction:column;gap:18px;max-width:440px}
+.phases{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.phase{display:flex;flex-direction:column;gap:7px;background:none;border:0;padding:0;text-align:left}
+.phase i{display:block;height:5px;border-radius:3px;background:var(--line)}
+.phase.done i{background:var(--done)}
+.phase.active i{background:var(--accent)}
+.phase span{font-size:10.5px;font-weight:700;line-height:1.2;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phase.active span{color:var(--ink)}
+.step{display:flex;flex-direction:column;gap:12px}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--arena)}
+.step h2{font-family:Georgia,serif;font-size:26px;line-height:1.15;margin:0;font-weight:700;color:var(--profundo);text-wrap:balance}
+.step p{margin:0;font-size:16px;line-height:1.55;max-width:60ch}
+.hint{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;background:var(--hint);border-radius:10px;font-size:14.5px;line-height:1.45;color:var(--hint-ink)}
+.hint svg{flex:none;width:22px;height:22px;margin-top:1px;color:var(--arena)}
+.hint b{font-weight:700;color:var(--arena)}
+.nav{display:flex;gap:10px;margin-top:6px}
+.nav button{border-radius:10px;padding:12px 18px;border:1px solid var(--line);background:var(--panel);font-weight:700;font-size:15px;transition:transform .08s ease}
+.nav button:active{transform:translateY(1px)}
+.nav button.primary{flex:1;background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.nav button:disabled{opacity:.45;cursor:default}
+.keys{font-size:12.5px;color:var(--muted)}
+.keys kbd{font-size:11px;font-weight:600;border:1px solid var(--line);border-radius:5px;padding:2px 5px;background:var(--panel)}
+.note{margin:auto 0 0;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.5}
+.linkbtn{background:none;border:0;padding:0;color:var(--arena);text-decoration:underline;font-size:inherit}
+.note a{color:var(--arena)}
+.device-wrap{position:relative;display:flex;align-items:center;justify-content:center;height:calc(100vh - 118px);min-height:520px}
+.device-wrap::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 46% 55% at 50% 52%,var(--glow),transparent 70%);pointer-events:none}
+.device{transform:scale(var(--s,1));transform-origin:center center;will-change:transform}
+@media (max-width:900px){
+  .top{padding:10px 16px} .badge{display:none}
+  .stage{grid-template-columns:1fr;padding:12px 14px 24px;gap:14px}
+  .device-wrap{height:72vh;min-height:440px;order:-1}
+  .panel{max-width:none}
+  .step h2{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ============ Teléfono (la autoevaluación de verdad, adentro) ============ */
+.phone{width:384px;height:806px;background:var(--bezel);border-radius:46px;padding:12px;box-shadow:0 32px 64px var(--shadow),0 0 0 1px rgba(255,255,255,.06) inset;position:relative}
+.phone::after{content:"";position:absolute;left:50%;top:22px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#000;box-shadow:0 0 0 2px #1f1f1f;z-index:5}
+.screen{width:360px;height:782px;background:#F2F7F5;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#000}
+.sb{height:30px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 22px;font-size:13px;font-weight:500;color:#000;background:#fff}
+.sb .ic{display:flex;gap:5px;align-items:center}
+.sb svg{width:14px;height:14px}
+.url{height:34px;flex:none;display:flex;align-items:center;gap:8px;padding:0 12px;background:#fff;border-bottom:1px solid #e3e9e7}
+.url span{flex:1;height:24px;border-radius:12px;background:#eef2f1;display:flex;align-items:center;gap:6px;padding:0 10px;font-size:11.5px;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.url span b{font-weight:600;color:#222}
+.url svg{width:12px;height:12px;flex:none;color:#1F6B4A}
+.url .dots{flex:none;background:none;padding:0;width:18px;color:#666;font-size:16px;line-height:1;text-align:center}
+.app{flex:1;min-height:0;position:relative;background:#F2F7F5}
+.app iframe{display:block;width:360px;height:100%;border:0;background:#F2F7F5}
+.app .cargando{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#0B3C49;background:#F2F7F5;pointer-events:none;transition:opacity .25s}
+.app .cargando.fuera{opacity:0}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="top">
+    <div>
+      <div class="marca">Gestión y Manejo de Proyectos · Unidad 1</div>
+      <h1>Recorrido por tu primer cierre</h1>
+      <div class="sub">La autoevaluación, pantalla por pantalla, con el ejemplo de una gestora inventada.</div>
+    </div>
+    <span class="badge">Recorrido · datos de ejemplo</span>
+  </header>
+
+  <main class="stage">
+    <aside class="panel">
+      <div class="phases" id="phases"></div>
+
+      <div class="step" id="stepBox">
+        <div class="eyebrow" id="stEyebrow">Parada 1 de 15</div>
+        <h2 id="stTitle"></h2>
+        <p id="stText"></p>
+        <div class="hint" id="stHint"></div>
+        <div class="nav">
+          <button id="btnPrev" type="button">Anterior</button>
+          <button id="btnNext" class="primary" type="button">Siguiente</button>
+        </div>
+        <div class="keys">También con las flechas <kbd>←</kbd> <kbd>→</kbd> del teclado. Puedes tocar cualquier cosa en el teléfono: es la página de verdad.</div>
+      </div>
+
+      <p class="note" id="nota">
+        Lo que ves adentro es tu autoevaluación tal cual, en modo recorrido: aquí nada se manda al profesor y nada toca lo que ya
+        hayas escrito en la tuya. Tania no existe; sus respuestas son el mismo ejemplo que trae cada paso.
+        <button class="linkbtn" id="btnRestart" type="button">Reiniciar el recorrido</button> ·
+        <button class="linkbtn" id="btnBlanco" type="button">Verla en blanco</button> ·
+        <a href="autoevaluacion-u1.html">Abrir la tuya</a>
+      </p>
+    </aside>
+
+    <section class="device-wrap" id="deviceWrap">
+      <div class="device" id="device">
+        <div class="phone">
+          <div class="screen" id="screen">
+            <div class="sb"><span>9:41</span><span class="ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9a15 15 0 0 1 20 0M5.5 12.5a10 10 0 0 1 13 0M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h3v-4H3zm5 0h3V9H8zm5 0h3V5h-3zm5 0h3V2h-3z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 10v4" stroke-linecap="round"/><rect x="5" y="9" width="11" height="6" fill="currentColor" stroke="none"/></svg>
+            </span></div>
+            <div class="url">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>pas-web.github.io</b>/gestiondeproyectos/evaluacion/autoevaluacion-u1.html</span>
+              <span class="dots">⋮</span>
+            </div>
+            <div class="app" id="app">
+              <iframe id="marco" title="Autoevaluación 1 de ensayo, en modo recorrido"></iframe>
+              <div class="cargando" id="cargando">Abriendo tu primer cierre…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+'use strict';
+const $=s=>document.querySelector(s);
+
+/* ---------- El ejemplo: Tania, la misma gestora inventada de los «Ver un ejemplo» ----------
+   Es el estado completo de la autoevaluación, con las mismas llaves data-exp
+   que guarda curso.js. Se manda en el hash del iframe y la página lo deja en su
+   llave de demo antes de arrancar. */
+const EJEMPLO={
+  nombre:'Tania Olvera',
+  's-contrato':true,'s-primerno':true,'s-reporte':false,'s-consulta':true,'s-sobre':true,'s-minutos':true,'s-tickets':true,
+  'suelo-falta':'Me falta el reporte de la ficha. Lo subo el miércoles antes de clase: ya tengo el texto, me falta pasarlo al Drive.',
+  'sob-abierto':'si',
+  'sob-p1':'Mesas','sob-p2':'Sombra','sob-p3':'Un asador',
+  'sob-r1':'Sombra','sob-r2':'Alumbrado','sob-r3':'Que la orilla se limpie sola',
+  'sob-aciertos':'1',
+  'sob-nadie':'El alumbrado. Salió en dos estaciones: la gente no quiere estar más rato, quiere poder regresarse de noche sin miedo.',
+  'sob-dice':'Que diseñar de oídas confirma lo que ya pensabas. Lo que más nos sirvió no lo saca ningún diseño de escritorio: hay que ir a preguntar.',
+  'frase-cita':'Ya vinieron tres veces a apuntar. ¿Y luego? Nada.',
+  'frase-quien':'un señor de unos setenta, en la estación 2',
+  'frase-porque':'La escribí tal cual aunque me dio pena anotarla enfrente de él. Me cambió la idea de para qué veníamos: no venimos a que nos cuenten qué quieren, venimos a que nos crean.',
+  'br-prometer':'salio','br-textual':'salio','br-auxilio':'fallo',
+  'br-auxilio-cuando':'Cuando preguntaron cuánto dinero traíamos dije «poquito» en vez de pasar la pregunta.',
+  e1:'si',e2:'si',e3:'si',e4:'si',e5:'no',e6:'',e7:'si',e8:'si',e9:'si',e10:'si',
+  e11:'si',e12:'',e13:'si',e14:'no',e15:'si',e16:'si',e17:'no',e18:'si',e19:'si',e20:'si',
+  'e3-t':'Mi pronóstico copiado en el expediente, y el sobre abierto',
+  'e7-t':'Mi primer no, sistematizado en el expediente',
+  'e10-t':'El reporte de la ficha, que subo el miércoles al Drive S2',
+  'e15-t':'El guion de mi estación, en mi bitácora página 5',
+  'e18-t':'Mis dos minutos, la estructura llena en la bitácora página 7',
+  'e19-t':'Mi registro en limpio, bitácora páginas 8 y 9',
+  'e20-t':'El sobre abierto junto a mi registro en limpio',
+  ev1q:'La foto del mapa de mi estación con las marcas de los niños', ev1d:'Drive del curso, carpeta S4',
+  ev2q:'Mi registro en limpio de catorce frases textuales', ev2d:'Mi bitácora, página 8 y 9',
+  ev3q:'El contrato de gestión firmado', ev3d:'Descargado, en mi carpeta',
+  'ev-extra':'Fui a buscar al señor de la tienda porque en el pliego su casilla estaba vacía. Nadie me lo pidió.',
+  costo:'Registrar mientras la gente hablaba rápido: se me iban frases. Empecé a anotar solo la primera y la última palabra y a completar en el registro en limpio esa misma noche.',
+  'nosé':'No sé cerrar una conversación. Con la señora que iba de salida con el nixtamal en la lumbre seguí preguntando cuando ya se quería ir; le quité tres minutos que no me tocaban. Lo vi en el ensayo del jueves, con la vecina difícil, y aun así volvió a pasarme el viernes.',
+  'noes-n':'2',
+  primerno:'Le pedí a la delegada la palapa dos horas. Me dijo que no porque el viernes había reunión; pregunté por qué y me ofreció el jueves. Sonó la campana y está en mi anti-currículum.',
+  num:'8',
+  porque:'Cubrí seis de siete casillas del suelo y la que falta tiene fecha. De mis tres pronósticos del sobre le atiné una, y de ahí salió lo que más me sirvió: nadie del equipo había pensado en el alumbrado. Registré catorce frases textuales, seis mías, y están en la bitácora páginas 8 y 9. Todavía no sé cerrar una conversación: con la señora del nixtamal seguí preguntando cuando ya se quería ir, y ya me había pasado en el ensayo.',
+  jueves:'Quiero oír su lectura de mi unidad, y saber si «no sé cerrar una conversación» se arregla con práctica o con guion.',
+  enviado:''
+};
+
+function aBase64(txt){
+  const arr=new TextEncoder().encode(txt); let bin='';
+  for(let i=0;i<arr.length;i++) bin+=String.fromCharCode(arr[i]);
+  return btoa(bin);
+}
+
+/* ---------- El teléfono ---------- */
+const marco=$('#marco'), cargandoEl=$('#cargando');
+let cargando=false, enBlanco=false, sello=0;
+function cargar(conEjemplo){
+  enBlanco=!conEjemplo;
+  cargando=true;
+  sello=Date.now();
+  cargandoEl.classList.remove('fuera');
+  /* Siempre va una semilla, aunque sea vacía: la página guarda en su llave de
+     demo lo último que se tocó, y «Verla en blanco» tiene que borrarlo.
+     Si este archivo no corre dentro del sitio (lo abrieron desde WhatsApp,
+     desde Descargas, con content:// o file://), la autoevaluación hermana no
+     existe a su lado: se carga la publicada. postMessage no pide mismo origen. */
+  const base=/^https?:$/.test(location.protocol)
+    ? 'autoevaluacion-u1.html'
+    : 'https://pas-web.github.io/gestiondeproyectos/evaluacion/autoevaluacion-u1.html';
+  marco.src=base+'?demo&v='+Date.now()+'#ejemplo='+encodeURIComponent(aBase64(JSON.stringify(conEjemplo?EJEMPLO:{})));
+}
+/* Cada carga del teléfono lleva un sello; la autoevaluación lo devuelve en
+   sus avisos, y así se ignoran los que llegan de una carga anterior. */
+function manda(m){
+  m.demo='gestion-autoeval-u1'; m.sello=sello;
+  try{ marco.contentWindow.postMessage(m,'*'); }catch(e){}
+}
+marco.addEventListener('load',()=>{
+  cargando=false;
+  cargandoEl.classList.add('fuera');
+  navega(TOUR[ti]);
+});
+
+/* ---------- Recorrido guiado ---------- */
+const PHASES=['Entrar','Tu evidencia','Lo difícil','El número','Cierre'];
+const HAND='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12"/><path d="M11 11.5a1.5 1.5 0 0 1 3 0V13"/><path d="M14 12.5a1.5 1.5 0 0 1 3 0V14"/><path d="M17 13.5a1.5 1.5 0 0 1 3 0V17a5 5 0 0 1-5 5h-2.6a5 5 0 0 1-4.2-2.3L5 15.5a1.6 1.6 0 0 1 2.6-1.8L8 14"/></svg>';
+/* scr: qué paso de la autoevaluación (0 portada … 9 cierre).
+   sel: hasta dónde bajar dentro de ese paso. */
+const TOUR=[
+  {ph:0,scr:0,title:'No produce ningún número: es el ensayo',
+    text:'Tu primer cierre no es un examen y no va a ningún acta: es una página que se abre en el celular. Nadie te la recoge. Existe porque en diciembre vas a proponer tu calificación con tu expediente en la mesa, y aquello no puede ser la primera vez que haces esto. Lo que ves aquí adentro es esa página, ya llena con el ejemplo de una gestora inventada.',
+    hint:'Empieza por tu <b>nombre</b>, como apareces en la lista. Aquí ya viene el de Tania: puedes cambiarlo.',
+    hintBlanco:'Empieza por tu <b>nombre</b>, como apareces en la lista. Escríbelo y mira cómo se pone verde la primera raya de arriba.'},
+  {ph:0,scr:0,sel:'.tarjeta',margen:100,
+    title:'Las rayitas de arriba son los nueve pasos',
+    text:'Cada raya de la barra azul es un paso. Verde: ese paso ya trae algo tuyo. Amarilla: ahí estás. Puedes tocarlas para saltar, y abajo siempre están Atrás y Siguiente; también se avanza deslizando el dedo. Se guarda solo en ese navegador mientras escribes. Tardas unos quince minutos, con tu registro en limpio a la vista.',
+    hint:'Toca una <b>raya verde</b> en el teléfono para brincar a ese paso, y regresa tocando la primera. Casi todos los pasos traen <b>Ver un ejemplo</b>.'},
+  {ph:0,scr:1,sel:'#pares',margen:120,
+    title:'Qué cuenta como argumento',
+    text:'El paso 1 no pide nada: se lee. Un argumento es algo que se puede abrir y mirar, y hay cuatro clases: una pieza que se puede abrir, tu sobre contra la realidad, un «todavía no sé» con su momento exacto, y algo que hiciste sin que nadie te lo pidiera. Ocho frases flojas te enseñan la diferencia.',
+    hint:'Estás en «La misma idea, dicha de dos maneras». Lee la frase floja, piensa cómo la dirías tú, y luego <b>destápala</b>.'},
+  {ph:1,scr:2,
+    title:'Tu suelo: siete compuertas',
+    text:'El suelo es piso, no techo: la lista corta de lo que basta cumplir para no reprobar. Tocas cada casilla que ya tienes cubierta y la cortina de la presa se cierra; por las que faltan se va el agua. Cada casilla trae su plan B con fecha y los enlaces a donde se hizo, para cotejar.',
+    hint:'<b>Desmarca una casilla</b> y mira la presa: se abre una compuerta y aparece la caja para anotar qué te falta y cuándo. Vuelve a marcarla.'},
+  {ph:1,scr:3,
+    title:'El sobre contra la realidad',
+    text:'En la semana 1 escribiste tres cosas que creías que la gente iba a pedir y sellaste el sobre. Aquí lo pones lado a lado con lo que de verdad pidieron, copiado de tu registro en limpio, y dices cuántas le atinaste. No hay respuesta buena: fallar el sobre es la prueba de que hacía falta preguntar.',
+    hint:'Toca <b>otro número</b> de aciertos y lee cómo cambia la lectura de abajo. Tania le atinó una, y de ahí salió lo que más le sirvió.',
+    hintBlanco:'Toca <b>Abrir el sobre</b>: el gesto importa, y la comparación no aparece hasta que lo abres. Luego elige cuántas le atinaste.'},
+  {ph:1,scr:4,
+    title:'Lo que oíste, textual',
+    text:'Antes de contar lo que hiciste, una parada en lo que escuchaste. De todo el viernes hay una frase que se te quedó pegada: búscala en tu registro en limpio, no en tu memoria, y escríbela tal cual la dijeron, aunque esté mal dicha. Quién la dijo, y por qué esa y no otra.',
+    hint:'Lee la frase de Tania: está <b>entre comillas y sin arreglar</b>. Eso es registrar textual. Si quieres, escribe la tuya encima.',
+    hintBlanco:'Escribe una frase que hayas oído en la orilla, <b>entre comillas y sin arreglarla</b>. Si la dijo mal dicha, así va.'},
+  {ph:1,scr:4,sel:'#brujulas',margen:120,
+    title:'Las tres brújulas, de frente',
+    text:'No prometer nada, registrar textual y pedir auxilio en vez de inventar. Nadie las cumple perfecto la primera vez. En cada una te marcas «me salió», «a medias» o «se me fue», y cuando se te fue dices en qué momento. Decir dónde se te rompió vale más que decir que te salieron las tres.',
+    hint:'Cambia una brújula a <b>Se me fue</b> y mira cómo se abre el renglón del momento y cambia la lectura. Tania reprobó la de pedir auxilio.'},
+  {ph:1,scr:5,
+    title:'El mapa de la unidad',
+    text:'Veinte cosas que la unidad te enseñó a hacer, semana por semana. En cada una: «Sí lo sé hacer», y dices con qué se demuestra, o «Todavía no». Cada una trae el enlace a donde se hizo. Las que marques con su pieza se ofrecen para llenar tus tres evidencias de abajo.',
+    hint:'Busca una sin contestar, toca <b>Sí lo sé hacer</b>, escribe con qué y luego <b>usarla de evidencia</b>: se va sola a una de las tres piezas.'},
+  {ph:1,scr:5,sel:'[data-exp="ev1q"]',margen:150,
+    title:'Tres piezas, con su dónde',
+    text:'Tres cosas que se pueden abrir hoy mismo, cada una con el «dónde está» completo: carpeta del Drive, página de la bitácora, en el salón. Si no puedes decir dónde está, no cuenta todavía, y eso también es información. Al final, lo que hiciste sin que nadie te lo pidiera.',
+    hint:'Toca <b>Drive</b> o <b>Bitácora</b> en una de las piezas: te pone el principio del dónde y tú lo completas con la carpeta o la página.'},
+  {ph:2,scr:6,
+    title:'Lo que me costó, y lo que todavía no sé',
+    text:'Lo difícil también es evidencia de que jugaste de verdad. Y un «todavía no sé» con su minuto exacto vale más, en esta conversación, que cualquier lista de aciertos. No «me falta práctica», sino con quién, en qué momento y qué pasó. Cuando lo escribes, suena una campana.',
+    hint:'Lee lo que escribió Tania en <b>lo que todavía no sé hacer</b>: con quién, en qué momento, y que ya le había pasado una vez. Eso es un hueco nombrado.',
+    hintBlanco:'Escribe algo en <b>lo que todavía no sé hacer</b>, con el momento exacto. Cuando pase de una línea, suena la campana.'},
+  {ph:2,scr:6,sel:'#contador',margen:150,
+    title:'Tu contador de noes',
+    text:'En este curso el no se aplaude, porque el no solo le llega a quien pidió. Cuentas cuántas veces pediste algo de verdad a alguien que podía negártelo, y la lectura te dice qué significa ese número. Es tu anti-currículum, y crece hacia arriba. Abajo, qué te enseñó tu primer no.',
+    hint:'Toca <b>otro número</b> del contador y lee la lectura. Con cero no hay regaño: hay una pregunta.'},
+  {ph:3,scr:7,
+    title:'El número que te pondrías',
+    text:'Aquí no se juega nada: este número no va a ningún acta. Lo que se practica es sostenerlo. Eliges del 5 al 10, y abajo están las piezas que salieron de lo que escribiste en los pasos anteriores: el sobre, el suelo, tus evidencias, la frase que oíste, tus brújulas, tus noes, lo que no sabes.',
+    hint:'<b>Toca un número</b> y mira cómo cambia «Me pondría un … porque». Luego toca dos o tres <b>piezas</b>: la frase se arma sola con tus palabras.'},
+  {ph:3,scr:7,sel:'#checks',margen:150,
+    title:'Antes de darlo por bueno',
+    text:'La lista revisa tu frase: que tenga número, algo que se pueda abrir con su dónde, tu sobre, un «todavía no sé», algo que oíste en la orilla, cuerpo, y nada de lo que no cuenta («me esforcé», «necesito», «nunca falté»). Después la editas hasta que suene a ti: tú eres quien la sostiene, no la pantalla.',
+    hint:'Edita la frase de arriba a mano y mira cómo <b>se prenden o se apagan</b> las palomitas. Y léela en voz alta una vez.'},
+  {ph:4,scr:8,
+    title:'El jueves que viene, si quieres',
+    text:'En la semana 5 se abre un espacio para comentar esto. Traerlo hecho no es opcional; compartirlo sí. Ahí puedes practicar la regla de los tres casos sin ningún riesgo: le pides al profesor su lectura de tu unidad y las comparan cinco minutos. Si coinciden, listo; si la tuya es más baja, él te dice por qué ve más; si es más alta, defiendes tu caso con evidencia.',
+    hint:'Escribe en <b>lo que quiero preguntarle al profesor</b> una duda concreta. Vale también «quiero oír su lectura de la mía».'},
+  {ph:4,scr:9,
+    title:'Ya está: mandarla, guardarla, respaldarla',
+    text:'Tres cosas al cierre. Mandársela al profesor es opcional y sigue sin producir número; si la mandas, la tiene enfrente el jueves. Descargar tu copia te baja un archivo con todo lo que escribiste: mándatelo a tu correo o WhatsApp. Y el respaldo es un código para seguir en otro aparato: se copia aquí y se pega allá.',
+    hint:'Toca <b>Mandársela al profesor</b>. En este recorrido no se manda nada: solo ves qué pasa cuando sale. Luego prueba <b>Descargar mi cuadernillo</b>.'}
+];
+let ti=0;
+function renderPhases(){
+  const cur=TOUR[ti].ph;
+  $('#phases').innerHTML=PHASES.map((p,i)=>`<button class="phase ${i<cur?'done':(i===cur?'active':'')}" type="button" data-ph="${i}" title="Ir a ${p}"><i></i><span>${p}</span></button>`).join('');
+}
+function navega(st){
+  if(cargando) return;
+  const m={ir:st.scr};
+  if(st.sel){ m.sel=st.sel; if(st.margen) m.margen=st.margen; }
+  manda(m);
+}
+function showStep(i,navigate=true){
+  ti=Math.max(0,Math.min(TOUR.length-1,i)); const st=TOUR[ti];
+  if(navigate) navega(st);
+  $('#stEyebrow').textContent=`Parada ${ti+1} de ${TOUR.length} · ${PHASES[st.ph]}`;
+  $('#stTitle').textContent=st.title; $('#stText').textContent=st.text;
+  $('#stHint').innerHTML=HAND+'<div>'+((enBlanco&&st.hintBlanco)||st.hint)+'</div>';
+  $('#btnPrev').disabled=ti===0; $('#btnNext').textContent=ti===TOUR.length-1?'Volver al inicio':'Siguiente';
+  renderPhases();
+  try{ history.replaceState(null,'','#parada-'+(ti+1)); }catch(e){}
+}
+/* La autoevaluación avisa en qué paso va (el estudiante puede tocar lo que
+   quiera adentro): el panel se pone en la parada que corresponde. */
+window.addEventListener('message',e=>{
+  const m=e.data; if(!m||m.demo!=='gestion-autoeval-u1'||cargando||m.sello!==sello) return;
+  if(typeof m.paso==='number' && TOUR[ti].scr!==m.paso){
+    const idx=TOUR.findIndex(s=>s.scr===m.paso);
+    if(idx>=0) showStep(idx,false);
+  }
+});
+$('#btnNext').addEventListener('click',()=>showStep(ti===TOUR.length-1?0:ti+1));
+$('#btnPrev').addEventListener('click',()=>showStep(ti-1));
+$('#btnRestart').addEventListener('click',()=>{ ti=0; cargar(true); showStep(0,false); });
+$('#btnBlanco').addEventListener('click',()=>{ ti=0; cargar(false); showStep(0,false); });
+$('#phases').addEventListener('click',e=>{const b=e.target.closest('[data-ph]');if(!b)return;const i=TOUR.findIndex(s=>s.ph===Number(b.dataset.ph));if(i>=0)showStep(i);});
+document.addEventListener('keydown',e=>{
+  if(e.target.matches('input,textarea,select')) return;
+  if(e.key==='ArrowRight'){showStep(ti===TOUR.length-1?0:ti+1);} else if(e.key==='ArrowLeft'){showStep(ti-1);}
+});
+
+/* ---------- Escala del teléfono ---------- */
+function fit(){
+  const w=$('#deviceWrap'); const s=Math.min(1,(w.clientHeight-16)/806,(w.clientWidth-16)/384);
+  $('#device').style.setProperty('--s',s.toFixed(3));
+}
+window.addEventListener('resize',fit);
+
+/* ---------- Arranque ---------- */
+let start=0;
+try{ const m=(location.hash||'').match(/parada-(\d+)/)||(location.search||'').match(/parada=(\d+)/); if(m) start=Number(m[1])-1; }catch(e){}
+fit(); showStep(isNaN(start)?0:start,false); cargar(true);
+})();
+</script>
+</body>
+</html>
