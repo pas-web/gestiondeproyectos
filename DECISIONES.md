@@ -616,6 +616,38 @@ las semanas 7 a 10. El índice del gimnasio corrige la descripción de La
 letra chiquita (son diez cláusulas, tres del PROCODES) y del gimnasio 2 de la
 S6 (Observar sin encuestar).
 
+### Adenda del mismo día: el primer lote de mejoras
+
+De la revisión a fondo de la unidad salieron recomendaciones; Eduardo pidió
+aplicar el primer lote y dejar para su decisión lo estructural (comprimir el
+calendario frente a la ventana de ejecución del fondo, y una validación en la
+orilla en la S9 para que la comunidad vea los componentes antes del comité).
+Lo aplicado:
+
+- **S5:** la tabla del destripado se parte en dos láminas (el dinero; los
+  actores y los papeles), y entra el aviso de los **$600 del ensayo**: los
+  $200 por equipo de la S6 salen de la misma Bolsa, y el documento tiene que
+  decir cuánto queda para el dictamen o si el ensayo tiene bolsa aparte. Va
+  también a pendientes, para la reimpresión de las reglas.
+- **S6:** lámina nueva con la primera pregunta de Acción sin Daño aplicada al
+  prototipo (¿qué daño puede causar el ensayo mismo?): nada que llame a los
+  niños se monta junto al agua, cada turno tiene a alguien mirando la orilla, y
+  el dato de seguridad y calidad del agua se pide a quien lo tiene (los vacíos
+  2 y 3 del banco de patrones, nombrados por fin en clase). Entra a la hoja de
+  consulta.
+- **S7:** la apuesta en una frase va en la casilla "qué te llevas" del ticket,
+  que no tiene casilla nueva.
+- **S8 viernes:** el Anexo 1 se reparte al arrancar la sesión y el duelo 2
+  corre con sus secciones en la cabeza; los bloques se renumeran sin cambiar
+  los minutos.
+- **Ejercicios de la S10:** salen "viernes 9", "jueves 15" y "9 de octubre"
+  (ahora anclados a la semana) y el "tope" que ya no existe en el presupuesto
+  agujerado. Las fechas del cronograma del manantial se quedan: son caso de
+  estudio.
+
+Pendiente nuevo: que la reimpresión de las reglas diga de dónde salen los
+$200 del ensayo de cada equipo y cuánto queda para el dictamen.
+
 ### Verificación
 
 Cero enlaces rotos en las nueve páginas tocadas (rutas cotejadas contra el
