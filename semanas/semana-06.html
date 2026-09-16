@@ -20,23 +20,18 @@
     background: var(--fondo); color: var(--texto);
     line-height: 1.65; font-size: 1.05rem;
   }
-  header.curso {
-    background: var(--profundo); color: #EAF4F2;
-    padding: 1.1rem 1.5rem;
-  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
   header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
   header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
   header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
   main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
 
-  .pregunta {
-    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
-    color: var(--profundo); margin: 1.8rem 0 .4rem;
-  }
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
   h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -55,11 +50,8 @@
   .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
   .consulta dd { margin: .2rem 0 .4rem 0; }
 
-  .chapuzon {
-    background: var(--profundo); color: #EAF4F2;
-    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
-  }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
 
   .aviso-goteo {
@@ -67,11 +59,8 @@
     padding: 1.2rem 1.5rem; margin: 2rem 0; text-align: center; color: var(--profundo);
     display: none;
   }
-  table { width: 100%; border-collapse: collapse; margin: .6rem 0; background: #fff; }
-  th, td { border: 1px solid var(--borde); padding: .5rem .7rem; text-align: left; font-size: .95rem; }
-  th { background: #E4EFEB; color: var(--profundo); }
-  .pendiente { color: #8aa39c; font-style: italic; }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -87,30 +76,237 @@
 <div id="wk-gate" data-semana="6">
 
 <p class="pregunta">¿Cómo pruebas una idea antes de gastar un peso en ella?</p>
-<p class="bajada">La semana pasada convertimos la consulta en líneas de trabajo y cada equipo adoptó un componente del centro recreativo. Antes de escribir una sola página de solicitud, esta semana vas a ir a la presa a probar tu componente en tamaño real, con cal, mecate y cartón. El papel aguanta todo; la orilla de la presa no.</p>
+<p class="bajada">La semana pasada convertimos la consulta en líneas de trabajo y cada equipo adoptó un componente. Antes de escribir una sola página de solicitud, esta semana vas a la presa a probar tu componente en tamaño real, con cal, mecate, cartón y planta en maceta. Y antes de eso, se cumple la única promesa que hicimos en la orilla: regresar con lo apuntado. El papel aguanta todo; la orilla de la presa no.</p>
 
 <h2>Esta semana podrás</h2>
 <div class="podras">
   <ul>
-    <li>Montar un prototipo de tu componente en el sitio real gastando menos de $200 del fondo.</li>
-    <li>Distinguir prototipo, maqueta y proyecto (y saber cuál te toca esta semana).</li>
-    <li>Observar cómo reacciona la gente que pasa, sin encuestarla, y registrar lo que hace (no lo que dice).</li>
+    <li>Cumplir la única promesa autorizada de la consulta: volver a La Florida con lo que la gente dijo, en sus palabras y a la vista.</li>
+    <li>Montar un prototipo de tu componente en el sitio real gastando menos de $200 del fondo, con su comprobante.</li>
+    <li>Distinguir prototipo, maqueta y proyecto, y saber cuál te toca esta semana.</li>
+    <li>Observar cómo reacciona la gente que pasa, sin encuestarla, y registrar lo que hace, no lo que dice.</li>
     <li>Corregir tu diseño con lo que viste, antes de que cueste dinero de verdad.</li>
   </ul>
 </div>
 
-<h2>Herramientas de la semana</h2>
+<h2 class="corte">Las dos sesiones de esta semana</h2>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
+
+<!-- ====================== JUEVES ====================== -->
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves · 2 horas</div>
+      <h3>Más ligero, más rápido, más barato</h3>
+      <p class="foco">Entender el ensayo en sitio como método, diseñar el prototipo de cada componente con las tres reglas, y dejar listo el montaje del viernes y la observación del fin de semana.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El ticket de la semana pasada <span class="reloj">5 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Lo que el viernes quedó turbio de las reglas, hoy se contesta con el documento en la mano.</p>
+    <p class="apoyo">Este arranque no se salta ningún jueves. Si lo turbio fue una cláusula, se lee la cláusula; si fue una pregunta que las reglas no contestan, se dice quién la sabe y quién va a ir a preguntarle.</p>
+    <p class="nota-conductor">Traer dos o tres tickets textuales. Si alguno pide "que nos expliquen las reglas", contestar con la página del documento, no con la explicación: la lectura en frío sigue siendo el entrenamiento.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> La campana del no <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Ritual · cada jueves</span>
+    <p class="di">¿Quién pidió esta semana?</p>
+    <p class="apoyo">Un no conseguido se anuncia, suena la campana, el grupo aplaude y el no se anota en el anti-currículum. Los síes también se cuentan. Desde esta semana las peticiones empiezan a tener nombre de componente: la lona prestada, las sillas, las macetas del vivero.</p>
+    <p class="nota-conductor">Cerrar el pendiente del suelo de la unidad 1 en una línea: quien todavía deba primer no o reporte lo resuelve con el profesor al final. No se vuelve a mencionar en el salón.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> Los equipos, en limpio <span class="reloj">10 min</span></h4>
+    <p class="di">Desde hoy, todo lo que el curso produce lo produce un equipo con nombre.</p>
+    <p class="apoyo">Al pizarrón: cada componente con su nombre provisional, su línea y sus tres oficios con dueño. Quien quedó sin equipo el jueves pasado se acomoda hoy, con el mismo criterio: el oficio que falta. Y una regla que empieza a correr: la bitácora de equipo, una entrada por semana, escrita por turnos, con la letra de quien la escribe. Es casilla del suelo de esta unidad y es la memoria que en octubre nadie va a poder reconstruir de cabeza.</p>
+    <p class="nota-conductor">Abrir la bitácora de equipo hoy mismo: un cuaderno físico por equipo o una carpeta en el Drive, y el primer turno asignado. La entrada de esta semana la escribe quien montó el prototipo.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">4</span> Las sillas de once dólares <span class="reloj">15 min</span></h4>
+    <p class="di">En 2009 Nueva York cerró Broadway al tráfico con macetas y sillas de jardín de once dólares.</p>
+    <p class="apoyo">No fue el plan final: fue la pregunta "¿y si la gente quisiera sentarse aquí?". La gente las llenó, y solo entonces vino la obra de millones. Es la regla del placemaking que la gente de Project for Public Spaces resume en tres palabras: más ligero, más rápido, más barato. Los mejores espacios públicos del mundo casi nunca empezaron con obra: empezaron con una temporada de prueba. Si tu idea no se puede ensayar en una semana con lo que hay a la mano, todavía no la entiendes.</p>
+  </section>
+
+  <!-- Ilustración pendiente (ver imagenes-semanas-05-10.md, carpeta local del profesor):
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-06/las-sillas-de-once-dolares.webp" alt="Dibujo a tinta: una avenida cerrada al tráfico con macetas y sillas plegables de jardín ocupadas por gente conversando; al fondo, autos detenidos y un rótulo que dice ensayo, se quita el domingo">
+  </section>
+  -->
+
+  <section class="lam">
+    <p class="di">Los expertos se equivocan seguido sobre lo que la gente quiere en un espacio. La gente vota con los pies.</p>
+    <p class="apoyo">Es el hallazgo incómodo de quienes se pusieron a observar por qué unas plazas se llenan y otras se abandonan, de Jane Jacobs a William Whyte con su cámara en Nueva York. Lo que la gente dice que haría y lo que hace casi nunca coinciden. Por eso el ensayo no se juzga por los aplausos: se juzga por lo que la gente hace con él cuando nadie la está entrevistando.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">5</span> Prototipo, maqueta, proyecto <span class="reloj">10 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--oscura">prototipo<small>se prueba en el sitio</small></span>
+      <span class="op">/</span>
+      <span class="pz pz--clara">maqueta<small>se conversa en la mesa</small></span>
+      <span class="op">/</span>
+      <span class="pz pz--arena">proyecto<small>se somete al fondo</small></span>
+      <span class="eq">y esta semana toca el primero</span>
+    </div>
+    <p class="apoyo">Tres palabras que la gente revuelve todo el tiempo. La maqueta convence al equipo, el prototipo convence a la realidad, el proyecto convence al que firma el cheque. El orden importa: realidad antes que cheque. El <a href="../ejercicios/semana-06/ejercicio-32-prototipo-maqueta-proyecto.html">gimnasio 3</a> trae ocho casos para no confundirlos, incluido el mercadito de prueba: los servicios también se prototipan.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">6</span> Las tres reglas del ensayo <span class="reloj">10 min</span></h4>
+    <div class="flujo">
+      <div class="paso"><b>1</b><span class="t">se quita</span>nada que no puedas quitar en una hora</div>
+      <div class="paso"><b>2</b><span class="t">$200</span>nada que cueste más, y con comprobante</div>
+      <div class="paso"><b>3</b><span class="t">no promete</span>es un ensayo y así se anuncia</div>
+    </div>
+    <p class="apoyo">La tercera es la de siempre y aquí vuelve con una trampa nueva: un rótulo de cartón que diga "aquí van los columpios" está prometiendo columpios. Se escribe "aquí habría", se dice "es un ensayo, se quita el domingo", y la promesa accidental se registra si alguien la siembra.</p>
+    <div class="ojo">
+      <strong>La sombra del futuro se ensaya con la maceta de hoy.</strong> Estamos dentro de una Reserva de la Biosfera: lo que se siembre en la orilla será nativo y con el visto bueno que toque, y eso llega con el proyecto, no con el ensayo. La planta en maceta del vivero te deja probar el dónde sin comprometer el suelo ni la especie. Un huizache mal ubicado son treinta años de error; una maceta mal ubicada se carga entre dos.
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">7</span> Gimnasio 1 · Prototipo barato <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · en tríos</span>
+    <p class="di">Tres peticiones de la consulta. Conviértelas en un ensayo de fin de semana: no diseñes la obra, diseña la pregunta.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-06/ejercicio-11-prototipo-barato.html">ejercicio del gimnasio</a> proyectado: dónde sentarse en la sombra, juegos para los niños, más sombra y que se vea cuidado. Para cada una: qué montarías, con qué material, y qué conducta contarías. Si nadie se sienta en tres horas, la sombra estaba en el lugar equivocado, y eso también es un hallazgo.</p>
+    <p class="nota-conductor">Al comparar con los ejemplos, subrayar la conducta que se cuenta: es lo que separa un ensayo de una decoración. Quien proponga un ensayo sin conducta que contar todavía está haciendo maqueta.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">8</span> El ensayo de tu componente <span class="reloj">30 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Qué se marca con cal, qué se levanta con mecate o cartón, qué se consigue prestado, y qué conducta vas a contar.</p>
+    <p class="apoyo">Cada equipo diseña su ensayo en una hoja con cuatro columnas y una lista de materiales con dueño: el costal de cal para recorridos y zonas, mecate y estacas para volúmenes, cartón y plumón para los rótulos, las sillas que se consigan prestadas, la planta nativa en maceta del vivero puesta exactamente donde se sembraría. Con la <a href="../ejercicios/semana-06/ejercicio-22-guia-observacion.html">guía de observación</a> se eligen de tres a cinco conductas contables. Y se pasa el diseño por las tres reglas, sin excepción: lo que no se quite en una hora, se recorta.</p>
+    <p class="nota-conductor">Revisar cada diseño con la pregunta "¿qué conducta cuenta esto?" y con la regla 1 en la mano. Cotejar los materiales contra el árbol de problemas: si el ensayo puede confirmar o tumbar una raíz marcada como hipótesis, decirlo. Materiales por equipo en una sola bolsa, cerrada hoy; la cal y las macetas se recogen mañana temprano.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">9</span> Expediente Kenia · Entrega 2 <span class="reloj">10 min</span></h4>
+    <p class="di">El agua salía limpia del tubo. Se volvía a contaminar dentro de la casa.</p>
+    <p class="apoyo">En la semana 2 dejamos un misterio abierto: protegieron los manantiales, el agua salía limpia, y la diarrea infantil casi no bajó. Aquí cae la primera pista: el agua se volvía a contaminar en los recipientes donde se almacenaba, en el trayecto y en la casa. La solución técnica era correcta y aun así no alcanzó. Lo que la gente hace con tu obra importa más que tu obra, y eso solo se ve observando conductas, no inaugurando tubos. El caso sigue en la semana 13.</p>
+    <p class="nota-conductor">Antes de dar la pista, pedir que relean su hipótesis de la bitácora de la semana 2. Quien le atinó y quien no aprenden lo mismo: la comparación es suya. No adelantar lo que viene en la semana 13.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · en la bitácora</span>
+    <p class="di">Relee tu hipótesis de la semana 2 y escribe debajo qué le faltaba.</p>
+    <p class="apoyo">Dos líneas. Y una tercera, sobre tu propio componente: ¿qué podría hacer la gente con tu obra que la deje sin efecto? Esa pregunta es la que el prototipo va a empezar a contestar el domingo.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">10</span> Los $200: el primer gasto real <span class="reloj">5 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--arena">gastar<small>hasta $200 por equipo</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--oscura">comprobar<small>factura o recibo simple</small></span>
+      <span class="eq">= el primer asiento del libro</span>
+    </div>
+    <p class="apoyo">Los doscientos pesos del ensayo salen del fondo, y son el primer dinero real que este grupo ejerce. Corre desde hoy lo que las reglas dicen: factura, o recibo simple con fecha, concepto, monto, nombre y firma de quien recibe, llenado en el momento. Lo que no tenga papel lo paga tu bolsa. Estos comprobantes son la primera página del libro del fondo, que abre formalmente en la semana 12 y va a rendir examen en público en la semana 16.</p>
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para mañana</span>
+      Mañana volvemos a La Florida, y no vamos a pedir nada: vamos a entregar. En la consulta hicimos una sola promesa, "les traemos apuntado lo que salga hoy". Mañana se cumple, antes de marcar una sola raya de cal.
+    </div>
+  </section>
+</section>
+
+<!-- ====================== VIERNES ====================== -->
+<section class="mazo" id="mazo-viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes · 2 horas</div>
+      <h3>De vuelta en la orilla</h3>
+      <p class="foco">Cumplir la única promesa autorizada, marcar cada componente en su sitio real y dejar montado el ensayo que el fin de semana se observa.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">1</span> Encuadre antes de salir <span class="reloj">10 min</span></h4>
+    <p class="di">Hoy no venimos a pedir. Venimos a devolver lo apuntado.</p>
+    <p class="apoyo">De cada contacto con la comunidad tiene que salir algo visible antes del siguiente: es la regla que los que hacen lugares con la gente repiten más, porque es la que más se rompe. Lo apuntado es un pliego con las líneas de trabajo en las palabras de la gente, con sus conteos y sin ningún nombre, para que quede pegado donde la delegación diga. Es la carta de presentación del proyecto, y vale más que cualquier obra futura. Las palabras prohibidas siguen prohibidas: "abandonado", "desaprovechado", "hay que activar esto". Y el ensayo se anuncia como ensayo: se quita el domingo.</p>
+    <p class="nota-conductor">Revisar el pliego antes de salir: frases textuales entre comillas, conteos por línea, cero nombres de vecinos. Repasar la frase para quien pregunte qué es lo de la cal: "es un ensayo, se quita el domingo, ¿usted qué pondría aquí?", y lo que conteste se anota.</p>
+  </section>
+
+  <section class="lam">
+    <div class="ojo">
+      <strong>La única promesa nueva del día es la misma de siempre.</strong> "Esto se quita el domingo." Se cumple porque está en nuestra mano, y cumplirla es lo que permite volver en octubre con obra de verdad. Todo lo demás: nada se ofrece, nada se asegura.
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> Traslado y entrega de lo apuntado <span class="reloj">20 min</span></h4>
+    <span class="senal senal--campo">En campo</span>
+    <p class="di">Se saluda a la autoridad, se entrega el pliego y se acuerda dónde queda a la vista.</p>
+    <p class="apoyo">Quien da la cara de cada equipo va con el pliego; el profesor acompaña, no encabeza. Se entrega, se lee junto con la autoridad si ella quiere, y se pide permiso para el ensayo del fin de semana explicándolo completo: qué se va a marcar con cal (se va con la lluvia), qué se va a poner en maceta (regresa al vivero), quién va a estar y a qué hora, y que el domingo la orilla queda como estaba. Si la autoridad dice que no a algo, ese no es el diseño del ensayo: se ajusta ahí mismo.</p>
+    <p class="nota-conductor">Fotografiar el pliego ya pegado: va a "Lo que produjimos" y al mapa de evidencias. Si la autoridad hace una promesa en nombre del proyecto ("van a poner..."), corregir con suavidad en el momento: promesa accidental.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">3</span> Cada componente en su sitio <span class="reloj">40 min</span></h4>
+    <span class="senal senal--campo">En campo · por equipo</span>
+    <p class="di">Cal para los recorridos, mecate para los volúmenes, macetas donde iría la sombra, cartón para lo que "habría".</p>
+    <p class="apoyo">Cada equipo monta en el sitio exacto de su componente, en tamaño real. Primero se camina el lugar con la hoja del jueves en la mano y se corrige lo que el terreno diga: la pendiente que el croquis no tenía, la raíz, el paso que la gente ya usa y que no se puede tapar. Luego se marca. La prueba de la hora se aplica antes de terminar: si algo no se puede quitar en una hora, sobra. Quien se acerque a preguntar recibe la frase del encuadre, y su respuesta va a la libreta, textual.</p>
+    <p class="nota-conductor">Rondar los tres montajes sin montar ninguno. Vigilar la regla 3 en los rótulos de cartón. Si dos componentes se estorban en el sitio, es un hallazgo de diseño y se anota; no se resuelve hoy a gritos. Foto de cada prototipo montado, con clave del equipo, al Drive, carpeta S6.</p>
+  </section>
+
+  <!-- Ilustración pendiente (ver imagenes-semanas-05-10.md, carpeta local del profesor):
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-06/el-prototipo-de-cal.webp" alt="Dibujo a tinta: en la orilla de una presa, un recorrido marcado con rayas de cal, estacas con mecate formando el contorno de una sombra, tres sillas prestadas y una hilera de macetas con plantas nativas; un rótulo de cartón dice aquí habría sombra">
+  </section>
+  -->
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">4</span> La guía de observación, calibrada en sitio <span class="reloj">15 min</span></h4>
+    <span class="senal">En parejas</span>
+    <p class="di">Diez minutos de conteo de prueba, ahora mismo: una raya por evento, sin confiar en la memoria.</p>
+    <p class="apoyo">Con la guía del <a href="../ejercicios/semana-06/ejercicio-22-guia-observacion.html">gimnasio 2</a> ya elegida el jueves: quién pasa, quién se detiene, quién usa, cuántos minutos, quién pregunta, quién toma foto, qué evitan o rodean. Y la columna vacía que suele traer el hallazgo: lo que no esperaba. Se cuenta conducta, no opinión: "se sentaron cuatro" vale; "les gustó" no. La vecina que dice que ese pedazo se inunda en septiembre no es un conteo, pero se anota aparte y se toma en serio: es oro para el diseño.</p>
+    <p class="nota-conductor">Corregir en vivo la hoja que mezcle conducta con opinión. Acordar la clave de fotos (como en la ficha de observación de agosto) y que la hoja del fin de semana sea la misma para los tres equipos, para poder comparar el lunes.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> El plan del fin de semana <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Quién monta, a qué hora, quién cuenta en cada turno, y cómo se levanta todo el domingo.</p>
+    <p class="apoyo">Tres horas de observación por equipo, en la hora en que la gente va, con turnos y una hoja por turno. Qué se hace si alguien mueve algo del ensayo: nada, se anota; la gente también diseña moviendo cosas. Qué se hace si alguien pide algo: se anota textual, no se promete. El domingo al final: las macetas regresan al vivero, las sillas a su dueño, el cartón a la bolsa, y la orilla queda como estaba. Los comprobantes de los $200, en la bolsa del equipo, para el lunes.</p>
+    <p class="nota-conductor">Confirmar que ningún equipo se queda con una sola persona en la orilla. Dejar el número del profesor como código de auxilio de fin de semana. Acordar quién sube al Drive las fotos y los conteos el lunes.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">6</span> Levantamiento parcial y regreso <span class="reloj">20 min</span></h4>
+    <p class="di">Lo que no se queda al fin de semana se levanta hoy. Cómo se va uno también manda un mensaje.</p>
+    <p class="apoyo">Se agradece de persona a persona, se recuerda a la autoridad la hora del domingo en que todo se quita, y se levanta lo que no forma parte del ensayo acordado, incluida la basura que no es nuestra. El ticket se contesta en el transporte. El lunes: conteos pasados en limpio a la bitácora de equipo, fotos con clave al Drive, y una línea con lo que no esperabas. Con eso se abre el jueves.</p>
+  </section>
+</section>
+
+<h2 class="corte">Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">La palabra cumplida</span>
+  <h3 style="margin-top:.2rem">Volver con lo apuntado</h3>
+  <p>En la consulta se hizo una sola promesa: "les traemos apuntado lo que salga hoy". El viernes se cumple, antes de cualquier ensayo. De cada contacto con la comunidad tiene que salir algo visible antes del siguiente; es la regla que la gente que hace lugares con la comunidad repite más, porque es la que más se rompe. El pliego con las líneas de trabajo, en las palabras de la gente, con sus conteos y sin nombres, se entrega a la autoridad y queda pegado a la vista. Es la carta de presentación del proyecto, y lo que permite volver en octubre con obra de verdad.</p>
+</div>
 
 <div class="tarjeta">
   <span class="etiqueta">Método</span>
   <h3 style="margin-top:.2rem">Más ligero, más rápido, más barato</h3>
-  <p>Los mejores espacios públicos del mundo casi nunca empezaron con obra. Empezaron con un ensayo: pintura, sillas prestadas, un fin de semana. La regla del método (Lighter, Quicker, Cheaper, del movimiento de placemaking): si tu idea no se puede ensayar en una semana con lo que hay a la mano, todavía no la entiendes. En la hoja de consulta viene el paso a paso.</p>
+  <p>Los mejores espacios públicos del mundo casi nunca empezaron con obra. Empezaron con un ensayo: pintura, sillas prestadas, un fin de semana. La regla del método, que la gente de Project for Public Spaces resume en tres palabras: si tu idea no se puede ensayar en una semana con lo que hay a la mano, todavía no la entiendes. En la hoja de consulta viene el paso a paso.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">Kit de campo</span>
   <h3 style="margin-top:.2rem">Prototipo 1:1 en la orilla</h3>
-  <p>Un costal de cal para marcar recorridos y zonas en el suelo, mecate y estacas para volúmenes, cartón y plumón para rótulos ("aquí habría sombra", "aquí iría la barrera viva"), las sillas que consigan prestadas, y planta nativa EN MACETA del vivero: la sombra del futuro se ensaya con la maceta de hoy. En una reserva no se siembra por ocurrencia; la planta en maceta te deja probar el dónde sin comprometer el suelo ni la especie. El sábado o domingo el equipo monta, y se queda tres horas mirando qué hace la gente que pasa. La guía de observación está en el gimnasio.</p>
+  <p>Un costal de cal para marcar recorridos y zonas en el suelo, mecate y estacas para volúmenes, cartón y plumón para rótulos ("aquí habría sombra", "aquí iría la barrera viva"), las sillas que consigan prestadas, y planta nativa en maceta del vivero: la sombra del futuro se ensaya con la maceta de hoy. En una reserva no se siembra por ocurrencia; la planta en maceta te deja probar el dónde sin comprometer el suelo ni la especie. El viernes el equipo monta en el sitio, y el sábado o el domingo se queda tres horas mirando qué hace la gente que pasa. La guía de observación está en el gimnasio.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El primer gasto</span>
+  <h3 style="margin-top:.2rem">Los $200 del ensayo</h3>
+  <p>Salen del fondo, y son el primer dinero real que este grupo ejerce. Corre desde ahora lo que las reglas dicen: factura, o recibo simple con fecha, concepto, monto, nombre y firma de quien recibe el dinero, llenado en el momento de la compra. Lo que no tenga papel lo paga tu bolsa. Esos comprobantes son la primera página del libro del fondo, que abre formalmente en la semana 12 y rinde examen en público en la semana 16.</p>
 </div>
 
 <div class="tarjeta siembra">
@@ -120,41 +316,53 @@
 
 <h2>El gimnasio</h2>
 <div class="tarjeta">
-  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-06/ejercicio-11-prototipo-barato.html"><strong>Prototipo barato</strong></a> · De la petición de la señora al mockup con lo que hay en tu casa.</div></div>
-  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-06/ejercicio-22-guia-observacion.html"><strong>Guía de observación</strong></a> · Qué contar y qué anotar durante las tres horas en la orilla: paradas, rodeos, fotos, preguntas que te hagan.</div></div>
-  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-06/ejercicio-32-prototipo-maqueta-proyecto.html"><strong>Prototipo vs. maqueta vs. proyecto</strong></a> · Ejercicio corto para no confundir el ensayo con la obra.</div></div>
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-06/ejercicio-11-prototipo-barato.html"><strong>Prototipo barato</strong></a> · De la petición de la señora al ensayo con lo que hay en tu casa: qué montas, con qué, y qué conducta cuentas.</div></div>
+  <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-06/ejercicio-22-guia-observacion.html"><strong>Observar sin encuestar</strong></a> · Conducta contra opinión, y la guía de las tres horas en la orilla: paradas, rodeos, fotos, preguntas que te hagan.</div></div>
+  <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-06/ejercicio-32-prototipo-maqueta-proyecto.html"><strong>¿Prototipo, maqueta o proyecto?</strong></a> · Ocho casos para no confundir el ensayo con la obra ni con la mesa.</div></div>
 </div>
 
 <h2>Hoja de consulta</h2>
 <div class="tarjeta consulta">
   <dl>
+    <dt>La promesa cumplida</dt>
+    <dd>Lo único que se prometió en la consulta, "les traemos apuntado lo que salga hoy", entregado en la primera visita siguiente y a la vista: un pliego con las líneas en palabras de la gente, con conteos y sin nombres. Regla del oficio: de cada contacto con la comunidad sale algo visible antes del siguiente.</dd>
     <dt>Placemaking</dt>
     <dd>Hacer lugares con la gente que los va a usar, no para ella. Nació de observar por qué unas plazas se llenan y otras se abandonan (Jane Jacobs, William Whyte). Su hallazgo incómodo: los expertos se equivocan seguido sobre lo que la gente quiere en un espacio; la gente vota con los pies.</dd>
-    <dt>Más ligero, más rápido, más barato (LQC)</dt>
-    <dd>Ensayo de bajo costo antes de cualquier obra: se monta en días, se paga con centavos, se puede quitar sin dejar cicatriz. Si funciona, justifica la inversión grande; si no funciona, te ahorró el error. En 2009 Nueva York cerró Broadway al tráfico en Times Square con macetas y sillas de jardín de $11; solo cuando la gente las llenó, hicieron la obra definitiva.</dd>
+    <dt>Más ligero, más rápido, más barato</dt>
+    <dd>Ensayo de bajo costo antes de cualquier obra: se monta en días, se paga con centavos, se puede quitar sin dejar cicatriz. Si funciona, justifica la inversión grande; si no funciona, te ahorró el error. En 2009 Nueva York cerró Broadway al tráfico en Times Square con macetas y sillas de jardín de once dólares; solo cuando la gente las llenó, hicieron la obra definitiva.</dd>
     <dt>Prototipo</dt>
-    <dd>Versión de tamaño real, temporal y barata, montada en el sitio, hecha para observar reacciones. Se juzga por lo que la gente HACE con ella.</dd>
+    <dd>Versión de tamaño real, temporal y barata, montada en el sitio, hecha para observar reacciones. Se juzga por lo que la gente hace con ella.</dd>
     <dt>Maqueta</dt>
     <dd>Representación a escala para conversar el diseño en mesa. Sirve para acordar, no para probar.</dd>
     <dt>Proyecto</dt>
     <dd>El documento completo (diseño, presupuesto, cronograma, responsables) que se somete a un fondo. Lo empezamos a escribir la próxima semana, ya con lo que el prototipo enseñó.</dd>
     <dt>Las tres reglas del ensayo en sitio</dt>
-    <dd>1) Nada que no puedas quitar en una hora (la planta va en maceta, no en suelo). 2) Nada que cueste más de $200. 3) Nada se promete a nadie: es un ensayo y así se anuncia (recuerda la semana 3: no prometer es también cuidar la confianza de la comunidad).</dd>
+    <dd>1) Nada que no puedas quitar en una hora (la planta va en maceta, no en suelo). 2) Nada que cueste más de $200, y con comprobante. 3) Nada se promete a nadie: es un ensayo y así se anuncia. Un rótulo que diga "aquí van los columpios" ya está prometiendo columpios.</dd>
     <dt>Vegetación en la reserva</dt>
     <dd>Estamos dentro de una Reserva de la Biosfera: lo que se siembre en la orilla será nativo y con el visto bueno que toque. Por eso el ensayo se hace con maceta: pruebas dónde da mejor sombra, qué rodea la gente, qué tocan los niños, y la decisión de sembrar llega después, con el proyecto. Un huizache mal ubicado son treinta años de error; una maceta mal ubicada se carga entre dos.</dd>
+    <dt>Conducta contra opinión</dt>
+    <dd>Conducta es lo que viste hacer: se cuenta, se fotografía, nadie lo discute. Opinión es lo que alguien dijo o lo que tú interpretaste ("les encantó"). Para el registro del ensayo cuenta la conducta; la opinión se anota aparte, y la del vecino que conoce las crecidas se toma muy en serio.</dd>
     <dt>Observar sin encuestar</dt>
-    <dd>Cuenta conductas: cuántos se paran, cuántos se desvían para ver, cuántos preguntan, cuántos se sientan si hay dónde. Lo que la gente dice que haría y lo que hace casi nunca coinciden; por eso el conteo vale más que la opinión.</dd>
+    <dd>Cuenta conductas: cuántos se paran, cuántos se desvían para ver, cuántos preguntan, cuántos se sientan si hay dónde, cuántos toman foto. Lo que la gente dice que haría y lo que hace casi nunca coinciden; por eso el conteo vale más que la opinión. Y lo que nadie usó es tan dato como lo que todos usaron.</dd>
+    <dt>Los $200 del ensayo</dt>
+    <dd>El primer dinero del fondo que se ejerce, hasta doscientos pesos por equipo, con factura o recibo simple llenado en el momento. Sin comprobante no hay reembolso. Sus papeles son la primera página del libro del fondo.</dd>
   </dl>
 </div>
 
 <h2>Lo que produjimos</h2>
 <div class="tarjeta">
-  <p class="pendiente">Aquí subiremos las fotos de los tres prototipos y los conteos de cada equipo después del fin de semana. Esta sección se llena con lo que pase en la orilla.</p>
+  <p style="color:#8aa39c; font-style:italic;">Esta vitrina se llena al cierre de la semana. Lo que va a llegar aquí:</p>
+  <ul style="color:#8aa39c; font-style:italic; margin:.4rem 0 .2rem;">
+    <li>La foto del pliego de lo apuntado, ya pegado en La Florida.</li>
+    <li>Las fotos de los tres prototipos montados, con su clave de equipo.</li>
+    <li>Los conteos del fin de semana y la columna de lo que nadie esperaba.</li>
+    <li>Los primeros comprobantes del fondo, sin montos de nadie: solo que existen.</li>
+  </ul>
 </div>
 
 <div class="chapuzon">
   <h2>Aviéntate 🌊</h2>
-  <p>Las sillas de $11 de Times Square no eran el plan final: eran la pregunta "¿y si la gente quisiera sentarse aquí?". La respuesta fueron 356,000 personas al día sentándose. La obra de millones vino después, cuando ya nadie podía negar lo que las sillas habían demostrado.</p>
+  <p>Las sillas de once dólares de Times Square no eran el plan final: eran la pregunta "¿y si la gente quisiera sentarse aquí?". La respuesta fueron cientos de miles de personas al día sentándose. La obra de millones vino después, cuando ya nadie podía negar lo que las sillas habían demostrado.</p>
   <p>Tu costal de cal es tu juego de sillas. Que tu prototipo haga una buena pregunta.</p>
 </div>
 

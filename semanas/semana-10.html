@@ -20,23 +20,18 @@
     background: var(--fondo); color: var(--texto);
     line-height: 1.65; font-size: 1.05rem;
   }
-  header.curso {
-    background: var(--profundo); color: #EAF4F2;
-    padding: 1.1rem 1.5rem;
-  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
   header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
   header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
   header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
   main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
 
-  .pregunta {
-    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
-    color: var(--profundo); margin: 1.8rem 0 .4rem;
-  }
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
   h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -55,11 +50,8 @@
   .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
   .consulta dd { margin: .2rem 0 .4rem 0; }
 
-  .chapuzon {
-    background: var(--profundo); color: #EAF4F2;
-    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
-  }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
 
   .aviso-goteo {
@@ -68,6 +60,7 @@
     display: none;
   }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -83,7 +76,7 @@
 <div id="wk-gate" data-semana="10">
 
 <p class="pregunta">¿Cuánto cuesta hacerlo de verdad?</p>
-<p class="bajada">Esta es la semana en que el proyecto deja de ser tuyo. El jueves se arma el presupuesto con cotizaciones de a de veras y un cronograma que quepa en cuatro semanas. El viernes se ensaya el pitch entre pares, se corrige lo que la Troika encuentre, y a las 14:00 la solicitud se entrega en mano. Después de esa hora, ya no hay nada que pulir: solo esperar al Comité.</p>
+<p class="bajada">Esta es la semana en que el proyecto deja de ser tuyo. El jueves se arma el presupuesto a dos columnas con cotizaciones de a de veras y un cronograma que quepa en cuatro semanas. El viernes se ensaya el pitch entre pares, se corrige lo que la Troika encuentre, y a las 14:00 la solicitud se entrega en mano. Después de esa hora, ya no hay nada que pulir: solo esperar al comité.</p>
 
 <h2>Esta semana podrás</h2>
 <div class="podras">
@@ -91,45 +84,246 @@
     <li>Armar el presupuesto de tu componente con cotizaciones reales y a dos columnas: lo que paga el fondo y lo conseguido afuera, valorizado.</li>
     <li>Dibujar un cronograma que quepa en las cuatro semanas de ejecución, con responsables, dependencias y la lluvia contemplada.</li>
     <li>Ensamblar la solicitud completa: las diez secciones del Anexo 1, las firmas, la anuencia y las cotizaciones anexas.</li>
-    <li>Contar tu proyecto en dos minutos y dejar que tus pares le encuentren los huecos antes de que se los encuentre el Comité.</li>
+    <li>Contar tu proyecto en dos minutos y dejar que tus pares le encuentren los huecos antes de que se los encuentre el comité.</li>
+    <li>Entregar a tiempo, que también es una habilidad y se aprende entregando.</li>
   </ul>
 </div>
 
-<h2>Herramientas de la semana</h2>
+<h2 class="corte">Las dos sesiones de esta semana</h2>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
+
+<!-- ====================== JUEVES ====================== -->
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves · 2 horas</div>
+      <h3>El proyecto en pesos</h3>
+      <p class="foco">Armar el presupuesto a dos columnas con cotizaciones de verdad, un cronograma que quepa en cuatro semanas y la solicitud ensamblada sección por sección.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El ticket de la semana pasada <span class="reloj">5 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Lo que el viernes quedó turbio del trato, hoy se contesta con el trato ya hecho.</p>
+    <p class="apoyo">Este arranque no se salta ningún jueves. Lo turbio de la semana 9 suele ser una sola pregunta: qué hago si me dijeron que sí de palabra y no hay papel. La respuesta está en la campana.</p>
+    <p class="nota-conductor">Traer dos o tres tickets textuales. Entregar el dictamen escrito del reto 3 al final de la sesión, con el porqué por criterio.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> La campana del no <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Ritual · cada jueves</span>
+    <p class="di">La campana de los tratos: ¿qué se consiguió, qué se negó, qué quedó en el aire?</p>
+    <p class="apoyo">Hoy la campana suena por los tratos de la semana 9: la anuencia, las tarimas, el flete, la cotización. Un no conseguido se anuncia, suena la campana, el grupo aplaude y el no se anota en el anti-currículum. Los síes se cuentan con su papel en la mano: el sí de palabra sin documento todavía no es contrapartida, es gestión en curso, y así se escribe en la solicitud.</p>
+    <p class="nota-conductor">Preguntar por la anuencia equipo por equipo: firmada, en camino con día, o en el aire. La que esté en el aire tiene hasta mañana a las 14:00 y hoy se decide quién va por ella.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> El presupuesto es tu proyecto en pesos <span class="reloj">10 min</span></h4>
+    <p class="di">Cada partida responde a una actividad, y cada actividad a un producto. El renglón que no puede explicar para qué existe, sobra.</p>
+    <p class="apoyo">Un presupuesto no es una lista de cosas caras: es tu cronograma traducido a dinero. Y las reglas no perdonan la aritmética: mínimo de $2,000 por solicitud, sin tope fijo, una Bolsa de $10,000 que se comparte entre los equipos y se reparte por orden de calificación hasta agotarse (cláusula 5.2), con la ministración condicionada a la contrapartida gestionada (cláusula 5.6). Si el total de tu equipo se acerca a los diez mil completos, ese número es tu alarma de incendio: la Bolsa se comparte.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">4</span> La columna de lo conseguido <span class="reloj">10 min</span></h4>
+    <div class="contra">
+      <div class="bien">
+        <span class="rot">Lo que paga el fondo</span>
+        <p style="margin:0">Malla sombra, cotización de la ferretería del pueblo: $2,850. Postes: $1,900. Cemento: $680. Flete: $400. Imponderables: $290.</p>
+      </div>
+      <div class="mal">
+        <span class="rot">Lo conseguido afuera, valorizado</span>
+        <p style="margin:0">Doce tarimas de la bodega: $1,200. Dos jornadas de faena, ocho personas: a precio de jornal de la región. Flete de la camioneta prestada: lo que cobraría el viaje.</p>
+      </div>
+    </div>
+    <p class="apoyo">Dos columnas y las dos cuentan: la segunda es la contrapartida de la rúbrica y le enseña al comité el tamaño real del proyecto. Y una pregunta que el manual de Acción sin Daño hace sobre el uso de los recursos: ¿qué efectos causa en el contexto la forma de gastar? A quién se le compra, a quién se contrata, quién se queda fuera. Comprar la malla en la ferretería del pueblo o en la cabecera no es solo un precio: es un mensaje, y la comunidad lo lee. Los que hacen lugares con poco dinero lo dicen con cuatro palabras que caben en una columna: comprado, prestado, trocado o donado.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> Gimnasio 1 · El presupuesto agujerado <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · en parejas</span>
+    <p class="di">Siete partidas del manantial. Cinco traen agujero, una comete algo peor y una se salva.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-10/ejercicio-11-el-presupuesto-agujerado.html">ejercicio del gimnasio</a> proyectado. Los agujeros clásicos: el precio de oídas (sin cotización que lo respalde), la partida bolsa (un renglón gordo que no dice para qué actividad), el flete olvidado, el presupuesto al centavo (sin imponderables), el doble papel (cobrar al fondo lo que ya es contrapartida) y el pecado mayor: pedir lo que las reglas no permiten, que se desecha sin evaluar.</p>
+    <p class="nota-conductor">Detenerse en el doble papel: es el agujero nuevo de esta semana y el que la columna de lo conseguido vuelve fácil de cometer. Lo que ya está valorizado como contrapartida no se le cobra al fondo.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">6</span> La cotización y sus dos hermanos olvidados <span class="reloj">10 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--oscura">cotización<small>escrita, fechada, con quién la da</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--clara">flete<small>el material no camina solo</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--arena">imponderables<small>alrededor del 5%, con nombre</small></span>
+      <span class="eq">= un presupuesto que se defiende solo</span>
+    </div>
+    <p class="apoyo">Un precio sin papel es un rumor. Tres cotizaciones por partida grande: para comparar, para tener plan B y para responder cuando el comité pregunte de dónde salió el número. El flete es el renglón que todo primer presupuesto olvida: el material cotizado en la cabecera no camina solo hasta la orilla, y si lo trae la camioneta prestada, ese flete es contrapartida. Y los imponderables: el clavo que falta en domingo, con un colchón chico y con nombre honesto. Un presupuesto al centavo exacto no es precisión: es optimismo disfrazado de contabilidad.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">7</span> El presupuesto, por equipo <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Partida por partida, con su papel, a dos columnas. Se suma de ida y de regreso, y se compara contra la Bolsa.</p>
+    <p class="apoyo">Con las cotizaciones traídas desde la semana 9 y el plan de palanca con sus renglones confirmados. La prueba de la partida honesta: se puede leer en voz alta ante el comité sin carraspear. "Materiales varios: $3,000" no pasa; "malla sombra 6 por 4, cotización de la ferretería del pueblo, con fecha: $2,850" sí. Los criterios del reto 4 se publican hoy: cada partida con su papel; flete e imponderables con renglón propio; lo conseguido en la columna de contrapartida y no en el gasto; total dentro de lo que las reglas permiten; y la suma que cuadra dos veces.</p>
+    <p class="nota-conductor">Rondar con la lista de agujeros del gimnasio 1. Quien llegó sin cotización no arma presupuesto hoy: arma la lista de cotizaciones que faltan, con quién y a qué hora las consigue antes de mañana. Es la lección, no el castigo.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">8</span> Un calendario que quepa <span class="reloj">15 min</span></h4>
+    <p class="di">La ejecución dura cuatro semanas, ni una más. El cronograma que cabe tiene tres virtudes.</p>
+    <p class="apoyo">Respeta las dependencias (no se instala lo que no se ha comprado, no se cuela piso el día que se convoca la faena), tiene responsable por renglón (lo que es de todos no es de nadie) y le cree al cielo (si puede llover, hay fecha B). El error clásico es la joroba: todo amontonado en la última semana, donde ya no hay margen para que algo salga mal. Y algo siempre sale mal: para eso planeas. Con el <a href="../ejercicios/semana-10/ejercicio-21-el-cronograma-iluso.html">gimnasio 2</a> proyectado: seis renglones del calendario del manantial, cinco con una ilusión escondida.</p>
+    <p class="nota-conductor">Las cuatro semanas de ejecución corren de la semana 12 a la 15 del curso, con las fechas exactas que fijan las reglas. Recordar que la faena se convoca con tiempo y la convoca la autoridad, no el equipo: ese renglón tiene dependencia política, no solo logística.</p>
+  </section>
+
+  <!-- Ilustración pendiente (ver imagenes-semanas-05-10.md, carpeta local del profesor):
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-10/la-joroba.webp" alt="Dibujo a tinta: dos calendarios de cuatro semanas lado a lado; en el primero todas las tareas se amontonan en la última semana formando una joroba, con una nube de lluvia encima; en el segundo las tareas se reparten parejas con un nombre junto a cada una y una fecha B marcada">
+  </section>
+  -->
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">9</span> El cronograma, por equipo <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Cuatro renglones, uno por semana: qué pasa, quién responde, qué depende de qué, y qué se moja.</p>
+    <p class="apoyo">En una hoja horizontal, con tres filtros en orden: primero dependencias (¿qué necesita estar listo antes de cada renglón?), luego responsables (un nombre por renglón), luego el cielo (¿qué se hace a la intemperie y cuál es su fecha B?). Si la semana 4 quedó gorda, algo migra a la 1. Los criterios del reto 5: dependencias respetadas, responsable por renglón, fecha B para lo que se moja, y que quepa en las cuatro semanas sin joroba.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">10</span> El semáforo de la solicitud <span class="reloj">10 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Las diez secciones del Anexo 1: terminada, a medias o vacía. Junto a cada pendiente, quién lo cierra y a qué hora.</p>
+    <p class="apoyo">Con el bloque 1 del <a href="../ejercicios/semana-10/ejercicio-32-mi-solicitud-y-mi-pitch.html">gimnasio 3</a>. Todo lo que quede en amarillo o rojo tiene dueño y hora antes de mañana a las 14:00. Y el estado real de las firmas y la anuencia, sin optimismo: firmado es firmado; "ya dijo que sí" no es firmado.</p>
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para mañana</span>
+      Mañana la Troika: cuentas tu proyecto en dos minutos, te volteas, y escuchas a tus pares discutirlo como si no estuvieras. Y a las 14:00 se suelta. Escribe el pitch esta noche y dilo en voz alta con reloj dos veces: la primera siempre dura cuatro minutos.
+    </div>
+  </section>
+</section>
+
+<!-- ====================== VIERNES ====================== -->
+<section class="mazo" id="mazo-viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes · 2 horas</div>
+      <h3>La Troika y la entrega</h3>
+      <p class="foco">Contar el proyecto en dos minutos, escuchar de espaldas lo que los pares le encuentran, corregir a tiempo y entregar la solicitud en mano a las 14:00.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam">
+    <h4><span class="n">1</span> El segundo peldaño <span class="reloj">5 min</span></h4>
+    <div class="flujo">
+      <div class="paso"><b>1</b><span class="t">la orilla</span>dos minutos entre colegas, semana 4</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>2</b><span class="t">la Troika</span>dos minutos ante tus pares, hoy</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>3</b><span class="t">el comité</span>ante desconocidos con rúbrica, semana 11</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>4</b><span class="t">la comunidad</span>en la presa, sin podio, semana 17</div>
+    </div>
+    <p class="apoyo">La escalera de contar en público sube un peldaño. El mismo formato y el mismo reloj que verás en el dictamen: dos minutos, cuatro movimientos, y el reloj no perdona.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">2</span> Cómo funciona la Troika <span class="reloj">10 min</span></h4>
+    <p class="di">Cuentas, te volteas, y tu equipo escucha en silencio mientras los otros discuten tu proyecto como si no estuvieras.</p>
+    <p class="apoyo">Es una estructura de consultoría entre pares, y su gracia está en la espalda: sin la cara del que presenta enfrente, los demás hablan con toda libertad, y sin poder contestar, el que presenta escucha de verdad. Duele un poco y vale oro: lo que tus pares no entendieron, el comité tampoco lo va a entender, y hoy todavía puedes corregirlo. Regla de oro del que escucha: no defenderse, apuntar. Cada ronda: dos minutos de pitch, un minuto de preguntas de aclaración, seis minutos de consulta de espaldas, dos minutos para decir qué se lleva.</p>
+    <p class="nota-conductor">Reloj visible y cortar a los dos minutos aunque falte: lo que no cupo en el pitch es lo que sobra en la solicitud. Los consultores hablan del proyecto, no del equipo. Si alguien del equipo que escucha se voltea a contestar, se le recuerda la regla con humor y sigue la ronda.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">3</span> Las rondas <span class="reloj">40 min</span></h4>
+    <span class="senal">Actividad · por equipos, tres rondas</span>
+    <p class="di">Qué pidió la comunidad, qué van a hacer, por qué va a funcionar, cuánto cuesta y con qué contrapartida.</p>
+    <p class="apoyo">Los cuatro movimientos del pitch, sin adornos, del bloque 6 del <a href="../ejercicios/semana-10/ejercicio-32-mi-solicitud-y-mi-pitch.html">gimnasio 3</a>. Un equipo presenta, los otros dos son consultores. Prueba del pitch sano: si alguien que no es del curso lo escucha, puede repetir qué haces, para quién y cuánto cuesta; si solo puede repetir adjetivos, hay que reescribirlo. El que escucha de espaldas apunta todo, incluida la pregunta que temía y que alguien acaba de hacer.</p>
+    <p class="nota-conductor">Tres rondas de unos once minutos. Los consultores tienen la rúbrica del fondo enfrente y hablan desde ahí: pertinencia, viabilidad, presupuesto, cronograma, contrapartida. Anotar en el pizarrón, por equipo, las dos cosas que más se repitieron: esas se corrigen antes de las 14:00.</p>
+  </section>
+
+  <!-- Ilustración pendiente (ver imagenes-semanas-05-10.md, carpeta local del profesor):
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-10/la-troika.webp" alt="Dibujo a tinta: tres personas de espaldas a una mesa, con libretas en la mano, mientras del otro lado un grupo conversa señalando un papel; un reloj de arena sobre la mesa y un rótulo que dice no defenderse, apuntar">
+  </section>
+  -->
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">4</span> Lo que la Troika corrigió <span class="reloj">30 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Se corrige lo corregible antes de las 14:00. Lo demás se anota para el comité.</p>
+    <p class="apoyo">La partida sin papel, la sección vacía, el cronograma con joroba, el pitch que solo tenía adjetivos. Y el checklist final del bloque 1 del gimnasio 3: las diez secciones del Anexo 1 llenas, el presupuesto con sus cotizaciones anexas, el cronograma, la contrapartida cuantificada y documentada, la carta compromiso con sus tres firmas y la anuencia de la delegación. Se imprime con margen: la impresora del viernes a la una y media es un animal traicionero. Quien engrapa revisa contra el checklist; quien lleva sale con tiempo.</p>
+    <p class="nota-conductor">Rondar con la rúbrica en la mano y decir en voz baja lo que un dictaminador vería. No corregir por ellos: a las 14:00 el documento es del equipo. Lo que no se pudo cerrar se anota en la bitácora como "lo que el comité va a preguntar", que es el bloque 7 del gimnasio 3.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">5</span> La hora es la hora <span class="reloj">5 min</span></h4>
+    <p class="di">El proyecto entregado a tiempo con un defecto vive. El proyecto perfecto entregado a las 14:10 no existe.</p>
+    <p class="apoyo">No hay prórroga porque en las convocatorias reales no la hay: el sistema se cierra a la hora que se cierra, con tu proyecto adentro o afuera. Entregar a tiempo también es una habilidad, y se aprende entregando.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">6</span> La entrega <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · en mano</span>
+    <p class="di">Impresa, completa, en mano, con recibido y hora.</p>
+    <p class="apoyo">Se entrega, se firma el recibido con la hora, y se toma la foto del momento: va al mapa de evidencias y a "Lo que produjimos", carpeta S10 del Drive. Después de esa hora no hay nada que pulir. Lo que sigue no depende de escribir mejor, sino de haber escrito bien.</p>
+    <p class="nota-conductor">Recibir en mano, firmar y anotar la hora en cada solicitud, delante del equipo. Si un equipo llega tarde, se recibe con la hora real y se dice en el momento lo que las reglas dicen al respecto, sin drama y sin excepción: es la lección más cara y más barata del semestre.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">7</span> Lo que sigue, y el cierre de la unidad 2 <span class="reloj">15 min</span></h4>
+    <p class="di">La semana que entra deciden otros. El fondo reparte dinero, no calificaciones.</p>
+    <p class="apoyo">El jueves de la semana 11, un comité externo dictamina con la rúbrica pública que ya conoces: puede dar todo, parcial, nada, o declarar desierto. Cortafuegos, dicho desde agosto: se puede perder el fondo con un trabajo excelente, y eso es una lección del oficio, no una sanción. La unidad 2 se cierra después del fallo, en la semana 11, con tu segundo cierre: el <a href="../evaluacion/expediente-u2.html">cuadernillo 2</a> trae el suelo de esta unidad explicado casilla por casilla (tres retos intentados, cotizaciones conseguidas por ti, la Troika, la bitácora al corriente), la hoja de retos con tus intentos y sus porqués, y la autoevaluación de ensayo, la segunda del semestre. Este fin de semana: descansar, poner la bitácora al día y leer la rúbrica con la solicitud al lado, como pide la semana 11. Y el ticket, noventa segundos.</p>
+    <p class="nota-conductor">Dejar claro el orden: primero el fallo, después la autoevaluación, para que se evalúe el trabajo y no el veredicto. Recordar que la respuesta escrita al fallo es parte de la unidad 3 y se explica en la semana 11.</p>
+  </section>
+</section>
+
+<h2 class="corte">Herramientas de la semana</h2>
 
 <div class="tarjeta">
   <span class="etiqueta">La idea grande</span>
   <h3 style="margin-top:.2rem">El presupuesto es tu proyecto en pesos</h3>
-  <p>Un presupuesto no es una lista de cosas caras: es tu cronograma traducido a dinero. Cada partida responde a una actividad y cada actividad a un producto; el renglón que no puede explicar para qué actividad existe, sobra. Y las reglas del fondo no perdonan la aritmética: mínimo de $2,000 por solicitud, sin tope fijo, y un dictamen que reparte por orden de calificación hasta agotar el capital, con la ministración condicionada a la contrapartida gestionada (cláusulas 5.2 y 5.6, las destripaste en septiembre). Es el ensayo general del mundo de las convocatorias, donde el que no lee las reglas paga con meses de trabajo. Por eso el presupuesto de este curso se escribe a dos columnas: lo que paga el fondo y lo que el plan de palanca consiguió afuera, valorizado en pesos.</p>
+  <p>Un presupuesto no es una lista de cosas caras: es tu cronograma traducido a dinero. Cada partida responde a una actividad y cada actividad a un producto; el renglón que no puede explicar para qué actividad existe, sobra. Y las reglas del fondo no perdonan la aritmética: mínimo de $2,000 por solicitud, sin tope fijo, y un dictamen que reparte por orden de calificación hasta agotar la Bolsa, con la ministración condicionada a la contrapartida gestionada (cláusulas 5.2 y 5.6, las destripaste en la semana 5). Es el ensayo general del mundo de las convocatorias, donde el que no lee las reglas paga con meses de trabajo. Por eso el presupuesto de este curso se escribe a dos columnas: lo que paga el fondo y lo que el plan de palanca consiguió afuera, valorizado en pesos. Y con una pregunta que el manual de Acción sin Daño hace sobre el uso de los recursos: a quién se le compra y a quién se contrata también es un mensaje que la comunidad lee.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El aparato</span>
   <h3 style="margin-top:.2rem">La cotización y sus dos hermanos olvidados</h3>
-  <p>Un precio sin papel es un rumor: la cotización escrita y fechada es lo que vuelve tu presupuesto defendible (y lo que te salva si el precio sube en noviembre). Este curso pide tres por partida grande: para comparar, para tener plan B y para responder cuando el Comité pregunte de dónde salió el número. Y los dos renglones que todo primer presupuesto olvida: el flete (el material cotizado en la cabecera no camina solo hasta la orilla) y los imponderables (el clavo que falta en domingo; un colchón chico, alrededor del 5%, con nombre honesto).</p>
+  <p>Un precio sin papel es un rumor: la cotización escrita y fechada es lo que vuelve tu presupuesto defendible (y lo que te salva si el precio sube en noviembre). Este curso pide tres por partida grande: para comparar, para tener plan B y para responder cuando el comité pregunte de dónde salió el número. Y los dos renglones que todo primer presupuesto olvida: el flete (el material cotizado en la cabecera no camina solo hasta la orilla) y los imponderables (el clavo que falta en domingo; un colchón chico, alrededor del 5%, con nombre honesto).</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El aparato</span>
   <h3 style="margin-top:.2rem">Un calendario que quepa</h3>
-  <p>La ejecución va del 19 de octubre al 13 de noviembre: cuatro semanas, ni una más. El cronograma que cabe tiene tres virtudes: respeta las dependencias (no se instala lo que no se ha comprado, no se cuela piso el día que se convoca la faena), tiene responsable por renglón (lo que es de todos no es de nadie) y le cree a la temporada (si puede llover, hay fecha B). El error clásico es la joroba: todo amontonado en la última semana, donde ya no hay margen para que algo salga mal. Y algo siempre sale mal: para eso planeas.</p>
+  <p>La ejecución dura cuatro semanas, de la semana 12 a la 15 del curso, con las fechas que fijan las reglas: ni una más. El cronograma que cabe tiene tres virtudes: respeta las dependencias (no se instala lo que no se ha comprado, no se cuela piso el día que se convoca la faena), tiene responsable por renglón (lo que es de todos no es de nadie) y le cree a la temporada (si puede llover, hay fecha B). El error clásico es la joroba: todo amontonado en la última semana, donde ya no hay margen para que algo salga mal. Y algo siempre sale mal: para eso planeas.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">Los retos</span>
+  <h3 style="margin-top:.2rem">Retos 4 y 5: presupuesto y cronograma</h3>
+  <p>Los dos últimos retos de la unidad, al expediente, con criterios publicados el jueves. Presupuesto: cada partida con su papel; flete e imponderables con renglón propio; lo conseguido en la columna de contrapartida y no en el gasto; total dentro de lo que las reglas permiten; la suma que cuadra dos veces. Cronograma: dependencias respetadas, responsable por renglón, fecha B para lo que se moja, y que quepa en las cuatro semanas sin joroba. Bien o aún no, con el porqué y con reintento; el reintento se puede entregar hasta el viernes de la semana 11, y el suelo de la unidad pide haber intentado al menos tres de los cinco.</p>
 </div>
 
 <div class="tarjeta siembra">
   <span class="etiqueta">El peldaño</span>
   <h3 style="margin-top:.2rem">El pre-pitch: la Troika</h3>
-  <p>Segundo peldaño de la escalera que empezó en la consulta: contar tu proyecto en dos minutos, ante tus pares, con el mismo formato y el mismo reloj que verás en el dictamen. Luego viene lo mejor: te volteas, y tu equipo escucha en silencio mientras los otros discuten tu proyecto como si no estuvieras. Duele un poco y vale oro: lo que tus pares no entendieron, el Comité tampoco lo va a entender, y hoy todavía puedes corregirlo. El jueves que viene ya no.</p>
+  <p>Segundo peldaño de la escalera que empezó en la consulta: contar tu proyecto en dos minutos, ante tus pares, con el mismo formato y el mismo reloj que verás en el dictamen. Luego viene lo mejor: te volteas, y tu equipo escucha en silencio mientras los otros discuten tu proyecto como si no estuvieras. Es una estructura de consultoría entre pares, y su gracia está en la espalda: sin la cara del que presenta enfrente, los demás hablan con libertad, y sin poder contestar, el que presenta escucha de verdad. Duele un poco y vale oro: lo que tus pares no entendieron, el comité tampoco lo va a entender, y hoy todavía puedes corregirlo. El jueves que viene ya no.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">La hora</span>
-  <h3 style="margin-top:.2rem">La entrega: viernes 9, 14:00, en mano</h3>
-  <p>Como lo dicen las reglas desde septiembre: la solicitud completa, impresa y en mano, el viernes de esta semana a las 14:00. Completa quiere decir: las diez secciones del Anexo 1 llenas, el presupuesto con sus cotizaciones anexas, el cronograma, la contrapartida cuantificada, la carta compromiso con sus tres firmas y la anuencia de la delegación. No hay prórroga porque en las convocatorias reales no la hay: el sistema se cierra a la hora que se cierra, con tu proyecto adentro o afuera. Entregar a tiempo también es una habilidad, y se aprende entregando.</p>
+  <h3 style="margin-top:.2rem">La entrega: viernes, 14:00, en mano</h3>
+  <p>Como lo dicen las reglas desde la semana 5: la solicitud completa, impresa y en mano, el viernes de esta semana a las 14:00. Completa quiere decir: las diez secciones del Anexo 1 llenas, el presupuesto con sus cotizaciones anexas, el cronograma, la contrapartida cuantificada, la carta compromiso con sus tres firmas y la anuencia de la delegación. No hay prórroga porque en las convocatorias reales no la hay: el sistema se cierra a la hora que se cierra, con tu proyecto adentro o afuera. Entregar a tiempo también es una habilidad, y se aprende entregando.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El cierre de unidad</span>
+  <h3 style="margin-top:.2rem">Tu segundo cierre, después del fallo</h3>
+  <p>La unidad 2 se cierra en la semana 11, cuando el comité ya haya hablado, para que se evalúe tu trabajo y no el veredicto. El <a href="../evaluacion/expediente-u2.html">cuadernillo 2</a> se llena en línea o en papel y trae el suelo de la unidad explicado casilla por casilla (tres retos intentados, cotizaciones conseguidas por ti, la Troika, la bitácora de equipo al corriente), la hoja de retos con tus intentos y sus porqués, tus hojas de cada semana y la autoevaluación de ensayo, la segunda del semestre. Ponlo al día este fin de semana: en la semana 11 solo debería faltarle la autoevaluación.</p>
 </div>
 
 <h2>El gimnasio</h2>
 <div class="tarjeta">
-  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-10/ejercicio-11-el-presupuesto-agujerado.html"><strong>El presupuesto agujerado</strong></a> · Siete partidas del proyecto del manantial. Cinco traen agujero, una excede algo peor y una se salva.</div></div>
+  <div class="gimnasio-item"><span class="num">1</span><div><a href="../ejercicios/semana-10/ejercicio-11-el-presupuesto-agujerado.html"><strong>El presupuesto agujerado</strong></a> · Siete partidas del proyecto del manantial. Cinco traen agujero, una comete algo peor y una se salva.</div></div>
   <div class="gimnasio-item"><span class="num">2</span><div><a href="../ejercicios/semana-10/ejercicio-21-el-cronograma-iluso.html"><strong>El cronograma iluso</strong></a> · Seis renglones de calendario con falla escondida (uno se salva). Dependencias, jorobas y lluvia.</div></div>
   <div class="gimnasio-item"><span class="num">3</span><div><a href="../ejercicios/semana-10/ejercicio-32-mi-solicitud-y-mi-pitch.html"><strong>Mi solicitud y mi pitch</strong></a> · El checklist final de la solicitud y el guion de tus dos minutos. Se llena esta semana o no sirve.</div></div>
 </div>
@@ -138,31 +332,42 @@
 <div class="tarjeta consulta">
   <dl>
     <dt>Partida</dt>
-    <dd>Cada renglón del presupuesto: qué se compra o se paga, cuánto, para qué actividad. La prueba de la partida honesta: se puede leer en voz alta ante el Comité sin carraspear. "Materiales varios: $3,000" no pasa la prueba; "malla sombra 6×4 m, cotización de la ferretería del 3 de octubre: $2,850" sí.</dd>
+    <dd>Cada renglón del presupuesto: qué se compra o se paga, cuánto, para qué actividad. La prueba de la partida honesta: se puede leer en voz alta ante el comité sin carraspear. "Materiales varios: $3,000" no pasa la prueba; "malla sombra 6 por 4, cotización de la ferretería con fecha: $2,850" sí.</dd>
     <dt>Cotización</dt>
     <dd>El precio por escrito, con fecha y quién lo da. Tres por partida grande: para comparar, para tener plan B si un proveedor falla y para defender el número. La cotización es al presupuesto lo que el medio de verificación es al indicador: sin papel, no existe.</dd>
     <dt>Recibo simple</dt>
     <dd>El comprobante que las reglas del fondo aceptan para el comercio local que no factura: una nota con fecha, concepto, monto, nombre y firma de quien recibe el dinero. Se llena en el momento de la compra, no después de memoria. Sin comprobante no hay reembolso: ese gasto lo paga tu bolsa.</dd>
     <dt>La columna de lo conseguido</dt>
-    <dd>La segunda columna del presupuesto: lo que no paga el fondo porque el plan de palanca de la semana 9 lo consiguió afuera, valorizado en pesos. El jornal de la faena a precio de la región, el flete prestado a lo que cobraría la camioneta, el material que puso el municipio a precio de ferretería. Suma a la contrapartida de la rúbrica y le enseña al Comité el tamaño real del proyecto, que es más grande que su tope.</dd>
+    <dd>La segunda columna del presupuesto: lo que no paga el fondo porque el plan de palanca de la semana 9 lo consiguió afuera, valorizado en pesos. El jornal de la faena a precio de la región, el flete prestado a lo que cobraría la camioneta, el material que puso el municipio a precio de ferretería. Suma a la contrapartida de la rúbrica y le enseña al comité el tamaño real del proyecto, que es más grande que lo que pide.</dd>
+    <dt>Comprado, prestado, trocado o donado</dt>
+    <dd>Las cuatro palabras con que la gente que hace lugares con poco dinero clasifica cada cosa de su presupuesto. Solo la primera le cuesta al fondo; las otras tres son gestión, y se cuentan igual de completas.</dd>
+    <dt>Doble papel</dt>
+    <dd>El agujero nuevo de esta semana: cobrarle al fondo lo que ya está valorizado como contrapartida. Cada cosa vive en una sola columna.</dd>
     <dt>Flete</dt>
-    <dd>El renglón que los primeros presupuestos siempre olvidan: mover el material del punto A al punto B cuesta, en dinero o en trato (la camioneta prestada del mapa de poder también es flete, y es contrapartida). Cotizar el material sin cotizar su traslado es presupuestar la mitad del problema.</dd>
+    <dd>El renglón que los primeros presupuestos siempre olvidan: mover el material del punto A al punto B cuesta, en dinero o en trato (la camioneta prestada del mapa de actores también es flete, y es contrapartida). Cotizar el material sin cotizar su traslado es presupuestar la mitad del problema.</dd>
     <dt>Imponderables</dt>
     <dd>El colchón para lo que no se dejó ver: el clavo que falta en domingo, el precio que subió, la bisagra que nadie contó. Chico (alrededor del 5%) y con nombre honesto en su renglón. Un presupuesto al centavo exacto no es precisión: es optimismo disfrazado de contabilidad.</dd>
     <dt>Cronograma</dt>
-    <dd>Las actividades acomodadas en el calendario real: qué se hace, en qué semana, quién responde. En este fondo, cuatro semanas exactas (19 de octubre a 13 de noviembre). Su columna invisible es la dependencia: qué tiene que estar terminado para que este renglón pueda empezar.</dd>
+    <dd>Las actividades acomodadas en el calendario real: qué se hace, en qué semana, quién responde. En este fondo, cuatro semanas exactas, las que las reglas fijan entre la semana 12 y la 15 del curso. Su columna invisible es la dependencia: qué tiene que estar terminado para que este renglón pueda empezar.</dd>
     <dt>Dependencia</dt>
     <dd>La relación de orden entre actividades: no se instala lo que no se ha comprado, no se convoca faena de un día para otro, no se cuela piso si no llegó el cemento. El cronograma que ignora sus dependencias no es un plan: es una lista de deseos con fechas.</dd>
     <dt>Pre-pitch (Troika)</dt>
-    <dd>El ensayo del dictamen entre pares: dos minutos de pitch, y luego tu equipo escucha de espaldas mientras los demás discuten tu proyecto con toda libertad. La regla de oro del que escucha: no defenderse, apuntar. Lo que no se entendió hoy se corrige hoy; el jueves 15 ya no.</dd>
+    <dd>El ensayo del dictamen entre pares: dos minutos de pitch, y luego tu equipo escucha de espaldas mientras los demás discuten tu proyecto con toda libertad. La regla de oro del que escucha: no defenderse, apuntar. Lo que no se entendió hoy se corrige hoy; ante el comité ya no.</dd>
     <dt>La entrega en mano</dt>
     <dd>El viernes de esta semana, 14:00, impresa y completa: diez secciones, cotizaciones anexas, contrapartida cuantificada, tres firmas y anuencia. La hora es la hora, como en toda convocatoria real. El proyecto entregado a tiempo con un defecto vive; el proyecto perfecto entregado a las 14:10 no existe.</dd>
+    <dt>Suelo de la unidad 2</dt>
+    <dd>La lista corta de lo que basta para no reprobar esta unidad: haber intentado al menos tres de los cinco retos (aunque salgan aún no), cotizaciones reales conseguidas por ti, el pre-pitch en la Troika y la bitácora de equipo al corriente en tu parte. Está explicada casilla por casilla, con su evidencia y su plan B, en el <a href="../evaluacion/expediente-u2.html">cuadernillo 2</a>.</dd>
   </dl>
 </div>
 
 <h2>Lo que produjimos</h2>
 <div class="tarjeta">
-  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán los presupuestos con sus cotizaciones, los cronogramas de cuatro semanas, lo que la Troika corrigió a tiempo y la foto del momento de la entrega.</p>
+  <p style="color:#8aa39c; font-style:italic;">Esta vitrina se llena al cierre de la semana. Lo que va a llegar aquí:</p>
+  <ul style="color:#8aa39c; font-style:italic; margin:.4rem 0 .2rem;">
+    <li>Los presupuestos a dos columnas con sus cotizaciones, sin montos de nadie: solo sus renglones.</li>
+    <li>Los cronogramas de cuatro semanas y lo que la Troika corrigió a tiempo.</li>
+    <li>La foto del momento de la entrega, con la hora.</li>
+  </ul>
 </div>
 
 <div class="chapuzon">

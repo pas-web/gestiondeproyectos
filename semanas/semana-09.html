@@ -20,23 +20,18 @@
     background: var(--fondo); color: var(--texto);
     line-height: 1.65; font-size: 1.05rem;
   }
-  header.curso {
-    background: var(--profundo); color: #EAF4F2;
-    padding: 1.1rem 1.5rem;
-  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
   header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
   header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
   header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
   main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
 
-  .pregunta {
-    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
-    color: var(--profundo); margin: 1.8rem 0 .4rem;
-  }
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
   h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -55,11 +50,8 @@
   .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
   .consulta dd { margin: .2rem 0 .4rem 0; }
 
-  .chapuzon {
-    background: var(--profundo); color: #EAF4F2;
-    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
-  }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
 
   .aviso-goteo {
@@ -68,6 +60,7 @@
     display: none;
   }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -83,12 +76,12 @@
 <div id="wk-gate" data-semana="9">
 
 <p class="pregunta">¿Quién tiene que decir que sí?</p>
-<p class="bajada">Tu proyecto ya aguanta la lupa en el papel. Pero los papeles no firman anuencias, no prestan camionetas ni abren candados: eso lo hace la gente. Esta semana levantas el mapa de las personas de tu proyecto (quién ayuda, quién se resiste, quién falta), ensayas el oficio de pedir bien y descubres que buena parte de lo que necesitas no se compra: se consigue. La solicitud se entrega el 9 de octubre, y hay firmas que no dependen de ti.</p>
+<p class="bajada">Tu proyecto ya aguanta la lupa en el papel. Pero los papeles no firman anuencias, no prestan camionetas ni abren candados: eso lo hace la gente. Esta semana levantas el mapa de las personas de tu proyecto (quién ayuda, quién se resiste, quién falta), ensayas el oficio de pedir bien y descubres que buena parte de lo que necesitas no se compra: se consigue. La solicitud se entrega el viernes de la semana que entra, y hay firmas que no dependen de ti.</p>
 
 <h2>Esta semana podrás</h2>
 <div class="podras">
   <ul>
-    <li>Levantar el mapa de poder de tu componente: cada involucrado ubicado por su interés y su influencia, sin caricaturas.</li>
+    <li>Levantar el mapa de actores de tu componente: cada involucrado ubicado por su interés y su influencia, sin caricaturas y sin nombres.</li>
     <li>Leer las resistencias como información de diseño y no como enemigos: la objeción de hoy es el ajuste que te salva en noviembre.</li>
     <li>Preparar y ensayar un trato real (la anuencia, el préstamo, la cotización que falta) con oferta, escucha y plan B.</li>
     <li>Armar el plan de palanca de tu equipo: usar el capital semilla ya puesto como argumento para conseguir lo que falta con la comunidad, el municipio y otros aliados.</li>
@@ -97,24 +90,225 @@
   </ul>
 </div>
 
-<h2>Herramientas de la semana</h2>
+<h2 class="corte">Las dos sesiones de esta semana</h2>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
+
+<!-- ====================== JUEVES ====================== -->
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves · 2 horas</div>
+      <h3>Los proyectos son gente</h3>
+      <p class="foco">Levantar el mapa de las personas de cada componente, leer las resistencias como diseño y armar el plan de palanca que convierte los diez mil en argumento.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El ticket de la semana pasada <span class="reloj">5 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Lo que el viernes quedó turbio del Anexo 1, hoy se contesta con el formato en la mano.</p>
+    <p class="apoyo">Este arranque no se salta ningún jueves. Lo turbio de un formato suele ser una sección que nadie entendió igual: se lee la sección, se dice qué pieza del curso la llena, y se sigue.</p>
+    <p class="nota-conductor">Traer dos o tres tickets textuales. Entregar el dictamen escrito del reto 2 a cada equipo al final de la sesión, con el porqué por criterio.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> La campana del no <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Ritual · cada jueves</span>
+    <p class="di">¿Quién pidió esta semana? Las cotizaciones también cuentan.</p>
+    <p class="apoyo">Un no conseguido se anuncia, suena la campana, el grupo aplaude y el no se anota en el anti-currículum. Desde esta semana la campana entra en su temporada alta: cotizaciones, préstamos, la anuencia. Cada trato de la semana es una petición real, y las peticiones reales cuentan en el semestre.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> Los proyectos son gente <span class="reloj">10 min</span></h4>
+    <p class="di">El marco lógico más fino del mundo no instala una malla si la delegación no firma.</p>
+    <p class="apoyo">Ni si el dueño del terreno de junto se siente brincado, ni si nadie consigue quién preste la camioneta. Todo proyecto tiene una capa política: no la de los partidos, sino la de los acuerdos entre personas con intereses distintos. Ignorarla no la desaparece: solo garantiza que te sorprenda. En una Reserva de la Biosfera, donde casi ninguna decisión sobre el territorio es de una sola persona, esa capa no es adorno: es la condición para que el proyecto exista.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">4</span> El mapa de actores <span class="reloj">15 min</span></h4>
+    <div class="contra">
+      <div class="bien">
+        <span class="rot">Mucha influencia</span>
+        <p style="margin:0"><strong>Durmientes</strong> (poco interés): se les informa antes de que despierten de malas.</p>
+        <p style="margin:.5rem 0 0"><strong>Clave</strong> (mucho interés): con ellos se trabaja de la mano y desde temprano.</p>
+      </div>
+      <div class="mal">
+        <span class="rot">Poca influencia</span>
+        <p style="margin:0"><strong>Lejanos</strong> (poco interés): se tienen en el radar.</p>
+        <p style="margin:.5rem 0 0"><strong>Aliados de a pie</strong> (mucho interés): tus ojos y tus manos en el sitio; se activan con tareas concretas.</p>
+      </div>
+    </div>
+    <p class="apoyo">Dos ejes: cuánto le importa tu proyecto a cada quien (interés) y cuánto puede moverlo o frenarlo (influencia). El manual de Acción sin Daño dibuja a cada actor por su posición, su interés y su necesidad, y le mide cuatro poderes: el que da el cargo, el que da el dinero, el que da el saber y el que da la gente que lo sigue. Un vecino sin cargo puede tener el cuarto poder completo. Y la pregunta que más paga: ¿quién falta? La conversación que nadie ha tenido suele ser la que evita el pleito.</p>
+    <div class="ojo">
+      <strong>Regla de respeto.</strong> El mapa se dibuja con cargos y roles, nunca con nombres y etiquetas, y no sale del aula. En una comunidad chica, un papel que diga "opositor" junto a un nombre hace más daño que cualquier retraso de obra.
+    </div>
+  </section>
+
+  <!-- Ilustración pendiente (ver imagenes-semanas-05-10.md, carpeta local del profesor):
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-09/el-tablero-de-actores.webp" alt="Dibujo a tinta: un tablero cuadriculado en cuatro zonas con fichas de madera sin rostro, cada ficha rotulada con un cargo y no con un nombre: delegación, comité de agua, vivero, ejido; una ficha vacía con signo de interrogación en una esquina, rotulada quién falta">
+  </section>
+  -->
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> Gimnasio 1 · El tablero del manantial <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · en parejas</span>
+    <p class="di">Siete personas alrededor del proyecto del manantial. Cada una a su zona, y la jugada que le toca.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-09/ejercicio-11-el-tablero-del-manantial.html">ejercicio del gimnasio</a> proyectado: el proyecto vecino de siempre, una comunidad serrana, siete involucrados con interés e influencia distintos. La jugada cambia por zona: al clave se le trabaja de la mano, al durmiente se le informa antes, al aliado de a pie se le da tarea, al lejano se le vigila. Y la quinta categoría, que no sale en el cruce: los que faltan.</p>
+    <p class="nota-conductor">Detenerse en el durmiente: es la zona que más pleitos produce en las obras comunitarias, y siempre empieza con la frase "a mí nadie me avisó". Preguntar quién sería el durmiente de la presa de La Florida.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">6</span> La resistencia trae diseño <span class="reloj">10 min</span></h4>
+    <p class="di">El que abreva su ganado en el manantial no odia tu sombra. Necesita el paso al agua.</p>
+    <p class="apoyo">Una regla vieja del oficio de hacer lugares: al que está en contra no se le convence, se le pregunta qué necesita, y casi siempre cabe en el diseño. Pasa de estar en contra a estar a favor porque el diseño ya lo incluye: el acceso al abrevadero se respeta y se señaliza. La resistencia no es un enemigo: es alguien a quien tu proyecto le cuesta algo, y su objeción casi siempre trae información de diseño. Se le escucha primero. Y el manual agrega un radar: quién se lleva con quién, quién no se habla, qué pleito viejo puede reactivar tu proyecto sin querer. Ese radar también se dibuja sin nombres.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">7</span> Mi mapa, por equipo <span class="reloj">25 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">El sí que necesito, los clave, los durmientes, las resistencias y los que faltan. Con cargos, a lápiz, y no sale del aula.</p>
+    <p class="apoyo">Con los bloques 1 a 5 del <a href="../ejercicios/semana-09/ejercicio-32-mi-mapa-y-mi-trato.html">gimnasio 3</a>, en una doble página: el cruce de interés e influencia, cada involucrado por su rol, la jugada junto a cada clave, la objeción de cada resistencia escrita como la diría esa persona y el dato de diseño que trae dentro. Y la pregunta que más paga, contestada por escrito: ¿quién usa el sitio hoy, a quién toca tu componente, y nadie ha hablado con esa persona? Esa doble página es el reto 3, versión 1.</p>
+    <p class="nota-conductor">Rondar cuidando la regla de respeto: si aparece un nombre, se cambia por el rol ahí mismo. Pedir que cada resistencia traiga su dato de diseño y no solo su objeción. Los criterios del reto 3 se publican hoy: mapa con roles y no con nombres; cada clave con su jugada; cada resistencia con su dato de diseño; al menos un "quién falta" con conversación pendiente; y el trato de la semana con sus cuatro partes y su plan B.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">8</span> La palanca de los diez mil <span class="reloj">20 min</span></h4>
+    <p class="di">Al municipio no se le pide que arranque un proyecto. Se le enseña el proyecto andando y se le pide una pieza concreta.</p>
+    <p class="apoyo">Desde la semana 0 quedó dicho que el capital semilla no alcanza para todo y que ese es justamente el punto: sirve de contrapartida para ir por lo que falta. Y las reglas lo volvieron condición: sin contrapartida gestionada no hay ministración. Hoy eso se vuelve un plan con renglones: qué falta más allá del fondo, quién lo puede poner (la asamblea con una faena, el municipio con la máquina o el flete, la ferretería con precio o material, el ejido, la escuela, la Reserva), qué ofrecemos a cambio, y la acción con fecha y responsable: el punto en el orden del día de la asamblea, el oficio con acuse, la visita, el trato.</p>
+    <div class="pasa">
+      <b>El trato de las tarimas.</b> Un grupo de gestores necesitaba doce tarimas de pino para el piso de una sombra y el presupuesto ya no daba. En la bodega de materiales del pueblo había un rincón lleno de tarimas arrumbadas. El trato: nos las llevamos, le vaciamos y barremos el rincón el sábado, y en la lona de la inauguración va el nombre de su bodega. Doce tarimas a cien pesos cada una: mil doscientos pesos conseguidos con una conversación de diez minutos, con nota firmada y foto. El favor bien hecho también es presupuesto.
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Los primeros renglones del plan de palanca: qué falta, quién lo pone, qué ofrecemos, acción con fecha y responsable.</p>
+    <p class="apoyo">Con la lista de materiales del componente enfrente: qué se puede conseguir en lugar de comprar. Cada renglón confirmado se vuelve contrapartida de la solicitud, pero solo cuenta la contrapartida cuantificada en pesos y documentada (nota firmada, foto fechada, mensaje). El favor confirmado es contrapartida; el favor supuesto es esperanza. El plan va al cuadernillo 2 y alimenta la columna de lo conseguido del presupuesto de la semana que entra.</p>
+    <p class="nota-conductor">Cuidar que las acciones tengan fecha dentro de esta semana o la próxima: un renglón con fecha de noviembre no sirve para la solicitud. Y que el responsable sea, casi siempre, quien da la cara.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">9</span> La anuencia: esta semana es la semana <span class="reloj">10 min</span></h4>
+    <p class="di">Un sí de palabra no es una anuencia. Es el paso previo.</p>
+    <p class="apoyo">El fondo exige el sí por escrito de la delegación, y ese papel no lo produce tu equipo: se gestiona. El mapa te dice con quién se habla, el trato te dice cómo, y el calendario te dice cuándo: la solicitud se entrega el viernes de la semana 10 a las 14:00, y una anuencia no se consigue el jueves por la noche. Hoy se decide quién va, qué día, con qué papel en la mano (qué se hará, dónde, quién responde, cuándo se quita si es temporal) y qué se ofrece. La delegación ya nos conoce: nos vio consultar, nos vio volver con lo apuntado y nos vio levantar el ensayo el domingo. Ese historial es el argumento.</p>
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para mañana</span>
+      Mañana se ensaya el trato antes de hacerlo de verdad, con contrapartes de mala leche. Y entra al mapa un actor que casi nadie dibuja: el que tiene dinero para proyectos como el tuyo y todavía no sabe que existes.
+    </div>
+  </section>
+</section>
+
+<!-- ====================== VIERNES ====================== -->
+<section class="mazo" id="mazo-viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes · 2 horas</div>
+      <h3>El trato y el donante</h3>
+      <p class="foco">Ensayar el trato real contra contrapartes difíciles, leer al PROCODES como actor de tu mapa y salir con la anuencia en camino y el plan de palanca con fechas.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam">
+    <h4><span class="n">1</span> El trato, en cuatro partes <span class="reloj">10 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--oscura">qué pido<small>concreto, con fecha y cantidad</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--clara">qué ofrezco<small>algo real que controlo</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--arena">qué le importa<small>se averigua preguntando y callando</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--roja">plan B<small>para poder decir gracias, lo busco por otro lado</small></span>
+      <span class="eq">= el trato</span>
+    </div>
+    <p class="apoyo">Pedir bien es un oficio con partes. Tu poder en un trato es poder decir "gracias, lo busco por otro lado" sin hundir el proyecto; quien no tiene plan B no negocia: suplica. Y un trato bien cerrado tiene quién, qué, cuánto y cuándo. El "sí, luego vemos" no es un trato: es una amabilidad que no se puede cobrar.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> Gimnasio 2 · El mal trato <span class="reloj">10 min</span></h4>
+    <span class="senal">Actividad · en parejas</span>
+    <p class="di">Seis tratos del manantial. Cinco salieron chuecos por una falla con nombre; uno se salva.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-09/ejercicio-21-el-mal-trato.html">ejercicio del gimnasio</a> proyectado. Las fallas: manos vacías (pedir sin ofrecer nada), prometer de más (ofrecer lo que no controlas), sin plan B (aceptar lo que sea), recitar sin escuchar (llegar con el discurso y perderse el dato) y el sí vago (cerrar sin quién, qué, cuánto ni cuándo). Cada quien elige la que le queda más cerca: esa es la que va a ensayar ahora.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">3</span> El ensayo del trato <span class="reloj">30 min</span></h4>
+    <span class="senal">Actividad · en tríos rotativos</span>
+    <p class="di">Uno pide, uno es la contraparte con mala leche, uno observa con las cinco fallas en la mano.</p>
+    <p class="apoyo">El trato real del equipo (la anuencia, el préstamo, la cotización que falta), como se va a decir: las primeras dos frases en voz alta suenan distinto que en la cabeza. La contraparte se elige del mismo mundo: el dueño de la bodega que no tiene tiempo, la delegada que ya le dio anuencia a otro grupo, la ferretera que pregunta qué gana ella, el presidente del comité de agua que pide que le expliquen para qué sirve. Difícil no es imposible: la contraparte cede si el que pide lo hace bien, igual que los vecinos del ensayo de la consulta. Dos rondas de ocho minutos, dos minutos de ajuste entre una y otra, y se rota.</p>
+    <p class="nota-conductor">Rondar escuchando las primeras frases: ahí se decide casi todo. El observador nombra la falla, no la corrige. Cuidar que quien da la cara de cada equipo pase por el rol de pedir con el trato real que va a hacer entre hoy y el jueves. Equivocarse aquí es gratis; en la bodega, no.</p>
+  </section>
+
+  <!-- Ilustración pendiente (ver imagenes-semanas-05-10.md, carpeta local del profesor):
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-09/el-trato-de-las-tarimas.webp" alt="Dibujo a tinta: en la puerta de una bodega, una persona joven conversa con el encargado señalando un rincón lleno de tarimas arrumbadas; en la mano trae una escoba y una hoja con cuatro renglones: pido, ofrezco, le importa, plan B">
+  </section>
+  -->
+
+  <section class="lam">
+    <h4><span class="n">4</span> El donante también es actor <span class="reloj">25 min</span></h4>
+    <p class="di">Hay un involucrado que casi nadie dibuja: el que tiene dinero para proyectos como el tuyo y todavía no sabe que existes.</p>
+    <p class="apoyo">Hoy se le pone cara con un documento real: los Lineamientos del PROCODES 2026 de la CONANP, el programa federal que opera en las áreas naturales protegidas, con técnica de la Reserva incluida en tu contrato de gestión, y del que ya destripaste tres cláusulas en la semana 5. Se lee con la plantilla de dictaminador: quién puede solicitar, qué apoya (los conceptos: proyectos, estudios técnicos, cursos de capacitación) y cómo califica (52 puntos, sin fracciones, mínimo 20). El mejor proyecto en el concepto equivocado califica cero.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Tres preguntas, con tu proyecto enfrente. La tercera es la difícil y no se resuelve hoy.</p>
+    <table class="veredicto">
+      <tr><th>Pregunta</th><th>Lo que se decide</th></tr>
+      <tr><td><strong>¿En qué concepto de apoyo cabría?</strong></td><td>Elegibilidad primero: si no cabe en ningún concepto, la respuesta es que este programa no es para este proyecto, y eso también se anota.</td></tr>
+      <tr><td><strong>¿Qué habría que ajustarle para que a este programa le interese?</strong></td><td>El cómo se puede reescribir para hablarle a lo que el programa premia. La síntesis no traiciona: se ajusta el cómo, no el qué.</td></tr>
+      <tr><td><strong>¿Qué no le vamos a cambiar aunque pague?</strong></td><td>El límite. Cuando el ajuste ya cambia lo que la consulta pidió, esa convocatoria no era para este proyecto. Se guarda escrita: en la semana 16 el radar retoma al PROCODES con calendario y círculo rojo.</td></tr>
+    </table>
+    <p class="nota-conductor">No cerrar la tercera pregunta: dejarla escrita en la bitácora de equipo con las dos posturas si las hay. Es la discusión que separa al gestor del que aplica a todo.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> El plan de palanca, con fechas <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Cada renglón con acción, fecha y responsable, y todas las fechas antes del viernes de la semana 10.</p>
+    <p class="apoyo">El plan del jueves se cierra: el punto en el orden del día de la asamblea, el oficio con acuse de recibido, la visita a la bodega, la cotización que falta, la anuencia. Los tratos se hacen entre hoy y el jueves; lo confirmado se documenta el mismo día (nota firmada, foto, mensaje guardado). Lo que no alcance a confirmarse no entra a la solicitud como contrapartida: entra como gestión en curso, que también se dice, pero no suma puntos.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">6</span> Especie a pesos <span class="reloj">10 min</span></h4>
+    <table class="veredicto">
+      <tr><th>Lo conseguido</th><th>Cómo se valoriza</th><th>Con qué se documenta</th></tr>
+      <tr><td>El jornal de la faena</td><td>A precio de jornal de la región, por persona y por día</td><td>Lista de asistencia firmada, foto</td></tr>
+      <tr><td>El flete prestado</td><td>A lo que cobraría la camioneta por ese viaje</td><td>Nota firmada de quien presta, foto del viaje</td></tr>
+      <tr><td>El material que pone el municipio o el ejido</td><td>A precio de ferretería, con cotización de referencia</td><td>Oficio o nota de entrega, foto</td></tr>
+      <tr><td>Las tarimas de la bodega</td><td>Doce por cien pesos: mil doscientos</td><td>Nota firmada de recibido y foto</td></tr>
+    </table>
+    <p class="apoyo">Valorizar no es inflar: es ponerle el precio que tendría si se comprara, con una referencia que se pueda enseñar. Todo esto va a la columna de lo conseguido del presupuesto de la semana que entra, y le enseña al comité el tamaño real del proyecto, que es más grande que lo que pide.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">7</span> Cierre y ticket <span class="reloj">15 min</span></h4>
+    <p class="di">El trato real de la semana tiene dueño y fecha. Y es una solicitud real: se registra como tal.</p>
+    <p class="apoyo">El ticket desde el celular, noventa segundos. Antes de irte: el trato real de tu equipo, con quién lo hace y cuándo, en la bitácora. Ese trato es una solicitud real del semestre (destinatario con nombre, petición concreta, fecha), y se registra en la hoja de solicitudes reales del <a href="../evaluacion/expediente-u2.html">cuadernillo 2</a>: el primer no de la semana 2 fue la primera; esta puede ser la segunda. La anuencia queda en camino con día y persona. Y para el jueves: las cotizaciones escritas, fechadas y con quién las da, porque el presupuesto se arma con ellas y no se puede armar sin ellas.</p>
+  </section>
+</section>
+
+<h2 class="corte">Herramientas de la semana</h2>
 
 <div class="tarjeta">
   <span class="etiqueta">La idea grande</span>
   <h3 style="margin-top:.2rem">Los proyectos son gente</h3>
-  <p>El marco lógico más fino del mundo no instala una malla si la delegación no firma, si el dueño del terreno de junto se siente brincado o si nadie consigue quién preste la camioneta. Todo proyecto tiene una capa política: no la de los partidos, sino la de los acuerdos entre personas con intereses distintos. Ignorarla no la desaparece: solo garantiza que te sorprenda. El mapa de poder la vuelve visible: cada involucrado ubicado por cuánto le importa tu proyecto (interés) y cuánto puede moverlo o frenarlo (influencia).</p>
+  <p>El marco lógico más fino del mundo no instala una malla si la delegación no firma, si el dueño del terreno de junto se siente brincado o si nadie consigue quién preste la camioneta. Todo proyecto tiene una capa política: no la de los partidos, sino la de los acuerdos entre personas con intereses distintos. Ignorarla no la desaparece: solo garantiza que te sorprenda. El mapa de actores la vuelve visible: cada involucrado ubicado por cuánto le importa tu proyecto (interés) y cuánto puede moverlo o frenarlo (influencia).</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El aparato</span>
-  <h3 style="margin-top:.2rem">Cuatro zonas y una regla de respeto</h3>
-  <p>Del cruce de los dos ejes salen cuatro zonas: los clave (mucho interés, mucha influencia: con ellos se trabaja de la mano y desde temprano), los durmientes (mucha influencia, poco interés: se les informa antes de que despierten de malas), los aliados de a pie (mucho interés, poca influencia: son tus ojos y tus manos en el sitio, se activan con tareas concretas) y los lejanos (se tienen en el radar). Y la pregunta que más paga: ¿quién falta? La conversación que nadie ha tenido suele ser la que evita el pleito. Regla de respeto: el mapa se dibuja con cargos y roles, nunca con nombres y etiquetas, y no sale del aula. En una comunidad chica, un papel que diga "opositor" junto a un nombre hace más daño que cualquier retraso de obra.</p>
+  <h3 style="margin-top:.2rem">Cuatro zonas, cuatro poderes y una regla de respeto</h3>
+  <p>Del cruce de los dos ejes salen cuatro zonas: los clave (mucho interés, mucha influencia: con ellos se trabaja de la mano y desde temprano), los durmientes (mucha influencia, poco interés: se les informa antes de que despierten de malas), los aliados de a pie (mucho interés, poca influencia: son tus ojos y tus manos en el sitio, se activan con tareas concretas) y los lejanos (se tienen en el radar). El manual de Acción sin Daño agrega una lectura más fina: a cada actor se le miden cuatro poderes, el del cargo, el del dinero, el del saber y el de la gente que lo sigue, y un radar de relaciones: quién se lleva con quién y qué pleito viejo puede reactivar tu proyecto sin querer. Y la pregunta que más paga: ¿quién falta? Regla de respeto: el mapa se dibuja con cargos y roles, nunca con nombres y etiquetas, y no sale del aula. En una comunidad chica, un papel que diga "opositor" junto a un nombre hace más daño que cualquier retraso de obra.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El oficio</span>
   <h3 style="margin-top:.2rem">El trato</h3>
-  <p>Pedir bien es un oficio con partes: qué pido (concreto, con fecha y cantidad), qué ofrezco (algo real: trabajo, acarreo, el lugar limpio, el agradecimiento público), qué le importa al otro (se averigua preguntando y callando, no se adivina) y mi plan B (tu poder en un trato es poder decir "gracias, lo busco por otro lado" sin hundir el proyecto; quien no tiene plan B no negocia: suplica). El viernes se ensaya con vecinos difíciles antes de hacerlo de verdad. Equivocarse en el ensayo es gratis; en la bodega, no.</p>
+  <p>Pedir bien es un oficio con partes: qué pido (concreto, con fecha y cantidad), qué ofrezco (algo real: trabajo, acarreo, el lugar limpio, el agradecimiento público), qué le importa al otro (se averigua preguntando y callando, no se adivina) y mi plan B (tu poder en un trato es poder decir "gracias, lo busco por otro lado" sin hundir el proyecto; quien no tiene plan B no negocia: suplica). El viernes se ensaya con contrapartes difíciles antes de hacerlo de verdad. Equivocarse en el ensayo es gratis; en la bodega, no.</p>
 </div>
 
 <div class="tarjeta siembra">
@@ -131,6 +325,12 @@
 </div>
 
 <div class="tarjeta">
+  <span class="etiqueta">El reto</span>
+  <h3 style="margin-top:.2rem">Reto 3: mi mapa y mi trato</h3>
+  <p>Tercer reto de la unidad, al expediente. Los criterios, publicados el jueves: el mapa con roles y no con nombres; cada clave con su jugada; cada resistencia con la objeción como la diría esa persona y el dato de diseño que trae dentro; al menos un "quién falta" con su conversación pendiente; y el trato real de la semana con sus cuatro partes y su plan B, hecho de verdad entre el viernes y el jueves. El resultado del trato no cuenta: sí, no o silencio valen igual. Bien o aún no, con el porqué y con reintento.</p>
+</div>
+
+<div class="tarjeta">
   <span class="etiqueta">El actor grande</span>
   <h3 style="margin-top:.2rem">El donante también es actor</h3>
   <p>En el mapa de tu componente hay un tipo de involucrado que casi nadie dibuja: el que tiene dinero para proyectos como el tuyo y todavía no sabe que existes. Esta semana se le pone cara con un documento real: los Lineamientos del PROCODES 2026 de la CONANP, el programa federal que opera en las áreas naturales protegidas, con técnica de la Reserva incluida en tu contrato de gestión. Se leen con la plantilla de dictaminador de la semana 5 (quién puede solicitar, qué apoya, cómo se califica: 52 puntos, sin fracciones, mínimo 20) y luego cada equipo contesta tres preguntas con su proyecto enfrente. ¿En qué concepto de apoyo cabría? ¿Qué habría que ajustarle para que a este programa le interese? ¿Y qué no le vamos a cambiar aunque pague? La tercera es la difícil, y no se resuelve hoy.</p>
@@ -140,7 +340,7 @@
 <div class="tarjeta">
   <span class="etiqueta">El papel que no depende de ti</span>
   <h3 style="margin-top:.2rem">La anuencia</h3>
-  <p>El fondo exige el sí por escrito de la delegación, y ese papel no lo produce tu equipo: se gestiona. El mapa te dice con quién se habla, el trato te dice cómo, y el calendario te dice cuándo: la solicitud se entrega el viernes de la semana 10 a las 14:00, y una anuencia no se consigue el jueves 8 por la noche. Un sí de palabra no es una anuencia: es el paso previo. Esta semana es la semana.</p>
+  <p>El fondo exige el sí por escrito de la delegación, y ese papel no lo produce tu equipo: se gestiona. El mapa te dice con quién se habla, el trato te dice cómo, y el calendario te dice cuándo: la solicitud se entrega el viernes de la semana 10 a las 14:00, y una anuencia no se consigue el jueves por la noche. Un sí de palabra no es una anuencia: es el paso previo. La delegación ya nos conoce: nos vio consultar, nos vio volver con lo apuntado y nos vio levantar el ensayo el domingo. Ese historial es el argumento. Esta semana es la semana.</p>
 </div>
 
 <h2>El gimnasio</h2>
@@ -153,20 +353,26 @@
 <h2>Hoja de consulta</h2>
 <div class="tarjeta consulta">
   <dl>
-    <dt>Mapa de poder</dt>
-    <dd>El dibujo de las personas de tu proyecto: cada involucrado ubicado por su interés (cuánto le importa) y su influencia (cuánto puede moverlo o frenarlo). Es herramienta interna de trabajo, no se publica ni se exhibe: sirve para decidir con quién hablar, en qué orden y con qué oferta.</dd>
+    <dt>Mapa de actores</dt>
+    <dd>El dibujo de las personas de tu proyecto: cada involucrado ubicado por su interés (cuánto le importa) y su influencia (cuánto puede moverlo o frenarlo). Es herramienta interna de trabajo, no se publica ni se exhibe: sirve para decidir con quién hablar, en qué orden y con qué oferta. También se le dice mapa de poder.</dd>
     <dt>Involucrado</dt>
-    <dd>Cualquier persona, grupo o institución a la que tu proyecto toca, o que puede tocar a tu proyecto: autoridades, comités, vecinos del sitio, usuarios actuales, proveedores, la escuela, la reserva. Incluye a los que nadie ha mencionado: los que faltan también son involucrados, solo que todavía no lo saben.</dd>
+    <dd>Cualquier persona, grupo o institución a la que tu proyecto toca, o que puede tocar a tu proyecto: autoridades, comités, vecinos del sitio, usuarios actuales, proveedores, la escuela, la reserva, el programa que financia. Incluye a los que nadie ha mencionado: los que faltan también son involucrados, solo que todavía no lo saben.</dd>
+    <dt>Los cuatro poderes</dt>
+    <dd>La lectura fina que trae el manual de Acción sin Daño: el poder que da el cargo, el que da el dinero, el que da el saber y el que da la gente que lo sigue. Un vecino sin cargo puede tener el cuarto completo, y un funcionario con cargo puede no tener ninguno de los otros tres.</dd>
     <dt>Durmiente</dt>
     <dd>Quien tiene mucha influencia y poco interés: no está mirando tu proyecto, pero si despierta de malas lo puede frenar con una mano. La jugada es informarle antes de que se entere por terceros. El pleito clásico de las obras comunitarias empieza con la frase "a mí nadie me avisó".</dd>
     <dt>Resistencia</dt>
     <dd>Quien tiene razones para que tu proyecto no le guste. No es un enemigo: es alguien a quien tu proyecto le cuesta algo. Se le escucha primero, porque su objeción casi siempre trae información de diseño: el que abreva su ganado en el manantial no odia tu sombra, necesita el paso al agua. El diseño que incorpora la objeción convierte la resistencia en vecino conforme.</dd>
+    <dt>Radar de relaciones</dt>
+    <dd>El segundo dibujo del manual: quién se lleva con quién, quién no se habla, qué acuerdo viejo o qué pleito viejo hay entre los actores de tu mapa. Sirve para no reactivar sin querer una historia que no es tuya. Se dibuja sin nombres, como el mapa.</dd>
     <dt>El trato</dt>
     <dd>El nombre honesto de la negociación: qué pido, qué ofrezco, qué le importa al otro, con qué cierro. Un trato bien cerrado tiene quién, qué, cuánto y cuándo. El "sí, luego vemos" no es un trato: es una amabilidad que no se puede cobrar.</dd>
     <dt>Plan B</dt>
     <dd>Tu alternativa si el trato no sale: otro proveedor, otra fecha, otra forma de resolverlo. Se prepara antes de tocar la puerta, porque es lo que te permite negociar condiciones en lugar de aceptarlas. Quien llega sin plan B firma lo que le pongan enfrente.</dd>
     <dt>Gestión en especie</dt>
     <dd>Conseguir sin comprar: el préstamo, la donación, el acarreo, la mano de obra de la faena, la planta del vivero. Es el idioma natural del campo (la faena y la mano vuelta existen desde mucho antes que las convocatorias) y es gestión de la buena: cada peso que no gastas es un peso que rinde en otro lado.</dd>
+    <dt>Valorizar</dt>
+    <dd>Ponerle a lo conseguido en especie el precio que tendría si se comprara, con una referencia que se pueda enseñar: el jornal a precio de la región, el flete a lo que cobraría la camioneta, el material a precio de ferretería. No es inflar: es contar completo.</dd>
     <dt>Contrapartida</dt>
     <dd>Lo que tu equipo y la comunidad ponen de su lado: trabajo, materiales, préstamos, especie. La rúbrica del fondo le da hasta 15 puntos, pero solo cuenta la contrapartida cuantificada (en pesos) y documentada (nota firmada, foto fechada, mensaje). El favor confirmado es contrapartida; el favor supuesto es esperanza. Y funciona en las dos direcciones: el capital semilla también es la contrapartida que tu equipo enseña cuando va a pedir a otra puerta.</dd>
     <dt>Plan de palanca</dt>
@@ -182,7 +388,13 @@
 
 <h2>Lo que produjimos</h2>
 <div class="tarjeta">
-  <p style="color:#8aa39c; font-style:italic;">Aquí quedará lo que esta semana se consiga sin gastar: los tratos cerrados, las tarimas propias de cada equipo, el plan de palanca de cada componente con sus renglones confirmados, la tabla del destripado del PROCODES y cuánto creció cada contrapartida. Los mapas no: esos son herramienta interna y se quedan en el aula.</p>
+  <p style="color:#8aa39c; font-style:italic;">Esta vitrina se llena al cierre de la semana. Lo que va a llegar aquí, sin los mapas, que son herramienta interna y se quedan en el aula:</p>
+  <ul style="color:#8aa39c; font-style:italic; margin:.4rem 0 .2rem;">
+    <li>Los tratos cerrados de la semana y las tarimas propias de cada equipo.</li>
+    <li>El plan de palanca de cada componente con sus renglones confirmados y cuánto creció cada contrapartida.</li>
+    <li>La tabla del destripado del PROCODES y las tres preguntas contestadas por equipo.</li>
+    <li>La anuencia, cuando llegue, sin más dato que su existencia.</li>
+  </ul>
 </div>
 
 <div class="chapuzon">

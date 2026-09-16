@@ -20,23 +20,18 @@
     background: var(--fondo); color: var(--texto);
     line-height: 1.65; font-size: 1.05rem;
   }
-  header.curso {
-    background: var(--profundo); color: #EAF4F2;
-    padding: 1.1rem 1.5rem;
-  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
   header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
   header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
   header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
   main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
 
-  .pregunta {
-    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
-    color: var(--profundo); margin: 1.8rem 0 .4rem;
-  }
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
   h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -55,11 +50,8 @@
   .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
   .consulta dd { margin: .2rem 0 .4rem 0; }
 
-  .chapuzon {
-    background: var(--profundo); color: #EAF4F2;
-    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
-  }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
 
   .aviso-goteo {
@@ -68,6 +60,7 @@
     display: none;
   }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -83,11 +76,12 @@
 <div id="wk-gate" data-semana="7">
 
 <p class="pregunta">¿Por qué crees que eso va a funcionar?</p>
-<p class="bajada">En Kenia la obra salió bien, el agua salía limpia del tubo, y los niños se seguían enfermando: el agua se volvía a contaminar camino a casa. El proyecto funcionó y el cambio no llegó, porque entre lo que haces y lo que esperas hay una cadena de pasos que nadie había dibujado. Esta semana tu equipo dibuja la suya: la apuesta causal de tu componente, eslabón por eslabón, con los supuestos a la vista. Y el viernes, primer duelo del semestre: la misma cadena, hecha por ustedes y hecha por una IA, frente a frente.</p>
+<p class="bajada">En Kenia la obra salió bien, el agua salía limpia del tubo, y los niños se seguían enfermando: el agua se volvía a contaminar camino a casa. El proyecto funcionó y el cambio no llegó, porque entre lo que haces y lo que esperas hay una cadena de pasos que nadie había dibujado. Esta semana tu equipo dibuja la suya: la apuesta causal de tu componente, eslabón por eslabón, con los supuestos a la vista y con lo que el prototipo contestó. Y el viernes, primer duelo del semestre: la misma cadena, hecha por ustedes y hecha por una IA, frente a frente.</p>
 
 <h2>Esta semana podrás</h2>
 <div class="podras">
   <ul>
+    <li>Leer lo que el prototipo contestó, en conductas y no en opiniones, y corregir tu diseño con eso.</li>
     <li>Voltear el árbol de problemas de la semana 5 en árbol de objetivos, y escoger de sus ramas la estrategia de tu equipo.</li>
     <li>Distinguir producto de cambio: lo que tu proyecto entrega no es todavía lo que tu proyecto logra.</li>
     <li>Construir la cadena de resultados de tu componente: si hacemos esto, entonces pasa esto otro, siempre que...</li>
@@ -96,7 +90,209 @@
   </ul>
 </div>
 
-<h2>Herramientas de la semana</h2>
+<h2 class="corte">Las dos sesiones de esta semana</h2>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
+
+<!-- ====================== JUEVES ====================== -->
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves · 2 horas</div>
+      <h3>Del árbol a la cadena</h3>
+      <p class="foco">Leer lo que el prototipo contestó, voltear el árbol de problemas y armar la cadena de resultados de cada componente con sus supuestos a la vista.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El ticket de la semana pasada <span class="reloj">5 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Lo que el viernes quedó turbio en la orilla, hoy se contesta en voz alta.</p>
+    <p class="apoyo">Este arranque no se salta ningún jueves. Lo turbio de un viernes de campo suele ser práctico: quién levanta qué, qué se hace con lo que la gente movió. Se contesta rápido y se pasa a lo que la orilla dijo.</p>
+    <p class="nota-conductor">Traer dos o tres tickets textuales. Si alguno trae una promesa accidental ("un señor dijo que ya nos habían dado el permiso de la palapa"), nombrarla como tal y anotar quién la desmonta.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> La campana del no <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Ritual · cada jueves</span>
+    <p class="di">¿Quién pidió esta semana?</p>
+    <p class="apoyo">Un no conseguido se anuncia, suena la campana, el grupo aplaude y el no se anota en el anti-currículum. Los síes también se cuentan: las sillas prestadas, las macetas del vivero, el permiso de la autoridad. Cada préstamo del fin de semana fue una petición, y varias se van a volver contrapartida en octubre.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">3</span> Lo que la orilla contestó <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · dos minutos por equipo</span>
+    <p class="di">Conteos, lo que la gente hizo, y lo que nadie esperaba. Nada de "les gustó".</p>
+    <p class="apoyo">Cada equipo, con su hoja de conteo en la mano: cuántos pasaron, cuántos se detuvieron, cuántos usaron y por cuánto tiempo, qué evitaron, qué movieron de lugar, qué preguntaron. Luego la columna de lo que no esperaba, que es donde suele estar el hallazgo. Y la conclusión honesta: qué del diseño se confirma, qué se corrige, qué raíz del árbol marcada como hipótesis se sostuvo o se cayó. Si nadie se sentó en tres horas, la sombra estaba en el lugar equivocado, y eso también es un hallazgo.</p>
+    <p class="nota-conductor">Corregir en vivo cualquier opinión disfrazada de dato. Anotar en el árbol pegado desde la semana 5 qué raíces confirmó o tumbó el ensayo: hoy se voltea y conviene voltearlo ya corregido. Fotos y conteos deben estar en el Drive, carpeta S6; si no están, se suben antes de mañana.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">4</span> Kenia, otra vez <span class="reloj">5 min</span></h4>
+    <p class="di">En Kenia el proyecto funcionó y el cambio no llegó. Entre los dos había una cadena que nadie dibujó.</p>
+    <p class="apoyo">Manantial protegido, entonces agua limpia en el tubo, entonces agua limpia en la boca del niño, entonces menos diarrea. El tercer "entonces" nadie lo escribió, y ahí se rompió todo: el agua se contaminaba en la cubeta. Esta semana se trata de escribir todos los "entonces" de tu componente, sobre todo el que preferirías que no existiera.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> El volteo <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · todo el grupo, en el muro</span>
+    <p class="di">Cada tarjeta del árbol se reescribe en positivo. El problema central se vuelve el objetivo central.</p>
+    <p class="apoyo">"La orilla no tiene sombra" se vuelve "la orilla tiene sombra donde la gente se junta". Lo que eran causas ahora son medios; lo que eran efectos ahora son fines. Y ahí está la gracia del volteo: cada raíz volteada es una estrategia posible, y ningún equipo puede con todas. Elegir tu rama del árbol volteado es elegir tu estrategia. Este par de árboles viene de la metodología de marco lógico, la misma de la tabla que llega la semana que entra, y los formatos grandes los piden tal cual, con todo y dibujo.</p>
+    <p class="nota-conductor">Voltear tarjeta por tarjeta, en voz alta, con quien la escribió. Cuidar que el positivo no se vuelva obra ("hay una palapa" no es un medio: "hay sombra donde la gente se junta" sí). Cada equipo marca su rama con su color. Foto del árbol volteado al Drive, carpeta S7.</p>
+  </section>
+
+  <!-- Ilustración pendiente (ver imagenes-semanas-05-10.md, carpeta local del profesor):
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-07/el-arbol-volteado.webp" alt="Dibujo a tinta: dos árboles espejo, uno con raíces hacia abajo y tarjetas de problemas, otro volteado hacia arriba con las mismas tarjetas reescritas en positivo; una rama del árbol volteado está marcada con un color y se estira hacia afuera como una cadena de eslabones">
+  </section>
+  -->
+
+  <section class="lam">
+    <h4><span class="n">6</span> La escalera <span class="reloj">20 min</span></h4>
+    <div class="flujo">
+      <div class="paso"><b>1</b><span class="t">insumos</span>lo que metes: dinero, material, jornales</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>2</b><span class="t">actividades</span>lo que haces con ello</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>3</b><span class="t">productos</span>lo que entregas, contable</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>4</b><span class="t">resultados</span>lo que la gente hace distinto</div>
+      <span class="flecha">&#8594;</span>
+      <div class="paso"><b>5</b><span class="t">impacto</span>el cambio grande y lento</div>
+    </div>
+    <p class="apoyo">La trampa vive entre el tercer y el cuarto escalón. "Cincuenta productores capacitados en tres talleres" es un producto; "seis meses después, treinta familias usan la técnica" es un resultado, y son cosas distintas que los proyectos flojos reportan como si fueran la misma. Regla de responsabilidad: de tus productos respondes completo, a tus resultados les apuestas, al impacto solo contribuyes. Quien promete impacto directo está vendiendo humo, y los dictaminadores lo huelen.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · en parejas</span>
+    <p class="di">Gimnasio 1: ocho enunciados de proyectos de por acá. Cada uno a su escalón.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-07/ejercicio-11-producto-o-cambio.html">ejercicio del gimnasio</a> proyectado. Parece fácil hasta que deja de serlo: la trampa favorita del género es el producto vestido de logro. La prueba del resultado: ¿aparece alguien haciendo algo que antes no hacía?</p>
+    <p class="nota-conductor">Detenerse en el enunciado que más gente subió de escalón: casi siempre es el de la obra entregada leída como cambio. Conectar con los conteos del prototipo: sentarse, quedarse, volver son resultados; las sillas puestas son producto.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">7</span> La cadena de cambios <span class="reloj">10 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--oscura">si hacemos<small>la estrategia</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--clara">entonces<small>los eslabones, uno por uno</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--arena">siempre que<small>los supuestos, honestos</small></span>
+      <span class="eq">= la apuesta, escrita completa</span>
+    </div>
+    <p class="apoyo">El manual de Acción sin Daño la llama cadena de cambios; los formatos grandes la llaman teoría del cambio; aquí, cadena de resultados. Es la misma apuesta con tres nombres, y tu rama del árbol volteado estirada eslabón por eslabón hasta el objetivo. Cada flecha es un "entonces" que alguien puede cuestionar; mejor que lo cuestiones tú primero. Y entre flecha y flecha, el supuesto: lo que tiene que ser cierto, fuera de tu control, para que la flecha funcione. Los que el equipo puede verificar en campo (la temporada de agua, qué aguanta pisoteo) se marcan como técnicos y se van a verificar.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">8</span> Gimnasio 2 · La cadena rota <span class="reloj">10 min</span></h4>
+    <span class="senal">Actividad · en parejas</span>
+    <p class="di">Seis apuestas causales. Cinco traen una falla escondida; una se salva.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-07/ejercicio-21-la-cadena-rota.html">ejercicio del gimnasio</a> proyectado. Las cuatro fallas de esta semana: el brinco de eslabón (de la actividad al milagro sin pasos intermedios), el producto disfrazado (entregar algo no es que lo usen), el supuesto heroico (la flecha depende de algo improbable o de nadie) y la grandilocuencia (prometer el escalón que no te toca). Es el mismo ojo clínico que mañana se usa contra la IA, y en octubre a tu favor.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">9</span> La cadena de tu componente, en kraft <span class="reloj">25 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Del problema al cambio, mínimo tres eslabones, un supuesto por flecha, y el eslabón que más te preocupa señalado.</p>
+    <p class="apoyo">En papel kraft, con las tarjetas de la rama elegida y los conteos del prototipo a la mano. A la izquierda el problema con su evidencia de consulta; luego la estrategia, en cosas que se pueden contar y fechar; luego los "entonces", con la prueba de cada uno (¿aparece la gente haciendo algo distinto?); entre flecha y flecha el "siempre que", incluido el incómodo. El <a href="../ejercicios/semana-07/ejercicio-32-la-cadena-de-mi-componente.html">gimnasio 3</a> es tu versión personal de bolsillo: te obliga a poder decir la apuesta completa sin ver el kraft, que es lo que el pitch de octubre te va a pedir. Su bloque 7, el prompt del duelo, se escribe hoy en equipo.</p>
+    <p class="nota-conductor">Rondar con las cuatro fallas del gimnasio 2 como lente y señalarlas sin resolverlas. Pedir que el eslabón frágil quede marcado con una señal temprana ("si en la primera semana nadie se sienta, la apuesta se está rompiendo aquí"). El prompt del duelo se manda al profesor esta noche: es el seguro por si mañana no hay red, y se lanza desde su cuenta si hace falta.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">10</span> El reto 1, explicado <span class="reloj">5 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--clara">bien<small>la herramienta ya es tuya</small></span>
+      <span class="op">/</span>
+      <span class="pz pz--arena">aún no<small>reintentas con las razones</small></span>
+      <span class="eq">= así se dictamina la cadena</span>
+    </div>
+    <p class="apoyo">Es el primer reto de la unidad 2 y va directo al expediente. Los criterios se publican hoy, no después: eslabones concretos (se puede ver si pasaron o no), sin brincos (ninguna flecha del taller al milagro), supuestos honestos (los "siempre que" incómodos incluidos) y la punta final conectada a la consulta (tu último eslabón responde a lo que la gente pidió). La versión que entra al expediente es la del lunes, ya pasada por el duelo de mañana: foto del kraft al Drive y la apuesta en una frase en el cuadernillo 2. Si sale "aún no", trae escrito el porqué, y se reintenta las veces que haga falta. El registro de intentos, con fechas, es la hoja de retos del cuadernillo 2.</p>
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para mañana</span>
+      Mañana, la misma cadena hecha por una máquina. Aviso de experiencia: la IA redacta cadenas impecables de lugares que no existen. Encontrarle la impecabilidad hueca es el punto.
+    </div>
+  </section>
+</section>
+
+<!-- ====================== VIERNES ====================== -->
+<section class="mazo" id="mazo-viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes · 2 horas</div>
+      <h3>Duelo 1: la cadena</h3>
+      <p class="foco">Poner la cadena del equipo frente a la de la IA, cazarle la impecabilidad hueca y salir con una cadena mejor que la del jueves.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">1</span> Las reglas del duelo <span class="reloj">10 min</span></h4>
+    <p class="di">La misma consigna, dos caminos, un cotejo en público.</p>
+    <p class="apoyo">Es el ritual del eje de IA del curso y va a volver dos veces más este semestre. Su equipo ya tiene su cadena en kraft; ahora le piden a una IA la cadena del mismo componente, con el mejor prompt que sepan escribir, y se cotejan las dos delante de todos. Lo que la IA hace mejor se toma prestado declarándolo, con los cuatro datos del pacto. Lo que falla se anota en el registro de cacería: la lista de trampas que este grupo empezó a cazarle a la máquina en la semana 3, con el guion de consulta. La unidad de evaluación no es la respuesta: es el prompt.</p>
+    <div class="piezas">
+      <span class="pz pz--clara">la velocidad<small>es de ella</small></span>
+      <span class="op">+</span>
+      <span class="pz pz--oscura">el territorio y el criterio<small>son de ustedes</small></span>
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> Se lanza el prompt <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">El prompt del jueves, tal como quedó. Lo que devuelva se imprime o se copia entero: no se edita.</p>
+    <p class="apoyo">Desde un teléfono del equipo, con el bloque 7 del gimnasio 3. Si no hay red, el profesor trae las respuestas de los prompts que le mandaron anoche: para eso se mandaron. Mientras llega, el equipo anota qué espera que la máquina haga bien (redactar limpio, ordenar) y en qué espera que falle (el lugar, la gente, los supuestos). Después se compara con lo que de verdad pasó.</p>
+    <p class="nota-conductor">Vigilar que nadie corrija el prompt sobre la marcha "para que salga mejor": la versión que se coteja es la que se escribió el jueves. Si un equipo insiste, que lo anote como segundo intento, después del cotejo: la conversación iterada de la semana 1 también se vale, pero se declara.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">3</span> El cotejo <span class="reloj">40 min</span></h4>
+    <span class="senal">Actividad · plenaria, un equipo a la vez</span>
+    <p class="di">Eslabón por eslabón, la cadena de kraft junto a la de la máquina.</p>
+    <table class="veredicto">
+      <tr><th>Eslabón</th><th>¿Qué pasó?</th><th>Qué se hace</th></tr>
+      <tr class="si"><td>Dice lo mismo que el nuestro</td><td class="v">Empate</td><td>Nada: la apuesta se sostiene por dos caminos.</td></tr>
+      <tr class="si"><td>El de ella es mejor: más concreto, con un paso que no vimos</td><td class="v">Préstamo</td><td>Se toma, y se declara: herramienta, para qué, qué cambiamos, prompt.</td></tr>
+      <tr class="cuidado"><td>Suena bien pero no se puede ver si pasó o no</td><td class="v">Cacería</td><td>Va al registro: brinco, producto disfrazado, supuesto heroico o grandilocuencia.</td></tr>
+      <tr class="no"><td>Habla de un lugar que no existe: la plaza, el comité de vecinos, la temporada seca en julio</td><td class="v">Cacería</td><td>Es la impecabilidad hueca. Se nombra el dato inventado y se anota quién sí lo sabe.</td></tr>
+    </table>
+    <p class="nota-conductor">Unos diez minutos por equipo, con reloj. Pedir siempre el dato del lugar que la IA inventó, porque siempre hay uno. Que el equipo diga en voz alta su eslabón frágil y si la máquina lo vio o lo pasó de largo: casi nunca lo ve, y esa es la lección del duelo.</p>
+  </section>
+
+  <!-- Ilustración pendiente (ver imagenes-semanas-05-10.md, carpeta local del profesor):
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-07/el-duelo-de-las-cadenas.webp" alt="Dibujo a tinta: dos cadenas de eslabones frente a frente sobre una mesa, una escrita a mano en papel kraft con tachones y otra impresa perfectamente pareja; una lupa sobre un eslabón de la impresa muestra que está hueco por dentro">
+  </section>
+  -->
+
+  <section class="lam">
+    <h4><span class="n">4</span> El registro de cacería y el préstamo <span class="reloj">10 min</span></h4>
+    <p class="di">Lo cazado se nombra por su falla. Lo prestado se declara.</p>
+    <p class="apoyo">El registro de cacería del grupo gana hoy una página: cada trampa cazada con su nombre (brinco, producto disfrazado, supuesto heroico, grandilocuencia, lugar inventado) y el equipo que la cazó. Sirve para el duelo 2 de la semana que viene, donde las fallas van a ser más finas. Y lo que se toma prestado va con su declaración al pie, con los cuatro datos del pacto: qué herramienta, para qué, qué cambiaste tú y el prompt. La declaración no es castigo: es la costumbre que te va a permitir defender tu trabajo en una mesa donde no te conocen.</p>
+    <p class="nota-conductor">El registro vive en una hoja grande del salón y en el Drive. Leerlo en voz alta antes del duelo 2: los equipos que ya saben qué buscar cazan más.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> La cadena que sobrevive <span class="reloj">25 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">La cadena se reescribe con el cotejo puesto. La que sobrevive es mejor que la que nació ayer.</p>
+    <p class="apoyo">Con lo prestado, lo cazado y lo que la plenaria le encontró al equipo: se corrige el kraft o se rehace en limpio. El eslabón frágil queda con su señal temprana escrita. La apuesta en una frase (si... entonces... siempre que...) es la columna vertebral del pitch de octubre y va al cuadernillo 2. Esta versión, la del lunes, es la que entra al reto 1: foto del kraft al Drive, carpeta S7, y la frase en la hoja del cuadernillo.</p>
+    <p class="nota-conductor">Pasar por cada equipo con los cuatro criterios del reto en la mano y decir en voz baja qué ve el profesor: no es el dictamen, es el último ajuste antes del dictamen. El dictamen se da el jueves de la semana 8, por escrito y por criterio.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">6</span> Cierre y ticket <span class="reloj">15 min</span></h4>
+    <p class="di">El ticket de hoy es tu apuesta en una frase.</p>
+    <p class="apoyo">Además de lo de siempre, escribe en el ticket la frase completa de tu componente: si hacemos, entonces, siempre que. Es el bloque 6 del gimnasio 3, y es la primera vez que el profesor va a leer las tres apuestas del grupo juntas. Fin de semana: la página de la semana 8 leída, y el propósito de tu componente pasado por las cinco pruebas en el cuaderno, como pide el gimnasio 1 de la semana que entra. Y la bitácora de equipo, con la entrada de esta semana escrita por quien le tocó.</p>
+  </section>
+</section>
+
+<h2 class="corte">Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">Lo que la orilla dijo</span>
+  <h3 style="margin-top:.2rem">El prototipo se lee en conductas</h3>
+  <p>El jueves cada equipo abre con dos minutos de conteos: cuántos pasaron, cuántos se detuvieron, cuántos usaron y por cuánto tiempo, qué evitaron, qué movieron de lugar. Y la columna de lo que nadie esperaba. Lo que la gente hizo con el ensayo corrige el diseño antes de que cueste dinero, y confirma o tumba las raíces del árbol que en la semana 5 quedaron marcadas como hipótesis. Ese árbol se voltea el jueves, y conviene voltearlo ya corregido.</p>
+</div>
 
 <div class="tarjeta">
   <span class="etiqueta">La idea grande</span>
@@ -114,13 +310,13 @@
 <div class="tarjeta">
   <span class="etiqueta">La escalera</span>
   <h3 style="margin-top:.2rem">Producto no es cambio</h3>
-  <p>La escalera completa: insumos, actividades, productos, resultados, impacto. La trampa vive entre el tercer y el cuarto escalón: "50 productores capacitados en tres talleres" es un producto; "seis meses después, 30 familias usan la técnica" es un resultado, y son cosas distintas que los proyectos flojos reportan como si fueran la misma. Regla de responsabilidad: de tus productos respondes completo, a tus resultados les apuestas, al impacto solo contribuyes. Quien promete impacto directo está vendiendo humo, y los dictaminadores lo huelen.</p>
+  <p>La escalera completa: insumos, actividades, productos, resultados, impacto. La trampa vive entre el tercer y el cuarto escalón: "cincuenta productores capacitados en tres talleres" es un producto; "seis meses después, treinta familias usan la técnica" es un resultado, y son cosas distintas que los proyectos flojos reportan como si fueran la misma. Regla de responsabilidad: de tus productos respondes completo, a tus resultados les apuestas, al impacto solo contribuyes. Quien promete impacto directo está vendiendo humo, y los dictaminadores lo huelen.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El reto</span>
-  <h3 style="margin-top:.2rem">La cadena de tu componente</h3>
-  <p>Primer reto de la unidad 2, directo al expediente: la cadena de resultados de tu componente, con eslabones concretos, sin brincos y con los supuestos escritos entre flecha y flecha. Se dictamina como todo en este curso: bien o aún no, con reintento. La versión que entra al expediente es la del lunes, ya pasada por el duelo del viernes: la cadena que sobrevive al cotejo es mejor que la que nació el jueves.</p>
+  <h3 style="margin-top:.2rem">Reto 1: la cadena de tu componente</h3>
+  <p>Primer reto de la unidad 2, directo al expediente: la cadena de resultados de tu componente, con eslabones concretos, sin brincos, con los supuestos escritos entre flecha y flecha y la punta conectada a lo que la consulta pidió. Esos cuatro son los criterios, publicados antes y no después. Se dictamina como todo en este curso: bien o aún no, con el porqué y con reintento. La versión que entra al expediente es la del lunes, ya pasada por el duelo del viernes: la cadena que sobrevive al cotejo es mejor que la que nació el jueves. El intento, con fecha y resultado, se anota en la hoja de retos del <a href="../evaluacion/expediente-u2.html">cuadernillo 2</a>.</p>
 </div>
 
 <div class="tarjeta siembra">
@@ -142,11 +338,13 @@
     <dt>Apuesta causal</dt>
     <dd>La creencia que sostiene tu proyecto, dicha completa: si hacemos X, entonces pasará Y, siempre que Z. Todo proyecto la tiene; los buenos la escriben y la vigilan, los malos la descubren en la evaluación final, cuando ya costó dinero.</dd>
     <dt>Modelo conceptual</dt>
-    <dd>El mapa del mundo ANTES de tu proyecto: el problema, sus causas, sus actores, tal como la consulta y el campo lo mostraron. El árbol de problemas de la semana 5 es su versión dibujada. De ahí sale la cadena: se toma un factor del mapa y se voltea a positivo.</dd>
+    <dd>El mapa del mundo antes de tu proyecto: el problema, sus causas, sus actores, tal como la consulta y el campo lo mostraron. El árbol de problemas de la semana 5 es su versión dibujada. De ahí sale la cadena: se toma un factor del mapa y se voltea a positivo.</dd>
     <dt>Árbol de objetivos</dt>
     <dd>El árbol de problemas reescrito en positivo: el problema central vuelto objetivo, las causas vueltas medios, los efectos vueltos fines. Cada rama es una estrategia posible; la que tu equipo elige se convierte en su cadena de resultados. Viene de la metodología de marco lógico y los formatos lo piden con ese nombre.</dd>
     <dt>Cadena de resultados</dt>
-    <dd>El mapa del mundo DESPUÉS, si tu apuesta funciona: estrategia → resultados intermedios → cambio en el uso → reducción del problema. Cada flecha es un "entonces" que hay que poder defender. Es el idioma estándar del mundo de la conservación: hablarlo es empleabilidad directa.</dd>
+    <dd>El mapa del mundo después, si tu apuesta funciona: estrategia, resultados intermedios, cambio en el uso, reducción del problema. Cada flecha es un "entonces" que hay que poder defender. Es el idioma estándar del mundo de la conservación: hablarlo es empleabilidad directa.</dd>
+    <dt>Cadena de cambios</dt>
+    <dd>El nombre que le da el manual de Acción sin Daño a la misma herramienta: la secuencia de cambios que una acción espera provocar, con lo que cada paso supone. Se cita aquí para que cuando la encuentres con ese nombre sepas que ya la sabes hacer.</dd>
     <dt>Teoría del cambio</dt>
     <dd>El nombre que la cadena de resultados usa en los formatos grandes: la explicación de cómo y por qué tu estrategia produce el cambio que promete, con sus supuestos a la vista. Si una convocatoria te pide una teoría del cambio, ya sabes hacerla; cambia el membrete, no la herramienta.</dd>
     <dt>Insumos y actividades</dt>
@@ -159,14 +357,24 @@
     <dd>El cambio grande y lento del que tu proyecto es una pieza: la salud, el ingreso, el ecosistema. Se contribuye a él, no se controla; prometerlo directo en una solicitud es firmar un cheque sin fondos.</dd>
     <dt>Supuesto</dt>
     <dd>Lo que tiene que ser cierto, fuera de tu control, para que una flecha de tu cadena funcione: "siempre que la temporada de lluvia no cubra la zona", "siempre que la delegación sostenga el acuerdo". Los supuestos honestos hacen las cadenas creíbles; en Kenia, el supuesto no escrito ("el agua llega limpia a la boca") tumbó toda la apuesta.</dd>
+    <dt>Eslabón frágil</dt>
+    <dd>La flecha de tu cadena que más te preocupa, marcada con su señal temprana: qué tendrías que ver en la primera semana para saber que la apuesta se está rompiendo ahí. Es el eslabón que la IA casi nunca ve, y el que el monitoreo de la unidad 4 va a vigilar.</dd>
     <dt>El duelo</dt>
     <dd>El ritual del eje de IA: la misma consigna resuelta por el equipo con criterio propio y por la IA con el mejor prompt del equipo, cotejadas en público. Lo que la IA hace mejor se toma prestado declarándolo; lo que falla se anota en el registro de cacería. La velocidad es de ella; el territorio y el criterio son de ustedes.</dd>
+    <dt>Registro de cacería</dt>
+    <dd>La lista de trampas que el grupo le ha cazado a la IA desde la semana 3: preguntas inducidas, promesas de contrabando, supuestos de ciudad, y desde hoy brincos de eslabón, productos disfrazados, supuestos heroicos y lugares inventados. Vive en una hoja grande del salón y en el Drive, y se relee antes de cada duelo.</dd>
   </dl>
 </div>
 
 <h2>Lo que produjimos</h2>
 <div class="tarjeta">
-  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán el árbol de objetivos del grupo, las cadenas de los componentes (versión kraft y versión post-duelo), la tabla del cotejo y las mejores piezas de cacería del duelo 1.</p>
+  <p style="color:#8aa39c; font-style:italic;">Esta vitrina se llena al cierre de la semana. Lo que va a llegar aquí:</p>
+  <ul style="color:#8aa39c; font-style:italic; margin:.4rem 0 .2rem;">
+    <li>Los conteos del prototipo por equipo y la columna de lo que nadie esperaba.</li>
+    <li>El árbol de objetivos del grupo, con la rama de cada equipo marcada.</li>
+    <li>Las cadenas de los componentes: versión kraft y versión post-duelo.</li>
+    <li>La tabla del cotejo del duelo 1 y las mejores piezas de cacería.</li>
+  </ul>
 </div>
 
 <div class="chapuzon">
