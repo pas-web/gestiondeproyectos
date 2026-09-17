@@ -645,6 +645,15 @@ Lo aplicado:
   agujerado. Las fechas del cronograma del manantial se quedan: son caso de
   estudio.
 
+- **S5, bloque 4 reescrito** a pedido de Eduardo ("ni yo la entiendo"): la
+  síntesis se explica en cinco pasos con una lámina cada uno (la voz textual
+  con su fuente, la tarjeta con su así sí y así no, el muro donde palapa, lona
+  y árbol hablan del mismo problema, el nombre por problema y no por obra, el
+  conteo con la excepción del pliego de quién falta) y cierra con la prueba de
+  la línea honesta en tres preguntas. El bloque pasa de 10 a 15 minutos y la
+  mesa de tarjetas de 30 a 25: con la explicación hecha, la mesa corre más
+  rápido.
+
 Pendiente nuevo: que la reimpresión de las reglas diga de dónde salen los
 $200 del ensayo de cada equipo y cuánto queda para el dictamen.
 
