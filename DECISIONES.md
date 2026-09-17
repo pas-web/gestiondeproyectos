@@ -139,6 +139,13 @@ discutir el primer día se cobra caro en noviembre.
    con el expediente en la mesa.
 10. **Credenciales fuera del repositorio y fuera del chat.** Si se usa un token de
    GitHub para publicar, se revoca al terminar la sesión.
+11. **Los mazos no se aprietan para caber en 120 minutos.** Eduardo prefiere
+   tener varias opciones y elegir o brincarse algo sobre la marcha, antes que
+   recortar contenido para que quepa. Las chapas de minutos son estimaciones
+   por bloque, no una suma que deba cerrar; un mazo puede traer más de lo que
+   cabe en dos horas. Lo que sí se marca es qué bloques no se recortan (la
+   campana, Kenia, el cierre de unidad) en la nota del conductor. Decidido el
+   17 de septiembre de 2026.
 
 ## Protocolo de la hoja de retroalimentación
 
@@ -644,6 +651,72 @@ Lo aplicado:
   (ahora anclados a la semana) y el "tope" que ya no existe en el presupuesto
   agujerado. Las fechas del cronograma del manantial se quedan: son caso de
   estudio.
+
+- **S5, bloque 4 reescrito** a pedido de Eduardo ("ni yo la entiendo"): la
+  síntesis se explica en cinco pasos con una lámina cada uno (la voz textual
+  con su fuente, la tarjeta con su así sí y así no, el muro donde palapa, lona
+  y árbol hablan del mismo problema, el nombre por problema y no por obra, el
+  conteo con la excepción del pliego de quién falta) y cierra con la prueba de
+  la línea honesta en tres preguntas. El bloque pasa de 10 a 15 minutos y la
+  mesa de tarjetas de 30 a 25: con la explicación hecha, la mesa corre más
+  rápido.
+
+- **S5, bloques 6 y 7 desarrollados** por el mismo pedido: la mesa de
+  tarjetas queda en tres rondas con tiempos, materiales y papeles que rotan
+  (escribir con la O para las observaciones y la canasta de condiciones desde
+  el principio; pegar y juntar con la pregunta "¿de qué problema habla?";
+  nombrar, contar y cotejar con el pliego), y el árbol de problemas en cuatro
+  láminas (por qué en vertical, la prueba del tronco "si se arreglara, ¿qué
+  montones se moverían?", las raíces con una cadena de ejemplo de La Florida y
+  la regla de dónde parar, las ramas y para qué sirven en las semanas 7 y 8)
+  más la actividad de causa o mismo nombre, con dos colores de tarjeta: las de
+  la consulta y las hipótesis del salón.
+
+- **La consulta real se levantó con dos instrumentos, no con tres
+  estaciones**, y la semana 5 se ajusta a ellos: entrevistas en pareja con
+  guion de 22 preguntas y hoja de registro por persona (con la foto de la
+  presa numerada del 1 al 5, sin nombres, rango de edad y rumbo), y un taller
+  diagnóstico con diez muchachos de la secundaria de La Florida (arranque de
+  un paso al frente, seis rondas de puntos por zona, hojas de zona, el no y su
+  volteo, ideas de la mesa, saberes de la casa, boleta de confianza). La mesa
+  de tarjetas gana una lámina que dice qué pregunta y qué hoja se vuelve
+  tarjeta, observación, condición o material para la semana 9 (las
+  respuestas 20 y 21, quién cuidaría y faenas, son la semilla de la
+  contrapartida); las fuentes al pie se escriben con lo que la hoja de
+  registro trae ("mujer de 30 a 49, entrevista 4, pregunta 9"); la pregunta
+  10 y las tiras del no son la cantera de las raíces del árbol, y los volteos
+  de la hoja 8 arrancan el árbol de objetivos de la S7. La S6 nombra la
+  promesa tal como la hizo el guion: devolución por escrito con fecha y copia
+  a Obras Públicas; lo de la S6 es la primera devolución, la completa sigue
+  para noviembre.
+- **S5, bloque 8 desarrollado**: la postulación en tres tiempos (escribir,
+  ronda de un minuto por persona, armar), el así sí y así no de una
+  postulación con evidencia, los tres oficios con sus chambas de la unidad
+  (y la regla de que solo se rota el pedir), la capa técnica en piezas (suelo,
+  especies, agua, pisoteo) atada a las zonas de la foto, y la tabla de lo que
+  puede pasar al armar equipos, incluida la línea que se queda sin nadie y se
+  reporta en la devolución.
+
+- **El árbol de problemas gana su técnica y su gimnasio.** A pedido de
+  Eduardo, con su presentación del caso del valle (insecticidas
+  organofosforados, tres ramas de porqués y tres líneas estratégicas) y la
+  plantilla de tres causas por cuatro porqués: entra el gimnasio 4 de la S5,
+  `ejercicio-41-los-cinco-porques.html` (autocontenido, regla 6), con cuatro
+  partes: síntoma o causa en seis casos del campo (plaga e insecticida, Kenia
+  y la cubeta, maíz y fertilizante, ganado y bebedero, jóvenes y curso,
+  basura y letreros), el árbol del valle que se abre nivel por nivel con el
+  botón y termina mostrando la raíz que se quedó sin línea, la clasificación
+  de ocho frases entre problema y ausencia de solución, y la plantilla del
+  problema como pregunta (tres causas, cuatro porqués, casilla de "tiene
+  tarjeta", detector de "falta" y "no hay", ejemplo de la presa, guardado en
+  el navegador y copia a la bitácora). El bloque 7 de la S5 pasa de 20 a 30
+  minutos con tres láminas nuevas (síntoma o causa, los cinco porqués, un
+  problema no es la ausencia de una solución) y la actividad de las raíces
+  se hace con la plantilla en tríos. El video de vimeo que recomienda
+  Eduardo sobre la trampa del "falta" queda enlazado en la tarjeta del
+  árbol. Con la regla 11 nueva, el jueves de la S5 suma 135 minutos y no se
+  recorta: la mesa de tarjetas vuelve a 30, el gimnasio 2 a 10 y la
+  postulación a 15, con sus tres tiempos.
 
 Pendiente nuevo: que la reimpresión de las reglas diga de dónde salen los
 $200 del ensayo de cada equipo y cuánto queda para el dictamen.

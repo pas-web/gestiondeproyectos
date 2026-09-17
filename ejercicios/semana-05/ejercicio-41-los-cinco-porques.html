@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S5 · Los cinco porqués</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:760px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.2rem; margin:2rem 0 .4rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .situacion { font-family:Georgia,serif; font-style:italic; font-size:1.05rem; color:var(--profundo); margin:.2rem 0 .7rem; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; font-style:normal; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .ojo { background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.75rem 1rem; margin:.9rem 0; font-size:.95rem; color:#5C4A1C; }
+
+  /* ---- El árbol interactivo de los cinco porqués ---- */
+  .arbol { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1rem 0; }
+  .problema { background:var(--profundo); color:#fff; border-radius:10px; padding:.7rem 1rem; font-family:Georgia,serif; font-size:1.05rem; text-align:center; }
+  .ramas { display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; margin-top:.6rem; }
+  @media (max-width:600px){ .ramas { grid-template-columns:1fr; } }
+  .rama { display:flex; flex-direction:column; gap:.35rem; }
+  .nivel { border:1.5px solid var(--borde); border-radius:8px; padding:.5rem .7rem; font-size:.9rem; background:#F7FAF9; opacity:0; transform:translateY(-6px); transition:opacity .35s, transform .35s; min-height:3.6rem; position:relative; }
+  .nivel.ve { opacity:1; transform:none; }
+  .nivel::before { content:"¿por qué?"; display:block; font-size:.66rem; letter-spacing:.09em; text-transform:uppercase; color:var(--arena); font-weight:bold; }
+  .nivel.raiz { background:#FBEFD5; border-color:#E8D4A4; }
+  .nivel.raiz::before { content:"raíz"; color:#7C6222; }
+  .nivel.linea { background:var(--marca); color:#fff; border-color:var(--marca); }
+  .nivel.linea::before { content:"línea estratégica"; color:#DCEFEA; }
+  .nivel.hueco { background:#FBF0EE; border-color:#EBCFC9; color:#6B2F22; }
+  .nivel.hueco::before { content:"raíz sin línea"; color:#8A3B2B; }
+  .btn { background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.5rem 1.1rem; font:inherit; font-weight:bold; cursor:pointer; margin:.6rem .4rem 0 0; }
+  .btn.sec { background:#fff; color:var(--marca); border:2px solid var(--marca); }
+  .btn:disabled { opacity:.45; cursor:default; }
+  .paso-txt { font-size:.93rem; color:#45605a; margin:.5rem 0 0; min-height:2.6rem; }
+
+  /* ---- La plantilla ---- */
+  .plantilla { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1rem 0; }
+  .plantilla label.preg { display:block; font-size:.72rem; letter-spacing:.09em; text-transform:uppercase; color:var(--marca); font-weight:bold; margin-bottom:.25rem; }
+  .plantilla input, .plantilla textarea { width:100%; font:inherit; font-size:.92rem; border:1.5px solid var(--borde); border-radius:8px; padding:.45rem .6rem; background:#FDFDFB; resize:vertical; }
+  .plantilla textarea { min-height:3.6rem; }
+  .plantilla input:focus, .plantilla textarea:focus { outline:2px solid var(--marca); border-color:var(--marca); }
+  .cols { display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; margin-top:.8rem; }
+  @media (max-width:600px){ .cols { grid-template-columns:1fr; } }
+  .col { display:flex; flex-direction:column; gap:.4rem; }
+  .col .cab { background:var(--profundo); color:#fff; border-radius:8px; padding:.35rem .6rem; font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; font-weight:bold; text-align:center; }
+  .celda { position:relative; }
+  .celda .pq { font-size:.72rem; color:#7C6222; background:#FBEFD5; border-radius:6px 6px 0 0; padding:.15rem .5rem; text-align:center; letter-spacing:.04em; }
+  .celda textarea { border-radius:0 0 8px 8px; }
+  .celda.ausencia textarea { border-color:#C97B5D; background:#FBF0EE; }
+  .celda .aviso { display:none; font-size:.78rem; color:var(--rojo); margin:.15rem 0 0; }
+  .celda.ausencia .aviso { display:block; }
+  .celda label.chk { display:flex; align-items:center; gap:.35rem; font-size:.78rem; color:#45605a; margin:.15rem 0 .1rem; }
+  .celda label.chk input { width:auto; }
+  .celda.sin-tarjeta textarea { border-style:dashed; }
+  .resumen { margin-top:.8rem; font-size:.92rem; color:#45605a; }
+  .contra { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin:.8rem 0; }
+  @media (max-width:600px){ .contra { grid-template-columns:1fr; } }
+  .contra > div { border-radius:10px; padding:.75rem .9rem; font-size:.93rem; }
+  .contra .mal { background:#FBF0EE; border:1px solid #EBCFC9; color:#6B2F22; }
+  .contra .bien { background:#EEF6F0; border:1px solid #C9E2CF; color:#1F4A2C; }
+  .contra .rot { display:block; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; font-weight:bold; opacity:.75; margin-bottom:.25rem; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.3rem; }
+  body.proyector main { max-width:1100px; }
+</style>
+</head>
+<body>
+<main>
+<h1>Los cinco porqués</h1>
+<p class="sub">Gimnasio · Semana 5 · Práctica libre, sin registro y sin nota. Las partes 1 a 3 se hacen solas; la parte 4 se hace en clase, con tu línea.</p>
+
+<p>Un problema casi nunca es lo que se ve primero. Lo que se ve es el síntoma: la plaga, la basura del lunes, los niños en la carretera. Debajo hay una cadena de causas, y el proyecto que ataca el síntoma se siente productivo y sale caro dos veces: paga la obra y paga el problema, que vuelve. Este gimnasio entrena tres cosas: distinguir síntoma de causa, bajar por la cadena preguntando "¿y eso por qué pasa?", y no confundir un problema con la ausencia de una solución.</p>
+
+<div class="intro">
+  La técnica de los cinco porqués nació en las fábricas de Toyota: ante una falla, se pregunta por qué, y a la respuesta se le vuelve a preguntar por qué, unas cinco veces, hasta llegar a una causa que <strong>se puede cambiar</strong>. Aquí se usa igual, con una regla extra del curso: cada porqué tiene que poder enseñar su tarjeta de la consulta, o se marca como hipótesis del salón.
+</div>
+
+<h2>Parte 1 · ¿Síntoma o causa?</h2>
+<p>Seis cosas que de verdad se hacen en el campo. En cada una, alguien atendió algo. Decide si atendió el síntoma o la causa. Si fallas, hay pista.</p>
+<div id="casos"></div>
+
+<h2>Parte 2 · Los cinco porqués, en vivo</h2>
+<p>Un caso del valle, como se trabaja en planeación de proyectos: el problema arriba, y tres ramas que bajan preguntando. Toca el botón y mira cómo se abre.</p>
+<div class="arbol" id="arbol">
+  <div class="problema">Algunos productores utilizan en exceso insecticidas organofosforados en el valle</div>
+  <div class="ramas">
+    <div class="rama">
+      <div class="nivel" data-n="1">Desconocen alternativas de manejo integrado de plagas</div>
+      <div class="nivel raiz" data-n="2">No se han implementado proyectos de transferencia de tecnología</div>
+      <div class="nivel linea" data-n="4">Capacitaciones en manejo integrado de plagas</div>
+    </div>
+    <div class="rama">
+      <div class="nivel" data-n="1">Hay mucha incidencia de plagas</div>
+      <div class="nivel" data-n="2">Se siembra en monocultivo</div>
+      <div class="nivel raiz" data-n="3">Hay baja coordinación entre productores</div>
+      <div class="nivel hueco" data-n="4">Ninguna de las tres líneas trabaja la coordinación entre productores</div>
+    </div>
+    <div class="rama">
+      <div class="nivel" data-n="1">Es la opción más económica</div>
+      <div class="nivel raiz" data-n="2">La reglamentación no absorbe las externalidades negativas</div>
+      <div class="nivel linea" data-n="4">Reglamento municipal para regular el uso de agroquímicos</div>
+    </div>
+  </div>
+  <button class="btn" id="btn-pq" onclick="siguientePorque()">¿Y eso por qué pasa?</button>
+  <button class="btn sec" onclick="reiniciarArbol()">Empezar de nuevo</button>
+  <p class="paso-txt" id="paso-txt">Un solo problema, dicho como lo que pasa (no como lo que falta). Toca el botón para bajar el primer nivel.</p>
+</div>
+
+<h2>Parte 3 · Un problema no es la ausencia de una solución</h2>
+<p>La trampa más común al escribir un problema: escribir la solución con un "falta" adelante. "Falta una palapa" no es un problema, es una palapa disfrazada, y cierra la puerta a cualquier otra respuesta. Clasifica estas ocho frases.</p>
+<div class="contra">
+  <div class="mal"><span class="rot">Ausencia de solución</span>"Falta un reglamento municipal." Ya decidió que la respuesta es un reglamento. No dice qué le pasa a nadie.</div>
+  <div class="bien"><span class="rot">Problema</span>"Nadie paga los daños que causan los agroquímicos en el valle." Dice qué pasa y a quién. La respuesta puede ser un reglamento, o no.</div>
+</div>
+<div id="ausencias"></div>
+
+<h2>Parte 4 · Tu problema como una pregunta</h2>
+<p>La plantilla de la clase: el problema de tu línea, escrito como pregunta, y tres causas que bajan cuatro porqués cada una. Se llena con las tarjetas del muro a la vista. Cada celda tiene una casilla: márcala si esa causa puede enseñar su tarjeta; si no, queda como hipótesis del salón, y así se pega en el árbol.</p>
+<div class="plantilla" id="plantilla">
+  <label class="preg" for="pregunta">Tu problema como una pregunta</label>
+  <input type="text" id="pregunta" placeholder="¿Por qué no hay dónde estar a gusto en la presa por la tarde?">
+  <div class="cols" id="cols"></div>
+  <p class="resumen" id="resumen"></p>
+  <button class="btn sec" onclick="ejemploPresa()">Ver el ejemplo de la presa</button>
+  <button class="btn" onclick="copiarPlantilla()">Copiar a la bitácora</button>
+  <button class="btn sec" onclick="borrarPlantilla()">Borrar</button>
+</div>
+<div class="ojo">
+  <strong>La regla de dónde parar.</strong> Se baja mientras el registro conteste. Cuando el siguiente porqué ya no lo contesta ninguna tarjeta ni ninguna observación de agosto, ahí termina la raíz; lo que sigue es hipótesis del salón y se marca como tal, porque el prototipo de la semana 6 puede confirmarla o tumbarla.
+</div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Dibuja la plantilla en una doble página: la pregunta arriba, tres columnas, cuatro renglones de "¿por qué ocurre esto?" hacia abajo. Escribe con lápiz. Junto a cada celda, una marca si tiene tarjeta del muro y una H si es hipótesis. Cualquier celda que empiece con "falta" o "no hay" se reescribe como lo que le pasa a la gente. Esa doble página se pega al muro como raíces del árbol.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  /* ---------- Parte 1 ---------- */
+  var casos = [
+    { s: 'Hay plaga en el chile, así que el programa repartió más insecticida a los productores.',
+      ops: ['Atendió un síntoma', 'Atendió una causa'], resp: 0,
+      pista: 'La plaga se ve. ¿Y por qué hay tanta plaga en ese valle y no en el de junto?',
+      exp: 'Síntoma. La plaga es lo visible; debajo suele haber monocultivo sin rotación y sin enemigos naturales. El insecticida arregla esta temporada y empeora la siguiente (resistencia, plaga más fuerte, un paquete más caro). Es el caso de la parte 2 de este gimnasio.' },
+    { s: 'La diarrea infantil no bajaba aunque el agua salía limpia del manantial. El programa entregó tapas y cloro para las cubetas de la casa y enseñó a usarlos.',
+      ops: ['Atendió una causa', 'Atendió un síntoma'], resp: 0,
+      pista: 'Es el Expediente Kenia. ¿Dónde se volvía a contaminar el agua?',
+      exp: 'Causa. La obra del manantial atendía el síntoma visible (agua sucia en la fuente) y la diarrea no bajó; la causa próxima era la recontaminación en el recipiente de la casa. Atender la cubeta cuesta centavos y mueve el problema; la obra costó miles y no lo movió.' },
+    { s: 'El rendimiento del maíz cayó a la mitad en diez años. El programa regala fertilizante cada temporada.',
+      ops: ['Atendió una causa', 'Atendió un síntoma'], resp: 1,
+      pista: '¿Por qué cayó el rendimiento? ¿El fertilizante contesta ese porqué o tapa el número?',
+      exp: 'Síntoma. El rendimiento bajo es la señal; debajo hay suelo sin materia orgánica y erosión por labranza en pendiente. El fertilizante sube el número un año y el suelo sigue yéndose. Cuando se acaba el programa, se acaba el rendimiento.' },
+    { s: 'El ganado se enfermaba cada temporada de lluvias. En lugar de desparasitar cada mes, se construyó un bebedero aparte del charco donde el mismo ganado defecaba.',
+      ops: ['Atendió un síntoma', 'Atendió una causa'], resp: 1,
+      pista: 'Desparasitar cada mes, ¿qué atiende? Y el bebedero, ¿qué corta?',
+      exp: 'Causa. Desparasitar cada mes atiende el síntoma para siempre; separar el agua de beber del charco contaminado corta la cadena. La prueba de una causa bien atendida: el gasto baja con el tiempo en lugar de repetirse.' },
+    { s: 'Los jóvenes se van del ejido. Se abrió un curso de emprendimiento de dos semanas.',
+      ops: ['Atendió una causa', 'Atendió un síntoma'], resp: 1,
+      pista: '¿Por qué se van? ¿Un curso de dos semanas contesta ese porqué?',
+      exp: 'Síntoma. Los jóvenes se van porque no hay tierra ni ingreso que los sostenga, y a veces porque no hay dónde estar; el curso atiende la señal visible y deja intacta la cadena. No es que el curso sea malo: es que no está parado en una raíz.' },
+    { s: 'La orilla de la presa amanece con basura los lunes. Se pusieron seis letreros de "no tire basura".',
+      ops: ['Atendió un síntoma', 'Atendió una causa'], resp: 0,
+      pista: '¿Quién va los domingos, qué lleva, y qué hace con lo que sobra? ¿El letrero contesta algo de eso?',
+      exp: 'Síntoma. La basura es lo visible. Un porqué abajo: no hay dónde dejarla; dos abajo: nadie recoge lo que se junta; tres abajo: la orilla no es de nadie. El letrero le habla al síntoma. Y ojo con el segundo porqué: comprar botes sin que alguien los vacíe es atender medio síntoma con una obra nueva.' }
+  ];
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div'); d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ' + c.s + '</div>';
+    c.ops.forEach(function (op, j) { html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>'; });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div><div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html; cont.appendChild(d);
+  });
+  function responder(i, j, btn) {
+    var c = casos[i], pista = document.getElementById('p' + i), acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien'); pista.style.display = 'none'; acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else { btn.classList.add('elegida-mal'); pista.style.display = 'block'; setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200); }
+  }
+
+  /* ---------- Parte 2 ---------- */
+  var nivelActual = 0;
+  var textos = [
+    'Un solo problema, dicho como lo que pasa (no como lo que falta). Toca el botón para bajar el primer nivel.',
+    'Primer porqué: tres respuestas distintas, y las tres son ciertas a la vez. Un problema casi nunca tiene una sola causa: por eso la plantilla trae tres columnas.',
+    'Segundo porqué: dos ramas ya tocaron una causa que se puede cambiar (una raíz). La del medio todavía no: el monocultivo también tiene un porqué.',
+    'Tercer porqué: la rama del medio llega a su raíz. Fíjate que las tres raíces son cosas distintas: conocimiento, organización y reglas. Ninguna es "falta insecticida bueno".',
+    'Y así se voltea: cada raíz se vuelve una línea estratégica del proyecto. Pero mira la rama del medio: la coordinación entre productores se quedó sin línea. Una raíz sin línea es una apuesta coja, y el que lee el proyecto lo va a notar. ¿Qué línea faltó?'
+  ];
+  function siguientePorque() {
+    if (nivelActual >= 4) return;
+    nivelActual++;
+    document.querySelectorAll('#arbol .nivel[data-n="' + nivelActual + '"]').forEach(function (n) { n.classList.add('ve'); });
+    if (nivelActual === 3) { /* las ramas que ya llegaron a raíz no tienen nivel 3 */ }
+    document.getElementById('paso-txt').textContent = textos[nivelActual];
+    var b = document.getElementById('btn-pq');
+    if (nivelActual === 3) b.textContent = 'Voltear las raíces';
+    if (nivelActual >= 4) b.disabled = true;
+  }
+  function reiniciarArbol() {
+    nivelActual = 0;
+    document.querySelectorAll('#arbol .nivel').forEach(function (n) { n.classList.remove('ve'); });
+    document.getElementById('paso-txt').textContent = textos[0];
+    var b = document.getElementById('btn-pq'); b.disabled = false; b.textContent = '¿Y eso por qué pasa?';
+  }
+
+  /* ---------- Parte 3 ---------- */
+  var frases = [
+    { s: '"Falta una palapa en la orilla."', resp: 1, re: 'No hay dónde estar a gusto en la orilla por la tarde.' },
+    { s: '"La gente va a la presa y no se queda más de media hora."', resp: 0, re: null },
+    { s: '"No hay un programa de capacitación para los productores."', resp: 1, re: 'Los productores no conocen otra forma de controlar la plaga que el insecticida.' },
+    { s: '"Los niños juegan en la carretera porque no tienen otro lugar."', resp: 0, re: null },
+    { s: '"Faltan botes de basura en la presa."', resp: 1, re: 'La orilla amanece con basura los lunes y nadie la recoge.' },
+    { s: '"Nadie deja ir sola a una niña o un niño a la zona 4."', resp: 0, re: null },
+    { s: '"No hay quien cuide la orilla."', resp: 1, re: 'La orilla no es de nadie: lo que se rompe o se ensucia se queda así.' },
+    { s: '"Los sabinos de la orilla se secaron y no hay sombra donde la gente se junta."', resp: 0, re: null }
+  ];
+  var cont3 = document.getElementById('ausencias');
+  frases.forEach(function (f, i) {
+    var d = document.createElement('div'); d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ' + f.s + '</div>';
+    ['Es un problema', 'Es la ausencia de una solución'].forEach(function (op, j) { html += '<button class="opcion" onclick="responder3(' + i + ',' + j + ',this)">' + op + '</button>'; });
+    html += '<div class="pista" id="q' + i + '">' + (f.resp === 1 ? 'Empieza con "falta" o "no hay" y lo que sigue se puede comprar o construir. ¿Qué le pasa a la gente por eso?' : 'No nombra ninguna obra: dice qué pasa y a quién. ¿Eso es un problema o una solución escondida?') + '</div>';
+    html += '<div class="acierto" id="b' + i + '">' + (f.resp === 1 ? 'Ausencia de solución. Reescrito como problema: <strong>' + f.re + '</strong> Así la respuesta queda abierta y el árbol puede seguir bajando.' : 'Problema. Dice qué pasa y a quién, sin decir qué construir. De aquí sí se puede preguntar "¿y eso por qué pasa?".') + '</div>';
+    d.innerHTML = html; cont3.appendChild(d);
+  });
+  function responder3(i, j, btn) {
+    var f = frases[i], pista = document.getElementById('q' + i), acierto = document.getElementById('b' + i);
+    if (j === f.resp) {
+      btn.classList.add('elegida-bien'); pista.style.display = 'none'; acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else { btn.classList.add('elegida-mal'); pista.style.display = 'block'; setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200); }
+  }
+
+  /* ---------- Parte 4 ---------- */
+  var CLAVE = 'gestion-s5-cinco-porques';
+  var AUSENCIA = /^\s*(falta|faltan|no hay|no existe|no existen|no tienen|no tenemos|hace falta|hacen falta|no cuenta con|no se cuenta con)\b/i;
+  var datos = {};
+  try { datos = JSON.parse(localStorage.getItem(CLAVE) || '{}'); } catch (e) {}
+  var cols = document.getElementById('cols');
+  for (var c = 1; c <= 3; c++) {
+    var col = document.createElement('div'); col.className = 'col';
+    var html = '<div class="cab">Causa ' + c + '</div>';
+    for (var n = 0; n <= 3; n++) {
+      var k = 'c' + c + 'n' + n;
+      html += '<div class="celda" id="cel-' + k + '"><div class="pq">' + (n === 0 ? 'una causa del problema' : '¿por qué ocurre esto?') + '</div>'
+        + '<textarea data-k="' + k + '" placeholder="' + (n === 0 ? 'Lo que pasa, no lo que falta' : 'Y eso, ¿por qué?') + '"></textarea>'
+        + '<div class="aviso">Empieza con "falta" o "no hay": es una solución escondida. Escribe qué le pasa a la gente.</div>'
+        + '<label class="chk"><input type="checkbox" data-k="' + k + '-t"> tiene tarjeta del muro</label></div>';
+    }
+    col.innerHTML = html; cols.appendChild(col);
+  }
+  var pregunta = document.getElementById('pregunta');
+  pregunta.value = datos.pregunta || '';
+  pregunta.addEventListener('input', function () { datos.pregunta = pregunta.value; guarda(); });
+  document.querySelectorAll('#cols textarea').forEach(function (t) {
+    var k = t.getAttribute('data-k');
+    t.value = datos[k] || ''; revisa(t);
+    t.addEventListener('input', function () { datos[k] = t.value; revisa(t); guarda(); });
+  });
+  document.querySelectorAll('#cols input[type=checkbox]').forEach(function (ch) {
+    var k = ch.getAttribute('data-k');
+    ch.checked = !!datos[k]; marcaTarjeta(ch);
+    ch.addEventListener('change', function () { datos[k] = ch.checked; marcaTarjeta(ch); guarda(); });
+  });
+  function revisa(t) {
+    var cel = t.closest('.celda');
+    if (AUSENCIA.test(t.value)) cel.classList.add('ausencia'); else cel.classList.remove('ausencia');
+    resumen();
+  }
+  function marcaTarjeta(ch) {
+    var cel = ch.closest('.celda'); var t = cel.querySelector('textarea');
+    if (t.value.trim() && !ch.checked) cel.classList.add('sin-tarjeta'); else cel.classList.remove('sin-tarjeta');
+    resumen();
+  }
+  function resumen() {
+    var llenas = 0, aus = 0, hip = 0;
+    document.querySelectorAll('#cols .celda').forEach(function (cel) {
+      var t = cel.querySelector('textarea'); if (!t.value.trim()) return;
+      llenas++; if (cel.classList.contains('ausencia')) aus++;
+      if (!cel.querySelector('input[type=checkbox]').checked) hip++;
+    });
+    var r = document.getElementById('resumen');
+    if (!llenas) { r.textContent = ''; return; }
+    r.textContent = llenas + ' porqués escritos · ' + aus + ' que suenan a ausencia de solución · ' + hip + ' sin tarjeta (se pegan como hipótesis del salón, en tarjeta de otro color).';
+  }
+  function guarda() { try { localStorage.setItem(CLAVE, JSON.stringify(datos)); } catch (e) {} }
+  function ejemploPresa() {
+    var ej = {
+      pregunta: '¿Por qué no hay dónde estar a gusto en la presa por la tarde?',
+      c1n0: 'No hay sombra donde la gente se junta', c1n1: 'Los sabinos de esa orilla se secaron y nadie volvió a sembrar', c1n2: 'La orilla no es de nadie: lo que se seca se queda seco', c1n3: 'La presa está en zona federal y el ejido no la siente suya',
+      c2n0: 'La gente se sienta en la piedra y se va a la media hora', c2n1: 'No hay dónde sentarse a la sombra ni dónde poner lo que traen', c2n2: 'Las mesas que hubo se las llevaron o se pudrieron', c2n3: 'Nadie quedó responsable de lo que se puso',
+      c3n0: 'La orilla amanece con basura los lunes', c3n1: 'Lo que sobra del domingo se queda tirado', c3n2: 'Nadie recoge lo que se junta, y no hay dónde dejarlo', c3n3: 'La orilla no es de nadie'
+    };
+    Object.keys(ej).forEach(function (k) { datos[k] = ej[k]; });
+    ['c1n0','c1n1','c1n2','c2n0','c2n1','c3n0','c3n1'].forEach(function (k) { datos[k + '-t'] = true; });
+    ['c1n3','c2n2','c2n3','c3n2','c3n3'].forEach(function (k) { datos[k + '-t'] = false; });
+    pregunta.value = ej.pregunta;
+    document.querySelectorAll('#cols textarea').forEach(function (t) { t.value = datos[t.getAttribute('data-k')] || ''; revisa(t); });
+    document.querySelectorAll('#cols input[type=checkbox]').forEach(function (ch) { ch.checked = !!datos[ch.getAttribute('data-k')]; marcaTarjeta(ch); });
+    guarda();
+    document.getElementById('resumen').textContent += ' En el ejemplo, las celdas punteadas son hipótesis: nadie las dijo en la consulta. Fíjate que dos ramas llegan a la misma raíz: la orilla no es de nadie. Cuando eso pasa, esa raíz es la que más pesa.';
+  }
+  function borrarPlantilla() {
+    if (!confirm('¿Borrar la plantilla?')) return;
+    datos = {}; guarda(); pregunta.value = '';
+    document.querySelectorAll('#cols textarea').forEach(function (t) { t.value = ''; revisa(t); });
+    document.querySelectorAll('#cols input[type=checkbox]').forEach(function (ch) { ch.checked = false; marcaTarjeta(ch); });
+  }
+  function copiarPlantilla() {
+    var out = 'LOS CINCO PORQUÉS · ' + (pregunta.value || '(sin pregunta)') + '\n';
+    for (var c = 1; c <= 3; c++) {
+      out += '\nCausa ' + c + ':\n';
+      for (var n = 0; n <= 3; n++) {
+        var k = 'c' + c + 'n' + n, v = (datos[k] || '').trim(); if (!v) continue;
+        out += '  ' + (n === 0 ? '' : '¿por qué? ') + v + (datos[k + '-t'] ? ' [tarjeta]' : ' [hipótesis]') + '\n';
+      }
+    }
+    if (navigator.clipboard) navigator.clipboard.writeText(out).then(function () { alert('Copiado. Pégalo en tu bitácora.'); });
+    else { prompt('Copia este texto:', out); }
+  }
+</script>
+</main>
+</body>
+</html>
