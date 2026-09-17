@@ -690,6 +690,26 @@ Lo aplicado:
   puede pasar al armar equipos, incluida la línea que se queda sin nadie y se
   reporta en la devolución.
 
+- **El árbol de problemas gana su técnica y su gimnasio.** A pedido de
+  Eduardo, con su presentación del caso del valle (insecticidas
+  organofosforados, tres ramas de porqués y tres líneas estratégicas) y la
+  plantilla de tres causas por cuatro porqués: entra el gimnasio 4 de la S5,
+  `ejercicio-41-los-cinco-porques.html` (autocontenido, regla 6), con cuatro
+  partes: síntoma o causa en seis casos del campo (plaga e insecticida, Kenia
+  y la cubeta, maíz y fertilizante, ganado y bebedero, jóvenes y curso,
+  basura y letreros), el árbol del valle que se abre nivel por nivel con el
+  botón y termina mostrando la raíz que se quedó sin línea, la clasificación
+  de ocho frases entre problema y ausencia de solución, y la plantilla del
+  problema como pregunta (tres causas, cuatro porqués, casilla de "tiene
+  tarjeta", detector de "falta" y "no hay", ejemplo de la presa, guardado en
+  el navegador y copia a la bitácora). El bloque 7 de la S5 pasa de 20 a 30
+  minutos con tres láminas nuevas (síntoma o causa, los cinco porqués, un
+  problema no es la ausencia de una solución) y la actividad de las raíces
+  se hace con la plantilla en tríos; el gimnasio 2 baja a 5 minutos y la
+  postulación a 10, con el gimnasio 3 escrito desde casa. El video de
+  vimeo que recomienda Eduardo sobre la trampa del "falta" queda enlazado en
+  la tarjeta del árbol.
+
 Pendiente nuevo: que la reimpresión de las reglas diga de dónde salen los
 $200 del ensayo de cada equipo y cuánto queda para el dictamen.
 
