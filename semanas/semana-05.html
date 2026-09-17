@@ -20,23 +20,18 @@
     background: var(--fondo); color: var(--texto);
     line-height: 1.65; font-size: 1.05rem;
   }
-  header.curso {
-    background: var(--profundo); color: #EAF4F2;
-    padding: 1.1rem 1.5rem;
-  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
   header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
   header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
   header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
   main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
 
-  .pregunta {
-    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
-    color: var(--profundo); margin: 1.8rem 0 .4rem;
-  }
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
   h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -55,11 +50,8 @@
   .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
   .consulta dd { margin: .2rem 0 .4rem 0; }
 
-  .chapuzon {
-    background: var(--profundo); color: #EAF4F2;
-    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
-  }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
 
   .aviso-goteo {
@@ -68,6 +60,7 @@
     display: none;
   }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -83,11 +76,12 @@
 <div id="wk-gate" data-semana="5">
 
 <p class="pregunta">¿Cómo se reparte lo que no alcanza?</p>
-<p class="bajada">La consulta dejó libretas llenas, un mapa rayado y una respuesta incómoda o dos. Esta semana todo eso se convierte en decisiones: el jueves fabricamos las líneas de trabajo y se forman los equipos. Y el viernes se acaba el misterio más viejo del curso: las reglas del fondo, selladas desde la semana 1, se entregan impresas y se destripan. Arranca la unidad 2: ya escuchamos la presa, ahora diseñamos lo que pidieron.</p>
+<p class="bajada">La consulta dejó libretas llenas, un mapa rayado, una respuesta incómoda o dos y, en tu teléfono, tu primer cierre. Esta semana se cierra la unidad 1 con las dos listas sobre la mesa, y todo lo que se escuchó se convierte en decisiones: el jueves se fabrican las líneas de trabajo, se arma el árbol de problemas y se forman los equipos. El viernes se acaba el misterio más viejo del curso: las reglas del fondo se entregan impresas y se destripan. Arranca la unidad 2: ya escuchamos la presa, ahora diseñamos lo que pidieron.</p>
 
 <h2>Esta semana podrás</h2>
 <div class="podras">
   <ul>
+    <li>Cerrar la unidad 1 en la mesa: tu suelo contra la lista del profesor, tu primer cierre comentado y las objeciones de agosto retomadas.</li>
     <li>Convertir un registro de campo en líneas de trabajo sin traicionar la voz de la gente.</li>
     <li>Armar el árbol de problemas del grupo: el problema central con sus causas y sus efectos, sacado de las tarjetas y no del pálpito.</li>
     <li>Elegir tu línea con evidencia y formar equipo con criterio de oficios, no solo de amistad.</li>
@@ -96,37 +90,271 @@
   </ul>
 </div>
 
-<h2>Herramientas de la semana</h2>
+<h2 class="corte">Las dos sesiones de esta semana</h2>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
+
+<!-- ====================== JUEVES ====================== -->
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves · 2 horas</div>
+      <h3>De la orilla a las líneas</h3>
+      <p class="foco">Cerrar la unidad 1 con las dos listas en la mesa, fabricar las líneas de trabajo con método y formar los equipos por oficio.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El ticket de la semana pasada <span class="reloj">5 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">El ticket del viernes se contestó junto al agua. Hoy se contesta en voz alta.</p>
+    <p class="apoyo">Este arranque no se salta ningún jueves. Lo que quedó turbio después de la consulta suele ser lo mismo para varios: se lee textual, sin nombre, y se resuelve aquí.</p>
+    <p class="nota-conductor">Traer dos o tres respuestas: de preferencia una sobre lo que dolió de la consulta (la respuesta incómoda) y una sobre el sobre. Hoy es el día de resolverlas, porque la unidad se cierra.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> La campana del no <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Ritual · cada jueves</span>
+    <p class="di">¿Quién pidió esta semana?</p>
+    <p class="apoyo">Un no conseguido se anuncia, suena la campana, el grupo aplaude y el no se anota en el anti-currículum. Los síes también se cuentan. Y hoy hay una pregunta más: ¿a quién le falta su primer no? La petición real de la semana 2 es casilla del suelo y su plan B vence mañana.</p>
+    <p class="nota-conductor">Sin exhibir a nadie: preguntar en general quién trae pendiente la petición y recordar el plazo (antes del viernes de esta semana, hecha y sistematizada en el cuadernillo 1). Si el tiempo aprieta, la campana se acorta pero no se salta.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> El cierre de la unidad 1, en la mesa <span class="reloj">20 min</span></h4>
+    <p class="di">Dos listas sobre la mesa: la tuya y la del profesor.</p>
+    <p class="apoyo">El suelo de la unidad 1 son siete casillas y ya las marcaste en tu primer cierre o en el cuadernillo. Hoy se ponen junto a la lista del profesor, en grupo y sin nombres: qué casillas faltan más, y qué plan B tiene cada una. Contrato sin entregar: se entrega hoy. Primer no y reporte de la ficha de observación en el Drive: antes de mañana. Nada de esto es drama: es pendiente con fecha.</p>
+    <p class="nota-conductor">Proyectar solo el panel de grupo de la mesa del profesor (qué casillas faltan más, cómo les fue con el sobre, cuántos no nombraron nada que todavía no sepan hacer). Los nombres se quedan en la mesa; en el salón se habla del grupo. Quien traiga una casilla pendiente lo resuelve con el profesor al final, no al aire.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal senal--aire">Se abre el piso</span>
+    <p class="di">Tu primer cierre, comentado. Compartirlo es opcional; traerlo hecho, no.</p>
+    <p class="apoyo">Se proyecta el muro de La Florida: las frases textuales que el grupo entero se trajo de la orilla, sin nombre de quien las anotó. Y el sobre del grupo enfrentado consigo mismo: lo que la comunidad pidió varias veces y no estaba en ningún pronóstico. Ese es el punto ciego del salón, y es el mejor argumento que existe para haber consultado. Después, quien quiera lee su porqué: el número que se pondría y con qué lo sostiene.</p>
+    <p class="nota-conductor">Del muro, elegir tres frases que apunten a problemas distintos: van a reaparecer en la mesa de tarjetas dentro de una hora. La regla de los tres casos se ofrece, no se impone: quien quiera comparar lecturas lo hace en cinco minutos al final de la sesión, sin registro de ninguna de las dos.</p>
+  </section>
+
+  <section class="lam">
+    <p class="di">La respuesta larga que se debía: por qué aquí no hay números, ahora que ya lo viviste un mes.</p>
+    <p class="apoyo">En agosto quedó una deuda: la respuesta corta fue que los puntos entrenan para juntar puntos. La larga se paga hoy, con la unidad 1 vivida. Un mes de trabajo produjo un contrato, una petición real, un reporte de observación, una consulta levantada y un pronóstico comparado con la realidad. Nada de eso llevó número y todo dejó evidencia. Las objeciones que se anotaron en la semana 0 y las que dejaste escritas al aceptar el pacto se releen ahora, una por una, con esa evidencia enfrente.</p>
+    <p class="nota-conductor">Traer la hoja de objeciones de la semana 0. Leerlas textuales y preguntar a quien la puso si sigue en pie. Las que sigan en pie se anotan otra vez: se vuelven a revisar en la semana 11, con la segunda autoevaluación.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">4</span> La síntesis no traiciona <span class="reloj">10 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--clara">voz<small>lo que alguien dijo, textual</small></span>
+      <span class="op">&#8594;</span>
+      <span class="pz pz--arena">tarjeta<small>una petición, con su fuente</small></span>
+      <span class="op">&#8594;</span>
+      <span class="pz pz--oscura">muro<small>las tarjetas agrupadas</small></span>
+      <span class="eq">= una línea de trabajo</span>
+    </div>
+    <p class="apoyo">Pasar de ochenta frases a tres líneas es una fabricación, y las fabricaciones se controlan con método. Cada línea tiene que poder enseñar sus tarjetas: de qué voces viene, cuántas veces se dijo, qué marca el mapa. Lo que se repitió ocho veces pesa más que lo que gritó uno, con una excepción: las voces que el pliego de quién falta marcó como pocas se cuidan aparte, porque su conteo bajo no es desinterés, es que casi no las oímos.</p>
+    <div class="ojo">
+      <strong>La línea se nombra por el problema, no por la solución.</strong> La consulta no dijo "palapa": dijo "no hay dónde estar a gusto en la tarde". Si la línea ya trae la obra en el nombre, la síntesis se saltó un paso y alguien está diseñando de oídas otra vez.
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> Gimnasio 2 · De peticiones a líneas <span class="reloj">10 min</span></h4>
+    <span class="senal">Actividad · en parejas</span>
+    <p class="di">Diez voces de El Sabinito. Cada una a su línea, o a la canasta de las condiciones.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-05/ejercicio-21-de-peticiones-a-lineas.html">ejercicio del gimnasio</a> proyectado: tres líneas de trabajo y una canasta transversal. La prueba de la canasta: si lo que pide la voz debe cumplirse en todos los componentes a la vez (que no se cobre, que sea seguro, que alguien lo mantenga, que no dañe), no es línea: es condición, y las condiciones se heredan a todo.</p>
+    <p class="nota-conductor">Detenerse en las voces que traen la obra escondida en el nombre y en las que son condición: son las dos confusiones que van a aparecer en el muro de aquí a diez minutos. Quien trajo sus cinco frases clasificadas desde el gimnasio va a ir más rápido.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">6</span> La mesa de tarjetas <span class="reloj">30 min</span></h4>
+    <span class="senal">Actividad · todo el grupo</span>
+    <p class="di">Una petición por tarjeta, con su fuente. Se agrupan en el muro hasta que los grupos se nombran solos.</p>
+    <p class="apoyo">Del registro en limpio de cada estación salen las tarjetas: la petición u observación en las palabras de la persona y su fuente al pie ("señora de unos sesenta, estación 2"). Se pegan, se mueven, se juntan por afinidad. Cuando un grupo de tarjetas ya no se mueve, se nombra: como problema, sin obra. Se cuentan las tarjetas de cada grupo y se anota el número junto al nombre. Las condiciones transversales van a su canasta, aparte. Mover tarjetas es barato; mover conclusiones publicadas, no.</p>
+    <p class="nota-conductor">El pliego de quién falta se pega junto al muro para pesar el conteo. Sostener la regla del nombre: si sale "palapa", preguntar "¿y qué problema resuelve la palapa?" hasta que el nombre sea el problema. Fotografiar el muro terminado: es el registro de las líneas y va al Drive, carpeta S5. Lo normal es que salgan tres líneas y una canasta; si salen cinco, se pregunta cuáles son la misma cosa.</p>
+  </section>
+
+  <!-- Ilustración pendiente (ver imagenes-semanas-05-10.md, carpeta local del profesor):
+  <section class="lam lam--figura">
+    <img class="ilustracion" src="../assets/img/semana-05/la-mesa-de-tarjetas.webp" alt="Dibujo a tinta: un muro lleno de tarjetas agrupadas en tres montones, cada tarjeta con una frase entre comillas y una fuente al pie; una mano mueve una tarjeta de un montón a otro y arriba de cada montón hay un nombre escrito como problema">
+  </section>
+  -->
+
+  <section class="lam">
+    <h4><span class="n">7</span> El árbol de problemas <span class="reloj">20 min</span></h4>
+    <div class="flujo">
+      <div class="paso"><b>&#8595;</b><span class="t">raíces</span>las causas: "¿y eso por qué pasa?"</div>
+      <div class="paso"><b>&#9679;</b><span class="t">tronco</span>el problema central, el ineludible</div>
+      <div class="paso"><b>&#8593;</b><span class="t">ramas</span>los efectos: "¿y eso qué provoca?"</div>
+    </div>
+    <p class="apoyo">Los grupos del muro ya tienen nombre; falta acomodarlos, porque no todos los problemas son del mismo tamaño ni están al mismo nivel. Al tronco va el problema que la consulta volvió ineludible. Abajo, las causas, bajando con la pregunta "¿y eso por qué pasa?" hasta donde el registro alcance y ni un paso más. Arriba, los efectos. Se arma en el muro mismo, con las tarjetas: "no hay dónde estar a gusto en la tarde" al centro, y de ahí se discute qué va abajo y qué va arriba.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · todo el grupo</span>
+    <p class="di">¿La orilla sin sombra es una causa, o es otro nombre del mismo problema?</p>
+    <p class="apoyo">Ahí nos vamos a detener, porque esa discusión es el ejercicio. Una causa es algo que, si cambiara, movería el problema central; otro nombre del problema es lo mismo dicho distinto, y en el árbol estorba. Cada raíz tiene que poder enseñar su tarjeta: si no hay voz ni observación que la respalde, es hipótesis del salón y se marca como tal. El árbol se queda pegado junto al mapa. En la semana 7 se voltea, y del volteo sale la estrategia de cada componente.</p>
+    <p class="nota-conductor">Aguantar la tentación de resolver el árbol por ellos: es preferible un árbol chico con raíces respaldadas que uno frondoso de pálpitos. Marcar con un color distinto las raíces que son hipótesis: en la semana 6 el prototipo puede confirmar o tumbar alguna. Foto al Drive, carpeta S5.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">8</span> Postulación y equipos <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · individual, luego por línea</span>
+    <p class="di">Postularte a una línea es un acto con evidencia: qué del registro la respalda y qué oficio le pones encima.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-05/ejercicio-32-mi-linea-mi-equipo.html">gimnasio 3</a> llenado desde antes: tu línea y sus evidencias, el problema dicho como problema, tu oficio y la capa técnica que solo ustedes van a poner en la mesa (suelo, especies, temporada de agua, qué aguanta pisoteo). Cada componente necesita tres oficios con dueño: quien escribe, quien trae los números y quien da la cara. La amistad es inevitable y está bien; el criterio es que en tu equipo los tres oficios tengan quién. Al final, cada componente sale con nombre provisional, honesto y sin mercadotecnia.</p>
+    <p class="nota-conductor">Postulaciones en voz alta, una por persona, con su evidencia: si alguien dice "me late", se le pide la tarjeta. Si una línea se queda sin gente, se decide en el momento si espera o si muere por hoy, y se dice por qué. Equipos y componentes bautizados van al pizarrón, a la foto y a "Lo que produjimos". Desde mañana, todo lo que el curso produce lo produce un equipo con nombre.</p>
+  </section>
+
+  <section class="lam">
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para mañana</span>
+      Un mes preguntando "¿y las reglas?" y un mes de "semana 5". Mañana se reparten impresas y nadie te las va a explicar: se leen en frío, con la plantilla enfrente. Trae tus tres preguntas escritas. Van al pizarrón antes de que el documento toque la mesa.
+    </div>
+  </section>
+</section>
+
+<!-- ====================== VIERNES ====================== -->
+<section class="mazo" id="mazo-viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes · 2 horas</div>
+      <h3>Las reglas, destripadas</h3>
+      <p class="foco">Leer las reglas del fondo como dictaminador, con la matriz de contexto en la mano, y salir sabiendo qué se pide, cuándo, quién decide y con qué criterios.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> Las tres preguntas, al pizarrón <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Antes de ver el documento: ¿qué esperas que conteste?</p>
+    <p class="apoyo">Cada equipo pasa sus tres preguntas al pizarrón (bloque 6 del gimnasio 3). Se agrupan las repetidas y se cuentan. Al final de la sesión se revisa cuáles contestó el documento, cuáles no, y qué se hace con las que no.</p>
+    <p class="nota-conductor">Casi siempre salen las tres de todo fondo que se nombraron en la semana 0 (quién decide, en qué se puede, quién comprueba) y algunas que las reglas no contestan (¿y si nos dan menos?, ¿y si llueve?). Guardar esas: son la lección del cierre.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">2</span> Se reparten las reglas <span class="reloj">5 min</span></h4>
+    <p class="di">Se leen en frío. Nadie las explica.</p>
+    <p class="apoyo">El documento completo, impreso, una copia por equipo y una para cada quien que la pida. Descubrir lo que dice y lo que no dice es exactamente el entrenamiento: en el mundo real, la convocatoria llega en PDF y no viene con profesor.</p>
+    <p class="nota-conductor">Repartir la versión reimpresa: cambiaron la Bolsa, el tope y la cláusula de palanca respecto de la de agosto. Decirlo en una línea y no explicar nada más. Las dudas de vocabulario sí se contestan; las de interpretación, no: "lo que el documento diga".</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> Leer como dictaminador <span class="reloj">10 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--roja">¿qué me piden?<small>así lee el que aplica</small></span>
+      <span class="op">&#8800;</span>
+      <span class="pz pz--oscura">¿qué van a premiar?<small>así lee el que gana</small></span>
+    </div>
+    <p class="apoyo">El dictaminador no lee tu entusiasmo: lee una tabla de criterios con la pluma en la mano, y cada párrafo tuyo o le da puntos o le da flojera. La plantilla de dos columnas entrena esa lectura: a la izquierda, el elemento del documento (un monto, una fecha, un requisito, un criterio); a la derecha, qué implica para nosotros. Es la habilidad que separa al que aplica del que gana, y en este oficio se usa toda la vida.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">4</span> La matriz de contexto <span class="reloj">10 min</span></h4>
+    <div class="flujo">
+      <div class="paso"><b>1</b><span class="t">hechos</span>lo que el documento dice: montos, fechas, formatos</div>
+      <div class="paso"><b>2</b><span class="t">oportunidades</span>lo que premia: la rúbrica y sus pesos</div>
+      <div class="paso"><b>3</b><span class="t">riesgos</span>lo que descalifica: plazos, tope, letra chiquita</div>
+      <div class="paso"><b>4</b><span class="t">actores</span>quién decide, quién comprueba, quién firma</div>
+    </div>
+    <p class="apoyo">El manual de Acción sin Daño que conociste en la semana 3 trae una herramienta para leer cualquier contexto en cuatro casillas: hechos, oportunidades, riesgos y actores. Unas reglas de operación también son un contexto, no un trámite. Leídas así, dejan de ser una lista de requisitos y se vuelven un mapa de dónde está el dinero, dónde está el peligro y quién tiene la pluma.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">5</span> Lectura en frío, por equipo <span class="reloj">30 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Dos pasadas: la primera para entender, la segunda para encontrar lo que la primera se saltó.</p>
+    <p class="apoyo">Con lápiz. En la primera pasada se llena la plantilla de dos columnas, elemento por elemento. En la segunda se llena la matriz: qué de todo eso es hecho, qué es oportunidad, qué es riesgo, quién es actor. Las preguntas que salgan se anotan, no se preguntan: al final se cotejan con el pizarrón. Regla de la lectura: lo que no está escrito no está prometido, y lo que está escrito se cumple aunque nadie lo recuerde en octubre.</p>
+    <p class="nota-conductor">Rondar sin interpretar. Cuando un equipo pregunte "¿esto quiere decir que...?", devolver la pregunta: "¿qué dice el texto?". Cuidar que el que trae los números lea la sección del presupuesto y el que da la cara lea la de firmas y anuencia: el reparto de oficios empieza aquí.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">6</span> El destripado colectivo <span class="reloj">25 min</span></h4>
+    <span class="senal">Actividad · plenaria</span>
+    <p class="di">Elemento por elemento, con la pregunta al lado: ¿qué implica para nosotros? Primero, el dinero.</p>
+    <table class="veredicto">
+      <tr><th>Lo que dicen las reglas</th><th>Lo que implica para nosotros</th></tr>
+      <tr><td><strong>La Bolsa: $10,000 de capital semilla</strong>, para todos los componentes juntos.</td><td>No es el presupuesto del proyecto: es la contrapartida que se enseña para ir por lo que falta. Se comparte entre equipos.</td></tr>
+      <tr><td><strong>Mínimo de $2,000 por solicitud, sin tope fijo.</strong> El dictamen reparte por orden de calificación hasta agotar la Bolsa (cláusula 5.2).</td><td>Pedir de más no se castiga con puntos: se castiga con la fila. Un proyecto calificado abajo puede llegar a la mesa cuando ya no queda nada.</td></tr>
+      <tr><td><strong>La ministración se condiciona a contrapartida gestionada</strong>, en faenas o en monto (cláusula 5.6).</td><td>Ganar el dictamen no abre el dinero: lo abre haber conseguido algo afuera. La palanca de los diez mil deja de ser una frase.</td></tr>
+      <tr><td><strong>La rúbrica: cien puntos</strong> en pertinencia, viabilidad técnica y ambiental, presupuesto, cronograma y capacidad, y contrapartida y gestión.</td><td>Es la lista de lo que premian. La solicitud se escribe para esa lista, sección por sección, y no para el gusto propio.</td></tr>
+    </table>
+    <div class="ojo">
+      <strong>Los $600 del ensayo.</strong> En la semana 6 cada equipo va a gastar hasta $200 en su prototipo, y ese dinero sale de esta misma Bolsa. Cuánto queda entonces para el dictamen, o si el ensayo tiene bolsa aparte, lo tiene que decir el documento con el mismo número: se busca hoy, y si no está, es la primera pregunta que las reglas no contestan.
+    </div>
+    <p class="nota-conductor">Cotejar esta tabla contra la reimpresión antes de clase: los pesos de la rúbrica, "sin tope fijo" y el destino de los $600 del ensayo vienen de la bitácora, no del documento. Si algo no coincide, manda el documento y se corrige la lámina.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · plenaria</span>
+    <p class="di">Y después, los actores y los papeles: quién decide, quién firma, quién comprueba.</p>
+    <table class="veredicto">
+      <tr><th>Lo que dicen las reglas</th><th>Lo que implica para nosotros</th></tr>
+      <tr><td><strong>Decide un comité externo.</strong> Puede dar todo, parcial, nada, o declarar desierto. El fallo llega escrito, por rubro.</td><td>Nadie que te haya visto trabajar va a evaluar tu solicitud. El documento tiene que defenderse solo, y el fallo se responde por escrito.</td></tr>
+      <tr><td><strong>La solicitud se entrega impresa y en mano</strong>, el viernes de la semana 10 a las 14:00, en el formato del fondo (el Anexo 1, que llega en la semana 8).</td><td>La hora es la hora, como en toda convocatoria. Hay firmas que no dependen de nosotros y se gestionan con semanas de anticipación.</td></tr>
+      <tr><td><strong>Carta compromiso con tres firmas y anuencia de la delegación.</strong></td><td>La anuencia no la produce el equipo: se gestiona. Un sí de palabra es el paso previo, no el papel.</td></tr>
+      <tr><td><strong>Comprobantes:</strong> factura, o recibo simple cuando el comercio local no factura. <strong>Libro del fondo público</strong>, cada movimiento asentado a 48 horas.</td><td>Gastar y comprobar son dos verbos, y solo el segundo cuenta: lo que no tenga papel lo paga tu bolsa.</td></tr>
+      <tr><td><strong>Ejecución en cuatro semanas</strong>, con las fechas que el documento fija.</td><td>El cronograma no se inventa: cabe o no cabe. Y en esas semanas puede llover.</td></tr>
+    </table>
+    <p class="nota-conductor">La tabla es guía, no guion: se llena con lo que los equipos encontraron, y se corrige con el documento en la mano si algo aquí no coincide con la versión impresa. Cerrar contestando en voz alta las tres preguntas de todo fondo de la semana 0: quién decide, en qué se puede, quién comprueba.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">7</span> Gimnasio 1 · La letra chiquita <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · en parejas</span>
+    <p class="di">Diez cláusulas que descalifican solicitudes todos los años. Tres son del PROCODES 2026, palabra por palabra.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-05/ejercicio-11-la-letra-chiquita.html">ejercicio del gimnasio</a> proyectado. Las siete primeras son del tipo que aparece en convocatorias reales de este país; las tres últimas vienen copiadas de los lineamientos del programa federal que opera en las áreas naturales protegidas, Sierra Gorda incluida. El mismo programa vuelve en la semana 9, ya como actor del mapa de tu componente.</p>
+    <p class="nota-conductor">Detenerse en la cláusula que más gente no descifró: casi siempre es la del plazo o la de la elegibilidad, y el aprendizaje es el mismo: la letra chiquita no está escondida, está en la página que nadie leyó dos veces.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">8</span> Las preguntas del pizarrón, revisadas <span class="reloj">10 min</span></h4>
+    <p class="di">¿Cuáles contestó el documento? ¿Y las que no?</p>
+    <p class="apoyo">Se tachan las contestadas con la página al lado. Las que el documento no contesta tienen dos destinos: o son cosas que las reglas no van a decir nunca (qué pasa si llueve: eso lo resuelve tu cronograma) o son cosas que alguien sí sabe y hay que ir a preguntarle. Pedir el dato a quien lo tiene es gestión, y es exactamente el oficio que este curso enseña.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">9</span> Cierre y ticket <span class="reloj">5 min</span></h4>
+    <p class="di">Las reglas van al expediente. El equipo, con nombre, va a la bitácora.</p>
+    <p class="apoyo">El ticket desde el celular, noventa segundos. Este fin de semana: el gimnasio 3 completo en la bitácora, con el nombre provisional del componente, y la página de la semana 6 leída, porque el viernes que viene se vuelve a La Florida y hay una promesa que cumplir.</p>
+  </section>
+</section>
+
+<h2 class="corte">Herramientas de la semana</h2>
+
+<div class="tarjeta">
+  <span class="etiqueta">El cierre de unidad</span>
+  <h3 style="margin-top:.2rem">Las dos listas en la mesa</h3>
+  <p>La unidad 1 se cierra el jueves con tu suelo junto a la lista del profesor y tu primer cierre comentado. Nada se recoge y nada produce número: se revisa qué casillas faltan más en el grupo y qué plan B tiene cada una, se proyecta el muro de frases textuales que todos se trajeron de la orilla, y se paga la respuesta larga que se debía desde agosto sobre por qué aquí no hay números. Las objeciones que dejaste escritas en el pacto se releen con la unidad vivida. Si quieres practicar la regla de los tres casos, se hace en cinco minutos al final, sin registro.</p>
+</div>
 
 <div class="tarjeta">
   <span class="etiqueta">La idea grande</span>
   <h3 style="margin-top:.2rem">La síntesis no traiciona</h3>
-  <p>Pasar de ochenta frases a tres líneas de trabajo es una fabricación, y las fabricaciones se controlan con método: cada petición a una tarjeta con su fuente, las tarjetas se agrupan por afinidad en el muro, y cada grupo se nombra por el problema, no por la solución. La consulta no dijo "palapa": dijo "no hay dónde estar a gusto en la tarde". Si la línea ya trae la obra en el nombre, la síntesis se saltó un paso y alguien está diseñando de oídas otra vez. El conteo protege: lo que se repitió ocho veces pesa más que lo que gritó uno.</p>
+  <p>Pasar de ochenta frases a tres líneas de trabajo es una fabricación, y las fabricaciones se controlan con método: cada petición a una tarjeta con su fuente, las tarjetas se agrupan por afinidad en el muro, y cada grupo se nombra por el problema, no por la solución. La consulta no dijo "palapa": dijo "no hay dónde estar a gusto en la tarde". Si la línea ya trae la obra en el nombre, la síntesis se saltó un paso y alguien está diseñando de oídas otra vez. El conteo protege: lo que se repitió ocho veces pesa más que lo que gritó uno. Y las voces que el pliego de quién falta marcó como pocas se cuidan aparte: su conteo bajo no es desinterés, es que casi no las oímos.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">La herramienta</span>
   <h3 style="margin-top:.2rem">El árbol de problemas</h3>
-  <p>Cuando los grupos del muro ya tienen nombre, falta acomodarlos, porque no todos los problemas son del mismo tamaño ni están al mismo nivel. El árbol los ordena. Al tronco va el problema central, el que la consulta volvió ineludible. A las raíces van las causas, bajando con la pregunta "¿y eso por qué pasa?" hasta donde el registro alcance. A las ramas van los efectos, subiendo con "¿y eso qué provoca?". Se arma en el muro mismo, con las tarjetas de la consulta: "no hay dónde estar a gusto en la tarde" al centro, y de ahí se discute qué va abajo y qué va arriba. ¿La orilla sin sombra es una causa, o es otro nombre del mismo problema? Ahí nos vamos a detener.</p>
+  <p>Cuando los grupos del muro ya tienen nombre, falta acomodarlos, porque no todos los problemas son del mismo tamaño ni están al mismo nivel. El árbol los ordena. Al tronco va el problema central, el que la consulta volvió ineludible. A las raíces van las causas, bajando con la pregunta "¿y eso por qué pasa?" hasta donde el registro alcance. A las ramas van los efectos, subiendo con "¿y eso qué provoca?". Se arma en el muro mismo, con las tarjetas de la consulta, y cada raíz tiene que poder enseñar la suya: la que no tenga voz ni observación detrás es hipótesis del salón y se marca como tal.</p>
   <p>El árbol se queda pegado junto al mapa. En la semana 7 se voltea, y del volteo sale la estrategia de cada componente.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El equipo</span>
   <h3 style="margin-top:.2rem">Tres oficios por equipo</h3>
-  <p>Los equipos se forman por componente, y un componente necesita tres oficios: quien escribe (la solicitud no se redacta sola), quien trae los números (cotizaciones, presupuesto) y quien da la cara (con la comunidad, con el grupo, con quien decida). En un grupo de nueve la amistad es inevitable y está bien; el criterio es que en tu equipo los tres oficios tengan dueño. Postularte a una línea es un acto con evidencia: qué del registro respalda que esa línea importa y qué sabes hacer tú para empujarla.</p>
+  <p>Los equipos se forman por componente, y un componente necesita tres oficios: quien escribe (la solicitud no se redacta sola), quien trae los números (cotizaciones, presupuesto) y quien da la cara (con la comunidad, con el grupo, con quien decida). En un grupo chico la amistad es inevitable y está bien; el criterio es que en tu equipo los tres oficios tengan dueño. Postularte a una línea es un acto con evidencia: qué del registro respalda que esa línea importa y qué sabes hacer tú para empujarla. El <a href="../ejercicios/semana-05/ejercicio-32-mi-linea-mi-equipo.html">gimnasio 3</a> arma tu postulación.</p>
 </div>
 
 <div class="tarjeta">
   <span class="etiqueta">El giro</span>
   <h3 style="margin-top:.2rem">Leer como dictaminador</h3>
-  <p>Todo el mundo lee las convocatorias preguntándose "¿qué me piden?". Los que ganan las leen al revés: "¿qué van a premiar?". El dictaminador no lee tu entusiasmo: lee una tabla de criterios con la pluma en la mano, y cada párrafo tuyo o le da puntos o le da flojera. Esta semana entrenas esa lectura con la plantilla de dos columnas: elemento por elemento, qué implica para nosotros. Es la habilidad que separa al que aplica del que gana, y en este oficio se usa toda la vida.</p>
+  <p>Todo el mundo lee las convocatorias preguntándose "¿qué me piden?". Los que ganan las leen al revés: "¿qué van a premiar?". El dictaminador no lee tu entusiasmo: lee una tabla de criterios con la pluma en la mano, y cada párrafo tuyo o le da puntos o le da flojera. Esta semana entrenas esa lectura con dos instrumentos: la plantilla de dos columnas (elemento por elemento, qué implica para nosotros) y la matriz de contexto que trae el manual de Acción sin Daño (hechos, oportunidades, riesgos, actores), porque unas reglas de operación son un contexto que se lee, no un trámite que se sufre.</p>
 </div>
 
 <div class="tarjeta siembra">
   <span class="etiqueta">La siembra se paga</span>
   <h3 style="margin-top:.2rem">Las reglas, por fin</h3>
-  <p>Un mes preguntando y un mes de "semana 5". Ya llegamos. El viernes recibes el documento impreso, completo, y nadie te lo va a explicar: se lee en frío, con la plantilla enfrente, porque descubrir lo que dice (y lo que no dice) es exactamente el entrenamiento. Aquí no te adelantamos ni una cláusula. Trae al viernes las tres preguntas que esperas que las reglas respondan: el gimnasio 3 te las guarda.</p>
+  <p>Un mes preguntando y un mes de "semana 5". Ya llegamos. El viernes recibes el documento impreso, completo, y nadie te lo va a explicar: se lee en frío, con la plantilla enfrente, porque descubrir lo que dice (y lo que no dice) es exactamente el entrenamiento. Aquí no te adelantamos ni una cláusula. Trae al viernes las tres preguntas que esperas que las reglas respondan: el gimnasio 3 te las guarda y van al pizarrón antes de que el documento toque la mesa.</p>
 </div>
 
 <h2>El gimnasio</h2>
@@ -143,20 +371,26 @@
     <dd>El paso de los datos crudos a las decisiones, hecho con método y a la vista de todos. Se sintetiza sobre el registro (frases, conteos, mapa), nunca sobre el recuerdo. Toda línea de trabajo debe poder mostrar sus tarjetas: de qué voces viene.</dd>
     <dt>Línea de trabajo</dt>
     <dd>Un problema que la consulta volvió ineludible, nombrado como problema: "dónde estar a gusto en la tarde", "el agua y su orilla", "los niños no tienen dónde". De cada línea saldrá un componente; la línea respeta el problema para que el diseño no llegue con la solución puesta.</dd>
+    <dt>Condición transversal</dt>
+    <dd>Lo que la consulta pidió para todo a la vez: que sea seguro, que no se cobre, que alguien lo mantenga, que no dañe. No es una línea con obra propia: es una regla que cada componente hereda. En la mesa de tarjetas va a su propia canasta.</dd>
     <dt>Árbol de problemas</dt>
     <dd>El problema central al tronco, sus causas a las raíces, sus efectos a las ramas. Se baja preguntando "¿por qué pasa?" y se sube preguntando "¿qué provoca?". Se arma con las tarjetas de la consulta, para que cada raíz pueda enseñar su fuente. En la semana 7 se voltea y se convierte en árbol de objetivos.</dd>
     <dt>Componente</dt>
     <dd>La pieza del centro recreativo que un equipo diseña y ejecuta: la respuesta concreta a una línea. Los componentes de los equipos son hermanos y rivales a la vez: se complementan en la orilla y compiten por el mismo fondo.</dd>
     <dt>Mesa de tarjetas</dt>
-    <dd>El método de agrupación: una petición u observación por tarjeta, con su fuente ("señora ~60, mesa 2"), agrupadas por afinidad en el muro hasta que los grupos se nombran solos. Mover tarjetas es barato; mover conclusiones publicadas, no.</dd>
+    <dd>El método de agrupación: una petición u observación por tarjeta, con su fuente ("señora de unos sesenta, estación 2"), agrupadas por afinidad en el muro hasta que los grupos se nombran solos. Mover tarjetas es barato; mover conclusiones publicadas, no.</dd>
     <dt>Evidencia de consulta</dt>
     <dd>Lo que respalda una línea o una decisión: número de menciones, frases textuales, marcas del mapa. "A mí me late" no es evidencia; "lo dijeron seis personas y el mapa lo confirma" sí.</dd>
     <dt>Reglas de operación</dt>
     <dd>El documento donde una convocatoria dice quién puede pedir, cuánto, cómo, cuándo y con qué obligaciones. Se leen completas, con lápiz, dos veces: la primera para entender, la segunda para encontrar lo que la primera se saltó. Ahí vive la letra chiquita que descalifica solicitudes enteras.</dd>
     <dt>Leer como dictaminador</dt>
     <dd>Leer la convocatoria desde la silla del que decide: convertir los criterios de evaluación en una lista de "esto es lo que premian" y escribir la solicitud para esa lista. El dictaminador no conoce tu esfuerzo: conoce tu documento.</dd>
+    <dt>Matriz de contexto</dt>
+    <dd>Cuatro casillas para leer cualquier situación, tomadas del manual de Acción sin Daño: hechos (lo que es), oportunidades (lo que se puede aprovechar), riesgos (lo que puede tumbarte) y actores (quién tiene la pluma). Aplicada a unas reglas de operación, convierte el trámite en mapa.</dd>
+    <dt>Rúbrica</dt>
+    <dd>La tabla con la que el comité califica: cien puntos repartidos en pertinencia, viabilidad técnica y ambiental, presupuesto, cronograma y capacidad, y contrapartida y gestión. Es pública desde hoy, y por eso la solicitud se escribe para ella.</dd>
     <dt>Contrapartida</dt>
-    <dd>Lo que el solicitante pone de su lado: trabajo, materiales, gestiones, dinero propio. En las convocatorias reales la contrapartida habla por ti: dice "esto no se cae si ustedes se van". Se declara y se cuantifica, no se presume.</dd>
+    <dd>Lo que el solicitante pone de su lado: trabajo, materiales, gestiones, dinero propio. En las convocatorias reales la contrapartida habla por ti: dice "esto no se cae si ustedes se van". Se declara y se cuantifica, no se presume. En este fondo, además, abre la ministración: sin contrapartida gestionada, el dinero no sale.</dd>
     <dt>Monto solicitado y monto otorgado</dt>
     <dd>Dos números distintos, y la diferencia educa: en el mundo real pides lo que justificas y te dan lo que el dictamen decide, que puede ser todo, menos o nada. Por eso el presupuesto se arma para defenderse solo.</dd>
   </dl>
@@ -164,7 +398,13 @@
 
 <h2>Lo que produjimos</h2>
 <div class="tarjeta">
-  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán las líneas de trabajo con sus tarjetas de evidencia, el árbol de problemas del grupo, los equipos con sus componentes bautizados y la tabla colectiva del destripado de las reglas.</p>
+  <p style="color:#8aa39c; font-style:italic;">Esta vitrina se llena al cierre de la semana. Lo que va a llegar aquí:</p>
+  <ul style="color:#8aa39c; font-style:italic; margin:.4rem 0 .2rem;">
+    <li>La foto del muro con las líneas de trabajo y sus tarjetas de evidencia.</li>
+    <li>El árbol de problemas del grupo, con las raíces de hipótesis marcadas.</li>
+    <li>Los equipos con sus componentes bautizados y sus tres oficios.</li>
+    <li>La tabla colectiva del destripado de las reglas y las preguntas que el documento no contestó.</li>
+  </ul>
 </div>
 
 <div class="chapuzon">

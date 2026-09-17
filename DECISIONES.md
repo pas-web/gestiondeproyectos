@@ -7,7 +7,10 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 52 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 10 (28 ago 2026): la guía del guion de
+- **Último bloque cerrado:** bloque 11 (16 sep 2026): la unidad 2 completa
+  (semanas 5 a 10) en mazos de láminas, con el cuadernillo 2 llenable en línea
+  y el suelo de la unidad explicado (ver el bloque al final de este archivo).
+  Antes, bloque 10 (28 ago 2026): la guía del guion de
   entrevista con IA entra al gimnasio de la semana 3, porque como HTML suelto
   no abría en los iPhone del grupo. Antes, bloque 9 (20 ago 2026): el primer no entra al
   cuadernillo y al suelo de la unidad 1, y el contrato de gestión se vuelve
@@ -33,9 +36,11 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
   retroalimentación de la materia; bloque 1 (28 jul 2026): menú de navegación,
   Semana 0 como semana real, página del gimnasio, detalle de sesiones de las
   semanas 0, 1 y 2, y reparto de contenido entre la Semana 0 y la 1.
-- **Siguiente paso acordado:** producir el lote de la unidad 2 (semanas 5 a 10)
-  con el mapa de fuentes del bloque 6. La semana 5 abre comentando la
-  autoevaluación de ensayo que quedó de tarea del fin de semana de la S4.
+- **Siguiente paso acordado:** producir el lote de la unidad 3 (semanas 11 a
+  14) con el mapa de fuentes del bloque 6. La semana 11 abre con la rúbrica
+  releída y cierra la unidad 2 después del fallo (cuadernillo 2 y
+  autoevaluación 2). Pendiente de decidir si la autoevaluación 2 gana pantalla
+  propia conectada al recolector, como la de la unidad 1.
 
 ## Dónde vive cada cosa
 
@@ -257,10 +262,22 @@ aquí en adelante. Al diseñar otra materia, se dan por puestas.
   perros.
 - Menú de navegación tipo Etimologías en la portada (fila 2 de la hoja).
 - Integrar la imagen del home cuando Eduardo la entregue (fila 7).
-- Reimprimir las reglas del fondo y el Anexo 1 para la semana 5: cambiaron la
-  Bolsa, el tope y la cláusula de palanca.
-- Producir los días de las semanas 5 a 17 en el formato nuevo, en lotes por
+- Reimprimir las reglas del fondo para el viernes de la semana 5 (cambiaron la
+  Bolsa, el tope y la cláusula de palanca) y el Anexo 1 para el viernes de la
+  semana 8. La lámina "Se reparten las reglas" de la S5 lo da por hecho.
+- Producir los días de las semanas 11 a 17 en el formato nuevo, en lotes por
   unidad, siguiendo el mapa de fuentes del bloque 6.
+- Decidir si la autoevaluación 2 (cierre de la unidad 2, semana 11) gana
+  pantalla propia como "tu segundo cierre", conectada al recolector y a la
+  mesa del profesor. Hoy vive como hoja del cuadernillo 2 con botón de correo
+  (asunto «Autoevaluación U2 · Nombre»), igual que la hoja de la U1.
+- Ilustraciones a tinta de las semanas 5 a 10, cuando Eduardo las entregue:
+  dos por semana, con placeholders comentados en cada página y los prompts en
+  `imagenes-semanas-05-10.md` (carpeta local del profesor). Candidatas: la
+  mesa de tarjetas y leer como dictaminador (S5); las sillas de once dólares y
+  el prototipo de cal (S6); el árbol volteado y el duelo de las cadenas (S7);
+  la tabla que traduce y la llegada del Anexo 1 (S8); el tablero de actores y
+  el trato de las tarimas (S9); la joroba y la Troika (S10).
 - Ilustraciones a tinta de la semana 4, cuando Eduardo las entregue. Candidatas:
   los vecinos difíciles del ensayo, el pliego a media consulta, el sobre abierto
   junto al agua.
@@ -475,3 +492,168 @@ abierta).
 - **Enlazada desde tres puertas:** el gimnasio de la S3 y el índice de
   `gimnasio.html` con la marca `+`, y la tarjeta "La IA en su lugar" de las
   herramientas de la semana, que es donde el argumento de la guía ya vivía.
+
+## Bloque 11 (16 de septiembre de 2026): la unidad 2 completa en mazos de láminas
+
+Pedido de Eduardo: trabajar la unidad 2 entera, a detalle, con todas las
+actividades, respetando el estilo de la clase y las reglas acordadas. Las seis
+semanas (5 a 10) quedaron reconstruidas como mazos de láminas con el estándar
+de la semana 4: jueves y viernes de 120 minutos exactos, bloques con numeral y
+chapa de minutos, señales, notas del conductor, ticket al cierre del viernes,
+piezas en caja, tablas veredicto y flujos. Los 18 ejercicios del gimnasio ya
+existían y no se tocaron; cada uno quedó enlazado desde su lámina.
+
+### Cómo quedó cada semana
+
+- **S5 · Líneas y reglas del fondo.** Jueves "De la orilla a las líneas":
+  el cierre de la unidad 1 en la mesa (las dos listas del suelo, el primer
+  cierre comentado con el muro de La Florida y el punto ciego del sobre, y la
+  respuesta larga que se debía desde agosto sobre por qué no hay números, con
+  las objeciones del pacto releídas), la mesa de tarjetas, el árbol de
+  problemas con raíces de hipótesis marcadas, y la postulación por oficios.
+  Viernes "Las reglas, destripadas": las tres preguntas al pizarrón antes del
+  documento, lectura en frío en dos pasadas con la plantilla de dictaminador y
+  la matriz de contexto de Acción sin Daño (hechos, oportunidades, riesgos,
+  actores), el destripado colectivo en tabla y la letra chiquita.
+- **S6 · Prototipo en la presa.** Jueves "Más ligero, más rápido, más
+  barato": Times Square, la distinción prototipo/maqueta/proyecto, las tres
+  reglas del ensayo con la maceta como sombra del futuro, el diseño del ensayo
+  por equipo, Kenia entrega 2 y los $200 como primer gasto real con
+  comprobante. Viernes "De vuelta en la orilla": cumplir la única promesa
+  autorizada (el pliego de lo apuntado entregado a la autoridad antes de
+  marcar una raya de cal), montaje por componente, guía de observación
+  calibrada en sitio y plan del fin de semana.
+- **S7 · La apuesta causal.** Jueves "Del árbol a la cadena": lo que la
+  orilla contestó en conductas, Kenia como cadena que nadie dibujó, el volteo
+  del árbol, la escalera producto/resultado, la cadena de cambios con
+  supuestos y el reto 1 con criterios publicados. Viernes "Duelo 1: la
+  cadena": reglas del duelo, prompt lanzado tal como se escribió el jueves,
+  cotejo en tabla (empate, préstamo, cacería), registro de cacería y la
+  cadena que sobrevive.
+- **S8 · Ingeniería del papel.** Jueves "La tabla que traduce": la familia
+  completa (dos árboles, cadena, marco), el objetivo del valle reescrito en
+  vivo con las cinco pruebas, dos indicadores con línea base (la ficha de
+  agosto y el prototipo) y que cualquiera pueda leer, verificación y
+  supuesto, el marco exprés por equipo con el reto 2. Viernes "Duelo 2 y el
+  Anexo 1": las fallas de columna, el cotejo, y la llegada del formato con
+  el mapa de piezas del curso a sus secciones y dueño por oficio.
+- **S9 · La política del proyecto.** Jueves "Los proyectos son gente": el
+  mapa de actores con las cuatro zonas y los cuatro poderes del manual, la
+  resistencia que trae diseño, el radar de relaciones, el mapa por equipo
+  (reto 3), la palanca de los diez mil y la anuencia con fecha. Viernes "El
+  trato y el donante": el trato en cuatro partes, ensayo en tríos con
+  contrapartes de mala leche, el PROCODES leído como actor con sus tres
+  preguntas, el plan de palanca con fechas y la tabla de especie a pesos.
+- **S10 · Presupuesto y pre-pitch.** Jueves "El proyecto en pesos": el
+  presupuesto a dos columnas con la pregunta del manual sobre a quién se le
+  compra, cotización + flete + imponderables, presupuesto y cronograma por
+  equipo (retos 4 y 5), el semáforo de la solicitud. Viernes "La Troika y la
+  entrega": el segundo peldaño, la Troika explicada como consultoría de
+  espaldas, tres rondas con la rúbrica en la mano, corrección antes de las
+  14:00, la entrega en mano con recibido y hora, y el anuncio del cierre de
+  la unidad después del fallo.
+
+### Decisiones que obligan hacia adelante
+
+- **El suelo de la unidad 2 queda en cuatro casillas**, las públicas desde
+  agosto: tres de los cinco retos intentados, cotizaciones reales conseguidas
+  por cada quien, pre-pitch en la Troika y bitácora de equipo al corriente en
+  la parte propia. Cada una con evidencia y plan B (todos vencen en la semana
+  11). La casilla "Solicitud real 1 hecha" que traía el cuadernillo 2 en papel
+  se retiró: desde el bloque 9 el primer no cuenta como la solicitud real 1,
+  y la segunda vence con la unidad 3. La hoja de solicitudes reales del
+  cuadernillo 2 lo dice así, con el trato de la S9 como candidata a segunda.
+- **Los cinco retos de la unidad 2 y sus criterios**, publicados en la lámina
+  del día que se entregan: reto 1 cadena (S7), reto 2 marco exprés (S8), reto
+  3 mapa y trato (S9), retos 4 y 5 presupuesto y cronograma (S10). El
+  dictamen se entrega por escrito el jueves siguiente, criterio por criterio;
+  la versión que se dictamina es la del lunes, después del duelo cuando lo
+  hay. Reintentos hasta el viernes de la semana 11.
+- **La bitácora de equipo abre el jueves de la semana 6** (cuaderno físico o
+  carpeta del Drive, turnos, letra de quien escribe) porque es casilla del
+  suelo y hasta ahora no tenía lámina que la arrancara.
+- **Los $200 del ensayo salen del fondo y estrenan el régimen de
+  comprobantes** (S6): son la primera página del libro del fondo que abre
+  formalmente en la S12. Así cierra la mención de la S16 ("el libro abrió con
+  los $200 del ensayo").
+- **La única promesa autorizada de la S4 se cumple en la S6**, antes del
+  prototipo: el pliego de lo apuntado se entrega a la autoridad y queda a la
+  vista. Regla del oficio que se nombra en la página: de cada contacto con la
+  comunidad sale algo visible antes del siguiente.
+- **Los prompts del duelo se mandan al profesor la noche anterior** (S7 y
+  S8), como seguro por si el viernes no hay red, y la versión que se coteja
+  es la escrita el jueves: no se corrige sobre la marcha.
+- **La unidad 2 se cierra después del fallo**, en la semana 11, para que la
+  autoevaluación evalúe el trabajo y no el veredicto (cortafuegos). La S10
+  lo anuncia; la S11 lo ejecuta.
+- **El calendario sale del texto también en la unidad 2**: la entrega es "el
+  viernes de la semana 10 a las 14:00" y la ejecución "cuatro semanas, de la
+  12 a la 15, con las fechas que fijan las reglas". Las fechas de los
+  ejercicios (casos de estudio) no se tocaron.
+- **Las fuentes del mapa del bloque 6 entraron con narrativa y sin ID**:
+  la matriz de contexto (S5), la temporada de prueba y "cumplir lo
+  prometido" (S6), la cadena de cambios (S7), los indicadores que cualquiera
+  lee (S8), los cuatro poderes, el radar y "de estar en contra a estar a
+  favor" (S9), y la pregunta por los efectos de cómo se usan los recursos más
+  "comprado, prestado, trocado o donado" (S10). La Troika se explicó por su
+  mecánica (consultoría entre pares, de espaldas) sin nombrar la biblioteca.
+
+### El cuadernillo 2, llenable en línea
+
+`evaluacion/expediente-u2.html` rehecho con el mecanismo genérico
+(`data-cuadernillo="u2"`, 73 campos): portadilla con nombre, cómo funciona
+(con la advertencia de que aquí se guarda la parte propia y no la del
+equipo), mi componente y mi equipo (S5), registro de los cinco retos con
+tres intentos y los porqués, una hoja por semana (lo que la orilla contestó,
+mi apuesta en una frase, mis dos indicadores, mi trato y mi renglón de
+palanca, mi parte de la solicitud), la hoja de solicitudes reales (la 1
+referida al primer no, la 2 capturable), el mapa de evidencias de la unidad,
+el suelo explicado con evidencia y plan B por casilla, la autoevaluación 2
+explicada (qué cambia respecto de la primera) y la hoja de autoevaluación
+con botón de correo. Conectado desde la rejilla del expediente del gestor,
+desde la fila U2 de `tu-calificacion.html` y desde las láminas de cierre de
+las semanas 7 a 10. El índice del gimnasio corrige la descripción de La
+letra chiquita (son diez cláusulas, tres del PROCODES) y del gimnasio 2 de la
+S6 (Observar sin encuestar).
+
+### Adenda del mismo día: el primer lote de mejoras
+
+De la revisión a fondo de la unidad salieron recomendaciones; Eduardo pidió
+aplicar el primer lote y dejar para su decisión lo estructural (comprimir el
+calendario frente a la ventana de ejecución del fondo, y una validación en la
+orilla en la S9 para que la comunidad vea los componentes antes del comité).
+Lo aplicado:
+
+- **S5:** la tabla del destripado se parte en dos láminas (el dinero; los
+  actores y los papeles), y entra el aviso de los **$600 del ensayo**: los
+  $200 por equipo de la S6 salen de la misma Bolsa, y el documento tiene que
+  decir cuánto queda para el dictamen o si el ensayo tiene bolsa aparte. Va
+  también a pendientes, para la reimpresión de las reglas.
+- **S6:** lámina nueva con la primera pregunta de Acción sin Daño aplicada al
+  prototipo (¿qué daño puede causar el ensayo mismo?): nada que llame a los
+  niños se monta junto al agua, cada turno tiene a alguien mirando la orilla, y
+  el dato de seguridad y calidad del agua se pide a quien lo tiene (los vacíos
+  2 y 3 del banco de patrones, nombrados por fin en clase). Entra a la hoja de
+  consulta.
+- **S7:** la apuesta en una frase va en la casilla "qué te llevas" del ticket,
+  que no tiene casilla nueva.
+- **S8 viernes:** el Anexo 1 se reparte al arrancar la sesión y el duelo 2
+  corre con sus secciones en la cabeza; los bloques se renumeran sin cambiar
+  los minutos.
+- **Ejercicios de la S10:** salen "viernes 9", "jueves 15" y "9 de octubre"
+  (ahora anclados a la semana) y el "tope" que ya no existe en el presupuesto
+  agujerado. Las fechas del cronograma del manantial se quedan: son caso de
+  estudio.
+
+Pendiente nuevo: que la reimpresión de las reglas diga de dónde salen los
+$200 del ensayo de cada equipo y cuánto queda para el dictamen.
+
+### Verificación
+
+Cero enlaces rotos en las nueve páginas tocadas (rutas cotejadas contra el
+disco), etiquetas balanceadas, un solo emoji por página (el del chapuzón),
+sin raya larga, 120 minutos exactos en los doce mazos, los 18 ejercicios de
+la unidad enlazados desde su semana, y cada página cargada en Chromium sin
+cabeza para confirmar que `curso.js` monta la barra, el mapa lateral, el
+telón y la barra del cuadernillo.
+

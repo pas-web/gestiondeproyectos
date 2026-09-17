@@ -20,23 +20,18 @@
     background: var(--fondo); color: var(--texto);
     line-height: 1.65; font-size: 1.05rem;
   }
-  header.curso {
-    background: var(--profundo); color: #EAF4F2;
-    padding: 1.1rem 1.5rem;
-  }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
   header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
   header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
   header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
   main { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
 
-  .pregunta {
-    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3;
-    color: var(--profundo); margin: 1.8rem 0 .4rem;
-  }
+  .pregunta { font-family: Georgia, serif; font-size: 1.6rem; line-height: 1.3; color: var(--profundo); margin: 1.8rem 0 .4rem; }
   .pregunta::before { content: ""; display: block; width: 64px; height: 5px; background: var(--arena); margin-bottom: .9rem; border-radius: 3px; }
   .bajada { color: #45605a; margin-top: 0; }
 
   h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.35rem; margin: 2.6rem 0 .6rem; }
+  h2.corte { border-top: 3px solid var(--borde); padding-top: 1.6rem; }
   h3 { color: var(--profundo); font-size: 1.05rem; margin: 1.4rem 0 .3rem; }
 
   .podras { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.4rem; }
@@ -55,11 +50,8 @@
   .consulta dt { font-weight: bold; color: var(--profundo); margin-top: .9rem; }
   .consulta dd { margin: .2rem 0 .4rem 0; }
 
-  .chapuzon {
-    background: var(--profundo); color: #EAF4F2;
-    border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem;
-  }
-  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; }
+  .chapuzon { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 2.8rem; }
+  .chapuzon h2 { color: var(--arena); margin: 0 0 .5rem; border: none; padding: 0; }
   .chapuzon p { margin: .4rem 0; }
 
   .aviso-goteo {
@@ -68,6 +60,7 @@
     display: none;
   }
   a { color: var(--marca); }
+  /* Los estilos de los mazos de láminas y del modo presentación viven en curso.js */
 </style>
 </head>
 <body>
@@ -83,24 +76,208 @@
 <div id="wk-gate" data-semana="8">
 
 <p class="pregunta">¿Cómo se mide una promesa?</p>
-<p class="bajada">Tu cadena ya dice qué apuestas. Esta semana la apuesta se viste de traje: marco lógico exprés, objetivos que aguanten la lupa y dos indicadores por componente que se puedan verificar sin fe. No es burocracia: es tu proyecto traducido al idioma en que las instituciones deciden. El viernes hay segundo duelo con la IA, y algo más: llega el Anexo 1, el formato de solicitud del fondo. El papel de octubre se empieza a llenar esta semana.</p>
+<p class="bajada">Tu cadena ya dice qué apuestas. Esta semana la apuesta se viste de traje: marco lógico exprés, un propósito que aguante la lupa y dos indicadores por componente que se puedan verificar sin fe. No es burocracia: es tu proyecto traducido al idioma en que las instituciones deciden. El viernes hay segundo duelo con la IA, y algo más: llega el Anexo 1, el formato de solicitud del fondo. El papel de la semana 10 se empieza a llenar esta semana.</p>
 
 <h2>Esta semana podrás</h2>
 <div class="podras">
   <ul>
     <li>Traducir tu cadena de resultados a un marco lógico exprés: la misma apuesta, en tabla auditable.</li>
-    <li>Afinar objetivos con las cinco pruebas (SMART) hasta que no les sobre humo ni les falte fecha.</li>
-    <li>Elegir dos indicadores por componente, con su escalera de bien, mejor y excelente, y medios de verificación reales.</li>
+    <li>Afinar el propósito con las cinco pruebas hasta que no le sobre humo ni le falte fecha.</li>
+    <li>Elegir dos indicadores por componente, con su escalera de bien, mejor y excelente, su línea base y medios de verificación reales.</li>
     <li>Cotejar tu marco contra el de la IA y cazarle las fallas de segunda generación: las que se ven bonitas en tabla.</li>
+    <li>Leer el Anexo 1 y saber qué pieza del curso cae en cada sección, cuál ya existe y cuál falta.</li>
   </ul>
 </div>
 
-<h2>Herramientas de la semana</h2>
+<h2 class="corte">Las dos sesiones de esta semana</h2>
+<p class="pista">Cada día es un mazo de láminas: en clase se proyectan una por una con el botón <strong>Presentar</strong>, y aquí se quedan, en orden, para volver a ellas cuando quieras.</p>
+
+<!-- ====================== JUEVES ====================== -->
+<section class="mazo" id="mazo-jueves">
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Jueves · 2 horas</div>
+      <h3>La tabla que traduce</h3>
+      <p class="foco">Pasar la cadena a marco lógico exprés, afinar el propósito con las cinco pruebas y elegir dos indicadores que cualquiera pueda leer y verificar.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">1</span> El ticket de la semana pasada <span class="reloj">5 min</span></h4>
+    <span class="senal senal--aire">Al aire</span>
+    <p class="di">Tres apuestas en una frase. Hoy se leen juntas, y luego lo turbio.</p>
+    <p class="apoyo">Este arranque no se salta ningún jueves. El ticket del viernes traía la apuesta de cada quien: se leen las tres frases del grupo, una por componente, sin nombre. Y después lo que quedó turbio del duelo, que suele ser una sola cosa: cuándo se vale tomar prestado.</p>
+    <p class="nota-conductor">Leer una frase de cada componente y preguntar si alguien del equipo la diría distinto: las diferencias dentro de un mismo equipo son el primer dato de hoy. Entregar el dictamen del reto 1 por escrito, equipo por equipo, al final de la sesión y no al aire.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">2</span> La campana del no <span class="reloj">10 min</span></h4>
+    <span class="senal senal--aire">Ritual · cada jueves</span>
+    <p class="di">¿Quién pidió esta semana?</p>
+    <p class="apoyo">Un no conseguido se anuncia, suena la campana, el grupo aplaude y el no se anota en el anti-currículum. Los síes también se cuentan. Aviso para la semana que entra: las cotizaciones se piden, no se inventan, y pedir una cotización también es pedir. Quien ya haya ido a la ferretería, que lo diga.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">3</span> La tabla es un traductor <span class="reloj">10 min</span></h4>
+    <div class="flujo">
+      <div class="paso"><b>4</b><span class="t">fin</span>a lo que contribuyes</div>
+      <div class="paso"><b>3</b><span class="t">propósito</span>el cambio que sí te toca</div>
+      <div class="paso"><b>2</b><span class="t">productos</span>lo que entregas</div>
+      <div class="paso"><b>1</b><span class="t">actividades</span>lo que haces</div>
+    </div>
+    <p class="apoyo">El marco lógico tiene mala fama y la tiene ganada: se ha usado como trámite hueco millones de veces. Bien entendido es otra cosa: tu cadena acomodada en cuatro renglones, y al lado tres columnas que la vuelven auditable: cómo se mide, dónde se verifica, qué se supone. Un desconocido con tu tabla enfrente puede auditar tu proyecto sin conocerte, y eso es exactamente lo que va a pasar en la semana 11. La versión exprés de este curso cabe en una hoja; los marcos de veinte hojas se dejan para cuando alguien los pague.</p>
+    <div class="ojo">
+      <strong>Con esta tabla se cierra la familia.</strong> Árbol de problemas (semana 5), árbol de objetivos (semana 7), cadena o teoría del cambio (semana 7) y marco (hoy): la misma apuesta en cuatro ropas. Las convocatorias piden cualquiera de las cuatro, y quien sabe una las sabe todas.
+    </div>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">4</span> El objetivo en la lupa <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · todo el grupo, en vivo</span>
+    <p class="di">"Mejorar la orilla" no es un objetivo: es un deseo con verbo.</p>
+    <p class="apoyo">Las cinco pruebas lo van afinando, letra por letra y en el pizarrón: específico (¿qué de la orilla?), medible (¿cuánto y desde cuánto?), alcanzable (¿con este equipo, este dinero, este semestre?), relevante (¿responde a lo que la consulta pidió o a lo que se te ocurrió?) y con tiempo (¿para cuándo?). Se reescribe después de cada prueba que repruebe, hasta que quede uno que un dictaminador no pueda rebotar. Luego, con el <a href="../ejercicios/semana-08/ejercicio-11-el-objetivo-en-la-lupa.html">gimnasio 1</a> proyectado, siete objetivos como los que llegan a las convocatorias de verdad: cada uno reprueba una prueba, y a uno le falta casi todo.</p>
+    <p class="nota-conductor">Empezar con "mejorar la orilla de la presa" y dejar que el grupo lo vaya cerrando: el punto es ver cuántas reescrituras hacen falta (casi siempre cuatro). El "desde cuánto" es la línea base, y la tenemos: los conteos de la ficha de agosto y los del prototipo. Decirlo hoy y volver a decirlo en el bloque 6.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">5</span> Propósito no es producto <span class="reloj">5 min</span></h4>
+    <div class="piezas">
+      <span class="pz pz--clara">producto<small>está o no está</small></span>
+      <span class="op">&#8800;</span>
+      <span class="pz pz--oscura">propósito<small>la gente hace algo distinto</small></span>
+    </div>
+    <p class="apoyo">El propósito es el renglón más importante de la tabla y el que más se escribe mal. Prueba rápida: si tu propósito se puede cumplir con puro dinero y sin que nadie cambie de conducta ("instalar las mesas"), no es propósito: es producto disfrazado de cambio. El propósito habla de gente haciendo algo distinto: las familias que vuelven por las tardes, los niños que llegan solos.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">6</span> Dos indicadores, no veinte <span class="reloj">15 min</span></h4>
+    <p class="di">Uno de producto: ¿entregaste lo que dijiste? Uno de resultado: ¿la gente hace algo distinto?</p>
+    <p class="apoyo">Cada uno con número, fecha y línea base, y con su escalera de tres peldaños: bien (el piso digno), mejor (lo esperado), excelente (el techo honesto). Poner los tres por escrito te protege del optimismo y le da al dictamen algo serio que leer; prometer solo el techo es la receta clásica del incumplimiento. Veinte indicadores que nadie va a medir valen menos que dos que sí.</p>
+    <table class="veredicto">
+      <tr><th>Indicador</th><th>¿Se puede leer sin explicación?</th><th>Por qué</th></tr>
+      <tr class="si"><td>Personas sentadas en la zona los domingos de noviembre de cuatro a seis; línea base: cuatro, conteos de agosto.</td><td class="v">Sí</td><td>Cualquiera puede contarlo con una hoja y un lápiz, y ya sabemos desde dónde partimos.</td></tr>
+      <tr class="si"><td>Mujeres por cada diez personas en el sitio; mezcla de edades; quién recoge basura que no es suya.</td><td class="v">Sí</td><td>Son los indicadores que la gente que estudia plazas usa desde hace décadas: dicen si un lugar es de todos o solo de algunos, y se cuentan a simple vista.</td></tr>
+      <tr class="no"><td>"El 80% de los usuarios reportará satisfacción con el espacio."</td><td class="v">No</td><td>Nadie va a levantar esa encuesta, el 80 salió de la nada y "satisfacción" no es una conducta.</td></tr>
+    </table>
+    <p class="nota-conductor">El manual de Acción sin Daño pide indicadores de cambio y preguntas guía; el placemaking pide indicadores que cualquiera lea. Juntarlos en una frase: si tu indicador necesita un especialista para contarse, no es tuyo. La línea base ya existe: la ficha de agosto y el prototipo. Usarla, no inventarla.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">7</span> Medio de verificación y supuesto <span class="reloj">20 min</span></h4>
+    <p class="di">Dónde va a constar que se cumplió. Se decide antes de ejecutar, porque el documento que no se planeó no existe cuando se necesita.</p>
+    <p class="apoyo">La hoja de conteo fechada, la lista de asistencia, la foto con fecha, el registro contable: baratos y contundentes. Si verificar cuesta más que la actividad, es fantasía. Lo que no se puede verificar no se promete. Y la última columna, el supuesto: los "siempre que" de tu cadena, ya depurados a los externos. "Que el equipo trabaje bien" no es supuesto: es tu chamba y va al cronograma. "Que la temporada de lluvia no cubra la zona" sí lo es.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · en parejas</span>
+    <p class="di">Gimnasio 2: seis renglones de marcos lógicos. Cinco traen falla de columna, uno se salva.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-08/ejercicio-21-el-renglon-chueco.html">ejercicio del gimnasio</a> proyectado. Las fallas de columna: el indicador sin número ni fecha, el número inventado, el medio de verificación fantasma, el supuesto interno y el propósito-producto. Es el ojo del duelo de mañana, entrenado en frío: cada falla que te encuentres tú es una que no te encuentra el comité.</p>
+    <p class="nota-conductor">Detenerse en el medio de verificación fantasma ("encuestas trimestrales de percepción"): es la falla que la IA va a cometer mañana con toda seguridad, y conviene que ya la conozcan por su nombre.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">8</span> Mi marco exprés, por equipo <span class="reloj">35 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">Una hoja: cuatro renglones, tres columnas, a lápiz. Los renglones ya existen: vienen de tu cadena.</p>
+    <p class="apoyo">Con el <a href="../ejercicios/semana-08/ejercicio-32-mi-marco-expres.html">gimnasio 3</a> como guía: el fin (verbo contribuir), el propósito pasado por las cinco pruebas, dos o tres productos contables con fecha, las actividades clave en orden. Luego las columnas: los dos indicadores con escalera y línea base, sus medios de verificación con quién los produce y cuándo, y los supuestos externos. Se llena a lápiz porque el duelo de mañana y el reintento del reto la van a mover. Los criterios del reto 2 se publican hoy: el propósito habla de gente haciendo algo distinto; dos indicadores con número, fecha y línea base; el medio de verificación decidido antes de ejecutar; supuestos externos; y lo que no se puede verificar no se promete. El bloque 8 del gimnasio, el prompt del duelo 2, se escribe hoy en equipo y se manda al profesor esta noche.</p>
+    <p class="nota-conductor">Rondar con las cinco fallas de columna como lente. Insistir en la línea base: cada indicador de resultado debe traer su "desde cuánto" con la fuente (ficha de agosto, conteo del prototipo). Entregar el dictamen escrito del reto 1 a cada equipo al cerrar: bien o aún no, criterio por criterio, con el porqué. El reintento, si hace falta, se entrega el lunes junto con el marco.</p>
+    <div class="llave">
+      <span class="rot">Lo que se queda picando para mañana</span>
+      Mañana llega el Anexo 1, antes que nada, y con sus secciones en la cabeza corre el duelo 2. La IA arma tablas hermosas, y en la columna de indicadores le brota el numerito inventado y en la de verificación el documento que nadie va a producir. Ya no vas a estar haciendo tareas: vas a estar armando una solicitud.
+    </div>
+  </section>
+</section>
+
+<!-- ====================== VIERNES ====================== -->
+<section class="mazo" id="mazo-viernes" data-ticket>
+  <div class="mazo-cabeza">
+    <div>
+      <div class="cuando">Viernes · 2 horas</div>
+      <h3>Duelo 2 y el Anexo 1</h3>
+      <p class="foco">Recibir el formato de solicitud del fondo al arrancar, y con sus secciones en la cabeza cazarle a la IA las fallas de segunda generación en las columnas y dejar el marco listo para el expediente.</p>
+    </div>
+    <button class="btn-presentar" type="button">Presentar ▸</button>
+  </div>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">1</span> Llega el Anexo 1 <span class="reloj">25 min</span></h4>
+    <p class="di">El papel de la semana 10 se empieza a llenar hoy.</p>
+    <p class="apoyo">Como lo prometían las reglas, hoy se reparte impreso el formato de solicitud del fondo, y se reparte antes que nada: lo demás del día se hace con sus secciones en la cabeza. Se lee en voz alta, sección por sección, con el documento en la mano. De aquí al cierre, todo lo que el curso produce tiene destino: la consulta y las líneas, el árbol, la cadena, el marco y sus indicadores ya existen y caen en su sección; lo que falta llega con fecha. Ya no estás haciendo tareas: estás armando una solicitud. Se siente distinto, y esa es la idea.</p>
+    <p class="nota-conductor">Leer las diez secciones del formato sin explicarlas de más: la lectura en frío sigue siendo el método. Donde una sección pida algo que el curso todavía no ha producido, decir en qué semana llega y nada más.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">El mapa de piezas: qué del curso cae en cada sección, qué ya existe, qué falta y quién lo cierra.</p>
+    <table class="veredicto">
+      <tr><th>Lo que el formato pide</th><th>De dónde sale</th><th>Estado</th></tr>
+      <tr class="si"><td>El problema y su evidencia</td><td>La consulta, las líneas y el árbol (semanas 4 y 5)</td><td class="v">Existe</td></tr>
+      <tr class="si"><td>Por qué va a funcionar</td><td>La cadena y el árbol de objetivos (semana 7)</td><td class="v">Existe</td></tr>
+      <tr class="si"><td>Objetivos, indicadores, verificación</td><td>El marco exprés (esta semana)</td><td class="v">Existe</td></tr>
+      <tr class="cuidado"><td>Quién está involucrado y la anuencia</td><td>El mapa de actores y el trato (semana 9)</td><td class="v">Falta</td></tr>
+      <tr class="cuidado"><td>Contrapartida y lo conseguido afuera</td><td>El plan de palanca (semana 9)</td><td class="v">Falta</td></tr>
+      <tr class="cuidado"><td>Presupuesto, cotizaciones y cronograma</td><td>Semana 10, con las cotizaciones pedidas desde la 9</td><td class="v">Falta</td></tr>
+      <tr class="cuidado"><td>Carta compromiso y firmas</td><td>Semana 10, con la anuencia gestionada en la 9</td><td class="v">Falta</td></tr>
+    </table>
+    <p class="apoyo">Cada sección con dueño según los tres oficios: quien escribe redacta, quien trae los números arma presupuesto y cotizaciones, quien da la cara gestiona la anuencia y los tratos. Es el semáforo que el gimnasio 3 de la semana 10 va a pedir terminado.</p>
+    <p class="nota-conductor">Los renglones de la tabla son la guía; la numeración real es la del formato impreso y se sigue esa. Hacer la asignación de dueños en voz alta y anotarla en la bitácora de equipo: en la semana 10 nadie puede decir que no sabía qué le tocaba.</p>
+  </section>
+
+  <section class="lam lam--oscura">
+    <h4><span class="n">2</span> Las reglas, segunda ronda <span class="reloj">5 min</span></h4>
+    <p class="di">Mismo ritual. Las fallas ya no están en la lógica: están en la letra chica de las columnas.</p>
+    <p class="apoyo">Con el Anexo 1 en la mesa, el cotejo tiene destino: lo que la máquina invente en indicadores y verificación caería derecho en una sección del formato. La semana pasada la cacería fue de eslabones. Hoy es más fina: el numerito inventado, el medio de verificación fantasma, el supuesto que es chamba y no condición, el propósito que es obra disfrazada. El registro de cacería se relee antes de empezar, porque el equipo que ya sabe qué buscar caza más. Y lo prestado se declara, con los cuatro datos.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">3</span> Se lanza el prompt <span class="reloj">15 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">El marco completo de tu componente, con las tres columnas, pedido con el prompt de anoche.</p>
+    <p class="apoyo">Desde un teléfono del equipo, con el bloque 8 del gimnasio 3; si no hay red, el profesor trae lo que devolvieron los prompts que le mandaron. Antes de leer la respuesta, cada equipo apunta dónde apuesta que la máquina va a inventar: el número, el documento, el supuesto. Después se coteja la apuesta con lo que pasó.</p>
+    <p class="nota-conductor">Igual que la semana pasada: la versión que se coteja es la del prompt escrito el jueves. Anotar en el registro cuántos equipos le atinaron a dónde iba a inventar: si todos, ya aprendieron a leerla.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">4</span> El cotejo <span class="reloj">30 min</span></h4>
+    <span class="senal">Actividad · plenaria, un equipo a la vez</span>
+    <p class="di">Renglón por renglón y columna por columna: la tabla de lápiz junto a la tabla de la máquina.</p>
+    <table class="veredicto">
+      <tr><th>Columna</th><th>La falla de segunda generación</th><th>La pregunta que la caza</th></tr>
+      <tr class="cuidado"><td><strong>Indicador</strong></td><td>El numerito inventado: "el 80% de los usuarios"</td><td>¿De dónde salió ese número? ¿Cuál es la línea base?</td></tr>
+      <tr class="cuidado"><td><strong>Verificación</strong></td><td>El documento fantasma: "encuestas trimestrales de percepción"</td><td>¿Quién lo produce, cuándo, y cuánto cuesta producirlo?</td></tr>
+      <tr class="cuidado"><td><strong>Supuesto</strong></td><td>El supuesto interno: "que el equipo cumpla el cronograma"</td><td>¿Está fuera de nuestro control? Si no, es chamba.</td></tr>
+      <tr class="no"><td><strong>Propósito</strong></td><td>La obra vestida de cambio: "instalar un área de sombra"</td><td>¿Aparece la gente haciendo algo distinto?</td></tr>
+    </table>
+    <p class="nota-conductor">Diez minutos por equipo. Lo que la máquina hizo mejor suele estar en el orden y en la redacción de los productos: se toma prestado y se declara, sin pena. Lo que inventó en indicadores y verificación va al registro con su nombre. Pedir siempre el "desde cuánto" que la IA no tiene: la línea base es del equipo, porque la máquina no estuvo en la orilla.</p>
+  </section>
+
+  <section class="lam">
+    <h4><span class="n">5</span> Cacería y préstamo <span class="reloj">10 min</span></h4>
+    <p class="di">La página de hoy del registro: las fallas de columna, con nombre y con equipo.</p>
+    <p class="apoyo">Al registro de cacería entran las de esta semana: numerito inventado, verificación fantasma, supuesto interno, propósito-producto. Lo prestado va al marco con su declaración al pie. Y una observación para el duelo 3, en la semana 14: cada ronda la máquina falla más fino, y cada ronda el grupo caza más fino. Eso no es casualidad: es el músculo que el pacto de IA quería entrenar.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">6</span> El marco que sobrevive <span class="reloj">20 min</span></h4>
+    <span class="senal">Actividad · por equipo</span>
+    <p class="di">La tabla se corrige con el cotejo puesto. La versión del lunes es la que entra al reto 2.</p>
+    <p class="apoyo">Con lo prestado, lo cazado y lo que la plenaria le encontró al equipo: se pasa en limpio. Foto de la tabla al Drive, carpeta S8, y los dos indicadores con su escalera y su línea base en la hoja del <a href="../evaluacion/expediente-u2.html">cuadernillo 2</a>. Si el reto 1 salió "aún no", el reintento de la cadena viaja junto con el marco: son la misma apuesta en dos ropas, y se corrigen juntas.</p>
+  </section>
+
+  <section class="lam lam--actividad">
+    <h4><span class="n">7</span> Cierre y ticket <span class="reloj">15 min</span></h4>
+    <p class="di">El fin de semana: el Anexo 1 leído otra vez, y las secciones que ya existen, redactadas.</p>
+    <p class="apoyo">El ticket desde el celular, noventa segundos. Este fin de semana, quien escribe redacta las secciones que ya tienen materia (problema, evidencia, por qué va a funcionar, objetivos e indicadores) en el formato, y el equipo la lee. Quien trae los números empieza a pedir cotizaciones: se necesitan escritas, fechadas y con quién las da, y la semana 10 no perdona al que las deja para el jueves. Quien da la cara averigua con quién se habla en la delegación para la anuencia: la semana que entra es la semana. Y la bitácora de equipo, al corriente.</p>
+  </section>
+</section>
+
+<h2 class="corte">Herramientas de la semana</h2>
 
 <div class="tarjeta">
   <span class="etiqueta">La idea grande</span>
   <h3 style="margin-top:.2rem">La tabla es un traductor</h3>
-  <p>El marco lógico tiene mala fama y la tiene ganada: se ha usado como trámite hueco millones de veces. Pero bien entendido es otra cosa: tu cadena de resultados acomodada en cuatro renglones (propósito, productos, actividades, y el fin al que contribuyes) con tres columnas al lado: cómo se mide, dónde se verifica, qué se supone. Un desconocido con tu tabla enfrente puede auditar tu proyecto sin conocerte, y eso es exactamente lo que va a pasar en octubre. La versión exprés de este curso cabe en una hoja; los marcos de veinte hojas se dejan para cuando alguien los pague.</p>
+  <p>El marco lógico tiene mala fama y la tiene ganada: se ha usado como trámite hueco millones de veces. Pero bien entendido es otra cosa: tu cadena de resultados acomodada en cuatro renglones (propósito, productos, actividades, y el fin al que contribuyes) con tres columnas al lado: cómo se mide, dónde se verifica, qué se supone. Un desconocido con tu tabla enfrente puede auditar tu proyecto sin conocerte, y eso es exactamente lo que va a pasar en la semana 11. La versión exprés de este curso cabe en una hoja; los marcos de veinte hojas se dejan para cuando alguien los pague.</p>
 </div>
 
 <div class="tarjeta">
@@ -112,7 +289,13 @@
 <div class="tarjeta">
   <span class="etiqueta">El aparato</span>
   <h3 style="margin-top:.2rem">Dos indicadores, no veinte</h3>
-  <p>Este curso pide dos indicadores por componente: uno de producto (¿entregaste lo que dijiste?) y uno de resultado (¿la gente hace algo distinto?). Cada uno con su escalera de tres peldaños (bien, mejor, excelente) y su medio de verificación de a de veras: hoja de conteo fechada, foto, lista, registro. Regla de oro: lo que no se puede verificar no se promete. Veinte indicadores que nadie va a medir valen menos que dos que sí.</p>
+  <p>Este curso pide dos indicadores por componente: uno de producto (¿entregaste lo que dijiste?) y uno de resultado (¿la gente hace algo distinto?). Cada uno con número, fecha y línea base (la tenemos: los conteos de agosto y los del prototipo), con su escalera de tres peldaños (bien, mejor, excelente) y su medio de verificación de a de veras: hoja de conteo fechada, foto, lista, registro. Y con una regla que viene de la gente que estudia plazas: que cualquiera lo pueda leer. Cuántas mujeres por cada diez personas, qué mezcla de edades, quién recoge basura que no es suya: eso dice si un lugar es de todos, y se cuenta a simple vista. Lo que no se puede verificar no se promete. Veinte indicadores que nadie va a medir valen menos que dos que sí.</p>
+</div>
+
+<div class="tarjeta">
+  <span class="etiqueta">El reto</span>
+  <h3 style="margin-top:.2rem">Reto 2: el marco exprés</h3>
+  <p>Segundo reto de la unidad, al expediente. Los criterios, publicados el jueves: el propósito habla de gente haciendo algo distinto, no de obras; dos indicadores, uno de producto y uno de resultado, con número, fecha y línea base; el medio de verificación decidido antes de ejecutar; los supuestos externos; y lo que no se puede verificar no se promete. Bien o aún no, con el porqué y con reintento. La versión que entra es la del lunes, después del duelo. Si el reto 1 salió "aún no", la cadena corregida viaja junto con el marco: son la misma apuesta en dos ropas.</p>
 </div>
 
 <div class="tarjeta siembra">
@@ -124,7 +307,7 @@
 <div class="tarjeta">
   <span class="etiqueta">El fondo toca la puerta</span>
   <h3 style="margin-top:.2rem">Llega el Anexo 1</h3>
-  <p>El viernes se reparte el formato de solicitud del fondo, como lo prometía el calendario de las reglas. De aquí al cierre de la convocatoria, todo lo que el curso produce tiene destino: la cadena, el marco, los indicadores y lo que viene (mapa de poder, presupuesto, cronograma) son las piezas del formato. Ya no estás haciendo tareas: estás armando una solicitud. Se siente distinto, y esa es la idea.</p>
+  <p>El viernes, al arrancar la sesión, se reparte el formato de solicitud del fondo, como lo prometía el calendario de las reglas. De aquí al cierre de la convocatoria, todo lo que el curso produce tiene destino: la cadena, el marco, los indicadores y lo que viene (mapa de actores, plan de palanca, presupuesto, cronograma) son las piezas del formato. El viernes se hace el mapa: qué pieza cae en qué sección, cuál ya existe, cuál falta y quién la cierra. Ya no estás haciendo tareas: estás armando una solicitud. Se siente distinto, y esa es la idea.</p>
 </div>
 
 <h2>El gimnasio</h2>
@@ -143,30 +326,42 @@
     <dd>La primera columna del marco: la historia de tu proyecto contada en cuatro renglones, de abajo hacia arriba: hago actividades, que entregan productos, que logran el propósito, que contribuye al fin. Si tu cadena de la semana pasada está bien hecha, el resumen narrativo ya existe: solo cambia de ropa.</dd>
     <dt>Propósito</dt>
     <dd>El cambio que tu componente logra en la gente o en el sitio: el renglón más importante de la tabla y el que más se escribe mal. Prueba rápida: si tu propósito se puede cumplir con puro dinero y sin que nadie cambie de conducta ("instalar las mesas"), no es propósito: es producto disfrazado de cambio.</dd>
+    <dt>Las cinco pruebas</dt>
+    <dd>Específico, medible, alcanzable, relevante y con tiempo. Un objetivo que reprueba una, rebota entero. Se aplican una por una, reescribiendo después de cada reprobada; el que llega vivo a la quinta es el que va al marco.</dd>
     <dt>Indicador</dt>
-    <dd>La señal contable que dirá si cumpliste: cuánto, de qué, dónde, para cuándo. Un indicador sin número o sin fecha es un adorno. En este curso: dos por componente, uno de producto y uno de resultado.</dd>
+    <dd>La señal contable que dirá si cumpliste: cuánto, de qué, dónde, para cuándo, desde cuánto. Un indicador sin número, sin fecha o sin línea base es un adorno. En este curso: dos por componente, uno de producto y uno de resultado, y que cualquiera los pueda leer.</dd>
+    <dt>Línea base</dt>
+    <dd>El "desde cuánto": lo que había antes de tu proyecto, medido. Este grupo ya la tiene: los conteos de la ficha de observación de agosto y los del prototipo. Sin línea base no hay cambio que mostrar, solo un número suelto; en la unidad 4 la misma hoja se vuelve a levantar para comparar.</dd>
     <dt>Bien, mejor, excelente</dt>
     <dd>La escalera de cada indicador: el piso digno (bien), el escenario esperado (mejor) y el techo honesto (excelente). Poner los tres peldaños por escrito te protege del optimismo y le da al dictamen algo serio que leer. Prometer solo el techo es la receta clásica del incumplimiento.</dd>
     <dt>Medio de verificación</dt>
-    <dd>Dónde constará que el indicador se cumplió: la hoja de conteo fechada, la lista de asistencia, la foto con fecha, el registro contable. Se decide ANTES de ejecutar, porque el documento que no se planeó no existe cuando se necesita. Lo que no se puede verificar no se promete.</dd>
+    <dd>Dónde constará que el indicador se cumplió: la hoja de conteo fechada, la lista de asistencia, la foto con fecha, el registro contable. Se decide antes de ejecutar, porque el documento que no se planeó no existe cuando se necesita. Lo que no se puede verificar no se promete.</dd>
     <dt>Supuesto (columna)</dt>
     <dd>Los "siempre que" de tu cadena, ahora en su columna oficial: condiciones externas, fuera de tu control, necesarias para subir de un renglón al otro. "Que el equipo trabaje bien" no es supuesto: es tu chamba. "Que la temporada de lluvia no cubra la zona" sí lo es.</dd>
+    <dt>Fallas de columna</dt>
+    <dd>Las de segunda generación, las que se ven bonitas en tabla: el indicador sin número ni fecha, el número inventado, el medio de verificación fantasma, el supuesto interno y el propósito-producto. Son las que la IA comete con elegancia y las que el comité caza con oficio.</dd>
     <dt>Ingeniería del papel</dt>
     <dd>El nombre honesto de esta semana: los proyectos también se construyen en papel, y el papel tiene su ingeniería (formatos, columnas, pruebas de resistencia). Despreciarla es romántico y caro: las buenas ideas mal escritas pierden contra las ideas regulares bien escritas, todos los años, en todas las convocatorias.</dd>
     <dt>Anexo 1</dt>
-    <dd>El formato de solicitud del fondo, prometido en las reglas para esta semana. Se llena con las piezas que el curso ha ido produciendo. La solicitud completa, impresa y en mano, se entrega el 9 de octubre a las 14:00. El que lo lee dos veces esta semana llena mejor que el que lo abre en octubre.</dd>
+    <dd>El formato de solicitud del fondo, prometido en las reglas para esta semana. Se llena con las piezas que el curso ha ido produciendo, cada una en su sección y con dueño según los tres oficios. La solicitud completa, impresa y en mano, se entrega el viernes de la semana 10 a las 14:00. El que lo lee dos veces esta semana llena mejor que el que lo abre la semana que entra.</dd>
   </dl>
 </div>
 
 <h2>Lo que produjimos</h2>
 <div class="tarjeta">
-  <p style="color:#8aa39c; font-style:italic;">Aquí quedarán los marcos exprés de los componentes, los indicadores con su escalera, la tabla del cotejo del duelo 2 y la cacería nueva.</p>
+  <p style="color:#8aa39c; font-style:italic;">Esta vitrina se llena al cierre de la semana. Lo que va a llegar aquí:</p>
+  <ul style="color:#8aa39c; font-style:italic; margin:.4rem 0 .2rem;">
+    <li>El objetivo del valle reescrito en vivo, con sus cuatro versiones tachadas.</li>
+    <li>Los marcos exprés de los componentes y sus dos indicadores con escalera y línea base.</li>
+    <li>La tabla del cotejo del duelo 2 y la página nueva del registro de cacería.</li>
+    <li>El mapa de piezas del Anexo 1 de cada equipo, con dueño por sección.</li>
+  </ul>
 </div>
 
 <div class="chapuzon">
   <h2>Aviéntate 🌊</h2>
   <p>Las palabras se las lleva el viento, dice el refrán, y los dictaminadores lo saben mejor que nadie: por eso piden tablas. Una promesa con número, fecha y hoja de conteo deja de ser palabra y se vuelve compromiso.</p>
-  <p>Esta semana tu apuesta aprende a dejarse medir. Lo que aguante la lupa aquí, aguantará la mesa en octubre.</p>
+  <p>Esta semana tu apuesta aprende a dejarse medir. Lo que aguante la lupa aquí, aguantará la mesa en la semana 11.</p>
 </div>
 
 </div>

@@ -19,45 +19,37 @@
   table { width:100%; border-collapse:collapse; margin:.5rem 0; }
   th, td { border:1px solid var(--borde); padding:.45rem .55rem; text-align:left; vertical-align:top; }
   th { background:#E4EFEB; color:var(--profundo); font-size:.86rem; }
+  td input { width:100%; border:none; font:inherit; font-size:.9rem; background:transparent; padding:.15rem .1rem; }
+  td input:focus { outline:2px solid var(--marca); border-radius:4px; }
   .ejemplo td { color:#9ab0aa; font-style:italic; }
   .clave { border-left:5px solid var(--arena); background:#FBF7EC; padding:.6rem .9rem; margin:.8rem 0; }
-  .linea-larga { border-bottom:1px solid var(--borde); height:1.5rem; }
-  .renglones div { border-bottom:1px solid var(--borde); height:1.7rem; }
   .chk { display:flex; gap:.55rem; align-items:flex-start; padding:.3rem 0; }
-  .chk .caja { flex:none; width:1rem; height:1rem; border:1.5px solid var(--marca); border-radius:3px; margin-top:.2rem; }
-  .portada { text-align:center; padding:5rem 2.3rem 4rem; }
-  .portada .franja { width:80px; height:6px; background:var(--arena); margin:1.4rem auto; border-radius:3px; }
-  .portada h1 { font-size:2.1rem; }
-  .portada .nombre { margin-top:4rem; }
-  .portada .nombre .linea-larga { max-width:420px; margin:0 auto; }
-  .portada .nota { color:#68807a; font-size:.9rem; max-width:460px; margin:2.5rem auto 0; }
-  .pie { font-size:.78rem; color:#8aa39c; margin-top:1.4rem; border-top:1px dashed var(--borde); padding-top:.5rem; }
-  #btn-imprimir { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.7rem 1.1rem; font:inherit; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); }
-  @media print {
-    body { background:#fff; }
-    .pagina { max-width:none; margin:0; border:none; padding:0 0 1rem; page-break-after:always; }
-    .pagina:last-child { page-break-after:auto; }
-    #btn-imprimir { display:none; }
-    @page { margin:1.6cm; }
-  }
-
-  .cuadernillos{display:grid;gap:.7rem;margin:1rem 0}
-  .cuadernillos a{display:block;background:#fff;border:1px solid var(--borde);border-left:5px solid var(--arena);border-radius:0 10px 10px 0;padding:.8rem 1rem;text-decoration:none;color:var(--texto)}
-  .cuadernillos a:hover{background:#F7FAF9}
-  .cuadernillos a b{display:block;font-family:Georgia,serif;color:var(--marca);font-size:1.08rem}
-  .cuadernillos a .cuando{display:block;font-size:.82rem;color:#8aa39c;text-transform:uppercase;letter-spacing:.08em;font-weight:bold;margin-bottom:.15rem}
-  .cuadernillos a .q{display:block;font-size:.9rem;color:#68807a;margin-top:.25rem}
+  .chk input[type=checkbox] { flex:none; width:1.05rem; height:1.05rem; margin-top:.25rem; accent-color:var(--marca); }
+  .suelo-item { border-bottom:1px dashed var(--borde); padding:.45rem 0; }
+  .suelo-item:last-of-type { border-bottom:none; }
+  .suelo-item .como { display:block; font-size:.84rem; color:#68807a; margin:.1rem 0 0 1.6rem; }
   .portadilla{text-align:center;padding:4rem 2.3rem 3rem}
   .portadilla .franja{width:80px;height:6px;background:var(--arena);margin:1.2rem auto;border-radius:3px}
   .portadilla h1{font-size:1.9rem}
   .portadilla .preg{font-family:Georgia,serif;font-style:italic;color:#45605a;font-size:1.1rem}
-  .portadilla .guarda{max-width:430px;margin:2.6rem auto 0;text-align:left;background:#F7FAF9;border:1px solid var(--borde);border-radius:10px;padding:.9rem 1.1rem}
+  .portadilla .guarda{max-width:430px;margin:2.4rem auto 0;text-align:left;background:#F7FAF9;border:1px solid var(--borde);border-radius:10px;padding:.9rem 1.1rem}
   .portadilla .guarda b{display:block;font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;color:var(--marca);margin-bottom:.3rem}
-  .portadilla .nombre{margin-top:2.4rem}
-  .portadilla .nombre .linea-larga{max-width:380px;margin:0 auto}
+  .portadilla .nombre{margin-top:2.2rem;max-width:420px;margin-left:auto;margin-right:auto}
+  .pie { font-size:.78rem; color:#8aa39c; margin-top:1.4rem; border-top:1px dashed var(--borde); padding-top:.5rem; }
+  .btn-correo { background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.5rem 1.2rem; font:inherit; font-size:.92rem; font-weight:bold; cursor:pointer; margin-top:.5rem; }
+  .btn-correo:hover { filter:brightness(1.12); }
+  .num-inline { width:3.2rem; border:none; border-bottom:2px solid var(--marca); font:inherit; text-align:center; font-weight:bold; }
+  a { color:var(--marca); }
+  @media print {
+    body { background:#fff; }
+    .pagina { max-width:none; margin:0; border:none; padding:0 0 1rem; page-break-after:always; }
+    .pagina:last-child { page-break-after:auto; }
+    .btn-correo { display:none; }
+    @page { margin:1.6cm; }
+  }
 </style>
 </head>
-<body>
+<body data-cuadernillo="u2">
 
 <div class="pagina portadilla">
   <div class="curso">Expediente del gestor · La presa que queremos</div>
@@ -66,87 +58,288 @@
   <h1>Unidad 2 · Diseñar lo que pidieron</h1>
   <p class="preg">¿Cómo se convierte una petición en un proyecto que se sostiene?</p>
   <div class="guarda"><b>Qué se guarda aquí</b>
-    <div>· Registro de retos: las herramientas del oficio</div>
-    <div>· Las dos solicitudes reales del semestre</div>
-    <div>· El suelo de la unidad 2</div>
-    <div>· Autoevaluación 2, de ensayo</div>
+    <div>· Cómo funciona este cuadernillo (léelo una vez)</div>
+    <div>· Mi componente y mi equipo (semana 5)</div>
+    <div>· El registro de retos: cinco intentos con su porqué</div>
+    <div>· Una hoja por semana: lo que la orilla contestó, mi apuesta, mis dos indicadores, mi trato, mi parte de la solicitud</div>
+    <div>· Las solicitudes reales del semestre</div>
+    <div>· El mapa de evidencias de la unidad</div>
+    <div>· El suelo de la unidad 2, explicado</div>
+    <div>· Autoevaluación 2, de ensayo, explicada</div>
   </div>
+  <div class="nombre">
+    <input type="text" class="exp-campo" data-exp="nombre" placeholder="Nombre del gestor o de la gestora" style="text-align:center;font-family:Georgia,serif;font-size:1.05rem">
+    <p style="font-size:.9rem;color:#68807a;margin-top:.3rem">Como apareces en la lista del grupo</p>
+  </div>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Cómo funciona</div>
+  <h2>Este cuadernillo se llena aquí, en papel, o en los dos</h2>
+  <p>Igual que el de la unidad 1: todo lo que escribas en esta página <strong>se guarda solo, en este navegador</strong>, mientras escribes. No viaja a ningún servidor, no le llega al profesor, no lo ve nadie.</p>
+  <ul>
+    <li><strong>Descargar mi cuadernillo</strong> (botón de abajo a la derecha) te baja un archivo con todo lo que llevas escrito. Mándatelo a tu propio WhatsApp o correo cada vez que avances.</li>
+    <li><strong>Imprimir</strong> sigue valiendo igual: en blanco para llenarlo a mano, o ya lleno. La carpeta física existe de todos modos, y lo de pluma cuenta igual que lo de pantalla.</li>
+    <li><strong>Ojo con las máquinas compartidas:</strong> descarga tu copia y luego usa "Borrar mis respuestas".</li>
+  </ul>
+  <p>Esta unidad se llena distinto que la primera: casi todo el trabajo es de equipo (la cadena, el marco, el presupuesto viven en el kraft y en el Drive del equipo), y este cuadernillo guarda <strong>tu parte</strong>: lo que tú hiciste, lo que tú entendiste, lo que tú pediste. En la conferencia de diciembre nadie va a poder defender por ti lo que hizo tu equipo; sí lo que hiciste tú dentro de él.</p>
+  <div class="clave"><strong>La regla de siempre:</strong> la evidencia que no registras no existe. Lo que no perdona este expediente es la hoja vacía.</div>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Semana 5</div>
+  <h2>Mi componente y mi equipo</h2>
+  <p>Se llena el jueves de la semana 5, cuando se formen los equipos, con la postulación del gimnasio 3 enfrente.</p>
+  <h3>Mi línea de trabajo, dicha como problema, y la evidencia de consulta que la respalda</h3>
+  <textarea class="exp-campo" data-exp="s5-linea" placeholder="Sin obra escondida en el nombre. Mínimo dos evidencias que no sean tu opinión: conteos, frases textuales, marcas del mapa."></textarea>
+  <h3>El componente y su nombre provisional</h3>
+  <textarea class="exp-campo" data-exp="s5-componente" placeholder="Honesto y sin mercadotecnia. Se puede cambiar; lo que no se puede es no saber cómo llamarle a lo tuyo." style="min-height:2.6rem"></textarea>
+  <h3>Mi oficio en el equipo, y el que quiero desarrollar</h3>
+  <textarea class="exp-campo" data-exp="s5-oficio" placeholder="Escribe / trae los números / da la cara. Con qué prueba, y cuál no es tu fuerte y vas a practicar (tu contrato de gestión tiene la pista)."></textarea>
+  <h3>Mis tres preguntas para las reglas, y cuáles contestó el documento</h3>
+  <textarea class="exp-campo" data-exp="s5-preguntas" placeholder="Las tres que llevaste al pizarrón el viernes. Junto a cada una: contestada (página) o no contestada (y quién sí la sabe)."></textarea>
+  <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
 </div>
 
 <div class="pagina">
   <div class="curso">Expediente del gestor · Registro de retos</div>
   <h2>Las herramientas del oficio</h2>
-  <p>Cada herramienta clave tiene un reto. Se intenta, se recibe retroalimentación y se reintenta hasta que salga. Anota la fecha de cada intento y el resultado: bien o aún no.</p>
+  <p>Cada herramienta clave de la unidad tiene un reto con criterios publicados antes. Se intenta, se recibe el dictamen por escrito (bien o aún no, con el porqué por criterio) y se reintenta hasta que salga. Anota la fecha de cada intento y el resultado. El suelo de esta unidad pide haber intentado al menos tres de los cinco.</p>
   <table>
-    <tr><th style="width:34%">Reto</th><th>Intento 1<br>(fecha y resultado)</th><th>Intento 2</th><th>Intento 3</th><th>Quedó "bien" el</th></tr>
-    <tr class="ejemplo"><td>Ejemplo: cadena de resultados</td><td>18-sep · aún no (confundí actividades con resultados)</td><td>25-sep · bien</td><td></td><td>25-sep</td></tr>
-    <tr><td>Árboles de problemas y objetivos, y cadena de resultados</td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Marco lógico exprés y objetivos SMART</td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Presupuesto con cotizaciones reales</td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Cronograma</td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Mapa de poder, negociación y plan de palanca</td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Monitoreo y línea base</td><td></td><td></td><td></td><td></td></tr>
-    <tr><td style="color:#68807a; font-style:italic;">(Reto que se agregue en el camino)</td><td></td><td></td><td></td><td></td></tr>
+    <tr><th style="width:30%">Reto</th><th>Intento 1<br>(fecha y resultado)</th><th>Intento 2</th><th>Intento 3</th><th style="width:14%">Quedó "bien" el</th></tr>
+    <tr class="ejemplo"><td>Ejemplo: cadena de resultados</td><td>18-sep · aún no (confundí productos con resultados)</td><td>25-sep · bien</td><td></td><td>25-sep</td></tr>
+    <tr><td><strong>1 · La cadena</strong> (semana 7): árbol volteado y cadena con supuestos</td><td><input data-exp="reto1-i1"></td><td><input data-exp="reto1-i2"></td><td><input data-exp="reto1-i3"></td><td><input data-exp="reto1-bien"></td></tr>
+    <tr><td><strong>2 · El marco exprés</strong> (semana 8): propósito, dos indicadores, verificación, supuestos</td><td><input data-exp="reto2-i1"></td><td><input data-exp="reto2-i2"></td><td><input data-exp="reto2-i3"></td><td><input data-exp="reto2-bien"></td></tr>
+    <tr><td><strong>3 · Mi mapa y mi trato</strong> (semana 9): mapa de actores, trato real, plan de palanca</td><td><input data-exp="reto3-i1"></td><td><input data-exp="reto3-i2"></td><td><input data-exp="reto3-i3"></td><td><input data-exp="reto3-bien"></td></tr>
+    <tr><td><strong>4 · El presupuesto</strong> (semana 10): a dos columnas, con cotizaciones</td><td><input data-exp="reto4-i1"></td><td><input data-exp="reto4-i2"></td><td><input data-exp="reto4-i3"></td><td><input data-exp="reto4-bien"></td></tr>
+    <tr><td><strong>5 · El cronograma</strong> (semana 10): dependencias, responsables, fecha B</td><td><input data-exp="reto5-i1"></td><td><input data-exp="reto5-i2"></td><td><input data-exp="reto5-i3"></td><td><input data-exp="reto5-bien"></td></tr>
+    <tr><td style="color:#68807a; font-style:italic;">(Reto que se agregue en el camino)</td><td><input data-exp="reto6-i1"></td><td><input data-exp="reto6-i2"></td><td><input data-exp="reto6-i3"></td><td><input data-exp="reto6-bien"></td></tr>
   </table>
-  <div class="clave">Escribe siempre el porqué del "aún no" (una frase basta). Ese porqué es el que convierte el reintento en aprendizaje y no en volado.</div>
+  <h3>Los porqués de mis "aún no"</h3>
+  <textarea class="exp-campo" data-exp="retos-porques" placeholder="Una frase por cada aún no: qué criterio no pasó y qué cambiaste en el reintento. Ese porqué es el que convierte el reintento en aprendizaje y no en volado."></textarea>
+  <div class="clave">Los retos se dictaminan sobre la versión del equipo, pero el registro es tuyo: anota qué parte hiciste tú en cada intento. Reintentos hasta el viernes de la semana 11.</div>
   <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Semana 6</div>
+  <h2>Lo que la orilla contestó</h2>
+  <p>Se llena el lunes después del prototipo, con la hoja de conteo en la mano.</p>
+  <h3>Qué montamos y qué conducta contamos</h3>
+  <textarea class="exp-campo" data-exp="s6-montaje" placeholder="Qué se marcó con cal, qué se levantó, qué se consiguió prestado, y las tres a cinco conductas de la guía."></textarea>
+  <h3>Los conteos: lo que la gente hizo, no lo que dijo</h3>
+  <textarea class="exp-campo" data-exp="s6-conteos" placeholder="Cuántos pasaron, se detuvieron, usaron, por cuánto tiempo; qué evitaron o movieron; quién preguntó o tomó foto."></textarea>
+  <h3>Lo que no esperaba</h3>
+  <textarea class="exp-campo" data-exp="s6-inesperado" placeholder="La columna vacía de la guía. Aquí suele estar el hallazgo."></textarea>
+  <h3>Qué del diseño se confirma y qué se corrige</h3>
+  <textarea class="exp-campo" data-exp="s6-correccion" placeholder="Y qué raíz del árbol de problemas, marcada como hipótesis, se sostuvo o se cayó."></textarea>
+  <h3>Kenia: mi hipótesis de la semana 2, releída</h3>
+  <textarea class="exp-campo" data-exp="s6-kenia" placeholder="Qué le faltaba a tu hipótesis, y qué podría hacer la gente con tu obra que la deje sin efecto." style="min-height:3.2rem"></textarea>
+  <p class="pie">Los $200 del ensayo: sus comprobantes van en la bolsa del equipo y son la primera página del libro del fondo.</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Semana 7</div>
+  <h2>Mi apuesta en una frase</h2>
+  <p>Se llena el viernes de la semana 7, después del duelo, con la cadena que sobrevivió.</p>
+  <h3>Si hacemos... entonces... siempre que...</h3>
+  <textarea class="exp-campo" data-exp="s7-apuesta" placeholder="Todo junto, en una frase. Es la columna vertebral de tu pitch y lo que tienes que poder decir sin ver el kraft."></textarea>
+  <h3>El eslabón frágil y su señal temprana</h3>
+  <textarea class="exp-campo" data-exp="s7-fragil" placeholder="La flecha que más te preocupa, y qué tendrías que ver en la primera semana para saber que se está rompiendo ahí."></textarea>
+  <h3>Lo que el duelo cambió: qué se tomó prestado (declarado) y qué se cazó</h3>
+  <textarea class="exp-campo" data-exp="s7-duelo" placeholder="Lo prestado con los cuatro datos del pacto (herramienta, para qué, qué cambiaste, prompt). Lo cazado con su nombre: brinco, producto disfrazado, supuesto heroico, grandilocuencia, lugar inventado."></textarea>
+  <h3>Mi parte en la cadena del equipo</h3>
+  <textarea class="exp-campo" data-exp="s7-miparte" placeholder="Qué eslabón o supuesto pusiste tú, qué falla encontraste tú." style="min-height:3.2rem"></textarea>
+  <p class="pie">La foto del kraft, versión del lunes, vive en el Drive del equipo, carpeta S7: anótala en tu mapa de evidencias.</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Semana 8</div>
+  <h2>Mis dos indicadores</h2>
+  <p>Se llena el viernes de la semana 8, después del duelo 2, con el marco que sobrevivió.</p>
+  <h3>El propósito de mi componente, ya pasado por las cinco pruebas</h3>
+  <textarea class="exp-campo" data-exp="s8-proposito" placeholder="Gente haciendo algo distinto, con número, línea base y fecha."></textarea>
+  <table>
+    <tr><th style="width:22%"></th><th>Indicador de producto</th><th>Indicador de resultado</th></tr>
+    <tr><th>Qué se cuenta</th><td><input data-exp="s8-ip-que"></td><td><input data-exp="s8-ir-que"></td></tr>
+    <tr><th>Línea base (desde cuánto, y fuente)</th><td><input data-exp="s8-ip-base"></td><td><input data-exp="s8-ir-base"></td></tr>
+    <tr><th>Bien / mejor / excelente</th><td><input data-exp="s8-ip-escalera"></td><td><input data-exp="s8-ir-escalera"></td></tr>
+    <tr><th>Medio de verificación (quién, cuándo)</th><td><input data-exp="s8-ip-verif"></td><td><input data-exp="s8-ir-verif"></td></tr>
+  </table>
+  <h3>Lo que el duelo 2 cambió, y lo que la IA inventó en las columnas</h3>
+  <textarea class="exp-campo" data-exp="s8-duelo" placeholder="El numerito inventado, el documento fantasma, el supuesto interno. Y lo prestado, declarado."></textarea>
+  <h3>Mi sección del Anexo 1</h3>
+  <textarea class="exp-campo" data-exp="s8-anexo" placeholder="Qué sección o secciones te tocan según tu oficio, y en qué estado quedaron este fin de semana." style="min-height:3.2rem"></textarea>
+  <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Semana 9</div>
+  <h2>Mi trato y mi renglón de palanca</h2>
+  <p>El mapa de actores no se copia aquí: es herramienta interna y se queda en el aula. Lo que sí es tuyo es el trato que hiciste y lo que conseguiste.</p>
+  <h3>El trato real que hice esta semana</h3>
+  <table>
+    <tr><th style="width:28%">Qué pedí (concreto, con fecha y cantidad)</th><td><input data-exp="s9-pido"></td></tr>
+    <tr><th>A quién (cargo o rol, no nombre)</th><td><input data-exp="s9-aquien"></td></tr>
+    <tr><th>Qué ofrecí</th><td><input data-exp="s9-ofrezco"></td></tr>
+    <tr><th>Qué le importaba (lo que averigüé escuchando)</th><td><input data-exp="s9-importa"></td></tr>
+    <tr><th>Mi plan B</th><td><input data-exp="s9-planb"></td></tr>
+    <tr><th>Qué pasó: sí, no o silencio, con fecha</th><td><input data-exp="s9-resultado"></td></tr>
+    <tr><th>Con qué se documenta (nota, foto, mensaje)</th><td><input data-exp="s9-documento"></td></tr>
+  </table>
+  <h3>Mi renglón del plan de palanca, valorizado</h3>
+  <textarea class="exp-campo" data-exp="s9-palanca" placeholder="Qué falta, quién lo pone, qué ofrecemos, acción con fecha y responsable, y cuánto vale en pesos con qué referencia."></textarea>
+  <h3>La resistencia que escuché y el dato de diseño que traía</h3>
+  <textarea class="exp-campo" data-exp="s9-resistencia" placeholder="La objeción como la diría esa persona (por su rol), y qué cambió en el diseño por haberla escuchado." style="min-height:3.2rem"></textarea>
+  <h3>PROCODES: qué no le cambiaríamos aunque pague</h3>
+  <textarea class="exp-campo" data-exp="s9-procodes" placeholder="La tercera pregunta, sin resolver. Se retoma en la semana 16." style="min-height:2.6rem"></textarea>
+  <div class="clave">Este trato es una solicitud real del semestre: si es tu segunda, pásala también a la hoja de solicitudes reales. El resultado no cuenta; el intento sí.</div>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Semana 10</div>
+  <h2>Mi parte de la solicitud</h2>
+  <p>Se llena el viernes de la semana 10, después de la entrega.</p>
+  <h3>Lo que hice yo dentro de la solicitud</h3>
+  <textarea class="exp-campo" data-exp="s10-miparte" placeholder="Qué secciones redactaste, qué cotizaciones conseguiste tú (con quién, fecha), qué gestionaste. Hechos, no intenciones."></textarea>
+  <h3>Las cotizaciones que conseguí yo</h3>
+  <textarea class="exp-campo" data-exp="s10-cotizaciones" placeholder="Partida, quién la dio, fecha, monto. Al menos una es casilla del suelo." style="min-height:3.2rem"></textarea>
+  <h3>Lo que la Troika le encontró a nuestro proyecto, y lo que me llevo</h3>
+  <textarea class="exp-campo" data-exp="s10-troika" placeholder="Las dos cosas que más se repitieron, y qué se corrigió antes de las 14:00. Lo que no se pudo corregir es lo que el comité va a preguntar."></textarea>
+  <h3>La pregunta que temo</h3>
+  <textarea class="exp-campo" data-exp="s10-temo" placeholder="Y la respuesta honesta, que a veces es: eso no lo sabemos aún, y así lo vamos a averiguar." style="min-height:3.2rem"></textarea>
+  <h3>La entrega</h3>
+  <textarea class="exp-campo" data-exp="s10-entrega" placeholder="Hora real del recibido. Si fue después de las 14:00, qué pasó y qué aprendiste: también es evidencia." style="min-height:2.6rem"></textarea>
+  <p class="pie">La foto del momento de la entrega, con la hora, vive en el Drive, carpeta S10.</p>
 </div>
 
 <div class="pagina">
   <div class="curso">Expediente del gestor · Solicitudes reales</div>
   <h2>Las dos que cuentan (mínimo)</h2>
-  <p>Compromiso transversal del semestre: al menos dos solicitudes reales, fuera del salón, a personas u organizaciones de verdad. El resultado es irrelevante para tu calificación; hacerlas no. Una solicitud real tiene destinatario con nombre, petición concreta y fecha.</p>
-  <h3>Solicitud 1</h3>
+  <p>Compromiso transversal del semestre: al menos dos solicitudes reales, fuera del salón, a personas u organizaciones de verdad. El resultado es irrelevante; hacerlas no. Una solicitud real tiene destinatario con nombre, petición concreta y fecha. <strong>La primera ya la hiciste:</strong> es tu primer no de la semana 2, sistematizado en el cuadernillo 1. Aquí queda su referencia y se registra la segunda, que puede ser el trato de la semana 9 o cualquier otra.</p>
+  <h3>Solicitud 1 · Mi primer no (semana 2)</h3>
   <table>
-    <tr><th style="width:28%">Qué pedí</th><td><div class="linea-larga"></div></td></tr>
-    <tr><th>A quién (nombre y organización)</th><td><div class="linea-larga"></div></td></tr>
-    <tr><th>Cómo (oficio, correo, visita, llamada)</th><td><div class="linea-larga"></div></td></tr>
-    <tr><th>Fecha en que la hice</th><td><div class="linea-larga"></div></td></tr>
-    <tr><th>Respuesta (o silencio, con fecha)</th><td><div class="linea-larga"></div></td></tr>
-    <tr><th>Evidencia (dónde está la copia)</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th style="width:28%">Qué pedí y a quién</th><td><input data-exp="sol1-que"></td></tr>
+    <tr><th>Fecha y respuesta (sí, no o silencio)</th><td><input data-exp="sol1-resultado"></td></tr>
+    <tr><th>Dónde está el registro completo</th><td><input data-exp="sol1-donde" placeholder="Cuadernillo 1, hoja Mi primer no"></td></tr>
   </table>
   <h3>Solicitud 2</h3>
   <table>
-    <tr><th style="width:28%">Qué pedí</th><td><div class="linea-larga"></div></td></tr>
-    <tr><th>A quién (nombre y organización)</th><td><div class="linea-larga"></div></td></tr>
-    <tr><th>Cómo (oficio, correo, visita, llamada)</th><td><div class="linea-larga"></div></td></tr>
-    <tr><th>Fecha en que la hice</th><td><div class="linea-larga"></div></td></tr>
-    <tr><th>Respuesta (o silencio, con fecha)</th><td><div class="linea-larga"></div></td></tr>
-    <tr><th>Evidencia (dónde está la copia)</th><td><div class="linea-larga"></div></td></tr>
+    <tr><th style="width:28%">Qué pedí</th><td><input data-exp="sol2-que"></td></tr>
+    <tr><th>A quién (nombre y organización)</th><td><input data-exp="sol2-aquien"></td></tr>
+    <tr><th>Cómo (oficio, correo, visita, llamada)</th><td><input data-exp="sol2-como"></td></tr>
+    <tr><th>Fecha en que la hice</th><td><input data-exp="sol2-fecha"></td></tr>
+    <tr><th>Respuesta (o silencio, con fecha)</th><td><input data-exp="sol2-resultado"></td></tr>
+    <tr><th>Evidencia (dónde está la copia)</th><td><input data-exp="sol2-evidencia"></td></tr>
   </table>
-  <p class="pie">¿Hiciste más de dos? Las extra van al anti-currículum o a esta hoja repetida. Más saliva, más pinole.</p>
+  <h3>Las demás (si hubo más de dos)</h3>
+  <textarea class="exp-campo" data-exp="sol-extra" placeholder="Una línea por solicitud: qué, a quién, cuándo, qué pasó. Las que salieron no también van al anti-currículum." style="min-height:3.2rem"></textarea>
+  <p class="pie">Esta hoja vive todo el semestre: se sigue llenando en los cuadernillos 3 y 4. Más saliva, más pinole.</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Mapa de evidencias</div>
+  <h2>Qué es y dónde está, unidad 2</h2>
+  <p>La evidencia de esta unidad vive repartida: el kraft en el salón, las fotos en el Drive del equipo, la solicitud entregada, la bitácora de equipo. Este mapa es tu índice para encontrarla cuando la necesites, por ejemplo para defender tu autoevaluación en diciembre.</p>
+  <table>
+    <tr><th style="width:16%">Semana</th><th style="width:42%">Qué es la evidencia</th><th>Dónde está</th></tr>
+    <tr class="ejemplo"><td>S7</td><td>Foto de la cadena en kraft, versión del lunes, con mi eslabón</td><td>Drive del equipo · carpeta S7</td></tr>
+    <tr class="ejemplo"><td>S9</td><td>Nota firmada de las tarimas y foto</td><td>Anexo de la solicitud · copia en la bolsa del equipo</td></tr>
+    <tr><td><input data-exp="mapa2-1s"></td><td><input data-exp="mapa2-1q"></td><td><input data-exp="mapa2-1d"></td></tr>
+    <tr><td><input data-exp="mapa2-2s"></td><td><input data-exp="mapa2-2q"></td><td><input data-exp="mapa2-2d"></td></tr>
+    <tr><td><input data-exp="mapa2-3s"></td><td><input data-exp="mapa2-3q"></td><td><input data-exp="mapa2-3d"></td></tr>
+    <tr><td><input data-exp="mapa2-4s"></td><td><input data-exp="mapa2-4q"></td><td><input data-exp="mapa2-4d"></td></tr>
+    <tr><td><input data-exp="mapa2-5s"></td><td><input data-exp="mapa2-5q"></td><td><input data-exp="mapa2-5d"></td></tr>
+    <tr><td><input data-exp="mapa2-6s"></td><td><input data-exp="mapa2-6q"></td><td><input data-exp="mapa2-6d"></td></tr>
+    <tr><td><input data-exp="mapa2-7s"></td><td><input data-exp="mapa2-7q"></td><td><input data-exp="mapa2-7d"></td></tr>
+    <tr><td><input data-exp="mapa2-8s"></td><td><input data-exp="mapa2-8q"></td><td><input data-exp="mapa2-8d"></td></tr>
+    <tr><td><input data-exp="mapa2-9s"></td><td><input data-exp="mapa2-9q"></td><td><input data-exp="mapa2-9d"></td></tr>
+    <tr><td><input data-exp="mapa2-10s"></td><td><input data-exp="mapa2-10q"></td><td><input data-exp="mapa2-10d"></td></tr>
+  </table>
+  <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
 </div>
 
 <div class="pagina">
   <div class="curso">Expediente del gestor · El suelo de esta unidad</div>
-  <h2>Tu checklist de no reprobar</h2>
-  <p>Esto es lo que basta cumplir en esta unidad para no reprobar la materia. Sin números y sin letra chiquita. Marca cada casilla cuando esté hecha; tu profesor lleva la misma lista.</p>
+  <h2>Tu checklist de no reprobar, explicado</h2>
+  <p>El suelo es <strong>piso, no techo</strong>: la lista corta de lo que basta cumplir en esta unidad para no reprobar la materia. Es pública desde el primer día y no cambia a media unidad. Marca cada casilla cuando esté hecha; tu profesor lleva la misma lista, y las dos se ponen sobre la mesa al abrir la semana 12.</p>
   <h3>Unidad 2 · Diseñar lo que pidieron</h3>
-  <div class="chk"><span class="caja"></span><span>Intenté al menos 3 retos de herramientas (aunque salgan "aún no")</span></div>
-  <div class="chk"><span class="caja"></span><span>Cotizaciones reales entregadas para el presupuesto</span></div>
-  <div class="chk"><span class="caja"></span><span>Pre-pitch ante compañeros (semana 10)</span></div>
-  <div class="chk"><span class="caja"></span><span>Bitácora de equipo al corriente en mi parte</span></div>
-  <div class="chk"><span class="caja"></span><span>Solicitud real 1 hecha</span></div>
-  <div class="clave"><strong>Hojas que viven todo el semestre.</strong> Las dos solicitudes reales y el anti-currículum se siguen llenando después de esta unidad. No los archives: pásalos al cuadernillo que estés usando.</div>
+  <div class="suelo-item">
+    <label class="chk"><input type="checkbox" data-exp="suelo2-retos"><span><strong>Intenté al menos 3 de los 5 retos</strong> (aunque salgan "aún no")</span></label>
+    <span class="como">Su evidencia: la hoja de retos de este cuadernillo con fechas y resultados, y las versiones del lunes en el Drive del equipo (cadena S7, marco S8, mapa y trato S9, presupuesto y cronograma S10). Intentar es entregar a dictamen; el resultado no cuenta para el suelo. Plan B: un reintento o un intento tardío se puede entregar hasta el viernes de la semana 11.</span>
+  </div>
+  <div class="suelo-item">
+    <label class="chk"><input type="checkbox" data-exp="suelo2-cotiza"><span><strong>Cotizaciones reales conseguidas por mí</strong> para el presupuesto</span></label>
+    <span class="como">Su evidencia: al menos una cotización escrita, fechada y con quién la da, conseguida por ti y anexa a la solicitud (o en la bolsa del equipo si fue de respaldo), anotada en tu hoja de la semana 10. Plan B: si tu oficio no era los números y no conseguiste ninguna, una cotización de respaldo para cualquier partida del equipo antes del viernes de la semana 11.</span>
+  </div>
+  <div class="suelo-item">
+    <label class="chk"><input type="checkbox" data-exp="suelo2-troika"><span><strong>Pre-pitch en la Troika</strong> (semana 10)</span></label>
+    <span class="como">Su evidencia: estuviste en las rondas, tu equipo presentó y escuchó de espaldas, y tu "lo que me llevo" está en tu hoja de la semana 10. Plan B, si faltaste con causa: el pitch de dos minutos ante otro equipo, con la misma estructura y el mismo reloj, antes del jueves de la semana 11.</span>
+  </div>
+  <div class="suelo-item">
+    <label class="chk"><input type="checkbox" data-exp="suelo2-bitacora"><span><strong>Bitácora de equipo al corriente en mi parte</strong></span></label>
+    <span class="como">Su evidencia: las entradas de las semanas 5 a 10 que te tocaron por turno, con tu letra y tu fecha, en el cuaderno o la carpeta del equipo. Plan B: ponerse al corriente antes del viernes de la semana 11, con la fecha real de escritura; una entrada antedatada no es evidencia de nada.</span>
+  </div>
+  <div class="clave" style="margin-top:1rem"><strong>Sobre las solicitudes reales:</strong> no son casilla de esta unidad. El primer no de la semana 2 cuenta como la primera del semestre y la segunda vence con la unidad 3; el trato de la semana 9 puede ser esa segunda. Se registran en la hoja de solicitudes de este cuadernillo.</div>
+  <div class="clave"><strong>¿Te falta una casilla?</strong> No es drama, es pendiente: cada una trae escrito su plan B y su fecha límite. El suelo se completa, no se negocia.</div>
   <p class="pie">Gestión y Manejo de Proyectos · 2026 · Expediente del gestor</p>
+</div>
+
+<div class="pagina">
+  <div class="curso">Expediente del gestor · Antes de autoevaluarte</div>
+  <h2>La segunda autoevaluación, explicada</h2>
+  <p>Ya hiciste una y sabes cómo va: es de ensayo, no produce número, nadie te la recoge, y la regla de los tres casos se practica sin registro. Lo que cambia esta vez:</p>
+  <ul>
+    <li><strong>Se llena después del fallo,</strong> en la semana 11, y no antes. El orden importa: el comité reparte dinero, no calificaciones, y aquí se evalúa tu trabajo, no el veredicto. Se puede perder el fondo con un trabajo excelente, y ganarlo no sube ni un décimo.</li>
+    <li><strong>El argumento se arma con los retos.</strong> En la unidad 1 tu evidencia era la consulta y el sobre; aquí son cinco intentos con dictamen escrito. Un "aún no" con su porqué y su reintento es mejor evidencia que un "bien" que no sabes explicar.</li>
+    <li><strong>Tu parte, no la del equipo.</strong> La cadena, el marco y la solicitud son del equipo. Lo que se autoevalúa es lo que hiciste tú dentro: qué eslabón pusiste, qué cotización conseguiste, qué trato hiciste, qué entrada de bitácora escribiste.</li>
+    <li><strong>La pregunta que temías.</strong> Si el comité la hizo, aquí se cuenta qué contestaste. Si no la hizo, también: saber cuál era ya es evidencia de que leíste tu solicitud como dictaminador.</li>
+  </ul>
+  <div class="clave"><strong>Qué hace buena una autoevaluación:</strong> cita evidencia que existe ("mi hoja de retos: dos bien, un aún no con reintento"; "la cotización de la ferretería, anexo 3 de la solicitud"), habla de hechos y no de intenciones, y el número que propone trae argumento. "Trabajé mucho en el presupuesto" no es evidencia; "conseguí tres cotizaciones y descubrí el flete olvidado antes de la Troika" sí.</div>
+  <p>Se comenta el jueves de la semana 12, al abrir la unidad 3, junto con las dos listas del suelo. Compartirla es opcional; traerla hecha, no.</p>
 </div>
 
 <div class="pagina">
   <div class="curso">Expediente del gestor · Autoevaluación 2 (ensayo)</div>
   <h2>Cierre de la unidad 2 · Semana 11</h2>
-  <p>Segunda parada, la semana de la Dictaminadora. Recuerda el cortafuegos: el fondo reparte dinero, no calificaciones. Aquí se evalúa tu trabajo, no el veredicto.</p>
-  <h3>Lo que hice esta unidad (con evidencia)</h3>
-  <div class="renglones"><div></div><div></div><div></div></div>
-  <h3>Mis retos: cuáles quedaron "bien", cuáles siguen en "aún no" y qué plan tengo</h3>
-  <div class="renglones"><div></div><div></div><div></div></div>
-  <h3>Qué aprendí del pitch y de la retroalimentación recibida</h3>
-  <div class="renglones"><div></div><div></div></div>
-  <h3>Si esta unidad llevara número, yo me pondría un ______ porque:</h3>
-  <div class="renglones"><div></div><div></div><div></div></div>
-  <div class="clave"><strong>Bloque para transcribir al formulario privado:</strong> nombre, unidad 2, calificación propuesta y justificación.</div>
-  <p class="pie">Fecha: __________</p>
+  <p>Segunda parada, la semana del comité. Se llena después del fallo, con tu hoja de retos y tu mapa de evidencias a la vista.</p>
+  <h3>Lo que hice yo esta unidad (con evidencia: cita tu mapa y tus hojas)</h3>
+  <textarea class="exp-campo" data-exp="auto2-hice" placeholder="Hechos con su evidencia, no intenciones. Tu parte dentro del equipo."></textarea>
+  <h3>Mis retos: cuáles quedaron "bien", cuáles siguen en "aún no", y qué plan tengo</h3>
+  <textarea class="exp-campo" data-exp="auto2-retos" placeholder="Con los porqués. El aún no con reintento pesa más que el bien sin explicación."></textarea>
+  <h3>Qué aprendí de la Troika y del fallo del comité</h3>
+  <textarea class="exp-campo" data-exp="auto2-pitch" placeholder="Qué no entendieron tus pares, qué preguntó el comité, qué dice eso de tu solicitud y no de tu talento."></textarea>
+  <h3>Lo que todavía no sé hacer</h3>
+  <textarea class="exp-campo" data-exp="auto2-nose" placeholder="Nombrarlo cuesta lo mismo que conseguir un no, y es el paso que más rinde en diciembre." style="min-height:3.2rem"></textarea>
+  <h3>Si esta unidad llevara número, yo me pondría un
+    <input type="text" data-exp="auto2-num" maxlength="3" class="num-inline"> porque:</h3>
+  <textarea class="exp-campo" data-exp="auto2-porque" placeholder="El argumento, en dos o tres frases, con tus propias piezas. Este es el bloque que se transcribe."></textarea>
+  <div class="clave">
+    <strong>Bloque para transcribir al canal privado:</strong> nombre, unidad 2, calificación propuesta y tu justificación. El botón lo arma por ti y abre tu propia app de correo: nada se manda solo, tú decides si le das enviar.
+    <br><button type="button" class="btn-correo no-descarga" id="btn-correo">Armar el correo al profesor</button>
+  </div>
+  <p class="pie">La regla de los tres casos aplica desde el ensayo, para que la conozcas sin riesgo. El cortafuegos también: el fallo del comité no toca esta hoja.</p>
 </div>
-<button id="btn-imprimir" onclick="window.print()">Imprimir</button>
+
+<script>
+  // El botón del correo arma un mailto con lo ya guardado; no manda nada solo.
+  document.getElementById('btn-correo').addEventListener('click', function () {
+    var r = {};
+    try { r = JSON.parse(localStorage.getItem('gestion-exp-u2') || '{}'); } catch (e) {}
+    var n = (r['nombre'] || '').trim();
+    var num = (r['auto2-num'] || '').trim();
+    var por = (r['auto2-porque'] || '').trim();
+    var nose = (r['auto2-nose'] || '').trim();
+    var cuerpo = 'Nombre: ' + (n || '(sin nombre)') +
+      '\nUnidad: 2 · Diseñar lo que pidieron' +
+      '\nCalificación propuesta (ensayo): ' + (num || '(sin número)') +
+      '\n\nMi justificación:\n' + (por || '(sin justificación)') +
+      '\n\nLo que todavía no sé hacer:\n' + (nose || '(sin respuesta)');
+    location.href = 'mailto:eduardo.lusan@gmail.com?subject=' +
+      encodeURIComponent('Autoevaluación U2 · ' + (n || 'Sin nombre')) +
+      '&body=' + encodeURIComponent(cuerpo);
+  });
+</script>
 
 <script src="../curso.js"></script>
 
