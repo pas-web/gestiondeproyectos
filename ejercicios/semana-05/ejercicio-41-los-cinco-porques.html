@@ -72,6 +72,24 @@
   .contra .mal { background:#FBF0EE; border:1px solid #EBCFC9; color:#6B2F22; }
   .contra .bien { background:#EEF6F0; border:1px solid #C9E2CF; color:#1F4A2C; }
   .contra .rot { display:block; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; font-weight:bold; opacity:.75; margin-bottom:.25rem; }
+  /* ---- Ver mi árbol ---- */
+  .miarbol { display:none; margin-top:1rem; }
+  .miarbol.ve { display:block; }
+  .ma-tronco { background:var(--profundo); color:#fff; border-radius:10px; padding:.7rem 1rem; font-family:Georgia,serif; font-size:1.05rem; text-align:center; position:relative; }
+  .ma-tronco::after { content:""; position:absolute; left:50%; bottom:-14px; width:3px; height:14px; background:var(--marca); }
+  .ma-raices { display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; margin-top:14px; border-top:3px solid var(--marca); padding-top:.6rem; }
+  @media (max-width:600px){ .ma-raices { grid-template-columns:1fr; border-top:none; } }
+  .ma-col { display:flex; flex-direction:column; align-items:stretch; }
+  .ma-caja { border:1.5px solid var(--borde); background:#fff; border-radius:8px; padding:.45rem .6rem; font-size:.88rem; position:relative; margin-bottom:14px; }
+  .ma-caja::after { content:""; position:absolute; left:50%; bottom:-14px; width:2px; height:14px; background:var(--marca); }
+  .ma-caja:last-child { margin-bottom:0; }
+  .ma-caja:last-child::after { display:none; }
+  .ma-caja.hipo { border-style:dashed; border-color:#C97B5D; background:#FBF0EE; color:#6B2F22; }
+  .ma-caja.hipo::before { content:"hipótesis"; display:block; font-size:.62rem; letter-spacing:.09em; text-transform:uppercase; color:var(--rojo); font-weight:bold; }
+  .ma-caja.ausencia { border-color:var(--rojo); }
+  .ma-caja.ausencia::before { content:"¿ausencia de solución?"; display:block; font-size:.62rem; letter-spacing:.09em; text-transform:uppercase; color:var(--rojo); font-weight:bold; }
+  .ma-fondo { margin-top:.8rem; background:#FBEFD5; border:1.5px solid var(--arena); border-radius:8px; padding:.5rem .8rem; font-size:.9rem; text-align:center; }
+  .ma-leyenda { font-size:.8rem; color:#45605a; margin-top:.5rem; }
   .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
   .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
   #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
@@ -136,9 +154,11 @@
   <input type="text" id="pregunta" placeholder="¿Por qué no hay dónde estar a gusto en la presa por la tarde?">
   <div class="cols" id="cols"></div>
   <p class="resumen" id="resumen"></p>
+  <button class="btn" onclick="verArbol()">Ver mi árbol</button>
   <button class="btn sec" onclick="ejemploPresa()">Ver el ejemplo de la presa</button>
-  <button class="btn" onclick="copiarPlantilla()">Copiar a la bitácora</button>
+  <button class="btn sec" onclick="copiarPlantilla()">Copiar a la bitácora</button>
   <button class="btn sec" onclick="borrarPlantilla()">Borrar</button>
+  <div class="miarbol" id="miarbol"></div>
 </div>
 <div class="ojo">
   <strong>La regla de dónde parar.</strong> Se baja mientras el registro conteste. Cuando el siguiente porqué ya no lo contesta ninguna tarjeta ni ninguna observación de agosto, ahí termina la raíz; lo que sigue es hipótesis del salón y se marca como tal, porque el prototipo de la semana 6 puede confirmarla o tumbarla.
@@ -317,10 +337,38 @@
     document.querySelectorAll('#cols input[type=checkbox]').forEach(function (ch) { ch.checked = !!datos[ch.getAttribute('data-k')]; marcaTarjeta(ch); });
     guarda();
     document.getElementById('resumen').textContent += ' En el ejemplo, las celdas punteadas son hipótesis: nadie las dijo en la consulta. Fíjate que dos ramas llegan a la misma raíz: la orilla no es de nadie. Cuando eso pasa, esa raíz es la que más pesa.';
+    verArbol();
   }
+  function verArbol() {
+    var cont = document.getElementById('miarbol');
+    var preg = (pregunta.value || '').trim();
+    var tronco = preg ? preg.replace(/^\s*¿?\s*por qué\s+/i, '').replace(/\?\s*$/, '') : 'Escribe arriba tu problema como pregunta';
+    var html = '<div class="ma-tronco">' + esc(tronco.charAt(0).toUpperCase() + tronco.slice(1)) + '</div><div class="ma-raices">';
+    var fondos = {};
+    for (var c = 1; c <= 3; c++) {
+      html += '<div class="ma-col">';
+      var ultima = '';
+      for (var n = 0; n <= 3; n++) {
+        var k = 'c' + c + 'n' + n, v = (datos[k] || '').trim(); if (!v) continue;
+        var cls = 'ma-caja' + (datos[k + '-t'] ? '' : ' hipo') + (AUSENCIA.test(v) ? ' ausencia' : '');
+        html += '<div class="' + cls + '">' + esc(v) + '</div>';
+        ultima = v.toLowerCase().replace(/[^a-záéíóúñü ]/g, '').trim();
+      }
+      if (ultima) fondos[ultima] = (fondos[ultima] || 0) + 1;
+      html += '</div>';
+    }
+    html += '</div>';
+    var repetida = Object.keys(fondos).filter(function (k) { return fondos[k] > 1; });
+    if (repetida.length) html += '<div class="ma-fondo">Dos raíces llegan al mismo fondo: <strong>' + esc(repetida[0]) + '</strong>. Esa es la raíz que más pesa.</div>';
+    html += '<div class="ma-leyenda">Caja entera: tiene tarjeta de la consulta. Caja punteada: hipótesis del salón, va al muro en otro color. Toma captura o proyecta esta vista antes de pasar las tarjetas al árbol grande.</div>';
+    cont.innerHTML = html; cont.classList.add('ve');
+    cont.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function borrarPlantilla() {
     if (!confirm('¿Borrar la plantilla?')) return;
     datos = {}; guarda(); pregunta.value = '';
+    document.getElementById('miarbol').classList.remove('ve');
     document.querySelectorAll('#cols textarea').forEach(function (t) { t.value = ''; revisa(t); });
     document.querySelectorAll('#cols input[type=checkbox]').forEach(function (ch) { ch.checked = false; marcaTarjeta(ch); });
   }

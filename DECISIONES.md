@@ -718,6 +718,18 @@ Lo aplicado:
   recorta: la mesa de tarjetas vuelve a 30, el gimnasio 2 a 10 y la
   postulación a 15, con sus tres tiempos.
 
+- **El árbol gana tres gráficos propios, en SVG dentro de la página** (se
+  proyectan nítidos y no dependen de ninguna imagen): el iceberg de la presa
+  (síntoma arriba del agua, causa debajo), la escalera de los porqués con el
+  caso del valle, y el árbol de La Florida completo con tarjetas y dos
+  hipótesis en otro color, que se enseña después de que armen el suyo, no
+  antes. El gimnasio 4 gana el botón "Ver mi árbol": dibuja las tres raíces
+  de la plantilla debajo del tronco, marca las hipótesis y avisa cuando dos
+  raíces llegan al mismo fondo. Cuatro ilustraciones más quedan pedidas para
+  la S5 (el iceberg, cavar los porqués, la trampa del falta, el árbol de La
+  Florida) con sus placeholders comentados y sus prompts en el archivo de
+  imágenes.
+
 Pendiente nuevo: que la reimpresión de las reglas diga de dónde salen los
 $200 del ensayo de cada equipo y cuánto queda para el dictamen.
 
