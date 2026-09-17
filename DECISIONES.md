@@ -139,6 +139,13 @@ discutir el primer día se cobra caro en noviembre.
    con el expediente en la mesa.
 10. **Credenciales fuera del repositorio y fuera del chat.** Si se usa un token de
    GitHub para publicar, se revoca al terminar la sesión.
+11. **Los mazos no se aprietan para caber en 120 minutos.** Eduardo prefiere
+   tener varias opciones y elegir o brincarse algo sobre la marcha, antes que
+   recortar contenido para que quepa. Las chapas de minutos son estimaciones
+   por bloque, no una suma que deba cerrar; un mazo puede traer más de lo que
+   cabe en dos horas. Lo que sí se marca es qué bloques no se recortan (la
+   campana, Kenia, el cierre de unidad) en la nota del conductor. Decidido el
+   17 de septiembre de 2026.
 
 ## Protocolo de la hoja de retroalimentación
 
@@ -705,10 +712,11 @@ Lo aplicado:
   el navegador y copia a la bitácora). El bloque 7 de la S5 pasa de 20 a 30
   minutos con tres láminas nuevas (síntoma o causa, los cinco porqués, un
   problema no es la ausencia de una solución) y la actividad de las raíces
-  se hace con la plantilla en tríos; el gimnasio 2 baja a 5 minutos y la
-  postulación a 10, con el gimnasio 3 escrito desde casa. El video de
-  vimeo que recomienda Eduardo sobre la trampa del "falta" queda enlazado en
-  la tarjeta del árbol.
+  se hace con la plantilla en tríos. El video de vimeo que recomienda
+  Eduardo sobre la trampa del "falta" queda enlazado en la tarjeta del
+  árbol. Con la regla 11 nueva, el jueves de la S5 suma 135 minutos y no se
+  recorta: la mesa de tarjetas vuelve a 30, el gimnasio 2 a 10 y la
+  postulación a 15, con sus tres tiempos.
 
 Pendiente nuevo: que la reimpresión de las reglas diga de dónde salen los
 $200 del ensayo de cada equipo y cuánto queda para el dictamen.
