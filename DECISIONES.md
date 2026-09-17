@@ -665,6 +665,31 @@ Lo aplicado:
   más la actividad de causa o mismo nombre, con dos colores de tarjeta: las de
   la consulta y las hipótesis del salón.
 
+- **La consulta real se levantó con dos instrumentos, no con tres
+  estaciones**, y la semana 5 se ajusta a ellos: entrevistas en pareja con
+  guion de 22 preguntas y hoja de registro por persona (con la foto de la
+  presa numerada del 1 al 5, sin nombres, rango de edad y rumbo), y un taller
+  diagnóstico con diez muchachos de la secundaria de La Florida (arranque de
+  un paso al frente, seis rondas de puntos por zona, hojas de zona, el no y su
+  volteo, ideas de la mesa, saberes de la casa, boleta de confianza). La mesa
+  de tarjetas gana una lámina que dice qué pregunta y qué hoja se vuelve
+  tarjeta, observación, condición o material para la semana 9 (las
+  respuestas 20 y 21, quién cuidaría y faenas, son la semilla de la
+  contrapartida); las fuentes al pie se escriben con lo que la hoja de
+  registro trae ("mujer de 30 a 49, entrevista 4, pregunta 9"); la pregunta
+  10 y las tiras del no son la cantera de las raíces del árbol, y los volteos
+  de la hoja 8 arrancan el árbol de objetivos de la S7. La S6 nombra la
+  promesa tal como la hizo el guion: devolución por escrito con fecha y copia
+  a Obras Públicas; lo de la S6 es la primera devolución, la completa sigue
+  para noviembre.
+- **S5, bloque 8 desarrollado**: la postulación en tres tiempos (escribir,
+  ronda de un minuto por persona, armar), el así sí y así no de una
+  postulación con evidencia, los tres oficios con sus chambas de la unidad
+  (y la regla de que solo se rota el pedir), la capa técnica en piezas (suelo,
+  especies, agua, pisoteo) atada a las zonas de la foto, y la tabla de lo que
+  puede pasar al armar equipos, incluida la línea que se queda sin nadie y se
+  reporta en la devolución.
+
 Pendiente nuevo: que la reimpresión de las reglas diga de dónde salen los
 $200 del ensayo de cada equipo y cuánto queda para el dictamen.
 
