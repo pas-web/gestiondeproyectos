@@ -654,6 +654,17 @@ Lo aplicado:
   mesa de tarjetas de 30 a 25: con la explicación hecha, la mesa corre más
   rápido.
 
+- **S5, bloques 6 y 7 desarrollados** por el mismo pedido: la mesa de
+  tarjetas queda en tres rondas con tiempos, materiales y papeles que rotan
+  (escribir con la O para las observaciones y la canasta de condiciones desde
+  el principio; pegar y juntar con la pregunta "¿de qué problema habla?";
+  nombrar, contar y cotejar con el pliego), y el árbol de problemas en cuatro
+  láminas (por qué en vertical, la prueba del tronco "si se arreglara, ¿qué
+  montones se moverían?", las raíces con una cadena de ejemplo de La Florida y
+  la regla de dónde parar, las ramas y para qué sirven en las semanas 7 y 8)
+  más la actividad de causa o mismo nombre, con dos colores de tarjeta: las de
+  la consulta y las hipótesis del salón.
+
 Pendiente nuevo: que la reimpresión de las reglas diga de dónde salen los
 $200 del ensayo de cada equipo y cuánto queda para el dictamen.
 
