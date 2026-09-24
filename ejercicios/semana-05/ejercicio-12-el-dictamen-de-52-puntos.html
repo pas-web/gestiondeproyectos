@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S5 · El dictamen de 52 puntos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:780px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.2rem; margin:2.2rem 0 .3rem; }
+  h3 { font-family:Georgia,serif; color:var(--profundo); font-size:1.12rem; margin:.1rem 0 .3rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .intro a { color:#fff; }
+  .sol { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.2rem 0; }
+  .ficha { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; font-size:.93rem; margin:.4rem 0 .8rem; }
+  .ficha b { color:var(--profundo); }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th, td { border:1px solid var(--borde); padding:.35rem .5rem; vertical-align:top; text-align:left; }
+  th { background:#E4EFEB; color:var(--profundo); font-size:.82rem; }
+  td.n { width:2rem; text-align:center; color:#7C6222; font-weight:bold; }
+  td.pts { width:4.2rem; text-align:center; font-weight:bold; }
+  select { font:inherit; font-size:.88rem; width:100%; padding:.2rem; border:1px solid var(--borde); border-radius:6px; background:#fff; }
+  tr.difiere td { background:#FDF6E7; }
+  tr.coincide td.pts { color:var(--marca); }
+  .porque { display:none; font-size:.85rem; color:#5C4A1C; margin-top:.25rem; }
+  .btn { font:inherit; font-weight:bold; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.5rem 1.1rem; cursor:pointer; margin:.7rem .4rem 0 0; }
+  .resultado { display:none; margin-top:.7rem; padding:.7rem 1rem; border-radius:0 8px 8px 0; background:#E4EFEB; border-left:4px solid var(--marca); font-size:.95rem; }
+  .resultado.no { background:#FBF0EE; border-left-color:#C97B5D; }
+  .reparto { display:none; background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin-top:.8rem; }
+  .reparto tr.fuera td { color:#8a4b3a; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.3rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El dictamen de 52 puntos</h1>
+<p class="sub">Gimnasio · Semana 5 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Siéntate en la silla del Comité Técnico. Cuatro solicitudes al PROCODES llegan a la Reserva de la Biosfera Sierra Gorda y la bolsa del área alcanza para $350,000. Las solicitudes son inventadas; la tabla con la que se califican es la de verdad, la del numeral 3.3.2.2 de las Reglas de Operación 2026 (páginas 11 y 12). Califica cada una criterio por criterio, compárala con la lectura del comité y al final reparte el dinero.</p>
+
+<div class="intro">
+  <strong>Dos reglas que la tabla no dice sola.</strong> Para ser autorizada, una solicitud necesita al menos 20 puntos <strong>y</strong> contribuir directa o indirectamente a los criterios 2 y 3 (la planeación estratégica del área y su decreto o Programa de Manejo). Luego se ordenan por puntaje y el dinero se asigna de arriba abajo <strong>hasta agotarlo</strong>. Pasar la línea no es lo mismo que recibir.
+</div>
+
+<div id="solicitudes"></div>
+
+<h2>El reparto</h2>
+<p>Cuando hayas calificado las cuatro, ordena y reparte. La bolsa del área: $350,000.</p>
+<button class="btn" onclick="repartir()">Repartir con los puntajes del comité</button>
+<div class="reparto" id="reparto"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Copia la tabla de los doce criterios en una hoja. Escribe en una línea el proyecto de tu equipo como si fuera una solicitud al PROCODES y califícalo con honestidad. Luego marca los tres criterios donde podrías subir sin traicionar lo que la consulta pidió, y escribe qué tendrías que hacer para subir en cada uno. Esa lista es tu primera ruta de mejora.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var CRITERIOS = [
+    { t: 'Dónde se ejecuta y tiene impacto', o: [['Dentro del ANP', 6], ['En la zona de influencia', 4], ['Fuera de las dos', 0]] },
+    { t: 'Contribuye a la planeación estratégica del ANP', o: [['Directamente', 6], ['Indirectamente', 3], ['No contribuye', 0]] },
+    { t: 'Contribuye a las acciones del decreto o del Programa de Manejo', o: [['Directamente', 6], ['Indirectamente', 3], ['No contribuye', 0]] },
+    { t: 'Promueve el aprovechamiento sustentable de ecosistemas y biodiversidad', o: [['Directamente', 5], ['Indirectamente', 2], ['No contribuye', 0]] },
+    { t: 'Da continuidad a procesos comunitarios de desarrollo sostenible', o: [['Directamente', 5], ['Indirectamente', 2], ['No contribuye', 0]] },
+    { t: 'Promueve la restauración productiva', o: [['Directamente', 5], ['Indirectamente', 3], ['No contribuye', 0]] },
+    { t: 'Beneficia a localidades de alta y muy alta marginación', o: [['Sí', 4], ['No', 2]] },
+    { t: 'Participan mujeres', o: [['El 100%', 3], ['Del 50 al 99%', 2], ['Menos del 50%', 1], ['Ninguna', 0]] },
+    { t: 'Participa población indígena o afromexicana', o: [['El 100%', 3], ['Del 50 al 99%', 2], ['Menos del 50%', 1], ['Ninguna', 0]] },
+    { t: 'Participan personas jóvenes (18 a 29 años)', o: [['El 100%', 3], ['Del 50 al 99%', 2], ['Menos del 50%', 1], ['Ninguna', 0]] },
+    { t: 'Medidas de mitigación y adaptación al cambio climático', o: [['Directamente', 4], ['Indirectamente', 2], ['No contribuye', 0]] },
+    { t: 'Contribuye a actividades productivas sustentables', o: [['Sí', 2], ['No', 0]] }
+  ];
+
+  var sols = [
+    { id: 'A', t: 'Vivero comunitario de encino, sabino y mezquite',
+      ficha: '<b>Quién:</b> grupo de 12 habitantes (8 mujeres, 5 de 18 a 29 años), localidad de alta marginación dentro de la reserva. <b>Qué:</b> proyecto productivo, vivero forestal de especies nativas de 300 m². <b>Monto:</b> $180,000, más el 20% del grupo en jornales y tierra de monte. <b>Historia:</b> desde 2025 el grupo hace faenas de reforestación en el arroyo con planta que traen de fuera. <b>Encaje:</b> el Programa de Manejo de la reserva contempla la producción de planta nativa para restauración, y la Dirección la tiene entre sus prioridades del año.',
+      comite: [0, 0, 0, 0, 0, 1, 0, 1, 3, 2, 1, 0],
+      porque: ['Dentro de la reserva.', 'La producción de planta nativa está entre las prioridades del año: directo.', 'El Programa de Manejo la contempla con todas sus letras.', 'Produce planta nativa para uso local: directo.', 'Hay faena de reforestación desde 2025, dentro de los dos años: directo.', 'Abastece la restauración pero no restaura por sí mismo: indirecto.', 'Alta marginación.', '8 de 12 son mujeres: 67%.', 'El grupo no declara población indígena.', '5 de 12 son jóvenes: 42%, menos de la mitad.', 'Los árboles capturan carbono y dan sombra, pero el vivero no es la medida en sí: indirecto.', 'Es una actividad productiva.'] },
+    { id: 'B', t: 'Cabañas en la orilla del río',
+      ficha: '<b>Quién:</b> grupo de 6 hombres (uno de 26 años), localidad en la zona de influencia, sin marginación alta. <b>Qué:</b> proyecto productivo ecoturístico, dos cabañas y un asador. <b>Monto:</b> $280,000. <b>Historia:</b> grupo nuevo, se juntó para la convocatoria. <b>Encaje:</b> el Programa de Manejo permite el turismo de bajo impacto en esa zona; la planeación del año de la Dirección no incluye infraestructura turística nueva en ese tramo del río.',
+      comite: [1, 2, 1, 1, 2, 2, 1, 3, 3, 2, 2, 0],
+      porque: ['Zona de influencia.', 'La planeación del año no la incluye: no contribuye. Y este criterio es obligatorio.', 'El manejo lo permite, pero permitir no es contribuir a sus acciones: indirecto, con generosidad.', 'El turismo de bajo impacto aprovecha el paisaje: indirecto.', 'Grupo nuevo, sin proceso previo.', 'No restaura nada.', 'Sin marginación alta: la tabla da 2 puntos por el "no".', 'Ningún integrante es mujer. La tabla no trae renglón para cero; aquí se lee como no cumplido.', 'Sin población indígena declarada.', '1 de 6 es joven.', 'No propone medidas de clima.', 'Es productivo.'] },
+    { id: 'C', t: 'Estufas ahorradoras de leña y cultivo de cobertera',
+      ficha: '<b>Quién:</b> un ejido, 25 personas (10 mujeres, 5 jóvenes, 15 pames o xi\'iuy), localidad de muy alta marginación dentro de la reserva. <b>Qué:</b> restauración de ecosistemas con fines productivos: estufas ahorradoras y cobertera de leguminosas en las parcelas de ladera. <b>Monto:</b> $150,000. <b>Historia:</b> el ejido participó hace cuatro años en un proyecto de conservación de suelos que ya no sigue. <b>Encaje:</b> la presión por leña y la erosión en ladera son dos de los problemas que el Programa de Manejo y la planeación del año nombran directamente.',
+      comite: [0, 0, 0, 0, 1, 0, 0, 2, 1, 2, 0, 0],
+      porque: ['Dentro de la reserva.', 'Leña y erosión están en la planeación del año: directo.', 'El Programa de Manejo nombra los dos problemas.', 'Menos leña del monte y suelo que se queda: directo.', 'El proyecto anterior fue hace cuatro años y ya no está activo: el Anexo 3 pide procesos activos o de los dos años anteriores. Indirecto, por el antecedente.', 'Cobertera en ladera es restauración con fines productivos: directo.', 'Muy alta marginación.', '10 de 25 son mujeres: 40%.', '15 de 25 son pames: 60%.', '5 de 25 son jóvenes: 20%.', 'Menos leña quemada y suelo protegido: directo.', 'La cobertera mejora la milpa.'] },
+    { id: 'D', t: 'Apiario de mujeres jóvenes',
+      ficha: '<b>Quién:</b> grupo de 7 mujeres (4 de 18 a 29 años), localidad de alta marginación en la zona de influencia. <b>Qué:</b> proyecto productivo, 26 colmenas con su equipo. <b>Monto:</b> $117,000 (26 colmenas por $4,500). <b>Historia:</b> grupo nuevo; ninguna ha tenido abejas. <b>Encaje:</b> el Programa de Manejo menciona la apicultura entre las actividades compatibles; la planeación del año no la trae como prioridad.',
+      comite: [1, 1, 1, 0, 2, 2, 0, 0, 3, 1, 2, 0],
+      porque: ['Zona de influencia.', 'No es prioridad del año, pero cabe en sus líneas de aprovechamiento: indirecto.', 'Actividad compatible según el Programa de Manejo: indirecto.', 'Aprovecha la floración del monte sin tumbarlo: directo.', 'Grupo nuevo, sin proceso previo.', 'No restaura.', 'Alta marginación.', 'El 100% son mujeres.', 'Sin población indígena declarada.', '4 de 7 son jóvenes: 57%.', 'La solicitud no propone nada de clima.', 'Es productivo.'] }
+  ];
+
+  function suma(idx) { return idx.reduce(function (s, v, i) { return s + CRITERIOS[i].o[v][1]; }, 0); }
+  function pasa(sol) {
+    var p = suma(sol.comite);
+    return { puntos: p, ok: p >= 20 && CRITERIOS[1].o[sol.comite[1]][1] > 0 && CRITERIOS[2].o[sol.comite[2]][1] > 0 };
+  }
+
+  var cont = document.getElementById('solicitudes');
+  sols.forEach(function (s, si) {
+    var d = document.createElement('div');
+    d.className = 'sol';
+    var html = '<h3>Solicitud ' + s.id + ' · ' + s.t + '</h3><div class="ficha">' + s.ficha + '</div>' +
+               '<table><tr><th>#</th><th>Criterio</th><th>Tu lectura</th><th>Puntos</th></tr>';
+    CRITERIOS.forEach(function (c, ci) {
+      html += '<tr id="f' + si + '-' + ci + '"><td class="n">' + (ci + 1) + '</td><td>' + c.t + '<div class="porque" id="w' + si + '-' + ci + '"></div></td><td><select id="s' + si + '-' + ci + '" onchange="puntos(' + si + ')"><option value="">elige</option>';
+      c.o.forEach(function (o, oi) { html += '<option value="' + oi + '">' + o[0] + '</option>'; });
+      html += '</select></td><td class="pts" id="pt' + si + '-' + ci + '">·</td></tr>';
+    });
+    html += '<tr><td></td><td><strong>Total</strong></td><td></td><td class="pts" id="tot' + si + '">0</td></tr></table>' +
+            '<button class="btn" onclick="comparar(' + si + ')">Comparar con el comité</button>' +
+            '<div class="resultado" id="res' + si + '"></div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function puntos(si) {
+    var t = 0;
+    CRITERIOS.forEach(function (c, ci) {
+      var v = document.getElementById('s' + si + '-' + ci).value;
+      var cel = document.getElementById('pt' + si + '-' + ci);
+      if (v === '') { cel.textContent = '·'; return; }
+      var p = c.o[+v][1]; cel.textContent = p; t += p;
+    });
+    document.getElementById('tot' + si).textContent = t;
+  }
+
+  function comparar(si) {
+    var s = sols[si], mio = 0, dif = 0, falta = 0;
+    CRITERIOS.forEach(function (c, ci) {
+      var v = document.getElementById('s' + si + '-' + ci).value;
+      var fila = document.getElementById('f' + si + '-' + ci);
+      var w = document.getElementById('w' + si + '-' + ci);
+      w.innerHTML = '<strong>Comité: ' + c.o[s.comite[ci]][0] + ' (' + c.o[s.comite[ci]][1] + ').</strong> ' + s.porque[ci];
+      w.style.display = 'block';
+      fila.classList.remove('difiere', 'coincide');
+      if (v === '') { falta++; fila.classList.add('difiere'); return; }
+      mio += c.o[+v][1];
+      if (+v === s.comite[ci]) fila.classList.add('coincide'); else { fila.classList.add('difiere'); dif++; }
+    });
+    var r = pasa(s);
+    var res = document.getElementById('res' + si);
+    var txt = 'Tu total: ' + mio + '. El del comité: <strong>' + r.puntos + ' de 52</strong>. ' +
+              (dif ? 'Leíste distinto ' + dif + ' criterio' + (dif > 1 ? 's' : '') + ' (en amarillo, con la razón del comité). ' : 'Coincidiste en todo lo que calificaste. ') +
+              (falta ? 'Te faltaron ' + falta + '. ' : '');
+    if (r.ok) txt += 'Pasa la línea: tiene 20 o más y contribuye a los criterios 2 y 3. Queda en la lista para el reparto.';
+    else if (r.puntos < 20) txt += 'No llega a 20: no se puede autorizar.';
+    else txt += 'Tiene los puntos, pero no contribuye al criterio 2 o al 3, que son obligatorios: no se puede autorizar aunque sume.';
+    res.innerHTML = txt;
+    res.className = 'resultado' + (r.ok ? '' : ' no');
+    res.style.display = 'block';
+  }
+
+  var MONTOS = { A: 180000, B: 280000, C: 150000, D: 117000 };
+  function peso(n) { return '$' + n.toLocaleString('es-MX'); }
+  function repartir() {
+    var lista = sols.map(function (s) { var r = pasa(s); return { s: s, p: r.puntos, ok: r.ok }; });
+    lista.sort(function (a, b) { return b.p - a.p; });
+    var bolsa = 350000;
+    var html = '<table><tr><th>Lugar</th><th>Solicitud</th><th>Puntos</th><th>Pide</th><th>Queda en la bolsa</th><th>Resultado</th></tr>';
+    lista.forEach(function (x, i) {
+      var m = MONTOS[x.s.id], res, clase = '';
+      if (!x.ok) { res = 'No autorizable'; clase = 'fuera'; }
+      else if (m <= bolsa) { bolsa -= m; res = 'Autorizada'; }
+      else { res = 'Viable, sin dinero: queda en espera'; clase = 'fuera'; }
+      html += '<tr class="' + clase + '"><td>' + (i + 1) + '</td><td>' + x.s.id + ' · ' + x.s.t + '</td><td>' + x.p + '</td><td>' + peso(m) + '</td><td>' + peso(bolsa) + '</td><td>' + res + '</td></tr>';
+    });
+    html += '</table>' +
+      '<p style="margin:.8rem 0 .3rem"><strong>Lo que dice el reparto.</strong> El apiario de mujeres jóvenes (D) pasó la línea con 26 puntos y aun así se queda sin dinero: cuando le toca, en la bolsa quedan $20,000. No perdió por mala: perdió por la fila. Si alguien se desiste o se cancela un apoyo, es la primera en la lista para recibir (numeral 3.3.2.2, página 13).</p>' +
+      '<p style="margin:.3rem 0"><strong>¿Cómo pudo subir D sin cambiar de proyecto?</strong> Sumándose a un proceso que ya existe en la localidad (criterio 5, hasta 5 puntos), sembrando flora melífera nativa como medida de adaptación (criterio 11, 2 o 4), y conversando antes con la Dirección de la Reserva para anclar el apiario a una línea de su planeación (criterios 2 y 3, hasta 6 más). Nada de eso es maquillaje si es verdad: es trabajo de gestión antes de escribir.</p>' +
+      '<p style="margin:.3rem 0"><strong>¿Y B?</strong> Catorce puntos, y aunque hubiera sumado cuarenta, sin contribuir a la planeación del año no pasaba. La pregunta que le faltó hacer antes de gastar en cotizaciones: ¿esto está en lo que la Reserva quiere este año?</p>';
+    var r = document.getElementById('reparto');
+    r.innerHTML = html;
+    r.style.display = 'block';
+  }
+</script>
+</main>
+</body>
+</html>

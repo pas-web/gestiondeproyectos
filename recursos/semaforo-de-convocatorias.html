@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El semáforo de convocatorias · Gestión y Manejo de Proyectos</title>
+<style>
+  :root {
+    --marca: #0F6E6E;
+    --profundo: #0B3C49;
+    --fondo: #F2F7F5;
+    --borde: #CFE3DD;
+    --arena: #D9A441;
+    --texto: #1C2B28;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif; background: var(--fondo); color: var(--texto); line-height: 1.6; font-size: 1.04rem; }
+  header.curso { background: var(--profundo); color: #EAF4F2; padding: 1.1rem 1.5rem; }
+  header.curso .curso-nombre { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+  header.curso .semana-titulo { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; margin: .2rem 0 0; font-weight: bold; }
+  header.curso .migas { font-size: .85rem; opacity: .75; margin-top: .3rem; }
+  main { max-width: 800px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem; }
+  .bajada { color: #45605a; }
+  h2 { font-family: Georgia, serif; color: var(--marca); font-size: 1.3rem; margin: 2.2rem 0 .4rem; }
+  a { color: var(--marca); }
+  .campo { display: block; width: 100%; font: inherit; padding: .5rem .7rem; border: 1px solid var(--borde); border-radius: 8px; background: #fff; }
+  .criterio { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: .8rem 1.1rem; margin: .7rem 0; }
+  .criterio .q { font-weight: bold; color: var(--profundo); }
+  .criterio .ayuda { font-size: .9rem; color: #5b7671; margin: .15rem 0 .5rem; }
+  .opciones { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .opciones label { border: 2px solid var(--borde); border-radius: 999px; padding: .25rem .8rem; font-size: .9rem; cursor: pointer; background: #fff; }
+  .opciones input { margin-right: .35rem; }
+  .opciones label:has(input:checked) { border-color: var(--marca); background: #E4EFEB; }
+  .veredicto-caja { position: sticky; bottom: .6rem; margin-top: 1.5rem; border-radius: 14px; padding: 1rem 1.2rem; color: #fff; background: #7d918c; box-shadow: 0 2px 10px rgba(0,0,0,.2); }
+  .veredicto-caja.rojo { background: #8A3B2B; }
+  .veredicto-caja.ambar { background: #B7862A; }
+  .veredicto-caja.verde { background: #1F6B45; }
+  .veredicto-caja .color { font-family: Georgia, serif; font-size: 1.4rem; font-weight: bold; }
+  .veredicto-caja p { margin: .3rem 0 0; }
+  .btn { font: inherit; font-weight: bold; border: none; border-radius: 999px; padding: .5rem 1.1rem; cursor: pointer; margin: .4rem .4rem 0 0; background: var(--profundo); color: #fff; }
+  .btn.claro { background: #fff; color: var(--profundo); border: 2px solid var(--profundo); }
+  .tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 1rem 1.3rem; margin: .9rem 0; }
+  .luces { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin: .8rem 0; }
+  .luz { border-radius: 12px; padding: .7rem .9rem; font-size: .92rem; color: #fff; }
+  .luz b { display: block; font-family: Georgia, serif; font-size: 1.1rem; }
+  .luz.r { background: #8A3B2B; } .luz.a { background: #B7862A; } .luz.v { background: #1F6B45; }
+  @media (max-width: 620px) { .luces { grid-template-columns: 1fr; } }
+  @media print { header.curso, .no-imprimir, nav { display: none !important; } .veredicto-caja { position: static; box-shadow: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="semana-titulo">El semáforo de convocatorias</div>
+  <div class="migas">Documentos para revisar · Semana 5 · De vuelta en la semana 16, con el radar</div>
+</header>
+
+<main>
+
+<p class="bajada">Quince minutos para decidir si una convocatoria vale la pena. Se usa antes de escribir una sola línea, con las reglas abiertas y el proyecto en la cabeza. No mide si el proyecto es bueno: mide si esta convocatoria, en esta edición, es para este grupo.</p>
+
+<div class="tarjeta">
+  <strong>Cómo se lee.</strong> Primero los cinco filtros: son de sí o no, y un solo "no" apaga la convocatoria para esta edición. Un "no sé" no apaga, pero detiene: se convierte en una pregunta con nombre y fecha antes de seguir. Después, siete criterios de ajuste de 0 a 2, que dicen qué tan buena es la apuesta. El orden importa: elegibilidad primero, proyecto después, calendario al final.
+  <div class="luces">
+    <div class="luz r"><b>Rojo</b>Un filtro en "no", o 5 puntos o menos. No se aplica en esta edición. Si el problema es de tiempo o de papeles, va al radar con fecha.</div>
+    <div class="luz a"><b>Ámbar</b>Filtros sin "no" pero con dudas, o de 6 a 9 puntos. Se aplica solo si se resuelven las condiciones que se escriben abajo, y con fecha límite para decidir.</div>
+    <div class="luz v"><b>Verde</b>Los cinco filtros en "sí" y 10 puntos o más. Se aplica, y se arma con la ruta de la propuesta.</div>
+  </div>
+</div>
+
+<div class="no-imprimir">
+  <button class="btn claro" onclick="ejemplo()">Cargar el ejemplo: PROCODES 2026 para un grupo de La Florida</button>
+  <button class="btn claro" onclick="limpiar()">Empezar en blanco</button>
+</div>
+
+<h2>La convocatoria</h2>
+<input class="campo" id="nombre" placeholder="Nombre de la convocatoria, quién la da y de qué año" oninput="calcula()">
+<input class="campo" id="proyecto" style="margin-top:.4rem" placeholder="Para qué proyecto o componente, y quién sería el solicitante" oninput="calcula()">
+
+<h2>Paso 1 · Los cinco filtros</h2>
+<div id="filtros"></div>
+
+<h2>Paso 2 · Los siete criterios de ajuste</h2>
+<div id="ajustes"></div>
+
+<h2>Paso 3 · La decisión</h2>
+<label class="criterio" style="display:block">
+  <span class="q">La razón, en una línea</span>
+  <input class="campo" id="razon" placeholder="Por qué este color y no otro" oninput="calcula()">
+</label>
+<label class="criterio" style="display:block">
+  <span class="q">Lo que tendría que pasar para que cambie de color, con nombre y fecha</span>
+  <input class="campo" id="condicion" placeholder="Quién averigua qué, y para cuándo" oninput="calcula()">
+</label>
+
+<div class="veredicto-caja" id="veredicto">
+  <div class="color" id="v-color">Sin veredicto todavía</div>
+  <p id="v-texto">Contesta los filtros y los criterios.</p>
+</div>
+
+<div class="no-imprimir" style="margin-top:.8rem">
+  <button class="btn" onclick="copiar()">Copiar el resumen para la bitácora</button>
+  <button class="btn" onclick="window.print()">Imprimir</button>
+  <span id="copiado" style="font-size:.9rem;color:#5b7671"></span>
+</div>
+
+<h2>Por qué este orden</h2>
+<p>La tentación es empezar por el monto. El monto deslumbra y la elegibilidad ejecuta: una convocatoria que no puedes cumplir no es una oportunidad, es un gasto de ilusión. Después de la elegibilidad viene el proyecto: se estira sin traicionarse o no se estira. Y hasta el final el calendario, porque una convocatoria buena con tres semanas de margen suele ser mejor apuesta para la edición siguiente que para esta. En la semana 16 este mismo semáforo se usa para el radar: ahí el rojo por tiempo se vuelve una fecha en el calendario del año que entra.</p>
+<p>Para leer las reglas con las que se contesta, sirve <a href="procodes-2026.html">la guía del PROCODES 2026</a>. Para lo que sigue después del verde, <a href="ruta-de-la-propuesta.html">la ruta de la propuesta</a>.</p>
+
+</main>
+
+<script>
+  var FILTROS = [
+    { q: '¿Podemos ser el solicitante?', a: 'Tipo de persona o grupo, edad, número mínimo de integrantes, figura legal, y la lista de quién NO puede. En el PROCODES: 3.1.2 y 3.2.' },
+    { q: '¿Nuestro territorio entra?', a: 'Municipio, localidad, área protegida, región. En el PROCODES: el Anexo 1.' },
+    { q: '¿El proyecto cabe en un concepto de apoyo sin deformarse?', a: 'Si para caber hay que convertirlo en otra cosa, la respuesta es no. En el PROCODES: el Anexo 2.' },
+    { q: '¿Podemos poner la aportación que piden, en la forma que la piden?', a: 'No es lo mismo 20% en jornales que 30% en efectivo depositado en garantía.' },
+    { q: '¿Llegamos al cierre con los papeles duros?', a: 'Los que no dependen de nosotros o tardan: documento del predio o anuencia del dueño, actas de asamblea, permisos, estudios obligatorios, identificaciones vigentes.' }
+  ];
+  var AJUSTES = [
+    { q: 'Puntaje alcanzable', a: 'Con la tabla de criterios de la convocatoria en la mano, ¿dónde quedaríamos?', o: ['Abajo de la mitad', 'Alrededor de la mitad', 'En el tercio alto'] },
+    { q: 'Encaje con lo que el financiador quiere este año', a: 'Sus prioridades, su plan, lo que premia (en el PROCODES, los criterios 2 y 3).', o: ['No lo sabemos o no encaja', 'Encaja de lado', 'Encaja de frente, y lo podemos enseñar'] },
+    { q: 'Evidencia y antecedentes', a: 'Consulta, datos, un proceso vivo, un proyecto anterior bien cerrado.', o: ['Nada que enseñar', 'Algo, reciente', 'Proceso con historia y evidencia'] },
+    { q: 'Tiempo para hacerlo bien', a: 'Desde hoy hasta el cierre, contando los papeles lentos.', o: ['Menos de 3 semanas', 'De 3 a 6 semanas', 'Más de 6 semanas'] },
+    { q: 'Capacidad de ejecutar y comprobar si ganamos', a: 'Obligaciones, reportes, comprobantes, plazos de ejecución, quién se queda a cargo.', o: ['No podríamos cumplir', 'Con esfuerzo y ayuda', 'Sí, con dueños claros'] },
+    { q: 'Tamaño que vale la pena', a: 'Lo que se recibe contra las horas de preparación y lo que se compromete.', o: ['No vale el esfuerzo', 'Justo', 'Vale de sobra'] },
+    { q: 'La fila', a: 'Cuánta bolsa hay, cuántos compiten y cuántos reciben (en el PROCODES la meta es apoyar una de cada cuatro solicitudes).', o: ['Muy disputada y bolsa chica', 'Normal', 'Poca competencia o bolsa amplia'] }
+  ];
+
+  function dibujar() {
+    var f = document.getElementById('filtros'), h = '';
+    FILTROS.forEach(function (c, i) {
+      h += '<div class="criterio"><div class="q">F' + (i + 1) + '. ' + c.q + '</div><div class="ayuda">' + c.a + '</div><div class="opciones">' +
+        ['Sí', 'No sé', 'No'].map(function (o, j) { return '<label><input type="radio" name="f' + i + '" value="' + j + '" onchange="calcula()">' + o + '</label>'; }).join('') +
+        '</div></div>';
+    });
+    f.innerHTML = h;
+    var a = document.getElementById('ajustes'); h = '';
+    AJUSTES.forEach(function (c, i) {
+      h += '<div class="criterio"><div class="q">A' + (i + 1) + '. ' + c.q + '</div><div class="ayuda">' + c.a + '</div><div class="opciones">' +
+        c.o.map(function (o, j) { return '<label><input type="radio" name="a' + i + '" value="' + j + '" onchange="calcula()">' + j + ' · ' + o + '</label>'; }).join('') +
+        '</div></div>';
+    });
+    a.innerHTML = h;
+  }
+
+  function val(n) { var e = document.querySelector('input[name="' + n + '"]:checked'); return e ? +e.value : null; }
+
+  var ultimo = '';
+  function calcula() {
+    var nos = 0, dudas = 0, sin = 0, pts = 0, faltan = 0;
+    FILTROS.forEach(function (c, i) { var v = val('f' + i); if (v === null) sin++; else if (v === 2) nos++; else if (v === 1) dudas++; });
+    AJUSTES.forEach(function (c, i) { var v = val('a' + i); if (v === null) faltan++; else pts += v; });
+    var caja = document.getElementById('veredicto'), color, texto;
+    if (nos > 0) { color = 'Rojo'; texto = 'Un filtro en "no" apaga esta edición. Si el "no" es de tiempo o de papeles, la convocatoria va al radar con la fecha de la siguiente.'; }
+    else if (sin > 0 || faltan > 0) { color = 'Sin veredicto todavía'; texto = 'Faltan ' + (sin + faltan) + ' respuestas. Ajuste acumulado: ' + pts + ' de 14.'; }
+    else if (pts <= 5) { color = 'Rojo'; texto = 'Se puede, pero la apuesta es mala: ' + pts + ' de 14. El esfuerzo rinde más en otra convocatoria o en la siguiente edición.'; }
+    else if (dudas > 0 || pts <= 9) { color = 'Ámbar'; texto = pts + ' de 14' + (dudas ? ', con ' + dudas + ' filtro' + (dudas > 1 ? 's' : '') + ' por averiguar' : '') + '. Se aplica solo si se cumplen las condiciones escritas arriba, y con fecha límite para decidir.'; }
+    else { color = 'Verde'; texto = pts + ' de 14 y los cinco filtros en sí. Se aplica: siguiente parada, la ruta de la propuesta.'; }
+    caja.className = 'veredicto-caja ' + ({ 'Rojo': 'rojo', 'Ámbar': 'ambar', 'Verde': 'verde' }[color] || '');
+    document.getElementById('v-color').textContent = color;
+    document.getElementById('v-texto').textContent = texto;
+    var lineas = ['Semáforo de convocatorias', 'Convocatoria: ' + document.getElementById('nombre').value, 'Proyecto y solicitante: ' + document.getElementById('proyecto').value];
+    FILTROS.forEach(function (c, i) { var v = val('f' + i); lineas.push('F' + (i + 1) + ' ' + c.q + ' ' + (v === null ? '(sin contestar)' : ['Sí', 'No sé', 'No'][v])); });
+    AJUSTES.forEach(function (c, i) { var v = val('a' + i); lineas.push('A' + (i + 1) + ' ' + c.q + ': ' + (v === null ? '(sin contestar)' : v + ', ' + c.o[v])); });
+    lineas.push('Veredicto: ' + color + '. ' + texto, 'Razón: ' + document.getElementById('razon').value, 'Para cambiar de color: ' + document.getElementById('condicion').value);
+    ultimo = lineas.join('\n');
+  }
+
+  function marcar(n, v) { var e = document.querySelector('input[name="' + n + '"][value="' + v + '"]'); if (e) e.checked = true; }
+  function ejemplo() {
+    document.getElementById('nombre').value = 'PROCODES 2027 de la CONANP (leído con las reglas 2026; las de 2027 pueden cambiar)';
+    document.getElementById('proyecto').value = 'Un componente del área recreativa de la presa de La Florida; solicitante: un grupo de al menos 5 habitantes mayores de edad, no el salón ni la UAQ';
+    [1, 0, 0, 0, 1].forEach(function (v, i) { marcar('f' + i, v); });
+    [1, 1, 1, 2, 1, 2, 1].forEach(function (v, i) { marcar('a' + i, v); });
+    document.getElementById('razon').value = 'El proyecto cabe (centro de cultura ambiental, restauración o ecoturismo) y hay tiempo, pero no sabemos si existe el grupo ni de quién es la orilla.';
+    document.getElementById('condicion').value = 'Antes del 15 de diciembre: quien da la cara pregunta en la delegación quién formaría el grupo; quien escribe consulta en la Dirección de la Reserva si la orilla es zona federal y qué pide su planeación 2027. Se decide en enero.';
+    calcula();
+  }
+  function limpiar() {
+    document.querySelectorAll('input[type=radio]').forEach(function (e) { e.checked = false; });
+    ['nombre', 'proyecto', 'razon', 'condicion'].forEach(function (id) { document.getElementById(id).value = ''; });
+    calcula();
+  }
+  function copiar() {
+    calcula();
+    var ok = function () { document.getElementById('copiado').textContent = 'Copiado.'; };
+    if (navigator.clipboard) navigator.clipboard.writeText(ultimo).then(ok, function () { window.prompt('Copia el resumen:', ultimo); });
+    else window.prompt('Copia el resumen:', ultimo);
+  }
+  dibujar();
+  calcula();
+</script>
+<script src="../curso.js"></script>
+</body>
+</html>

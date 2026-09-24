@@ -742,3 +742,58 @@ la unidad enlazados desde su semana, y cada página cargada en Chromium sin
 cabeza para confirmar que `curso.js` monta la barra, el mapa lateral, el
 telón y la barra del cuadernillo.
 
+
+## Bloque 12 (24 de septiembre de 2026): el árbol de la semana 5 reacomodado y el PROCODES completo
+
+Pedido de Eduardo: mejorar la semana 5 desde la sección 7 (árbol de
+problemas), con más ejercicios y más ejemplos, sin repetir información,
+revisando congruencia; adjuntar las Reglas de Operación del PROCODES 2026
+completas para revisarlas; una rúbrica rápida para decidir si vale la pena
+aplicar a una convocatoria, y la ruta para armar propuestas con potencial de
+ser elegidas.
+
+- **El árbol se arma en cinco movimientos** (tronco, raíces, ramas, cinco
+  pruebas, foto) y cada herramienta entra donde contesta una duda: el
+  iceberg y síntoma/causa dicen hasta dónde bajar, los cinco porqués cómo
+  bajar, la trampa del "falta" cuándo te desviaste. El gimnasio 4 se hace a
+  la mitad del bloque, no al final. Nuevas: la prueba del tronco con dos
+  preguntas y cuatro candidatos, el círculo vicioso, las cinco pruebas del
+  árbol (tarjeta, si... entonces, cotización, una idea, tamaño y dueño) y
+  tres árboles de otros lugares.
+- **Congruencia corregida.** Antes el tronco de La Florida era "no hay dónde
+  estar a gusto en la tarde", que es también una línea del muro (y entonces
+  una línea sería de todos), y las 14 tarjetas de esa línea aparecían en otra
+  caja. Ahora el tronco es "la gente del pueblo casi no usa la orilla para
+  estar y convivir" y las tres líneas (14, 9 y 4 tarjetas) bajan como raíces:
+  cada equipo carga una raíz, que es lo que la semana 7 voltea. Dos raíces
+  llegan a "la orilla no es de nadie"; la de los niños termina en hipótesis.
+  Debajo del fondo queda la hipótesis "¿es zona federal?, ¿quién firma?",
+  que es la misma duda que el semáforo no deja pasar el viernes.
+- **El viernes se ordena en cuatro tiempos:** las reglas del fondo en frío,
+  el espejo del PROCODES por cinco estaciones (una por equipo), el semáforo
+  aplicado en plenaria a un grupo de La Florida y la ruta hasta la semana 10.
+  "Leer como dictaminador" y la matriz de contexto quedaron en una sola
+  lámina. La letra chiquita pasa a tarea.
+- **Documentos nuevos en `recursos/`:** la copia del PDF de las Reglas
+  (DOF 15 de enero de 2026), la guía de lectura con mapa de las 126 páginas,
+  tabla de 52 puntos, conceptos de la Sierra Gorda, letra chiquita, hoja de
+  estaciones imprimible y un mazo de once láminas; el semáforo de
+  convocatorias (cinco filtros de sí o no, siete criterios de 0 a 2, color
+  con razón y condición); y la ruta de la propuesta (once estaciones con
+  prueba de salida, ocho señales y calendario hacia atrás).
+- **Cuatro ejercicios nuevos:** 42 ¿tronco, raíz o rama?, 43 el árbol
+  chueco, 13 cacería en las reglas, 12 el dictamen de 52 puntos. Quedan como
+  gimnasios 5 a 8 para no renumerar los que ya se citan.
+- **Hallazgos del documento que conviene saber:** el estudio de factibilidad
+  dice tres años en 3.3.1 y dos en el Anexo 3; la CURP del grupo es del año
+  en curso y la de cada beneficiario al firmar, de menos de tres meses; en
+  2023 el mínimo era de ocho personas y en 2026 es de cinco; la UAQ y su
+  personal no pueden ser beneficiarios (3.2). La lectura de las metas del
+  Anexo 13 (23.56% de solicitudes apoyadas, 26.88% de proyectos productivos
+  que permanecen) está cotejada por orden de la tabla: verificar en las
+  páginas 120 y 121 antes de proyectarla.
+- **Vocabulario.** El documento del viernes son las Reglas de Operación; los
+  Lineamientos Internos (de donde vienen dos cláusulas de La letra chiquita y
+  el "sin fracciones" de la semana 9) son otro documento de la CONANP. La
+  letra chiquita y la semana 9 ahora citan también el numeral de las Reglas
+  y enlazan la guía.

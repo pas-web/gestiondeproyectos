@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S5 · El árbol chueco</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:720px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .intro ol { margin:.4rem 0 0; padding-left:1.2rem; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .situacion { color:var(--profundo); margin:.2rem 0 .6rem; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .mini { background:#F7FAF9; border:1px solid var(--borde); border-radius:10px; padding:.6rem .8rem; margin:.4rem 0 .7rem; font-size:.93rem; }
+  .mini div { padding:.15rem 0; }
+  .mini .niv { display:inline-block; min-width:5.2rem; font-size:.68rem; letter-spacing:.09em; text-transform:uppercase; font-weight:bold; color:#7C6222; }
+  .mini .tr { font-family:Georgia,serif; color:var(--profundo); font-weight:bold; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.5rem .8rem; cursor:pointer; margin:.35rem 0; font-size:.94rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>El árbol chueco</h1>
+<p class="sub">Gimnasio · Semana 5 · Práctica libre, sin registro y sin nota.</p>
+
+<p>Ocho pedazos de árboles de problemas, cada uno con un solo defecto. Son los defectos que más aparecen cuando un grupo arma su primer árbol, y todos se corrigen con una de las cinco pruebas de la clase. Encuentra qué está chueco.</p>
+
+<div class="intro">
+  <strong>Las cinco pruebas del árbol.</strong>
+  <ol>
+    <li><strong>Tarjeta:</strong> cada caja enseña su tarjeta de la consulta, o va en otro color como hipótesis.</li>
+    <li><strong>Si... entonces:</strong> cada flecha se lee de abajo hacia arriba y suena derecha.</li>
+    <li><strong>Cotización:</strong> ninguna caja se puede cotizar; si se puede, es una solución disfrazada.</li>
+    <li><strong>Una idea por caja:</strong> sin "y", sin comas que junten dos problemas.</li>
+    <li><strong>Tamaño:</strong> el tronco cabe en lo que el grupo puede mover, y ninguna raíz queda sin dueño sin decirlo.</li>
+  </ol>
+</div>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Pasa tu propio árbol, el del muro o el de tu plantilla, por las cinco pruebas, una por una, y anota junto a cada caja qué prueba falla. Una caja puede fallar dos. Lo que se corrige hoy no se corrige en el marco lógico de la semana 8, donde ya cuesta el triple.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var casos = [
+    { arbol: [['Tronco', 'Hay problemas ambientales en la Sierra Gorda.', 1], ['Raíz', 'La gente tira basura en la presa.'], ['Raíz', 'Se tala el monte.'], ['Rama', 'Se pierde la biodiversidad.']],
+      ops: ['Las raíces no tienen tarjeta', 'El tronco es tan grande que le cabe cualquier cosa: no dice a quién le pasa, ni dónde exactamente, y ningún grupo lo mueve', 'Falta una rama', 'Está perfecto: un tronco grande da más puntos'],
+      resp: 1,
+      pista: 'Prueba 5. ¿Hay algo que pase en la Sierra Gorda que NO quepa en ese tronco?',
+      exp: 'Tronco del tamaño de un estado: todo cabe, y por eso nada se puede decidir. Se achica con tres preguntas: ¿a quién le pasa?, ¿dónde?, ¿desde cuándo o en qué temporada? "La orilla de la presa de La Florida amanece con basura cada lunes" ya se puede trabajar.' },
+    { arbol: [['Tronco', 'La gente no se queda en la presa por la tarde.', 1], ['Raíz', 'La gente se va pronto.']],
+      ops: ['La raíz es el mismo problema dicho con otras palabras: no explica nada', 'La raíz necesita una hipótesis', 'La raíz debería decir "falta sombra"', 'El tronco está mal escrito'],
+      resp: 0,
+      pista: 'Prueba 2 en voz alta: "si la gente se va pronto, entonces la gente no se queda". ¿Aprendiste algo con esa flecha?',
+      exp: 'Un porqué que da vueltas en su lugar. Pasa mucho cuando se baja de prisa: la respuesta repite la pregunta con sinónimos. La raíz tiene que traer información nueva: ¿por qué se va? ("se sienta en la piedra porque no hay dónde", "a las cinco el sol pega de frente").' },
+    { arbol: [['Tronco', 'Los pescadores del embalse sacan cada año menos mojarra.', 1], ['Raíz', 'Falta un reglamento de pesca.'], ['Raíz', 'Se pesca con red de malla chica en la temporada de cría.']],
+      ops: ['La segunda raíz es demasiado técnica', 'El tronco es una solución disfrazada', 'La primera raíz es una solución disfrazada: detrás del "falta" hay un reglamento ya decidido', 'Faltan ramas, y eso lo invalida'],
+      resp: 2,
+      pista: 'Prueba 3. ¿Cuál de las dos raíces se podría "comprar" o "tramitar" tal como está escrita?',
+      exp: 'El "falta" cerró la puerta. La segunda raíz está bien escrita y ya dice lo que el reglamento intentaría atender; la primera sobra. Si quedara algo más debajo, sería del estilo "los pescadores no se ponen de acuerdo en cuándo descansar el embalse", que deja abiertas varias respuestas: un acuerdo de asamblea, una veda comunitaria o, quizá, un reglamento.' },
+    { arbol: [['Rama', 'No hay dónde estar a gusto en la tarde.'], ['Tronco', 'Los jóvenes se van los domingos al río de otro pueblo.', 1]],
+      ops: ['Todo bien: cualquiera de los dos puede ir arriba', 'Están al revés: irse al río es lo que provoca que no haya dónde estar a gusto, no al contrario', 'Están al revés: no haber dónde estar a gusto explica que los jóvenes se vayan; irse es efecto, no problema central', 'Falta una tercera caja'],
+      resp: 2,
+      pista: 'Prueba 2, en las dos direcciones: "si no hay dónde estar a gusto, entonces los jóvenes se van" contra "si los jóvenes se van, entonces no hay dónde estar a gusto". ¿Cuál suena derecha?',
+      exp: 'Árbol de cabeza. Pasa cuando el efecto duele más que la causa (que los jóvenes se vayan es lo que la gente siente) y se sube al tronco. La prueba del si... entonces lo destapa en diez segundos. En el árbol de La Florida, irse al río es rama.' },
+    { arbol: [['Tronco', 'La gente casi no usa la orilla de la presa para estar y convivir.', 1], ['Raíz', 'No hay sombra ni baños y la gente tira basura.']],
+      ops: ['La raíz junta tres problemas en una caja, y cada uno tiene sus propios porqués', 'La raíz culpa a la gente', 'Falta marcar la raíz como hipótesis', 'El tronco es demasiado chico'],
+      resp: 0,
+      pista: 'Prueba 4. Cuenta los "y" de la caja.',
+      exp: 'Tres raíces en una caja. Así pegadas no se pueden bajar, porque cada una tiene su porqué distinto (los sabinos secos, el agua sin drenaje, nadie a cargo), y al voltear el árbol en la semana 7 saldría un objetivo con tres obras adentro. Se separan en tres tarjetas y cada una baja por su lado.' },
+    { arbol: [['Tronco', 'La gente casi no usa la orilla de la presa para estar y convivir.', 1], ['Raíz', 'No hay sombra donde la gente se junta · 14 tarjetas'], ['Raíz de fondo', 'El municipio no da presupuesto para la presa.']],
+      ops: ['La raíz de fondo es una solución disfrazada', 'La raíz de fondo no tiene tarjeta ni está marcada: es una suposición del salón que quedó con la misma pinta que lo que la gente dijo', 'Las 14 tarjetas son demasiadas', 'El tronco está mal'],
+      resp: 1,
+      pista: 'Prueba 1. ¿Quién dijo lo del presupuesto? ¿En qué entrevista?',
+      exp: 'El pálpito con traje de dato. Puede ser cierto, y no se tira: se pasa a una tarjeta de otro color con H y se pregunta. Lo grave es que quede igual que lo que sí se escuchó, porque en octubre alguien va a defender la solicitud con esa raíz como si la hubiera dicho la comunidad.' },
+    { arbol: [['Tronco', 'Las huertas de traspatio se secan en mayo.', 1], ['Raíz', 'La gente es floja y no riega.']],
+      ops: ['La raíz está bien: es honesta', 'La raíz es un juicio sobre las personas, no algo que pasa; no se puede comprobar ni mover con un proyecto', 'La raíz es un efecto', 'El tronco es una solución disfrazada'],
+      resp: 1,
+      pista: '¿Qué se observaría en campo para saber que alguien es "flojo"? ¿Y qué proyecto cambia el carácter de una persona?',
+      exp: 'La raíz que culpa. Además de ofender a quien te va a firmar la anuencia, no sirve: esconde la causa real. Se reescribe como conducta o condición observable: "en mayo el agua de la llave solo llega de noche", "la huerta está a cien metros de la toma". Casi siempre, detrás de "no quieren" hay un "no pueden" que nadie preguntó.' },
+    { arbol: [['Tronco', 'La gente casi no usa la orilla de la presa para estar y convivir.', 1], ['Raíz', 'No hay dónde estar a gusto en la tarde · equipo A'], ['Raíz', 'El agua y su orilla no invitan a acercarse · equipo B'], ['Raíz', 'Los niños no tienen dónde jugar a la vista de los adultos · sin equipo']],
+      ops: ['Hay que borrar la tercera raíz porque nadie la va a trabajar', 'Nada: es normal que una raíz se quede sola y no hace falta decirlo', 'La tercera raíz se queda en el árbol y se dice en voz alta que este semestre nadie la carga; el proyecto la reconoce aunque no la atienda', 'Hay que repartir a los dos equipos en tres'],
+      resp: 2,
+      pista: 'Prueba 5. ¿Qué va a pensar quien dictamine si ve que la raíz de los niños desapareció del árbol? ¿Y la comunidad, en la devolución?',
+      exp: 'Una raíz sin equipo no se borra: se nombra. Borrarla sería editar lo que la consulta dijo para que el proyecto se vea completo. Dejarla y decir "esta la escuchamos y este semestre no la trabajamos, por esto" es honestidad que un comité lee como madurez. Y ojo con el conteo bajo: fueron cuatro voces de un grupo que casi no se oyó.' }
+  ];
+
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué está chueco?</div><div class="mini">';
+    c.arbol.forEach(function (a) {
+      html += '<div><span class="niv">' + a[0] + '</span> <span class="' + (a[2] ? 'tr' : '') + '">' + a[1] + '</span></div>';
+    });
+    html += '</div>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div><div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

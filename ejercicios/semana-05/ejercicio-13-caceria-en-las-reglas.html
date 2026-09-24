@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S5 · Cacería en las reglas</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:720px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.2rem; margin:2.2rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .donde { color:#45605a; font-size:.92rem; margin:0 0 .6rem; }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .intro a { color:#fff; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1rem 0; }
+  .situacion { color:var(--profundo); margin:.2rem 0 .6rem; }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.5rem .8rem; cursor:pointer; margin:.35rem 0; font-size:.94rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .acierto .ref { display:block; font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; color:var(--marca); font-weight:bold; margin-bottom:.2rem; }
+  .marcador { position:sticky; top:0; background:var(--fondo); padding:.4rem 0; font-size:.9rem; color:#45605a; z-index:5; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Cacería en las reglas</h1>
+<p class="sub">Gimnasio · Semana 5 · Práctica libre, sin registro y sin nota. En clase se reparte por estaciones: una por equipo.</p>
+
+<p>Veinticinco preguntas sobre las Reglas de Operación del PROCODES 2026, publicadas en el Diario Oficial el 15 de enero de 2026: 126 páginas que casi nadie lee completas y que deciden quién recibe unos 167 millones de pesos al año en las áreas naturales protegidas del país, la Sierra Gorda incluida. Cada respuesta trae el numeral y la página donde está, para que la busques con el documento abierto y no de memoria.</p>
+
+<div class="intro">
+  Ten a la mano <a href="../../recursos/procodes-2026/ReglasDeOperacionPROCODES2026.pdf" target="_blank" rel="noopener">el PDF de las reglas</a> (o <a href="https://www.conanp.gob.mx/procodes2026/ReglasDeOperacionPROCODES2026.pdf" target="_blank" rel="noopener">el de la CONANP</a>) y <a href="../../recursos/procodes-2026.html" target="_blank" rel="noopener">la guía de lectura</a>. <strong>La regla de la cacería:</strong> antes de tocar una opción, encuentra la página. Adivinar entrena la memoria; buscar entrena el oficio.
+</div>
+
+<div class="marcador" id="marcador">0 de 25 encontradas</div>
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Haz la tabla de dos columnas con tu estación: a la izquierda el dato con su numeral y su página, a la derecha qué implica para un grupo de La Florida que quisiera pedir. Termina con una pregunta que el documento no conteste: esa se lleva a la Dirección de la Reserva, que es quien la puede contestar.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var estaciones = [
+    { t: 'Estación 1 · ¿Quién puede pedir?', d: 'Numerales 3.1 a 3.3.1 y Anexo 1 · páginas 8 a 10 y 36', q: [
+      { p: '¿Quién puede solicitar un apoyo del PROCODES?',
+        ops: ['Cualquier persona u organización interesada en la conservación', 'Asociaciones civiles con experiencia en áreas protegidas', 'Grupos organizados de mujeres y hombres de 18 años o más, y ejidos y comunidades, que sean dueños, poseedores, usufructuarios o usuarios de los recursos naturales en las localidades de los municipios del Anexo 1', 'Universidades con proyectos de investigación en la zona'],
+        r: 2, ref: 'Numeral 3.1.2 · página 8',
+        exp: 'La población objetivo es la gente que vive y usa los recursos del lugar. El programa no le da dinero a quien quiere ayudar desde fuera: se lo da a quien vive ahí.' },
+      { p: '¿Puede la UAQ ser la solicitante? ¿Y el profesor del curso?',
+        ops: ['Las dos sí, si presentan un buen proyecto', 'La UAQ no, pero el profesor sí como persona', 'Ninguna de las dos: las instituciones académicas, su personal y las personas servidoras públicas no pueden ser beneficiarias; tampoco las organizaciones de la sociedad civil', 'La UAQ sí, porque es pública'],
+        r: 2, ref: 'Numeral 3.2, fracciones II a V · página 9',
+        exp: 'Los que saben escribir proyectos quedan fuera a propósito. El papel de quien estudia esto es acompañar a la gente que sí puede pedir: escribir con ella, no por ella. Un estudiante que viva en la zona podría estar en un grupo de su localidad como habitante, no como estudiante.' },
+      { p: '¿Cuántas personas como mínimo debe tener una solicitud?',
+        ops: ['Al menos 5 por cada concepto de apoyo', 'Al menos 10 en total', 'Basta una persona con su representante', 'Depende del monto'],
+        r: 0, ref: 'Numeral 3.3.1, fracción II · páginas 9 y 10',
+        exp: 'Cinco por concepto. En las reglas de 2023 eran ocho: por eso las reglas se leen cada año y no se recuerdan. Si piden dos conceptos, la cuenta es por cada uno.' },
+      { p: '¿Arroyo Seco entra en la cobertura del programa?',
+        ops: ['No: solo entran las localidades dentro del polígono de la reserva', 'Sí: la Reserva de la Biosfera Sierra Gorda cubre Arroyo Seco, Jalpan de Serra, Landa de Matamoros, Peñamiller y Pinal de Amoles', 'Solo si la localidad es indígena', 'Solo Jalpan, que es donde está la oficina'],
+        r: 1, ref: 'Anexo 1 · página 36 (Región Centro y Eje Neovolcánico)',
+        exp: 'El Anexo 1 lista la reserva y sus municipios. La Dirección Regional que le toca a la Sierra Gorda es la de Centro y Eje Neovolcánico, con sede en Cuernavaca; la Dirección de la Reserva está en Jalpan.' },
+      { p: 'Para un grupo organizado, ¿qué CURP sirve?',
+        ops: ['Cualquiera, mientras sea legible', 'Una con fecha de emisión del año en curso (y no es obligatoria para población indígena, afromexicana o de zonas de alta marginación)', 'Una de hace menos de cinco años', 'No piden CURP'],
+        r: 1, ref: 'Numeral 3.3.1, fracción I, inciso a · página 9',
+        exp: 'La CURP impresa el año pasado no sirve, aunque sea la misma. Es de los papeles que tiran solicitudes por descuido, y se imprime en cinco minutos si alguien se acuerda.' }
+    ] },
+    { t: 'Estación 2 · ¿Cómo califican?', d: 'Numerales 3.3.2.2 y 3.3.2.3 · páginas 11 a 13', q: [
+      { p: '¿Quién dictamina las solicitudes?',
+        ops: ['Un sistema en línea que suma puntos', 'La persona titular de la CONANP', 'Un Comité Técnico por cada área protegida: la Dirección Regional preside, la Dirección del ANP es secretaria, y al menos dos vocales de los sectores social, gubernamental o académico', 'Los presidentes municipales'],
+        r: 2, ref: 'Numeral 3.3.2.2 · página 11',
+        exp: 'Gente con nombre, y la Dirección de la Reserva está sentada en la mesa. Por eso la solicitud no es solo un formato: la gente que la dictamina conoce el territorio, y conviene que conozca al grupo antes de leerlo. Los vocales no pueden recibir apoyos del programa.' },
+      { p: '¿Cuál es el puntaje máximo y cuál el mínimo para ser autorizada?',
+        ops: ['100 y 60', '52 y 20, y además la solicitud tiene que contribuir directa o indirectamente a los criterios 2 y 3', '52 y 26', 'No hay mínimo: se reparte hasta que se acaba'],
+        r: 1, ref: 'Numeral 3.3.2.2 · páginas 11 a 13',
+        exp: 'Doce criterios que suman 52. Con 20 se puede pasar, pero solo si el proyecto aporta a la planeación estratégica del área (criterio 2) y a lo que dicen su decreto o su Programa de Manejo (criterio 3). Un proyecto que no toca esos dos no pasa aunque junte 40 puntos en lo demás.' },
+      { p: 'En la tabla de 52 puntos, ¿qué bloque pesa más?',
+        ops: ['Quién participa (mujeres, jóvenes, población indígena)', 'Dónde se hace y cómo encaja en el plan del área: los criterios 1 a 3 suman 18 puntos', 'El cambio climático', 'Que sea productivo'],
+        r: 1, ref: 'Numeral 3.3.2.2 · páginas 11 y 12',
+        exp: 'Territorio y plan: 18. Sustentabilidad, continuidad y restauración (criterios 4 a 6): 15. Quién participa (7 a 10): hasta 13. Clima (11): 4. Actividad productiva (12): 2. Leída así, la tabla dice qué premian antes que qué piden.' },
+      { p: 'Si dos solicitudes empatan, ¿qué decide?',
+        ops: ['Un sorteo', 'La que pida más dinero', 'En este orden: la que beneficie directamente a más personas, la más económica y técnicamente viable, la que reutilice equipo comprado con el PROCODES el año anterior; y si siguen empatadas, la que se entregó primero sin correcciones', 'La que tenga más mujeres'],
+        r: 2, ref: 'Numeral 3.3.2.3 · página 13',
+        exp: 'El último desempate es la hora de entrega, y solo cuenta la solicitud "debidamente requisitada": sin correcciones. Llegar el primer día con todo completo vale puntos que no están en la tabla.' },
+      { p: 'Si no te notifican en el plazo, ¿qué significa?',
+        ops: ['Que siguen evaluando', 'Que tu solicitud no fue aprobada', 'Que puedes volver a meterla', 'Que te van a llamar'],
+        r: 1, ref: 'Numeral 3.3.2.4 · página 14',
+        exp: 'Diez días hábiles después del dictamen, el silencio es un no. La cuenta de los días la lleva el grupo, no la oficina.' }
+    ] },
+    { t: 'Estación 3 · ¿Qué se apoya y cuánto?', d: 'Numerales 3.4.1 y 3.4.2 y Anexo 2 · páginas 16 a 18 y 45 a 55', q: [
+      { p: '¿Qué tipos de apoyo da el programa?',
+        ops: ['Solo proyectos productivos', 'Estudios técnicos, proyectos (de restauración con fines productivos y productivos), cursos de capacitación y brigadas de contingencia ambiental', 'Becas y créditos', 'Obra pública en las comunidades'],
+        r: 1, ref: 'Numeral 3.4.1 · página 16',
+        exp: 'La primera pregunta ante cualquier convocatoria es en qué concepto cabe lo tuyo. El mejor proyecto en el concepto equivocado no se puede calificar.' },
+      { p: '¿Cuánto tiene que poner el grupo?',
+        ops: ['Nada, todo lo pone la CONANP', 'El 50 por ciento en efectivo', 'En proyectos productivos, el 20 por ciento del costo total, en especie, dinero u otro; en restauración, estudios y cursos, la CONANP cubre hasta el 100 por ciento', 'El 20 por ciento de todo, siempre en efectivo'],
+        r: 2, ref: 'Numeral 3.3.1, fracción IV · página 10; Anexo 2 · página 53',
+        exp: 'La aportación puede ser en jornales, materiales de la región, herramientas o insumos, pero se escribe con número en la memoria de cálculo. La que no se cuantifica no existe.' },
+      { p: '¿Cómo se calcula el monto que se pide?',
+        ops: ['Se pide lo que se necesita y el comité ajusta', 'Con cotizaciones libres', 'Meta en unidades del Anexo 2 por su costo unitario máximo, dentro del mínimo y máximo de unidades de ese concepto; por ejemplo, 30 colmenas por $4,500 cada una da hasta $135,000 de apoyo federal', 'Un porcentaje del presupuesto del área'],
+        r: 2, ref: 'Anexo 2 · páginas 54 y 55; Anexo 3, instrucciones 21 y 22',
+        exp: 'En el Anexo 2 cada concepto tiene su unidad (hectárea, metro cuadrado, colmena, lote) y su tope por unidad. Pedir fuera del rango es no cumplir la fracción III de los requisitos. Los apiarios, por ejemplo, van de 20 a 100 colmenas.' },
+      { p: '¿Cuánto es lo máximo que puede recibir una persona beneficiaria en el año?',
+        ops: ['$300,000', '$1,200,000, sumando todos sus conceptos, siempre dentro de los costos unitarios del Anexo 2', 'No hay máximo', '$450,000'],
+        r: 1, ref: 'Numeral 3.4.2 · página 17',
+        exp: 'El techo existe, pero casi nunca es el límite real: el límite real es cuánto le tocó al área protegida y cuántas solicitudes calificaron mejor que la tuya.' },
+      { p: '¿Qué dos porcentajes chicos cambian el presupuesto de un proyecto?',
+        ops: ['La asistencia técnica especializada no puede pasar del 10 por ciento del monto aprobado, y puede haber hasta un 17 por ciento adicional para acciones afirmativas con perspectiva de género', 'El IVA y la comisión bancaria', 'El 5 por ciento de imprevistos y el 5 de administración', 'Ninguno'],
+        r: 0, ref: 'Anexo 6 "A", punto 8 · página 79; numeral 3.4.1 · página 16',
+        exp: 'El 17 por ciento se usa cuando al menos una persona del grupo lo requiere y lo pide (por ejemplo, para cuidados), y se asienta en el acta del Comité de Seguimiento. El 10 de asistencia técnica pone límite a lo que se le paga a quien asesora.' }
+    ] },
+    { t: 'Estación 4 · ¿Cuándo, y qué pasa después?', d: 'Numerales 3.3.2.1, 3.3.2.4, 3.3.2.5, 4.1 a 4.5 · páginas 10 a 24', q: [
+      { p: '¿Cuándo se publica la convocatoria y cuánto dura abierta?',
+        ops: ['Todo el año, ventanilla abierta', 'A más tardar el último día hábil de febrero, con 15 días hábiles para entregar; y la CONANP puede publicarla desde el último trimestre del año anterior', 'En agosto, un mes', 'Cuando cada área protegida decida'],
+        r: 1, ref: 'Numerales 4.1 y 4.2 · páginas 19 y 20',
+        exp: 'Quince días hábiles son tres semanas. Nadie arma una buena solicitud en tres semanas desde cero: se arma antes de que salga, y la convocatoria solo abre la ventanilla. Y ojo: la del año que entra puede aparecer desde octubre.' },
+      { p: 'Si registras la solicitud en línea, ¿qué más tienes que hacer?',
+        ops: ['Nada, el registro basta', 'Llevar la solicitud y los documentos originales o copias certificadas a la oficina de la CONANP a más tardar 3 días hábiles después, o se desecha', 'Mandar un correo de confirmación', 'Esperar la visita de campo'],
+        r: 1, ref: 'Numeral 3.3.1, fracción VIII · página 10',
+        exp: 'El registro electrónico no sustituye la ida a la oficina. De Arroyo Seco a Jalpan hay que planearlo: quién va, en qué día, con qué copias.' },
+      { p: 'Te notifican que falta un documento. ¿Cuánto tiempo tienes?',
+        ops: ['Un mes', 'Lo que tarde el documento', '5 días hábiles desde la notificación, que llega a más tardar 3 días hábiles después de entregar; si no se corrige, se desecha', 'No te avisan: se desecha directo'],
+        r: 2, ref: 'Numeral 3.3.2.1 · páginas 10 y 11',
+        exp: 'Es la prevención: una sola vez, con cronómetro. Después de entregar, el grupo queda de guardia unos ocho días hábiles, localizable y con los papeles a la mano.' },
+      { p: 'Te aprueban un proyecto que necesita un permiso ambiental. ¿Cuánto tiempo hay para entregarlo?',
+        ops: ['Hasta que termine el proyecto', '150 días naturales desde que te notifican la autorización; si no, el proyecto se cancela', '30 días hábiles', 'El permiso lo tramita la CONANP'],
+        r: 1, ref: 'Numeral 3.3.2.4, inciso d · página 14; numeral 4.3.2, fracción III · página 21',
+        exp: 'Cinco meses parecen mucho hasta que se sabe cuánto tarda un permiso. Los papeles lentos (permisos, anuencias, actas de asamblea) se empiezan antes de pedir, no después de ganar.' },
+      { p: '¿Cómo llega el dinero y cómo se comprueba?',
+        ops: ['Todo por adelantado, en efectivo', 'Hasta el 50 por ciento en los 20 días hábiles después de firmar el convenio y el resto contra avance verificado; se comprueba con facturas verificadas en el SAT, recibos comunitarios o listas de jornales a nombre de un representante del Comité de Seguimiento, y se guarda todo cinco años', 'Al final, contra entrega de la obra', 'Mensualmente, sin comprobar'],
+        r: 1, ref: 'Numeral 3.3.2.5 · páginas 15 y 16; numeral 4.3.2, fracción VI · página 21',
+        exp: 'La mitad del dinero depende de documentar el avance. Y el proyecto no puede pasar del 31 de diciembre (numeral 4.5.3, página 24): un cronograma que se estira a enero no cabe.' }
+    ] },
+    { t: 'Estación 5 · El papel que se llena', d: 'Anexo 3 (solicitud) y Anexo 6 "A" (expediente técnico) · páginas 56 a 64 y 79 a 81', q: [
+      { p: 'Además de los datos del grupo, ¿qué pide la solicitud de proyecto sobre el proyecto mismo?',
+        ops: ['Un documento libre de diez cuartillas', 'Nombre según los tipos del Anexo 2, objetivo, las tres actividades más relevantes, ecosistema, meta, monto, fechas, y si da continuidad a procesos comunitarios', 'Solo el monto', 'Un video'],
+        r: 1, ref: 'Anexo 3, instrucciones 18 a 30 · páginas 56 a 64',
+        exp: 'Tres actividades: ahí cabe o no cabe el proyecto. En la revisión de los proyectos del curso de 2023 fue una de las causas de rechazo señaladas: actividades tan generales que el comité no podía imaginar qué iba a pasar.' },
+      { p: '¿Qué cuenta como "continuidad a procesos comunitarios" (criterio 5)?',
+        ops: ['Cualquier cosa que la comunidad haya hecho alguna vez', 'Procesos activos o generados dentro de los 2 años anteriores, diciendo cuáles y cuántos años llevan', 'Solo proyectos pagados por el PROCODES', 'No se pregunta'],
+        r: 1, ref: 'Anexo 3, instrucciones 27 y 28 · página 63',
+        exp: 'Cinco puntos que se ganan con historia: una faena que ya se hace, un comité que ya existe, un vivero que ya arrancó. Lo que el curso haga este semestre en La Florida sería, el año que entra, un proceso de menos de dos años.' },
+      { p: 'Un proyecto productivo de $350,000 en área terrestre necesita un estudio de factibilidad. ¿De cuándo puede ser?',
+        ops: ['De cualquier fecha', 'De no más de tres años, dice el numeral 3.3.1; de no más de dos, dice el Anexo 3. El documento se contradice: se usa el plazo más estricto y se pregunta por escrito a la Dirección del área', 'De este mismo año', 'No lo piden'],
+        r: 1, ref: 'Numeral 3.3.1, fracción V · página 10, contra Anexo 3, puntos 36 y 39.5 · páginas 60 y 63',
+        exp: 'Las reglas también se equivocan. Cuando dos partes del mismo documento no coinciden, no se escoge la cómoda: se cumple la más exigente y se pide la aclaración por escrito, con acuse.' },
+      { p: 'Si te aprueban, ¿qué pide el expediente técnico del proyecto?',
+        ops: ['Una foto del terreno', 'Objetivo, metas, supuestos, impactos ecológicos y socioeconómicos esperados, cronograma por mes, memoria de cálculo (jornales, materiales, herramientas, servicios, y la aportación del grupo) y plano de localización', 'Solo el presupuesto', 'Lo mismo que la solicitud'],
+        r: 1, ref: 'Anexo 6 "A" · páginas 79 a 81',
+        exp: 'Es el curso entero en un formato: supuestos y cadena (semanas 7 y 8), memoria de cálculo a dos columnas (semana 10), cronograma que cabe. Quien trae eso armado desde antes firma rápido.' },
+      { p: 'Antes de firmar el convenio, ¿qué tiene que formar el grupo?',
+        ops: ['Una asociación civil', 'Un Comité de Seguimiento (presidencia, secretaría, tesorería, con al menos una mujer en los cargos si hay mujeres en el grupo) y dos contralores sociales', 'Una cooperativa', 'Nada'],
+        r: 1, ref: 'Numeral 3.3.2.4, inciso b · página 14; Anexo 5 · página 76',
+        exp: 'Además: la opinión de cumplimiento fiscal del SAT de quien recibe el pago y una cuenta bancaria a su nombre, con documentos de menos de tres meses. Otra lista de papeles lentos que conviene tener lista antes.' }
+    ] }
+  ];
+
+  var total = 0, hallados = 0;
+  var cont = document.getElementById('casos');
+  estaciones.forEach(function (e, ei) {
+    var h = document.createElement('div');
+    h.innerHTML = '<h2>' + e.t + '</h2><p class="donde">' + e.d + '</p>';
+    cont.appendChild(h);
+    e.q.forEach(function (c, qi) {
+      total++;
+      var id = ei + '-' + qi;
+      var d = document.createElement('div');
+      d.className = 'caso';
+      var html = '<div class="situacion"><span class="num-caso">' + total + '.</span> ' + c.p + '</div>';
+      c.ops.forEach(function (op, j) {
+        html += '<button class="opcion" onclick="responder(' + ei + ',' + qi + ',' + j + ',this)">' + op + '</button>';
+      });
+      html += '<div class="pista" id="p' + id + '">Todavía no. Busca en ' + e.d.split(' · ')[1] + ' y vuelve a intentar.</div>' +
+              '<div class="acierto" id="a' + id + '"><span class="ref">' + c.ref + '</span>' + c.exp + '</div>';
+      d.innerHTML = html;
+      cont.appendChild(d);
+    });
+  });
+
+  function responder(ei, qi, j, btn) {
+    var c = estaciones[ei].q[qi], id = ei + '-' + qi;
+    var pista = document.getElementById('p' + id);
+    if (j === c.r) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      document.getElementById('a' + id).style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+      hallados++;
+      document.getElementById('marcador').textContent = hallados + ' de ' + total + ' encontradas';
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

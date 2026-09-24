@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S5 · ¿Tronco, raíz o rama?</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:760px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.2rem; margin:2.2rem 0 .3rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .contexto { color:#45605a; font-size:.95rem; margin:.2rem 0 .8rem; }
+  .tarjeta { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.8rem 1rem; margin:.7rem 0; }
+  .frase { font-family:Georgia,serif; font-style:italic; color:var(--profundo); margin:0 0 .5rem; }
+  .ops { display:flex; flex-wrap:wrap; gap:.35rem; }
+  button.op { font:inherit; font-size:.88rem; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:999px; padding:.3rem .8rem; cursor:pointer; }
+  button.op:hover { border-color:var(--marca); }
+  button.op.bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.op.mal { border-color:#C97B5D; color:#8a4b3a; }
+  button.op:disabled { cursor:default; }
+  .pista, .acierto { display:none; padding:.6rem .9rem; border-radius:0 8px 8px 0; margin-top:.6rem; font-size:.93rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .btn { font:inherit; font-weight:bold; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.5rem 1.1rem; cursor:pointer; margin:.6rem .4rem 0 0; }
+  .btn:disabled { opacity:.45; cursor:default; }
+  .cuenta { font-size:.9rem; color:#45605a; }
+  /* El árbol dibujado */
+  .arbol { display:none; background:#fff; border:1px solid var(--borde); border-radius:14px; padding:1rem; margin-top:1rem; }
+  .fila-rot { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; font-weight:bold; color:#7C6222; text-align:center; margin:.5rem 0 .3rem; }
+  .fila { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; }
+  .caja { flex:1 1 10rem; max-width:15rem; background:#F7FAF9; border:2px solid var(--borde); border-radius:10px; padding:.5rem .6rem; font-size:.86rem; line-height:1.35; }
+  .caja.efecto { background:#DDEDE8; border-color:var(--marca); }
+  .caja.tronco { background:var(--profundo); color:#fff; border-color:var(--profundo); font-family:Georgia,serif; font-size:1rem; max-width:26rem; text-align:center; }
+  .caja.hipo { background:#FBF0EE; border:2px dashed #C97B5D; }
+  .caja.hipo::before { content:"hipótesis"; display:block; font-size:.6rem; letter-spacing:.09em; text-transform:uppercase; color:var(--rojo); font-weight:bold; }
+  .columnas { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; }
+  .columna { flex:1 1 10rem; max-width:15rem; display:flex; flex-direction:column; gap:.35rem; }
+  .columna .caja { max-width:none; flex:none; }
+  .columnas { align-items:flex-start; }
+  .columna .caja + .caja::before { content:"¿y eso por qué?"; display:block; font-size:.6rem; letter-spacing:.08em; text-transform:uppercase; color:var(--arena); font-weight:bold; }
+  .columna .caja.hipo + .caja::before, .columna .caja + .caja.hipo::before { content:"hipótesis · ¿y eso por qué?"; color:var(--rojo); }
+  .canasta { margin-top:.9rem; background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.6rem .9rem; font-size:.9rem; }
+  .circulo { margin-top:.6rem; background:#EEF6F0; border-left:4px solid var(--marca); border-radius:0 10px 10px 0; padding:.6rem .9rem; font-size:.9rem; }
+  .candidato { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.8rem 1rem; margin:.7rem 0; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.5rem .8rem; cursor:pointer; margin:.35rem 0; font-size:.94rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>¿Tronco, raíz o rama?</h1>
+<p class="sub">Gimnasio · Semana 5 · Práctica libre, sin registro y sin nota.</p>
+
+<p>El árbol de La Florida se arma en clase con las tarjetas de la consulta. Aquí el mismo oficio se entrena con otros tres lugares: una milpa en ladera, un manantial que se queda corto en la seca y una prepa que se vacía. Son ejemplos armados para entrenar el ojo, no diagnósticos de ninguna comunidad real. En cada caso hay ocho tarjetas revueltas. Decide dónde va cada una y, al final, mira el árbol que se forma.</p>
+
+<div class="intro">
+  Cuatro lugares posibles para una tarjeta. <strong>Tronco</strong>: el problema central, el que las demás explican o del que se desprenden. <strong>Raíz</strong>: una causa, contesta "¿y eso por qué pasa?". <strong>Rama</strong>: un efecto, contesta "¿y eso qué provoca?". <strong>Solución disfrazada</strong>: una obra o una compra escondida detrás de un "falta" o un "no hay"; no va en el árbol, se reescribe.
+</div>
+
+<h2>Parte 1 · Acomodar las tarjetas</h2>
+<div id="casos"></div>
+
+<h2>Parte 2 · El tronco del tamaño justo</h2>
+<p>El tronco es la decisión más difícil del árbol, y casi siempre se equivoca por tamaño: tan grande que cabe todo el municipio, tan chico que es una sola tarjeta, o tan concreto que ya trae la obra. En cada caso hay cuatro candidatos. Elige el que sirve.</p>
+<div id="troncos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Copia las ocho tarjetas de un caso en papelitos. Pon el tronco al centro de una hoja, las raíces abajo y las ramas arriba, y lee cada flecha en voz alta con la prueba del "si... entonces": "si el aguacero se lleva la tierra, entonces la milpa da menos maíz". Si una lectura suena al revés, la tarjeta está en el nivel equivocado. Las soluciones disfrazadas se reescriben en la orilla de la hoja como lo que le pasa a la gente.</p>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var NIVELES = [['tronco', 'Tronco'], ['causa', 'Raíz'], ['efecto', 'Rama'], ['solucion', 'Solución disfrazada']];
+  var casos = [
+    { titulo: 'La milpa de las laderas',
+      contexto: 'Una comunidad de la Sierra Gorda con milpa de temporal en terrenos con pendiente.',
+      tarjetas: [
+        { t: 'La milpa de las laderas da cada año menos maíz.', n: 'tronco', exp: 'Es lo que las demás tarjetas explican o provocan. Está dicho como lo que pasa, con lugar, y es del tamaño de lo que un grupo puede mover.' },
+        { t: 'Se siembra a favor de la pendiente y cada aguacero se lleva la tierra.', n: 'causa', exp: 'Raíz: contesta por qué la milpa da menos. Prueba del si... entonces: si el aguacero se lleva la tierra, entonces la milpa rinde menos. Se lee derecho.' },
+        { t: 'El rastrojo se quema o se vende, y el suelo se queda pelón toda la seca.', n: 'causa', exp: 'Otra raíz, distinta de la primera: la primera habla de agua y pendiente, esta de materia orgánica. Un problema casi nunca tiene una sola causa.' },
+        { t: 'La semilla nativa se cruzó con la comprada y ya no aguanta la sequía como antes.', n: 'causa', hipo: true, exp: 'Raíz, y de las que conviene marcar como hipótesis hasta tener tarjeta: suena a saber de la casa, pero alguien tiene que haberlo dicho o se tiene que poder ver en campo.' },
+        { t: 'Los que sabían trazar curvas de nivel se fueron, y nadie enseñó a los de ahora.', n: 'causa', bajo: 1, exp: 'Raíz, y más honda que las otras: contesta por qué se sigue sembrando a favor de la pendiente. En el árbol va debajo de esa tarjeta, no al lado. Es la que un curso o un intercambio de productor a productor podría mover.' },
+        { t: 'Las familias compran maíz en la tienda de marzo en adelante.', n: 'efecto', exp: 'Rama: es lo que provoca que la milpa rinda menos. Nadie lo va a resolver directamente, pero en la semana 8 de ahí puede salir un indicador de resultado.' },
+        { t: 'Se abren parcelas nuevas en el monte para completar.', n: 'efecto', circulo: true, exp: 'Rama... y mira a dónde lleva: abrir monte en ladera es sembrar otra vez a favor de la pendiente, que es una raíz. Cuando un efecto alimenta a una de sus propias causas, el árbol tiene un círculo vicioso, y cortarlo en un punto mueve todo lo demás.' },
+        { t: 'Faltan terrazas.', n: 'solucion', re: 'La tierra de la ladera se va con cada aguacero.', exp: 'Una obra detrás de un "falta". Las terrazas pueden ser la respuesta, o pueden serlo las barreras vivas, o el cultivo de cobertera: la frase ya cerró la puerta a las demás. Se reescribe como lo que pasa.' }
+      ] },
+    { titulo: 'El agua de El Madroño',
+      contexto: 'Un rancho con toma domiciliaria que baja por manguera desde un manantial en el cerro.',
+      tarjetas: [
+        { t: 'De marzo a mayo las casas de El Madroño se quedan sin agua en la llave.', n: 'tronco', exp: 'El tronco: lo que pasa, a quién y cuándo. Nota que no dice "falta agua": dice qué le pasa a la gente y en qué temporada.' },
+        { t: 'El manantial da menos agua cada año en la seca.', n: 'causa', hipo: true, exp: 'Raíz. Y es de las que tientan a bajar de oídas ("es por el cambio climático"): el siguiente porqué necesita tarjeta o se marca como hipótesis. ¿Alguien midió? ¿Qué pasó arriba del manantial?' },
+        { t: 'La manguera pierde agua en el camino y nadie la repara.', n: 'causa', exp: 'Raíz: aunque el manantial diera lo mismo, a la llave llega menos. Es la causa más barata de atender, y por eso la más fácil de ignorar cuando alguien ya está pensando en una obra grande.' },
+        { t: 'El agua de lluvia de los techos se va al arroyo sin que nadie la guarde.', n: 'causa', exp: 'Raíz, bien escrita: podría haber dicho "no hay tinacos" y habría sido una compra. Dicha así deja abiertas varias respuestas (cisterna, ferrocemento, olla, tinaco).' },
+        { t: 'El comité del agua no cobra la cuota y no tiene con qué comprar refacciones.', n: 'causa', bajo: 2, exp: 'Raíz de fondo: contesta por qué nadie repara la manguera. Va debajo de esa tarjeta. Es organización, no tubería, y los proyectos que solo compran manguera nueva la vuelven a ver rota en dos años.' },
+        { t: 'Las mujeres acarrean agua hasta dos horas al día.', n: 'efecto', exp: 'Rama: lo que provoca quedarse sin agua. Ojo con quién carga el efecto: la pregunta de quién sufre el problema es la misma que luego decide quién tiene que estar en el grupo.' },
+        { t: 'Se venden animales en la seca porque no hay con qué darles de beber.', n: 'efecto', exp: 'Rama: otro efecto, ahora en el ingreso de la familia.' },
+        { t: 'No hay tinacos.', n: 'solucion', re: 'El agua de lluvia se va sin que nadie la guarde.', exp: 'Una compra detrás de un "no hay". Ya está en el árbol dicha como problema (la lluvia que se va), así que esta tarjeta sobra.' }
+      ] },
+    { titulo: 'La prepa que se vacía',
+      contexto: 'Una comunidad con telebachillerato a veinte minutos en camión.',
+      tarjetas: [
+        { t: 'Los muchachos de la comunidad dejan la prepa antes de terminarla.', n: 'tronco', exp: 'El tronco, dicho como lo que pasa y a quién.' },
+        { t: 'El camión pasa dos veces al día y el pasaje pesa en el gasto de la casa.', n: 'causa', exp: 'Raíz: una causa de dinero y de horario a la vez.' },
+        { t: 'A los dieciséis ya se les necesita en la parcela o en la obra.', n: 'causa', exp: 'Raíz: la familia necesita sus manos. Ningún proyecto de becas la mueve sola, y por eso conviene que quede a la vista.' },
+        { t: 'No ven cómo la prepa les sirve para quedarse a vivir aquí.', n: 'causa', hipo: true, exp: 'Raíz, y probablemente la que más pesa; pero si nadie en la consulta lo dijo con esas palabras, va como hipótesis. Una entrevista a cinco muchachos la confirma o la tumba.' },
+        { t: 'En la casa nadie terminó la secundaria y la escuela se siente ajena.', n: 'causa', bajo: 3, hipo: true, exp: 'Raíz de fondo, debajo de "no ven cómo les sirve". Cuidado con el tono: se escribe como lo que pasa, no como culpa de nadie.' },
+        { t: 'Se van a trabajar a Querétaro o al otro lado.', n: 'efecto', exp: 'Rama.' },
+        { t: 'La cooperativa del pueblo no encuentra quién le lleve las cuentas.', n: 'efecto', exp: 'Rama, y de las interesantes: un efecto que conecta con otro problema del pueblo. Aquí suele esconderse un aliado para el proyecto.' },
+        { t: 'Falta una beca.', n: 'solucion', re: 'El pasaje y el tiempo de la escuela pesan en el gasto de la casa.', exp: 'La solución favorita de todos, detrás de un "falta". La beca puede ser parte de la respuesta, pero la frase no dice qué le pasa a nadie y deja fuera las otras dos raíces.' }
+      ] }
+  ];
+
+  var troncos = [
+    { caso: 'La presa de La Florida, con sus tres montones: "No hay dónde estar a gusto en la tarde" (14 tarjetas), "El agua y su orilla" (9) y "Los niños no tienen dónde" (4).',
+      ops: ['Hay problemas ambientales en la Sierra Gorda.', 'No hay dónde estar a gusto en la tarde.', 'La gente del pueblo casi no usa la orilla de la presa para estar y convivir.', 'Falta un parque en la presa.'],
+      resp: 2,
+      pista: 'Prueba cada candidato con los tres montones: ¿cada montón contesta el "por qué pasa esto" del candidato?',
+      exp: 'El tercero. Los tres montones contestan su porqué: no se quedan porque no hay dónde estar a gusto, porque el agua y la orilla no invitan, porque los niños no tienen dónde. El primero es tan grande que cabe todo el estado; el segundo es uno de los montones (una raíz grande, no el tronco), y si fuera el tronco su línea sería de todos y no de un equipo; el cuarto es una obra con un "falta" adelante.' },
+    { caso: 'Una cooperativa de miel con estas tarjetas: "la miel se vende a granel al primer coyote", "no tienen dónde envasar", "las colmenas bajaron de 60 a 35 en tres años", "los jóvenes no quieren entrarle a las abejas".',
+      ops: ['La cooperativa gana cada año menos con la miel.', 'Faltan envases y etiqueta.', 'La apicultura en México está en crisis.', 'La miel se vende a granel al primer coyote.'],
+      resp: 0,
+      pista: '¿Cuál de los cuatro es algo que les pasa a ellos, del tamaño de lo que ellos pueden mover, y que las cuatro tarjetas explican?',
+      exp: 'El primero: las cuatro tarjetas son porqués de que ganen menos. "Faltan envases" es compra disfrazada; "la apicultura en México" es tan grande que no se mueve en un semestre ni en diez; "se vende a granel" es una raíz fuerte, pero es una sola tarjeta.' },
+    { caso: 'Un ejido con tarjetas sobre el monte: "entra ganado suelto al área que se reforestó", "las plantas del vivero llegan chicas y en mala época", "nadie da el riego de auxilio el primer año".',
+      ops: ['Se necesita un proyecto de reforestación.', 'La mayoría de los árboles que se plantan en el ejido no llega al segundo año.', 'El ganado se come los arbolitos.', 'Hay deforestación.'],
+      resp: 1,
+      pista: 'Uno de los candidatos es una solución, otro es una sola tarjeta y otro no dice dónde ni a quién.',
+      exp: 'El segundo: las tres tarjetas contestan por qué los árboles no sobreviven. "Se necesita un proyecto" es la solución más disfrazada de todas; "el ganado se come los arbolitos" es una de las tres raíces; "hay deforestación" es cierto y no se puede trabajar: no dice dónde, a quién ni desde cuándo.' }
+  ];
+
+  var estado = [];
+  var cont = document.getElementById('casos');
+  casos.forEach(function (c, ci) {
+    estado[ci] = 0;
+    var d = document.createElement('div');
+    var html = '<h3 style="font-family:Georgia,serif;color:var(--profundo);margin:1.4rem 0 .1rem">' + (ci + 1) + '. ' + c.titulo + '</h3>' +
+               '<p class="contexto">' + c.contexto + '</p>';
+    c.tarjetas.forEach(function (t, ti) {
+      html += '<div class="tarjeta"><p class="frase">"' + t.t + '"</p><div class="ops">';
+      NIVELES.forEach(function (nv) {
+        html += '<button class="op" onclick="elegir(' + ci + ',' + ti + ',\'' + nv[0] + '\',this)">' + nv[1] + '</button>';
+      });
+      html += '</div><div class="pista" id="p' + ci + '-' + ti + '"></div><div class="acierto" id="a' + ci + '-' + ti + '">' + t.exp + '</div></div>';
+    });
+    html += '<button class="btn" id="ver' + ci + '" onclick="dibujar(' + ci + ')" disabled>Ver el árbol</button> <span class="cuenta" id="cuenta' + ci + '">0 de ' + c.tarjetas.length + ' acomodadas</span>' +
+            '<div class="arbol" id="arbol' + ci + '"></div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+
+  var PISTAS = {
+    tronco: 'Pregúntale a las demás tarjetas: ¿esta es lo que todas explican? Si es solo una de varias causas, no es el tronco.',
+    causa: 'Lee la flecha en voz alta: "si esto pasa, entonces pasa el problema". ¿Suena derecho o al revés?',
+    efecto: '¿Esta tarjeta explica el problema, o es algo que pasa por culpa del problema?',
+    solucion: '¿Se puede cotizar en una ferretería o en una oficina? Si no, es algo que le pasa a alguien.'
+  };
+
+  function elegir(ci, ti, nivel, btn) {
+    var t = casos[ci].tarjetas[ti];
+    var pista = document.getElementById('p' + ci + '-' + ti);
+    if (nivel === t.n) {
+      btn.classList.add('bien');
+      pista.style.display = 'none';
+      document.getElementById('a' + ci + '-' + ti).style.display = 'block';
+      btn.parentNode.querySelectorAll('.op').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .45; });
+      estado[ci]++;
+      document.getElementById('cuenta' + ci).textContent = estado[ci] + ' de ' + casos[ci].tarjetas.length + ' acomodadas';
+      if (estado[ci] === casos[ci].tarjetas.length) document.getElementById('ver' + ci).disabled = false;
+    } else {
+      btn.classList.add('mal');
+      pista.textContent = PISTAS[nivel === 'tronco' ? 'tronco' : t.n];
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('mal'); }, 1200);
+    }
+  }
+
+  function caja(t, clase) {
+    return '<div class="caja ' + clase + (t.hipo ? ' hipo' : '') + '">' + t.t + '</div>';
+  }
+
+  function dibujar(ci) {
+    var c = casos[ci], ts = c.tarjetas;
+    var efectos = ts.filter(function (t) { return t.n === 'efecto'; });
+    var tronco = ts.filter(function (t) { return t.n === 'tronco'; })[0];
+    var sol = ts.filter(function (t) { return t.n === 'solucion'; });
+    var html = '<div class="fila-rot">Ramas · ¿y eso qué provoca?</div><div class="fila">';
+    efectos.forEach(function (t) { html += caja(t, 'efecto'); });
+    html += '</div><div class="fila-rot">Tronco</div><div class="fila">' + caja(tronco, 'tronco') + '</div>';
+    html += '<div class="fila-rot">Raíces · ¿y eso por qué pasa?</div><div class="columnas">';
+    ts.forEach(function (t, i) {
+      if (t.n !== 'causa' || t.bajo !== undefined) return;
+      html += '<div class="columna">' + caja(t, '');
+      ts.forEach(function (h) { if (h.bajo === i) html += caja(h, ''); });
+      html += '</div>';
+    });
+    html += '</div>';
+    var circ = ts.filter(function (t) { return t.circulo; });
+    if (circ.length) html += '<div class="circulo"><strong>Círculo vicioso.</strong> "' + circ[0].t + '" es rama, y al mismo tiempo alimenta una raíz. En el muro se dibuja con una flecha que regresa de arriba abajo.</div>';
+    sol.forEach(function (t) {
+      html += '<div class="canasta"><strong>Fuera del árbol:</strong> "' + t.t + '" se reescribió como "' + t.re + '"</div>';
+    });
+    var hip = ts.filter(function (t) { return t.hipo; }).length;
+    html += '<p class="cuenta" style="margin:.8rem 0 0">Cajas en otro color: ' + hip + '. Son hipótesis hasta que alguien enseñe su tarjeta, o hasta que un ensayo como el de la semana 6 las confirme o las tumbe.</p>';
+    var a = document.getElementById('arbol' + ci);
+    a.innerHTML = html;
+    a.style.display = 'block';
+  }
+
+  var tc = document.getElementById('troncos');
+  troncos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'candidato';
+    var html = '<p style="margin:.1rem 0 .5rem;color:var(--profundo)"><strong>' + (i + 1) + '.</strong> ' + c.caso + '</p>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" onclick="tronco(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="tp' + i + '">' + c.pista + '</div><div class="acierto" id="ta' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    tc.appendChild(d);
+  });
+
+  function tronco(i, j, btn) {
+    var c = troncos[i];
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      document.getElementById('tp' + i).style.display = 'none';
+      document.getElementById('ta' + i).style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+    } else {
+      btn.classList.add('elegida-mal');
+      document.getElementById('tp' + i).style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>
