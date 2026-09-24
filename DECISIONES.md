@@ -823,3 +823,29 @@ ser elegidas.
   los montones reales. El viernes ya no nombra el semáforo antes de
   explicarlo. Pendiente de revisar con la misma regla: el paso 5 del conteo
   (sección 4 del jueves) todavía usa montones inventados de antes de la mesa.
+
+## Bloque 14 (24 de septiembre de 2026): los equipos voltean su raíz en la semana 5
+
+- **Los oficios dejan de repartirse.** Todos escriben, consiguen números y dan
+  la cara; cada equipo solo nombra quién cuida que ninguna de esas chambas se
+  quede sin hacer. Sale la ronda de postulación de un minuto y la lámina de
+  la capa técnica.
+- **La sección 8 del jueves es ahora "Del árbol de problemas al árbol de
+  objetivos"**, con la regla de explicar, ejemplificar y ejercitar: esquema
+  del árbol de objetivos (fines, objetivo central, medios, línea estratégica
+  enmarcada), qué es una línea estratégica y cómo se voltea sin volver obra,
+  el ejemplo de la raíz "el lugar está descuidado" volteada en "Cuidado de la
+  orilla", y dos ejercicios: formar los tres equipos por primera y segunda
+  opción, y voltear cada raíz con su línea estratégica.
+- **El gimnasio 3 (Mi línea, mi equipo) se rehízo:** primera y segunda opción
+  con una tarjeta, la raíz del equipo con sus cajas del árbol de problemas
+  para voltear una por una (avisa si se cuela una obra o queda en negativo),
+  nombre y propósito de la línea, dibujo del árbol de objetivos y copia a la
+  bitácora. Guarda en el navegador. Las tres preguntas del viernes quedan al
+  final.
+- **Semana 7:** "El volteo" pasa a "El volteo, corregido": ya no se voltea de
+  cero, se revisa el árbol de objetivos de la semana 5 con lo que el
+  prototipo contestó, y la línea estratégica se estira en cadena.
+- En el árbol de problemas se explica qué es una caja, el tronco trae un
+  ejemplo por cada forma de equivocarse, y las cinco pruebas traen un ejemplo
+  con las tarjetas de la mesa.

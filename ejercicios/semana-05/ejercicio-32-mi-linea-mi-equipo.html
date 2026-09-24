@@ -5,116 +5,224 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gimnasio S5 · Mi línea, mi equipo</title>
 <style>
-  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; }
   * { box-sizing:border-box; }
   body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
-  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  main { max-width:720px; margin:0 auto; padding:1.2rem 1rem 4rem; }
   h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
   .sub { color:#45605a; margin-top:0; }
-  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
-  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.1rem; margin:.1rem 0 .3rem; }
-  .porque { font-size:.92rem; color:#68807a; margin:.1rem 0 .5rem; }
-  textarea { width:100%; min-height:80px; font:inherit; font-size:.98rem; border:2px solid var(--borde); border-radius:8px; padding:.6rem .8rem; resize:vertical; background:#FDFEFD; }
-  textarea:focus { outline:none; border-color:var(--marca); }
-  .btn-copiar { font:inherit; font-size:.85rem; background:#fff; color:var(--marca); border:2px solid var(--borde); border-radius:999px; padding:.3rem .9rem; cursor:pointer; margin-top:.4rem; }
-  .btn-copiar:hover { border-color:var(--marca); }
   .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
   .reglas strong { color:var(--arena); }
-  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
-  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
-  #btn-todo { display:block; margin:1.4rem auto 0; font:inherit; font-weight:bold; background:var(--marca); color:#fff; border:none; border-radius:999px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.02rem; }
+  .reglas ol { margin:.4rem 0 0; padding-left:1.2rem; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.12rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.93rem; color:#5b7671; margin:.1rem 0 .6rem; }
+  .lineas label { display:block; border:2px solid var(--borde); border-radius:10px; padding:.5rem .8rem; margin:.35rem 0; cursor:pointer; background:#fff; }
+  .lineas label:has(input:checked) { border-color:var(--marca); background:#E4EFEB; }
+  .lineas input { margin-right:.5rem; }
+  .lineas small { display:block; color:#5b7671; margin-left:1.6rem; }
+  input[type=text] { width:100%; font:inherit; font-size:.97rem; border:2px solid var(--borde); border-radius:8px; padding:.45rem .7rem; background:#FDFEFD; margin-top:.4rem; }
+  input[type=text]:focus { outline:none; border-color:var(--marca); }
+  .par { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; align-items:start; padding:.6rem 0; border-bottom:1px dashed var(--borde); }
+  .par:last-child { border-bottom:none; }
+  .par .prob { font-size:.93rem; color:#6B2F22; background:#FBF0EE; border-radius:8px; padding:.45rem .6rem; }
+  .par .prob small { display:block; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:#8A3B2B; font-weight:bold; }
+  .par input { margin-top:0; }
+  .par .aviso { grid-column:2; color:var(--rojo); font-size:.84rem; min-height:0; margin:-.2rem 0 0; }
+  @media (max-width:600px) { .par { grid-template-columns:1fr; } .par .aviso { grid-column:1; } }
+  .fijo { background:#0F6E6E; color:#fff; border-radius:10px; padding:.55rem .8rem; font-family:Georgia,serif; }
+  .resultado { background:#fff; border:2px solid var(--profundo); border-radius:12px; padding:1rem 1.2rem; margin:1.4rem 0; }
+  .resultado h2 { font-family:Georgia,serif; color:var(--profundo); font-size:1.15rem; margin:0 0 .5rem; }
+  .arbol .fila-rot { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; font-weight:bold; color:#7C6222; margin:.5rem 0 .25rem; }
+  .arbol .c { border-radius:8px; padding:.4rem .6rem; margin:.25rem 0; font-size:.93rem; border:2px solid var(--borde); background:#F7FAF9; }
+  .arbol .c.obj { background:#0F6E6E; color:#fff; border-color:#0F6E6E; font-family:Georgia,serif; }
+  .arbol .c.medio { border-color:var(--marca); background:#fff; }
+  .arbol .c.h { border-style:dashed; border-color:#C97B5D; background:#FBF0EE; }
+  .arbol .sangria { margin-left:1.4rem; }
+  .arbol .linea-est { border:3px dashed var(--arena); border-radius:12px; padding:.5rem .7rem; margin-top:.4rem; }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.5rem 1.1rem; cursor:pointer; margin:.7rem .4rem 0 0; background:var(--marca); color:#fff; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
   .aviso-copiado { color:var(--marca); font-weight:bold; font-size:.9rem; margin-left:.3rem; }
   #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
-  body.proyector { font-size:1.4rem; }
-  body.proyector textarea { font-size:1.25rem; }
+  body.proyector { font-size:1.35rem; }
+  body.proyector input[type=text] { font-size:1.2rem; }
 </style>
 </head>
 <body>
 <main>
 <h1>Mi línea, mi equipo</h1>
-<p class="sub">Gimnasio · Semana 5 · La primera mitad se llena antes del jueves; la última pregunta, antes del viernes.</p>
+<p class="sub">Gimnasio · Semana 5 · En clase, el jueves: cinco minutos para elegir y veinte, por equipo, para voltear.</p>
 
-<p>El jueves te vas a postular a una línea de trabajo, y postularse es un acto con evidencia. Este ejercicio arma tu postulación, deja claro qué oficio aportas y prepara tus preguntas para el documento del viernes.</p>
+<p>Dos cosas en una página. Primero eliges a qué raíz del árbol de La Florida quieres entrar; con eso se forman los tres equipos. Después, ya en equipo, se voltea esa raíz a árbol de objetivos: cada caja del problema se reescribe como la situación ya resuelta, y la rama volteada se vuelve la <strong>línea estratégica</strong> del equipo, el camino que va a trabajar el resto del semestre.</p>
 
 <div class="reglas">
-  Recuerda los <strong>tres oficios</strong> de todo equipo: quien <strong>escribe</strong>, quien trae los <strong>números</strong> y quien <strong>da la cara</strong>. En tu postulación no digas solo qué línea te gusta: di qué oficio le pones encima.
+  <strong>Cómo se forman los equipos</strong>
+  <ol>
+    <li>Cada quien elige primera y segunda opción, con una tarjeta del muro que respalde la primera.</li>
+    <li>Los nombres se pegan en el pizarrón debajo de su primera opción.</li>
+    <li>Si una raíz tiene de más, se mueve quien la tenga como segunda opción, hasta que los tres equipos queden parejos. Si no pones segunda opción, el grupo decide por ti.</li>
+  </ol>
 </div>
 
 <div class="caso">
-  <h2>1 · Mi línea y su evidencia</h2>
-  <p class="porque">A qué línea te postulas y qué del registro la respalda: conteos, frases textuales, marcas del mapa. Mínimo dos evidencias que no sean tu opinión.</p>
-  <textarea id="r1" placeholder='Ej.: La línea del estar: 8 menciones de sombra, la frase "las fiestas se hacían aquí" y el racimo de marcas junto al sabino...'></textarea>
-  <button class="btn-copiar" onclick="copiar('r1', this)">Copiar</button>
+  <h2>1 · Mi primera opción</h2>
+  <div class="lineas" id="op1"></div>
+  <input type="text" id="tarjeta" placeholder='Una tarjeta del muro que la respalde. Ej.: "no hay donde llegar a sentarse"' oninput="todo()">
 </div>
 
 <div class="caso">
-  <h2>2 · El problema, dicho como problema</h2>
-  <p class="porque">Redacta la línea sin obra escondida en el nombre. Si tu redacción trae palapa, muelle o chapoteadero, todavía no es problema: es solución impaciente.</p>
-  <textarea id="r2" placeholder="Ej.: En la orilla no hay dónde estar a gusto entre las 2 y las 6 de la tarde, que es cuando la gente puede ir..."></textarea>
-  <button class="btn-copiar" onclick="copiar('r2', this)">Copiar</button>
+  <h2>2 · Mi segunda opción</h2>
+  <div class="lineas" id="op2"></div>
 </div>
 
 <div class="caso">
-  <h2>3 · Mi oficio en el equipo</h2>
-  <p class="porque">Cuál de los tres oficios aportas (escribe / números / da la cara), con qué prueba, y cuál quieres desarrollar aunque no sea tu fuerte (tu contrato de gestión tiene la pista).</p>
-  <textarea id="r3" placeholder="Ej.: Aporto números: llevo las cuentas del rancho de mi casa. Quiero desarrollar dar la cara, que es justo la habilidad de mi contrato..."></textarea>
-  <button class="btn-copiar" onclick="copiar('r3', this)">Copiar</button>
+  <h2>3 · Nuestra raíz, volteada</h2>
+  <p class="porque">Ya en equipo. Elige la raíz que les tocó y reescribe cada caja como la situación lograda: lo que se ve cuando el problema ya no está. Sin obras (bancas, botes, muelle): esas son maneras de lograrlo, y se deciden después. Las cajas marcadas como hipótesis siguen siéndolo.</p>
+  <div class="lineas" id="eq"></div>
+  <div id="volteo"></div>
 </div>
 
 <div class="caso">
-  <h2>4 · La capa técnica de mi línea</h2>
-  <p class="porque">Lo que ustedes saben y nadie más va a poner sobre la mesa: suelo, especies, temporada de agua, qué aguanta pisoteo y qué no. Qué le dice esa capa a tu línea.</p>
-  <textarea id="r4" placeholder="Ej.: La zona más marcada tiene talud suelto en la parte norte; cualquier área de estar tendría que cargarse al sur, donde el piso es firme..."></textarea>
-  <button class="btn-copiar" onclick="copiar('r4', this)">Copiar</button>
+  <h2>4 · Nuestra línea estratégica</h2>
+  <p class="porque">Un nombre corto, de dos a cuatro palabras, y una oración que diga qué busca lograr. Ejemplo: <em>Cuidado de la orilla. Busca que los caminos y la orilla estén abiertos y limpios, y que alguien quede a cargo de mantenerlos así.</em></p>
+  <input type="text" id="lnombre" placeholder="Nombre de la línea" oninput="todo()">
+  <input type="text" id="lbusca" placeholder="Busca que..." oninput="todo()">
+</div>
+
+<div class="resultado">
+  <h2>Nuestro árbol de objetivos</h2>
+  <div class="arbol" id="arbol"><p class="porque">Elige la raíz del equipo y empieza a voltear: aquí se dibuja.</p></div>
+  <button class="btn" onclick="copiar(this)">Copiar a la bitácora</button>
+  <button class="btn claro" onclick="ejemplo()">Ver el ejemplo de clase</button>
+  <button class="btn claro" onclick="borrar()">Borrar</button>
 </div>
 
 <div class="caso">
-  <h2>5 · Nombre provisional del componente</h2>
-  <p class="porque">Un nombre de trabajo, honesto y sin mercadotecnia. Se puede cambiar; lo que no se puede es no saber cómo llamarle a lo tuyo.</p>
-  <textarea id="r5" placeholder="Ej.: Componente de sombra y estar (zona del sabino)..." style="min-height:56px"></textarea>
-  <button class="btn-copiar" onclick="copiar('r5', this)">Copiar</button>
-</div>
-
-<div class="caso">
-  <h2>6 · Mis tres preguntas para las reglas</h2>
-  <p class="porque">Antes del viernes: las tres cosas que esperas que el documento del fondo responda. Van al pizarrón y al final de la sesión se revisa cuáles contestó y cuáles no.</p>
-  <textarea id="r6" placeholder="Ej.: ¿Cuánto puede pedir cada equipo? ¿Quién decide y con qué cara nos lo dice? ¿Qué pasa si no gastamos todo?..."></textarea>
-  <button class="btn-copiar" onclick="copiar('r6', this)">Copiar</button>
-</div>
-
-<button id="btn-todo" onclick="copiarTodo(this)">Copiar todo a la bitácora</button>
-
-<div class="cuaderno">
-  <h2>Si trabajas en cuaderno</h2>
-  <p>Los mismos seis bloques. Los primeros cinco se llevan el jueves a la postulación; el sexto se lleva el viernes en la mano, porque las preguntas van al pizarrón antes de que el documento se reparta.</p>
+  <h2>Para el viernes · tres preguntas para las reglas del fondo</h2>
+  <p class="porque">Tres cosas que esperas que el documento del fondo conteste. Van al pizarrón antes de que se reparta.</p>
+  <input type="text" id="q1" placeholder="Ej.: ¿cuánto puede pedir cada equipo?" oninput="guarda()">
+  <input type="text" id="q2" placeholder="Ej.: ¿quién decide y cómo nos lo dice?" oninput="guarda()">
+  <input type="text" id="q3" placeholder="Ej.: ¿qué pasa si no gastamos todo?" oninput="guarda()">
 </div>
 
 <button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
 
 <script>
-  var TITULOS = ['Mi línea y su evidencia', 'El problema, dicho como problema', 'Mi oficio en el equipo', 'La capa técnica de mi línea', 'Nombre provisional del componente', 'Mis tres preguntas para las reglas'];
-  function marcar(btn) {
-    var aviso = document.createElement('span');
-    aviso.className = 'aviso-copiado';
-    aviso.textContent = 'copiado';
-    btn.after(aviso);
-    setTimeout(function () { aviso.remove(); }, 1500);
+  var TRONCO = 'La gente casi no usa la orilla de la presa para quedarse, convivir y divertirse';
+  var OBJETIVO = 'La gente usa la orilla de la presa para quedarse, convivir y divertirse';
+  var RAICES = [
+    { t: 'No hay cómo quedarse a gusto', d: 'dónde sentarse y comer, sombra',
+      cajas: [ { p: 'No hay cómo quedarse a gusto', n: 0 },
+               { p: 'No hay dónde sentarse, comer ni convivir', n: 1 },
+               { p: 'Hay como tres bancas y un columpio', n: 2 },
+               { p: 'No hay sombra donde estar', n: 1 },
+               { p: 'Los árboles de la orilla se perdieron y nadie sembró', n: 2, h: 1 } ] },
+    { t: 'No hay qué hacer ni cómo acercarse al agua', d: 'juegos, muelle, pesca',
+      cajas: [ { p: 'No hay qué hacer ahí ni cómo acercarse al agua', n: 0 },
+               { p: 'Niños y jóvenes no tienen con qué jugar', n: 1 },
+               { p: 'Lo que hubo se acabó o nunca se repuso', n: 2, h: 1 },
+               { p: 'Es difícil llegar al agua y disfrutarla', n: 1 },
+               { p: 'No hay por dónde asomarse ni dónde pescar', n: 2 } ] },
+    { t: 'El lugar está descuidado', d: 'monte, espinas, basura',
+      cajas: [ { p: 'El lugar está descuidado', n: 0 },
+               { p: 'El monte y las espinas cierran caminos y lugares', n: 1 },
+               { p: 'Nadie limpia los caminos', n: 2, h: 1 },
+               { p: 'La basura se queda en la orilla y el camino', n: 1 },
+               { p: 'No hay dónde tirar la basura cerca', n: 2 } ] }
+  ];
+  var FONDO = { p: 'Nadie está a cargo de cuidar la orilla', h: 1 };
+  var EJEMPLO = ['El lugar está cuidado', 'Los caminos y los lugares están abiertos y sin espinas', 'Alguien limpia los caminos con regularidad',
+                 'La orilla y el camino están limpios', 'Hay dónde dejar la basura cerca, y alguien la recoge', 'Alguien está a cargo de cuidar la orilla'];
+  var OBRAS = /\b(banca|bancas|bote|botes|muelle|columpio|columpios|palapa|kayak|lancha|asador|asadores|mesa|mesas|letrero|faena|cabaña|cabañas|juegos)\b/i;
+  var CLAVE = 'gdp-s5-volteo';
+
+  function radios(id, nombre, conDesc) {
+    document.getElementById(id).innerHTML = RAICES.map(function (r, i) {
+      return '<label><input type="radio" name="' + nombre + '" value="' + i + '" onchange="todo(true)">' + r.t + (conDesc ? '<small>' + r.d + '</small>' : '') + '</label>';
+    }).join('');
   }
-  function copiar(id, btn) {
-    var t = document.getElementById(id).value;
-    if (!t.trim()) { t = '(sin llenar)'; }
-    navigator.clipboard.writeText(t).then(function () { marcar(btn); });
+  radios('op1', 'op1', true); radios('op2', 'op2', false); radios('eq', 'eq', false);
+
+  function val(n) { var e = document.querySelector('input[name="' + n + '"]:checked'); return e ? +e.value : null; }
+  function v(id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; }
+
+  var eqActual = null;
+  function pintaVolteo() {
+    var i = val('eq'), cont = document.getElementById('volteo');
+    if (i === null) { cont.innerHTML = ''; eqActual = null; return; }
+    if (i === eqActual) return;
+    eqActual = i;
+    var cajas = RAICES[i].cajas.concat([FONDO]);
+    cont.innerHTML = '<div class="par"><div class="prob"><small>tronco, el de todos</small>' + TRONCO + '</div><div class="fijo">' + OBJETIVO + '</div></div>' +
+      cajas.map(function (c, k) {
+        var rot = k === cajas.length - 1 ? 'fondo común, hipótesis' : (c.n === 0 ? 'raíz principal' : (c.n === 1 ? 'causa' : 'causa de la causa')) + (c.h ? ', hipótesis' : '');
+        return '<div class="par"><div class="prob"><small>' + rot + '</small>' + c.p + '</div><input type="text" id="v' + k + '" placeholder="Volteada, como situación lograda" oninput="todo()"><p class="aviso" id="a' + k + '"></p></div>';
+      }).join('');
   }
-  function copiarTodo(btn) {
-    var partes = ['MI LÍNEA, MI EQUIPO · Semana 5', ''];
-    for (var i = 1; i <= 6; i++) {
-      var v = document.getElementById('r' + i).value.trim();
-      partes.push(i + ' · ' + TITULOS[i - 1]);
-      partes.push(v || '(sin llenar)');
-      partes.push('');
+
+  function dibuja() {
+    var i = val('eq'), a = document.getElementById('arbol');
+    if (i === null) { a.innerHTML = '<p class="porque">Elige la raíz del equipo y empieza a voltear: aquí se dibuja.</p>'; return ''; }
+    var cajas = RAICES[i].cajas.concat([FONDO]), txt = ['ÁRBOL DE OBJETIVOS · raíz: ' + RAICES[i].t, 'Objetivo central: ' + OBJETIVO];
+    var h = '<div class="fila-rot">Objetivo central</div><div class="c obj">' + OBJETIVO + '</div><div class="fila-rot">Nuestra rama</div><div class="linea-est">';
+    if (v('lnombre')) h += '<div style="font-weight:bold;color:#7C6222">Línea estratégica: ' + v('lnombre') + '</div>' + (v('lbusca') ? '<div style="font-size:.9rem;margin-bottom:.3rem">' + v('lbusca') + '</div>' : '');
+    cajas.forEach(function (c, k) {
+      var t = v('v' + k) || '(sin voltear) ' + c.p;
+      var clase = 'c' + (c.n === 0 ? ' medio' : '') + (c.h ? ' h' : '');
+      var sang = c.n === 2 ? ' sangria' : '';
+      if (k === cajas.length - 1) { h += '</div><div class="fila-rot">Medio compartido por las tres líneas</div>'; clase = 'c h'; sang = ''; }
+      h += '<div class="' + clase + sang + '">' + t + (c.h ? ' <em style="font-size:.8rem;color:#8A3B2B">(hipótesis)</em>' : '') + '</div>';
+      var nivel = k === cajas.length - 1 ? 'Medio compartido' : (c.n === 0 ? 'Medio principal' : (c.n === 1 ? 'Medio' : 'Medio del medio'));
+      txt.push(nivel + ': ' + (v('v' + k) || '(sin voltear)') + (c.h ? ' (hipótesis)' : '') + '   [antes: ' + c.p + ']');
+    });
+    a.innerHTML = h;
+    txt.splice(2, 0, 'Línea estratégica: ' + (v('lnombre') || '(sin nombre)') + (v('lbusca') ? '. ' + v('lbusca') : ''));
+    return txt.join('\n');
+  }
+
+  function revisa() {
+    var i = val('eq'); if (i === null) return;
+    var n = RAICES[i].cajas.length + 1;
+    for (var k = 0; k < n; k++) {
+      var t = v('v' + k), a = document.getElementById('a' + k), m = '';
+      if (OBRAS.test(t)) m = 'Se coló una obra: ¿qué situación se logra con ella?';
+      else if (/^(falta|faltan|no hay|nadie|hace falta)\b/i.test(t)) m = 'Todavía está en negativo.';
+      if (a) a.textContent = m;
     }
-    navigator.clipboard.writeText(partes.join('\n')).then(function () { marcar(btn); });
   }
+
+  function guarda() {
+    var d = { op1: val('op1'), op2: val('op2'), eq: val('eq') };
+    ['tarjeta', 'lnombre', 'lbusca', 'q1', 'q2', 'q3', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5'].forEach(function (id) { d[id] = v(id); });
+    try { localStorage.setItem(CLAVE, JSON.stringify(d)); } catch (e) {}
+  }
+  function todo() { pintaVolteo(); revisa(); dibuja(); guarda(); }
+
+  function marca(n, i) { document.querySelectorAll('input[name="' + n + '"]').forEach(function (e) { e.checked = (i !== null && +e.value === i); }); }
+  function pon(d) {
+    marca('op1', d.op1 === undefined ? null : d.op1); marca('op2', d.op2 === undefined ? null : d.op2); marca('eq', d.eq === undefined ? null : d.eq);
+    eqActual = null; pintaVolteo();
+    ['tarjeta', 'lnombre', 'lbusca', 'q1', 'q2', 'q3', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5'].forEach(function (id) { var e = document.getElementById(id); if (e) e.value = d[id] || ''; });
+    todo();
+  }
+  function ejemplo() {
+    var d = { eq: 2, lnombre: 'Cuidado de la orilla', lbusca: 'Busca que los caminos y la orilla estén abiertos y limpios, y que alguien quede a cargo de mantenerlos así.' };
+    EJEMPLO.forEach(function (t, k) { d['v' + k] = t; });
+    d.op1 = val('op1'); d.op2 = val('op2'); d.tarjeta = v('tarjeta'); d.q1 = v('q1'); d.q2 = v('q2'); d.q3 = v('q3');
+    pon(d);
+  }
+  function borrar() { if (confirm('¿Borrar todo lo que llenaste?')) { pon({}); try { localStorage.removeItem(CLAVE); } catch (e) {} } }
+  function copiar(btn) {
+    var o1 = val('op1'), o2 = val('op2'), q = ['q1', 'q2', 'q3'].map(v).filter(Boolean);
+    var txt = ['MI LÍNEA, MI EQUIPO · Semana 5',
+      'Primera opción: ' + (o1 === null ? '(sin elegir)' : RAICES[o1].t) + (v('tarjeta') ? ' · tarjeta: ' + v('tarjeta') : ''),
+      'Segunda opción: ' + (o2 === null ? '(sin elegir)' : RAICES[o2].t), '', dibuja() || '(sin árbol de objetivos todavía)',
+      q.length ? '\nMis preguntas para las reglas: ' + q.join(' / ') : ''].join('\n');
+    var ok = function () { var s = document.createElement('span'); s.className = 'aviso-copiado'; s.textContent = 'copiado'; btn.after(s); setTimeout(function () { s.remove(); }, 1500); };
+    if (navigator.clipboard) navigator.clipboard.writeText(txt).then(ok, function () { window.prompt('Copia:', txt); });
+    else window.prompt('Copia:', txt);
+  }
+  try { var d0 = JSON.parse(localStorage.getItem(CLAVE) || 'null'); if (d0) pon(d0); } catch (e) {}
 </script>
 </main>
 </body>
