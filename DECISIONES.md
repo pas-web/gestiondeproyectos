@@ -797,3 +797,29 @@ ser elegidas.
   el "sin fracciones" de la semana 9) son otro documento de la CONANP. La
   letra chiquita y la semana 9 ahora citan también el numeral de las Reglas
   y enlazan la guía.
+
+## Bloque 13 (24 de septiembre de 2026): el árbol en su propio mazo, con las tarjetas del grupo
+
+- **Regla general nueva (Eduardo):** una herramienta se presenta primero con
+  su dibujo, qué es y para qué sirve; no se nombra ni se usa antes. Orden de
+  toda secuencia: explicar, luego ejemplos, luego ejercicios.
+- El árbol de problemas sale del mazo del jueves a un mazo propio con botón
+  de presentación ("El árbol de problemas, y los equipos"): esquema general,
+  para qué sirve, cómo se lee, los cinco pasos (tronco, raíces con síntoma o
+  causa, cinco porqués y trampa del "falta", ramas, revisión con cinco
+  pruebas, reparto); tres ejemplos (el valle, tres lugares, La Florida); y
+  tres ejercicios (gimnasio 5 en parejas, gimnasio 4 en tríos, la propuesta
+  al muro). La postulación y los equipos siguen en ese mismo mazo.
+- **Propuesta inicial de árbol con las 45 tarjetas reales de la mesa**
+  (hoja de cálculo de Eduardo, cinco montones y una canasta): tronco "la gente
+  casi no usa la orilla de la presa para quedarse, convivir y divertirse";
+  tres raíces principales (no hay cómo quedarse a gusto; no hay qué hacer ni
+  cómo acercarse al agua; el lugar está descuidado) que agrupan seis montones;
+  ramas todavía como hipótesis porque las tarjetas casi no hablan de efectos;
+  fondo común hipotético "nadie está a cargo de cuidar la orilla". El montón
+  "falta de sombra y muchas hierbas" se parte en dos; la canasta se separa en
+  condiciones y "por preguntar" (muro de contención, cabañas).
+- El iceberg, la postulación de ejemplo y los ejercicios 42 y 43 usan ahora
+  los montones reales. El viernes ya no nombra el semáforo antes de
+  explicarlo. Pendiente de revisar con la misma regla: el paso 5 del conteo
+  (sección 4 del jueves) todavía usa montones inventados de antes de la mesa.
