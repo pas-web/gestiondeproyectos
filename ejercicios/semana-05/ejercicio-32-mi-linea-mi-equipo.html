@@ -123,7 +123,7 @@
                { p: 'La basura se queda en la orilla y el camino', n: 1 },
                { p: 'No hay dónde tirar la basura cerca', n: 2 },
                { p: 'Nadie vigila cuando hay visitantes', n: 1 } ] },
-    { t: 'Participación comunitaria', d: 'quién cuida la orilla y quién se suma', sinFondo: 1,
+    { t: 'Participación comunitaria', d: 'que la comunidad se haga cargo del espacio público', sinFondo: 1,
       cajas: [ { p: 'Nadie está a cargo de cuidar la orilla', n: 0, h: 1 },
                { p: 'Nadie limpia los caminos', n: 1, h: 1 },
                { p: 'Lo que hubo se acabó o nunca se repuso', n: 1, h: 1 } ] }
@@ -156,7 +156,7 @@
     var cajas = cajasDe(i);
     cont.innerHTML = '<div class="par"><div class="prob"><small>tronco, el de todos</small>' + TRONCO + '</div><div class="fijo">' + OBJETIVO + '</div></div>' +
       cajas.map(function (c, k) {
-        var rot = c.f ? 'fondo común, hipótesis' : (c.n === 0 ? 'el problema de la línea' : (c.n === 1 ? 'causa' : 'causa de la causa')) + (c.h ? ', hipótesis' : '');
+        var rot = c.f ? 'causa más honda, hipótesis' : (c.n === 0 ? 'el problema de la línea' : (c.n === 1 ? 'causa' : 'causa de la causa')) + (c.h ? ', hipótesis' : '');
         return '<div class="par"><div class="prob"><small>' + rot + '</small>' + c.p + '</div><input type="text" id="v' + k + '" placeholder="Volteada, como situación lograda" oninput="todo()"><p class="aviso" id="a' + k + '"></p></div>';
       }).join('');
   }
