@@ -46,6 +46,32 @@
   .hoja .renglones div { border-bottom: 1px solid var(--borde); height: 1.9rem; }
   .hoja .dos { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--marca); font-weight: bold; margin-top: .6rem; }
   .btn-imprimir { background: var(--profundo); color: #fff; border: none; border-radius: 999px; padding: .5rem 1.2rem; font: inherit; font-weight: bold; cursor: pointer; }
+  /* Estaciones y aplicación hipotética */
+  .objetivos { background: var(--profundo); color: #EAF4F2; border-radius: 12px; padding: 1rem 1.4rem; margin: 1rem 0; }
+  .objetivos .etiqueta { color: var(--arena); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; font-weight: bold; }
+  .objetivos ol { margin: .5rem 0 .2rem; padding-left: 1.3rem; }
+  .objetivos li { margin: .35rem 0; }
+  .objetivos strong { color: #fff; }
+  .lineas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: .8rem; margin: .8rem 0; }
+  .linea-card { background: #fff; border: 1px solid var(--borde); border-top: 5px solid var(--marca); border-radius: 12px; padding: .8rem 1rem; font-size: .93rem; }
+  .linea-card .linea-nom { display: block; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: bold; }
+  .linea-card b { display: block; color: var(--profundo); font-size: 1.02rem; line-height: 1.3; margin: .2rem 0 .3rem; }
+  .linea-card p { margin: .3rem 0; }
+  .linea-card .num { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: .8rem; background: #F2F7F5; border-radius: 6px; padding: .3rem .5rem; }
+  .linea-card .trampa { color: #8A4B12; background: #FBF1E3; border-radius: 6px; padding: .35rem .5rem; font-size: .86rem; }
+  .linea-card .trampa::before { content: "Ojo: "; font-weight: bold; }
+  .hoja-cab { display: flex; gap: .8rem; align-items: center; }
+  .hoja-num { flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--marca); color: #fff; display: grid; place-items: center; font-weight: bold; font-size: 1.2rem; font-family: Georgia, serif; }
+  .hoja-cab h3 { margin: 0; font-size: 1.15rem; }
+  .hoja .donde { font-size: .82rem; color: #5b7671; }
+  .busca { margin: .7rem 0 .4rem; font-size: .95rem; }
+  .busca b, .alimenta b { color: var(--marca); }
+  .alimenta { font-size: .92rem; background: #F2F7F5; border-radius: 8px; padding: .45rem .7rem; margin: .5rem 0; }
+  details.reto { background: #FBF4E6; border: 1px dashed var(--arena); border-radius: 8px; padding: .5rem .8rem; margin: .5rem 0; font-size: .95rem; }
+  details.reto summary { cursor: pointer; }
+  details.reto summary::after { content: "  · ver respuesta"; color: var(--marca); font-size: .82rem; font-weight: bold; }
+  details.reto[open] summary::after { content: ""; }
+  details.reto p { margin: .5rem 0 .1rem; }
   @media print {
     header.curso, .no-imprimir, .mazo, nav { display: none !important; }
     body { background: #fff; }
@@ -70,7 +96,7 @@
   <ul>
     <li><a href="procodes-2026/ReglasDeOperacionPROCODES2026.pdf" target="_blank" rel="noopener">Reglas de Operación del PROCODES 2026</a> · copia en este sitio, PDF de 126 páginas, 2.7 MB. Publicadas en el Diario Oficial de la Federación el jueves 15 de enero de 2026.</li>
     <li><a href="https://www.conanp.gob.mx/procodes2026/ReglasDeOperacionPROCODES2026.pdf" target="_blank" rel="noopener">La misma, en el sitio de la CONANP</a> · la fuente oficial; si alguna vez no coinciden, manda esta.</li>
-    <li><a href="#estaciones">La hoja de estaciones</a> · para la lectura por equipos del viernes, se imprime desde esta misma página.</li>
+    <li><a href="#estaciones">Las estaciones y tu aplicación hipotética</a> · los objetivos, el concepto del Anexo 2 para cada línea, cinco estaciones con reto y la hoja para imprimir.</li>
     <li><a href="../ejercicios/semana-05/ejercicio-13-caceria-en-las-reglas.html">Cacería en las reglas</a> · veinticinco preguntas con su página, para comprobar que se leyó.</li>
     <li><a href="../ejercicios/semana-05/ejercicio-12-el-dictamen-de-52-puntos.html">El dictamen de 52 puntos</a> · la tabla de calificación, usada en cuatro solicitudes.</li>
     <li><a href="semaforo-de-convocatorias.html">El semáforo de convocatorias</a> y <a href="ruta-de-la-propuesta.html">la ruta de la propuesta</a> · qué hacer con lo que se leyó.</li>
@@ -207,7 +233,7 @@
   <section class="lam">
     <h4><span class="n">11</span> Y nosotros, ¿qué?</h4>
     <p class="di">El salón no puede pedir. La gente de La Florida, quizá sí. Nosotros podemos gestionar.</p>
-    <p class="apoyo">Un grupo de al menos cinco habitantes mayores de edad, con un proyecto que la Reserva reconozca en su planeación, con historia de al menos dos años atrás para el criterio 5, y con los papeles lentos resueltos antes de febrero. Todo lo que el curso haga este semestre en la presa (la consulta, el árbol, el prototipo, el libro de cuentas público) es exactamente el tipo de antecedente que ese grupo podría enseñar. Si vale la pena intentarlo lo dice el semáforo, no el entusiasmo.</p>
+    <p class="apoyo">Un grupo de al menos cinco habitantes mayores de edad, con un proyecto que la Reserva reconozca en su planeación, con historia de al menos dos años atrás para el criterio 5, y con los papeles lentos resueltos antes de febrero. Todo lo que el curso haga este semestre en la presa (la consulta, el árbol, el prototipo, el libro de cuentas público) es exactamente el tipo de antecedente que ese grupo podría enseñar. Si vale la pena intentarlo lo dice el semáforo, no el entusiasmo. Y para saber si sabríamos hacerlo, este semestre cada equipo arma su aplicación hipotética, campo por campo del Anexo 3.</p>
   </section>
 </section>
 
@@ -276,47 +302,151 @@
   <tr><td>Las Direcciones deben difundir un resumen de la planeación estratégica del área</td><td>4.1 · p. 19</td><td>Ese resumen es la llave de los criterios 2 y 3: se pide en la oficina de la Reserva</td></tr>
 </table>
 
-<h2 class="corte" id="estaciones">La hoja de estaciones</h2>
-<p class="no-imprimir">Para la lectura por equipos del viernes. Cada equipo toma una estación, lee sus páginas con lápiz y llena la hoja: el elemento a la izquierda, qué implica para un grupo de La Florida a la derecha. Dos minutos por equipo para contarla al grupo. <button class="btn-imprimir" onclick="window.print()">Imprimir la hoja</button></p>
+<h2 class="corte" id="estaciones">Las estaciones: leer para tu aplicación</h2>
+
+<p class="no-imprimir">Este semestre cada equipo arma una <strong>aplicación hipotética al PROCODES</strong> para su línea estratégica, llenando el formato del Anexo 3 como si un grupo de La Florida fuera a entregarlo. Nada se envía a la CONANP: es el ensayo completo de una solicitud real, con números reales. Las cinco estaciones son la primera lectura, y cada una contesta una pregunta que tu solicitud necesita resolver antes de escribir una línea. El viernes cada equipo toma una estación, lee sus páginas con lápiz y en dos minutos le cuenta al grupo lo que encontró. Después, cada equipo recorre las cinco para su propia línea.</p>
+
+<div class="objetivos no-imprimir">
+  <span class="etiqueta">Lo que vas a poder hacer al terminar</span>
+  <ol>
+    <li><strong>Encontrar lo que manda</strong> en unas reglas de operación reales: quién puede pedir, qué se financia, cuánto, cómo se califica y qué plazos obligan, citando numeral y página.</li>
+    <li><strong>Traducir tu línea estratégica a un concepto del Anexo 2</strong> y calcular su meta y su monto con el costo unitario y los límites de unidades, sin inventar un peso.</li>
+    <li><strong>Llenar el formato del Anexo 3 con las piezas del curso</strong>: el árbol de problemas, el árbol de objetivos, la cadena de resultados, el presupuesto.</li>
+    <li><strong>Calificar tu propia solicitud</strong> con la tabla de 52 puntos y decir qué harías para subir en cada criterio.</li>
+    <li><strong>Separar lo que depende de ti de lo que depende de otros</strong>: la redacción y el cálculo, contra el grupo, los papeles lentos, la anuencia y el dueño del predio, y planear cómo se gestionaría cada uno.</li>
+    <li><strong>Escribir con honestidad</strong>: sin inventar personas ni datos, con las hipótesis marcadas y la IA declarada.</li>
+  </ol>
+</div>
+
+<h3 class="no-imprimir">Tu línea en el PROCODES</h3>
+<p class="no-imprimir">Un punto de partida para cada equipo: el concepto del Anexo 2 donde su línea podría caber sin deformarse, y la trampa que conviene revisar antes de enamorarse. No es la única opción; el equipo elige y lo defiende. Los números son de las páginas 53 a 55: se verifican con el PDF abierto antes de usarlos.</p>
+<div class="lineas-grid no-imprimir">
+  <div class="linea-card">
+    <span class="linea-nom">Espacio de descanso</span>
+    <b>Proyectos ecoturísticos</b>
+    <p>Palapas, servicios básicos, equipamiento, senderos. Proyecto productivo: la CONANP pone hasta el 80%.</p>
+    <p class="num">$5,490 por m², de 30 a 180 m² · o $75,000 por lote, de 1 a 6</p>
+    <p class="trampa">Toda obra en la orilla pide el documento del predio o la autorización escrita de quien sea dueño (campos 39.6 y 39.7). ¿De quién es la ribera?</p>
+  </div>
+  <div class="linea-card">
+    <span class="linea-nom">Restauración ecológica</span>
+    <b>Viveros forestales y frutícolas, o conservación y restauración de suelos</b>
+    <p>Planta nativa para la orilla y obras para frenar la erosión. El vivero es productivo (80%); la restauración de suelos, 100%.</p>
+    <p class="num">Vivero: $1,300 por m², de 40 a 1,000 m² · Suelos: $6,950 por ha, de 10 a 140 ha</p>
+    <p class="trampa">Revisa los mínimos: las plantaciones forestales piden al menos 10 hectáreas. Antes de elegir el concepto, mide el terreno.</p>
+  </div>
+  <div class="linea-card">
+    <span class="linea-nom">Espacio de recreación</span>
+    <b>Atracadero para embarcaciones menores, o proyectos ecoturísticos</b>
+    <p>El muelle, que fue lo más pedido en la consulta, tiene concepto propio. Los senderos, las plataformas flotantes y la señalización caben en ecoturismo.</p>
+    <p class="num">Atracadero: $26,989 por metro, de 20 a 37 m</p>
+    <p class="trampa">Veinte metros ya son $539,780: un proyecto productivo de más de $300,000 pide estudio de factibilidad (campos 36 y 39.5). Es el reto de la estación 3.</p>
+  </div>
+  <div class="linea-card">
+    <span class="linea-nom">Espacio seguro y limpio</span>
+    <b>Planta de compostaje, y un curso de educación ambiental sobre residuos</b>
+    <p>Lo orgánico se vuelve abono; el curso, "manejo de residuos sólidos", está en la lista de educación ambiental.</p>
+    <p class="num">Compostaje: $5,720 por m², de 30 a 100 m², más equipamiento de $23,000 por lote · Curso: $45,000 por evento</p>
+    <p class="trampa">El equipamiento solo se aprueba si el local ya existe o se construye en el mismo proyecto.</p>
+  </div>
+  <div class="linea-card">
+    <span class="linea-nom">Participación comunitaria</span>
+    <b>Curso de gestión, o estudio técnico de ordenamiento territorial comunitario</b>
+    <p>El curso puede ser de "fortalecimiento de la organización social, de comités comunitarios": justo quién se hace cargo del espacio. Los dos van al 100%.</p>
+    <p class="num">Curso: $45,000 por evento, 1 o 2, con 20 horas y 5 personas como mínimo, honorarios hasta $600 la hora · Estudio: hasta $150,000</p>
+    <p class="trampa">Va en el otro formato del Anexo 3, la modalidad de estudios técnicos y cursos (páginas 65 a 73), no en el de proyectos.</p>
+  </div>
+</div>
+
+<div class="tarjeta no-imprimir">
+  <span class="etiqueta">Un cálculo de ejemplo, para copiar el método y no el número</span>
+  <p style="margin:.3rem 0">Una palapa comunitaria de 40 m² como proyecto ecoturístico: 40 × $5,490 = <strong>$219,600</strong> de apoyo federal máximo. Como es productivo, eso es el 80%: el proyecto completo vale $274,500, y el grupo pone el 20%, <strong>$54,900</strong>, en jornales, materiales o dinero (campos 37 y 38). Queda debajo de $300,000: no pide estudio de factibilidad. Con 60 m² ya serían $329,400 y sí lo pediría. Una decisión de diseño se vuelve un papel más.</p>
+</div>
+
+<p class="no-imprimir"><button class="btn-imprimir" onclick="window.print()">Imprimir las estaciones</button> <span class="nota-chica">Se imprimen las hojas con renglones; los retos y sus respuestas se quedan en pantalla.</span></p>
 
 <div class="hoja">
-  <h3>Estación 1 · ¿Quién puede pedir? · numerales 3.1 a 3.3.1, páginas 8 a 10, y Anexo 1, página 36</h3>
-  <p>¿Quién sí y quién no? ¿Cuántas personas? ¿Qué papeles, de qué fecha? ¿Podría pedir un grupo de La Florida? ¿Y el salón?</p>
+  <div class="hoja-cab"><span class="hoja-num">1</span><div><h3>¿Quién puede pedir?</h3><span class="donde">Numerales 3.1 a 3.3.1 · páginas 8 a 10 · Anexo 1, página 36</span></div></div>
+  <div class="busca"><b>Busca</b> quién sí puede pedir y cuántas personas hacen un grupo · quién no puede, y por qué (3.2) · qué papeles se piden y de qué fecha · si Arroyo Seco aparece en el Anexo 1.</div>
+  <details class="reto no-imprimir"><summary><b>Reto.</b> El salón quiere pedir para la presa. ¿Puede? Y si no, ¿quién sí, y qué tendría que reunir?</summary>
+    <p>No puede: las universidades y su personal están en las restricciones (3.2). Sí podría un grupo organizado de al menos cinco habitantes de La Florida, mayores de edad, con identificación, comprobante de domicilio, CURP con fecha del año en curso y, si hay obra o plantación, el documento del predio o la autorización escrita de quien sea dueño. El oficio del equipo aquí es acompañar, no solicitar.</p></details>
+  <p class="alimenta"><b>En tu formato:</b> campos 3 a 17 (quién pide) y 39 (documentos). No inventes personas: escribe "[integrante 1, por definir con el grupo]", di qué perfil tendría (mujer, joven, usa la orilla) y qué papel le falta.</p>
   <div class="dos"><span>Elemento del documento</span><span>Qué implica para nosotros</span></div>
   <div class="renglones"><div></div><div></div><div></div><div></div></div>
 </div>
+
 <div class="hoja">
-  <h3>Estación 2 · ¿Cómo califican? · numerales 3.3.2.2 y 3.3.2.3, páginas 11 a 13</h3>
-  <p>¿Quién dictamina? ¿Qué pesa más en la tabla? ¿Qué es obligatorio? ¿Qué pasa con la que pasa la línea y no alcanza dinero?</p>
+  <div class="hoja-cab"><span class="hoja-num">2</span><div><h3>¿Cómo califican?</h3><span class="donde">Numerales 3.3.2.2 y 3.3.2.3 · páginas 11 a 13</span></div></div>
+  <div class="busca"><b>Busca</b> quién se sienta en el Comité Técnico · qué bloque de la tabla pesa más · cuáles criterios son obligatorios · cuál es el mínimo para autorizar · cómo se desempata.</div>
+  <details class="reto no-imprimir"><summary><b>Reto.</b> Una solicitud suma 30 puntos, pero no toca el Programa de Manejo de la Reserva. ¿Pasa?</summary>
+    <p>No. Los criterios 2 y 3 (contribuir a la planeación estratégica del área y a su Programa de Manejo) son obligatorios: sin ellos no importa el total. Por eso la primera lectura de tu solicitud no es el formato, sino el Programa de Manejo de la Reserva de la Biosfera Sierra Gorda y el resumen de su planeación, que la Dirección debe difundir (4.1).</p></details>
+  <p class="alimenta"><b>En tu formato:</b> todo, pero sobre todo 25 a 28 (criterios 4 y 5) y 9 a 11 (criterios 8 a 10). Tu tarea: el puntaje que esperas en cada uno de los doce criterios, y con qué lo vas a demostrar.</p>
   <div class="dos"><span>Elemento del documento</span><span>Qué implica para nosotros</span></div>
   <div class="renglones"><div></div><div></div><div></div><div></div></div>
 </div>
+
 <div class="hoja">
-  <h3>Estación 3 · ¿Qué y cuánto? · numerales 3.4.1 y 3.4.2, páginas 16 a 18, y Anexo 2, páginas 45 a 55</h3>
-  <p>¿En qué concepto cabría un componente del curso? ¿Cómo se calcula su monto? ¿Cuánto pone el grupo, y en qué?</p>
+  <div class="hoja-cab"><span class="hoja-num">3</span><div><h3>¿Qué y cuánto?</h3><span class="donde">Numerales 3.4.1 y 3.4.2 · páginas 16 a 18 · Anexo 2, páginas 45 a 55</span></div></div>
+  <div class="busca"><b>Busca</b> los cuatro tipos de apoyo y su porcentaje · el concepto de tu línea y lo que incluye · su unidad, su costo unitario y sus límites · cuánto pone el grupo y en qué · el umbral de $300,000.</div>
+  <details class="reto no-imprimir"><summary><b>Reto.</b> El equipo de recreación quiere el muelle: un atracadero de 20 metros, el mínimo. ¿Cuánto pide, y qué papel le cae encima?</summary>
+    <p>20 × $26,989 = $539,780 de apoyo federal. Es proyecto productivo: eso es el 80%, así que el grupo pone el 20% del total, unos $135,000 en jornales, especie o dinero. Y como pasa de $300,000 en un área protegida terrestre, pide un estudio de factibilidad de no más de dos años (campos 36 y 39.5), que a su vez es otro concepto del Anexo 2. La obra más pedida es también la más cara de gestionar: por eso se calcula antes de prometer.</p></details>
+  <p class="alimenta"><b>En tu formato:</b> 18 (tipo de proyecto), 19.1 (nombre, con el vocabulario del Anexo 2), 20 (ecosistema), 21 (meta en las unidades del Anexo 2), 22 (monto), 36 a 38 (factibilidad y aportación).</p>
   <div class="dos"><span>Elemento del documento</span><span>Qué implica para nosotros</span></div>
   <div class="renglones"><div></div><div></div><div></div><div></div></div>
 </div>
+
 <div class="hoja">
-  <h3>Estación 4 · ¿Cuándo, y qué pasa después? · numerales 3.3.2.1, 3.3.2.4, 3.3.2.5 y 4.1 a 4.5, páginas 10 a 24</h3>
-  <p>¿Cuánto dura la ventanilla? ¿Qué plazos matan una solicitud? ¿Qué se firma y se entrega si ganas? ¿Cómo llega y cómo se comprueba el dinero?</p>
+  <div class="hoja-cab"><span class="hoja-num">4</span><div><h3>¿Cuándo, y qué pasa si ganas?</h3><span class="donde">Numerales 3.3.2.1, 3.3.2.4, 3.3.2.5 y 4.1 a 4.5 · páginas 10 a 24</span></div></div>
+  <div class="busca"><b>Busca</b> cuándo sale la convocatoria y cuánto dura la ventanilla · el plazo para corregir · cuándo y cómo avisan (y qué significa el silencio) · qué se firma y se entrega después de ganar · cómo llega y cómo se comprueba el dinero · la fecha límite para terminar.</div>
+  <details class="reto no-imprimir"><summary><b>Reto.</b> Tu cronograma pone la inauguración el 15 de enero del año siguiente, "para dar tiempo". ¿Qué pasa?</summary>
+    <p>No cabe: todo se ejecuta y se comprueba a más tardar el 31 de diciembre. Y si la convocatoria sale el último día hábil de febrero, con 15 días hábiles de ventanilla, 20 para dictaminar y 10 para notificar, el dinero llega hacia mayo: el calendario real de obra es de junio a noviembre, en plena temporada de lluvias. El cronograma no se inventa; se cuenta hacia atrás desde el 31 de diciembre.</p></details>
+  <p class="alimenta"><b>En tu formato:</b> 23 y 24 (fechas de inicio y de término); el cronograma mensual del expediente técnico (Anexo 6 "A", páginas 79 a 81).</p>
   <div class="dos"><span>Elemento del documento</span><span>Qué implica para nosotros</span></div>
   <div class="renglones"><div></div><div></div><div></div><div></div></div>
 </div>
+
 <div class="hoja">
-  <h3>Estación 5 · El papel que se llena · Anexo 3, páginas 56 a 64, y Anexo 6 "A", páginas 79 a 81</h3>
-  <p>¿Qué campos piden argumento y no solo datos? ¿Qué pieza del curso (árbol, cadena, marco, presupuesto) cae en cada uno? ¿Qué campo no sabríamos llenar hoy?</p>
+  <div class="hoja-cab"><span class="hoja-num">5</span><div><h3>El papel que se llena</h3><span class="donde">Anexo 3: proyectos, páginas 56 a 64; estudios técnicos y cursos, páginas 65 a 73 · Anexo 6 "A", páginas 79 a 81</span></div></div>
+  <div class="busca"><b>Busca</b> cuál de los dos formatos te toca · qué campos piden argumento y no solo datos · cuáles piden números · cuáles dependen de otras personas · las reglas de llenado (sin tachaduras, a máquina o con letra de molde).</div>
+  <details class="reto no-imprimir"><summary><b>Reto.</b> ¿Qué pieza del curso llena el campo 29, "la problemática que se pretende resolver"? ¿Y el 19.2 y el 19.3?</summary>
+    <p>El 29 es tu árbol de problemas contado en prosa: el problema central y la rama de tu línea, cada caja con su evidencia de la consulta y las hipótesis marcadas como tales. El 19.2, el objetivo, sale del árbol de objetivos, y las tres actividades del 19.3, de la cadena de resultados de la semana 7. Si una pieza del curso no cae en ningún campo, sobra; si un campo no tiene pieza, falta trabajo.</p></details>
+  <p class="alimenta"><b>En tu formato:</b> todo. Marca con un color los campos que hoy no sabrías llenar: esa es tu lista de pendientes.</p>
   <div class="dos"><span>Elemento del documento</span><span>Qué implica para nosotros</span></div>
   <div class="renglones"><div></div><div></div><div></div><div></div></div>
 </div>
+
 <div class="hoja">
-  <h3>Para todas las estaciones · La matriz de contexto</h3>
-  <p>Al terminar, pasen lo que encontraron a las cuatro casillas: <strong>hechos</strong> (lo que el documento dice), <strong>oportunidades</strong> (lo que premia), <strong>riesgos</strong> (lo que descalifica) y <strong>actores</strong> (quién decide, quién firma, quién comprueba). Y una pregunta que el documento no conteste, con el nombre de quien la podría contestar.</p>
+  <div class="hoja-cab"><span class="hoja-num">+</span><div><h3>Para todas las estaciones · la matriz de contexto</h3><span class="donde">Al terminar, en equipo</span></div></div>
+  <p>Pasen lo que encontraron a las cuatro casillas: <strong>hechos</strong> (lo que el documento dice), <strong>oportunidades</strong> (lo que premia), <strong>riesgos</strong> (lo que descalifica) y <strong>actores</strong> (quién decide, quién firma, quién comprueba). Y una pregunta que el documento no conteste, con el nombre del cargo de quien la podría contestar.</p>
   <div class="dos"><span>Hechos · Oportunidades</span><span>Riesgos · Actores</span></div>
   <div class="renglones"><div></div><div></div><div></div><div></div></div>
 </div>
 
+<h3 class="no-imprimir">Del curso al formato</h3>
+<p class="no-imprimir">Casi todo lo que el formato pide ya lo produjiste o lo vas a producir. Esta tabla dice dónde cae cada pieza.</p>
+<table class="guia no-imprimir">
+  <tr><th>Pieza del curso</th><th>Campo del Anexo 3</th><th>Cuidado con</th></tr>
+  <tr><td>La consulta de La Florida y sus tarjetas</td><td>26 y 29, como evidencia; 28, como antecedente</td><td>El campo 28 pide procesos comunitarios activos o de los dos años anteriores. La consulta es un antecedente, no un proceso de años: no la infles.</td></tr>
+  <tr><td>El árbol de problemas y la rama de tu línea</td><td>29, la problemática</td><td>Las hipótesis siguen siendo hipótesis en la solicitud.</td></tr>
+  <tr><td>El árbol de objetivos y tu línea estratégica</td><td>19.1 y 19.2, nombre y objetivo</td><td>El nombre usa el vocabulario del Anexo 2, no un eslogan.</td></tr>
+  <tr><td>La cadena de resultados (semana 7)</td><td>19.3, las tres actividades</td><td>Tres, no diez: las que más pesan.</td></tr>
+  <tr><td>El marco lógico (semana 8)</td><td>Anexo 6 "A": supuestos, impactos, indicadores</td><td>Los supuestos son lo que no depende de ustedes.</td></tr>
+  <tr><td>El presupuesto y las cotizaciones</td><td>21, 22, 37 y 38</td><td>Meta por costo unitario, dentro de los límites; el 20% cuantificado.</td></tr>
+  <tr><td>La microintervención del concurso y su estrategia de gestión</td><td>28 y 40, como antecedente y observación</td><td>Si no se ha hecho, se escribe en futuro, no en pasado.</td></tr>
+</table>
+
+<div class="tarjeta no-imprimir">
+  <span class="etiqueta">Las reglas de la aplicación hipotética</span>
+  <ul style="margin:.4rem 0 .2rem;padding-left:1.2rem">
+    <li><strong>Números reales, personas no.</strong> Los costos, los límites y los plazos salen del documento. Los nombres, CURP y domicilios no se inventan ni se piden a nadie: se escribe el perfil entre corchetes.</li>
+    <li><strong>Hipótesis a la vista.</strong> Lo que no sabemos (de quién es la orilla, si hay grupo, qué dice la Reserva) se marca como hipótesis y se vuelve pregunta con dueño.</li>
+    <li><strong>Texto propio.</strong> Copiar párrafos es causa de rechazo en la vida real y aquí también. Si usaste IA, se declara como dice el pacto del curso.</li>
+    <li><strong>Nada sale del salón.</strong> La solicitud se entrega en el formato, completa, como si fuera la ventanilla, pero no se envía a la CONANP ni se promete a nadie en La Florida.</li>
+  </ul>
+</div>
+
 </main>
+
 
 <script src="../curso.js"></script>
 </body>
