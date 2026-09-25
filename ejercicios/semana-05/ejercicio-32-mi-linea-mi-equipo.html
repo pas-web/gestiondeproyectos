@@ -53,14 +53,14 @@
 <h1>Mi línea, mi equipo</h1>
 <p class="sub">Gimnasio · Semana 5 · En clase, el jueves: cinco minutos para elegir y veinte, por equipo, para voltear.</p>
 
-<p>Dos cosas en una página. Primero eliges a qué raíz del árbol de La Florida quieres entrar; con eso se forman los tres equipos. Después, ya en equipo, se voltea esa raíz a árbol de objetivos: cada caja del problema se reescribe como la situación ya resuelta, y la rama volteada se vuelve la <strong>línea estratégica</strong> del equipo, el camino que va a trabajar el resto del semestre.</p>
+<p>Dos cosas en una página. Primero eliges en cuál de las cinco líneas estratégicas del grupo quieres entrar; con eso se forman los cinco equipos. Después, ya en equipo, se voltean las cajas del árbol de problemas de las que sale tu línea: cada una se reescribe como la situación ya resuelta, y esa rama del árbol de objetivos es el camino que tu equipo va a trabajar el resto del semestre, y el que lleva al concurso de los diez mil.</p>
 
 <div class="reglas">
   <strong>Cómo se forman los equipos</strong>
   <ol>
     <li>Cada quien elige primera y segunda opción, con una tarjeta del muro que respalde la primera.</li>
     <li>Los nombres se pegan en el pizarrón debajo de su primera opción.</li>
-    <li>Si una raíz tiene de más, se mueve quien la tenga como segunda opción, hasta que los tres equipos queden parejos. Si no pones segunda opción, el grupo decide por ti.</li>
+    <li>Si una línea tiene de más, se mueve quien la tenga como segunda opción, hasta que los cinco equipos queden parejos. Si no pones segunda opción, el grupo decide por ti.</li>
   </ol>
 </div>
 
@@ -76,22 +76,22 @@
 </div>
 
 <div class="caso">
-  <h2>3 · Nuestra raíz, volteada</h2>
-  <p class="porque">Ya en equipo. Elige la raíz que les tocó y reescribe cada caja como la situación lograda: lo que se ve cuando el problema ya no está. Sin obras (bancas, botes, muelle): esas son maneras de lograrlo, y se deciden después. Las cajas marcadas como hipótesis siguen siéndolo.</p>
+  <h2>3 · Nuestra línea, volteada</h2>
+  <p class="porque">Ya en equipo. Elige la línea que les tocó: aparecen las cajas del árbol de problemas de las que sale. Reescribe cada una como la situación lograda: lo que se ve cuando el problema ya no está. Sin obras (bancas, botes, muelle): esas son maneras de lograrlo, y se deciden después. Las cajas marcadas como hipótesis siguen siéndolo.</p>
   <div class="lineas" id="eq"></div>
   <div id="volteo"></div>
 </div>
 
 <div class="caso">
   <h2>4 · Nuestra línea estratégica</h2>
-  <p class="porque">Un nombre corto, de dos a cuatro palabras, y una oración que diga qué busca lograr. Ejemplo: <em>Cuidado de la orilla. Busca que los caminos y la orilla estén abiertos y limpios, y que alguien quede a cargo de mantenerlos así.</em></p>
+  <p class="porque">La línea ya tiene nombre; si el equipo lo quiere afinar, se vale. Lo que falta es una oración que diga qué busca lograr. Ejemplo: <em>Espacio seguro y limpio. Busca que los caminos y la orilla estén abiertos, limpios y vigilados, y que alguien quede a cargo de mantenerlos así.</em></p>
   <input type="text" id="lnombre" placeholder="Nombre de la línea" oninput="todo()">
   <input type="text" id="lbusca" placeholder="Busca que..." oninput="todo()">
 </div>
 
 <div class="resultado">
   <h2>Nuestro árbol de objetivos</h2>
-  <div class="arbol" id="arbol"><p class="porque">Elige la raíz del equipo y empieza a voltear: aquí se dibuja.</p></div>
+  <div class="arbol" id="arbol"><p class="porque">Elige la línea del equipo y empieza a voltear: aquí se dibuja.</p></div>
   <button class="btn" onclick="copiar(this)">Copiar a la bitácora</button>
   <button class="btn claro" onclick="ejemplo()">Ver el ejemplo de clase</button>
   <button class="btn claro" onclick="borrar()">Borrar</button>
@@ -103,30 +103,38 @@
   var TRONCO = 'La gente casi no usa la orilla de la presa para quedarse, convivir y divertirse';
   var OBJETIVO = 'La gente usa la orilla de la presa para quedarse, convivir y divertirse';
   var RAICES = [
-    { t: 'No hay cómo quedarse a gusto', d: 'dónde sentarse y comer, sombra',
+    { t: 'Espacio de descanso', d: 'dónde sentarse, comer y convivir',
       cajas: [ { p: 'No hay cómo quedarse a gusto', n: 0 },
                { p: 'No hay dónde sentarse, comer ni convivir', n: 1 },
-               { p: 'Hay como tres bancas y un columpio', n: 2 },
-               { p: 'No hay sombra donde estar', n: 1 },
-               { p: 'Los árboles de la orilla se perdieron y nadie sembró', n: 2, h: 1 } ] },
-    { t: 'No hay qué hacer ni cómo acercarse al agua', d: 'juegos, muelle, pesca',
+               { p: 'Hay como tres bancas y un columpio', n: 2 } ] },
+    { t: 'Restauración ecológica', d: 'sombra, árboles, vegetación de la orilla',
+      cajas: [ { p: 'No hay sombra donde estar', n: 0 },
+               { p: 'Los árboles de la orilla se perdieron y nadie sembró', n: 1, h: 1 } ] },
+    { t: 'Espacio de recreación', d: 'juegos, muelle, pesca',
       cajas: [ { p: 'No hay qué hacer ahí ni cómo acercarse al agua', n: 0 },
                { p: 'Niños y jóvenes no tienen con qué jugar', n: 1 },
                { p: 'Lo que hubo se acabó o nunca se repuso', n: 2, h: 1 },
                { p: 'Es difícil llegar al agua y disfrutarla', n: 1 },
                { p: 'No hay por dónde asomarse ni dónde pescar', n: 2 } ] },
-    { t: 'El lugar está descuidado', d: 'monte, espinas, basura',
+    { t: 'Espacio seguro y limpio', d: 'monte, espinas, basura, vigilancia',
       cajas: [ { p: 'El lugar está descuidado', n: 0 },
                { p: 'El monte y las espinas cierran caminos y lugares', n: 1 },
                { p: 'Nadie limpia los caminos', n: 2, h: 1 },
                { p: 'La basura se queda en la orilla y el camino', n: 1 },
-               { p: 'No hay dónde tirar la basura cerca', n: 2 } ] }
+               { p: 'No hay dónde tirar la basura cerca', n: 2 },
+               { p: 'Nadie vigila cuando hay visitantes', n: 1 } ] },
+    { t: 'Participación comunitaria', d: 'quién cuida la orilla y quién se suma', sinFondo: 1,
+      cajas: [ { p: 'Nadie está a cargo de cuidar la orilla', n: 0, h: 1 },
+               { p: 'Nadie limpia los caminos', n: 1, h: 1 },
+               { p: 'Lo que hubo se acabó o nunca se repuso', n: 1, h: 1 } ] }
   ];
   var FONDO = { p: 'Nadie está a cargo de cuidar la orilla', h: 1 };
   var EJEMPLO = ['El lugar está cuidado', 'Los caminos y los lugares están abiertos y sin espinas', 'Alguien limpia los caminos con regularidad',
-                 'La orilla y el camino están limpios', 'Hay dónde dejar la basura cerca, y alguien la recoge', 'Alguien está a cargo de cuidar la orilla'];
+                 'La orilla y el camino están limpios', 'Hay dónde dejar la basura cerca, y alguien la recoge', 'Hay quien vigile cuando llegan visitantes', 'Alguien está a cargo de cuidar la orilla'];
   var OBRAS = /\b(banca|bancas|bote|botes|muelle|columpio|columpios|palapa|kayak|lancha|asador|asadores|mesa|mesas|letrero|faena|cabaña|cabañas|juegos)\b/i;
-  var CLAVE = 'gdp-s5-volteo';
+  var CLAVE = 'gdp-s5-volteo-cinco';
+
+  function cajasDe(i) { var r = RAICES[i]; return r.sinFondo ? r.cajas : r.cajas.concat([{ p: FONDO.p, h: 1, f: 1 }]); }
 
   function radios(id, nombre, conDesc) {
     document.getElementById(id).innerHTML = RAICES.map(function (r, i) {
@@ -144,27 +152,28 @@
     if (i === null) { cont.innerHTML = ''; eqActual = null; return; }
     if (i === eqActual) return;
     eqActual = i;
-    var cajas = RAICES[i].cajas.concat([FONDO]);
+    var ln = document.getElementById('lnombre'); if (ln && !ln.value.trim()) ln.value = RAICES[i].t;
+    var cajas = cajasDe(i);
     cont.innerHTML = '<div class="par"><div class="prob"><small>tronco, el de todos</small>' + TRONCO + '</div><div class="fijo">' + OBJETIVO + '</div></div>' +
       cajas.map(function (c, k) {
-        var rot = k === cajas.length - 1 ? 'fondo común, hipótesis' : (c.n === 0 ? 'raíz principal' : (c.n === 1 ? 'causa' : 'causa de la causa')) + (c.h ? ', hipótesis' : '');
+        var rot = c.f ? 'fondo común, hipótesis' : (c.n === 0 ? 'el problema de la línea' : (c.n === 1 ? 'causa' : 'causa de la causa')) + (c.h ? ', hipótesis' : '');
         return '<div class="par"><div class="prob"><small>' + rot + '</small>' + c.p + '</div><input type="text" id="v' + k + '" placeholder="Volteada, como situación lograda" oninput="todo()"><p class="aviso" id="a' + k + '"></p></div>';
       }).join('');
   }
 
   function dibuja() {
     var i = val('eq'), a = document.getElementById('arbol');
-    if (i === null) { a.innerHTML = '<p class="porque">Elige la raíz del equipo y empieza a voltear: aquí se dibuja.</p>'; return ''; }
-    var cajas = RAICES[i].cajas.concat([FONDO]), txt = ['ÁRBOL DE OBJETIVOS · raíz: ' + RAICES[i].t, 'Objetivo central: ' + OBJETIVO];
+    if (i === null) { a.innerHTML = '<p class="porque">Elige la línea del equipo y empieza a voltear: aquí se dibuja.</p>'; return ''; }
+    var cajas = cajasDe(i), txt = ['ÁRBOL DE OBJETIVOS · línea: ' + RAICES[i].t, 'Objetivo central: ' + OBJETIVO];
     var h = '<div class="fila-rot">Objetivo central</div><div class="c obj">' + OBJETIVO + '</div><div class="fila-rot">Nuestra rama</div><div class="linea-est">';
     if (v('lnombre')) h += '<div style="font-weight:bold;color:#7C6222">Línea estratégica: ' + v('lnombre') + '</div>' + (v('lbusca') ? '<div style="font-size:.9rem;margin-bottom:.3rem">' + v('lbusca') + '</div>' : '');
     cajas.forEach(function (c, k) {
       var t = v('v' + k) || '(sin voltear) ' + c.p;
       var clase = 'c' + (c.n === 0 ? ' medio' : '') + (c.h ? ' h' : '');
       var sang = c.n === 2 ? ' sangria' : '';
-      if (k === cajas.length - 1) { h += '</div><div class="fila-rot">Medio compartido por las tres líneas</div>'; clase = 'c h'; sang = ''; }
+      if (c.f) { h += '</div><div class="fila-rot">Medio compartido por las cinco líneas</div>'; clase = 'c h'; sang = ''; }
       h += '<div class="' + clase + sang + '">' + t + (c.h ? ' <em style="font-size:.8rem;color:#8A3B2B">(hipótesis)</em>' : '') + '</div>';
-      var nivel = k === cajas.length - 1 ? 'Medio compartido' : (c.n === 0 ? 'Medio principal' : (c.n === 1 ? 'Medio' : 'Medio del medio'));
+      var nivel = c.f ? 'Medio compartido' : (c.n === 0 ? 'Medio principal' : (c.n === 1 ? 'Medio' : 'Medio del medio'));
       txt.push(nivel + ': ' + (v('v' + k) || '(sin voltear)') + (c.h ? ' (hipótesis)' : '') + '   [antes: ' + c.p + ']');
     });
     a.innerHTML = h;
@@ -174,7 +183,7 @@
 
   function revisa() {
     var i = val('eq'); if (i === null) return;
-    var n = RAICES[i].cajas.length + 1;
+    var n = cajasDe(i).length;
     for (var k = 0; k < n; k++) {
       var t = v('v' + k), a = document.getElementById('a' + k), m = '';
       if (OBRAS.test(t)) m = 'Se coló una obra: ¿qué situación se logra con ella?';
@@ -185,7 +194,7 @@
 
   function guarda() {
     var d = { op1: val('op1'), op2: val('op2'), eq: val('eq') };
-    ['tarjeta', 'lnombre', 'lbusca', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5'].forEach(function (id) { d[id] = v(id); });
+    ['tarjeta', 'lnombre', 'lbusca', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5', 'v6'].forEach(function (id) { d[id] = v(id); });
     try { localStorage.setItem(CLAVE, JSON.stringify(d)); } catch (e) {}
   }
   function todo() { pintaVolteo(); revisa(); dibuja(); guarda(); }
@@ -194,11 +203,11 @@
   function pon(d) {
     marca('op1', d.op1 === undefined ? null : d.op1); marca('op2', d.op2 === undefined ? null : d.op2); marca('eq', d.eq === undefined ? null : d.eq);
     eqActual = null; pintaVolteo();
-    ['tarjeta', 'lnombre', 'lbusca', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5'].forEach(function (id) { var e = document.getElementById(id); if (e) e.value = d[id] || ''; });
+    ['tarjeta', 'lnombre', 'lbusca', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5', 'v6'].forEach(function (id) { var e = document.getElementById(id); if (e) e.value = d[id] || ''; });
     todo();
   }
   function ejemplo() {
-    var d = { eq: 2, lnombre: 'Cuidado de la orilla', lbusca: 'Busca que los caminos y la orilla estén abiertos y limpios, y que alguien quede a cargo de mantenerlos así.' };
+    var d = { eq: 3, lnombre: 'Espacio seguro y limpio', lbusca: 'Busca que los caminos y la orilla estén abiertos, limpios y vigilados, y que alguien quede a cargo de mantenerlos así.' };
     EJEMPLO.forEach(function (t, k) { d['v' + k] = t; });
     d.op1 = val('op1'); d.op2 = val('op2'); d.tarjeta = v('tarjeta');
     pon(d);
