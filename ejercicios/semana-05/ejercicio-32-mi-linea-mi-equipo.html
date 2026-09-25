@@ -97,14 +97,6 @@
   <button class="btn claro" onclick="borrar()">Borrar</button>
 </div>
 
-<div class="caso">
-  <h2>Para el viernes · tres preguntas para las reglas del fondo</h2>
-  <p class="porque">Tres cosas que esperas que el documento del fondo conteste. Van al pizarrón antes de que se reparta.</p>
-  <input type="text" id="q1" placeholder="Ej.: ¿cuánto puede pedir cada equipo?" oninput="guarda()">
-  <input type="text" id="q2" placeholder="Ej.: ¿quién decide y cómo nos lo dice?" oninput="guarda()">
-  <input type="text" id="q3" placeholder="Ej.: ¿qué pasa si no gastamos todo?" oninput="guarda()">
-</div>
-
 <button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
 
 <script>
@@ -193,7 +185,7 @@
 
   function guarda() {
     var d = { op1: val('op1'), op2: val('op2'), eq: val('eq') };
-    ['tarjeta', 'lnombre', 'lbusca', 'q1', 'q2', 'q3', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5'].forEach(function (id) { d[id] = v(id); });
+    ['tarjeta', 'lnombre', 'lbusca', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5'].forEach(function (id) { d[id] = v(id); });
     try { localStorage.setItem(CLAVE, JSON.stringify(d)); } catch (e) {}
   }
   function todo() { pintaVolteo(); revisa(); dibuja(); guarda(); }
@@ -202,22 +194,21 @@
   function pon(d) {
     marca('op1', d.op1 === undefined ? null : d.op1); marca('op2', d.op2 === undefined ? null : d.op2); marca('eq', d.eq === undefined ? null : d.eq);
     eqActual = null; pintaVolteo();
-    ['tarjeta', 'lnombre', 'lbusca', 'q1', 'q2', 'q3', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5'].forEach(function (id) { var e = document.getElementById(id); if (e) e.value = d[id] || ''; });
+    ['tarjeta', 'lnombre', 'lbusca', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5'].forEach(function (id) { var e = document.getElementById(id); if (e) e.value = d[id] || ''; });
     todo();
   }
   function ejemplo() {
     var d = { eq: 2, lnombre: 'Cuidado de la orilla', lbusca: 'Busca que los caminos y la orilla estén abiertos y limpios, y que alguien quede a cargo de mantenerlos así.' };
     EJEMPLO.forEach(function (t, k) { d['v' + k] = t; });
-    d.op1 = val('op1'); d.op2 = val('op2'); d.tarjeta = v('tarjeta'); d.q1 = v('q1'); d.q2 = v('q2'); d.q3 = v('q3');
+    d.op1 = val('op1'); d.op2 = val('op2'); d.tarjeta = v('tarjeta');
     pon(d);
   }
   function borrar() { if (confirm('¿Borrar todo lo que llenaste?')) { pon({}); try { localStorage.removeItem(CLAVE); } catch (e) {} } }
   function copiar(btn) {
-    var o1 = val('op1'), o2 = val('op2'), q = ['q1', 'q2', 'q3'].map(v).filter(Boolean);
+    var o1 = val('op1'), o2 = val('op2');
     var txt = ['MI LÍNEA, MI EQUIPO · Semana 5',
       'Primera opción: ' + (o1 === null ? '(sin elegir)' : RAICES[o1].t) + (v('tarjeta') ? ' · tarjeta: ' + v('tarjeta') : ''),
-      'Segunda opción: ' + (o2 === null ? '(sin elegir)' : RAICES[o2].t), '', dibuja() || '(sin árbol de objetivos todavía)',
-      q.length ? '\nMis preguntas para las reglas: ' + q.join(' / ') : ''].join('\n');
+      'Segunda opción: ' + (o2 === null ? '(sin elegir)' : RAICES[o2].t), '', dibuja() || '(sin árbol de objetivos todavía)'].join('\n');
     var ok = function () { var s = document.createElement('span'); s.className = 'aviso-copiado'; s.textContent = 'copiado'; btn.after(s); setTimeout(function () { s.remove(); }, 1500); };
     if (navigator.clipboard) navigator.clipboard.writeText(txt).then(ok, function () { window.prompt('Copia:', txt); });
     else window.prompt('Copia:', txt);
