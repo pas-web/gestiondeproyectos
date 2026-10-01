@@ -75,7 +75,7 @@
 <!-- ================= PARTE 1 ================= -->
 <div class="caso">
   <h2>1 · Acomoda la cadena</h2>
-  <p class="porque">Tres casos de proyectos como los que vas a dirigir. Las tarjetas están revueltas: tócalas en orden, de lo que se hace a lo grande, y luego revisa. Cada caso tiene un eslabón que en la vida real nadie dibujó.</p>
+  <p class="porque">Tres casos de proyectos como los que vas a dirigir. Se abren uno por uno. Las tarjetas están revueltas: tócalas en orden, de lo que se hace a lo grande, y luego revisa. Cada caso tiene un eslabón que en la vida real nadie dibujó.</p>
   <div id="casos"></div>
 </div>
 
@@ -150,16 +150,17 @@
     document.getElementById('casos').innerHTML = CASOS.map(function (c, i) {
       var e = estado[i], usadas = e.orden;
       var mezcla = c._mezcla || (c._mezcla = c.cadena.map(function (x, k) { return k; }).sort(function () { return Math.random() - .5; }));
-      return '<div style="margin:.8rem 0 1.2rem;padding-top:.6rem;border-top:1px dashed var(--borde)">' +
-        '<strong>' + c.t + '</strong><div class="historia">' + c.h + '</div>' +
+      return '<details' + (abierto === i ? ' open' : '') + ' ontoggle="if(this.open){abierto=' + i + '}" style="margin:.6rem 0;border:1px solid var(--borde);border-radius:10px;padding:.2rem .8rem .6rem">' +
+        '<summary style="cursor:pointer;font-weight:bold;color:var(--profundo);padding:.4rem 0">' + c.t + (estado[i].listo ? ' <span style="color:var(--verde)">✓</span>' : '') + '</summary><div class="historia">' + c.h + '</div>' +
         '<div class="tarjetas">' + mezcla.map(function (k) { return '<button type="button" class="tj' + (usadas.indexOf(k) !== -1 ? ' usada' : '') + '" onclick="toca(' + i + ',' + k + ')">' + c.cadena[k] + '</button>'; }).join('') + '</div>' +
         '<div class="cadena" id="cad' + i + '">' + (usadas.length ? usadas.map(function (k, j) { return '<span class="es" id="es' + i + '_' + j + '">' + (j + 1) + '. ' + c.cadena[k] + '</span>' + (j < usadas.length - 1 ? '<span class="fl">→</span>' : ''); }).join('') : '<span class="vacio">toca las tarjetas en orden, de lo que se hace a lo grande</span>') + '</div>' +
         '<button class="btn" onclick="revisa(' + i + ')">Revisar</button><button class="btn claro" onclick="reinicia(' + i + ')">Empezar de nuevo</button>' +
         '<div class="retro" id="ret' + i + '"></div>' +
         '<div id="sup' + i + '" style="display:none;margin-top:.6rem"><label class="l">El "siempre que" del eslabón que se rompe</label><div class="opc">' + c.sup.map(function (s, k) { return '<label><input type="radio" name="sup' + i + '" value="' + k + '" onchange="supuesto(' + i + ',' + k + ')">' + s + '</label>'; }).join('') + '</div><div class="retro" id="rets' + i + '"></div></div>' +
-        '</div>';
+        '</details>';
     }).join('');
   }
+  var abierto = 0;
   function toca(i, k) { var e = estado[i]; if (e.orden.indexOf(k) !== -1 || e.orden.length >= CASOS[i].cadena.length) return; e.orden.push(k); pintaCasos(); }
   function reinicia(i) { estado[i] = { orden: [] }; pintaCasos(); }
   function revisa(i) {
@@ -168,7 +169,7 @@
     var errores = 0;
     e.orden.forEach(function (k, j) { var el = document.getElementById('es' + i + '_' + j); el.className = 'es ' + (k === j ? 'bien' : 'mal'); if (k !== j) errores++; });
     if (errores) { r.className = 'retro mal'; r.textContent = 'Hay ' + errores + ' eslabones fuera de lugar (en rojo). Léela de izquierda a derecha con un "entonces" entre cada par: donde no suene derecho, ahí está el cambio.'; return; }
-    r.className = 'retro bien'; r.innerHTML = '<strong>Derecha.</strong> ' + c.pista; document.getElementById('sup' + i).style.display = 'block';
+    r.className = 'retro bien'; r.innerHTML = '<strong>Derecha.</strong> ' + c.pista; document.getElementById('sup' + i).style.display = 'block'; estado[i].listo = true;
     document.getElementById('es' + i + '_' + c.rompe).style.outline = '3px dashed var(--arena)';
   }
   function supuesto(i, k) { var c = CASOS[i], r = document.getElementById('rets' + i); r.className = 'retro ' + (k === c.supOk ? 'bien' : 'mal'); r.textContent = (k === c.supOk ? 'Ese es. ' : 'Ese no es un supuesto: ') + c.supPor; }

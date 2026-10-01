@@ -75,6 +75,22 @@
 
 <div id="wk-gate" data-semana="6">
 
+<style>
+  /* La cadena vertical: eslabones con su "siempre que" entre uno y otro */
+  .cad { display:flex; flex-direction:column; margin:.8rem 0; }
+  .cad .esl { background:#fff; border:2px solid var(--marca); border-radius:10px; padding:.5rem .9rem; font-size:.97rem; }
+  .cad .esl.prob { border-color:#8A3B2B; background:#FBF0EE; }
+  .cad .esl.fin { background:#DDEDE8; }
+  .cad .esl.obj { background:var(--profundo); color:#fff; border-color:var(--profundo); font-family:Georgia,serif; }
+  .cad .esl.hueco { border-style:dashed; color:#8aa39c; font-style:italic; }
+  .cad .esl small { display:block; font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:#7C6222; font-weight:bold; font-style:normal; margin-bottom:.1rem; }
+  .cad .esl.obj small { color:var(--arena); }
+  .cad .sq { display:flex; align-items:baseline; gap:.5rem; margin:.2rem 0 .2rem 1.1rem; font-size:.88rem; color:#5C4A1C; }
+  .cad .sq::before { content:"\2193"; font-weight:bold; color:var(--arena); font-size:1.1rem; }
+  .cad .sq b { flex:none; background:#FBEFD5; border:1px solid #E8D4A4; border-radius:999px; padding:.02rem .55rem; font-size:.68rem; letter-spacing:.09em; text-transform:uppercase; color:#7C6222; }
+  .cad .sq.rojo b { background:#FBF0EE; border-color:#EBCFC9; color:#8A3B2B; }
+  .cad .sq.rojo { color:#6B2F22; }
+</style>
 <p class="pregunta">¿Por qué crees que eso va a funcionar?</p>
 <p class="bajada">La semana pasada el árbol de problemas se volteó en árbol de objetivos y quedaron cinco líneas estratégicas con cinco equipos. Desde hoy cada sesión le agrega una pieza al proyecto de tu línea, y la primera es la más honesta: la apuesta. En un vivero de la sierra se entregaron dos mil plantas, se sembraron en faena, y a los dos años quedaban sesenta: la planta era buena y la siembra salió bien, pero entre lo que haces y lo que esperas hay una cadena de pasos que nadie había dibujado. El jueves tu equipo dibuja la suya, eslabón por eslabón, con los supuestos a la vista. El viernes la apuesta se viste de tabla: el marco lógico, con un propósito que aguante la lupa y dos indicadores que se puedan contar sin fe. Y llega el formato de la solicitud, para que desde ahora todo lo que produzcas tenga destino.</p>
 
@@ -568,19 +584,23 @@
   </section>
 
   <section class="lam">
-    <p class="di">La cadena de la línea 1, completa, para ver cómo suena una.</p>
-    <table class="veredicto">
-      <tr><th>Eslabón</th><th>Lo que dice</th><th>Siempre que... (el supuesto)</th></tr>
-      <tr><td><strong>El problema</strong></td><td>Hay zonas de la orilla degradadas o erosionadas, sin sombra (3 tarjetas, ficha de agosto).</td><td></td></tr>
-      <tr><td><strong>Si hacemos</strong></td><td>Sembramos, en faena con gente del pueblo, 40 plantas nativas del vivero con su cajete en las dos zonas erosionadas, en la temporada de lluvia.</td><td>...siempre que la Reserva dé el visto bueno a las especies y la delegación dé la anuencia (papel lento, semana 8).</td></tr>
-      <tr><td><strong>Entonces</strong> (producto)</td><td>El día de la faena quedan 40 plantas sembradas con su cajete, y la lista de quienes vinieron.</td><td>...siempre que alguien las riegue en la seca. Este supuesto no es nuestro: es la línea 2.</td></tr>
-      <tr><td><strong>Entonces</strong> (resultado intermedio: el eslabón 3)</td><td>A los tres meses, 30 de las 40 siguen vivas; en dos o tres temporadas hay sombra en los dos lugares donde la gente se junta, y el suelo deja de lavarse.</td><td>...siempre que el ganado y los visitantes no las pisen (cerco vivo o estacas, a verificar en campo).</td></tr>
-      <tr><td><strong>Entonces</strong> (resultado)</td><td>La gente se junta bajo esa sombra por las tardes: se cuentan más personas sentadas y más minutos que en la ficha de agosto.</td><td>...siempre que las otras líneas pongan dónde sentarse y la orilla esté limpia.</td></tr>
-      <tr><td><strong>Entonces</strong> (objetivo de todos)</td><td>La gente usa la orilla como espacio público.</td><td></td></tr>
-      <tr><td><strong>Y contribuye a</strong> (fin)</td><td>El humedal se restaura y vuelve la avifauna.</td><td>Nadie lo promete.</td></tr>
-    </table>
-    <p class="apoyo">Fíjate en tres cosas. El eslabón frágil es el riego de la seca, y su señal temprana se puede ver en dos semanas: cuántos cajetes están húmedos un martes cualquiera. El supuesto más incómodo no depende del equipo: depende de que la comunidad cuide, que es la línea 2, y por eso las cinco cadenas van a tener un "siempre que" que apunta al mismo equipo. Y el último eslabón conecta con la consulta: la sombra fue tarjeta tres veces, y "para convivir con la familia" fue tarjeta de lado.</p>
-    <p class="nota-conductor">Leerla de abajo arriba en voz alta, flecha por flecha, y pedir que alguien la cuestione en cada "entonces". Es un ejemplo, no la cadena del equipo de reforestación: ese equipo la reescribe con lo suyo, y puede salir distinta.</p>
+    <p class="di">La cadena de la línea 1, completa, para ver cómo suena una. Se lee de arriba abajo, y entre eslabón y eslabón va lo que tiene que ser cierto.</p>
+    <div class="cad">
+      <div class="esl prob"><small>el problema, con su evidencia</small>Hay zonas de la orilla degradadas o erosionadas, sin sombra (3 tarjetas, ficha de agosto).</div>
+      <div class="sq"><b>si hacemos</b>Sembramos, en faena con gente del pueblo, 40 plantas nativas del vivero con su cajete en las dos zonas erosionadas, en la temporada de lluvia.</div>
+      <div class="sq"><b>siempre que</b>la Reserva dé el visto bueno a las especies y la delegación dé la anuencia (papel lento, semana 8).</div>
+      <div class="esl"><small>entonces · producto · respondemos</small>El día de la faena quedan 40 plantas sembradas con su cajete, y la lista de quienes vinieron.</div>
+      <div class="sq rojo"><b>siempre que</b>alguien las riegue en la seca. Este supuesto no es nuestro: es la línea 2. Es el eslabón 3.</div>
+      <div class="esl"><small>entonces · resultado intermedio · señal temprana</small>A los tres meses, 30 de las 40 siguen vivas; en dos o tres temporadas hay sombra en los dos lugares donde la gente se junta, y el suelo deja de lavarse.</div>
+      <div class="sq"><b>siempre que</b>el ganado y los visitantes no las pisen (cerco vivo o estacas, a verificar en campo) y las otras líneas pongan dónde sentarse y la orilla esté limpia.</div>
+      <div class="esl"><small>entonces · resultado · apostamos</small>La gente se junta bajo esa sombra por las tardes: se cuentan más personas sentadas y más minutos que en la ficha de agosto.</div>
+      <div class="sq"><b>entonces</b></div>
+      <div class="esl obj"><small>el objetivo de todos</small>La gente usa la orilla de la presa como espacio público.</div>
+      <div class="sq"><b>y contribuye a</b>nadie lo promete</div>
+      <div class="esl fin"><small>fin · impacto</small>El humedal se restaura y vuelve la avifauna.</div>
+    </div>
+    <p class="apoyo">Fíjate en tres cosas. El eslabón frágil es el riego de la seca (en rojo), y su señal temprana se puede ver en dos semanas: cuántos cajetes están húmedos un martes cualquiera. El supuesto más incómodo no depende del equipo: depende de que la comunidad cuide, que es la línea 2, y por eso las cinco cadenas van a tener un "siempre que" que apunta al mismo equipo. Y el último eslabón conecta con la consulta: la sombra fue tarjeta tres veces, y "para convivir con la familia" fue tarjeta de lado.</p>
+    <p class="nota-conductor">Leerla en voz alta de arriba abajo, flecha por flecha, y pedir que alguien la cuestione en cada "entonces". Es un ejemplo, no la cadena del equipo de reforestación: ese equipo la reescribe con lo suyo, y puede salir distinta.</p>
   </section>
 
   <section class="lam">
@@ -627,6 +647,23 @@
     <p class="di">Del problema al objetivo de todos, mínimo tres eslabones, un supuesto por flecha, el que apunta a la línea 2 incluido, y el eslabón que más te preocupa señalado.</p>
     <p class="apoyo">En papel kraft, con la columna de tu línea en el árbol a la mano. A la izquierda el problema con su evidencia de consulta; luego la estrategia, en cosas que se pueden contar y fechar; luego los "entonces", con la prueba de cada uno (¿aparece la gente haciendo algo distinto?); entre flecha y flecha el "siempre que", incluido el incómodo; al final el objetivo de todos y, aparte, el fin al que se contribuye. Lo que quede en el kraft se pasa a la pestaña 2 de la <a href="../ejercicios/semana-06/carpeta-del-proyecto.html">carpeta del proyecto</a>. El <a href="../ejercicios/semana-07/ejercicio-32-la-cadena-de-mi-componente.html">gimnasio 3</a> es tu versión personal de bolsillo: te obliga a poder decir la apuesta completa sin ver el kraft, que es lo que el pitch te va a pedir.</p>
     <p class="nota-conductor">Rondar con las cuatro fallas del gimnasio 2 como lente y señalarlas sin resolverlas. Pedir que el eslabón frágil quede marcado con una señal temprana ("si en la primera semana nadie se sienta, la apuesta se está rompiendo aquí"). Al equipo de la línea 2, la pregunta inversa: ¿qué le piden las otras cuatro cadenas, y cabe en la suya?</p>
+  </section>
+
+  <section class="lam">
+    <p class="di">La plantilla del kraft: así se acomoda, con las tarjetas del árbol y los huecos que hoy se llenan.</p>
+    <div class="cad">
+      <div class="esl prob"><small>el problema de la línea</small>La caja del árbol de problemas de donde sale tu línea, con sus tarjetas de la consulta pegadas al lado.</div>
+      <div class="sq"><b>si hacemos</b><span class="esl hueco" style="display:inline-block;padding:.1rem .6rem">la estrategia: cosas que se pueden contar y fechar, en tarjetas</span></div>
+      <div class="sq"><b>siempre que</b><span class="esl hueco" style="display:inline-block;padding:.1rem .6rem">lo que tiene que ser cierto y no controlas</span></div>
+      <div class="esl hueco"><small>entonces · producto</small>lo que queda entregado y se cuenta el mismo día</div>
+      <div class="sq rojo"><b>siempre que</b><span class="esl hueco" style="display:inline-block;padding:.1rem .6rem">el que apunta a la línea 2: quién tiene que hacer qué, cada cuánto</span></div>
+      <div class="esl hueco"><small>entonces · resultado</small>la gente haciendo algo distinto, con lo que se contaría</div>
+      <div class="sq"><b>entonces</b></div>
+      <div class="esl obj"><small>el objetivo de todos · ya está escrito</small>La gente usa la orilla de la presa como espacio público: se queda, convive y se divierte.</div>
+      <div class="sq"><b>y contribuye a</b></div>
+      <div class="esl fin"><small>el fin de tu rama · ya está en el árbol</small>El tejido social, la derrama o el humedal, según tu línea. No se promete.</div>
+    </div>
+    <p class="apoyo">Mínimo tres eslabones entre la estrategia y el objetivo, un "siempre que" por flecha, y el eslabón frágil marcado con un color y su señal temprana escrita al margen: qué verías en la primera semana si se está rompiendo. Lo que esté en rojo en tu kraft es lo que la semana 7 convierte en riesgo y la semana 8 en estrategia de contrapartida.</p>
   </section>
 
   <section class="lam">
@@ -736,7 +773,15 @@
     <h4><span class="n">2</span> El objetivo en la lupa <span class="reloj">15 min</span></h4>
     <span class="senal">Actividad · todo el grupo, en vivo</span>
     <p class="di">"Mejorar la orilla" no es un objetivo: es un deseo con verbo.</p>
-    <p class="apoyo">Las cinco pruebas lo van afinando, letra por letra y en el pizarrón: específico (¿qué de la orilla?), medible (¿cuánto y desde cuánto?), alcanzable (¿con este equipo, este dinero, este semestre?), relevante (¿responde a lo que la consulta pidió o a lo que se te ocurrió?) y con tiempo (¿para cuándo?). Se reescribe después de cada prueba que repruebe, hasta que quede uno que un dictaminador no pueda rebotar. Luego, con el <a href="../ejercicios/semana-08/ejercicio-11-el-objetivo-en-la-lupa.html">gimnasio 4</a> proyectado, siete objetivos como los que llegan a las convocatorias de verdad: cada uno reprueba una prueba, y a uno le falta casi todo.</p>
+    <p class="apoyo">Las cinco pruebas lo van afinando, letra por letra y en el pizarrón: específico (¿qué de la orilla?), medible (¿cuánto y desde cuánto?), alcanzable (¿con este equipo, este dinero, este semestre?), relevante (¿responde a lo que la consulta pidió o a lo que se te ocurrió?) y con tiempo (¿para cuándo?). Se reescribe después de cada prueba que repruebe, hasta que quede uno que un dictaminador no pueda rebotar. Así se ve el camino, casi siempre en cuatro pasos:</p>
+    <table class="veredicto">
+      <tr><th>Versión</th><th>Lo que dice</th><th>Qué prueba reprueba</th></tr>
+      <tr class="no"><td>1</td><td>"Mejorar la orilla de la presa."</td><td class="v">Específico</td></tr>
+      <tr class="no"><td>2</td><td>"Habilitar un área de sombra en la zona 2."</td><td class="v">Relevante</td></tr>
+      <tr class="cuidado"><td>3</td><td>"Que la gente use la zona 2 por las tardes."</td><td class="v">Medible</td></tr>
+      <tr class="si"><td>4</td><td>"Que al menos doce personas estén sentadas en la zona 2 los domingos de cuatro a seis, en la segunda temporada, desde cuatro en agosto."</td><td class="v">Pasa las cinco</td></tr>
+    </table>
+    <p class="apoyo">La versión 2 es la trampa de siempre: es específica, pero es una obra, no un cambio en la gente (eso lo pide la prueba de relevante: ¿responde a lo que la consulta pidió, o a lo que se te ocurrió construir?). La 3 ya habla de gente, pero no se puede contar. La 4 trae quién, cuántos, dónde, cuándo y desde cuánto. Luego, con el <a href="../ejercicios/semana-08/ejercicio-11-el-objetivo-en-la-lupa.html">gimnasio 4</a> proyectado, siete objetivos como los que llegan a las convocatorias de verdad: cada uno reprueba una prueba, y a uno le falta casi todo.</p>
     <p class="nota-conductor">Empezar con "mejorar la orilla de la presa" y dejar que el grupo lo vaya cerrando: el punto es ver cuántas reescrituras hacen falta (casi siempre cuatro). El "desde cuánto" es la línea base, y la tenemos: los conteos de la ficha de observación de agosto. Decirlo hoy y volver a decirlo en el bloque 4.</p>
   </section>
 
@@ -785,7 +830,31 @@
   <section class="lam">
     <h4><span class="n">5</span> Medio de verificación y supuesto <span class="reloj">10 min</span></h4>
     <p class="di">Dónde va a constar que se cumplió. Se decide antes de ejecutar, porque el documento que no se planeó no existe cuando se necesita.</p>
-    <p class="apoyo">La hoja de conteo fechada, la lista de asistencia, la foto con fecha, el registro contable: baratos y contundentes. Si verificar cuesta más que la actividad, es fantasía. Lo que no se puede verificar no se promete. Y la última columna, el supuesto: los "siempre que" de tu cadena, ya depurados a los externos. "Que el equipo trabaje bien" no es supuesto: es tu chamba y va al cronograma. "Que la temporada de lluvia no cubra la zona" sí lo es. "Que alguien riegue en la seca" también, y apunta a la línea 2. El supuesto clásico de la lombricultura en Arroyo Seco lo dice sin rodeos: "las personas están dispuestas a dedicar tres horas a la semana a manejar su lombricomposta". Si eso no es cierto, los diez lombricarios habilitados son diez cajones vacíos, y el proyecto lo sabía desde el papel.</p>
+    <div class="contra">
+      <div class="mal">
+        <span class="rot">Verificación · así no</span>
+        <p style="margin:0">"Encuestas trimestrales de percepción." "Informe de evaluación externa." "Testimonios de la comunidad."</p>
+        <p style="margin:.4rem 0 0;font-size:.9rem">Nadie dice quién lo levanta, cuándo ni cuánto cuesta. Son documentos que no van a existir cuando se necesiten.</p>
+      </div>
+      <div class="bien">
+        <span class="rot">Verificación · así sí</span>
+        <p style="margin:0">"Hoja de conteo fechada, un domingo al mes, la llena el grupo de cuidado." "Foto con fecha de las 40 plantas el día de la faena." "Lista de asistencia firmada."</p>
+        <p style="margin:.4rem 0 0;font-size:.9rem">Baratos, con dueño y con fecha. Si verificar cuesta más que la actividad, es fantasía.</p>
+      </div>
+    </div>
+    <div class="contra">
+      <div class="mal">
+        <span class="rot">Supuesto · así no</span>
+        <p style="margin:0">"Que el equipo trabaje bien." "Que la comunidad participe." "Que el proyecto se ejecute en tiempo."</p>
+        <p style="margin:.4rem 0 0;font-size:.9rem">El primero y el tercero son chamba del equipo: van al cronograma. El segundo es un deseo sin dueño: supuesto heroico.</p>
+      </div>
+      <div class="bien">
+        <span class="rot">Supuesto · así sí</span>
+        <p style="margin:0">"Que la temporada de lluvia no cubra la zona antes de diciembre." "Que alguien riegue en la seca (acuerdo con el grupo de cuidado, línea 2)." "Que las personas estén dispuestas a dedicar tres horas a la semana a su lombricomposta."</p>
+        <p style="margin:.4rem 0 0;font-size:.9rem">Fuera de tu control, concretos, y se puede ver en la primera semana si se cumplen. El último es el supuesto clásico de la lombricultura en Arroyo Seco: si no es cierto, los diez lombricarios son diez cajones vacíos, y el proyecto lo sabía desde el papel.</p>
+      </div>
+    </div>
+    <p class="apoyo">Lo que no se puede verificar no se promete. Y el supuesto es la columna donde el marco dice la verdad: los "siempre que" de tu cadena, depurados a los externos, con el que apunta a la línea 2 entre ellos.</p>
   </section>
 
   <section class="lam lam--actividad">
