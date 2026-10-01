@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S6 · La escalera, en tu carrera</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1.02rem; }
+  main { max-width:780px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.15rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.93rem; color:#5b7671; margin:.1rem 0 .6rem; }
+  .historia { font-family:Georgia,serif; font-size:1.02rem; color:var(--profundo); border-left:4px solid var(--arena); padding:.2rem 0 .2rem .9rem; margin:.5rem 0 .8rem; }
+  .tarjetas { display:flex; flex-wrap:wrap; gap:.4rem; margin:.4rem 0; }
+  .tj { font:inherit; font-size:.92rem; border:2px solid var(--borde); background:#fff; border-radius:10px; padding:.45rem .7rem; cursor:pointer; text-align:left; color:var(--texto); }
+  .tj:hover { border-color:var(--marca); }
+  .tj.usada { opacity:.35; cursor:default; }
+  .cadena { display:flex; flex-wrap:wrap; align-items:center; gap:.3rem; min-height:3rem; background:#F7FAF9; border:1px dashed var(--borde); border-radius:10px; padding:.5rem; margin:.5rem 0; }
+  .cadena .es { background:var(--profundo); color:#fff; border-radius:8px; padding:.35rem .6rem; font-size:.9rem; }
+  .cadena .es.mal { background:#FBF0EE; color:var(--rojo); border:2px solid var(--rojo); }
+  .cadena .es.bien { background:#EEF6F0; color:var(--verde); border:2px solid var(--verde); }
+  .cadena .fl { color:var(--arena); font-weight:bold; }
+  .cadena .vacio { color:#8aa39c; font-style:italic; font-size:.9rem; }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.5rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92rem; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
+  .retro { margin:.6rem 0 0; padding:.6rem .9rem; border-radius:10px; font-size:.93rem; display:none; }
+  .retro.mal { display:block; background:#FBF0EE; color:var(--rojo); }
+  .retro.bien { display:block; background:#EEF6F0; color:var(--verde); }
+  .opc label { display:block; border:2px solid var(--borde); border-radius:10px; padding:.45rem .8rem; margin:.3rem 0; cursor:pointer; background:#fff; font-size:.93rem; }
+  .opc label:has(input:checked) { border-color:var(--marca); background:#E4EFEB; }
+  .opc input { margin-right:.5rem; }
+  label.l { display:block; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:#5b7671; font-weight:bold; margin:.6rem 0 .15rem; }
+  input[type=text], textarea { width:100%; font:inherit; font-size:.95rem; border:2px solid var(--borde); border-radius:8px; padding:.4rem .65rem; background:#FDFEFD; }
+  input:focus, textarea:focus { outline:none; border-color:var(--marca); }
+  .aviso { color:var(--rojo); font-size:.84rem; margin:.1rem 0 0; min-height:1.1rem; }
+  .ok { color:var(--verde); }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; margin:.4rem 0; }
+  th { background:#E4EFEB; color:var(--profundo); text-align:left; padding:.35rem .5rem; border:1px solid var(--borde); font-size:.8rem; }
+  td { padding:.3rem .4rem; border:1px solid var(--borde); vertical-align:top; }
+  td input[type=text] { border-width:1px; font-size:.9rem; padding:.3rem .45rem; }
+  .voz { background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.7rem 1rem; margin:.7rem 0; font-family:Georgia,serif; font-size:1.02rem; color:#5C4A1C; white-space:pre-wrap; }
+  .esc { display:flex; flex-wrap:wrap; gap:.3rem; margin:.4rem 0; }
+  .esc span { flex:1 1 7rem; background:#F7FAF9; border:1px solid var(--borde); border-radius:8px; padding:.35rem .5rem; font-size:.8rem; text-align:center; color:#5b7671; }
+  .esc span b { display:block; font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace; color:var(--profundo); font-size:.95rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.3rem; }
+  body.proyector .tj, body.proyector .cadena .es { font-size:1.15rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La escalera, en tu carrera</h1>
+<p class="sub">Gimnasio · Semana 6 · En parejas · Diez frases, cinco escalones.</p>
+
+<div class="reglas">
+  <strong>Lo que entrena.</strong> Insumos, actividades, productos, resultados, impacto. La trampa vive entre el tercero y el cuarto escalón: entregar no es que lo usen. Diez frases de bebederos, conservas de nopal, nopal verdulero y lombricarios; cada una vive en un escalón, y la página dice por qué.
+</div>
+
+<div class="caso">
+  <h2>La escalera, en tu carrera</h2>
+  <p class="porque">Cinco escalones. La trampa vive entre el tercero y el cuarto: entregar no es que lo usen. Toca cada frase y dile en qué escalón vive.</p>
+  <div class="esc"><span><b>insumos</b>lo que metes</span><span><b>actividades</b>lo que haces</span><span><b>productos</b>lo que entregas</span><span><b>resultados</b>la gente hace algo distinto</span><span><b>impacto</b>lo grande y lento</span></div>
+  <div id="escalera"></div>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+</main>
+
+<script>
+  // ---------- Parte 2: escalera ----------
+  var ESC = ['insumos', 'actividades', 'productos', 'resultados', 'impacto'];
+  var FRASES = [
+    ['Veinte rollos de malla ciclónica y seis bultos de cemento, en bodega', 0, 'Es lo que metes. Todavía no pasa nada.'],
+    ['Se construyen dos bebederos en el agostadero', 1, 'Es lo que haces con los insumos.'],
+    ['Dos bebederos funcionando, con su flotador, el 30 de noviembre', 2, 'Están o no están: producto, y se cuenta.'],
+    ['El ganado ya no baja al manantial a abrevar y las familias lo ven limpio', 3, 'Alguien (el ganado, y el que lo arrea) hace algo distinto: resultado.'],
+    ['Cuarenta mujeres capacitadas en conservas de nopal, con constancia', 2, 'Capacitadas es producto. Lo que hagan con eso sería el resultado.'],
+    ['Nueve de esas mujeres venden conserva en el tianguis cada domingo desde marzo', 3, 'Aquí sí: una conducta nueva, con fecha y número.'],
+    ['El ingreso de las familias del pueblo sube y menos jóvenes se van', 4, 'Grande y lento: se contribuye, no se promete.'],
+    ['Se siembran 300 plantas de nopal verdulero con la asamblea', 1, 'Sembrar es la actividad; las plantas vivas a los seis meses serían el producto.'],
+    ['50 productores capacitados en lombricultura en tres talleres en el campus Concá, y 10 lombricarios habilitados en dos localidades', 2, 'Capacitados y habilitados: productos, contables. Lo que las familias hagan con eso es otra cosa.'],
+    ['Seis meses después de que terminó el proyecto, 30 familias de Arroyo Seco manejan sus residuos orgánicos con la técnica', 3, 'Aquí sí: la gente hace algo distinto, con número y fecha. Es el objetivo del proyecto conseguido.']
+  ];
+  var FRM = FRASES.map(function (f, i) { return i; }).sort(function () { return Math.random() - .5; });
+  document.getElementById('escalera').innerHTML = FRM.map(function (i) {
+    var f = FRASES[i];
+    return '<div style="margin:.6rem 0;padding:.5rem .7rem;background:#F7FAF9;border-radius:10px"><div style="font-family:Georgia,serif;color:var(--profundo)">' + f[0] + '</div><div class="tarjetas" style="margin-top:.3rem">' + ESC.map(function (e, k) { return '<button type="button" class="tj" onclick="escalon(this,' + i + ',' + k + ')">' + e + '</button>'; }).join('') + '</div><div class="retro" id="rf' + i + '"></div></div>';
+  }).join('');
+  function escalon(btn, i, k) { var f = FRASES[i], r = document.getElementById('rf' + i); r.className = 'retro ' + (k === f[1] ? 'bien' : 'mal'); r.textContent = (k === f[1] ? 'Sí. ' : 'No: es ' + ESC[f[1]] + '. ') + f[2]; }
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S6 · Acomoda la cadena</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1.02rem; }
+  main { max-width:780px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.15rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.93rem; color:#5b7671; margin:.1rem 0 .6rem; }
+  .historia { font-family:Georgia,serif; font-size:1.02rem; color:var(--profundo); border-left:4px solid var(--arena); padding:.2rem 0 .2rem .9rem; margin:.5rem 0 .8rem; }
+  .tarjetas { display:flex; flex-wrap:wrap; gap:.4rem; margin:.4rem 0; }
+  .tj { font:inherit; font-size:.92rem; border:2px solid var(--borde); background:#fff; border-radius:10px; padding:.45rem .7rem; cursor:pointer; text-align:left; color:var(--texto); }
+  .tj:hover { border-color:var(--marca); }
+  .tj.usada { opacity:.35; cursor:default; }
+  .cadena { display:flex; flex-wrap:wrap; align-items:center; gap:.3rem; min-height:3rem; background:#F7FAF9; border:1px dashed var(--borde); border-radius:10px; padding:.5rem; margin:.5rem 0; }
+  .cadena .es { background:var(--profundo); color:#fff; border-radius:8px; padding:.35rem .6rem; font-size:.9rem; }
+  .cadena .es.mal { background:#FBF0EE; color:var(--rojo); border:2px solid var(--rojo); }
+  .cadena .es.bien { background:#EEF6F0; color:var(--verde); border:2px solid var(--verde); }
+  .cadena .fl { color:var(--arena); font-weight:bold; }
+  .cadena .vacio { color:#8aa39c; font-style:italic; font-size:.9rem; }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.5rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92rem; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
+  .retro { margin:.6rem 0 0; padding:.6rem .9rem; border-radius:10px; font-size:.93rem; display:none; }
+  .retro.mal { display:block; background:#FBF0EE; color:var(--rojo); }
+  .retro.bien { display:block; background:#EEF6F0; color:var(--verde); }
+  .opc label { display:block; border:2px solid var(--borde); border-radius:10px; padding:.45rem .8rem; margin:.3rem 0; cursor:pointer; background:#fff; font-size:.93rem; }
+  .opc label:has(input:checked) { border-color:var(--marca); background:#E4EFEB; }
+  .opc input { margin-right:.5rem; }
+  label.l { display:block; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:#5b7671; font-weight:bold; margin:.6rem 0 .15rem; }
+  input[type=text], textarea { width:100%; font:inherit; font-size:.95rem; border:2px solid var(--borde); border-radius:8px; padding:.4rem .65rem; background:#FDFEFD; }
+  input:focus, textarea:focus { outline:none; border-color:var(--marca); }
+  .aviso { color:var(--rojo); font-size:.84rem; margin:.1rem 0 0; min-height:1.1rem; }
+  .ok { color:var(--verde); }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; margin:.4rem 0; }
+  th { background:#E4EFEB; color:var(--profundo); text-align:left; padding:.35rem .5rem; border:1px solid var(--borde); font-size:.8rem; }
+  td { padding:.3rem .4rem; border:1px solid var(--borde); vertical-align:top; }
+  td input[type=text] { border-width:1px; font-size:.9rem; padding:.3rem .45rem; }
+  .voz { background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.7rem 1rem; margin:.7rem 0; font-family:Georgia,serif; font-size:1.02rem; color:#5C4A1C; white-space:pre-wrap; }
+  .esc { display:flex; flex-wrap:wrap; gap:.3rem; margin:.4rem 0; }
+  .esc span { flex:1 1 7rem; background:#F7FAF9; border:1px solid var(--borde); border-radius:8px; padding:.35rem .5rem; font-size:.8rem; text-align:center; color:#5b7671; }
+  .esc span b { display:block; font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace; color:var(--profundo); font-size:.95rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.3rem; }
+  body.proyector .tj, body.proyector .cadena .es { font-size:1.15rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Acomoda la cadena</h1>
+<p class="sub">Gimnasio · Semana 6 · En parejas · Tres casos del campo, uno a la vez.</p>
+
+<div class="reglas">
+  <strong>Lo que entrena.</strong> Tres proyectos como los que vas a dirigir, con las tarjetas revueltas: se ordenan de lo que se hace a lo grande, se revisa, y cada caso señala el eslabón que en la vida real nadie dibujó. Al final se elige el "siempre que" que lo sostiene: dos de los tres son chamba del equipo disfrazada de supuesto.
+</div>
+
+<div class="caso">
+  <h2>Acomoda la cadena</h2>
+  <p class="porque">Tres casos de proyectos como los que vas a dirigir. Se abren uno por uno. Las tarjetas están revueltas: tócalas en orden, de lo que se hace a lo grande, y luego revisa. Cada caso tiene un eslabón que en la vida real nadie dibujó.</p>
+  <div id="casos"></div>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+</main>
+
+<script>
+  // ---------- Parte 1: casos ----------
+  var CASOS = [
+    { t: 'El potrero que se recupera', h: 'Un grupo de doce ganaderos de la sierra sobrepastorea un cerro: en la seca compran forraje y el suelo se lava. Un proyecto les da cerco eléctrico y un taller de pastoreo rotativo.',
+      cadena: ['Se entrega cerco eléctrico y se da el taller de pastoreo rotativo', 'Los doce ranchos tienen sus potreros divididos en cuatro', 'Los ganaderos mueven el ganado cada semana, de potrero en potrero', 'El pasto descansa y se recupera: en la seca hay forraje propio', 'Baja el gasto en forraje comprado y el suelo deja de lavarse'],
+      rompe: 2, pista: 'El eslabón 3 es el que nadie dibujó: el cerco se entregó, el taller se dio, y en muchos ranchos el ganado se quedó en el mismo potrero porque mover vacas cada semana es trabajo que alguien tiene que hacer. Entregar el cerco (producto) no es que lo usen (resultado).',
+      sup: ['...siempre que el cerco sea de buena marca', '...siempre que haya alguien en cada rancho que mueva el ganado cada semana, y le convenga', '...siempre que el taller dure dos días en lugar de uno'], supOk: 1,
+      supPor: 'El supuesto honesto habla de una conducta que no controlas: que alguien mueva el ganado cada semana. La marca del cerco y la duración del taller son chamba del equipo, no supuestos.' },
+    { t: 'La composta de la escuela', h: 'La secundaria de un pueblo compra fertilizante para su huerto y tira la basura orgánica de la cocina. Un proyecto instala tres composteras y capacita a dos grupos.',
+      cadena: ['Se instalan tres composteras y se capacita a dos grupos de alumnos', 'Las composteras reciben cada día los residuos de la cocina, con un turno por grupo', 'A los tres meses salen 400 kilos de composta', 'El huerto se abona con la composta y la escuela deja de comprar fertilizante', 'La escuela gasta menos y los alumnos saben hacer composta en su casa'],
+      rompe: 1, pista: 'El eslabón 2 es el que se rompe: las composteras se instalaron, la capacitación se dio, y a las dos semanas nadie llevaba la basura porque el turno no era de nadie. Sin ese "entonces", los 400 kilos nunca salen.',
+      sup: ['...siempre que las composteras sean de madera tratada', '...siempre que los alumnos tengan interés en el medio ambiente', '...siempre que el turno de llevar los residuos tenga nombre y la dirección lo sostenga en el horario'], supOk: 2,
+      supPor: '"Que tengan interés" es un deseo; "que el turno tenga nombre y la dirección lo sostenga" es algo concreto, fuera de tu control, y se puede verificar en la primera semana.' },
+    { t: 'Las plagas del valle', h: 'Es el valle del árbol de la semana 5: los productores usan insecticida en exceso porque no conocen alternativas de manejo integrado. Un proyecto da un curso de manejo integrado de plagas.',
+      cadena: ['Se imparte el curso de manejo integrado de plagas a 40 productores', 'Los 40 productores conocen tres alternativas al insecticida y saben cuándo usarlas', 'Al ciclo siguiente, 15 productores prueban una alternativa en una parte de su parcela', 'En esas parcelas la plaga se controla con menos aplicaciones', 'Baja el uso de insecticida en el valle y el gasto por hectárea'],
+      rompe: 2, pista: 'El eslabón 3: saber no es hacer. Cuarenta productores capacitados es un producto; quince que prueban es un resultado, y entre los dos hay una decisión que el curso no controla. Casi todos los proyectos de capacitación reportan el producto como si fuera el resultado.',
+      sup: ['...siempre que la alternativa cueste igual o menos que el insecticida y haya quien la venda en el valle', '...siempre que el instructor sea muy bueno', '...siempre que los productores asistan a las ocho sesiones'], supOk: 0,
+      supPor: 'El precio y la disponibilidad de la alternativa no dependen del equipo y deciden si alguien la prueba. La calidad del instructor y la asistencia son chamba del proyecto: van al cronograma, no a los supuestos.' }
+  ];
+  var estado = CASOS.map(function () { return { orden: [] }; });
+
+  function pintaCasos() {
+    document.getElementById('casos').innerHTML = CASOS.map(function (c, i) {
+      var e = estado[i], usadas = e.orden;
+      var mezcla = c._mezcla || (c._mezcla = c.cadena.map(function (x, k) { return k; }).sort(function () { return Math.random() - .5; }));
+      return '<details' + (abierto === i ? ' open' : '') + ' ontoggle="if(this.open){abierto=' + i + '}" style="margin:.6rem 0;border:1px solid var(--borde);border-radius:10px;padding:.2rem .8rem .6rem">' +
+        '<summary style="cursor:pointer;font-weight:bold;color:var(--profundo);padding:.4rem 0">' + c.t + (estado[i].listo ? ' <span style="color:var(--verde)">✓</span>' : '') + '</summary><div class="historia">' + c.h + '</div>' +
+        '<div class="tarjetas">' + mezcla.map(function (k) { return '<button type="button" class="tj' + (usadas.indexOf(k) !== -1 ? ' usada' : '') + '" onclick="toca(' + i + ',' + k + ')">' + c.cadena[k] + '</button>'; }).join('') + '</div>' +
+        '<div class="cadena" id="cad' + i + '">' + (usadas.length ? usadas.map(function (k, j) { return '<span class="es" id="es' + i + '_' + j + '">' + (j + 1) + '. ' + c.cadena[k] + '</span>' + (j < usadas.length - 1 ? '<span class="fl">→</span>' : ''); }).join('') : '<span class="vacio">toca las tarjetas en orden, de lo que se hace a lo grande</span>') + '</div>' +
+        '<button class="btn" onclick="revisa(' + i + ')">Revisar</button><button class="btn claro" onclick="reinicia(' + i + ')">Empezar de nuevo</button>' +
+        '<div class="retro" id="ret' + i + '"></div>' +
+        '<div id="sup' + i + '" style="display:none;margin-top:.6rem"><label class="l">El "siempre que" del eslabón que se rompe</label><div class="opc">' + c.sup.map(function (s, k) { return '<label><input type="radio" name="sup' + i + '" value="' + k + '" onchange="supuesto(' + i + ',' + k + ')">' + s + '</label>'; }).join('') + '</div><div class="retro" id="rets' + i + '"></div></div>' +
+        '</details>';
+    }).join('');
+  }
+  var abierto = 0;
+  function toca(i, k) { var e = estado[i]; if (e.orden.indexOf(k) !== -1 || e.orden.length >= CASOS[i].cadena.length) return; e.orden.push(k); pintaCasos(); }
+  function reinicia(i) { estado[i] = { orden: [] }; pintaCasos(); }
+  function revisa(i) {
+    var c = CASOS[i], e = estado[i], r = document.getElementById('ret' + i);
+    if (e.orden.length < c.cadena.length) { r.className = 'retro mal'; r.textContent = 'Faltan ' + (c.cadena.length - e.orden.length) + ' eslabones.'; return; }
+    var errores = 0;
+    e.orden.forEach(function (k, j) { var el = document.getElementById('es' + i + '_' + j); el.className = 'es ' + (k === j ? 'bien' : 'mal'); if (k !== j) errores++; });
+    if (errores) { r.className = 'retro mal'; r.textContent = 'Hay ' + errores + ' eslabones fuera de lugar (en rojo). Léela de izquierda a derecha con un "entonces" entre cada par: donde no suene derecho, ahí está el cambio.'; return; }
+    r.className = 'retro bien'; r.innerHTML = '<strong>Derecha.</strong> ' + c.pista; document.getElementById('sup' + i).style.display = 'block'; estado[i].listo = true;
+    document.getElementById('es' + i + '_' + c.rompe).style.outline = '3px dashed var(--arena)';
+  }
+  function supuesto(i, k) { var c = CASOS[i], r = document.getElementById('rets' + i); r.className = 'retro ' + (k === c.supOk ? 'bien' : 'mal'); r.textContent = (k === c.supOk ? 'Ese es. ' : 'Ese no es un supuesto: ') + c.supPor; }
+  pintaCasos();
+</script>
+</body>
+</html>

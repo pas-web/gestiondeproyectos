@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S6 · Escucha tu marco</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1.02rem; }
+  main { max-width:780px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.15rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.93rem; color:#5b7671; margin:.1rem 0 .6rem; }
+  .historia { font-family:Georgia,serif; font-size:1.02rem; color:var(--profundo); border-left:4px solid var(--arena); padding:.2rem 0 .2rem .9rem; margin:.5rem 0 .8rem; }
+  .tarjetas { display:flex; flex-wrap:wrap; gap:.4rem; margin:.4rem 0; }
+  .tj { font:inherit; font-size:.92rem; border:2px solid var(--borde); background:#fff; border-radius:10px; padding:.45rem .7rem; cursor:pointer; text-align:left; color:var(--texto); }
+  .tj:hover { border-color:var(--marca); }
+  .tj.usada { opacity:.35; cursor:default; }
+  .cadena { display:flex; flex-wrap:wrap; align-items:center; gap:.3rem; min-height:3rem; background:#F7FAF9; border:1px dashed var(--borde); border-radius:10px; padding:.5rem; margin:.5rem 0; }
+  .cadena .es { background:var(--profundo); color:#fff; border-radius:8px; padding:.35rem .6rem; font-size:.9rem; }
+  .cadena .es.mal { background:#FBF0EE; color:var(--rojo); border:2px solid var(--rojo); }
+  .cadena .es.bien { background:#EEF6F0; color:var(--verde); border:2px solid var(--verde); }
+  .cadena .fl { color:var(--arena); font-weight:bold; }
+  .cadena .vacio { color:#8aa39c; font-style:italic; font-size:.9rem; }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.5rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92rem; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
+  .retro { margin:.6rem 0 0; padding:.6rem .9rem; border-radius:10px; font-size:.93rem; display:none; }
+  .retro.mal { display:block; background:#FBF0EE; color:var(--rojo); }
+  .retro.bien { display:block; background:#EEF6F0; color:var(--verde); }
+  .opc label { display:block; border:2px solid var(--borde); border-radius:10px; padding:.45rem .8rem; margin:.3rem 0; cursor:pointer; background:#fff; font-size:.93rem; }
+  .opc label:has(input:checked) { border-color:var(--marca); background:#E4EFEB; }
+  .opc input { margin-right:.5rem; }
+  label.l { display:block; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:#5b7671; font-weight:bold; margin:.6rem 0 .15rem; }
+  input[type=text], textarea { width:100%; font:inherit; font-size:.95rem; border:2px solid var(--borde); border-radius:8px; padding:.4rem .65rem; background:#FDFEFD; }
+  input:focus, textarea:focus { outline:none; border-color:var(--marca); }
+  .aviso { color:var(--rojo); font-size:.84rem; margin:.1rem 0 0; min-height:1.1rem; }
+  .ok { color:var(--verde); }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; margin:.4rem 0; }
+  th { background:#E4EFEB; color:var(--profundo); text-align:left; padding:.35rem .5rem; border:1px solid var(--borde); font-size:.8rem; }
+  td { padding:.3rem .4rem; border:1px solid var(--borde); vertical-align:top; }
+  td input[type=text] { border-width:1px; font-size:.9rem; padding:.3rem .45rem; }
+  .voz { background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.7rem 1rem; margin:.7rem 0; font-family:Georgia,serif; font-size:1.02rem; color:#5C4A1C; white-space:pre-wrap; }
+  .esc { display:flex; flex-wrap:wrap; gap:.3rem; margin:.4rem 0; }
+  .esc span { flex:1 1 7rem; background:#F7FAF9; border:1px solid var(--borde); border-radius:8px; padding:.35rem .5rem; font-size:.8rem; text-align:center; color:#5b7671; }
+  .esc span b { display:block; font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace; color:var(--profundo); font-size:.95rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.3rem; }
+  body.proyector .tj, body.proyector .cadena .es { font-size:1.15rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Escucha tu marco</h1>
+<p class="sub">Gimnasio · Semana 6 · Por equipo · Se pega el marco que ya escribieron y la página lo lee en voz alta.</p>
+
+<div class="reglas">
+  <strong>Lo que entrena.</strong> El marco lógico es la cadena parada en una tabla. Aquí no se escribe de nuevo: se pegan los cuatro renglones que el equipo ya tiene (gimnasio 6 o pestaña 3 de la carpeta), la página busca las fallas de columna más comunes y, con el botón, lee la lógica vertical: si la cadena brinca, aquí se oye.
+</div>
+
+<div class="caso">
+  <h2>Arma tu marco, y escúchalo</h2>
+  <p class="porque">Aquí no se escribe de nuevo: pega los cuatro renglones que tu equipo ya tiene en el gimnasio 6 (Mi marco exprés) o en la pestaña 3 de la carpeta, o mira primero el ejemplo del potrero para oír cómo suena uno. La página busca las fallas de columna más comunes y, con el botón, te lee la lógica vertical: si la cadena brinca, aquí se oye.</p>
+  <div class="reglas" style="font-size:.88rem;margin-bottom:.6rem"><strong>Ojo.</strong> Los avisos los da una regla sencilla (busca palabras como "instalar", "encuesta", "equipo", números que faltan). Atrapan los errores típicos, no todos: que no marque nada no quiere decir que el marco esté bien, y lo que lo dictamina es el reto 2, no esta página.</div>
+  <table>
+    <tr><th style="width:16%">Renglón</th><th>Resumen narrativo</th><th>Indicador</th><th>Medio de verificación</th><th>Supuesto externo</th></tr>
+    <tr><th>Fin</th><td><input type="text" id="fin-r" placeholder="a lo que contribuye"></td><td><input type="text" id="fin-i" placeholder="sin meta propia"></td><td><input type="text" id="fin-v"></td><td><input type="text" id="fin-s"></td></tr>
+    <tr><th>Propósito</th><td><input type="text" id="pro-r" placeholder="gente haciendo algo distinto"></td><td><input type="text" id="pro-i" placeholder="número, fecha, línea base"></td><td><input type="text" id="pro-v" placeholder="quién lo produce, cuándo"></td><td><input type="text" id="pro-s"></td></tr>
+    <tr><th>Productos</th><td><input type="text" id="prd-r" placeholder="contables, con fecha"></td><td><input type="text" id="prd-i"></td><td><input type="text" id="prd-v"></td><td><input type="text" id="prd-s"></td></tr>
+    <tr><th>Actividades</th><td><input type="text" id="act-r" placeholder="las clave, en orden"></td><td><input type="text" id="act-i" placeholder="hechas o no"></td><td><input type="text" id="act-v"></td><td><input type="text" id="act-s"></td></tr>
+  </table>
+  <p class="aviso" id="rev"></p>
+  <button class="btn" onclick="leer()">Leer la lógica vertical en voz alta</button>
+  <button class="btn claro" onclick="ejemploMarco('potrero')">Ver el ejemplo del potrero</button>
+  <button class="btn claro" onclick="ejemploMarco('linea1')">Ver el ejemplo de la línea 1</button>
+  <button class="btn claro" onclick="borrarMarco()">Borrar</button>
+  <div class="voz" id="voz" style="display:none"></div>
+  <p class="porque" style="margin-top:.6rem">Lo que se oye: cada "entonces" debe sonar derecho y cada "siempre que" debe ser algo que tú no controlas. Si al leerlo dices "pues... más o menos", ahí está el brinco. Pásalo a la pestaña 3 de la carpeta del proyecto cuando suene bien.</p>
+  <button class="btn" onclick="copiar()">Copiar el marco a la bitácora</button>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+</main>
+
+<script>
+  // ---------- Parte 4: marco ----------
+  var CAMPOS = ['fin-r', 'fin-i', 'fin-v', 'fin-s', 'pro-r', 'pro-i', 'pro-v', 'pro-s', 'prd-r', 'prd-i', 'prd-v', 'prd-s', 'act-r', 'act-i', 'act-v', 'act-s'];
+  var CLAVE = 'gdp-s6-marco-escuchado';
+  var EJ = {
+    potrero: { 'fin-r': 'Contribuir a que el suelo del cerro deje de lavarse y las familias gasten menos en la seca', 'fin-i': 'se contribuye: sin meta propia', 'fin-v': '', 'fin-s': '',
+      'pro-r': 'Los doce ranchos mueven su ganado cada semana entre cuatro potreros y en la seca comen forraje propio', 'pro-i': 'Ranchos que rotan cada semana en marzo: 9 de 12; línea base: 0 en agosto', 'pro-v': 'Bitácora de rotación por rancho, revisada por el técnico cada quincena', 'pro-s': 'Siempre que la lluvia de este año no quede por debajo de la mitad de lo normal',
+      'prd-r': '48 potreros cercados y 12 bitácoras de rotación entregadas al 30 de noviembre', 'prd-i': 'Potreros con cerco funcionando: 48', 'prd-v': 'Lista de entrega firmada por rancho y foto fechada', 'prd-s': 'Siempre que en cada rancho haya alguien que mueva el ganado y le convenga',
+      'act-r': 'Comprar e instalar el cerco en faena por rancho; dar el taller de pastoreo rotativo en dos sesiones', 'act-i': 'Hechas o no hechas, con fecha', 'act-v': 'Lista de asistencia y comprobantes', 'act-s': 'Siempre que la ferretería surta el cerco antes de la lluvia' },
+    linea1: { 'fin-r': 'Contribuir a que el humedal de la presa se restaure y vuelva la avifauna', 'fin-i': 'se contribuye: sin meta propia', 'fin-v': '', 'fin-s': '',
+      'pro-r': 'La gente se junta bajo la sombra nueva por las tardes en las dos zonas erosionadas', 'pro-i': 'Señal temprana: 30 de 40 plantas vivas a los tres meses. Resultado: personas sentadas los domingos de 4 a 6 en la zona 2, segunda temporada: 12; línea base: 4 (ficha de agosto)', 'pro-v': 'Conteo de plantas con foto fechada a los tres meses; hoja de conteo de personas levantada por el grupo de cuidado', 'pro-s': 'Siempre que alguien riegue en la seca (línea 2) y las otras líneas pongan dónde sentarse',
+      'prd-r': '40 plantas nativas sembradas con cajete en las dos zonas erosionadas el día de la faena, con la lista de quienes vinieron', 'prd-i': 'Plantas sembradas con cajete el día de la faena: 40', 'prd-v': 'Foto fechada de la siembra y lista de asistencia de la faena', 'prd-s': 'Siempre que el ganado y los visitantes no las pisen (cerco vivo o estacas)',
+      'act-r': 'Pedir la planta al vivero; hacer los cajetes; convocar la faena con la delegación; sembrar en la lluvia', 'act-i': 'Hechas o no hechas, con fecha', 'act-v': 'Lista de asistencia de la faena, nota del vivero', 'act-s': 'Siempre que la Reserva dé el visto bueno a las especies y la delegación la anuencia' }
+  };
+  function v(id) { return document.getElementById(id).value.trim(); }
+  function guarda() { var d = {}; CAMPOS.forEach(function (k) { d[k] = v(k); }); try { localStorage.setItem(CLAVE, JSON.stringify(d)); } catch (e) {} revisaMarco(); }
+  function pon(d) { CAMPOS.forEach(function (k) { document.getElementById(k).value = d[k] || ''; }); guarda(); }
+  CAMPOS.forEach(function (k) { document.getElementById(k).addEventListener('input', guarda); });
+  try { pon(JSON.parse(localStorage.getItem(CLAVE) || '{}')); } catch (e) {}
+  function ejemploMarco(c) { pon(EJ[c]); leer(); }
+  function borrarMarco() { if (confirm('¿Borrar el marco?')) { pon({}); document.getElementById('voz').style.display = 'none'; } }
+  function revisaMarco() {
+    var f = [];
+    var pro = v('pro-r').toLowerCase();
+    if (pro && /^(instalar|construir|sembrar|colocar|entregar|capacitar|dar |impartir|hay |se instala|se construye)/.test(pro)) f.push('El propósito suena a producto u obra: ¿quién hace qué distinto?');
+    var pi = v('pro-i');
+    if (pi && !/\d/.test(pi)) f.push('El indicador del propósito no trae número.');
+    if (pi && !/base|desde|agosto|antes/i.test(pi)) f.push('El indicador del propósito no dice desde cuánto (línea base).');
+    ['pro-v', 'prd-v'].forEach(function (k) { if (/encuesta|percepci|satisfacci/i.test(v(k))) f.push('Medio de verificación fantasma: ¿quién levanta esa encuesta, cuándo y cuánto cuesta?'); });
+    ['pro-s', 'prd-s', 'act-s'].forEach(function (k) { var s = v(k).toLowerCase(); if (s && /equipo|nosotros|cumplamos|trabajemos|que el proyecto/.test(s)) f.push('Un supuesto que depende de ustedes no es supuesto: es chamba y va al cronograma.'); if (s && /particip|se involucre|interés|se apropie/.test(s) && !/acuerdo|turno|grupo|nombre|firma/.test(s)) f.push('"Que la comunidad participe" sin decir cómo es un supuesto heroico: ¿qué acuerdo, qué turno, qué grupo?'); });
+    var r = document.getElementById('rev');
+    if (!CAMPOS.some(function (k) { return v(k); })) { r.textContent = ''; return; }
+    r.className = 'aviso' + (f.length ? '' : ' ok'); r.textContent = f.length ? f.join(' · ') : 'Sin fallas de columna a la vista. Ahora escúchalo.';
+  }
+  function leer() {
+    var t = [];
+    t.push('Si hacemos ' + (v('act-r') || '[actividades]') + (v('act-s') ? ', ' + v('act-s').replace(/^siempre que/i, 'siempre que') : ''));
+    t.push('entonces entregamos ' + (v('prd-r') || '[productos]') + (v('prd-s') ? ', ' + v('prd-s').replace(/^siempre que/i, 'siempre que') : ''));
+    t.push('entonces pasa que ' + (v('pro-r') || '[propósito: la gente hace algo distinto]') + (v('pro-s') ? ', ' + v('pro-s').replace(/^siempre que/i, 'siempre que') : ''));
+    t.push('y con eso contribuimos a que ' + (v('fin-r') || '[fin]').replace(/^contribuir a que /i, '') + '.');
+    t.push('');
+    t.push('Lo sabremos porque ' + (v('pro-i') || '[indicador del propósito]') + ', y constará en ' + (v('pro-v') || '[medio de verificación]') + '.');
+    var el = document.getElementById('voz'); el.style.display = 'block'; el.textContent = t.join('\n');
+  }
+  function copiar() {
+    var l = ['MI MARCO EXPRÉS · Semana 6'];
+    [['Fin', 'fin'], ['Propósito', 'pro'], ['Productos', 'prd'], ['Actividades', 'act']].forEach(function (p) { l.push(p[0] + ': ' + v(p[1] + '-r') + ' | indicador: ' + v(p[1] + '-i') + ' | verificación: ' + v(p[1] + '-v') + ' | supuesto: ' + v(p[1] + '-s')); });
+    var voz = document.getElementById('voz'); if (voz.style.display !== 'none') l.push('', 'Leído en voz alta:', voz.textContent);
+    if (navigator.clipboard) navigator.clipboard.writeText(l.join('\n'));
+  }
+</script>
+</body>
+</html>

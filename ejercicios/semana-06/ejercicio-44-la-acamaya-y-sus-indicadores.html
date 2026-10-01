@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S6 · La acamaya y sus indicadores</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1.02rem; }
+  main { max-width:780px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.15rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.93rem; color:#5b7671; margin:.1rem 0 .6rem; }
+  .historia { font-family:Georgia,serif; font-size:1.02rem; color:var(--profundo); border-left:4px solid var(--arena); padding:.2rem 0 .2rem .9rem; margin:.5rem 0 .8rem; }
+  .tarjetas { display:flex; flex-wrap:wrap; gap:.4rem; margin:.4rem 0; }
+  .tj { font:inherit; font-size:.92rem; border:2px solid var(--borde); background:#fff; border-radius:10px; padding:.45rem .7rem; cursor:pointer; text-align:left; color:var(--texto); }
+  .tj:hover { border-color:var(--marca); }
+  .tj.usada { opacity:.35; cursor:default; }
+  .cadena { display:flex; flex-wrap:wrap; align-items:center; gap:.3rem; min-height:3rem; background:#F7FAF9; border:1px dashed var(--borde); border-radius:10px; padding:.5rem; margin:.5rem 0; }
+  .cadena .es { background:var(--profundo); color:#fff; border-radius:8px; padding:.35rem .6rem; font-size:.9rem; }
+  .cadena .es.mal { background:#FBF0EE; color:var(--rojo); border:2px solid var(--rojo); }
+  .cadena .es.bien { background:#EEF6F0; color:var(--verde); border:2px solid var(--verde); }
+  .cadena .fl { color:var(--arena); font-weight:bold; }
+  .cadena .vacio { color:#8aa39c; font-style:italic; font-size:.9rem; }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.5rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92rem; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
+  .retro { margin:.6rem 0 0; padding:.6rem .9rem; border-radius:10px; font-size:.93rem; display:none; }
+  .retro.mal { display:block; background:#FBF0EE; color:var(--rojo); }
+  .retro.bien { display:block; background:#EEF6F0; color:var(--verde); }
+  .opc label { display:block; border:2px solid var(--borde); border-radius:10px; padding:.45rem .8rem; margin:.3rem 0; cursor:pointer; background:#fff; font-size:.93rem; }
+  .opc label:has(input:checked) { border-color:var(--marca); background:#E4EFEB; }
+  .opc input { margin-right:.5rem; }
+  label.l { display:block; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:#5b7671; font-weight:bold; margin:.6rem 0 .15rem; }
+  input[type=text], textarea { width:100%; font:inherit; font-size:.95rem; border:2px solid var(--borde); border-radius:8px; padding:.4rem .65rem; background:#FDFEFD; }
+  input:focus, textarea:focus { outline:none; border-color:var(--marca); }
+  .aviso { color:var(--rojo); font-size:.84rem; margin:.1rem 0 0; min-height:1.1rem; }
+  .ok { color:var(--verde); }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; margin:.4rem 0; }
+  th { background:#E4EFEB; color:var(--profundo); text-align:left; padding:.35rem .5rem; border:1px solid var(--borde); font-size:.8rem; }
+  td { padding:.3rem .4rem; border:1px solid var(--borde); vertical-align:top; }
+  td input[type=text] { border-width:1px; font-size:.9rem; padding:.3rem .45rem; }
+  .voz { background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.7rem 1rem; margin:.7rem 0; font-family:Georgia,serif; font-size:1.02rem; color:#5C4A1C; white-space:pre-wrap; }
+  .esc { display:flex; flex-wrap:wrap; gap:.3rem; margin:.4rem 0; }
+  .esc span { flex:1 1 7rem; background:#F7FAF9; border:1px solid var(--borde); border-radius:8px; padding:.35rem .5rem; font-size:.8rem; text-align:center; color:#5b7671; }
+  .esc span b { display:block; font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace; color:var(--profundo); font-size:.95rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.3rem; }
+  body.proyector .tj, body.proyector .cadena .es { font-size:1.15rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La acamaya y sus indicadores</h1>
+<p class="sub">Gimnasio · Semana 6 · En parejas · Un caso real de la Huasteca.</p>
+
+<div class="reglas">
+  <strong>Lo que entrena.</strong> La cadena ya está armada; lo que falta es lo que el marco pide: a cada eslabón, el indicador que diría si pasó. Mientras más abajo en la cadena, más barato y más honesto el indicador. Y al final, las dos flechas que dan miedo: las que el proyecto menos controla.
+</div>
+
+<div class="caso">
+  <h2>La acamaya: cada eslabón con su indicador, y las flechas que dan miedo</h2>
+  <p class="porque">Un caso real de la Huasteca: la acamaya de río se extingue por la pesca sin control. Un proyecto apuesta a una campaña de comunicación. La cadena ya está armada; lo que falta es lo que el viernes se pide en la tabla: a cada eslabón, el indicador que diría si pasó. Toca un eslabón y luego el indicador que le toca.</p>
+  <div class="historia">Campaña de comunicación → más conocimiento sobre los macroinvertebrados del río → más interés en conservar la acamaya → los pobladores prefieren no comerla en veda → decrece la demanda → se reduce la pesca en los meses críticos → poblaciones sanas de acamaya.</div>
+  <div id="acamaya"></div>
+  <div class="retro" id="acamaya-retro"></div>
+  <label class="l" style="margin-top:.9rem">Y ahora las flechas: ¿cuáles dos son las que más miedo dan, las que el proyecto menos controla?</label>
+  <div class="opc" id="acamaya-flechas"></div>
+  <button class="btn" onclick="acamayaFlechas()">Revisar las flechas</button>
+  <div class="retro" id="acamaya-retro2"></div>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+</main>
+
+<script>
+  // ---------- Parte 3: la acamaya ----------
+  var ACA = [
+    ['Más conocimiento sobre los macroinvertebrados del río', 'Porcentaje de la población objetivo que cita dos beneficios ambientales de la acamaya en el río'],
+    ['Más interés en conservar la acamaya', 'Porcentaje de la población objetivo que apoya reglas para conservar la acamaya'],
+    ['Los pobladores prefieren no comer acamaya en veda', 'Porcentaje de la población objetivo que dice que ya no come acamaya durante la veda'],
+    ['Decrece la demanda de acamaya', 'Kilos de acamaya vendidos en los restaurantes'],
+    ['Se reduce la pesca en los meses críticos', 'Kilos extraídos por los pescadores durante los meses críticos'],
+    ['Poblaciones sanas de acamaya', 'Cambios en la abundancia y la estructura de la población']
+  ];
+  var acaSel = null, acaOk = {};
+  var acaMezcla = ACA.map(function (a, i) { return i; }).sort(function () { return Math.random() - .5; });
+  function acaPinta() {
+    var h = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">';
+    h += '<div><label class="l">Eslabones</label>' + ACA.map(function (a, i) { return '<button type="button" class="tj' + (acaOk[i] ? ' usada' : '') + '" style="display:block;width:100%;margin:.25rem 0' + (acaSel === i ? ';border-color:var(--marca);background:#E4EFEB' : '') + '" onclick="acaEsl(' + i + ')">' + (i + 1) + '. ' + a[0] + (acaOk[i] ? ' ✓' : '') + '</button>'; }).join('') + '</div>';
+    h += '<div><label class="l">Indicadores</label>' + acaMezcla.map(function (i) { return '<button type="button" class="tj' + (acaOk[i] ? ' usada' : '') + '" style="display:block;width:100%;margin:.25rem 0" onclick="acaInd(' + i + ')">' + ACA[i][1] + '</button>'; }).join('') + '</div></div>';
+    document.getElementById('acamaya').innerHTML = h;
+  }
+  function acaEsl(i) { if (acaOk[i]) return; acaSel = i; acaPinta(); }
+  function acaInd(i) {
+    var r = document.getElementById('acamaya-retro');
+    if (acaSel === null) { r.className = 'retro mal'; r.textContent = 'Primero toca un eslabón, luego su indicador.'; return; }
+    if (i === acaSel) { acaOk[i] = true; acaSel = null; r.className = 'retro bien'; r.textContent = Object.keys(acaOk).length === ACA.length ? 'Los seis en su lugar. Fíjate: los tres primeros se miden preguntando (porcentajes que alguien tiene que levantar); los tres últimos se miden contando kilos y animales. Mientras más abajo en la cadena, más barato y más honesto el indicador.' : 'Sí. Siguiente.'; }
+    else { r.className = 'retro mal'; r.textContent = 'Ese indicador mide otro eslabón. Pregunta: ¿qué tendría que verse, o contarse, para saber que este eslabón pasó?'; }
+    acaPinta();
+  }
+  acaPinta();
+  var FLECHAS = ['De la campaña a saber más', 'De saber más a querer conservar', 'De querer conservar a no comer en veda', 'De no comer a que baje la demanda', 'De que baje la demanda a que se pesque menos', 'De pescar menos a poblaciones sanas'];
+  document.getElementById('acamaya-flechas').innerHTML = FLECHAS.map(function (f, i) { return '<label><input type="checkbox" name="fl" value="' + i + '">' + f + '</label>'; }).join('');
+  function acamayaFlechas() {
+    var m = Array.prototype.slice.call(document.querySelectorAll('input[name="fl"]:checked')).map(function (e) { return +e.value; });
+    var r = document.getElementById('acamaya-retro2');
+    if (m.length !== 2) { r.className = 'retro mal'; r.textContent = 'Elige exactamente dos.'; return; }
+    var ok = m.indexOf(2) !== -1 && m.indexOf(4) !== -1;
+    r.className = 'retro ' + (ok ? 'bien' : 'mal');
+    r.textContent = (ok ? 'Esas dos. ' : 'Las que más miedo dan son la tercera y la quinta. ') + 'La tercera es el salto de querer a hacer: el mismo eslabón del vivero, del potrero y del encino. La quinta depende de gente que el proyecto no toca: los pescadores venden a quien no es de aquí, y la demanda del pueblo puede bajar sin que baje la pesca. Por eso el proyecto real le puso un signo de interrogación a cada flecha y volvió a la campaña a corregirla cada temporada: a eso le llaman manejo adaptativo, y en este curso se llama monitorear el eslabón frágil.';
+  }
+</script>
+</body>
+</html>

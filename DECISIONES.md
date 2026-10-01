@@ -1018,8 +1018,11 @@ y evaluar como dos caras).
   escuela, las plagas del valle (el árbol de la S5), el encino, la acamaya de
   la Huasteca, la lombricultura de Arroyo Seco, los bebederos y las conservas
   de nopal. El marco completo del potrero se lee en voz alta como ejemplo.
-- **Gimnasio 7 nuevo**, `ejercicios/semana-06/ejercicio-41-del-arbol-a-la-cadena.html`
-  (autocontenido): parte 0, el encino eslabón por eslabón con botón (simple);
+- **Gimnasios 7 a 11 nuevos** (autocontenidos, uno por página para que cada
+  lámina enlace solo lo que pide; el mismo día se partió el archivo único
+  `ejercicio-41-del-arbol-a-la-cadena.html` en cinco: 41 el encino, 42 acomoda
+  la cadena, 43 la escalera en tu carrera, 44 la acamaya y sus indicadores, 45
+  escucha tu marco). Lo que traen: el encino eslabón por eslabón con botón (simple);
   parte 1, tres cadenas con tarjetas revueltas, el eslabón que se rompe y el
   "siempre que" correcto entre tres (medio); parte 2, la escalera con diez
   frases (simple); parte 3, la acamaya: cada eslabón con su indicador y las
