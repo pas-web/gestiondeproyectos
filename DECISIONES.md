@@ -7,10 +7,13 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 52 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 15 (1 oct 2026): el árbol de problemas y
+- **Último bloque cerrado:** bloque 16 (1 oct 2026): la unidad 2 sin
+  prototipo: de la semana 6 a la 10 cada sesión agrega una pieza al proyecto
+  de cada línea, en la carpeta del proyecto, hasta la solicitud al Fondo y la
+  misma solicitud en el formato del PROCODES (ver el bloque al final). Antes,
+  bloque 15 (1 oct 2026): el árbol de problemas y
   el árbol de objetivos finales de La Florida, con cinco líneas y cinco
-  equipos, y las semanas 6 y 7 reconstruidas sobre ellos (ver el bloque al
-  final de este archivo). Antes, bloques 12 a 14 (24 sep 2026): el árbol en
+  equipos. Antes, bloques 12 a 14 (24 sep 2026): el árbol en
   su propio mazo con las tarjetas reales y el PROCODES completo. Antes, bloque
   11 (16 sep 2026): la unidad 2 completa
   (semanas 5 a 10) en mazos de láminas, con el cuadernillo 2 llenable en línea
@@ -921,3 +924,68 @@ Pendientes nuevos: contestar por escrito de qué bolsa salen los $1,000 del
 ensayo (la S6 lo da por contestado el jueves); si el muro del grupo difiere de
 los dos árboles en limpio, corregir los SVG de la S5 y la S7 con la foto; abrir
 las semanas 6 y 7 en `DISPONIBLES` cuando el grupo llegue.
+
+## Bloque 16 (1 de octubre de 2026): la unidad 2 sin prototipo, de la mano hasta la solicitud
+
+Pedido de Eduardo, después de publicar el bloque 15: se acaba el prototipo
+(no hay tiempo ni se usará dinero antes del dictamen); de la semana 6 en
+adelante cada sesión lleva a cada equipo de la mano en armar el proyecto de su
+línea (teoría del cambio, marco lógico, bocetos con ubicación, plan de
+actividades y cronograma, presupuesto, contrapartida) hasta la solicitud al
+Fondo con su pitch ante Mayra, y el mismo proyecto sometido al formato del
+PROCODES como ejercicio. Los ejercicios pasan a ser fichas con las que cada
+equipo perfila lo suyo. La única visita a la orilla es el viernes 13 de
+noviembre.
+
+### El arco nuevo (una pieza por sesión)
+
+| Semana | Jueves | Viernes | Retos |
+| --- | --- | --- | --- |
+| 6 · La apuesta causal | Del árbol a la cadena (escalera, cadena de cambios, ejemplo de la línea 1, Kenia 2) | La tabla que traduce: marco exprés, el único duelo de la unidad, llega el Anexo 1 | 1 y 2 |
+| 7 · El proyecto en el terreno | Bocetos y ubicación: del medio a la pieza, las cinco zonas con sus condiciones, el boceto que un dictaminador entiende, el plano maestro | Plan de actividades y cronograma, supuestos y riesgos | 5 |
+| 8 · Pesos y aliados | El presupuesto a dos columnas (cotizado para la microintervención, estimado con costos unitarios del PROCODES para la línea) | Mapa de actores, el trato, la estrategia de contrapartida y la anatomía del oficio | 4 y 3 |
+| 9 · Dos formatos, un proyecto | El Anexo 1 sección por sección, evidencia de consulta, semáforo | El mismo proyecto en el Anexo 3 del PROCODES y el dictamen cruzado con 52 puntos | |
+| 10 · La Troika y la entrega | El pitch en cuatro movimientos y la Troika con cinco equipos | Checklist, corrección, entrega a las 14:00, pitch con reloj | |
+| 11 · La Dictaminadora | La defensa ante Mayra (página en prosa, actualizada) | Fallo, respuesta, cierre de la unidad | |
+
+- **La carpeta del proyecto** (`ejercicios/semana-06/carpeta-del-proyecto.html`,
+  autocontenida, regla 6): una página por equipo con nueve pestañas (línea y
+  evidencia, teoría del cambio, marco, bocetos y ubicación, plan y cronograma,
+  presupuesto con suma y avisos de la Bolsa, contrapartida y oficio, riesgos y
+  pitch con cuenta de palabras, y "armar la solicitud" en modo Fondo y en modo
+  PROCODES). Guarda en el navegador, descarga un HTML con la fecha, copia una
+  pestaña a la bitácora. Lo personal sigue en el cuadernillo 2.
+- **Proyecto de la línea y microintervención** se distinguen en cada pieza:
+  el completo se escribe en la carpeta y se vierte en el Anexo 3; la
+  microintervención es su primer paso y concursa por los diez mil. Dos
+  presupuestos: uno cotizado, uno estimado con costos unitarios.
+- **Las hipótesis del árbol se declaran** como supuestos y riesgos (pestaña 8)
+  en lugar de probarse con prototipo; la visita del 13 de noviembre es donde
+  se confirman con la gente enfrente.
+- **Las Reglas del Fondo** se refechan por semana del curso con un aviso de la
+  Coordinación (cláusula 7.2 nueva): Anexo 1 el viernes de la S6, entrega el
+  viernes de la S10, defensa el jueves de la S11, respuesta hasta el viernes
+  de la S12, visita a la ribera el 13 de noviembre, ejecución S12 a S15. El
+  glosario trae los nombres finales de las líneas. Se suprime el ensayo:
+  ningún recurso antes del dictamen (5.4).
+- **Un solo duelo con IA** en la unidad (el marco, viernes de la S6), para que
+  el eje de IA no desaparezca sin comerse una sesión.
+- **Lo que quedó sin usar:** los tres ejercicios del prototipo
+  (`ejercicios/semana-06/ejercicio-11`, `-22`, `-32`) siguen en el repo pero
+  ya no se enlazan desde ninguna página; los de las semanas 7 a 11 se reparten
+  entre las semanas nuevas (el índice del gimnasio los lista por semana nueva
+  sin moverlos de carpeta).
+- **Cambios en cadena:** semana 5 (toda mención al prototipo y a los $200),
+  semana 11 (fechas por semana, Mayra en lugar del comité, rúbrica 20/20/20/
+  20/10/10), semana 12 (RACI nace del plan de actividades), semana 16 (el
+  libro abre con la primera compra de la microintervención), portada, semana 0
+  (títulos de las semanas 6 a 10), guía del PROCODES, cuadernillo 2 (hojas y
+  retos reordenados conservando las claves `data-exp`), `curso.js` (títulos y
+  preguntas de las semanas 6 a 10).
+- **La campana** sigue celebrando las peticiones reales (cotizaciones, citas,
+  tratos) aunque las Reglas solo exijan la gestión en papel.
+
+Pendientes: producir la semana 11 en formato de mazos (hoy sigue en prosa);
+decidir si los tres ejercicios del prototipo se borran del repo o se guardan
+como material opcional; cuando el grupo llegue a cada semana, publicar su
+fecha de calendario junto a las etapas de las Reglas.

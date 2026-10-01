@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La carpeta del proyecto · Gestión y Manejo de Proyectos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1rem; }
+  main { max-width:860px; margin:0 auto; padding:1.2rem 1rem 6rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.6rem 0 .2rem; }
+  .sub { color:#45605a; margin:0 0 .8rem; }
+  .cab { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.8rem 1rem; display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+  @media (max-width:600px) { .cab { grid-template-columns:1fr; } }
+  label.l { display:block; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:#5b7671; font-weight:bold; margin:.5rem 0 .15rem; }
+  input[type=text], textarea, select { width:100%; font:inherit; font-size:.96rem; border:2px solid var(--borde); border-radius:8px; padding:.45rem .65rem; background:#FDFEFD; }
+  input:focus, textarea:focus, select:focus { outline:none; border-color:var(--marca); }
+  textarea { min-height:4.4rem; resize:vertical; }
+  .tabs { display:flex; flex-wrap:wrap; gap:.3rem; margin:1rem 0 .6rem; }
+  .tabs button { font:inherit; font-size:.86rem; font-weight:bold; border:2px solid var(--borde); background:#fff; color:var(--profundo); border-radius:999px; padding:.35rem .8rem; cursor:pointer; }
+  .tabs button.on { background:var(--profundo); color:#fff; border-color:var(--profundo); }
+  .tabs button .n { color:var(--arena); margin-right:.3rem; }
+  .pest { display:none; background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; }
+  .pest.on { display:block; }
+  .pest h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.2rem; margin:.1rem 0 .2rem; }
+  .pest .cuando { font-size:.8rem; color:#7C6222; font-weight:bold; letter-spacing:.06em; text-transform:uppercase; }
+  .porque { font-size:.92rem; color:#5b7671; margin:.2rem 0 .8rem; }
+  .regla { background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.6rem .9rem; margin:.6rem 0; font-size:.92rem; color:#5C4A1C; }
+  table { width:100%; border-collapse:collapse; margin:.5rem 0; font-size:.9rem; }
+  th { background:#E4EFEB; color:var(--profundo); text-align:left; padding:.4rem .5rem; border:1px solid var(--borde); font-size:.8rem; }
+  td { padding:.25rem .3rem; border:1px solid var(--borde); vertical-align:top; }
+  td input[type=text] { border-width:1px; padding:.3rem .45rem; font-size:.9rem; }
+  td.num input { text-align:right; }
+  td.x { width:2rem; text-align:center; }
+  td.x button { border:none; background:none; color:var(--rojo); cursor:pointer; font-weight:bold; }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.4rem .3rem 0 0; background:var(--marca); color:#fff; font-size:.92rem; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
+  .btn.chico { padding:.25rem .7rem; font-size:.82rem; }
+  .suma { display:flex; flex-wrap:wrap; gap:.6rem 1.4rem; font-weight:bold; margin:.5rem 0; }
+  .suma span small { display:block; font-weight:normal; font-size:.78rem; color:#5b7671; }
+  .aviso { color:var(--rojo); font-size:.86rem; margin:.2rem 0; }
+  .ok { color:#1F4A2C; font-size:.86rem; margin:.2rem 0; }
+  .barra { position:fixed; left:0; right:0; bottom:0; background:var(--profundo); color:#EAF4F2; padding:.55rem 1rem; display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; justify-content:center; z-index:20; font-size:.9rem; }
+  .barra .btn { margin:0; }
+  .barra .btn.claro { background:transparent; color:#fff; border-color:#fff; }
+  .guardado { font-size:.8rem; opacity:.8; }
+  .salida { white-space:pre-wrap; font-family:Georgia,serif; font-size:.95rem; background:#F7FAF9; border:1px solid var(--borde); border-radius:10px; padding:.8rem 1rem; max-height:60vh; overflow:auto; }
+  .modo { display:flex; gap:.4rem; margin:.4rem 0; }
+  .cuenta { font-size:.8rem; color:#5b7671; text-align:right; }
+  @media print { .barra, .tabs, .btn { display:none; } .pest { display:block; page-break-inside:avoid; margin-bottom:1rem; } body { background:#fff; } }
+</style>
+</head>
+<body>
+<main>
+<h1>La carpeta del proyecto</h1>
+<p class="sub">Una pestaña por pieza, de la semana 6 a la 10. Se llena por equipo, en una sola laptop; se guarda en ese navegador y se descarga como archivo al Drive del equipo cada viernes. Lo personal va en el cuadernillo 2.</p>
+
+<div class="cab">
+  <div>
+    <label class="l">Equipo (nombre corto)</label>
+    <input type="text" data-k="equipo" placeholder="Como lo conoce el grupo">
+  </div>
+  <div>
+    <label class="l">Línea estratégica</label>
+    <select data-k="linea">
+      <option value="">Elige la línea</option>
+      <option>1 · Reforestación de las zonas degradadas o erosionadas</option>
+      <option>2 · Participación comunitaria en el cuidado y la vigilancia</option>
+      <option>3 · Recreación para distintas edades, también en el agua</option>
+      <option>4 · Espacio seguro y limpio</option>
+      <option>5 · Espacios de convivencia y descanso</option>
+    </select>
+  </div>
+  <div>
+    <label class="l">Integrantes</label>
+    <input type="text" data-k="integrantes" placeholder="Nombres, separados por comas">
+  </div>
+  <div>
+    <label class="l">Nombre provisional del proyecto</label>
+    <input type="text" data-k="nombre" placeholder="Honesto y sin mercadotecnia">
+  </div>
+</div>
+
+<div class="tabs" id="tabs"></div>
+
+<!-- 1 -->
+<section class="pest" data-p="1">
+  <h2>1 · La línea y su evidencia</h2>
+  <div class="cuando">Semana 5 y 6 · de la mesa de tarjetas y el árbol</div>
+  <p class="porque">Lo que la consulta pidió, dicho como problema y con sus pruebas. Es la sección "problema y evidencia" de cualquier formato.</p>
+  <label class="l">El problema de la línea, como caja del árbol (sin obra en el nombre)</label>
+  <textarea data-k="p1-problema" placeholder="Ej.: Hay zonas de la orilla degradadas o erosionadas, sin sombra."></textarea>
+  <label class="l">Sus causas, como quedaron en el árbol (marca las hipótesis con H)</label>
+  <textarea data-k="p1-causas" placeholder="Una por renglón. Las que no tienen tarjeta llevan (H)."></textarea>
+  <label class="l">Evidencia de consulta · elemento 1: el conteo</label>
+  <input type="text" data-k="p1-ev1" placeholder='Ej.: "No hay sombra donde estar" se repitió en 3 tarjetas (entrevistas y taller, zona 2)'>
+  <label class="l">Elemento 2: una frase textual con su fuente genérica</label>
+  <input type="text" data-k="p1-ev2" placeholder='Ej.: "Nos sentamos en la piedra porque no hay dónde" (mujer de 30 a 49, entrevista 4, pregunta 9)'>
+  <label class="l">Elemento 3: la referencia del mapa</label>
+  <input type="text" data-k="p1-ev3" placeholder="Ej.: zona 2 de la foto, el área abierta; en la ficha de agosto: 4 personas sentadas en piedra a las 17:00">
+  <label class="l">La voz que matiza o incomoda, y cómo la atiende el proyecto</label>
+  <input type="text" data-k="p1-ev4" placeholder='Ej.: "que no pierda su esencia y tranquilidad": por eso la sombra es de planta nativa y no de techo'>
+  <label class="l">El medio del árbol de objetivos que carga esta línea</label>
+  <input type="text" data-k="p1-medio" placeholder="Ej.: Las zonas degradadas o erosionadas de la orilla están reforestadas; hay sombra donde la gente se junta">
+</section>
+
+<!-- 2 -->
+<section class="pest" data-p="2">
+  <h2>2 · La teoría del cambio</h2>
+  <div class="cuando">Semana 6, jueves · reto 1</div>
+  <p class="porque">La apuesta completa: si hacemos, entonces, siempre que. Mínimo tres eslabones, un supuesto por flecha, el que apunta a la línea 2 incluido.</p>
+  <label class="l">Si hacemos (la estrategia, en cosas que se pueden contar y fechar)</label>
+  <textarea data-k="p2-hacemos"></textarea>
+  <label class="l">Entonces (producto): lo que queda, contable</label>
+  <input type="text" data-k="p2-e1"><input type="text" data-k="p2-s1" placeholder="...siempre que (supuesto)" style="margin-top:.3rem">
+  <label class="l">Entonces (resultado intermedio)</label>
+  <input type="text" data-k="p2-e2"><input type="text" data-k="p2-s2" placeholder="...siempre que (supuesto)" style="margin-top:.3rem">
+  <label class="l">Entonces (resultado: la gente haciendo algo distinto)</label>
+  <input type="text" data-k="p2-e3"><input type="text" data-k="p2-s3" placeholder="...siempre que (supuesto)" style="margin-top:.3rem">
+  <label class="l">Entonces (el objetivo de todos)</label>
+  <input type="text" data-k="p2-obj" value="" placeholder="La gente usa la orilla de la presa como espacio público: se queda, convive y se divierte">
+  <label class="l">Y contribuye a (fin: no se promete)</label>
+  <input type="text" data-k="p2-fin" placeholder="Ej.: El humedal se restaura y vuelve la avifauna">
+  <label class="l">El "siempre que" que apunta a la línea 2 (participación comunitaria)</label>
+  <input type="text" data-k="p2-linea2" placeholder="Ej.: siempre que alguien riegue en la seca">
+  <label class="l">El eslabón frágil y su señal temprana</label>
+  <input type="text" data-k="p2-fragil" placeholder="Qué flecha te preocupa más y qué verías en la primera semana si se está rompiendo">
+  <label class="l">La apuesta en una frase</label>
+  <textarea data-k="p2-frase" placeholder="Si hacemos... entonces... siempre que..." style="min-height:3rem"></textarea>
+</section>
+
+<!-- 3 -->
+<section class="pest" data-p="3">
+  <h2>3 · El marco lógico exprés</h2>
+  <div class="cuando">Semana 6, viernes · reto 2</div>
+  <p class="porque">La misma apuesta en tabla: cuatro renglones y tres columnas. Lo que no se puede verificar no se promete.</p>
+  <table>
+    <tr><th style="width:17%">Renglón</th><th>Resumen narrativo</th><th>Indicador (número, fecha, línea base)</th><th>Medio de verificación (quién, cuándo)</th><th>Supuesto externo</th></tr>
+    <tr><th>Fin</th><td><input type="text" data-k="p3-fin-r"></td><td><input type="text" data-k="p3-fin-i" placeholder="se contribuye: sin meta propia"></td><td><input type="text" data-k="p3-fin-v"></td><td><input type="text" data-k="p3-fin-s"></td></tr>
+    <tr><th>Propósito</th><td><input type="text" data-k="p3-pro-r" placeholder="gente haciendo algo distinto"></td><td><input type="text" data-k="p3-pro-i" placeholder="indicador de resultado · línea base: ficha de agosto"></td><td><input type="text" data-k="p3-pro-v"></td><td><input type="text" data-k="p3-pro-s"></td></tr>
+    <tr><th>Productos</th><td><input type="text" data-k="p3-prd-r" placeholder="dos o tres, contables, con fecha"></td><td><input type="text" data-k="p3-prd-i" placeholder="indicador de producto"></td><td><input type="text" data-k="p3-prd-v"></td><td><input type="text" data-k="p3-prd-s"></td></tr>
+    <tr><th>Actividades</th><td><input type="text" data-k="p3-act-r" placeholder="las clave, en orden"></td><td><input type="text" data-k="p3-act-i" placeholder="hechas o no hechas"></td><td><input type="text" data-k="p3-act-v"></td><td><input type="text" data-k="p3-act-s"></td></tr>
+  </table>
+  <label class="l">La escalera del indicador de resultado: bien / mejor / excelente</label>
+  <input type="text" data-k="p3-esc-r" placeholder="Ej.: 8 / 12 / 20 personas sentadas los domingos de 4 a 6, desde 4 en agosto">
+  <label class="l">La escalera del indicador de producto: bien / mejor / excelente</label>
+  <input type="text" data-k="p3-esc-p" placeholder="Ej.: 25 / 30 / 36 plantas vivas de 40 a los tres meses">
+  <label class="l">Lo que el duelo cambió: lo prestado (declarado con los cuatro datos) y lo cazado</label>
+  <textarea data-k="p3-duelo" style="min-height:3rem"></textarea>
+</section>
+
+<!-- 4 -->
+<section class="pest" data-p="4">
+  <h2>4 · Bocetos y ubicación</h2>
+  <div class="cuando">Semana 7, jueves · la leyenda del boceto; el dibujo va en kraft y en foto al Drive</div>
+  <p class="porque">Cada pieza con su número, su zona, el medio que sirve, la tarjeta que la pidió, el material y qué podría salir mal por ella. La microintervención se marca.</p>
+  <table id="t-piezas">
+    <tr><th>#</th><th>Pieza</th><th>Zona (1 a 5)</th><th>Medio que sirve</th><th>Tarjeta que la pidió</th><th>Material</th><th>Qué podría salir mal</th><th>¿Micro?</th><th></th></tr>
+  </table>
+  <button class="btn chico claro" onclick="fila('t-piezas')">+ pieza</button>
+  <label class="l">Lo que ya existe en la zona (de la ficha de agosto): sabinos, bancas, caminos, piedras donde la gente se sienta</label>
+  <textarea data-k="p4-existe" style="min-height:3rem"></textarea>
+  <label class="l">Medidas de la pieza principal (en pasos; en metros cuando la cinta las confirme)</label>
+  <input type="text" data-k="p4-medidas">
+  <label class="l">Condiciones que el boceto respeta (de la canasta y de la Reserva)</label>
+  <textarea data-k="p4-condiciones" style="min-height:3rem" placeholder="Los manantiales del Cedral, la tranquilidad, nada que llame a los niños junto al agua, vegetación nativa, ningún permanente sin permiso"></textarea>
+  <label class="l">Lo que el plano maestro cambió (choques, cruces, vacíos)</label>
+  <textarea data-k="p4-maestro" style="min-height:3rem"></textarea>
+  <label class="l">Permisos que alguna pieza necesita, y de quién</label>
+  <input type="text" data-k="p4-permisos">
+</section>
+
+<!-- 5 -->
+<section class="pest" data-p="5">
+  <h2>5 · Plan de actividades y cronograma</h2>
+  <div class="cuando">Semana 7, viernes · reto 5</div>
+  <p class="porque">Cada pieza abierta en actividades con producto, responsable, dependencia y fecha. Las de la microintervención van además al cronograma de cuatro semanas.</p>
+  <table id="t-plan">
+    <tr><th>Pieza</th><th>Actividad</th><th>Producto que deja</th><th>Responsable</th><th>Depende de</th><th>Cuándo (temporada o semana)</th><th>¿Se moja? Fecha B</th><th>¿Micro?</th><th></th></tr>
+  </table>
+  <button class="btn chico claro" onclick="fila('t-plan')">+ actividad</button>
+  <div class="regla">El cronograma de la microintervención: cuatro semanas exactas, de la 12 a la 15 del curso, como fijan las reglas. Sin joroba: si la semana 4 quedó gorda, algo migra a la 1.</div>
+  <table>
+    <tr><th>Semana de ejecución</th><th>Qué pasa</th><th>Quién responde</th><th>Depende de</th><th>Qué se moja y su fecha B</th></tr>
+    <tr><th>1 (semana 12)</th><td><input type="text" data-k="p5-c1-q"></td><td><input type="text" data-k="p5-c1-r"></td><td><input type="text" data-k="p5-c1-d"></td><td><input type="text" data-k="p5-c1-m"></td></tr>
+    <tr><th>2 (semana 13)</th><td><input type="text" data-k="p5-c2-q"></td><td><input type="text" data-k="p5-c2-r"></td><td><input type="text" data-k="p5-c2-d"></td><td><input type="text" data-k="p5-c2-m"></td></tr>
+    <tr><th>3 (semana 14)</th><td><input type="text" data-k="p5-c3-q"></td><td><input type="text" data-k="p5-c3-r"></td><td><input type="text" data-k="p5-c3-d"></td><td><input type="text" data-k="p5-c3-m"></td></tr>
+    <tr><th>4 (semana 15)</th><td><input type="text" data-k="p5-c4-q"></td><td><input type="text" data-k="p5-c4-r"></td><td><input type="text" data-k="p5-c4-d"></td><td><input type="text" data-k="p5-c4-m"></td></tr>
+  </table>
+  <label class="l">Lo que tiene que estar hecho antes de la visita a la orilla del viernes 13 de noviembre</label>
+  <textarea data-k="p5-visita" style="min-height:3rem" placeholder="El pliego de lo apuntado, el plano maestro impreso, el oficio de la anuencia, la cinta para medir, las preguntas que quedan"></textarea>
+  <label class="l">El horizonte del proyecto completo de la línea (temporadas, meses)</label>
+  <textarea data-k="p5-horizonte" style="min-height:3rem" placeholder="Ej.: siembra en la lluvia de 2027, riego dos secas, cerco vivo el segundo año"></textarea>
+</section>
+
+<!-- 6 -->
+<section class="pest" data-p="6">
+  <h2>6 · Presupuesto a dos columnas</h2>
+  <div class="cuando">Semana 8, jueves · reto 4</div>
+  <p class="porque">Cada partida con su actividad y su papel. Lo que pagaría el Fondo en una columna; lo que se pediría afuera, valorizado, en la otra. Cada cosa vive en una sola columna.</p>
+  <table id="t-presu">
+    <tr><th>Partida (qué, cuánto, de dónde)</th><th>Actividad</th><th>Papel (cotización, fecha, quién)</th><th>Paga el Fondo $</th><th>Se pediría afuera $</th><th>Tipo (comprado / prestado / trocado / donado)</th><th></th></tr>
+  </table>
+  <button class="btn chico claro" onclick="fila('t-presu')">+ partida</button>
+  <div class="suma">
+    <span>Fondo: $<b id="s-fondo">0</b><small>mínimo $2,000 · la Bolsa es de $10,000 y se comparte</small></span>
+    <span>Afuera: $<b id="s-afuera">0</b><small>la contrapartida de la rúbrica</small></span>
+    <span>Total del proyecto: $<b id="s-total">0</b></span>
+  </div>
+  <p id="s-aviso" class="aviso"></p>
+  <label class="l">Flete e imponderables (renglón propio cada uno; los imponderables alrededor del 5%, con nombre)</label>
+  <input type="text" data-k="p6-flete">
+  <label class="l">Lo que se cae primero si la Bolsa llega parcial</label>
+  <input type="text" data-k="p6-parcial">
+  <label class="l">El proyecto completo de la línea, estimado con conceptos y costos unitarios del PROCODES (concepto, unidad, meta, costo unitario, total)</label>
+  <textarea data-k="p6-procodes" placeholder="Marcado como estimación. Ej.: Reforestación, planta, 40, $..., $..."></textarea>
+</section>
+
+<!-- 7 -->
+<section class="pest" data-p="7">
+  <h2>7 · Contrapartida y gestión</h2>
+  <div class="cuando">Semana 8, viernes · reto 3</div>
+  <p class="porque">Qué se pediría a la comunidad y qué al municipio, cuantificado, a quién (cargo, no nombre), por qué vía y cuándo; y el oficio redactado completo. Se evalúa como práctica: no se envía, salvo el de la anuencia.</p>
+  <table id="t-pet">
+    <tr><th>Qué se pediría</th><th>A quién (cargo)</th><th>Comunidad / municipio / otro</th><th>Vía (asamblea, visita, oficio)</th><th>Cuándo</th><th>Tipo (jornales, materiales, servicios, permisos, efectivo)</th><th>Valor $ y referencia</th><th></th></tr>
+  </table>
+  <button class="btn chico claro" onclick="fila('t-pet')">+ petición</button>
+  <label class="l">El oficio principal, redactado completo (destinatario con cargo, fundamento con la consulta, petición con qué, cuánto, cuándo y para qué, lo que se ofrece, plazo y firma)</label>
+  <textarea data-k="p7-oficio" style="min-height:9rem"></textarea>
+  <label class="l">El oficio de la anuencia a la delegación (todos los equipos): estado</label>
+  <input type="text" data-k="p7-anuencia" placeholder="Redactado / entregado el ... / constancia de trámite / firmado el ...">
+  <label class="l">Los que faltan en el mapa (con quién nadie ha hablado) y la resistencia con su dato de diseño</label>
+  <textarea data-k="p7-faltan" style="min-height:3rem" placeholder="Con roles, sin nombres. El mapa completo se queda en el aula."></textarea>
+</section>
+
+<!-- 8 -->
+<section class="pest" data-p="8">
+  <h2>8 · Supuestos, riesgos y el pitch</h2>
+  <div class="cuando">Semana 7 (riesgos) y semana 10 (pitch)</div>
+  <p class="porque">Cada "siempre que" dicho al revés, con señal temprana y plan B. Las cajas del árbol que siguen siendo hipótesis se declaran aquí. Y el pitch: cuatro movimientos, dos minutos.</p>
+  <table id="t-riesgos">
+    <tr><th>Supuesto o hipótesis</th><th>El riesgo: qué pasa si falla</th><th>Señal temprana</th><th>Plan B (nunca "insistir")</th><th></th></tr>
+  </table>
+  <button class="btn chico claro" onclick="fila('t-riesgos')">+ riesgo</button>
+  <label class="l">Movimiento 1 · Qué pidió la comunidad (unos 25 segundos)</label>
+  <textarea data-k="p8-m1" style="min-height:3rem" oninput="cuenta()"></textarea>
+  <label class="l">Movimiento 2 · Qué vamos a hacer, dónde y con quién (unos 35 segundos)</label>
+  <textarea data-k="p8-m2" style="min-height:3rem" oninput="cuenta()"></textarea>
+  <label class="l">Movimiento 3 · Por qué va a funcionar y cómo lo vamos a saber (unos 35 segundos)</label>
+  <textarea data-k="p8-m3" style="min-height:3rem" oninput="cuenta()"></textarea>
+  <label class="l">Movimiento 4 · Cuánto cuesta y quién pondría qué (unos 25 segundos)</label>
+  <textarea data-k="p8-m4" style="min-height:3rem" oninput="cuenta()"></textarea>
+  <p class="cuenta" id="p8-cuenta">0 palabras · unos 0 segundos a ritmo de habla (dos minutos son unas 260 palabras)</p>
+  <label class="l">Lo que la dictaminadora va a preguntar (lo que la Troika dejó), y la respuesta preparada</label>
+  <textarea data-k="p8-preguntas"></textarea>
+</section>
+
+<!-- 9 -->
+<section class="pest" data-p="9">
+  <h2>9 · Armar la solicitud</h2>
+  <div class="cuando">Semana 9 · jueves en modo Fondo, viernes en modo PROCODES</div>
+  <p class="porque">Aquí no se escribe: se arma. El texto sale de las otras pestañas, ordenado como lo pide cada formato. Lo que salga vacío es lo que falta. El formato impreso manda en la numeración; esto es la guía del traslado.</p>
+  <div class="modo">
+    <button class="btn claro" onclick="arma('fondo')">Modo Fondo · Anexo 1</button>
+    <button class="btn claro" onclick="arma('procodes')">Modo PROCODES · Anexo 3</button>
+  </div>
+  <div class="salida" id="salida">Elige un modo.</div>
+  <button class="btn" onclick="copiarSalida()">Copiar el texto</button>
+  <label class="l">Semáforo de la solicitud: sección, estado (verde / amarillo / rojo), quién la cierra y a qué hora</label>
+  <textarea data-k="p9-semaforo"></textarea>
+  <label class="l">El dictamen cruzado del viernes (los 52 puntos que nos dio otro equipo) y nuestra respuesta en dos columnas: lo que se señaló, lo que se hizo con eso</label>
+  <textarea data-k="p9-cruzado" style="min-height:6rem"></textarea>
+</section>
+
+<div class="barra">
+  <span class="guardado" id="guardado">Se guarda solo en este navegador.</span>
+  <button class="btn" onclick="descargar()">Descargar la carpeta</button>
+  <button class="btn claro" onclick="window.print()">Imprimir</button>
+  <button class="btn claro" onclick="copiarPestana()">Copiar esta pestaña a la bitácora</button>
+  <button class="btn claro" onclick="borrar()">Borrar todo</button>
+</div>
+</main>
+
+<script>
+  var CLAVE = 'gdp-carpeta-proyecto';
+  var TITULOS = ['La línea y su evidencia', 'Teoría del cambio', 'Marco lógico', 'Bocetos y ubicación', 'Plan y cronograma', 'Presupuesto', 'Contrapartida y gestión', 'Riesgos y pitch', 'Armar la solicitud'];
+  var COLS = { 't-piezas': 8, 't-plan': 8, 't-presu': 6, 't-pet': 7, 't-riesgos': 4 };
+  var datos = {};
+  try { datos = JSON.parse(localStorage.getItem(CLAVE) || '{}'); } catch (e) { datos = {}; }
+
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+
+  // Pestañas
+  var tabs = $('#tabs');
+  TITULOS.forEach(function (t, i) {
+    var b = document.createElement('button');
+    b.innerHTML = '<span class="n">' + (i + 1) + '</span>' + t;
+    b.onclick = function () { muestra(i + 1); };
+    tabs.appendChild(b);
+  });
+  function muestra(n) {
+    $$('.pest').forEach(function (p) { p.classList.toggle('on', p.dataset.p == n); });
+    $$('#tabs button').forEach(function (b, i) { b.classList.toggle('on', i + 1 == n); });
+    datos._pestana = n; guarda();
+  }
+
+  // Filas dinámicas
+  function fila(id, valores) {
+    var t = document.getElementById(id), n = COLS[id], tr = document.createElement('tr');
+    var h = '';
+    for (var i = 0; i < n; i++) {
+      var num = (id === 't-presu' && (i === 3 || i === 4));
+      h += '<td' + (num ? ' class="num"' : '') + '><input type="text" value="' + ((valores && valores[i]) || '').replace(/"/g, '&quot;') + '"' + (num ? ' inputmode="decimal"' : '') + '></td>';
+    }
+    h += '<td class="x"><button type="button" title="quitar">×</button></td>';
+    tr.innerHTML = h;
+    tr.querySelector('.x button').onclick = function () { tr.remove(); guarda(); };
+    $$('input', tr).forEach(function (inp) { inp.addEventListener('input', guarda); });
+    t.appendChild(tr);
+  }
+  function filas(id) {
+    return $$('tr', document.getElementById(id)).slice(1).map(function (tr) { return $$('input', tr).map(function (i) { return i.value; }); });
+  }
+
+  // Guardar y cargar
+  function guarda() {
+    $$('[data-k]').forEach(function (e) { datos[e.dataset.k] = e.value; });
+    Object.keys(COLS).forEach(function (id) { datos[id] = filas(id); });
+    try { localStorage.setItem(CLAVE, JSON.stringify(datos)); } catch (e) {}
+    suma(); cuenta();
+    var g = $('#guardado'); if (g) g.textContent = 'Guardado en este navegador · ' + new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+  }
+  function carga() {
+    $$('[data-k]').forEach(function (e) { if (datos[e.dataset.k] !== undefined) e.value = datos[e.dataset.k]; });
+    Object.keys(COLS).forEach(function (id) {
+      var f = datos[id] || [];
+      if (!f.length) f = [[], []];
+      f.forEach(function (v) { fila(id, v); });
+    });
+    if (!$('[data-k="p2-obj"]').value) $('[data-k="p2-obj"]').value = 'La gente usa la orilla de la presa como espacio público: se queda, convive y se divierte';
+    muestra(datos._pestana || 1);
+    suma(); cuenta();
+  }
+  $$('[data-k]').forEach(function (e) { e.addEventListener('input', guarda); e.addEventListener('change', guarda); });
+
+  // Presupuesto
+  function num(s) { var n = parseFloat(String(s).replace(/[^0-9.]/g, '')); return isNaN(n) ? 0 : n; }
+  function suma() {
+    var f = 0, a = 0;
+    filas('t-presu').forEach(function (r) { f += num(r[3]); a += num(r[4]); });
+    $('#s-fondo').textContent = f.toLocaleString('es-MX'); $('#s-afuera').textContent = a.toLocaleString('es-MX'); $('#s-total').textContent = (f + a).toLocaleString('es-MX');
+    var av = $('#s-aviso'), m = '';
+    if (f > 0 && f < 2000) m = 'Las reglas no reciben solicitudes de menos de $2,000 (cláusula 5.2).';
+    else if (f > 10000) m = 'Pides más que la Bolsa entera: no existe ese dinero.';
+    else if (f > 6000) m = 'Alarma de incendio: la Bolsa de $10,000 se comparte entre cinco equipos y se reparte por orden de calificación.';
+    av.textContent = m; av.className = m ? 'aviso' : 'ok';
+  }
+  // Pitch
+  function cuenta() {
+    var t = ['p8-m1', 'p8-m2', 'p8-m3', 'p8-m4'].map(function (k) { var e = $('[data-k="' + k + '"]'); return e ? e.value : ''; }).join(' ');
+    var p = t.trim() ? t.trim().split(/\s+/).length : 0;
+    var c = $('#p8-cuenta'); if (c) c.textContent = p + ' palabras · unos ' + Math.round(p / 2.2) + ' segundos a ritmo de habla (dos minutos son unas 260 palabras)';
+  }
+
+  // Armar la solicitud
+  function v(k) { var e = $('[data-k="' + k + '"]'); return e && e.value.trim() ? e.value.trim() : '[falta]'; }
+  function tabla(id, enc) {
+    var f = filas(id).filter(function (r) { return r.join('').trim(); });
+    if (!f.length) return '[falta]';
+    return f.map(function (r) { return '  · ' + r.map(function (c, i) { return c ? (enc[i] ? enc[i] + ': ' : '') + c : ''; }).filter(Boolean).join(' · '); }).join('\n');
+  }
+  function arma(modo) {
+    var L = [], cab = (v('nombre') + ' · ' + v('linea') + ' · equipo ' + v('equipo'));
+    if (modo === 'fondo') {
+      L.push('SOLICITUD AL FONDO SEMILLA "LA PRESA QUE QUEREMOS" · guía de traslado al Anexo 1', cab, '');
+      L.push('1. LÍNEA ESTRATÉGICA Y PROBLEMA', v('p1-problema'), 'Causas: ' + v('p1-causas'), '');
+      L.push('2. EVIDENCIA DE CONSULTA (mínimo tres elementos verificables)', '· ' + v('p1-ev1'), '· ' + v('p1-ev2'), '· ' + v('p1-ev3'), '· La voz que matiza: ' + v('p1-ev4'), '');
+      L.push('3. POR QUÉ VA A FUNCIONAR (teoría del cambio)', v('p2-frase'), 'Supuesto que apunta a la comunidad: ' + v('p2-linea2'), 'Eslabón frágil: ' + v('p2-fragil'), '');
+      L.push('4. OBJETIVOS, INDICADORES Y VERIFICACIÓN', 'Fin: ' + v('p3-fin-r'), 'Propósito: ' + v('p3-pro-r'), '  Indicador de resultado: ' + v('p3-pro-i') + ' · escalera: ' + v('p3-esc-r') + ' · verificación: ' + v('p3-pro-v'), 'Productos: ' + v('p3-prd-r'), '  Indicador de producto: ' + v('p3-prd-i') + ' · escalera: ' + v('p3-esc-p') + ' · verificación: ' + v('p3-prd-v'), 'Actividades: ' + v('p3-act-r'), '');
+      L.push('5. LA MICROINTERVENCIÓN: QUÉ, DÓNDE Y CON QUIÉN', tabla('t-piezas', ['#', 'pieza', 'zona', 'medio', 'tarjeta', 'material', 'riesgo', 'micro']), 'Lo que existe: ' + v('p4-existe'), 'Condiciones: ' + v('p4-condiciones'), 'Permisos: ' + v('p4-permisos'), 'El proyecto completo de la línea, en un párrafo: ' + v('p5-horizonte'), '');
+      L.push('6. CRONOGRAMA DE EJECUCIÓN (cuatro semanas, de la 12 a la 15)', ['1', '2', '3', '4'].map(function (n) { return 'Semana ' + n + ': ' + v('p5-c' + n + '-q') + ' · responde: ' + v('p5-c' + n + '-r') + ' · depende de: ' + v('p5-c' + n + '-d') + ' · fecha B: ' + v('p5-c' + n + '-m'); }).join('\n'), '');
+      L.push('7. PRESUPUESTO (a dos columnas; cotizaciones anexas)', tabla('t-presu', ['partida', 'actividad', 'papel', 'Fondo $', 'afuera $', 'tipo']), 'Flete e imponderables: ' + v('p6-flete'), 'Total que se pide al Fondo: $' + $('#s-fondo').textContent + ' · contrapartida valorizada: $' + $('#s-afuera').textContent, 'Si la Bolsa llega parcial se cae primero: ' + v('p6-parcial'), '');
+      L.push('8. ESTRATEGIA DE GESTIÓN DE CONTRAPARTIDAS', tabla('t-pet', ['qué', 'a quién', 'lado', 'vía', 'cuándo', 'tipo', 'valor']), 'Oficio principal:', v('p7-oficio'), 'Anuencia: ' + v('p7-anuencia'), '');
+      L.push('9. SUPUESTOS Y RIESGOS', tabla('t-riesgos', ['supuesto', 'riesgo', 'señal', 'plan B']), '');
+      L.push('10. CAPACIDAD DEL EQUIPO', 'Integrantes: ' + v('integrantes'), 'Quién cuida que escribir, conseguir números y dar la cara no se queden sin hacer: [anotar]', '');
+      L.push('ANEXOS: cotizaciones · oficios · anuencia o constancia de trámite · carta compromiso firmada · fotos del boceto y del plano maestro');
+    } else {
+      L.push('APLICACIÓN HIPOTÉTICA AL PROCODES 2026 · guía de traslado al Anexo 3 (formato de proyectos)', cab, 'Se escribe como si lo pidiera un grupo de La Florida; la UAQ aparece como asesoría técnica. Nada se envía.', '');
+      L.push('GRUPO SOLICITANTE (campos 3 a 17)', 'Integrantes: [por definir con el grupo de La Florida: perfiles, no personas]. Grupo de cuidado de la orilla (línea 2): ' + v('p7-faltan'), '');
+      L.push('ANTECEDENTES Y PROCESOS COMUNITARIOS (campo 28)', 'La consulta del 28 de agosto de 2026 y las faenas que la comunidad nombró (preguntas 20 y 21).', '');
+      L.push('PROBLEMÁTICA QUE SE PRETENDE RESOLVER (campo 29): el árbol de problemas en prosa', v('p1-problema'), 'Causas: ' + v('p1-causas'), 'Evidencia: ' + v('p1-ev1') + ' · ' + v('p1-ev2') + ' · ' + v('p1-ev3'), '');
+      L.push('OBJETIVO Y METAS (campos 19.2 y 19.3), en las unidades del concepto de apoyo', 'Objetivo: ' + v('p3-pro-r'), 'Metas: ' + v('p3-prd-r') + ' · indicador: ' + v('p3-prd-i'), 'Contribución al Programa de Manejo de la Reserva (criterios obligatorios 2 y 3): [escribir con la guía]', '');
+      L.push('DESCRIPCIÓN TÉCNICA Y UBICACIÓN', tabla('t-piezas', ['#', 'pieza', 'zona', 'medio', 'tarjeta', 'material', 'riesgo', 'micro']), 'Medidas: ' + v('p4-medidas'), 'Documento del predio o autorización escrita de quien sea dueño (campos 39.6 y 39.7): ' + v('p7-anuencia'), '');
+      L.push('PROGRAMA DE ACTIVIDADES Y CALENDARIO (campos 23 y 24; todo termina el 31 de diciembre)', v('p5-horizonte'), tabla('t-plan', ['pieza', 'actividad', 'producto', 'responsable', 'depende', 'cuándo', 'fecha B', 'micro']), '');
+      L.push('PRESUPUESTO POR CONCEPTO Y COSTO UNITARIO (Anexo 2) · aportación del grupo donde aplique', v('p6-procodes'), 'Aportación del grupo en jornales y especie: ' + tabla('t-pet', ['qué', 'a quién', 'lado', 'vía', 'cuándo', 'tipo', 'valor']), '');
+      L.push('EXPEDIENTE TÉCNICO (Anexo 6 "A"): supuestos, impactos, indicadores', 'Supuestos y riesgos: ' + tabla('t-riesgos', ['supuesto', 'riesgo', 'señal', 'plan B']), 'Impactos (los fines, a los que se contribuye): ' + v('p2-fin'), 'Indicadores: ' + v('p3-pro-i') + ' · ' + v('p3-prd-i'), '');
+      L.push('PERMANENCIA Y MANTENIMIENTO: quién mantiene qué y con qué después del apoyo', 'Supuesto que apunta al grupo de cuidado: ' + v('p2-linea2'), 'Acuerdo de cuidado: [del equipo de la línea 2]');
+    }
+    $('#salida').textContent = L.join('\n');
+  }
+  function copiarSalida() { var t = $('#salida').textContent; if (navigator.clipboard) navigator.clipboard.writeText(t); }
+
+  // Copiar pestaña, descargar, borrar
+  function copiarPestana() {
+    var p = $('.pest.on'); if (!p) return;
+    var t = ['CARPETA DEL PROYECTO · ' + v('equipo') + ' · ' + v('linea'), p.querySelector('h2').textContent, ''];
+    $$('label.l', p).forEach(function (l) {
+      var e = l.nextElementSibling; if (e && e.dataset && e.dataset.k) t.push(l.textContent + ': ' + (e.value || '(vacío)'));
+    });
+    $$('table[id]', p).forEach(function (tb) { t.push(''); t.push(tabla(tb.id, $$('th', tb.rows[0]).map(function (th) { return th.textContent; }))); });
+    if (navigator.clipboard) navigator.clipboard.writeText(t.join('\n'));
+    var g = $('#guardado'); if (g) g.textContent = 'Pestaña copiada: pégala en la bitácora de equipo.';
+  }
+  function descargar() {
+    guarda();
+    var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Carpeta del proyecto · ' + (datos.equipo || '') + '</title><style>body{font-family:Georgia,serif;max-width:800px;margin:2rem auto;padding:0 1rem;line-height:1.5;color:#1C2B28}h1{color:#0B3C49}h2{color:#0F6E6E;margin-top:2rem}b{color:#5b7671;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;display:block;margin-top:.8rem}pre{white-space:pre-wrap;font:inherit;margin:.1rem 0}table{border-collapse:collapse;width:100%;font-size:.92rem}td,th{border:1px solid #CFE3DD;padding:.3rem .4rem;text-align:left;vertical-align:top}</style></head><body>';
+    html += '<h1>Carpeta del proyecto</h1><p>' + esc(datos.nombre || '') + ' · ' + esc(datos.linea || '') + ' · equipo ' + esc(datos.equipo || '') + ' · ' + esc(datos.integrantes || '') + '<br>Descargada el ' + new Date().toLocaleString('es-MX') + '</p>';
+    $$('.pest').forEach(function (p) {
+      html += '<h2>' + esc(p.querySelector('h2').textContent) + '</h2>';
+      $$('label.l', p).forEach(function (l) { var e = l.nextElementSibling; if (e && e.dataset && e.dataset.k) html += '<b>' + esc(l.textContent) + '</b><pre>' + esc(e.value || '') + '</pre>'; });
+      $$('table[id]', p).forEach(function (tb) {
+        var enc = $$('th', tb.rows[0]).map(function (th) { return th.textContent; }).filter(Boolean);
+        html += '<table><tr>' + enc.map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr>';
+        filas(tb.id).forEach(function (r) { html += '<tr>' + r.map(function (c) { return '<td>' + esc(c) + '</td>'; }).join('') + '</tr>'; });
+        html += '</table>';
+      });
+    });
+    html += '<script type="application/json" id="datos">' + JSON.stringify(datos).replace(/<\//g, '<\\/') + '<\/script>';
+    html += '<p style="margin-top:3rem;color:#68807a;font-size:.85rem">Este archivo es la copia del equipo: se sube al Drive cada viernes con la fecha en el nombre. Para seguir editando se usa la página del curso en la misma laptop; si se cambia de computadora, se copia a mano lo que cambió.</p>';
+    html += '</body></html>';
+    var a = document.createElement('a'), fecha = new Date().toISOString().slice(0, 10);
+    a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+    a.download = 'carpeta-' + (datos.equipo || 'equipo').toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + fecha + '.html';
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function borrar() {
+    if (!confirm('¿Borrar toda la carpeta de este navegador? Descárgala antes si no tienes copia.')) return;
+    try { localStorage.removeItem(CLAVE); } catch (e) {}
+    location.reload();
+  }
+  carga();
+</script>
+</body>
+</html>
