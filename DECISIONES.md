@@ -7,9 +7,14 @@ cualquier sesión y se actualiza al cerrar cada bloque de mejoras.
 
 - **Fase:** producción por goteo. El esqueleto de las 17 semanas, los 52 ejercicios
   y el sistema de evaluación ya existen y están publicados.
-- **Último bloque cerrado:** bloque 11 (16 sep 2026): la unidad 2 completa
+- **Último bloque cerrado:** bloque 15 (1 oct 2026): el árbol de problemas y
+  el árbol de objetivos finales de La Florida, con cinco líneas y cinco
+  equipos, y las semanas 6 y 7 reconstruidas sobre ellos (ver el bloque al
+  final de este archivo). Antes, bloques 12 a 14 (24 sep 2026): el árbol en
+  su propio mazo con las tarjetas reales y el PROCODES completo. Antes, bloque
+  11 (16 sep 2026): la unidad 2 completa
   (semanas 5 a 10) en mazos de láminas, con el cuadernillo 2 llenable en línea
-  y el suelo de la unidad explicado (ver el bloque al final de este archivo).
+  y el suelo de la unidad explicado.
   Antes, bloque 10 (28 ago 2026): la guía del guion de
   entrevista con IA entra al gimnasio de la semana 3, porque como HTML suelto
   no abría en los iPhone del grupo. Antes, bloque 9 (20 ago 2026): el primer no entra al
@@ -849,3 +854,70 @@ ser elegidas.
 - En el árbol de problemas se explica qué es una caja, el tronco trae un
   ejemplo por cada forma de equivocarse, y las cinco pruebas traen un ejemplo
   con las tarjetas de la mesa.
+
+## Bloque 15 (1 de octubre de 2026): el árbol final de La Florida y las semanas 6 y 7 con cinco líneas
+
+Pedido de Eduardo: el árbol de objetivos final del proyecto (objetivo central:
+la gente usa la presa como espacio público; fines: tejido social, turismo con
+derrama, restauración del humedal y más avifauna; cinco líneas estratégicas con
+equipo), el árbol de problemas que le corresponde, y las semanas 6 y 7
+reconstruidas sobre eso y sobre la semana 5 vigente.
+
+- **El árbol final tiene cinco raíces, una por línea, y una de ellas es también
+  el fondo de las otras cuatro.** Tronco: "la gente casi no usa la orilla de la
+  presa como espacio público: para quedarse, convivir y divertirse". Raíces:
+  1 zonas degradadas o erosionadas sin sombra; 2 nadie de la comunidad está a
+  cargo de cuidar y vigilar la orilla (hipótesis, preguntas 20 y 21); 3 no hay
+  qué hacer para las distintas edades ni cómo acercarse al agua; 4 el lugar es
+  inseguro y está sucio; 5 no hay dónde quedarse a gusto. Las otras cuatro
+  raíces llegan a la 2, dibujada en color de fondo. Las tres ramas (tejido
+  social, derrama, humedal y aves) siguen como hipótesis: la consulta casi no
+  habló de efectos. Debajo de todo, "¿de quién es la orilla? ¿quién firma?".
+- **El árbol de objetivos es el espejo:** objetivo "la gente usa la orilla de
+  la presa como espacio público: se queda, convive y se divierte"; fines: el
+  tejido social se fortalece, llegan visitantes y dejan derrama, el humedal se
+  restaura y vuelve la avifauna; medios: 1 reforestación de las zonas
+  degradadas o erosionadas, 2 participación comunitaria en el cuidado y la
+  vigilancia (enmarcada: la comparten las cinco), 3 recreación para distintas
+  edades, también en el agua, 4 espacio seguro y limpio, 5 espacios de
+  convivencia y descanso. Los dos árboles viven como SVG en la semana 5 (el de
+  problemas después del ejercicio 3; el de objetivos en la sección 8, con la
+  tabla de las cinco líneas renombradas) y el de objetivos se repite en el
+  jueves de la semana 7, que es donde se corrige.
+- **Los nombres de las líneas cambiaron** respecto del bloque 14: "espacio de
+  descanso" es ahora "convivencia y descanso", "restauración ecológica" es
+  "reforestación" (la restauración del humedal pasó a ser un fin, no un medio),
+  y "recreación" dice "para distintas edades, también en el agua". El gimnasio
+  3 de la S5 trae las cajas nuevas con el mismo orden de índices (la clave de
+  localStorage cambió a `gdp-s5-volteo-cinco-final` para que no se mezclen
+  volteos viejos). Los equipos se nombran por línea; los nombres de los
+  integrantes van al pizarrón y a la bitácora, nunca a la página (regla 8).
+- **La semana 6 prueba el medio, no la obra.** Lámina nueva "lo que el
+  prototipo prueba" y tabla con un ensayo posible por línea, su conducta
+  contable y lo que puede tumbar el medio. El ensayo de la línea 2 es una
+  petición (vecinos que cuiden el ensayo, cartel sin nombres), por eso su
+  equipo sale a pedir el jueves y suena en la campana de la S7. El dato de
+  seguridad y calidad del agua le toca al equipo de recreación. En la visita
+  del viernes se pregunta (no se pide) de quién es la orilla y quién firma: la
+  respuesta repinta la caja más honda del árbol. Los $200 por equipo son hasta
+  $1,000; la respuesta de la Coordinación sobre de qué bolsa salen se lee
+  textual el jueves (pendiente de Eduardo contestarla por escrito). El jueves
+  suma 135 minutos (regla 11); la campana, Kenia y los bloques 7 y 9 no se
+  recortan.
+- **La semana 7 pone cada piso del árbol en su escalón:** medio del medio =
+  producto, medio principal = resultado, objetivo central = resultado del
+  proyecto, fines = impacto (se contribuye, no se promete). Trae la cadena de
+  la línea 1 completa como ejemplo (siembra en faena, 30 de 40 plantas vivas,
+  sombra donde la gente se junta, la gente se junta ahí, objetivo, fin) con su
+  eslabón frágil (el riego de la seca) y la tabla de la punta de cada cadena
+  con la voz de la consulta que la pidió. Regla nueva de las cadenas: **las
+  cuatro cadenas llevan un "siempre que" que apunta a la línea 2**, y el reto 1
+  lo pide entre sus supuestos honestos. El cotejo del viernes pasa a 45
+  minutos: nueve por equipo.
+- El cuadernillo 2 y la semana 8 no se tocaron: hablan de "componente" y
+  "línea" sin nombrarlas, y siguen válidos.
+
+Pendientes nuevos: contestar por escrito de qué bolsa salen los $1,000 del
+ensayo (la S6 lo da por contestado el jueves); si el muro del grupo difiere de
+los dos árboles en limpio, corregir los SVG de la S5 y la S7 con la foto; abrir
+las semanas 6 y 7 en `DISPONIBLES` cuando el grupo llegue.

@@ -14,7 +14,7 @@
   /* EL INTERRUPTOR DEL CURSO. Para abrir una semana, agrega su número aquí y
      sube el cambio. Se abre por CONTENIDO —cuando el grupo llega— y no por
      fecha: si vamos adelantados se adelanta, y si algo nos retrasa espera. */
-  var DISPONIBLES = [0, 1, 2, 3, 4, 5];
+  var DISPONIBLES = [0, 1, 2, 3, 4, 5, 6, 7];
 
   /* URL del formulario del ticket de salida (Google Form). Mientras esté vacía,
      el bloque del ticket no se muestra. Pégala entre las comillas y listo. */
