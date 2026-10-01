@@ -971,8 +971,8 @@ noviembre.
 - **Un solo duelo con IA** en la unidad (el marco, viernes de la S6), para que
   el eje de IA no desaparezca sin comerse una sesión.
 - **Lo que quedó sin usar:** los tres ejercicios del prototipo
-  (`ejercicios/semana-06/ejercicio-11`, `-22`, `-32`) siguen en el repo pero
-  ya no se enlazan desde ninguna página; los de las semanas 7 a 11 se reparten
+  (`ejercicios/semana-06/ejercicio-11`, `-22`, `-32`) se borraron del repo
+  el mismo día, a pedido de Eduardo; los de las semanas 7 a 11 se reparten
   entre las semanas nuevas (el índice del gimnasio los lista por semana nueva
   sin moverlos de carpeta).
 - **Cambios en cadena:** semana 5 (toda mención al prototipo y a los $200),
@@ -986,6 +986,5 @@ noviembre.
   tratos) aunque las Reglas solo exijan la gestión en papel.
 
 Pendientes: producir la semana 11 en formato de mazos (hoy sigue en prosa);
-decidir si los tres ejercicios del prototipo se borran del repo o se guardan
-como material opcional; cuando el grupo llegue a cada semana, publicar su
+cuando el grupo llegue a cada semana, publicar su
 fecha de calendario junto a las etapas de las Reglas.
