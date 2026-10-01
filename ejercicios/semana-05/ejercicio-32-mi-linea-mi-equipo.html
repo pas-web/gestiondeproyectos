@@ -100,39 +100,38 @@
 <button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
 
 <script>
-  var TRONCO = 'La gente casi no usa la orilla de la presa para quedarse, convivir y divertirse';
-  var OBJETIVO = 'La gente usa la orilla de la presa para quedarse, convivir y divertirse';
+  var TRONCO = 'La gente casi no usa la orilla de la presa como espacio público: para quedarse, convivir y divertirse';
+  var OBJETIVO = 'La gente usa la orilla de la presa como espacio público: se queda, convive y se divierte';
   var RAICES = [
-    { t: 'Espacio de descanso', d: 'dónde sentarse, comer y convivir',
-      cajas: [ { p: 'No hay cómo quedarse a gusto', n: 0 },
-               { p: 'No hay dónde sentarse, comer ni convivir', n: 1 },
-               { p: 'Hay como tres bancas y un columpio', n: 2 } ] },
-    { t: 'Restauración ecológica', d: 'sombra, árboles, vegetación de la orilla',
-      cajas: [ { p: 'No hay sombra donde estar', n: 0 },
-               { p: 'Los árboles de la orilla se perdieron y nadie sembró', n: 1, h: 1 } ] },
-    { t: 'Espacio de recreación', d: 'juegos, muelle, pesca',
-      cajas: [ { p: 'No hay qué hacer ahí ni cómo acercarse al agua', n: 0 },
+    { t: 'Convivencia y descanso', d: 'dónde sentarse, comer y convivir a gusto',
+      cajas: [ { p: 'No hay dónde quedarse a gusto: sentarse, comer, convivir', n: 0 },
+               { p: 'Hay como tres bancas y un columpio', n: 1 },
+               { p: 'Lo que hubo se acabó o nunca se repuso', n: 2, h: 1 } ] },
+    { t: 'Reforestación', d: 'las zonas degradadas o erosionadas de la orilla, la sombra, el suelo',
+      cajas: [ { p: 'Hay zonas de la orilla degradadas o erosionadas, sin sombra', n: 0 },
+               { p: 'Los árboles de la orilla se perdieron y nadie volvió a sembrar', n: 1, h: 1 },
+               { p: 'El suelo sin cubierta se lava con la lluvia', n: 2 } ] },
+    { t: 'Recreación', d: 'qué hacer para las distintas edades, también en el agua',
+      cajas: [ { p: 'No hay qué hacer para las distintas edades ni cómo acercarse al agua', n: 0 },
                { p: 'Niños y jóvenes no tienen con qué jugar', n: 1 },
-               { p: 'Lo que hubo se acabó o nunca se repuso', n: 2, h: 1 },
-               { p: 'Es difícil llegar al agua y disfrutarla', n: 1 },
-               { p: 'No hay por dónde asomarse ni dónde pescar', n: 2 } ] },
+               { p: 'No hay por dónde asomarse ni dónde pescar', n: 1 },
+               { p: 'Nadie sabe si el agua es segura para meterse', n: 2, h: 1 } ] },
     { t: 'Espacio seguro y limpio', d: 'monte, espinas, basura, vigilancia',
-      cajas: [ { p: 'El lugar está descuidado', n: 0 },
+      cajas: [ { p: 'El lugar es inseguro y está sucio', n: 0 },
                { p: 'El monte y las espinas cierran caminos y lugares', n: 1 },
-               { p: 'Nadie limpia los caminos', n: 2, h: 1 },
                { p: 'La basura se queda en la orilla y el camino', n: 1 },
                { p: 'No hay dónde tirar la basura cerca', n: 2 },
                { p: 'Nadie vigila cuando hay visitantes', n: 1 } ] },
-    { t: 'Participación comunitaria', d: 'que la comunidad se haga cargo del espacio público', sinFondo: 1,
-      cajas: [ { p: 'Nadie está a cargo de cuidar la orilla', n: 0, h: 1 },
-               { p: 'Nadie limpia los caminos', n: 1, h: 1 },
-               { p: 'Lo que hubo se acabó o nunca se repuso', n: 1, h: 1 } ] }
+    { t: 'Participación comunitaria', d: 'que la comunidad cuide y vigile la orilla; es la raíz que las otras cuatro comparten', sinFondo: 1,
+      cajas: [ { p: 'Nadie de la comunidad está a cargo de cuidar y vigilar la orilla', n: 0, h: 1 },
+               { p: 'No hay acuerdo de quién cuida, ni cómo, ni con qué', n: 1, h: 1 },
+               { p: 'La orilla "no es de nadie"', n: 2, h: 1 } ] }
   ];
-  var FONDO = { p: 'Nadie está a cargo de cuidar la orilla', h: 1 };
-  var EJEMPLO = ['El lugar está cuidado', 'Los caminos y los lugares están abiertos y sin espinas', 'Alguien limpia los caminos con regularidad',
-                 'La orilla y el camino están limpios', 'Hay dónde dejar la basura cerca, y alguien la recoge', 'Hay quien vigile cuando llegan visitantes', 'Alguien está a cargo de cuidar la orilla'];
+  var FONDO = { p: 'Nadie de la comunidad está a cargo de cuidar y vigilar la orilla', h: 1 };
+  var EJEMPLO = ['El espacio se mantiene seguro y limpio', 'Los caminos y los lugares están abiertos y sin espinas', 'La orilla y el camino están limpios',
+                 'Hay dónde dejar la basura cerca, y alguien la recoge', 'Hay quien vigile cuando llegan visitantes', 'La comunidad participa en el cuidado y la vigilancia de la orilla'];
   var OBRAS = /\b(banca|bancas|bote|botes|muelle|columpio|columpios|palapa|kayak|lancha|asador|asadores|mesa|mesas|letrero|faena|cabaña|cabañas|juegos)\b/i;
-  var CLAVE = 'gdp-s5-volteo-cinco';
+  var CLAVE = 'gdp-s5-volteo-cinco-final';
 
   function cajasDe(i) { var r = RAICES[i]; return r.sinFondo ? r.cajas : r.cajas.concat([{ p: FONDO.p, h: 1, f: 1 }]); }
 
