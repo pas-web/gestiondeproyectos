@@ -67,7 +67,7 @@
   <p class="porque">Aquí no se escribe de nuevo: pega los cuatro renglones que tu equipo ya tiene en el gimnasio 6 (Mi marco exprés) o en la pestaña 3 de la carpeta, o mira primero el ejemplo del potrero para oír cómo suena uno. La página busca las fallas de columna más comunes y, con el botón, te lee la lógica vertical: si la cadena brinca, aquí se oye.</p>
   <div class="reglas" style="font-size:.88rem;margin-bottom:.6rem"><strong>Ojo.</strong> Los avisos los da una regla sencilla (busca palabras como "instalar", "encuesta", "equipo", números que faltan). Atrapan los errores típicos, no todos: que no marque nada no quiere decir que el marco esté bien, y lo que lo dictamina es el reto 2, no esta página.</div>
   <table>
-    <tr><th style="width:16%">Renglón</th><th>Resumen narrativo</th><th>Indicador</th><th>Medio de verificación</th><th>Supuesto externo</th></tr>
+    <tr><th style="width:16%">Renglón</th><th>Resumen narrativo</th><th>Indicador</th><th>Medio de verificación</th><th>Supuesto externo, en positivo</th></tr>
     <tr><th>Fin</th><td><input type="text" id="fin-r" placeholder="a lo que contribuye"></td><td><input type="text" id="fin-i" placeholder="sin meta propia"></td><td><input type="text" id="fin-v"></td><td><input type="text" id="fin-s"></td></tr>
     <tr><th>Propósito</th><td><input type="text" id="pro-r" placeholder="gente haciendo algo distinto"></td><td><input type="text" id="pro-i" placeholder="número, fecha, línea base"></td><td><input type="text" id="pro-v" placeholder="quién lo produce, cuándo"></td><td><input type="text" id="pro-s"></td></tr>
     <tr><th>Productos</th><td><input type="text" id="prd-r" placeholder="contables, con fecha"></td><td><input type="text" id="prd-i"></td><td><input type="text" id="prd-v"></td><td><input type="text" id="prd-s"></td></tr>
@@ -114,8 +114,9 @@
     var pi = v('pro-i');
     if (pi && !/\d/.test(pi)) f.push('El indicador del propósito no trae número.');
     if (pi && !/base|desde|agosto|antes/i.test(pi)) f.push('El indicador del propósito no dice desde cuánto (línea base).');
+    if (pi && !/para |en (la |el )?(segunda|primera|temporada|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|semana|mes|año|trimestre|semestre)|\d{4}/i.test(pi)) f.push('El indicador del propósito no dice para cuándo.');
     ['pro-v', 'prd-v'].forEach(function (k) { if (/encuesta|percepci|satisfacci/i.test(v(k))) f.push('Medio de verificación fantasma: ¿quién levanta esa encuesta, cuándo y cuánto cuesta?'); });
-    ['pro-s', 'prd-s', 'act-s'].forEach(function (k) { var s = v(k).toLowerCase(); if (s && /equipo|nosotros|cumplamos|trabajemos|que el proyecto/.test(s)) f.push('Un supuesto que depende de ustedes no es supuesto: es chamba y va al cronograma.'); if (s && /particip|se involucre|interés|se apropie/.test(s) && !/acuerdo|turno|grupo|nombre|firma/.test(s)) f.push('"Que la comunidad participe" sin decir cómo es un supuesto heroico: ¿qué acuerdo, qué turno, qué grupo?'); });
+    ['pro-s', 'prd-s', 'act-s'].forEach(function (k) { var s = v(k).toLowerCase(); if (s && /equipo|nosotros|cumplamos|trabajemos|que el proyecto/.test(s)) f.push('Un supuesto que depende de ustedes no es supuesto: es chamba y va al cronograma.'); if (s && /^(siempre que |que )?no\b|que no falte|que nadie/.test(s)) f.push('El supuesto se escribe en positivo (lo que tiene que ser cierto), no como lo que no debe pasar: dicho en positivo empuja a ir a conseguirlo.'); if (s && /particip|se involucre|interés|se apropie/.test(s) && !/acuerdo|turno|grupo|nombre|firma/.test(s)) f.push('"Que la comunidad participe" sin decir cómo es un supuesto heroico: ¿qué acuerdo, qué turno, qué grupo?'); });
     var r = document.getElementById('rev');
     if (!CAMPOS.some(function (k) { return v(k); })) { r.textContent = ''; return; }
     r.className = 'aviso' + (f.length ? '' : ' ok'); r.textContent = f.length ? f.join(' · ') : 'Sin fallas de columna a la vista. Ahora escúchalo.';
