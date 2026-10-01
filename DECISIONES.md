@@ -971,8 +971,8 @@ noviembre.
 - **Un solo duelo con IA** en la unidad (el marco, viernes de la S6), para que
   el eje de IA no desaparezca sin comerse una sesión.
 - **Lo que quedó sin usar:** los tres ejercicios del prototipo
-  (`ejercicios/semana-06/ejercicio-11`, `-22`, `-32`) se borraron del repo
-  el mismo día, a pedido de Eduardo; los de las semanas 7 a 11 se reparten
+  (`ejercicios/semana-06/ejercicio-11`, `-22`, `-32`) siguen en el repo pero
+  ya no se enlazan desde ninguna página; los de las semanas 7 a 11 se reparten
   entre las semanas nuevas (el índice del gimnasio los lista por semana nueva
   sin moverlos de carpeta).
 - **Cambios en cadena:** semana 5 (toda mención al prototipo y a los $200),
@@ -986,5 +986,46 @@ noviembre.
   tratos) aunque las Reglas solo exijan la gestión en papel.
 
 Pendientes: producir la semana 11 en formato de mazos (hoy sigue en prosa);
-cuando el grupo llegue a cada semana, publicar su
+decidir si los tres ejercicios del prototipo se borran del repo o se guardan
+como material opcional; cuando el grupo llegue a cada semana, publicar su
 fecha de calendario junto a las etapas de las Reglas.
+
+## Bloque 17 (1 de octubre de 2026): la semana 6 se vuelve visual, con casos de la carrera
+
+Pedido de Eduardo: la teoría del cambio y el marco lógico no se entienden
+fácil; más detalle visual, ejemplos de la carrera, algo interactivo con
+ejercicios simples y otros robustos, y fuera Kenia de la semana 6. Trajo su
+presentación (X entonces Y, el encino paso a paso, la acamaya de la Huasteca
+con indicadores, la lombricultura de Arroyo Seco, la tabla de Serrat, planear
+y evaluar como dos caras).
+
+- **Kenia sale de la semana 6** y entra el **vivero de las dos mil plantas**
+  (encino y nogal, faena, foto; a los dos años sesenta vivas: nadie dibujó el
+  eslabón del riego y del ganado). El hilo de Kenia sigue en la semana 2 y la
+  13; la promesa de la S2 ("eso se sabe en la semana 6") se corrigió a la 13
+  si existía con esas palabras. El cuadernillo 2 conserva la clave `s6-kenia`
+  con rótulo nuevo ("el eslabón que nadie dibuja en mi línea").
+- **Cinco dibujos SVG propios en la S6:** la cadena del vivero con el eslabón
+  punteado; el árbol acostado (columna del árbol que se vuelve cadena, con la
+  escalera debajo y los "siempre que" entre flechas); el encino como fila de
+  hipótesis X entonces Y; las dos lógicas del marco (vertical, horizontal y el
+  zigzag de los supuestos) con el potrero resaltado; y los tres recorridos de
+  la cadena (planear hacia atrás, ejecutar hacia adelante, evaluar midiendo).
+- **La tabla de Serrat (2009)** entra como lámina: impacto (contribuye),
+  resultado (consigue), productos, actividades e insumos (controla y rinde
+  cuentas), con control decreciente y dificultad de medición creciente.
+- **Casos de la carrera:** el potrero que se recupera, la composta de la
+  escuela, las plagas del valle (el árbol de la S5), el encino, la acamaya de
+  la Huasteca, la lombricultura de Arroyo Seco, los bebederos y las conservas
+  de nopal. El marco completo del potrero se lee en voz alta como ejemplo.
+- **Gimnasio 7 nuevo**, `ejercicios/semana-06/ejercicio-41-del-arbol-a-la-cadena.html`
+  (autocontenido): parte 0, el encino eslabón por eslabón con botón (simple);
+  parte 1, tres cadenas con tarjetas revueltas, el eslabón que se rompe y el
+  "siempre que" correcto entre tres (medio); parte 2, la escalera con diez
+  frases (simple); parte 3, la acamaya: cada eslabón con su indicador y las
+  dos flechas que dan miedo (robusto); parte 4, arma tu marco: revisa fallas
+  de columna y lee la lógica vertical en voz alta, con ejemplos del potrero y
+  de la línea 1 (robusto). Guarda en el navegador y copia a la bitácora.
+- **Prompts de ilustración** en `claude/imagenes-semana-06.md` (carpeta local,
+  no al repo): el eslabón que nadie dibujó, el árbol acostado, la mesa de
+  cuatro patas, la acamaya y sus flechas. Placeholders comentados en la S6.

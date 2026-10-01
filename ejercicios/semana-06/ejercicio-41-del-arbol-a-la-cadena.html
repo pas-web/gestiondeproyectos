@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio S6 · Del árbol a la cadena, y de la cadena a la tabla</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1.02rem; }
+  main { max-width:780px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .reglas strong { color:var(--arena); }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .caso h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.15rem; margin:.1rem 0 .3rem; }
+  .porque { font-size:.93rem; color:#5b7671; margin:.1rem 0 .6rem; }
+  .historia { font-family:Georgia,serif; font-size:1.02rem; color:var(--profundo); border-left:4px solid var(--arena); padding:.2rem 0 .2rem .9rem; margin:.5rem 0 .8rem; }
+  .tarjetas { display:flex; flex-wrap:wrap; gap:.4rem; margin:.4rem 0; }
+  .tj { font:inherit; font-size:.92rem; border:2px solid var(--borde); background:#fff; border-radius:10px; padding:.45rem .7rem; cursor:pointer; text-align:left; color:var(--texto); }
+  .tj:hover { border-color:var(--marca); }
+  .tj.usada { opacity:.35; cursor:default; }
+  .cadena { display:flex; flex-wrap:wrap; align-items:center; gap:.3rem; min-height:3rem; background:#F7FAF9; border:1px dashed var(--borde); border-radius:10px; padding:.5rem; margin:.5rem 0; }
+  .cadena .es { background:var(--profundo); color:#fff; border-radius:8px; padding:.35rem .6rem; font-size:.9rem; }
+  .cadena .es.mal { background:#FBF0EE; color:var(--rojo); border:2px solid var(--rojo); }
+  .cadena .es.bien { background:#EEF6F0; color:var(--verde); border:2px solid var(--verde); }
+  .cadena .fl { color:var(--arena); font-weight:bold; }
+  .cadena .vacio { color:#8aa39c; font-style:italic; font-size:.9rem; }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.5rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92rem; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
+  .retro { margin:.6rem 0 0; padding:.6rem .9rem; border-radius:10px; font-size:.93rem; display:none; }
+  .retro.mal { display:block; background:#FBF0EE; color:var(--rojo); }
+  .retro.bien { display:block; background:#EEF6F0; color:var(--verde); }
+  .opc label { display:block; border:2px solid var(--borde); border-radius:10px; padding:.45rem .8rem; margin:.3rem 0; cursor:pointer; background:#fff; font-size:.93rem; }
+  .opc label:has(input:checked) { border-color:var(--marca); background:#E4EFEB; }
+  .opc input { margin-right:.5rem; }
+  label.l { display:block; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:#5b7671; font-weight:bold; margin:.6rem 0 .15rem; }
+  input[type=text], textarea { width:100%; font:inherit; font-size:.95rem; border:2px solid var(--borde); border-radius:8px; padding:.4rem .65rem; background:#FDFEFD; }
+  input:focus, textarea:focus { outline:none; border-color:var(--marca); }
+  .aviso { color:var(--rojo); font-size:.84rem; margin:.1rem 0 0; min-height:1.1rem; }
+  .ok { color:var(--verde); }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; margin:.4rem 0; }
+  th { background:#E4EFEB; color:var(--profundo); text-align:left; padding:.35rem .5rem; border:1px solid var(--borde); font-size:.8rem; }
+  td { padding:.3rem .4rem; border:1px solid var(--borde); vertical-align:top; }
+  td input[type=text] { border-width:1px; font-size:.9rem; padding:.3rem .45rem; }
+  .voz { background:#FDF6E7; border-left:4px solid var(--arena); border-radius:0 10px 10px 0; padding:.7rem 1rem; margin:.7rem 0; font-family:Georgia,serif; font-size:1.02rem; color:#5C4A1C; white-space:pre-wrap; }
+  .esc { display:flex; flex-wrap:wrap; gap:.3rem; margin:.4rem 0; }
+  .esc span { flex:1 1 7rem; background:#F7FAF9; border:1px solid var(--borde); border-radius:8px; padding:.35rem .5rem; font-size:.8rem; text-align:center; color:#5b7671; }
+  .esc span b { display:block; font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace; color:var(--profundo); font-size:.95rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.3rem; }
+  body.proyector .tj, body.proyector .cadena .es { font-size:1.15rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Del árbol a la cadena, y de la cadena a la tabla</h1>
+<p class="sub">Gimnasio · Semana 6 · Tres casos del campo para armar la cadena y encontrar el eslabón que nadie dibujó; después, tu marco se lee en voz alta.</p>
+
+<div class="reglas">
+  <strong>Lo que entrena.</strong> La teoría del cambio es tu columna del árbol de objetivos acostada: si hacemos esto, entonces pasa esto otro, siempre que... El marco lógico es la misma cadena parada en una tabla. Aquí se arma una cadena con tarjetas, se encuentra el "siempre que" que faltaba, y al final tu marco te lee en voz alta la cadena que escribiste, para que oigas dónde brinca.
+</div>
+
+<!-- ================= PARTE 0 ================= -->
+<div class="caso">
+  <h2>0 · Si se cumple X, entonces Y: el encino, eslabón por eslabón</h2>
+  <p class="porque">Una teoría del cambio es una fila de hipótesis: si se cumple X, entonces Y. Y la Y de una es la X de la siguiente. Objetivo: conservar los bosques de encino de la sierra. La estrategia: una campaña de educación ambiental. Ve agregando eslabones y, en cada uno, pregunta si ya llegaste al bosque.</p>
+  <div class="cadena" id="encino"></div>
+  <button class="btn" id="btn-encino" onclick="encinoSig()">Agregar el siguiente eslabón</button>
+  <button class="btn claro" onclick="encinoIni()">Empezar de nuevo</button>
+  <div class="retro" id="encino-retro"></div>
+</div>
+
+<!-- ================= PARTE 1 ================= -->
+<div class="caso">
+  <h2>1 · Acomoda la cadena</h2>
+  <p class="porque">Tres casos de proyectos como los que vas a dirigir. Las tarjetas están revueltas: tócalas en orden, de lo que se hace a lo grande, y luego revisa. Cada caso tiene un eslabón que en la vida real nadie dibujó.</p>
+  <div id="casos"></div>
+</div>
+
+<!-- ================= PARTE 2 ================= -->
+<div class="caso">
+  <h2>2 · La escalera, en tu carrera</h2>
+  <p class="porque">Cinco escalones. La trampa vive entre el tercero y el cuarto: entregar no es que lo usen. Toca cada frase y dile en qué escalón vive.</p>
+  <div class="esc"><span><b>insumos</b>lo que metes</span><span><b>actividades</b>lo que haces</span><span><b>productos</b>lo que entregas</span><span><b>resultados</b>la gente hace algo distinto</span><span><b>impacto</b>lo grande y lento</span></div>
+  <div id="escalera"></div>
+</div>
+
+<!-- ================= PARTE 3 ================= -->
+<div class="caso">
+  <h2>3 · La acamaya: cada eslabón con su indicador, y las flechas que dan miedo</h2>
+  <p class="porque">Un caso real de la Huasteca: la acamaya de río se extingue por la pesca sin control. Un proyecto apuesta a una campaña de comunicación. La cadena ya está armada; lo que falta es lo que el viernes se pide en la tabla: a cada eslabón, el indicador que diría si pasó. Toca un eslabón y luego el indicador que le toca.</p>
+  <div class="historia">Campaña de comunicación → más conocimiento sobre los macroinvertebrados del río → más interés en conservar la acamaya → los pobladores prefieren no comerla en veda → decrece la demanda → se reduce la pesca en los meses críticos → poblaciones sanas de acamaya.</div>
+  <div id="acamaya"></div>
+  <div class="retro" id="acamaya-retro"></div>
+  <label class="l" style="margin-top:.9rem">Y ahora las flechas: ¿cuáles dos son las que más miedo dan, las que el proyecto menos controla?</label>
+  <div class="opc" id="acamaya-flechas"></div>
+  <button class="btn" onclick="acamayaFlechas()">Revisar las flechas</button>
+  <div class="retro" id="acamaya-retro2"></div>
+</div>
+
+<!-- ================= PARTE 4 ================= -->
+<div class="caso">
+  <h2>4 · Arma tu marco, y escúchalo</h2>
+  <p class="porque">Llena los cuatro renglones con lo de tu línea (o con el ejemplo del potrero para ver cómo suena). La página revisa las fallas de columna y, con el botón, te lee la lógica vertical: si la cadena brinca, aquí se oye.</p>
+  <table>
+    <tr><th style="width:16%">Renglón</th><th>Resumen narrativo</th><th>Indicador</th><th>Medio de verificación</th><th>Supuesto externo</th></tr>
+    <tr><th>Fin</th><td><input type="text" id="fin-r" placeholder="a lo que contribuye"></td><td><input type="text" id="fin-i" placeholder="sin meta propia"></td><td><input type="text" id="fin-v"></td><td><input type="text" id="fin-s"></td></tr>
+    <tr><th>Propósito</th><td><input type="text" id="pro-r" placeholder="gente haciendo algo distinto"></td><td><input type="text" id="pro-i" placeholder="número, fecha, línea base"></td><td><input type="text" id="pro-v" placeholder="quién lo produce, cuándo"></td><td><input type="text" id="pro-s"></td></tr>
+    <tr><th>Productos</th><td><input type="text" id="prd-r" placeholder="contables, con fecha"></td><td><input type="text" id="prd-i"></td><td><input type="text" id="prd-v"></td><td><input type="text" id="prd-s"></td></tr>
+    <tr><th>Actividades</th><td><input type="text" id="act-r" placeholder="las clave, en orden"></td><td><input type="text" id="act-i" placeholder="hechas o no"></td><td><input type="text" id="act-v"></td><td><input type="text" id="act-s"></td></tr>
+  </table>
+  <p class="aviso" id="rev"></p>
+  <button class="btn" onclick="leer()">Leer la lógica vertical en voz alta</button>
+  <button class="btn claro" onclick="ejemploMarco('potrero')">Ver el ejemplo del potrero</button>
+  <button class="btn claro" onclick="ejemploMarco('linea1')">Ver el ejemplo de la línea 1</button>
+  <button class="btn claro" onclick="borrarMarco()">Borrar</button>
+  <div class="voz" id="voz" style="display:none"></div>
+  <p class="porque" style="margin-top:.6rem">Lo que se oye: cada "entonces" debe sonar derecho y cada "siempre que" debe ser algo que tú no controlas. Si al leerlo dices "pues... más o menos", ahí está el brinco. Pásalo a la pestaña 3 de la carpeta del proyecto cuando suene bien.</p>
+  <button class="btn" onclick="copiar()">Copiar el marco a la bitácora</button>
+</div>
+
+<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+</main>
+
+<script>
+  // ---------- Parte 1: casos ----------
+  var CASOS = [
+    { t: 'El potrero que se recupera', h: 'Un grupo de doce ganaderos de la sierra sobrepastorea un cerro: en la seca compran forraje y el suelo se lava. Un proyecto les da cerco eléctrico y un taller de pastoreo rotativo.',
+      cadena: ['Se entrega cerco eléctrico y se da el taller de pastoreo rotativo', 'Los doce ranchos tienen sus potreros divididos en cuatro', 'Los ganaderos mueven el ganado cada semana, de potrero en potrero', 'El pasto descansa y se recupera: en la seca hay forraje propio', 'Baja el gasto en forraje comprado y el suelo deja de lavarse'],
+      rompe: 2, pista: 'El eslabón 3 es el que nadie dibujó: el cerco se entregó, el taller se dio, y en muchos ranchos el ganado se quedó en el mismo potrero porque mover vacas cada semana es trabajo que alguien tiene que hacer. Entregar el cerco (producto) no es que lo usen (resultado).',
+      sup: ['...siempre que el cerco sea de buena marca', '...siempre que haya alguien en cada rancho que mueva el ganado cada semana, y le convenga', '...siempre que el taller dure dos días en lugar de uno'], supOk: 1,
+      supPor: 'El supuesto honesto habla de una conducta que no controlas: que alguien mueva el ganado cada semana. La marca del cerco y la duración del taller son chamba del equipo, no supuestos.' },
+    { t: 'La composta de la escuela', h: 'La secundaria de un pueblo compra fertilizante para su huerto y tira la basura orgánica de la cocina. Un proyecto instala tres composteras y capacita a dos grupos.',
+      cadena: ['Se instalan tres composteras y se capacita a dos grupos de alumnos', 'Las composteras reciben cada día los residuos de la cocina, con un turno por grupo', 'A los tres meses salen 400 kilos de composta', 'El huerto se abona con la composta y la escuela deja de comprar fertilizante', 'La escuela gasta menos y los alumnos saben hacer composta en su casa'],
+      rompe: 1, pista: 'El eslabón 2 es el que se rompe: las composteras se instalaron, la capacitación se dio, y a las dos semanas nadie llevaba la basura porque el turno no era de nadie. Sin ese "entonces", los 400 kilos nunca salen.',
+      sup: ['...siempre que las composteras sean de madera tratada', '...siempre que los alumnos tengan interés en el medio ambiente', '...siempre que el turno de llevar los residuos tenga nombre y la dirección lo sostenga en el horario'], supOk: 2,
+      supPor: '"Que tengan interés" es un deseo; "que el turno tenga nombre y la dirección lo sostenga" es algo concreto, fuera de tu control, y se puede verificar en la primera semana.' },
+    { t: 'Las plagas del valle', h: 'Es el valle del árbol de la semana 5: los productores usan insecticida en exceso porque no conocen alternativas de manejo integrado. Un proyecto da un curso de manejo integrado de plagas.',
+      cadena: ['Se imparte el curso de manejo integrado de plagas a 40 productores', 'Los 40 productores conocen tres alternativas al insecticida y saben cuándo usarlas', 'Al ciclo siguiente, 15 productores prueban una alternativa en una parte de su parcela', 'En esas parcelas la plaga se controla con menos aplicaciones', 'Baja el uso de insecticida en el valle y el gasto por hectárea'],
+      rompe: 2, pista: 'El eslabón 3: saber no es hacer. Cuarenta productores capacitados es un producto; quince que prueban es un resultado, y entre los dos hay una decisión que el curso no controla. Casi todos los proyectos de capacitación reportan el producto como si fuera el resultado.',
+      sup: ['...siempre que la alternativa cueste igual o menos que el insecticida y haya quien la venda en el valle', '...siempre que el instructor sea muy bueno', '...siempre que los productores asistan a las ocho sesiones'], supOk: 0,
+      supPor: 'El precio y la disponibilidad de la alternativa no dependen del equipo y deciden si alguien la prueba. La calidad del instructor y la asistencia son chamba del proyecto: van al cronograma, no a los supuestos.' }
+  ];
+  var estado = CASOS.map(function () { return { orden: [] }; });
+
+  function pintaCasos() {
+    document.getElementById('casos').innerHTML = CASOS.map(function (c, i) {
+      var e = estado[i], usadas = e.orden;
+      var mezcla = c._mezcla || (c._mezcla = c.cadena.map(function (x, k) { return k; }).sort(function () { return Math.random() - .5; }));
+      return '<div style="margin:.8rem 0 1.2rem;padding-top:.6rem;border-top:1px dashed var(--borde)">' +
+        '<strong>' + c.t + '</strong><div class="historia">' + c.h + '</div>' +
+        '<div class="tarjetas">' + mezcla.map(function (k) { return '<button type="button" class="tj' + (usadas.indexOf(k) !== -1 ? ' usada' : '') + '" onclick="toca(' + i + ',' + k + ')">' + c.cadena[k] + '</button>'; }).join('') + '</div>' +
+        '<div class="cadena" id="cad' + i + '">' + (usadas.length ? usadas.map(function (k, j) { return '<span class="es" id="es' + i + '_' + j + '">' + (j + 1) + '. ' + c.cadena[k] + '</span>' + (j < usadas.length - 1 ? '<span class="fl">→</span>' : ''); }).join('') : '<span class="vacio">toca las tarjetas en orden, de lo que se hace a lo grande</span>') + '</div>' +
+        '<button class="btn" onclick="revisa(' + i + ')">Revisar</button><button class="btn claro" onclick="reinicia(' + i + ')">Empezar de nuevo</button>' +
+        '<div class="retro" id="ret' + i + '"></div>' +
+        '<div id="sup' + i + '" style="display:none;margin-top:.6rem"><label class="l">El "siempre que" del eslabón que se rompe</label><div class="opc">' + c.sup.map(function (s, k) { return '<label><input type="radio" name="sup' + i + '" value="' + k + '" onchange="supuesto(' + i + ',' + k + ')">' + s + '</label>'; }).join('') + '</div><div class="retro" id="rets' + i + '"></div></div>' +
+        '</div>';
+    }).join('');
+  }
+  function toca(i, k) { var e = estado[i]; if (e.orden.indexOf(k) !== -1 || e.orden.length >= CASOS[i].cadena.length) return; e.orden.push(k); pintaCasos(); }
+  function reinicia(i) { estado[i] = { orden: [] }; pintaCasos(); }
+  function revisa(i) {
+    var c = CASOS[i], e = estado[i], r = document.getElementById('ret' + i);
+    if (e.orden.length < c.cadena.length) { r.className = 'retro mal'; r.textContent = 'Faltan ' + (c.cadena.length - e.orden.length) + ' eslabones.'; return; }
+    var errores = 0;
+    e.orden.forEach(function (k, j) { var el = document.getElementById('es' + i + '_' + j); el.className = 'es ' + (k === j ? 'bien' : 'mal'); if (k !== j) errores++; });
+    if (errores) { r.className = 'retro mal'; r.textContent = 'Hay ' + errores + ' eslabones fuera de lugar (en rojo). Léela de izquierda a derecha con un "entonces" entre cada par: donde no suene derecho, ahí está el cambio.'; return; }
+    r.className = 'retro bien'; r.innerHTML = '<strong>Derecha.</strong> ' + c.pista; document.getElementById('sup' + i).style.display = 'block';
+    document.getElementById('es' + i + '_' + c.rompe).style.outline = '3px dashed var(--arena)';
+  }
+  function supuesto(i, k) { var c = CASOS[i], r = document.getElementById('rets' + i); r.className = 'retro ' + (k === c.supOk ? 'bien' : 'mal'); r.textContent = (k === c.supOk ? 'Ese es. ' : 'Ese no es un supuesto: ') + c.supPor; }
+  pintaCasos();
+
+  // ---------- Parte 2: escalera ----------
+  var ESC = ['insumos', 'actividades', 'productos', 'resultados', 'impacto'];
+  var FRASES = [
+    ['Veinte rollos de malla ciclónica y seis bultos de cemento, en bodega', 0, 'Es lo que metes. Todavía no pasa nada.'],
+    ['Se construyen dos bebederos en el agostadero', 1, 'Es lo que haces con los insumos.'],
+    ['Dos bebederos funcionando, con su flotador, el 30 de noviembre', 2, 'Están o no están: producto, y se cuenta.'],
+    ['El ganado ya no baja al manantial a abrevar y las familias lo ven limpio', 3, 'Alguien (el ganado, y el que lo arrea) hace algo distinto: resultado.'],
+    ['Cuarenta mujeres capacitadas en conservas de nopal, con constancia', 2, 'Capacitadas es producto. Lo que hagan con eso sería el resultado.'],
+    ['Nueve de esas mujeres venden conserva en el tianguis cada domingo desde marzo', 3, 'Aquí sí: una conducta nueva, con fecha y número.'],
+    ['El ingreso de las familias del pueblo sube y menos jóvenes se van', 4, 'Grande y lento: se contribuye, no se promete.'],
+    ['Se siembran 300 plantas de nopal verdulero con la asamblea', 1, 'Sembrar es la actividad; las plantas vivas a los seis meses serían el producto.'],
+    ['50 productores capacitados en lombricultura en tres talleres en el campus Concá, y 10 lombricarios habilitados en dos localidades', 2, 'Capacitados y habilitados: productos, contables. Lo que las familias hagan con eso es otra cosa.'],
+    ['Seis meses después de que terminó el proyecto, 30 familias de Arroyo Seco manejan sus residuos orgánicos con la técnica', 3, 'Aquí sí: la gente hace algo distinto, con número y fecha. Es el objetivo del proyecto conseguido.']
+  ];
+  var FRM = FRASES.map(function (f, i) { return i; }).sort(function () { return Math.random() - .5; });
+  document.getElementById('escalera').innerHTML = FRM.map(function (i) {
+    var f = FRASES[i];
+    return '<div style="margin:.6rem 0;padding:.5rem .7rem;background:#F7FAF9;border-radius:10px"><div style="font-family:Georgia,serif;color:var(--profundo)">' + f[0] + '</div><div class="tarjetas" style="margin-top:.3rem">' + ESC.map(function (e, k) { return '<button type="button" class="tj" onclick="escalon(this,' + i + ',' + k + ')">' + e + '</button>'; }).join('') + '</div><div class="retro" id="rf' + i + '"></div></div>';
+  }).join('');
+  function escalon(btn, i, k) { var f = FRASES[i], r = document.getElementById('rf' + i); r.className = 'retro ' + (k === f[1] ? 'bien' : 'mal'); r.textContent = (k === f[1] ? 'Sí. ' : 'No: es ' + ESC[f[1]] + '. ') + f[2]; }
+
+  // ---------- Parte 0: el encino ----------
+  var ENCINO = [
+    { t: 'Campaña de educación ambiental', tipo: 'estrategia', r: 'Esa es la X de la primera hipótesis. ¿Y entonces qué?' },
+    { t: '+ conocimiento sobre el bosque', tipo: 'outcome', r: 'Primera Y: la gente sabe más. ¿Ya se conservó el bosque? Todavía no: saber no es hacer. Sigue.' },
+    { t: '+ interés en conservar', tipo: 'outcome', r: 'Segunda Y: la gente quiere. Querer tampoco conserva un encino. ¿Qué tendría que cambiar en lo que la gente hace?' },
+    { t: '- consumo de carbón en las casas', tipo: 'outcome', r: 'Aquí aparece una conducta: comprar menos carbón. Ya hay algo que se puede contar. ¿Y eso qué provoca?' },
+    { t: '- producción de carbón', tipo: 'amenaza', r: 'Baja la amenaza: menos hornos, menos encinos cortados. Esto es lo que el proyecto le apuesta a reducir. Un eslabón más.' },
+    { t: 'Bosque de encino conservado', tipo: 'impacto', r: 'Llegaste al impacto. Cuenta: cinco "entonces" entre la campaña y el bosque, y el proyecto de verdad solo controla el primero. Cada flecha es una hipótesis que alguien puede cuestionar, y entre la tercera y la cuarta vive el eslabón que casi nadie dibuja: que saber y querer se vuelvan hacer.' }
+  ];
+  var encinoN = 0;
+  function encinoPinta() {
+    var h = ENCINO.slice(0, encinoN).map(function (e, i) {
+      var cls = e.tipo === 'impacto' ? 'es bien' : (e.tipo === 'amenaza' ? 'es mal' : 'es');
+      return '<span class="' + cls + '">' + e.t + '</span>' + (i < encinoN - 1 ? '<span class="fl">→</span>' : '');
+    }).join('');
+    document.getElementById('encino').innerHTML = h || '<span class="vacio">toca el botón: empieza por la estrategia</span>';
+    var r = document.getElementById('encino-retro');
+    if (encinoN) { r.className = 'retro ' + (encinoN === ENCINO.length ? 'bien' : 'mal'); r.innerHTML = '<strong>Si se cumple X, entonces Y.</strong> ' + ENCINO[encinoN - 1].r; } else r.className = 'retro';
+    document.getElementById('btn-encino').style.display = encinoN === ENCINO.length ? 'none' : '';
+  }
+  function encinoSig() { if (encinoN < ENCINO.length) encinoN++; encinoPinta(); }
+  function encinoIni() { encinoN = 0; encinoPinta(); }
+  encinoPinta();
+
+  // ---------- Parte 3: la acamaya ----------
+  var ACA = [
+    ['Más conocimiento sobre los macroinvertebrados del río', 'Porcentaje de la población objetivo que cita dos beneficios ambientales de la acamaya en el río'],
+    ['Más interés en conservar la acamaya', 'Porcentaje de la población objetivo que apoya reglas para conservar la acamaya'],
+    ['Los pobladores prefieren no comer acamaya en veda', 'Porcentaje de la población objetivo que dice que ya no come acamaya durante la veda'],
+    ['Decrece la demanda de acamaya', 'Kilos de acamaya vendidos en los restaurantes'],
+    ['Se reduce la pesca en los meses críticos', 'Kilos extraídos por los pescadores durante los meses críticos'],
+    ['Poblaciones sanas de acamaya', 'Cambios en la abundancia y la estructura de la población']
+  ];
+  var acaSel = null, acaOk = {};
+  var acaMezcla = ACA.map(function (a, i) { return i; }).sort(function () { return Math.random() - .5; });
+  function acaPinta() {
+    var h = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">';
+    h += '<div><label class="l">Eslabones</label>' + ACA.map(function (a, i) { return '<button type="button" class="tj' + (acaOk[i] ? ' usada' : '') + '" style="display:block;width:100%;margin:.25rem 0' + (acaSel === i ? ';border-color:var(--marca);background:#E4EFEB' : '') + '" onclick="acaEsl(' + i + ')">' + (i + 1) + '. ' + a[0] + (acaOk[i] ? ' ✓' : '') + '</button>'; }).join('') + '</div>';
+    h += '<div><label class="l">Indicadores</label>' + acaMezcla.map(function (i) { return '<button type="button" class="tj' + (acaOk[i] ? ' usada' : '') + '" style="display:block;width:100%;margin:.25rem 0" onclick="acaInd(' + i + ')">' + ACA[i][1] + '</button>'; }).join('') + '</div></div>';
+    document.getElementById('acamaya').innerHTML = h;
+  }
+  function acaEsl(i) { if (acaOk[i]) return; acaSel = i; acaPinta(); }
+  function acaInd(i) {
+    var r = document.getElementById('acamaya-retro');
+    if (acaSel === null) { r.className = 'retro mal'; r.textContent = 'Primero toca un eslabón, luego su indicador.'; return; }
+    if (i === acaSel) { acaOk[i] = true; acaSel = null; r.className = 'retro bien'; r.textContent = Object.keys(acaOk).length === ACA.length ? 'Los seis en su lugar. Fíjate: los tres primeros se miden preguntando (porcentajes que alguien tiene que levantar); los tres últimos se miden contando kilos y animales. Mientras más abajo en la cadena, más barato y más honesto el indicador.' : 'Sí. Siguiente.'; }
+    else { r.className = 'retro mal'; r.textContent = 'Ese indicador mide otro eslabón. Pregunta: ¿qué tendría que verse, o contarse, para saber que este eslabón pasó?'; }
+    acaPinta();
+  }
+  acaPinta();
+  var FLECHAS = ['De la campaña a saber más', 'De saber más a querer conservar', 'De querer conservar a no comer en veda', 'De no comer a que baje la demanda', 'De que baje la demanda a que se pesque menos', 'De pescar menos a poblaciones sanas'];
+  document.getElementById('acamaya-flechas').innerHTML = FLECHAS.map(function (f, i) { return '<label><input type="checkbox" name="fl" value="' + i + '">' + f + '</label>'; }).join('');
+  function acamayaFlechas() {
+    var m = Array.prototype.slice.call(document.querySelectorAll('input[name="fl"]:checked')).map(function (e) { return +e.value; });
+    var r = document.getElementById('acamaya-retro2');
+    if (m.length !== 2) { r.className = 'retro mal'; r.textContent = 'Elige exactamente dos.'; return; }
+    var ok = m.indexOf(2) !== -1 && m.indexOf(4) !== -1;
+    r.className = 'retro ' + (ok ? 'bien' : 'mal');
+    r.textContent = (ok ? 'Esas dos. ' : 'Las que más miedo dan son la tercera y la quinta. ') + 'La tercera es el salto de querer a hacer: el mismo eslabón del vivero, del potrero y del encino. La quinta depende de gente que el proyecto no toca: los pescadores venden a quien no es de aquí, y la demanda del pueblo puede bajar sin que baje la pesca. Por eso el proyecto real le puso un signo de interrogación a cada flecha y volvió a la campaña a corregirla cada temporada: a eso le llaman manejo adaptativo, y en este curso se llama monitorear el eslabón frágil.';
+  }
+
+  // ---------- Parte 4: marco ----------
+  var CAMPOS = ['fin-r', 'fin-i', 'fin-v', 'fin-s', 'pro-r', 'pro-i', 'pro-v', 'pro-s', 'prd-r', 'prd-i', 'prd-v', 'prd-s', 'act-r', 'act-i', 'act-v', 'act-s'];
+  var CLAVE = 'gdp-s6-marco-escuchado';
+  var EJ = {
+    potrero: { 'fin-r': 'Contribuir a que el suelo del cerro deje de lavarse y las familias gasten menos en la seca', 'fin-i': 'se contribuye: sin meta propia', 'fin-v': '', 'fin-s': '',
+      'pro-r': 'Los doce ranchos mueven su ganado cada semana entre cuatro potreros y en la seca comen forraje propio', 'pro-i': 'Ranchos que rotan cada semana en marzo: 9 de 12; línea base: 0 en agosto', 'pro-v': 'Bitácora de rotación por rancho, revisada por el técnico cada quincena', 'pro-s': 'Siempre que la lluvia de este año no quede por debajo de la mitad de lo normal',
+      'prd-r': '48 potreros cercados y 12 bitácoras de rotación entregadas al 30 de noviembre', 'prd-i': 'Potreros con cerco funcionando: 48', 'prd-v': 'Lista de entrega firmada por rancho y foto fechada', 'prd-s': 'Siempre que en cada rancho haya alguien que mueva el ganado y le convenga',
+      'act-r': 'Comprar e instalar el cerco en faena por rancho; dar el taller de pastoreo rotativo en dos sesiones', 'act-i': 'Hechas o no hechas, con fecha', 'act-v': 'Lista de asistencia y comprobantes', 'act-s': 'Siempre que la ferretería surta el cerco antes de la lluvia' },
+    linea1: { 'fin-r': 'Contribuir a que el humedal de la presa se restaure y vuelva la avifauna', 'fin-i': 'se contribuye: sin meta propia', 'fin-v': '', 'fin-s': '',
+      'pro-r': 'La gente se junta bajo la sombra nueva por las tardes en las dos zonas erosionadas', 'pro-i': 'Personas sentadas los domingos de 4 a 6 en la zona 2, en la segunda temporada: 12; línea base: 4 (ficha de agosto)', 'pro-v': 'Hoja de conteo fechada, levantada por el grupo de cuidado', 'pro-s': 'Siempre que las otras líneas pongan dónde sentarse y la orilla esté limpia',
+      'prd-r': '40 plantas nativas sembradas con cajete en las dos zonas erosionadas; 30 vivas a los tres meses', 'prd-i': 'Plantas vivas a los tres meses: 30 de 40', 'prd-v': 'Conteo con foto fechada, planta por planta', 'prd-s': 'Siempre que alguien riegue en la seca (acuerdo con el grupo de cuidado, línea 2)',
+      'act-r': 'Pedir la planta al vivero; hacer los cajetes; convocar la faena con la delegación; sembrar en la lluvia', 'act-i': 'Hechas o no hechas, con fecha', 'act-v': 'Lista de asistencia de la faena, nota del vivero', 'act-s': 'Siempre que la Reserva dé el visto bueno a las especies y la delegación la anuencia' }
+  };
+  function v(id) { return document.getElementById(id).value.trim(); }
+  function guarda() { var d = {}; CAMPOS.forEach(function (k) { d[k] = v(k); }); try { localStorage.setItem(CLAVE, JSON.stringify(d)); } catch (e) {} revisaMarco(); }
+  function pon(d) { CAMPOS.forEach(function (k) { document.getElementById(k).value = d[k] || ''; }); guarda(); }
+  CAMPOS.forEach(function (k) { document.getElementById(k).addEventListener('input', guarda); });
+  try { pon(JSON.parse(localStorage.getItem(CLAVE) || '{}')); } catch (e) {}
+  function ejemploMarco(c) { pon(EJ[c]); leer(); }
+  function borrarMarco() { if (confirm('¿Borrar el marco?')) { pon({}); document.getElementById('voz').style.display = 'none'; } }
+  function revisaMarco() {
+    var f = [];
+    var pro = v('pro-r').toLowerCase();
+    if (pro && /^(instalar|construir|sembrar|colocar|entregar|capacitar|dar |impartir|hay |se instala|se construye)/.test(pro)) f.push('El propósito suena a producto u obra: ¿quién hace qué distinto?');
+    var pi = v('pro-i');
+    if (pi && !/\d/.test(pi)) f.push('El indicador del propósito no trae número.');
+    if (pi && !/base|desde|agosto|antes/i.test(pi)) f.push('El indicador del propósito no dice desde cuánto (línea base).');
+    ['pro-v', 'prd-v'].forEach(function (k) { if (/encuesta|percepci|satisfacci/i.test(v(k))) f.push('Medio de verificación fantasma: ¿quién levanta esa encuesta, cuándo y cuánto cuesta?'); });
+    ['pro-s', 'prd-s', 'act-s'].forEach(function (k) { var s = v(k).toLowerCase(); if (s && /equipo|nosotros|cumplamos|trabajemos|que el proyecto/.test(s)) f.push('Un supuesto que depende de ustedes no es supuesto: es chamba y va al cronograma.'); if (s && /particip|se involucre|interés|se apropie/.test(s) && !/acuerdo|turno|grupo|nombre|firma/.test(s)) f.push('"Que la comunidad participe" sin decir cómo es un supuesto heroico: ¿qué acuerdo, qué turno, qué grupo?'); });
+    var r = document.getElementById('rev');
+    if (!CAMPOS.some(function (k) { return v(k); })) { r.textContent = ''; return; }
+    r.className = 'aviso' + (f.length ? '' : ' ok'); r.textContent = f.length ? f.join(' · ') : 'Sin fallas de columna a la vista. Ahora escúchalo.';
+  }
+  function leer() {
+    var t = [];
+    t.push('Si hacemos ' + (v('act-r') || '[actividades]') + (v('act-s') ? ', ' + v('act-s').replace(/^siempre que/i, 'siempre que') : ''));
+    t.push('entonces entregamos ' + (v('prd-r') || '[productos]') + (v('prd-s') ? ', ' + v('prd-s').replace(/^siempre que/i, 'siempre que') : ''));
+    t.push('entonces pasa que ' + (v('pro-r') || '[propósito: la gente hace algo distinto]') + (v('pro-s') ? ', ' + v('pro-s').replace(/^siempre que/i, 'siempre que') : ''));
+    t.push('y con eso contribuimos a que ' + (v('fin-r') || '[fin]').replace(/^contribuir a que /i, '') + '.');
+    t.push('');
+    t.push('Lo sabremos porque ' + (v('pro-i') || '[indicador del propósito]') + ', y constará en ' + (v('pro-v') || '[medio de verificación]') + '.');
+    var el = document.getElementById('voz'); el.style.display = 'block'; el.textContent = t.join('\n');
+  }
+  function copiar() {
+    var l = ['MI MARCO EXPRÉS · Semana 6'];
+    [['Fin', 'fin'], ['Propósito', 'pro'], ['Productos', 'prd'], ['Actividades', 'act']].forEach(function (p) { l.push(p[0] + ': ' + v(p[1] + '-r') + ' | indicador: ' + v(p[1] + '-i') + ' | verificación: ' + v(p[1] + '-v') + ' | supuesto: ' + v(p[1] + '-s')); });
+    var voz = document.getElementById('voz'); if (voz.style.display !== 'none') l.push('', 'Leído en voz alta:', voz.textContent);
+    if (navigator.clipboard) navigator.clipboard.writeText(l.join('\n'));
+  }
+</script>
+</body>
+</html>
