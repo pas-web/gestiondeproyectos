@@ -24,6 +24,7 @@
  *  5. Pégala en recursos/baraja/baraja-config.js, en BARAJA_API_URL.
  *  Si cambias este código después: Implementar → Gestionar implementaciones
  *  → editar → Versión: NUEVA. Si no, el enlace sigue sirviendo la anterior.
+ *  Al pegar una versión nueva, vuelve a ejecutar «prepararHoja».
  *
  *  No hay clave: lo que guardan los equipos lo ve el grupo entero, que es
  *  la idea de la ronda 2. Para empezar de cero otro semestre, basta con
@@ -41,9 +42,12 @@ const COLS_NUEVAS = ['equipo', 'id', 'titulo', 'que', 'ejemplo', 'quien', 'ts', 
 const COLS_RETRO = ['fecha', 'de', 'para', 'carta', 'tipo', 'texto', 'quien', 'id'];
 
 function prepararHoja() {
-  hoja_(HOJA_DEC, COLS_DEC); hoja_(HOJA_HIST, COLS_HIST);
-  hoja_(HOJA_NUEVAS, COLS_NUEVAS); hoja_(HOJA_RETRO, COLS_RETRO);
+  /* Las columnas con códigos de carta (3-01, 1a-04…) se declaran de texto: si no, la hoja
+     convierte «3-01» en la fecha 3 de enero y la plenaria ya no sabe de qué carta se trata. */
+  textoCol_(hoja_(HOJA_DEC, COLS_DEC), 2); textoCol_(hoja_(HOJA_HIST, COLS_HIST), 3);
+  textoCol_(hoja_(HOJA_NUEVAS, COLS_NUEVAS), 2); textoCol_(hoja_(HOJA_RETRO, COLS_RETRO), 4);
 }
+function textoCol_(sh, col) { sh.getRange(2, col, sh.getMaxRows() - 1, 1).setNumberFormat('@'); }
 
 /* ===================== ENTRADAS WEB ===================== */
 
@@ -84,17 +88,17 @@ function guardarDecision_(p) {
   const eq = equipo_(p.equipo); const carta = id_(p.carta);
   if (!eq || !carta) throw new Error('falta equipo o carta');
   const ts = Number(p.ts) || Date.now();
-  const vals = [eq, carta, celda_(p.estado, 10), celda_(p.zona, 40), celda_(p.cuida, 200), celda_(p.nota, 2000), celda_(p.quien, 80), ts, new Date()];
+  const vals = [eq, txt_(carta), celda_(p.estado, 10), celda_(p.zona, 40), celda_(p.cuida, 200), celda_(p.nota, 2000), celda_(p.quien, 80), ts, new Date()];
   const lock = LockService.getScriptLock(); lock.waitLock(10000);
   try {
     const sh = hoja_(HOJA_DEC, COLS_DEC);
     const data = sh.getDataRange().getValues();
     let row = -1;
-    for (let i = 1; i < data.length; i++) if (Number(data[i][0]) === eq && String(data[i][1]) === carta) { row = i + 1; break; }
+    for (let i = 1; i < data.length; i++) if (Number(data[i][0]) === eq && codigo_(data[i][1]) === carta) { row = i + 1; break; }
     /* Si en la hoja hay una decisión más nueva (otro teléfono del mismo equipo), esa gana. */
     if (row > 0 && Number(data[row - 1][7]) > ts) return;
     if (row > 0) sh.getRange(row, 1, 1, vals.length).setValues([vals]); else sh.appendRow(vals);
-    hoja_(HOJA_HIST, COLS_HIST).appendRow([new Date(), eq, carta, vals[2], vals[3], vals[4], vals[5], vals[6], ts]);
+    hoja_(HOJA_HIST, COLS_HIST).appendRow([new Date(), eq, txt_(carta), vals[2], vals[3], vals[4], vals[5], vals[6], ts]);
   } finally { lock.releaseLock(); }
 }
 
@@ -102,13 +106,13 @@ function guardarNueva_(p) {
   const eq = equipo_(p.equipo); const id = id_(p.id);
   if (!eq || !id) throw new Error('falta equipo o id');
   const ts = Number(p.ts) || Date.now();
-  const vals = [eq, id, celda_(p.titulo, 200), celda_(p.que, 2000), celda_(p.ejemplo, 2000), celda_(p.quien, 80), ts, new Date()];
+  const vals = [eq, txt_(id), celda_(p.titulo, 200), celda_(p.que, 2000), celda_(p.ejemplo, 2000), celda_(p.quien, 80), ts, new Date()];
   const lock = LockService.getScriptLock(); lock.waitLock(10000);
   try {
     const sh = hoja_(HOJA_NUEVAS, COLS_NUEVAS);
     const data = sh.getDataRange().getValues();
     let row = -1;
-    for (let i = 1; i < data.length; i++) if (Number(data[i][0]) === eq && String(data[i][1]) === id) { row = i + 1; break; }
+    for (let i = 1; i < data.length; i++) if (Number(data[i][0]) === eq && codigo_(data[i][1]) === id) { row = i + 1; break; }
     if (row > 0) sh.getRange(row, 1, 1, vals.length).setValues([vals]); else sh.appendRow(vals);
   } finally { lock.releaseLock(); }
 }
@@ -117,7 +121,7 @@ function guardarRetro_(p) {
   const de = equipo_(p.de); const para = equipo_(p.para);
   if (!de || !para) throw new Error('falta equipo');
   const tipo = p.tipo === 'choca' ? 'choca' : 'falta';
-  hoja_(HOJA_RETRO, COLS_RETRO).appendRow([new Date(), de, para, id_(p.carta), tipo, celda_(p.texto, 1000), celda_(p.quien, 80), id_(p.id)]);
+  hoja_(HOJA_RETRO, COLS_RETRO).appendRow([new Date(), de, para, txt_(id_(p.carta)), tipo, celda_(p.texto, 1000), celda_(p.quien, 80), txt_(id_(p.id))]);
 }
 
 /* ===================== LEER ===================== */
@@ -135,6 +139,11 @@ function leerRetro_(para, de) {
     .map(function (r) { return { fecha: r.fecha instanceof Date ? r.fecha.getTime() : 0, de: Number(r.de), para: Number(r.para), carta: r.carta, tipo: r.tipo, texto: r.texto, quien: r.quien, id: r.id }; });
 }
 
+/* Un código de carta que la hoja ya haya convertido en fecha (3-01 → 3 de enero) se recupera. */
+function codigo_(v) {
+  if (v instanceof Date) return (v.getMonth() + 1) + '-' + ('0' + v.getDate()).slice(-2);
+  return String(v == null ? '' : v);
+}
 function filas_(nombre, cols) {
   const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nombre);
   if (!sh || sh.getLastRow() < 2) return [];
@@ -143,7 +152,7 @@ function filas_(nombre, cols) {
   const out = [];
   for (let i = 1; i < data.length; i++) {
     const o = {};
-    enc.forEach(function (c, j) { o[c] = data[i][j]; });
+    enc.forEach(function (c, j) { o[c] = (c === 'carta' || c === 'id') ? codigo_(data[i][j]) : data[i][j]; });
     Object.keys(o).forEach(function (k) { if (typeof o[k] === 'string' && o[k].charAt(0) === "'") o[k] = o[k].slice(1); });
     out.push(o);
   }
@@ -176,3 +185,5 @@ function clip_(s, n) { s = String(s == null ? '' : s); return s.length > n ? s.s
 /* Lo que llega del navegador se guarda como texto: sin el apóstrofo, la hoja
    evaluaría como fórmula cualquier valor que empiece con = + - @. */
 function celda_(s, n) { s = clip_(s, n); return /^[=+\-@\t\r\n]/.test(s) ? "'" + s : s; }
+/* Los códigos de carta van siempre con apóstrofo: la hoja los guarda como texto y no como fecha. */
+function txt_(s) { s = String(s == null ? '' : s); return s ? "'" + s : s; }
