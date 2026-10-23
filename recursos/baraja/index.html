@@ -4,194 +4,142 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>La baraja de la orilla · La presa que queremos</title>
-<meta name="description" content="Baraja de ideas para la orilla de la presa de La Florida. Cada equipo decide en su teléfono qué va, qué quizá y qué no; voltea la carta y copia el prompt para imaginarla sobre la foto. Gestión y Manejo de Proyectos, UAQ Campus Concá.">
+<meta name="description" content="Baraja de ideas para la orilla de la presa de La Florida: una carta a la vez, en el teléfono. Va, quizá o no; voltea la carta para copiar el prompt de Gemini. Gestión y Manejo de Proyectos, UAQ Campus Concá.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..700&family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..700&family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--teal:#0F6E6E;--teal-dark:#0B3C49;--mint:#E3F1EF;--amber:#D9A441;--amber-dark:#A8731F;--paper:#F8FBF9;--ink:#1E2B27;--ink-soft:#4A5C55;--line:#D8E5DF;--rojo:#B4443C;--gris:#7A8B85;--c:#0F6E6E;--cl:#E3F1EF;--eq:#0F6E6E}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
-body{font-family:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;font-size:16px}
-h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.15}
+body{font-family:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;font-size:16px;min-height:100vh;display:flex;flex-direction:column}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.15}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 a{color:var(--teal)}
-.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
-header.top{background:linear-gradient(160deg,var(--teal-dark),var(--eq));color:#fff;padding:18px 0 14px}
-header .eyebrow{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--mint);opacity:.9}
-header h1{font-size:clamp(1.35rem,4vw,2rem);margin:4px 0 4px}
-header p{color:#D5EAE2;max-width:62ch;font-size:.92rem}
-.barra{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
-.pill{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;font-weight:700;font-size:.86rem;background:rgba(255,255,255,.16);color:#fff;border:1.5px solid rgba(255,255,255,.35)}
-.pill b{font-family:'Fraunces',serif;font-size:1rem}
-.pill.btn{cursor:pointer}
-.sync{margin-left:auto;font-size:.78rem;color:#D5EAE2;display:flex;align-items:center;gap:6px}
-.sync i{width:9px;height:9px;border-radius:50%;background:#9AA6A1;display:inline-block}
-.sync.ok i{background:#7FD6A5} .sync.pend i{background:var(--amber)} .sync.err i{background:#F08C84} .sync.local i{background:#9AA6A1}
-nav.tabs{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
-nav.tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
-nav.tabs .wrap::-webkit-scrollbar{display:none}
-.tab{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font-weight:600;font-size:.86rem;color:var(--ink-soft);display:flex;align-items:center;gap:7px;white-space:nowrap}
-.tab i{width:10px;height:10px;border-radius:50%;background:var(--c);display:inline-block}
-.tab.on{background:var(--c);border-color:var(--c);color:#fff}
-.tab.on i{background:#fff}
-.tab .k{font-size:.72rem;opacity:.8}
-.intro{padding:18px 0 4px}
-.intro h2{font-size:1.3rem;color:var(--c)}
-.intro p{color:var(--ink-soft);max-width:70ch;font-size:.95rem}
-.resumen{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:.84rem;align-items:center}
-.resumen span{border-radius:999px;padding:4px 11px;background:#fff;border:1px solid var(--line);font-weight:600}
-.resumen span.va{border-color:var(--teal);color:var(--teal)} .resumen span.quiza{border-color:var(--amber-dark);color:var(--amber-dark)} .resumen span.no{border-color:#9AA6A1;color:var(--gris)}
-.resumen span.meta{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark)} .resumen span.meta.mal{background:var(--amber);color:var(--ink);border-color:var(--amber)}
-.regla{margin-top:10px;background:#fff;border-left:4px solid var(--amber);border-radius:8px;padding:8px 12px;font-size:.84rem;color:var(--ink-soft)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;padding:16px 0 40px}
-@media (max-width:560px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}}
-.mini{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;text-align:left;display:flex;flex-direction:column;transition:transform .12s,box-shadow .12s;position:relative}
-.mini:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(10,74,58,.12)}
-.mini .band{background:var(--c);color:#fff;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:5px 10px;display:flex;justify-content:space-between;align-items:center;gap:6px}
-.mini .band b{font-family:'JetBrains Mono',monospace;font-size:.95rem;letter-spacing:.04em;text-transform:none;flex:none;white-space:nowrap}
-.mini .band span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.mini .vis{background:var(--cl);height:88px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.mini .vis img{width:100%;height:100%;object-fit:cover}
-.mini .vis svg{width:84px;height:62px;color:var(--c)}
-.mini .vis img ~ svg{display:none}
-.mini h3{font-size:.98rem;padding:9px 12px 4px;color:var(--ink)}
-.mini .que{font-size:.78rem;color:var(--ink-soft);padding:0 12px 10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.mini .pie{margin-top:auto;padding:0 12px 10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:.7rem;color:var(--ink-soft)}
-.mini .estado{position:absolute;top:34px;right:8px;border-radius:999px;padding:2px 9px;font-size:.7rem;font-weight:700;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.estado.va{color:var(--teal)} .estado.quiza{color:var(--amber-dark)} .estado.no{color:var(--gris);text-decoration:line-through}
-.mini.no{opacity:.5}
-.mini .zona{font-weight:700;color:var(--c);background:var(--cl);border-radius:999px;padding:2px 8px}
-.mini .ojo{font-weight:700;color:var(--amber-dark);background:#FBF1DC;border-radius:999px;padding:2px 8px}
-.mini.nueva{border-style:dashed}
-.mini.add{border:2px dashed var(--line);background:transparent;align-items:center;justify-content:center;min-height:200px;color:var(--ink-soft);font-weight:600;gap:6px}
-.mini.add b{font-size:2rem;color:var(--c);font-family:'Fraunces',serif;line-height:1}
-/* modal */
-.modal{position:fixed;inset:0;background:rgba(11,60,73,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:12px}
-.modal.open{display:flex}
-.dlg{background:var(--paper);border-radius:18px;max-width:920px;width:100%;max-height:96vh;overflow:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.35)}
-.dlg.chica{max-width:520px}
-.dlg .cerrar{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--line);font-size:1.1rem;z-index:2}
-.dlg .nav{position:fixed;bottom:18px;width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid var(--line);font-size:1.5rem;z-index:60;color:var(--teal-dark);box-shadow:0 6px 18px rgba(0,0,0,.2)}
-.dlg .nav.prev{left:calc(50% - 60px)} .dlg .nav.next{left:calc(50% + 14px)}
-.voltear{display:inline-flex;align-items:center;gap:6px;margin:10px 18px 0;border:1.5px solid var(--c);color:var(--c);border-radius:999px;padding:8px 16px;font-weight:700;font-size:.88rem;background:#fff}
-@media (min-width:761px){.voltear{display:none}}
-.carta{display:grid;grid-template-columns:1fr 1fr}
-@media (max-width:760px){.carta{grid-template-columns:1fr} .carta.ver-reverso .frente{display:none} .carta:not(.ver-reverso) .reverso{display:none}}
-.cara .band{background:var(--c);color:#fff;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:9px 56px 9px 16px;display:flex;justify-content:space-between;gap:10px;align-items:center}
-.cara .band b{font-family:'JetBrains Mono',monospace;font-size:1.15rem;letter-spacing:.04em;text-transform:none;white-space:nowrap;flex:none}
-.frente .vis{background:var(--cl);height:190px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.frente .vis img{width:100%;height:100%;object-fit:cover}
-.frente .vis svg{width:200px;height:150px;color:var(--c)}
-.frente .vis img ~ svg{display:none}
-.frente .cuerpo{padding:16px 18px 10px}
-.frente h2{font-size:1.45rem;color:var(--ink);margin-bottom:8px}
-.frente p{font-size:.94rem;margin-bottom:9px;color:var(--ink)}
-.frente p b{display:block;color:var(--c);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:1px}
-.frente p.senal{background:var(--cl);border-radius:10px;padding:10px 12px}
-.frente .ficha{font-size:.78rem;color:var(--ink-soft);margin-top:4px}
-.frente .ficha b{color:var(--ink)}
-.reverso{background:#fff;border-left:1px solid var(--line)}
-@media (max-width:760px){.reverso{border-left:none;border-top:1px solid var(--line)}}
-.reverso .cuerpo{padding:16px 18px 18px}
-.reverso h2{font-size:1.2rem;color:var(--c);margin-bottom:8px}
-.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.pasos div{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.76rem;color:var(--ink-soft);line-height:1.35}
+.wrap{max-width:620px;margin:0 auto;padding:0 14px;width:100%}
+header.top{background:var(--eq);color:#fff;padding:10px 0}
+header .wrap{display:flex;align-items:center;gap:10px}
+header .t{font-family:'Fraunces',serif;font-size:1.05rem;flex:1;line-height:1.2}
+header .t small{display:block;font-family:'Instrument Sans',sans-serif;font-size:.72rem;opacity:.85;font-weight:400}
+header .pill{border:1.5px solid rgba(255,255,255,.45);border-radius:999px;padding:5px 11px;font-size:.78rem;font-weight:700;white-space:nowrap}
+.sync{font-size:.7rem;color:#D5EAE2;display:flex;align-items:center;gap:5px;justify-content:flex-end;padding:3px 0 0}
+.sync i{width:7px;height:7px;border-radius:50%;background:#9AA6A1;display:inline-block}
+.sync.ok i{background:#7FD6A5} .sync.pend i{background:var(--amber)} .sync.err i{background:#F08C84}
+main{flex:1;padding:14px 0 90px}
+/* progreso */
+.prog{display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--ink-soft);margin-bottom:10px}
+.prog .barra{flex:1;height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+.prog .barra i{display:block;height:100%;background:var(--c);width:0;transition:width .3s}
+.prog b{color:var(--ink)}
+/* la carta */
+.carta{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(10,74,58,.10);animation:entra .25s}
+@keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.band{background:var(--c);color:#fff;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:9px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.band span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.band b{font-family:'JetBrains Mono',monospace;font-size:1.3rem;letter-spacing:.05em;text-transform:none;white-space:nowrap;flex:none}
+.vis{background:var(--cl);height:170px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.vis img{width:100%;height:100%;object-fit:cover}
+.vis svg{width:190px;height:140px;color:var(--c)}
+.vis img ~ svg{display:none}
+.cuerpo{padding:16px 18px 14px}
+.cuerpo h2{font-size:1.45rem;margin-bottom:8px}
+.cuerpo p{font-size:.97rem;margin-bottom:9px}
+.cuerpo p b{display:block;color:var(--c);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:1px}
+.cuerpo p.senal{background:var(--cl);border-radius:10px;padding:10px 12px}
+.mas{font-size:.85rem;font-weight:700;color:var(--c);padding:4px 0;display:inline-flex;gap:6px;align-items:center}
+.ficha{font-size:.76rem;color:var(--ink-soft);margin-top:6px}
+.ficha b{color:var(--ink)}
+/* reverso */
+.reverso{background:#fff}
+.reverso .cuerpo h2{font-size:1.2rem;color:var(--c)}
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}
+.pasos div{border:1px solid var(--line);border-radius:10px;padding:8px 9px;font-size:.74rem;color:var(--ink-soft);line-height:1.35}
 .pasos b{display:block;font-family:'Fraunces',serif;font-size:1.2rem;color:var(--c);line-height:1}
-.prompt{margin-bottom:12px}
-.prompt .pl{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;gap:8px}
-.prompt .pl span{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--c)}
-.prompt pre{font-family:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;font-size:.72rem;line-height:1.4;white-space:pre-wrap;background:#F6F6F3;border:1px solid var(--line);border-radius:10px;padding:10px 12px;max-height:170px;overflow:auto;color:var(--ink)}
-.copiar{border:1.5px solid var(--c);color:var(--c);border-radius:999px;padding:6px 13px;font-size:.8rem;font-weight:700;background:#fff;flex:none}
-.copiar.grande{padding:10px 16px;font-size:.9rem;background:var(--c);color:#fff;width:100%;justify-content:center;display:flex;margin-bottom:12px}
+.copiar{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border-radius:14px;padding:13px 14px;font-weight:700;font-size:.95rem;background:var(--c);color:#fff;margin-bottom:8px}
+.copiar.sec{background:#fff;color:var(--c);border:1.5px solid var(--c)}
 .copiar.ok{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark)}
-.links{font-size:.85rem;line-height:1.5}
-.links .pl{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--c);margin-bottom:4px}
+.verp{font-size:.8rem;color:var(--ink-soft);text-align:center;margin:4px 0 10px}
+.verp button{text-decoration:underline;color:var(--c);font-weight:600}
+pre{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.7rem;line-height:1.4;white-space:pre-wrap;background:#F6F6F3;border:1px solid var(--line);border-radius:10px;padding:10px 12px;max-height:200px;overflow:auto;margin-bottom:10px}
+.links{font-size:.84rem;line-height:1.5;margin-top:4px}
 .links a{display:block;margin-bottom:3px;word-break:break-word}
-.decidir{grid-column:1/-1;background:#fff;border-top:3px solid var(--c);padding:14px 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media (max-width:760px){.decidir{grid-template-columns:1fr;padding-bottom:90px}}
-.decidir .pl{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--c);margin-bottom:6px;display:block}
-.seg{display:flex;gap:6px;flex-wrap:wrap}
-.seg button{border:1.5px solid var(--line);border-radius:999px;padding:8px 15px;font-weight:700;font-size:.92rem;color:var(--ink-soft);background:#fff}
-.seg button.on.va{background:var(--teal);border-color:var(--teal);color:#fff}
-.seg button.on.quiza{background:var(--amber);border-color:var(--amber);color:var(--ink)}
-.seg button.on.no{background:var(--gris);border-color:var(--gris);color:#fff}
-.seg button.on.z{background:var(--c);border-color:var(--c);color:#fff}
-.seg button small{font-weight:400;opacity:.8}
-.decidir input,.decidir textarea,.form input,.form textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;font:inherit;font-size:.95rem;background:#fff}
-.decidir textarea,.form textarea{min-height:64px;resize:vertical}
-.postit{background:#FFF3A8;border-radius:4px;padding:12px 14px;box-shadow:2px 3px 10px rgba(0,0,0,.14);transform:rotate(-1deg);font-family:'Fraunces',serif;color:#4A3F10;display:flex;flex-direction:column;gap:2px;margin-top:4px}
-.postit b{font-family:'JetBrains Mono',monospace;font-size:1.6rem;letter-spacing:.06em;color:#2A2305}
-.postit small{font-family:'Instrument Sans',sans-serif;font-size:.74rem;color:#6F6220}
-.aviso{font-size:.8rem;color:var(--amber-dark);background:#FBF1DC;border-radius:8px;padding:6px 10px;margin-top:8px}
-.quien{font-size:.76rem;color:var(--ink-soft);margin-top:8px}
-.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:var(--teal-dark);color:#fff;padding:10px 16px;border-radius:999px;font-weight:600;font-size:.9rem;opacity:0;transition:all .25s;z-index:99;pointer-events:none;max-width:92vw;text-align:center}
-.toast.show{opacity:1;transform:translateX(-50%)}
-/* paneles */
-.panel{padding:16px 0 50px}
-.panel h2{font-size:1.3rem;color:var(--teal-dark);margin-bottom:6px}
-.panel p.b{color:var(--ink-soft);max-width:70ch;font-size:.95rem;margin-bottom:12px}
+/* decidir */
+.decide{padding:14px 18px 18px;border-top:1px solid var(--line);background:#fff}
+.decide .preg{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:10px;color:var(--teal-dark)}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tres button{border:2px solid var(--line);border-radius:14px;padding:14px 6px;font-weight:700;font-size:1.05rem;color:var(--ink-soft);background:#fff;display:flex;flex-direction:column;align-items:center;gap:2px}
+.tres button small{font-weight:400;font-size:.68rem;color:var(--ink-soft)}
+.tres button.on.va{background:var(--teal);border-color:var(--teal);color:#fff} .tres button.on.va small{color:#D5EAE2}
+.tres button.on.quiza{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+.tres button.on.no{background:var(--gris);border-color:var(--gris);color:#fff} .tres button.on.no small{color:#E6ECEA}
+.sigue{margin-top:12px;animation:entra .25s}
+.sigue label{display:block;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--c);margin:10px 0 4px}
+.sigue input,.sigue textarea,.form input,.form textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:.95rem;background:#fff}
+.sigue textarea,.form textarea{min-height:58px;resize:vertical}
+.quien{font-size:.74rem;color:var(--ink-soft);margin-top:8px}
+/* barra inferior */
+.pie{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);z-index:30;padding:8px 0 calc(8px + env(safe-area-inset-bottom))}
+.pie .wrap{display:flex;gap:8px;align-items:center}
+.pie .nav{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line);font-size:1.5rem;color:var(--teal-dark);display:flex;align-items:center;justify-content:center;background:#fff;flex:none}
+.pie .nav:disabled{opacity:.3}
+.pie .sig{flex:1;height:48px;border-radius:999px;background:var(--teal-dark);color:#fff;font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:8px}
+.pie .sig.suave{background:#fff;color:var(--teal-dark);border:1.5px solid var(--line)}
+.menu{display:flex;gap:6px;justify-content:center;margin-top:8px}
+.menu button{font-size:.76rem;font-weight:700;color:var(--ink-soft);padding:4px 10px;border-radius:999px}
+.menu button.on{background:var(--mint);color:var(--teal-dark)}
+/* pantallas */
+.pant h2{font-size:1.4rem;color:var(--teal-dark);margin-bottom:4px}
+.pant p.b{color:var(--ink-soft);font-size:.92rem;margin-bottom:12px}
+.resumen{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;font-size:.84rem}
+.resumen span{border-radius:999px;padding:4px 11px;background:#fff;border:1px solid var(--line);font-weight:600}
+.resumen span.meta{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark)} .resumen span.meta.mal{background:var(--amber);color:var(--ink);border-color:var(--amber)}
 .lista{display:flex;flex-direction:column;gap:10px}
-.fila{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;cursor:pointer}
-.fila .cod{font-family:'JetBrains Mono',monospace;font-size:1.25rem;font-weight:700;color:var(--c);background:var(--cl);border-radius:10px;padding:8px 10px;min-width:92px;text-align:center;line-height:1.1}
-.fila .cod small{display:block;font-family:'Instrument Sans',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--c);opacity:.8;margin-top:3px}
-.fila h3{font-size:1.02rem;margin-bottom:2px}
+.fila{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;text-align:left;width:100%}
+.fila .cod{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--c);background:var(--cl);border-radius:10px;padding:10px 10px;min-width:86px;text-align:center;line-height:1.1}
+.fila h3{font-size:1rem;margin-bottom:2px}
 .fila .det{font-size:.84rem;color:var(--ink-soft)}
 .fila .det b{color:var(--ink)}
-.fila .retro{margin-top:6px;display:flex;flex-direction:column;gap:4px}
-.rt{font-size:.82rem;border-radius:8px;padding:5px 9px;border-left:4px solid var(--amber)}
-.rt.falta{background:#FBF1DC;border-color:var(--amber)} .rt.choca{background:#F6E2E0;border-color:var(--rojo)}
-.rt b{font-weight:700}
-.acciones{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 15px;border-radius:999px;font-weight:700;font-size:.88rem;background:var(--teal);color:#fff;text-decoration:none}
+.rt{font-size:.82rem;border-radius:8px;padding:5px 9px;border-left:4px solid var(--amber);margin-top:5px}
+.rt.falta{background:#FBF1DC} .rt.choca{background:#F6E2E0;border-color:var(--rojo)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:999px;font-weight:700;font-size:.9rem;background:var(--teal);color:#fff;text-decoration:none}
 .btn.ghost{background:#fff;color:var(--teal-dark);border:1.5px solid var(--line)}
-.btn.amber{background:var(--amber);color:var(--ink)}
-.btn.rojo{background:var(--rojo);color:#fff}
-.btn:disabled{opacity:.5;cursor:default}
-.equipos{display:grid;grid-template-columns:1fr;gap:8px;margin:10px 0 14px}
-.eqb{border:2px solid var(--line);border-radius:14px;padding:10px 14px;text-align:left;background:#fff;display:flex;gap:12px;align-items:center}
-.eqb b{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--eqc);min-width:30px}
-.eqb span{font-size:.92rem;font-weight:600}
-.eqb small{display:block;font-weight:400;color:var(--ink-soft);font-size:.8rem}
-.eqb.on{border-color:var(--eqc);background:color-mix(in srgb,var(--eqc) 10%,#fff)}
+.btn.amber{background:var(--amber);color:var(--ink)} .btn.rojo{background:var(--rojo);color:#fff}
+.acciones{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.vacio{color:var(--ink-soft);font-size:.9rem;background:#fff;border:1px dashed var(--line);border-radius:12px;padding:14px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:var(--teal-dark);color:#fff;padding:10px 16px;border-radius:999px;font-weight:600;font-size:.9rem;opacity:0;transition:all .25s;z-index:99;pointer-events:none;max-width:92vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.modal{position:fixed;inset:0;background:rgba(11,60,73,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:12px}
+.modal.open{display:flex}
+.dlg{background:var(--paper);border-radius:18px;max-width:480px;width:100%;max-height:94vh;overflow:auto}
 .form{padding:22px 20px 20px}
 .form h2{font-size:1.35rem;color:var(--teal-dark);margin-bottom:4px}
 .form p{color:var(--ink-soft);font-size:.9rem;margin-bottom:10px}
 .form label{display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--teal);margin:12px 0 4px}
-.juego{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media (max-width:700px){.juego{grid-template-columns:1fr}}
-.paso{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
-.paso h3{font-size:1.05rem;color:var(--teal-dark);display:flex;gap:10px;align-items:center;margin-bottom:6px}
-.paso h3 i{font-style:normal;background:var(--teal-dark);color:#fff;border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-family:'Instrument Sans',sans-serif}
-.paso p{font-size:.88rem;color:var(--ink-soft)}
-.retro-sel{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
-.retro-sel button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font-weight:700;font-size:.86rem;color:var(--ink-soft)}
+.equipos{display:grid;gap:8px;margin:10px 0 6px}
+.eqb{border:2px solid var(--line);border-radius:14px;padding:10px 14px;text-align:left;background:#fff;display:flex;gap:12px;align-items:center}
+.eqb b{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--eqc);min-width:30px}
+.eqb span{font-size:.92rem;font-weight:600}
+.eqb small{display:block;font-weight:400;color:var(--ink-soft);font-size:.78rem}
+.eqb.on{border-color:var(--eqc);background:color-mix(in srgb,var(--eqc) 10%,#fff)}
+.retro-sel{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.retro-sel button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-weight:700;font-size:.84rem;color:var(--ink-soft)}
 .retro-sel button.on{background:var(--eqc);border-color:var(--eqc);color:#fff}
-.rform{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:8px}
-.rform .seg button.on.falta{background:var(--amber);border-color:var(--amber);color:var(--ink)}
-.rform .seg button.on.choca{background:var(--rojo);border-color:var(--rojo);color:#fff}
-.vacio{color:var(--ink-soft);font-size:.9rem;background:#fff;border:1px dashed var(--line);border-radius:12px;padding:14px}
+.rform{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:10px}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.dos button{border:2px solid var(--line);border-radius:12px;padding:10px;font-weight:700;background:#fff;color:var(--ink-soft)}
+.dos button.on.falta{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+.dos button.on.choca{background:var(--rojo);border-color:var(--rojo);color:#fff}
 .hoja{display:none}
+.fin{text-align:center;padding:30px 10px 10px}
+.fin h2{font-size:1.6rem;color:var(--teal-dark)}
+.fin p{color:var(--ink-soft);margin:6px 0 16px}
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="wrap">
-    <div class="eyebrow">La presa que queremos · La Florida, Arroyo Seco</div>
-    <h1>La baraja de la orilla</h1>
-    <p>Cada equipo decide en su teléfono: lo que falla va al <b>no</b>, lo dudoso a <b>quizá</b>, y al final quedan de tres a cinco cartas en <b>va</b>, con zona y con doliente. Voltea la carta para copiar el prompt y verla sobre la foto.</p>
-    <div class="barra" id="barra"></div>
-  </div>
-</header>
-<nav class="tabs"><div class="wrap" id="tabs"></div></nav>
-<main class="wrap">
-  <section id="intro" class="intro"></section>
-  <section id="grid" class="grid"></section>
-  <section id="panel" class="panel" style="display:none"></section>
-</main>
-
-<div class="modal" id="modal"><div class="dlg" id="dlg"></div></div>
-<div class="modal" id="entrar"><div class="dlg chica"><div class="form" id="entrarForm"></div></div></div>
-<div class="modal" id="nueva"><div class="dlg chica"><div class="form" id="nuevaForm"></div></div></div>
+<header class="top"><div class="wrap"><div class="t" id="titulo">La baraja de la orilla<small>La presa que queremos · La Florida</small></div><button class="pill" id="pillEq" onclick="abrirEntrar()">equipo</button></div><div class="wrap sync" id="sync"></div></header>
+<main><div class="wrap" id="main"></div></main>
+<div class="pie"><div class="wrap" id="pie"></div><div class="menu" id="menu"></div></div>
+<div class="modal" id="entrar"><div class="dlg"><div class="form" id="entrarForm"></div></div></div>
+<div class="modal" id="nueva"><div class="dlg"><div class="form" id="nuevaForm"></div></div></div>
 <div class="toast" id="toast"></div>
 <textarea class="hoja" id="hoja" aria-hidden="true"></textarea>
 
@@ -199,22 +147,23 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
 <script src="baraja-config.js"></script>
 <script>
 const D = window.BARAJA, EQUIPOS = window.BARAJA_EQUIPOS, API = (window.BARAJA_API_URL || '').trim();
-const KEY = 'baraja-orilla-v3';
-const ZN = {}; D.zonas.forEach((z, i) => ZN[z] = i + 1);
+const KEY = 'baraja-orilla-v4';
 const $ = s => document.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const COD = id => String(id).toUpperCase().replace(/^N(\d)-/, '$1N-');
 const hora = ts => ts ? new Date(ts).toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'}) : '';
+const NOMBRE = {va:'Va', quiza:'Quizá', no:'No'};
 
-/* ---------- estado local ---------- */
+/* ---------- estado ---------- */
 const S = (() => {
-  const base = {equipo:0, quien:'', dev:Math.random().toString(36).slice(2,8), dec:{}, nuevas:[], pend:{}, pendN:{}, retroEnv:[]};
+  const base = {equipo:0, quien:'', dec:{}, nuevas:[], pend:{}, pendN:{}, retroEnv:[], pos:0};
   try { return Object.assign(base, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e) { return base; }
 })();
 const q = new URLSearchParams(location.search);
 if (q.get('equipo') && EQUIPOS.some(e => String(e.n) === q.get('equipo'))) S.equipo = Number(q.get('equipo'));
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
-const SV = {retro:[], otros:{}};   /* lo que llega de la hoja */
+const SV = {retro:[], otros:{}};
+let vista = 'baraja', reverso = false, masInfo = false, verPrompt = false;
 
 function equipo(){ return EQUIPOS.find(e => e.n === S.equipo); }
 function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2000); }
@@ -224,209 +173,111 @@ const PICTO_NUEVA = '<svg viewBox="0 0 80 60"><path d="M40 14v32M24 30h32" fill=
 const HUECO = '[[ WHAT GOES HERE: material, size and position — e.g. a rustic timber bench 2.4 m long under the big oak ]]';
 function cartaNueva(n){
   const desc = '(described in Spanish) ' + n.titulo + ': ' + (n.que || '') + ' ' + (n.ejemplo || '');
-  return Object.assign({nueva:true, picto:PICTO_NUEVA, ficha:'carta en blanco del equipo', origen:'equipo', links:[], busca:n.titulo,
+  return Object.assign({nueva:true, picto:PICTO_NUEVA, ficha:'', origen:'equipo', links:[], busca:n.titulo,
     gimg:'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(n.titulo), pin:'https://www.pinterest.com/search/pins/?q=' + encodeURIComponent(n.titulo),
     p1:D.pBlanco1.replace(HUECO, desc), p2:D.pBlanco2.replace(HUECO, desc), hacer:'', senal:''}, n);
 }
-function allCards(){ return D.cards.concat(S.nuevas.map(cartaNueva)); }
-function cardsDe(comp){ return allCards().filter(c => comp === 'van' ? dec(c.id).estado === 'va' : c.comp === comp); }
-function misCartas(){ const e = equipo(); return allCards().filter(c => e && e.comps.includes(c.comp)); }
+function misCartas(){ const e = equipo(); if (!e) return []; return D.cards.filter(c => e.comps.includes(c.comp)).concat(S.nuevas.map(cartaNueva)); }
 function compDe(c){ return D.comps[c.comp]; }
-function dec(id){ return S.dec[id] || {estado:'', zona:'', cuida:'', nota:'', quien:'', ts:0}; }
-function completa(id){ const d = dec(id); return d.estado !== 'va' || (d.zona && d.cuida.trim()); }
-function cuenta(ids){ const o = {va:0, quiza:0, no:0}; ids.forEach(id => { const e = dec(id).estado; if (o[e] != null) o[e]++; }); return o; }
+function dec(id){ return S.dec[id] || {estado:'', cuida:'', nota:'', quien:'', ts:0}; }
+function cuenta(){ const o = {va:0, quiza:0, no:0, sin:0}; misCartas().forEach(c => { const e = dec(c.id).estado; if (o[e] != null) o[e]++; else o.sin++; }); return o; }
+function decidir(id, patch){ S.dec[id] = Object.assign({}, dec(id), patch, {quien:S.quien, ts:Date.now()}); S.pend[id] = 1; save(); programar(); }
 
-/* ---------- decidir ---------- */
-function decidir(id, patch){
-  const d = Object.assign({}, dec(id), patch, {quien:S.quien, ts:Date.now()});
-  S.dec[id] = d; S.pend[id] = 1; save(); programar();
-}
-
-/* ---------- sincronía con la hoja ---------- */
-let timer = null, pollTimer = null, syncEstado = API ? 'pend' : 'local';
+/* ---------- hoja ---------- */
+let timer = null, syncEstado = API ? 'pend' : 'local';
 function programar(){ clearTimeout(timer); timer = setTimeout(enviar, 700); pintarSync('pend'); }
-async function post(payload){
-  const r = await fetch(API, {method:'POST', body:JSON.stringify(payload)});
-  const j = await r.json(); if (!j.ok) throw new Error(j.error || 'error'); return j;
-}
+async function post(payload){ const r = await fetch(API, {method:'POST', body:JSON.stringify(payload)}); const j = await r.json(); if (!j.ok) throw new Error(j.error || 'error'); return j; }
 async function enviar(){
   if (!API || !S.equipo) { pintarSync('local'); return; }
   try {
-    for (const id of Object.keys(S.pendN)) {
-      const n = S.nuevas.find(x => x.id === id); if (!n) { delete S.pendN[id]; continue; }
-      await post({action:'nueva', equipo:S.equipo, id:n.id, titulo:n.titulo, que:n.que, ejemplo:n.ejemplo, quien:n.quien, ts:n.ts});
-      delete S.pendN[id];
-    }
-    for (const id of Object.keys(S.pend)) {
-      const d = dec(id); const ts = d.ts;
-      await post({action:'decidir', equipo:S.equipo, carta:id, estado:d.estado, zona:d.zona, cuida:d.cuida, nota:d.nota, quien:d.quien, ts});
-      if (dec(id).ts === ts) delete S.pend[id];
-    }
+    for (const id of Object.keys(S.pendN)) { const n = S.nuevas.find(x => x.id === id); if (!n) { delete S.pendN[id]; continue; } await post({action:'nueva', equipo:S.equipo, id:n.id, titulo:n.titulo, que:n.que, ejemplo:n.ejemplo, quien:n.quien, ts:n.ts}); delete S.pendN[id]; }
+    for (const id of Object.keys(S.pend)) { const d = dec(id); const ts = d.ts; await post({action:'decidir', equipo:S.equipo, carta:id, estado:d.estado, zona:'', cuida:d.cuida, nota:d.nota, quien:d.quien, ts}); if (dec(id).ts === ts) delete S.pend[id]; }
     save(); pintarSync('ok');
   } catch(e) { pintarSync('err'); }
 }
-async function get(params){
-  const u = API + (API.includes('?') ? '&' : '?') + new URLSearchParams(params).toString();
-  const r = await fetch(u); return r.json();
-}
+async function get(params){ const u = API + (API.includes('?') ? '&' : '?') + new URLSearchParams(params).toString(); const r = await fetch(u); return r.json(); }
 async function poll(){
   if (!API || !S.equipo || document.visibilityState !== 'visible') return;
   try {
-    const j = await get({action:'equipo', equipo:S.equipo});
-    if (!j.ok) throw new Error(j.error);
+    const j = await get({action:'equipo', equipo:S.equipo}); if (!j.ok) throw new Error(j.error);
     let cambio = false;
-    (j.decisiones || []).forEach(d => {
-      if (S.pend[d.carta]) return;
-      const l = dec(d.carta);
-      if (d.ts >= (l.ts || 0) && JSON.stringify([l.estado, l.zona, l.cuida, l.nota, l.quien]) !== JSON.stringify([d.estado, d.zona, d.cuida, d.nota, d.quien])) {
-        S.dec[d.carta] = {estado:d.estado, zona:d.zona, cuida:d.cuida, nota:d.nota, quien:d.quien, ts:d.ts}; cambio = true;
-      }
-    });
-    (j.nuevas || []).forEach(n => {
-      if (S.pendN[n.id]) return;
-      const i = S.nuevas.findIndex(x => x.id === n.id);
-      const o = {id:n.id, comp:compNueva(), n:0, titulo:n.titulo, que:n.que, ejemplo:n.ejemplo, quien:n.quien, ts:n.ts};
-      if (i < 0) { S.nuevas.push(o); cambio = true; }
-      else if (n.ts > (S.nuevas[i].ts || 0)) { S.nuevas[i] = o; cambio = true; }
-    });
+    (j.decisiones || []).forEach(d => { if (S.pend[d.carta]) return; const l = dec(d.carta); if (d.ts >= (l.ts || 0) && [l.estado, l.cuida, l.nota, l.quien].join('|') !== [d.estado, d.cuida, d.nota, d.quien].join('|')) { S.dec[d.carta] = {estado:d.estado, cuida:d.cuida, nota:d.nota, quien:d.quien, ts:d.ts}; cambio = true; } });
+    (j.nuevas || []).forEach(n => { if (S.pendN[n.id]) return; const i = S.nuevas.findIndex(x => x.id === n.id); const o = {id:n.id, comp:compNueva(), n:0, titulo:n.titulo, que:n.que, ejemplo:n.ejemplo, quien:n.quien, ts:n.ts}; if (i < 0) { S.nuevas.push(o); cambio = true; } else if (n.ts > (S.nuevas[i].ts || 0)) { S.nuevas[i] = o; cambio = true; } });
     const rj = JSON.stringify(j.retro || []); if (rj !== JSON.stringify(SV.retro)) { SV.retro = j.retro || []; cambio = true; }
     if (!Object.keys(S.pend).length && !Object.keys(S.pendN).length) pintarSync('ok');
-    if (cambio) { save(); render(); if ($('#modal').classList.contains('open') && abierta) pintarDecidir(); }
+    if (cambio) { save(); if (vista !== 'baraja' || !document.activeElement || !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) render(); }
   } catch(e) { pintarSync('err'); }
 }
-function pintarSync(est){
-  syncEstado = est; const el = $('#sync'); if (!el) return;
-  el.className = 'sync ' + est;
-  el.innerHTML = '<i></i>' + ({ok:'guardado en el equipo', pend:'guardando…', err:'sin conexión: guardado en este teléfono', local:'solo en este teléfono'}[est]);
-}
+function pintarSync(est){ syncEstado = est; const el = $('#sync'); el.className = 'wrap sync ' + est; el.innerHTML = S.equipo ? '<i></i>' + ({ok:'el equipo ve lo mismo', pend:'guardando…', err:'sin conexión: guardado en este teléfono', local:'guardado en este teléfono'}[est]) : ''; }
 function compNueva(){ const e = equipo(); return e ? e.comps[e.comps.length - 1] : '5'; }
 
-/* ---------- cabecera ---------- */
-function renderBarra(){
-  const e = equipo(); const el = $('#barra');
-  document.documentElement.style.setProperty('--eq', e ? e.color : '#0F6E6E');
-  el.innerHTML = e
-    ? `<button class="pill btn" onclick="abrirEntrar()"><b>Equipo ${e.n}</b> ${esc(e.nombre)}</button><button class="pill btn" onclick="abrirEntrar()">${esc(S.quien || 'sin nombre')} · cambiar</button><span class="sync" id="sync"></span>`
-    : `<button class="pill btn" onclick="abrirEntrar()">Elige tu equipo para empezar</button>`;
-  pintarSync(syncEstado);
-}
-
-/* ---------- pestañas ---------- */
-let tab = location.hash.replace('#', '') || '';
-function renderTabs(){
-  const e = equipo(); const el = $('#tabs'); el.innerHTML = '';
-  if (!e) return;
-  if (!tab || (!e.comps.includes(tab) && !['van','retro','juego'].includes(tab))) tab = e.comps[0];
-  const mk = (k, c, html) => { const b = document.createElement('button'); b.className = 'tab' + (tab === k ? ' on' : ''); b.style.setProperty('--c', c); b.innerHTML = html; b.onclick = () => { tab = k; location.hash = k; render(); window.scrollTo({top:0, behavior:'smooth'}); }; el.appendChild(b); };
-  e.comps.forEach(k => { const cc = D.comps[k]; const n = cuenta(cardsDe(k).map(c => c.id)).va; mk(k, cc.color, `<i></i>${k} · ${esc(cc.nombre)}${n ? ` <span class="k">${n} van</span>` : ''}`); });
-  const nv = misCartas().filter(c => dec(c.id).estado === 'va').length;
-  mk('van', '#0B3C49', `<i></i>Las que van <span class="k">${nv}</span>`);
-  mk('retro', '#A8731F', `<i></i>Ronda 2 · retro`);
-  mk('juego', '#4A5C55', `<i></i>Cómo se juega`);
-}
-
-/* ---------- vista de componente ---------- */
+/* ---------- render ---------- */
 function render(){
-  renderBarra(); renderTabs();
-  const e = equipo(); const intro = $('#intro'), grid = $('#grid'), panel = $('#panel');
-  if (!e) { intro.innerHTML = ''; grid.innerHTML = ''; panel.style.display = 'none'; return; }
-  if (['van','retro','juego'].includes(tab)) { intro.innerHTML = ''; grid.innerHTML = ''; grid.style.display = 'none'; panel.style.display = ''; ({van:renderVan, retro:renderRetro, juego:renderJuego})[tab](); return; }
-  grid.style.display = ''; panel.style.display = 'none';
-  const cc = D.comps[tab]; const cs = cardsDe(tab); const n = cuenta(cs.map(c => c.id));
-  const tot = misCartas().filter(c => dec(c.id).estado === 'va').length;
-  const inc = misCartas().filter(c => !completa(c.id)).length;
-  intro.style.setProperty('--c', cc.color); intro.style.setProperty('--cl', cc.claro);
-  intro.innerHTML = `<h2>${tab} · ${esc(cc.nombre)}</h2><p>${esc(cc.busca)}</p>
-    <div class="resumen"><span class="va">${n.va} van</span><span class="quiza">${n.quiza} quizá</span><span class="no">${n.no} no</span><span>${cs.length - n.va - n.quiza - n.no} sin decidir</span>
-    <span class="meta${tot >= 3 && tot <= 5 ? '' : ' mal'}">equipo: ${tot} en va · la meta es de 3 a 5</span></div>
-    ${inc ? `<div class="regla">${inc === 1 ? 'Una carta' : inc + ' cartas'} en «va» sin zona o sin doliente: así regresan a «quizá». Toca la carta y complétala.</div>` : ''}`;
-  grid.innerHTML = '';
-  cs.forEach(c => grid.appendChild(mini(c)));
-  const add = document.createElement('button'); add.className = 'mini add'; add.innerHTML = '<b>+</b>Carta en blanco<small style="font-weight:400">una idea que no está en la baraja</small>'; add.onclick = () => abrirNueva(tab); grid.appendChild(add);
+  const e = equipo();
+  $('#pillEq').textContent = e ? `Equipo ${e.n}${S.quien ? ' · ' + S.quien : ''}` : 'Elige equipo';
+  document.documentElement.style.setProperty('--eq', e ? e.color : '#0F6E6E');
+  $('#menu').innerHTML = e ? [['baraja','Cartas'],['van','Las que van'],['retro','Ronda 2']].map(([k, t]) => `<button class="${vista === k ? 'on' : ''}" onclick="ir('${k}')">${t}</button>`).join('') : '';
+  pintarSync(syncEstado);
+  if (!e) { $('#main').innerHTML = ''; $('#pie').innerHTML = ''; return; }
+  ({baraja:renderCarta, van:renderVan, retro:renderRetro})[vista]();
 }
-function mini(c){
-  const cc = compDe(c); const d = dec(c.id); const b = document.createElement('button');
-  b.className = 'mini' + (d.estado === 'no' ? ' no' : '') + (c.nueva ? ' nueva' : '');
-  b.style.setProperty('--c', cc.color); b.style.setProperty('--cl', cc.claro);
-  b.innerHTML = `<div class="band"><span>${esc(cc.nombre)}</span><b>${COD(c.id)}</b></div>
-    <div class="vis">${c.nueva ? '' : `<img src="img/${c.id}.png" alt="" loading="lazy" onerror="this.remove()">`}${c.picto}</div>
-    ${d.estado ? `<span class="estado ${d.estado}">${({va:'va', quiza:'quizá', no:'no'})[d.estado]}</span>` : ''}
-    <h3>${esc(c.titulo)}</h3><div class="que">${esc(c.que)}</div>
-    <div class="pie">${d.zona ? `<span class="zona">Z${ZN[d.zona] || ''} ${esc(d.zona)}</span>` : ''}${d.cuida ? `<span>cuida: ${esc(d.cuida)}</span>` : ''}${!completa(c.id) ? '<span class="ojo">falta zona o doliente</span>' : ''}${d.quien && d.estado ? `<span>· ${esc(d.quien)}</span>` : ''}</div>`;
-  b.onclick = () => abrir(c.id);
-  return b;
-}
+function ir(v){ vista = v; reverso = false; render(); window.scrollTo(0, 0); }
 
-/* ---------- la carta abierta ---------- */
-let lista = [], idx = 0, abierta = null, verReverso = false;
-function abrir(id){
-  lista = ['van','retro'].includes(tab) ? misCartas().filter(c => dec(c.id).estado === 'va') : cardsDe(tab);
-  idx = Math.max(0, lista.findIndex(c => c.id === id)); abierta = lista[idx]; verReverso = false;
-  pintarCarta(); $('#modal').classList.add('open'); $('#dlg').scrollTop = 0;
-}
-function cerrar(){ $('#modal').classList.remove('open'); abierta = null; render(); }
-function mover(k){ idx = (idx + k + lista.length) % lista.length; abierta = lista[idx]; verReverso = false; pintarCarta(); $('#dlg').scrollTop = 0; }
-function pintarCarta(){
-  const c = abierta; const cc = compDe(c); const dlg = $('#dlg');
-  dlg.style.setProperty('--c', cc.color); dlg.style.setProperty('--cl', cc.claro);
-  const links = (c.links || []).map(l => `<a href="${esc(l.u)}" target="_blank" rel="noopener">${esc(l.t)}</a>`).join('');
-  dlg.innerHTML = `<button class="cerrar" onclick="cerrar()" aria-label="Cerrar">✕</button>
-  <button class="voltear" onclick="voltear()">${verReverso ? '↩ Ver el frente' : '↻ Voltear: imaginarla sobre la foto'}</button>
-  <div class="carta${verReverso ? ' ver-reverso' : ''}">
-    <div class="cara frente">
-      <div class="band"><span>${c.comp} · ${esc(cc.nombre)}</span><b>${COD(c.id)}</b></div>
-      <div class="vis">${c.nueva ? '' : `<img src="img/${c.id}.png" alt="" onerror="this.remove()">`}${c.picto}</div>
-      <div class="cuerpo">
-        <h2>${esc(c.titulo)}</h2>
-        <p>${esc(c.que)}</p>
-        ${c.ejemplo ? `<p><b>Por ejemplo</b>${esc(c.ejemplo)}</p>` : ''}
-        ${c.hacer ? `<p><b>Para que quede</b>${esc(c.hacer)}</p>` : ''}
-        ${c.senal ? `<p class="senal"><b>¿Cómo sabemos que funciona?</b>${esc(c.senal)}</p>` : ''}
-        <div class="ficha">${c.origen === 'banco' ? `ficha <b>${esc(c.ficha)}</b> del banco de patrones` : c.origen === 'consulta' ? 'viene <b>de la consulta</b>' + (c.ficha && c.ficha !== 'de la consulta' ? ' · ' + esc(c.ficha) : '') : c.origen === 'curso' ? 'ya está <b>en el curso</b> (semanas 5 a 7)' : c.nueva ? `carta en blanco del equipo${c.quien ? ' · ' + esc(c.quien) : ''}` : 'propuesta sin ficha' + (c.ficha && c.ficha !== 'propuesta sin ficha' ? ' · ' + esc(c.ficha) : '')}</div>
+/* ---------- la carta, una a la vez ---------- */
+function renderCarta(){
+  const cs = misCartas(); if (S.pos > cs.length) S.pos = cs.length; if (S.pos < 0) S.pos = 0;
+  const m = $('#main');
+  if (S.pos === cs.length) { renderFin(cs); return; }
+  const c = cs[S.pos]; const cc = compDe(c); const d = dec(c.id);
+  m.style.setProperty('--c', cc.color); m.style.setProperty('--cl', cc.claro);
+  const n = cuenta();
+  m.innerHTML = `<div class="prog"><span>Carta <b>${S.pos + 1}</b> de ${cs.length}</span><div class="barra"><i style="width:${(S.pos) / cs.length * 100}%"></i></div><span>${n.va} van</span></div>
+  <div class="carta" id="carta">${reverso ? reversoHTML(c) : frenteHTML(c, cc)}
+    <div class="decide">
+      <div class="preg">${d.estado ? 'Decidieron: ' + NOMBRE[d.estado] : '¿Va, quizá o no?'}</div>
+      <div class="tres">${['va','quiza','no'].map(k => `<button class="${k}${d.estado === k ? ' on' : ''}" onclick="elegir('${c.id}','${k}')">${NOMBRE[k]}<small>${({va:'resuelve, hay quien cuide', quiza:'tiene dudas', no:'falla'})[k]}</small></button>`).join('')}</div>
+      <div class="sigue" id="sigue" style="display:${d.estado ? '' : 'none'}">
+        ${d.estado === 'va' ? `<label>¿Quién la cuidaría?</label><input value="${esc(d.cuida)}" placeholder="Una persona, un comité, un grupo" oninput="decidir('${c.id}',{cuida:this.value})">` : ''}
+        <label>${d.estado === 'va' ? 'Comentario (opcional)' : d.estado === 'no' ? '¿Por qué no? (opcional)' : '¿Qué duda tienen? (opcional)'}</label><textarea placeholder="Una línea basta" oninput="decidir('${c.id}',{nota:this.value})">${esc(d.nota)}</textarea>
+        ${d.quien && d.ts ? `<div class="quien">${esc(d.quien)} · ${hora(d.ts)}</div>` : ''}
       </div>
     </div>
-    <div class="cara reverso">
-      <div class="band"><span>Reverso · imaginarla sobre la foto</span><b>${COD(c.id)}</b></div>
-      <div class="cuerpo">
-        <h2>Imagínalo sobre la foto</h2>
-        <div class="pasos"><div><b>1</b>Foto horizontal del lugar exacto, con algo de escala (una persona, una cerca).</div><div><b>2</b>Marca en rojo el sitio con el marcador del celular. Dos o tres marcas, no más.</div><div><b>3</b>Sube la foto a Gemini y pega el prompt. Guarda todos los intentos, también los feos.</div></div>
-        <button class="copiar grande" onclick="copiar(this, abierta.p1)">Copiar el prompt de montaje realista</button>
-        <div class="prompt"><div class="pl"><span>Prompt · montaje realista</span><button class="copiar" onclick="copiar(this, abierta.p1)">Copiar</button></div><pre>${esc(c.p1)}</pre></div>
-        <div class="prompt"><div class="pl"><span>Variante · boceto a lápiz blanco</span><button class="copiar" onclick="copiar(this, abierta.p2)">Copiar</button></div><pre>${esc(c.p2)}</pre></div>
-        <div class="links"><div class="pl">Más ideas</div><a href="${esc(c.gimg)}" target="_blank" rel="noopener">Imágenes: busca «${esc(c.busca)}»</a><a href="${esc(c.pin)}" target="_blank" rel="noopener">Lo mismo en Pinterest</a>${links}</div>
-      </div>
-    </div>
-    <div class="decidir" id="decidir"></div>
-  </div>
-  <button class="nav prev" onclick="mover(-1)" aria-label="Anterior">‹</button><button class="nav next" onclick="mover(1)" aria-label="Siguiente">›</button>`;
-  pintarDecidir();
+  </div>`;
+  $('#pie').innerHTML = `<button class="nav" onclick="mover(-1)" ${S.pos === 0 ? 'disabled' : ''} aria-label="Anterior">‹</button><button class="sig${d.estado ? '' : ' suave'}" onclick="mover(1)">${d.estado ? 'Siguiente carta' : 'Saltar por ahora'} ›</button>`;
 }
-function voltear(){ verReverso = !verReverso; $('.carta').classList.toggle('ver-reverso', verReverso); $('.voltear').textContent = verReverso ? '↩ Ver el frente' : '↻ Voltear: imaginarla sobre la foto'; $('#dlg').scrollTop = 0; }
-function pintarDecidir(){
-  const c = abierta; if (!c) return; const d = dec(c.id); const el = $('#decidir');
-  el.innerHTML = `<div>
-      <span class="pl">¿Va, quizá o no?</span>
-      <div class="seg">${['va','quiza','no'].map(k => `<button class="${k}${d.estado === k ? ' on' : ''}" onclick="decidir('${c.id}',{estado:'${k}'});pintarDecidir()">${({va:'Va', quiza:'Quizá', no:'No'})[k]}</button>`).join('')}</div>
-      <span class="pl" style="margin-top:12px">¿Dónde? Zona de la foto</span>
-      <div class="seg">${D.zonas.map(z => `<button class="z${d.zona === z ? ' on' : ''}" onclick="decidir('${c.id}',{zona:'${d.zona === z ? '' : z}'});pintarDecidir()"><small>${ZN[z]} ·</small> ${esc(z)}</button>`).join('')}</div>
-      <span class="pl" style="margin-top:12px">¿Quién la cuida? (el doliente)</span>
-      <input value="${esc(d.cuida)}" placeholder="Nombre de la persona, comité o grupo" oninput="decidir('${c.id}',{cuida:this.value});refrescarPostit()">
-      <div class="aviso" id="aviso" style="display:${d.estado === 'va' && !completa(c.id) ? '' : 'none'}">Sin zona y sin nombre, la carta regresa a «quizá».</div>
-      ${d.quien && d.ts ? `<div class="quien">Última decisión: ${esc(d.quien)} · ${hora(d.ts)}</div>` : ''}
-    </div>
-    <div>
-      <span class="pl">Comentarios del equipo</span>
-      <textarea placeholder="Por qué va, por qué no, qué cambiarían, qué falta saber…" oninput="decidir('${c.id}',{nota:this.value})">${esc(d.nota)}</textarea>
-      <span class="pl" style="margin-top:12px">Para el post-it del mapa</span>
-      <div class="postit"><b>${COD(c.id)}</b><span>${esc(c.titulo)}</span><small id="postitPie"></small></div>
-      ${c.nueva ? `<div class="acciones" style="margin-bottom:0"><button class="btn ghost" onclick="abrirNueva('${c.comp}','${c.id}')">Editar la carta</button></div>` : ''}
+function frenteHTML(c, cc){
+  return `<div class="band"><span>${c.comp} · ${esc(cc.nombre)}</span><b>${COD(c.id)}</b></div>
+    <div class="vis">${c.nueva ? '' : `<img src="img/${c.id}.png" alt="" onerror="this.remove()">`}${c.picto}</div>
+    <div class="cuerpo"><h2>${esc(c.titulo)}</h2><p>${esc(c.que)}</p>${c.ejemplo ? `<p><b>Por ejemplo</b>${esc(c.ejemplo)}</p>` : ''}
+      ${masInfo ? `${c.hacer ? `<p><b>Para que quede</b>${esc(c.hacer)}</p>` : ''}${c.senal ? `<p class="senal"><b>¿Cómo sabemos que funciona?</b>${esc(c.senal)}</p>` : ''}<div class="ficha">${origenTxt(c)}</div>` : ''}
+      ${(c.hacer || c.senal) ? `<button class="mas" onclick="masInfo=!masInfo;render()">${masInfo ? '− Menos' : '+ Para que quede y cómo sabemos'}</button><br>` : ''}
+      <button class="mas" onclick="reverso=true;verPrompt=false;render();window.scrollTo(0,0)">↻ Voltear: imaginarla sobre la foto</button>
     </div>`;
-  refrescarPostit();
 }
-function refrescarPostit(){
-  const c = abierta; if (!c) return; const d = dec(c.id);
-  const p = $('#postitPie'); if (p) p.textContent = (d.zona ? `zona ${ZN[d.zona]} · ${d.zona}` : 'elige la zona para saber dónde pegarlo') + (d.cuida.trim() ? ' · cuida ' + d.cuida.trim() : '');
-  const a = $('#aviso'); if (a) a.style.display = d.estado === 'va' && !completa(c.id) ? '' : 'none';
+function origenTxt(c){ return c.origen === 'banco' ? `ficha <b>${esc(c.ficha)}</b> del banco de patrones` : c.origen === 'consulta' ? 'viene de la consulta' : c.origen === 'curso' ? 'ya está en el curso (semanas 5 a 7)' : c.nueva ? 'carta en blanco del equipo' : 'propuesta sin ficha'; }
+function reversoHTML(c){
+  const links = (c.links || []).map(l => `<a href="${esc(l.u)}" target="_blank" rel="noopener">${esc(l.t)}</a>`).join('');
+  return `<div class="band"><span>Reverso · ${esc(c.titulo)}</span><b>${COD(c.id)}</b></div>
+    <div class="reverso"><div class="cuerpo"><h2>Imagínala sobre la foto</h2>
+      <div class="pasos"><div><b>1</b>Foto horizontal del lugar exacto, con algo de escala.</div><div><b>2</b>Marca en rojo el sitio con el marcador del celular.</div><div><b>3</b>Sube la foto a Gemini y pega el prompt.</div></div>
+      <button class="copiar" onclick="copiar(this, cartaActual().p1)">Copiar el prompt (montaje realista)</button>
+      <button class="copiar sec" onclick="copiar(this, cartaActual().p2)">Copiar la variante: boceto a lápiz</button>
+      <div class="verp"><button onclick="verPrompt=!verPrompt;render()">${verPrompt ? 'Ocultar el texto' : 'Ver el texto del prompt'}</button></div>
+      ${verPrompt ? `<pre>${esc(c.p1)}</pre>` : ''}
+      <div class="links"><a href="${esc(c.gimg)}" target="_blank" rel="noopener">Más ideas: imágenes de «${esc(c.busca)}»</a>${links}</div>
+      <button class="mas" onclick="reverso=false;render();window.scrollTo(0,0)">↩ Volver al frente</button>
+    </div></div>`;
+}
+function cartaActual(){ return misCartas()[S.pos]; }
+function elegir(id, k){ decidir(id, {estado:k}); render(); const s = $('#sigue'); if (s) s.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+function mover(k){ S.pos += k; reverso = false; masInfo = false; verPrompt = false; save(); render(); window.scrollTo(0, 0); }
+
+function renderFin(cs){
+  const n = cuenta(); const m = $('#main');
+  m.innerHTML = `<div class="fin"><h2>Se acabaron las cartas</h2><p>${n.va} en va · ${n.quiza} en quizá · ${n.no} en no${n.sin ? ` · ${n.sin} sin decidir` : ''}</p>
+    ${n.va < 3 || n.va > 5 ? `<p><b>La meta es de tres a cinco en «va».</b> ${n.va < 3 ? 'Vuelvan a las de quizá.' : 'Sobran: cuáles regresan a quizá.'}</p>` : '<p>Quedan entre tres y cinco: ya está.</p>'}
+    <div class="acciones" style="justify-content:center"><button class="btn" onclick="ir('van')">Ver las que van</button><button class="btn ghost" onclick="abrirNueva()">Falta una idea: carta en blanco</button></div></div>`;
+  $('#pie').innerHTML = `<button class="nav" onclick="mover(-1)" aria-label="Anterior">‹</button><button class="sig suave" onclick="S.pos=0;save();render();window.scrollTo(0,0)">Volver a la primera carta</button>`;
 }
 
 /* ---------- copiar ---------- */
@@ -435,23 +286,22 @@ async function copiar(btn, txt){
   try { await navigator.clipboard.writeText(txt); ok = true; } catch(e) {}
   if (!ok) { try { const h = $('#hoja'); h.style.display = 'block'; h.value = txt; h.focus(); h.select(); h.setSelectionRange(0, txt.length); ok = document.execCommand('copy'); h.style.display = 'none'; } catch(e) {} }
   if (ok) { if (btn) { const t = btn.textContent; btn.classList.add('ok'); btn.textContent = 'Copiado ✓'; setTimeout(() => { btn.classList.remove('ok'); btn.textContent = t; }, 1600); } toast('Copiado. Pégalo en Gemini junto con la foto.'); }
-  else { toast('No se pudo copiar: selecciona el texto con el dedo.'); }
+  else { verPrompt = true; render(); toast('No se pudo copiar: selecciona el texto con el dedo.'); }
 }
 
 /* ---------- entrar ---------- */
 function abrirEntrar(){
   let sel = S.equipo || 0; const el = $('#entrarForm');
   const pinta = () => {
-    el.innerHTML = `<h2>¿De qué equipo eres?</h2><p>Cada equipo ve las cartas de su línea. Todos los teléfonos del mismo equipo ${API ? 'comparten sus decisiones' : 'verán sus decisiones cuando el profesor conecte la hoja; mientras, cada teléfono guarda lo suyo'}.</p>
-      <div class="equipos">${EQUIPOS.map(e => `<button class="eqb${sel === e.n ? ' on' : ''}" style="--eqc:${e.color}" data-n="${e.n}"><b>${e.n}</b><span>${esc(e.nombre)}<small>cartas ${e.comps.join(' y ')} · ${e.comps.map(k => D.comps[k].nombre).join(' / ')}</small></span></button>`).join('')}</div>
+    el.innerHTML = `<h2>¿De qué equipo eres?</h2><p>Cada equipo ve las cartas de su línea, una por una.</p>
+      <div class="equipos">${EQUIPOS.map(e => `<button class="eqb${sel === e.n ? ' on' : ''}" style="--eqc:${e.color}" data-n="${e.n}"><b>${e.n}</b><span>${esc(e.nombre)}<small>${e.comps.map(k => D.comps[k].nombre).join(' / ')}</small></span></button>`).join('')}</div>
       <label>Tu nombre de pila</label><input id="quienIn" value="${esc(S.quien)}" placeholder="Para saber quién decidió qué" autocomplete="given-name">
       <div class="acciones" style="margin-bottom:0"><button class="btn" id="entrarOk">Entrar</button>${S.equipo ? '<button class="btn ghost" onclick="cerrarEntrar()">Cancelar</button>' : ''}</div>`;
     el.querySelectorAll('.eqb').forEach(b => b.onclick = () => { sel = Number(b.dataset.n); pinta(); $('#quienIn').focus(); });
     $('#entrarOk').onclick = () => {
       if (!sel) { toast('Elige tu equipo.'); return; }
-      const cambio = sel !== S.equipo;
-      S.equipo = sel; S.quien = $('#quienIn').value.trim().slice(0, 40); if (cambio) { tab = ''; }
-      save(); cerrarEntrar(); render(); if (cambio) poll();
+      const cambio = sel !== S.equipo; S.equipo = sel; S.quien = $('#quienIn').value.trim().slice(0, 40); if (cambio) S.pos = 0;
+      save(); cerrarEntrar(); vista = 'baraja'; render(); if (cambio) poll();
     };
   };
   pinta(); $('#entrar').classList.add('open');
@@ -459,84 +309,70 @@ function abrirEntrar(){
 function cerrarEntrar(){ if (S.equipo) $('#entrar').classList.remove('open'); }
 
 /* ---------- carta en blanco ---------- */
-function abrirNueva(comp, id){
+function abrirNueva(id){
   const n = id ? S.nuevas.find(x => x.id === id) : null; const el = $('#nuevaForm');
-  el.innerHTML = `<h2>${n ? 'Editar la carta' : 'Carta en blanco'}</h2><p>Una idea que no estaba en la baraja. Escríbanla como las demás: qué es y un ejemplo con medida.</p>
+  el.innerHTML = `<h2>${n ? 'Editar la carta' : 'Carta en blanco'}</h2><p>Una idea que no estaba en la baraja. Como las demás: qué es y un ejemplo con medida.</p>
     <label>Título</label><input id="nvT" value="${esc(n ? n.titulo : '')}" placeholder="Por ejemplo: Tendedero de pescado a la sombra">
     <label>¿Qué es?</label><textarea id="nvQ" placeholder="Qué se pone, se siembra, se acuerda o se abre">${esc(n ? n.que : '')}</textarea>
     <label>Por ejemplo</label><textarea id="nvE" placeholder="Dónde, de qué tamaño, con qué material">${esc(n ? n.ejemplo : '')}</textarea>
     <div class="acciones" style="margin-bottom:0"><button class="btn" id="nvOk">${n ? 'Guardar' : 'Agregar a la baraja'}</button><button class="btn ghost" onclick="document.getElementById('nueva').classList.remove('open')">Cancelar</button></div>`;
   $('#nvOk').onclick = () => {
     const t = $('#nvT').value.trim(); if (!t) { toast('Ponle título.'); return; }
-    const o = n || {id:'n' + S.equipo + '-' + String(S.nuevas.length + 1).padStart(2, '0'), comp, n:0};
+    const o = n || {id:'n' + S.equipo + '-' + String(S.nuevas.length + 1).padStart(2, '0'), comp:compNueva(), n:0};
     Object.assign(o, {titulo:t.slice(0, 120), que:$('#nvQ').value.trim().slice(0, 900), ejemplo:$('#nvE').value.trim().slice(0, 900), quien:S.quien, ts:Date.now()});
     if (!n) S.nuevas.push(o);
-    S.pendN[o.id] = 1; save(); programar(); $('#nueva').classList.remove('open'); $('#modal').classList.remove('open'); render(); toast(n ? 'Carta guardada.' : 'Carta agregada al final de ' + comp + '.');
+    S.pendN[o.id] = 1; save(); programar(); $('#nueva').classList.remove('open');
+    if (!n) { S.pos = misCartas().findIndex(c => c.id === o.id); vista = 'baraja'; }
+    render(); window.scrollTo(0, 0); toast(n ? 'Carta guardada.' : 'Carta agregada: decídanla.');
   };
   $('#nueva').classList.add('open'); $('#nvT').focus();
 }
 
-/* ---------- panel: las que van ---------- */
+/* ---------- las que van ---------- */
 function renderVan(){
-  const e = equipo(); const panel = $('#panel'); const van = misCartas().filter(c => dec(c.id).estado === 'va');
-  const quiza = misCartas().filter(c => dec(c.id).estado === 'quiza');
-  const retroDe = id => SV.retro.filter(r => r.carta === id);
-  const general = SV.retro.filter(r => !r.carta || !misCartas().some(c => c.id === r.carta));
-  panel.innerHTML = `<h2>Las que van · equipo ${e.n}</h2><p class="b">De tres a cinco, cada una con zona y doliente. El código grande es el que se escribe en el post-it para pegarlo en el mapa del salón, en su zona.</p>
-    <div class="resumen" style="margin-bottom:14px"><span class="meta${van.length >= 3 && van.length <= 5 ? '' : ' mal'}">${van.length} en va · meta de 3 a 5</span><span class="quiza">${quiza.length} en quizá</span></div>
-    ${van.length ? '<div class="lista">' + van.map(c => { const d = dec(c.id); const cc = compDe(c); const rs = retroDe(c.id); return `<div class="fila" style="--c:${cc.color};--cl:${cc.claro}" onclick="abrir('${c.id}')"><div class="cod">${COD(c.id)}<small>${d.zona ? 'zona ' + ZN[d.zona] : '¿zona?'}</small></div><div><h3>${esc(c.titulo)}</h3><div class="det">${d.zona ? `<b>${esc(d.zona)}</b>` : '<b style="color:var(--amber-dark)">sin zona</b>'} · ${d.cuida ? `cuida <b>${esc(d.cuida)}</b>` : '<b style="color:var(--amber-dark)">sin doliente</b>'}${d.nota ? `<br>${esc(d.nota)}` : ''}${d.quien ? `<br><span style="opacity:.75">${esc(d.quien)} · ${hora(d.ts)}</span>` : ''}</div>${rs.length ? '<div class="retro">' + rs.map(rt).join('') + '</div>' : ''}</div></div>`; }).join('') + '</div>' : '<div class="vacio">Todavía no hay cartas en «va». Decide en cada carta: va, quizá o no.</div>'}
-    ${general.length ? `<h2 style="margin-top:22px;font-size:1.1rem">Lo que nos dijeron del conjunto</h2><div class="lista">${general.map(r => `<div class="fila" style="grid-template-columns:1fr;cursor:default">${rt(r)}</div>`).join('')}</div>` : ''}
-    ${quiza.length ? `<h2 style="margin-top:22px;font-size:1.1rem">En quizá</h2><p class="b">${quiza.map(c => `<a href="#" onclick="abrir('${c.id}');return false">${COD(c.id)} ${esc(c.titulo)}</a>`).join(' · ')}</p>` : ''}
-    <div class="acciones" style="margin-top:22px"><button class="btn ghost" onclick="copiar(this, resumen())">Copiar el resumen (para WhatsApp)</button><button class="btn ghost" onclick="copiar(this, codigo())">Copiar el código del equipo</button></div>
-    <p class="b" style="font-size:.82rem">El código del equipo sirve si falla la conexión: se pega en la pantalla de la plenaria y aparece igual.</p>`;
+  const e = equipo(); const cs = misCartas(); const n = cuenta();
+  const van = cs.filter(c => dec(c.id).estado === 'va'); const quiza = cs.filter(c => dec(c.id).estado === 'quiza');
+  const retroDe = id => SV.retro.filter(r => r.carta === id); const general = SV.retro.filter(r => !r.carta || !cs.some(c => c.id === r.carta));
+  $('#main').innerHTML = `<div class="pant"><h2>Las que van · equipo ${e.n}</h2><p class="b">El código grande es el que se escribe en el post-it del mapa.</p>
+    <div class="resumen"><span class="meta${n.va >= 3 && n.va <= 5 ? '' : ' mal'}">${n.va} en va · meta de 3 a 5</span><span>${n.quiza} en quizá</span>${n.sin ? `<span>${n.sin} sin decidir</span>` : ''}</div>
+    ${van.length ? '<div class="lista">' + van.map(c => { const d = dec(c.id); const cc = compDe(c); const rs = retroDe(c.id); return `<button class="fila" style="--c:${cc.color};--cl:${cc.claro}" onclick="irA('${c.id}')"><div class="cod">${COD(c.id)}</div><div><h3>${esc(c.titulo)}</h3><div class="det">${d.cuida ? `cuida <b>${esc(d.cuida)}</b>` : 'sin doliente todavía'}${d.nota ? `<br>${esc(d.nota)}` : ''}</div>${rs.map(rt).join('')}</div></button>`; }).join('') + '</div>' : '<div class="vacio">Todavía no hay cartas en «va».</div>'}
+    ${general.length ? `<h2 style="margin-top:22px;font-size:1.1rem">Lo que nos dijeron del conjunto</h2>${general.map(rt).join('')}` : ''}
+    ${quiza.length ? `<h2 style="margin-top:22px;font-size:1.1rem">En quizá</h2><div class="lista">${quiza.map(c => `<button class="fila" style="--c:${compDe(c).color};--cl:${compDe(c).claro}" onclick="irA('${c.id}')"><div class="cod">${COD(c.id)}</div><div><h3>${esc(c.titulo)}</h3><div class="det">${esc(dec(c.id).nota)}</div></div></button>`).join('')}</div>` : ''}
+    <div class="acciones" style="margin-top:22px"><button class="btn ghost" onclick="copiar(this, resumen())">Copiar resumen</button><button class="btn ghost" onclick="copiar(this, codigo())">Copiar código del equipo</button><button class="btn ghost" onclick="abrirNueva()">Carta en blanco</button></div></div>`;
+  $('#pie').innerHTML = `<button class="sig" onclick="ir('baraja')">Seguir con las cartas ›</button>`;
 }
+function irA(id){ S.pos = misCartas().findIndex(c => c.id === id); save(); ir('baraja'); }
 function rt(r){ return `<div class="rt ${r.tipo}"><b>${r.tipo === 'choca' ? 'Choca con lo mío' : 'Falta'}</b> · equipo ${r.de}${r.quien ? ' (' + esc(r.quien) + ')' : ''}: ${esc(r.texto)}</div>`; }
 function resumen(){
   const e = equipo(); const L = [`Equipo ${e.n} · ${e.nombre} · Baraja de la orilla`];
-  [['va','VAN'],['quiza','QUIZÁ'],['no','NO']].forEach(([k, t]) => { const cs = misCartas().filter(c => dec(c.id).estado === k); if (!cs.length) return; L.push('', `${t} (${cs.length}):`); cs.forEach(c => { const d = dec(c.id); L.push(`• ${COD(c.id)} ${c.titulo}${d.zona ? ' · zona ' + ZN[d.zona] + ' ' + d.zona : ''}${d.cuida ? ' · cuida: ' + d.cuida : ''}${d.nota ? ' · ' + d.nota : ''}`); }); });
+  [['va','VAN'],['quiza','QUIZÁ'],['no','NO']].forEach(([k, t]) => { const cs = misCartas().filter(c => dec(c.id).estado === k); if (!cs.length) return; L.push('', `${t} (${cs.length}):`); cs.forEach(c => { const d = dec(c.id); L.push(`• ${COD(c.id)} ${c.titulo}${d.cuida ? ' · cuida: ' + d.cuida : ''}${d.nota ? ' · ' + d.nota : ''}`); }); });
   return L.join('\n');
 }
-function codigo(){
-  const dec2 = {}; Object.keys(S.dec).forEach(k => { if (S.dec[k].estado) dec2[k] = S.dec[k]; });
-  return 'BARAJA·' + btoa(unescape(encodeURIComponent(JSON.stringify({equipo:S.equipo, dec:dec2, nuevas:S.nuevas}))));
-}
+function codigo(){ const dec2 = {}; Object.keys(S.dec).forEach(k => { if (S.dec[k].estado) dec2[k] = S.dec[k]; }); return 'BARAJA·' + btoa(unescape(encodeURIComponent(JSON.stringify({equipo:S.equipo, dec:dec2, nuevas:S.nuevas})))); }
 
-/* ---------- panel: ronda 2 ---------- */
+/* ---------- ronda 2 ---------- */
 let retroEq = 0, retroCarta = '', retroTipo = 'falta';
 async function renderRetro(){
-  const e = equipo(); const panel = $('#panel');
-  const otros = EQUIPOS.filter(x => x.n !== e.n);
-  if (!retroEq) retroEq = otros[0].n;
-  const oe = EQUIPOS.find(x => x.n === retroEq);
-  panel.innerHTML = `<h2>Ronda 2 · presenten y reciban</h2><p class="b">Tres minutos por equipo: sus cartas de «va» y sus fotomontajes. Los demás dejan tarjetas de dos tipos: <b>falta</b> (algo que no vieron) y <b>choca con lo mío</b> (se encima con una pieza o una zona de tu equipo). Elige el equipo que está presentando.</p>
-    <div class="retro-sel">${otros.map(x => `<button class="${retroEq === x.n ? 'on' : ''}" style="--eqc:${x.color}" onclick="retroEq=${x.n};retroCarta='';renderRetro()">Equipo ${x.n} · ${esc(x.nombre)}</button>`).join('')}</div>
-    <div id="retroLista">${API ? '<div class="vacio">Cargando lo que decidió el equipo ' + retroEq + '…</div>' : '<div class="vacio">Sin la hoja conectada no se puede ver lo del otro equipo desde aquí: míralo en la pantalla y deja tu tarjeta abajo.</div>'}</div>
-    <div class="rform" style="--eqc:${oe.color}"><span class="pl" style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal);display:block;margin-bottom:6px">Tu tarjeta para el equipo ${retroEq}</span>
-      <div class="seg" style="margin-bottom:8px"><button class="falta${retroTipo === 'falta' ? ' on' : ''}" onclick="retroTipo='falta';renderRetroForm()">Falta</button><button class="choca${retroTipo === 'choca' ? ' on' : ''}" onclick="retroTipo='choca';renderRetroForm()">Choca con lo mío</button></div>
-      <div id="retroSobre" style="font-size:.82rem;color:var(--ink-soft);margin-bottom:6px"></div>
-      <textarea id="retroTxt" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;font:inherit;min-height:60px" placeholder="${retroTipo === 'falta' ? 'Qué falta y por qué importa' : 'Con qué pieza o zona tuya choca, y qué propones'}"></textarea>
-      <div class="acciones" style="margin-bottom:0"><button class="btn ${retroTipo === 'falta' ? 'amber' : 'rojo'}" onclick="enviarRetro()">Mandar la tarjeta</button></div></div>
-    <div id="retroEnviadas"></div>`;
-  renderRetroForm(); pintarEnviadas();
+  const e = equipo(); const otros = EQUIPOS.filter(x => x.n !== e.n); if (!retroEq) retroEq = otros[0].n; const oe = EQUIPOS.find(x => x.n === retroEq);
+  $('#main').innerHTML = `<div class="pant"><h2>Ronda 2</h2><p class="b">Mientras otro equipo presenta, déjale una tarjeta: <b>falta</b> (algo que no vieron) o <b>choca con lo mío</b> (se encima con lo tuyo).</p>
+    <div class="retro-sel">${otros.map(x => `<button class="${retroEq === x.n ? 'on' : ''}" style="--eqc:${x.color}" onclick="retroEq=${x.n};retroCarta='';render()">Equipo ${x.n}</button>`).join('')}</div>
+    <div id="retroLista">${API ? '<div class="vacio">Cargando lo que decidió el equipo ' + retroEq + '…</div>' : ''}</div>
+    <div class="rform" style="--eqc:${oe.color}"><div class="dos"><button class="falta${retroTipo === 'falta' ? ' on' : ''}" onclick="retroTipo='falta';render()">Falta</button><button class="choca${retroTipo === 'choca' ? ' on' : ''}" onclick="retroTipo='choca';render()">Choca con lo mío</button></div>
+      <div id="retroSobre" style="font-size:.8rem;color:var(--ink-soft);margin-bottom:6px">${retroCarta ? 'Sobre la carta ' + COD(retroCarta) : 'Sobre el conjunto del equipo ' + retroEq + (API ? ' (toca una carta arriba para que sea sobre ella)' : '')}</div>
+      <textarea id="retroTxt" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;min-height:60px" placeholder="${retroTipo === 'falta' ? 'Qué falta y por qué importa' : 'Con qué pieza tuya choca y qué propones'}"></textarea>
+      <div class="acciones" style="margin-bottom:0"><button class="btn ${retroTipo === 'falta' ? 'amber' : 'rojo'}" onclick="enviarRetro()">Mandar al equipo ${retroEq}</button></div></div>
+    <div id="retroEnviadas"></div></div>`;
+  $('#pie').innerHTML = `<button class="sig suave" onclick="ir('van')">‹ Nuestras cartas</button>`;
+  pintarEnviadas();
   if (!API) return;
   try {
     const j = await get({action:'equipo', equipo:retroEq}); if (!j.ok) throw new Error(j.error);
     SV.otros[retroEq] = j;
-    const nuevasO = (j.nuevas || []).map(n => cartaNueva(Object.assign({comp:oe.comps[oe.comps.length - 1]}, n)));
-    const cartas = D.cards.concat(nuevasO);
+    const cartas = D.cards.concat((j.nuevas || []).map(n => cartaNueva(Object.assign({comp:oe.comps[oe.comps.length - 1]}, n))));
     const van = (j.decisiones || []).filter(d => d.estado === 'va').map(d => Object.assign({c:cartas.find(c => c.id === d.carta)}, d)).filter(x => x.c);
     const el = $('#retroLista'); if (!el || retroEq !== j.equipo) return;
-    el.innerHTML = van.length ? '<div class="lista">' + van.map(x => { const cc = compDe(x.c); return `<div class="fila${retroCarta === x.carta ? ' on' : ''}" style="--c:${cc.color};--cl:${cc.claro};${retroCarta === x.carta ? 'outline:2px solid ' + oe.color : ''}" onclick="retroCarta=retroCarta==='${x.carta}'?'':'${x.carta}';renderRetroMarca()"><div class="cod">${COD(x.carta)}<small>${x.zona ? 'zona ' + ZN[x.zona] : '¿zona?'}</small></div><div><h3>${esc(x.c.titulo)}</h3><div class="det">${esc(x.c.que)}<br>${x.zona ? `<b>${esc(x.zona)}</b>` : 'sin zona'} · ${x.cuida ? `cuida <b>${esc(x.cuida)}</b>` : 'sin doliente'}${x.nota ? `<br><i>${esc(x.nota)}</i>` : ''}</div></div></div>`; }).join('') + '</div><p class="b" style="font-size:.82rem;margin-top:8px">Toca una carta para que tu tarjeta sea sobre ella; sin tocar ninguna, la tarjeta es sobre el conjunto.</p>' : `<div class="vacio">El equipo ${retroEq} todavía no tiene cartas en «va».</div>`;
-  } catch(e) { const el = $('#retroLista'); if (el) el.innerHTML = '<div class="vacio">No se pudo leer la hoja. Mira la pantalla y deja tu tarjeta abajo.</div>'; }
-}
-function renderRetroMarca(){ document.querySelectorAll('#retroLista .fila').forEach(f => { const on = f.querySelector('.cod').textContent.trim().startsWith(COD(retroCarta)) && retroCarta; f.style.outline = on ? '2px solid ' + EQUIPOS.find(x => x.n === retroEq).color : ''; }); renderRetroForm(); }
-function renderRetroForm(){
-  const el = $('#retroSobre'); if (!el) return;
-  const c = retroCarta ? allCards().concat(((SV.otros[retroEq] || {}).nuevas || []).map(cartaNueva)).find(x => x.id === retroCarta) : null;
-  el.textContent = c ? `Sobre la carta ${COD(c.id)} · ${c.titulo}` : 'Sobre el conjunto de cartas del equipo ' + retroEq;
-  const f = $('.rform .seg .falta'), ch = $('.rform .seg .choca'); if (f) { f.classList.toggle('on', retroTipo === 'falta'); ch.classList.toggle('on', retroTipo === 'choca'); }
-  const ta = $('#retroTxt'); if (ta) ta.placeholder = retroTipo === 'falta' ? 'Qué falta y por qué importa' : 'Con qué pieza o zona tuya choca, y qué propones';
-  const b = $('.rform .btn'); if (b) b.className = 'btn ' + (retroTipo === 'falta' ? 'amber' : 'rojo');
+    el.innerHTML = van.length ? '<div class="lista">' + van.map(x => `<button class="fila" style="--c:${compDe(x.c).color};--cl:${compDe(x.c).claro};${retroCarta === x.carta ? 'outline:2px solid ' + oe.color : ''}" onclick="retroCarta=retroCarta==='${x.carta}'?'':'${x.carta}';render()"><div class="cod">${COD(x.carta)}</div><div><h3>${esc(x.c.titulo)}</h3><div class="det">${x.cuida ? `cuida <b>${esc(x.cuida)}</b>` : ''}${x.nota ? `<br>${esc(x.nota)}` : ''}</div></div></button>`).join('') + '</div>' : `<div class="vacio">El equipo ${retroEq} todavía no tiene cartas en «va».</div>`;
+  } catch(e) { const el = $('#retroLista'); if (el) el.innerHTML = '<div class="vacio">No se pudo leer la hoja. Mira la pantalla y deja tu tarjeta.</div>'; }
 }
 async function enviarRetro(){
   const txt = $('#retroTxt').value.trim(); if (!txt) { toast('Escribe la tarjeta.'); return; }
@@ -548,33 +384,16 @@ async function enviarRetro(){
 }
 async function reenviar(){ for (const r of S.retroEnv.filter(x => !x.enviada)) { try { await post({action:'retro', de:r.de, para:r.para, carta:r.carta, tipo:r.tipo, texto:r.texto, quien:r.quien, id:r.id}); r.enviada = true; } catch(e) {} } save(); pintarEnviadas(); }
 function pintarEnviadas(){
-  const el = $('#retroEnviadas'); if (!el) return; const mias = S.retroEnv.filter(r => r.para === retroEq);
-  const pend = S.retroEnv.filter(r => !r.enviada).length;
-  el.innerHTML = mias.length ? `<h2 style="margin-top:22px;font-size:1.1rem">Tus tarjetas para el equipo ${retroEq}</h2><div class="lista">${mias.map(r => `<div class="fila" style="grid-template-columns:1fr;cursor:default"><div class="rt ${r.tipo}"><b>${r.tipo === 'choca' ? 'Choca con lo mío' : 'Falta'}</b>${r.carta ? ' · ' + COD(r.carta) : ''}: ${esc(r.texto)}${r.enviada ? '' : ' <span style="color:var(--amber-dark)">(sin enviar)</span>'}</div></div>`).join('')}</div>${pend && API ? '<div class="acciones"><button class="btn ghost" onclick="reenviar()">Reintentar las que no salieron</button></div>' : ''}` : '';
-}
-
-/* ---------- panel: cómo se juega ---------- */
-function renderJuego(){
-  $('#panel').innerHTML = `<h2>Cómo se juega la baraja</h2><p class="b">Cada equipo recibe la baraja de su componente: cartas de pieza (cosas concretas que pueden quedar hechas en la orilla) y cartas en blanco para lo que no esté. Cada carta tiene dos caras: al frente la idea; al reverso, cómo imaginarla sobre una foto real de la presa con Gemini. El juego termina con tres a cinco piezas elegidas, con lugar y con doliente, pasadas al marco lógico.</p>
-  <div class="juego">
-    <div class="paso"><h3><i>1</i>Repartan y lean en voz alta</h3><p>Una persona lee el título de cada carta y la otra la pone en la mesa. Nadie lee todo: solo título, dibujo y «por ejemplo». Lo demás se lee cuando la carta sobreviva.</p></div>
-    <div class="paso"><h3><i>2</i>Tres montones: va, quizá, no</h3><p>Tres preguntas por carta: ¿resuelve algo que la gente pidió?, ¿hay quien lo pueda cuidar?, ¿se puede probar antes de construirlo? Las que fallen van al «no»; las dudosas, a «quizá». Al final quedan de tres a cinco en «va». Si falta una idea, se llena una carta en blanco.</p></div>
-    <div class="paso"><h3><i>3</i>¿Dónde y quién?</h3><p>En cada carta de «va» elijan la zona de la foto (1 a 5) y escriban quién la cuidaría. Sin zona y sin nombre, la carta regresa a «quizá». Escriban el código de la carta en un post-it y péguenlo en el mapa del salón, en su zona.</p></div>
-    <div class="paso"><h3><i>4</i>Imagínenla sobre la foto</h3><p>Volteen la carta. Tomen la foto del lugar exacto, marquen en rojo dónde iría y peguen el prompt en Gemini. El montaje realista convence; el boceto a lápiz blanco invita a cambiarlo. Guarden todos los intentos, también los feos.</p></div>
-    <div class="paso"><h3><i>5</i>Llenen la fila del marco lógico</h3><p>Con las cartas de «va»: el «para que quede» es la semilla de las actividades y el «cómo sabemos que funciona» es la semilla del indicador.</p></div>
-    <div class="paso"><h3><i>6</i>Presenten y reciban</h3><p>Tres minutos por equipo: las cartas de «va» y sus fotomontajes. Los demás dejan tarjetas de dos tipos desde la pestaña <b>Ronda 2</b>: «falta» y «choca con lo mío». Con eso se ajusta y se arma el catálogo que irá a la asamblea.</p></div>
-  </div>
-  <p class="b" style="font-size:.84rem;margin-top:16px">Las medidas son un punto de partida para conversar y cotizar, no un proyecto firmado: se confirman en la orilla, con cinta y con la gente. Las imágenes que salgan de Gemini son propuestas para discutirse, no proyectos aprobados; conviene decirlo en voz alta al mostrarlas. <a href="baraja-de-la-orilla.pdf" target="_blank" rel="noopener">Versión en PDF de la baraja</a> · <a href="plenaria.html" target="_blank" rel="noopener">pantalla de la plenaria</a>.</p>`;
+  const el = $('#retroEnviadas'); if (!el) return; const mias = S.retroEnv.filter(r => r.para === retroEq); const pend = S.retroEnv.filter(r => !r.enviada).length;
+  el.innerHTML = mias.length ? `<h2 style="margin-top:22px;font-size:1.1rem">Tus tarjetas para el equipo ${retroEq}</h2>${mias.map(r => `<div class="rt ${r.tipo}"><b>${r.tipo === 'choca' ? 'Choca con lo mío' : 'Falta'}</b>${r.carta ? ' · ' + COD(r.carta) : ''}: ${esc(r.texto)}${r.enviada ? '' : ' <span style="color:var(--amber-dark)">(sin enviar)</span>'}</div>`).join('')}${pend && API ? '<div class="acciones"><button class="btn ghost" onclick="reenviar()">Reintentar las que no salieron</button></div>' : ''}` : '';
 }
 
 /* ---------- arranque ---------- */
-document.addEventListener('keydown', e => { if (!$('#modal').classList.contains('open')) return; if (e.key === 'Escape') cerrar(); if (e.key === 'ArrowRight') mover(1); if (e.key === 'ArrowLeft') mover(-1); });
-$('#modal').addEventListener('click', e => { if (e.target === $('#modal')) cerrar(); });
-window.addEventListener('hashchange', () => { const h = location.hash.replace('#', ''); if (h && h !== tab) { tab = h; render(); } });
+document.addEventListener('keydown', e => { if (vista !== 'baraja' || /INPUT|TEXTAREA/.test(e.target.tagName)) return; if (e.key === 'ArrowRight') mover(1); if (e.key === 'ArrowLeft') mover(-1); });
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { poll(); enviar(); } });
 render();
 if (!S.equipo) abrirEntrar();
-if (API) { poll(); pollTimer = setInterval(poll, 12000); if (Object.keys(S.pend).length || Object.keys(S.pendN).length) enviar(); if (S.retroEnv.some(r => !r.enviada)) reenviar(); }
+if (API) { poll(); setInterval(poll, 12000); if (Object.keys(S.pend).length || Object.keys(S.pendN).length) enviar(); if (S.retroEnv.some(r => !r.enviada)) reenviar(); }
 </script>
 </body>
 </html>

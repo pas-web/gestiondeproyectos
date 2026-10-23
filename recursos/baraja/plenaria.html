@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plenaria · La baraja de la orilla</title>
-<meta name="description" content="Pantalla para proyectar la ronda 2 de la baraja de la orilla: las cartas que van de cada equipo, con zona y doliente, y las tarjetas de retroalimentación que llegan en vivo.">
+<meta name="description" content="Pantalla para proyectar la ronda 2 de la baraja de la orilla: las cartas que van de cada equipo, con su doliente, y las tarjetas de retroalimentación que llegan en vivo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700&family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -122,14 +122,11 @@ function ir(v){ vista = v; location.hash = v; render(); }
 
 function cartaHTML(x, conRetro){
   const c = x.c; const cc = D.comps[c.comp]; const rs = conRetro ? T.retro.filter(r => r.para === x.equipo && r.carta === x.carta) : [];
-  const falta = !x.zona || !String(x.cuida || '').trim();
-  return `<div class="carta" style="--c:${cc.color};--cl:${cc.claro}"><div class="band"><span>${c.comp} · ${esc(cc.nombre)}</span><b>${COD(c.id)}</b></div>
+    return `<div class="carta" style="--c:${cc.color};--cl:${cc.claro}"><div class="band"><span>${c.comp} · ${esc(cc.nombre)}</span><b>${COD(c.id)}</b></div>
     <div class="vis">${c.nueva ? '' : `<img src="img/${c.id}.png" alt="" loading="lazy" onerror="this.remove()">`}${c.picto}</div>
     <div class="cuerpo"><h3>${esc(c.titulo)}</h3><div class="que">${esc(c.que)}</div>
-      ${x.zona ? `<span class="zona"><i>${ZN[x.zona] || '?'}</i>${esc(x.zona)}</span>` : ''}
       <div class="dato">${x.cuida ? `<b>Cuida:</b> ${esc(x.cuida)}` : ''}</div>
       ${x.nota ? `<div class="nota">${esc(x.nota)}</div>` : ''}
-      ${falta ? '<div class="falta">Sin zona o sin doliente: regresa a «quizá»</div>' : ''}
       ${conRetro === 'semilla' ? `<div class="semilla">${c.hacer ? `<b>Semilla de actividad · para que quede</b>${esc(c.hacer)}` : ''}${c.senal ? `<b style="margin-top:4px">Semilla de indicador · cómo sabemos</b>${esc(c.senal)}` : ''}</div>` : ''}
       ${rs.length ? '<div class="rts">' + rs.map(r => `<div class="rt ${r.tipo}"><b>${r.tipo === 'choca' ? 'Choca' : 'Falta'}</b> · eq. ${r.de}: ${esc(r.texto)}</div>`).join('') + '</div>' : ''}
     </div></div>`;
@@ -142,9 +139,8 @@ function render(){
   document.documentElement.style.setProperty('--eq', e.color);
   const van = vanDe(eq); const quiza = decDe(eq).filter(d => d.estado === 'quiza').map(d => carta(d.carta, eq)).filter(Boolean);
   const retro = retroPara(eq); const general = retro.filter(r => !r.carta);
-  const incompletas = van.filter(x => !x.zona || !String(x.cuida || '').trim()).length;
   m.innerHTML = `<div class="cab"><h2>Equipo ${eq} · ${esc(e.nombre)}</h2><div class="meta">cartas <b>${e.comps.join(' y ')}</b> · ${e.comps.map(k => D.comps[k].nombre).join(' / ')}</div></div>
-    <div class="resumen"><span class="${van.length >= 3 && van.length <= 5 ? '' : 'mal'}">${van.length} en va · meta de 3 a 5</span><span>${quiza.length} en quizá</span><span>${decDe(eq).filter(d => d.estado === 'no').length} en no</span>${incompletas ? `<span class="mal">${incompletas} sin zona o doliente</span>` : ''}<span>${retro.length} tarjetas recibidas</span></div>
+    <div class="resumen"><span class="${van.length >= 3 && van.length <= 5 ? '' : 'mal'}">${van.length} en va · meta de 3 a 5</span><span>${quiza.length} en quizá</span><span>${decDe(eq).filter(d => d.estado === 'no').length} en no</span><span>${retro.length} tarjetas recibidas</span></div>
     <div class="dos">
       <div>${van.length ? `<div class="cartas">${van.map(x => cartaHTML(x, true)).join('')}</div>` : `<div class="vacio">El equipo ${eq} todavía no tiene cartas en «va».${API ? ' Esta pantalla se actualiza sola.' : ''}</div>`}
         ${quiza.length ? `<div class="quiza"><b>En quizá:</b> ${quiza.map(c => COD(c.id) + ' ' + esc(c.titulo)).join(' · ')}</div>` : ''}</div>
@@ -157,7 +153,7 @@ function render(){
 function renderCat(){
   document.documentElement.style.setProperty('--eq', '#0B3C49');
   const m = $('#main');
-  m.innerHTML = `<div class="cab"><h2 style="color:var(--teal-dark)">Catálogo de la orilla</h2><div class="meta">todo lo que va, por equipo, con su zona y su doliente: lo que se lleva a la asamblea y lo que siembra el marco lógico</div></div>
+  m.innerHTML = `<div class="cab"><h2 style="color:var(--teal-dark)">Catálogo de la orilla</h2><div class="meta">todo lo que va, por equipo, con su doliente: lo que se lleva a la asamblea y lo que siembra el marco lógico</div></div>
     <div class="acciones"><button class="btn" onclick="window.print()">Imprimir o guardar en PDF</button><button class="btn ghost" onclick="copiarCSV(this)">Copiar como tabla (CSV)</button></div>
     <div class="cat">${EQUIPOS.map(e => { const van = vanDe(e.n); return `<h2 style="--eqc:${e.color}">Equipo ${e.n} · ${esc(e.nombre)} <span style="font-family:'Instrument Sans';font-size:.9rem;color:var(--ink-soft);font-weight:400">· ${van.length} carta${van.length === 1 ? '' : 's'}</span></h2>${van.length ? `<div class="cartas">${van.map(x => cartaHTML(x, 'semilla')).join('')}</div>` : '<div class="vacio">Nada en «va» todavía.</div>'}`; }).join('')}</div>
     ${pegarHTML()}`;
@@ -182,8 +178,8 @@ function mezclar(){
   });
 }
 function copiarCSV(btn){
-  const L = [['equipo', 'linea', 'carta', 'titulo', 'zona', 'num_zona', 'cuida', 'comentario', 'para_que_quede', 'como_sabemos', 'quien', 'retro']];
-  EQUIPOS.forEach(e => vanDe(e.n).forEach(x => L.push([e.n, e.nombre, COD(x.carta), x.c.titulo, x.zona || '', x.zona ? ZN[x.zona] : '', x.cuida || '', x.nota || '', x.c.hacer || '', x.c.senal || '', x.quien || '', T.retro.filter(r => r.para === e.n && r.carta === x.carta).map(r => `[${r.tipo}·eq${r.de}] ${r.texto}`).join(' | ')])));
+  const L = [['equipo', 'linea', 'carta', 'titulo', 'cuida', 'comentario', 'para_que_quede', 'como_sabemos', 'quien', 'retro']];
+  EQUIPOS.forEach(e => vanDe(e.n).forEach(x => L.push([e.n, e.nombre, COD(x.carta), x.c.titulo, x.cuida || '', x.nota || '', x.c.hacer || '', x.c.senal || '', x.quien || '', T.retro.filter(r => r.para === e.n && r.carta === x.carta).map(r => `[${r.tipo}·eq${r.de}] ${r.texto}`).join(' | ')])));
   const csv = L.map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\n');
   navigator.clipboard.writeText(csv).then(() => { btn.textContent = 'Copiado ✓'; setTimeout(() => btn.textContent = 'Copiar como tabla (CSV)', 1500); }).catch(() => alert('No se pudo copiar.'));
 }
