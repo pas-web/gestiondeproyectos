@@ -5,7 +5,7 @@
    El código y las instrucciones están en apps-script/Code.gs.
    Mientras esté vacía, la baraja guarda solo en el teléfono de cada quien
    y los equipos comparten su resultado con el botón «copiar código». */
-window.BARAJA_API_URL = '';
+window.BARAJA_API_URL = 'https://script.google.com/macros/s/AKfycbyws8DN7LsdhchDyQ3cf4dhLYDLX3PUMWW5tvuPYsMDZfC3gNTnQzdEc-x0WfO9Pa_Ydw/exec';
 
 /* Los cinco equipos: uno por línea estratégica, con los componentes de la
    baraja que le tocan. El número del equipo es el de la línea del árbol. */
