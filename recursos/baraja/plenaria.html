@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plenaria · La baraja de la orilla</title>
+<meta name="description" content="Pantalla para proyectar la ronda 2 de la baraja de la orilla: las cartas que van de cada equipo, con zona y doliente, y las tarjetas de retroalimentación que llegan en vivo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700&family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0F6E6E;--teal-dark:#0B3C49;--mint:#E3F1EF;--amber:#D9A441;--amber-dark:#A8731F;--paper:#F8FBF9;--ink:#1E2B27;--ink-soft:#4A5C55;--line:#D8E5DF;--rojo:#B4443C;--gris:#7A8B85;--eq:#0F6E6E;--c:#0F6E6E;--cl:#E3F1EF}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Instrument Sans',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.45;font-size:18px}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.15}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+header{background:linear-gradient(160deg,var(--teal-dark),var(--eq));color:#fff;padding:14px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+header .t .eyebrow{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--mint)}
+header h1{font-size:1.5rem}
+header .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+header .tabs button{border:1.5px solid rgba(255,255,255,.4);border-radius:999px;padding:8px 14px;font-weight:700;font-size:.9rem;color:#fff}
+header .tabs button.on{background:#fff;color:var(--teal-dark);border-color:#fff}
+header .sync{font-size:.75rem;color:#D5EAE2;display:flex;align-items:center;gap:6px;width:100%}
+header .sync i{width:9px;height:9px;border-radius:50%;background:#9AA6A1;display:inline-block}
+.sync.ok i{background:#7FD6A5} .sync.err i{background:#F08C84} .sync.pend i{background:var(--amber)}
+header .sync button{text-decoration:underline;font-size:.75rem;color:#D5EAE2}
+main{padding:22px 28px 60px;max-width:1500px;margin:0 auto}
+.cab{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.cab h2{font-size:2rem;color:var(--eq)}
+.cab .meta{font-size:1rem;color:var(--ink-soft)}
+.cab .meta b{color:var(--ink)}
+.dos{display:grid;grid-template-columns:3fr 2fr;gap:22px;align-items:start}
+@media (max-width:1000px){.dos{grid-template-columns:1fr}}
+.cartas{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.carta{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.carta .band{background:var(--c);color:#fff;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.carta .band b{font-family:'JetBrains Mono',monospace;font-size:1.35rem;letter-spacing:.04em;text-transform:none;white-space:nowrap;flex:none}
+.carta .band span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.carta .vis{background:var(--cl);height:110px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.carta .vis img{width:100%;height:100%;object-fit:cover}
+.carta .vis svg{width:110px;height:80px;color:var(--c)}
+.carta .vis img ~ svg{display:none}
+.carta .cuerpo{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.carta h3{font-size:1.2rem}
+.carta .que{font-size:.86rem;color:var(--ink-soft)}
+.carta .dato{font-size:.9rem}
+.carta .dato b{color:var(--c)}
+.carta .zona{display:inline-flex;align-items:center;gap:6px;background:var(--cl);color:var(--c);border-radius:999px;padding:4px 12px;font-weight:700;font-size:.92rem;align-self:flex-start}
+.carta .zona i{font-style:normal;background:var(--c);color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem}
+.carta .nota{font-size:.88rem;background:#FFF8E6;border-radius:8px;padding:6px 10px;color:#4A3F10}
+.carta .falta{font-size:.78rem;color:var(--amber-dark);font-weight:700}
+.carta .rts{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.rt{font-size:.84rem;border-radius:8px;padding:6px 10px;border-left:5px solid var(--amber);background:#FBF1DC}
+.rt.choca{background:#F6E2E0;border-color:var(--rojo)}
+.rt b{font-weight:700}
+.rt small{display:block;color:var(--ink-soft);font-size:.72rem}
+.lado h3{font-size:1.15rem;color:var(--teal-dark);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.lado h3 span{font-size:.8rem;font-weight:700;background:var(--teal-dark);color:#fff;border-radius:999px;padding:2px 10px;font-family:'Instrument Sans',sans-serif}
+.feed{display:flex;flex-direction:column;gap:8px}
+.feed .rt{font-size:1rem;padding:10px 14px;background:#fff;border:1px solid var(--line);border-left-width:6px;animation:entra .4s}
+.feed .rt.falta{border-left-color:var(--amber)} .feed .rt.choca{border-left-color:var(--rojo)}
+.feed .rt .tag{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#fff;border-radius:999px;padding:2px 9px;margin-right:6px}
+.rt.falta .tag{background:var(--amber);color:var(--ink)} .rt.choca .tag{background:var(--rojo)}
+@keyframes entra{from{opacity:0;transform:translateY(-6px)}to{opacity:1}}
+.quiza{margin-top:22px;font-size:.92rem;color:var(--ink-soft)}
+.quiza b{color:var(--amber-dark)}
+.vacio{color:var(--ink-soft);background:#fff;border:1px dashed var(--line);border-radius:12px;padding:18px;font-size:1rem}
+.resumen{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}
+.resumen span{border-radius:999px;padding:5px 14px;background:#fff;border:1px solid var(--line);font-weight:700;font-size:.9rem}
+.resumen span.mal{border-color:var(--amber);background:#FBF1DC}
+.cat h2{font-size:1.6rem;margin:26px 0 10px;color:var(--eqc)}
+.cat .cartas{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.cat .semilla{font-size:.82rem;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:6px;margin-top:4px}
+.cat .semilla b{display:block;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.acciones{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 15px;border-radius:999px;font-weight:700;font-size:.88rem;background:var(--teal);color:#fff}
+.btn.ghost{background:#fff;color:var(--teal-dark);border:1.5px solid var(--line)}
+.pegar{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:20px}
+.pegar textarea{width:100%;min-height:70px;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;font:inherit;font-size:.85rem}
+.pegar p{font-size:.88rem;color:var(--ink-soft);margin-bottom:8px}
+.ayuda{position:fixed;bottom:10px;right:14px;font-size:.72rem;color:var(--ink-soft);opacity:.7}
+@media print{header,.ayuda,.pegar,.acciones,.sync{display:none !important} body{font-size:12px;background:#fff} main{padding:0} .cartas{grid-template-columns:repeat(3,1fr);gap:8px} .carta{break-inside:avoid} .cat h2{break-before:page} .cat h2:first-child{break-before:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="t"><div class="eyebrow">Ronda 2 · presenten y reciban · La Florida</div><h1>La baraja de la orilla</h1></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="sync" id="sync"></div>
+</header>
+<main id="main"></main>
+<div class="ayuda">← → cambia de equipo · C catálogo · R recarga</div>
+<script src="baraja-datos.js"></script>
+<script src="baraja-config.js"></script>
+<script>
+const D = window.BARAJA, EQUIPOS = window.BARAJA_EQUIPOS, API = (window.BARAJA_API_URL || '').trim();
+const ZN = {}; D.zonas.forEach((z, i) => ZN[z] = i + 1);
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const COD = id => String(id).toUpperCase().replace(/^N(\d)-/, '$1N-');
+const hora = ts => ts ? new Date(ts).toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'}) : '';
+const PICTO_NUEVA = '<svg viewBox="0 0 80 60"><path d="M40 14v32M24 30h32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
+
+let vista = (location.hash.replace('#', '') || '1'); /* '1'..'5' o 'cat' */
+let T = {decisiones:[], nuevas:[], retro:[]};       /* lo que llega de la hoja o de los códigos pegados */
+const PEG = (() => { try { return JSON.parse(localStorage.getItem('baraja-plenaria-codigos') || '{}'); } catch(e) { return {}; } })();
+
+function carta(id, eq){
+  const b = D.cards.find(c => c.id === id); if (b) return b;
+  const n = T.nuevas.find(x => x.id === id && (!eq || x.equipo === eq));
+  if (!n) return null;
+  const e = EQUIPOS.find(x => x.n === n.equipo) || EQUIPOS[0];
+  return Object.assign({nueva:true, picto:PICTO_NUEVA, comp:e.comps[e.comps.length - 1], hacer:'', senal:''}, n);
+}
+function decDe(eq){ return T.decisiones.filter(d => d.equipo === eq); }
+function vanDe(eq){ return decDe(eq).filter(d => d.estado === 'va').map(d => Object.assign({c:carta(d.carta, eq)}, d)).filter(x => x.c); }
+function retroPara(eq){ return T.retro.filter(r => r.para === eq).sort((a, b) => (b.fecha || 0) - (a.fecha || 0)); }
+
+function renderTabs(){
+  $('#tabs').innerHTML = EQUIPOS.map(e => `<button class="${vista === String(e.n) ? 'on' : ''}" onclick="ir('${e.n}')">Equipo ${e.n}<span style="opacity:.75;font-weight:400"> · ${vanDe(e.n).length}</span></button>`).join('') + `<button class="${vista === 'cat' ? 'on' : ''}" onclick="ir('cat')">Catálogo</button>`;
+}
+function ir(v){ vista = v; location.hash = v; render(); }
+
+function cartaHTML(x, conRetro){
+  const c = x.c; const cc = D.comps[c.comp]; const rs = conRetro ? T.retro.filter(r => r.para === x.equipo && r.carta === x.carta) : [];
+  const falta = !x.zona || !String(x.cuida || '').trim();
+  return `<div class="carta" style="--c:${cc.color};--cl:${cc.claro}"><div class="band"><span>${c.comp} · ${esc(cc.nombre)}</span><b>${COD(c.id)}</b></div>
+    <div class="vis">${c.nueva ? '' : `<img src="img/${c.id}.png" alt="" loading="lazy" onerror="this.remove()">`}${c.picto}</div>
+    <div class="cuerpo"><h3>${esc(c.titulo)}</h3><div class="que">${esc(c.que)}</div>
+      ${x.zona ? `<span class="zona"><i>${ZN[x.zona] || '?'}</i>${esc(x.zona)}</span>` : ''}
+      <div class="dato">${x.cuida ? `<b>Cuida:</b> ${esc(x.cuida)}` : ''}</div>
+      ${x.nota ? `<div class="nota">${esc(x.nota)}</div>` : ''}
+      ${falta ? '<div class="falta">Sin zona o sin doliente: regresa a «quizá»</div>' : ''}
+      ${conRetro === 'semilla' ? `<div class="semilla">${c.hacer ? `<b>Semilla de actividad · para que quede</b>${esc(c.hacer)}` : ''}${c.senal ? `<b style="margin-top:4px">Semilla de indicador · cómo sabemos</b>${esc(c.senal)}` : ''}</div>` : ''}
+      ${rs.length ? '<div class="rts">' + rs.map(r => `<div class="rt ${r.tipo}"><b>${r.tipo === 'choca' ? 'Choca' : 'Falta'}</b> · eq. ${r.de}: ${esc(r.texto)}</div>`).join('') + '</div>' : ''}
+    </div></div>`;
+}
+
+function render(){
+  renderTabs(); const m = $('#main');
+  if (vista === 'cat') { renderCat(); return; }
+  const eq = Number(vista); const e = EQUIPOS.find(x => x.n === eq); if (!e) { vista = '1'; render(); return; }
+  document.documentElement.style.setProperty('--eq', e.color);
+  const van = vanDe(eq); const quiza = decDe(eq).filter(d => d.estado === 'quiza').map(d => carta(d.carta, eq)).filter(Boolean);
+  const retro = retroPara(eq); const general = retro.filter(r => !r.carta);
+  const incompletas = van.filter(x => !x.zona || !String(x.cuida || '').trim()).length;
+  m.innerHTML = `<div class="cab"><h2>Equipo ${eq} · ${esc(e.nombre)}</h2><div class="meta">cartas <b>${e.comps.join(' y ')}</b> · ${e.comps.map(k => D.comps[k].nombre).join(' / ')}</div></div>
+    <div class="resumen"><span class="${van.length >= 3 && van.length <= 5 ? '' : 'mal'}">${van.length} en va · meta de 3 a 5</span><span>${quiza.length} en quizá</span><span>${decDe(eq).filter(d => d.estado === 'no').length} en no</span>${incompletas ? `<span class="mal">${incompletas} sin zona o doliente</span>` : ''}<span>${retro.length} tarjetas recibidas</span></div>
+    <div class="dos">
+      <div>${van.length ? `<div class="cartas">${van.map(x => cartaHTML(x, true)).join('')}</div>` : `<div class="vacio">El equipo ${eq} todavía no tiene cartas en «va».${API ? ' Esta pantalla se actualiza sola.' : ''}</div>`}
+        ${quiza.length ? `<div class="quiza"><b>En quizá:</b> ${quiza.map(c => COD(c.id) + ' ' + esc(c.titulo)).join(' · ')}</div>` : ''}</div>
+      <div class="lado"><h3>Tarjetas de los demás <span>${retro.length}</span></h3>
+        ${retro.length ? `<div class="feed">${retro.map(r => `<div class="rt ${r.tipo}"><span class="tag">${r.tipo === 'choca' ? 'Choca con lo mío' : 'Falta'}</span>${r.carta ? `<b>${COD(r.carta)}</b> · ` : ''}${esc(r.texto)}<small>equipo ${r.de}${r.quien ? ' · ' + esc(r.quien) : ''}${r.fecha ? ' · ' + hora(r.fecha) : ''}</small></div>`).join('')}</div>` : '<div class="vacio">Todavía no llega ninguna tarjeta. Los demás equipos las mandan desde la pestaña «Ronda 2» de su baraja.</div>'}
+      </div>
+    </div>
+    ${pegarHTML()}`;
+}
+function renderCat(){
+  document.documentElement.style.setProperty('--eq', '#0B3C49');
+  const m = $('#main');
+  m.innerHTML = `<div class="cab"><h2 style="color:var(--teal-dark)">Catálogo de la orilla</h2><div class="meta">todo lo que va, por equipo, con su zona y su doliente: lo que se lleva a la asamblea y lo que siembra el marco lógico</div></div>
+    <div class="acciones"><button class="btn" onclick="window.print()">Imprimir o guardar en PDF</button><button class="btn ghost" onclick="copiarCSV(this)">Copiar como tabla (CSV)</button></div>
+    <div class="cat">${EQUIPOS.map(e => { const van = vanDe(e.n); return `<h2 style="--eqc:${e.color}">Equipo ${e.n} · ${esc(e.nombre)} <span style="font-family:'Instrument Sans';font-size:.9rem;color:var(--ink-soft);font-weight:400">· ${van.length} carta${van.length === 1 ? '' : 's'}</span></h2>${van.length ? `<div class="cartas">${van.map(x => cartaHTML(x, 'semilla')).join('')}</div>` : '<div class="vacio">Nada en «va» todavía.</div>'}`; }).join('')}</div>
+    ${pegarHTML()}`;
+}
+function pegarHTML(){
+  return `<div class="pegar"><p><b>Si falla la conexión:</b> cada equipo copia su «código del equipo» (pestaña «Las que van») y se pega aquí. Se puede pegar más de uno, uno por línea.</p><textarea id="peg" placeholder="BARAJA·…"></textarea><div class="acciones" style="margin:8px 0 0"><button class="btn ghost" onclick="pegar()">Cargar códigos</button>${Object.keys(PEG).length ? `<span style="font-size:.84rem;color:var(--ink-soft);align-self:center">códigos cargados: equipos ${Object.keys(PEG).join(', ')}</span><button class="btn ghost" onclick="olvidar()">Olvidar códigos</button>` : ''}</div></div>`;
+}
+function pegar(){
+  const txt = $('#peg').value; let n = 0;
+  txt.split(/\s+/).forEach(t => { if (!t.startsWith('BARAJA·')) return; try { const o = JSON.parse(decodeURIComponent(escape(atob(t.slice(7))))); if (o.equipo) { PEG[o.equipo] = o; n++; } } catch(e) {} });
+  try { localStorage.setItem('baraja-plenaria-codigos', JSON.stringify(PEG)); } catch(e) {}
+  if (!n) { alert('No encontré ningún código válido.'); return; }
+  mezclar(); render();
+}
+function olvidar(){ Object.keys(PEG).forEach(k => delete PEG[k]); try { localStorage.removeItem('baraja-plenaria-codigos'); } catch(e) {} mezclar(); render(); }
+let HOJA = null;
+function mezclar(){
+  T = HOJA ? {decisiones:HOJA.decisiones.slice(), nuevas:HOJA.nuevas.slice(), retro:HOJA.retro.slice()} : {decisiones:[], nuevas:[], retro:[]};
+  Object.keys(PEG).forEach(k => { const o = PEG[k]; const eq = Number(k);
+    Object.keys(o.dec || {}).forEach(id => { const d = o.dec[id]; const i = T.decisiones.findIndex(x => x.equipo === eq && x.carta === id); const nd = Object.assign({equipo:eq, carta:id}, d); if (i < 0) T.decisiones.push(nd); else if ((d.ts || 0) >= (T.decisiones[i].ts || 0)) T.decisiones[i] = nd; });
+    (o.nuevas || []).forEach(n => { if (!T.nuevas.some(x => x.id === n.id && x.equipo === eq)) T.nuevas.push(Object.assign({equipo:eq}, n)); });
+  });
+}
+function copiarCSV(btn){
+  const L = [['equipo', 'linea', 'carta', 'titulo', 'zona', 'num_zona', 'cuida', 'comentario', 'para_que_quede', 'como_sabemos', 'quien', 'retro']];
+  EQUIPOS.forEach(e => vanDe(e.n).forEach(x => L.push([e.n, e.nombre, COD(x.carta), x.c.titulo, x.zona || '', x.zona ? ZN[x.zona] : '', x.cuida || '', x.nota || '', x.c.hacer || '', x.c.senal || '', x.quien || '', T.retro.filter(r => r.para === e.n && r.carta === x.carta).map(r => `[${r.tipo}·eq${r.de}] ${r.texto}`).join(' | ')])));
+  const csv = L.map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\n');
+  navigator.clipboard.writeText(csv).then(() => { btn.textContent = 'Copiado ✓'; setTimeout(() => btn.textContent = 'Copiar como tabla (CSV)', 1500); }).catch(() => alert('No se pudo copiar.'));
+}
+
+/* ---------- hoja ---------- */
+function pintarSync(est, extra){
+  const el = $('#sync'); el.className = 'sync ' + est;
+  el.innerHTML = '<i></i>' + ({ok:'en vivo desde la hoja · ' + (extra || ''), err:'sin conexión con la hoja' + (extra ? ' · ' + extra : ''), pend:'leyendo la hoja…', local:'sin hoja conectada: pega los códigos de los equipos abajo'}[est]) + (API ? ' <button onclick="cargar(true)">recargar</button>' : '');
+}
+async function cargar(aviso){
+  if (!API) { pintarSync('local'); return; }
+  if (aviso) pintarSync('pend');
+  try {
+    const r = await fetch(API + (API.includes('?') ? '&' : '?') + 'action=todo'); const j = await r.json(); if (!j.ok) throw new Error(j.error);
+    const antes = JSON.stringify(HOJA); HOJA = {decisiones:j.decisiones || [], nuevas:j.nuevas || [], retro:j.retro || []};
+    pintarSync('ok', hora(Date.now()));
+    if (antes !== JSON.stringify(HOJA)) { mezclar(); render(); } else renderTabs();
+  } catch(e) { pintarSync('err', String(e.message || e)); }
+}
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'TEXTAREA') return;
+  const n = Number(vista);
+  if (e.key === 'ArrowRight') ir(vista === 'cat' ? '1' : n >= EQUIPOS.length ? 'cat' : String(n + 1));
+  if (e.key === 'ArrowLeft') ir(vista === 'cat' ? String(EQUIPOS.length) : n <= 1 ? 'cat' : String(n - 1));
+  if (e.key.toLowerCase() === 'c') ir('cat');
+  if (e.key.toLowerCase() === 'r') cargar(true);
+  if (/^[1-9]$/.test(e.key) && EQUIPOS.some(x => String(x.n) === e.key)) ir(e.key);
+});
+window.addEventListener('hashchange', () => { const h = location.hash.replace('#', ''); if (h && h !== vista) { vista = h; render(); } });
+mezclar(); render(); cargar(true);
+if (API) setInterval(() => { if (document.visibilityState === 'visible') cargar(); }, 8000);
+</script>
+</body>
+</html>
