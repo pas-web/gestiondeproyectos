@@ -132,6 +132,23 @@ pre{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.7rem;li
 .fin{text-align:center;padding:30px 10px 10px}
 .fin h2{font-size:1.6rem;color:var(--teal-dark)}
 .fin p{color:var(--ink-soft);margin:6px 0 16px}
+.modos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 4px}
+.modos button{border:2px solid var(--line);border-radius:14px;padding:12px 10px;background:#fff;font-weight:700;color:var(--ink-soft);display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.9rem}
+.modos button i{display:block;border:2.5px solid currentColor;border-radius:4px;width:18px;height:30px}
+.modos button i.anc{width:34px;height:22px}
+.modos button small{font-weight:400;font-size:.72rem}
+.modos button.on{border-color:var(--teal);background:var(--mint);color:var(--teal-dark)}
+/* modo horizontal (computadora) */
+body.h .wrap{max-width:1080px}
+body.h .pant,body.h .fin{max-width:720px;margin:0 auto}
+body.h .carta{display:grid;grid-template-columns:1.15fr .85fr;align-items:stretch}
+body.h .cara{min-width:0}
+body.h .vis{height:250px}
+body.h .decide{border-top:none;border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:22px 24px}
+body.h .decide .preg{font-size:1.35rem}
+body.h .tres button{padding:18px 6px;font-size:1.15rem}
+body.h .pie .wrap{max-width:560px}
+body.h main{padding-bottom:100px}
 </style>
 </head>
 <body>
@@ -156,7 +173,7 @@ const NOMBRE = {va:'Va', quiza:'Quizá', no:'No'};
 
 /* ---------- estado ---------- */
 const S = (() => {
-  const base = {equipo:0, quien:'', dec:{}, nuevas:[], pend:{}, pendN:{}, retroEnv:[], pos:0};
+  const base = {equipo:0, quien:'', modo:'', dec:{}, nuevas:[], pend:{}, pendN:{}, retroEnv:[], pos:0};
   try { return Object.assign(base, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e) { return base; }
 })();
 const q = new URLSearchParams(location.search);
@@ -212,7 +229,9 @@ function pintarSync(est){ syncEstado = est; const el = $('#sync'); el.className 
 function compNueva(){ const e = equipo(); return e ? e.comps[e.comps.length - 1] : '5'; }
 
 /* ---------- render ---------- */
+function aplicarModo(){ document.body.classList.toggle('h', S.modo === 'h'); }
 function render(){
+  aplicarModo();
   const e = equipo();
   $('#pillEq').textContent = e ? `Equipo ${e.n}${S.quien ? ' · ' + S.quien : ''}` : 'Elige equipo';
   document.documentElement.style.setProperty('--eq', e ? e.color : '#0F6E6E');
@@ -232,7 +251,7 @@ function renderCarta(){
   m.style.setProperty('--c', cc.color); m.style.setProperty('--cl', cc.claro);
   const n = cuenta();
   m.innerHTML = `<div class="prog"><span>Carta <b>${S.pos + 1}</b> de ${cs.length}</span><div class="barra"><i style="width:${(S.pos) / cs.length * 100}%"></i></div><span>${n.va} van</span></div>
-  <div class="carta" id="carta">${reverso ? reversoHTML(c) : frenteHTML(c, cc)}
+  <div class="carta" id="carta"><div class="cara">${reverso ? reversoHTML(c) : frenteHTML(c, cc)}</div>
     <div class="decide">
       <div class="preg">${d.estado ? 'Decidieron: ' + NOMBRE[d.estado] : '¿Va, quizá o no?'}</div>
       <div class="tres">${['va','quiza','no'].map(k => `<button class="${k}${d.estado === k ? ' on' : ''}" onclick="elegir('${c.id}','${k}')">${NOMBRE[k]}<small>${({va:'resuelve, hay quien cuide', quiza:'tiene dudas', no:'falla'})[k]}</small></button>`).join('')}</div>
@@ -291,16 +310,19 @@ async function copiar(btn, txt){
 
 /* ---------- entrar ---------- */
 function abrirEntrar(){
-  let sel = S.equipo || 0; const el = $('#entrarForm');
+  let sel = S.equipo || 0; let modo = S.modo || (window.innerWidth > 900 ? 'h' : 'v'); const el = $('#entrarForm');
   const pinta = () => {
     el.innerHTML = `<h2>¿De qué equipo eres?</h2><p>Cada equipo ve las cartas de su línea, una por una.</p>
       <div class="equipos">${EQUIPOS.map(e => `<button class="eqb${sel === e.n ? ' on' : ''}" style="--eqc:${e.color}" data-n="${e.n}"><b>${e.n}</b><span>${esc(e.nombre)}<small>${e.comps.map(k => D.comps[k].nombre).join(' / ')}</small></span></button>`).join('')}</div>
       <label>Tu nombre de pila</label><input id="quienIn" value="${esc(S.quien)}" placeholder="Para saber quién decidió qué" autocomplete="given-name">
+      <label>¿Dónde la vas a usar?</label>
+      <div class="modos"><button class="${modo === 'v' ? 'on' : ''}" data-m="v"><i></i>Celular<small>vertical</small></button><button class="${modo === 'h' ? 'on' : ''}" data-m="h"><i class="anc"></i>Computadora<small>horizontal</small></button></div>
       <div class="acciones" style="margin-bottom:0"><button class="btn" id="entrarOk">Entrar</button>${S.equipo ? '<button class="btn ghost" onclick="cerrarEntrar()">Cancelar</button>' : ''}</div>`;
     el.querySelectorAll('.eqb').forEach(b => b.onclick = () => { sel = Number(b.dataset.n); pinta(); $('#quienIn').focus(); });
+    el.querySelectorAll('.modos button').forEach(b => b.onclick = () => { modo = b.dataset.m; pinta(); });
     $('#entrarOk').onclick = () => {
       if (!sel) { toast('Elige tu equipo.'); return; }
-      const cambio = sel !== S.equipo; S.equipo = sel; S.quien = $('#quienIn').value.trim().slice(0, 40); if (cambio) S.pos = 0;
+      const cambio = sel !== S.equipo; S.equipo = sel; S.modo = modo; S.quien = $('#quienIn').value.trim().slice(0, 40); if (cambio) S.pos = 0;
       save(); cerrarEntrar(); vista = 'baraja'; render(); if (cambio) poll();
     };
   };
