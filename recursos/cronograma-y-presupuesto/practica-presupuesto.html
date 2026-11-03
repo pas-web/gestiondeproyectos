@@ -58,6 +58,17 @@
   .pie-acciones { position:sticky; bottom:0; background:rgba(242,247,245,.96); border-top:1px solid var(--borde); padding:.5rem .8rem; margin:1.5rem -1rem 0; display:flex; flex-wrap:wrap; align-items:center; gap:.2rem; }
   .guardado { font-size:.85rem; color:#45605a; margin-left:auto; }
   .ayuda { font-size:.9rem; color:#45605a; }
+  .ejemplo { border-left:6px solid var(--arena); background:#FFFDF7; }
+  .ejemplo .etq { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:#7C6222; font-weight:bold; }
+  .ejemplo p { margin:.4rem 0; }
+  table.ej { width:100%; border-collapse:collapse; font-size:.88rem; margin:.4rem 0; }
+  table.ej th { text-align:left; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:#45605a; border-bottom:2px solid var(--borde); padding:.25rem .4rem; }
+  table.ej td { padding:.3rem .4rem; border-bottom:1px solid var(--borde); vertical-align:top; }
+  body.proyector { font-size:1.3rem; }
+  body.proyector table.plan { font-size:1.1rem; }
+  body.proyector table.plan td input, body.proyector table.plan td textarea, body.proyector table.plan td select { font-size:1.05rem; }
+  body.proyector ul.revision li { font-size:1.15rem; }
+  body.proyector .total .v { font-size:2.6rem; }
   details { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.6rem 1rem; margin:.6rem 0; }
   summary { cursor:pointer; font-weight:bold; color:var(--profundo); }
   table.ref { width:100%; border-collapse:collapse; font-size:.88rem; }
@@ -79,6 +90,19 @@
 
 <div class="reglas">
   <strong>Las reglas del Fondo que la hoja vigila.</strong> Mínimo $2,000 por solicitud; la Bolsa es de $10,000 y se comparte entre los cinco equipos. No paga honorarios del equipo, ni comida que no sea de faena, ni nada sin comprobante. Tres cotizaciones por cada rubro de mil pesos o más, dos por escrito y de menos de treinta días. Cada cosa vive en una sola columna.
+</div>
+
+<div class="caja ejemplo">
+  <div class="etq">Así se ve uno hecho · la sombra del manantial</div>
+  <p>El mismo proyecto del manantial, ahora en pesos. Cada partida dice para qué actividad es, qué es exactamente, cuántas y a cuánto, y de dónde salió el precio. Lo comprado lo paga el Fondo; lo trocado y lo donado va a la otra columna con el precio que tendría. Así se ven cuatro de sus siete partidas:</p>
+  <table class="ej">
+    <tr><th>Actividad</th><th>Qué</th><th>Cant. × precio</th><th>Papel</th><th>Paga el Fondo</th><th>Afuera</th></tr>
+    <tr><td>Faena 2: tender la malla</td><td>Malla sombra 90%, 6 por 4 m</td><td>1 pieza × $2,850</td><td>Ferretería del pueblo, 2 nov</td><td>$2,850</td><td></td></tr>
+    <tr><td>Flete del material</td><td>Viaje de la cabecera al manantial</td><td>1 viaje × $400</td><td>Nota del fletero, 3 nov</td><td>$400</td><td></td></tr>
+    <tr><td>Faena 2: acomodar las tarimas</td><td>Tarimas de pino de la bodega, trocadas por barrer el rincón</td><td>12 × $100</td><td>Nota firmada y foto</td><td></td><td>$1,200</td></tr>
+    <tr><td>Faenas 1 y 2</td><td>Jornales de la faena, ocho personas por dos jornadas</td><td>16 × $300</td><td>Jornal de la región, lista de asistencia</td><td></td><td>$4,800</td></tr>
+  </table>
+  <p>Con el flete y los imponderables, el Fondo pagaría $6,122 y afuera se conseguirían $6,000: el proyecto vale el doble de lo que pide. Lo que van a hacer ustedes es lo mismo con las actividades de su cronograma. <button class="btn claro chico" id="verEjemplo">Cargar el ejemplo completo para ver las sumas</button> <span class="ayuda">(reemplaza lo que haya en la tabla)</span></p>
 </div>
 
 <h2><span class="n">1</span>El equipo y las actividades</h2>
@@ -166,6 +190,7 @@
   <button class="btn" id="descargar">Descargar el presupuesto (HTML)</button>
   <button class="btn claro" id="copiar">Copiar la tabla para la carpeta</button>
   <button class="btn claro" onclick="window.print()">Imprimir</button>
+  <button class="btn claro" onclick="document.body.classList.toggle('proyector')" title="Letra grande para proyectar el presupuesto de un equipo">Aa proyector</button>
   <button class="btn peligro" id="borrar">Borrar todo</button>
   <span class="guardado" id="guardado">Se guarda solo en este navegador.</span>
 </div>
@@ -193,7 +218,7 @@
     return { equipo:'', componente:'', bolsa:10000, minimo:2000, partidas:[], sig:1, flete:{si:false, papel:'', cant:1, precio:0, fuente:'comprado'}, imp:{si:true, nombre:'', pct:5}, pro:[], sigPro:1, seCae:'' };
   }
   function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(estado)); $('guardado').textContent = 'Guardado en este navegador · ' + new Date().toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'}); } catch (e) { $('guardado').textContent = 'No se pudo guardar: descarga al terminar.'; } }
-  function pesos(n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
+  function pesos(n) { return '$' + Math.round(n).toLocaleString('es-MX', { maximumFractionDigits: 0 }); }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
   function nueva(p) { p = p || {}; return { id: estado.sig++, actividad:p.actividad||'', que:p.que||'', unidad:p.unidad||'', cant:p.cant===undefined?1:p.cant, precio:p.precio||0, tipo:p.tipo||'materiales', fuente:p.fuente||'comprado', papel:p.papel||'', cae:false }; }
   function total(p) { return (+p.cant || 0) * (+p.precio || 0); }
@@ -328,6 +353,21 @@
     pintar(); guardar();
   });
   $('traer').addEventListener('click', traer);
+  $('verEjemplo').addEventListener('click', function () {
+    if (estado.partidas.length && !confirm('Esto reemplaza lo que hay en la tabla por el ejemplo del manantial. ¿Seguimos?')) return;
+    estado.sig = 1; estado.partidas = [
+      nueva({ actividad:'8 · Faena 2: tender la malla y acomodar las tarimas', que:'Malla sombra 90%, 6 por 4 m', unidad:'pieza', cant:1, precio:2850, tipo:'materiales', fuente:'comprado', papel:'Ferretería del pueblo, 2 nov' }),
+      nueva({ actividad:'7 · Faena 1: hincar los postes y colar las bases', que:'Poste de madera de 2.2 m', unidad:'pieza', cant:10, precio:190, tipo:'materiales', fuente:'comprado', papel:'Maderería de la cabecera, 2 nov' }),
+      nueva({ actividad:'7 · Faena 1: hincar los postes y colar las bases', que:'Cemento gris, bulto de 50 kg', unidad:'bulto', cant:2, precio:340, tipo:'materiales', fuente:'comprado', papel:'Ferretería del pueblo, 2 nov' }),
+      nueva({ actividad:'8 · Faena 2: tender la malla y acomodar las tarimas', que:'Tarimas de pino de la bodega, trocadas por barrer el rincón', unidad:'pieza', cant:12, precio:100, tipo:'materiales', fuente:'trocado', papel:'Nota firmada y foto, 20 nov' }),
+      nueva({ actividad:'7 y 8 · Las dos faenas', que:'Jornal de la faena, ocho personas por dos jornadas', unidad:'jornal', cant:16, precio:300, tipo:'gente', fuente:'donado', papel:'Jornal de la región; lista de asistencia' })
+    ];
+    estado.partidas[1].cae = true;
+    estado.flete = { si:true, papel:'El fletero del pueblo, de la cabecera al manantial, 3 nov', cant:1, precio:400, fuente:'comprado' };
+    estado.imp = { si:true, nombre:'el clavo que falta en domingo: grapas, alambre, un bulto más', pct:5 };
+    estado.seCae = 'Se caen los postes nuevos: se cambian por troncos del monte con permiso del comité. La malla y el cemento se quedan, que son lo que no se consigue afuera.';
+    actividades = []; pintar(); guardar(); $('tabla').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
   ['equipo', 'componente', 'seCae'].forEach(function (id) { $(id).addEventListener('input', function () { estado[id] = $(id).value; guardar(); }); });
   ['bolsa', 'minimo'].forEach(function (id) { $(id).addEventListener('input', function () { estado[id] = parseFloat($(id).value) || 0; guardar(); pintar(); }); });
   $('fleteSi').addEventListener('change', function () { estado.flete.si = this.checked; guardar(); pintar(); });

@@ -52,6 +52,17 @@
   .pie-acciones { position:sticky; bottom:0; background:rgba(242,247,245,.96); border-top:1px solid var(--borde); padding:.5rem .8rem; margin:1.5rem -1rem 0; display:flex; flex-wrap:wrap; align-items:center; gap:.2rem; }
   .guardado { font-size:.85rem; color:#45605a; margin-left:auto; }
   .ayuda { font-size:.9rem; color:#45605a; }
+  .ejemplo { border-left:6px solid var(--arena); background:#FFFDF7; }
+  .ejemplo .etq { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:#7C6222; font-weight:bold; }
+  .ejemplo p { margin:.4rem 0; }
+  table.ej { width:100%; border-collapse:collapse; font-size:.88rem; margin:.4rem 0; }
+  table.ej th { text-align:left; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:#45605a; border-bottom:2px solid var(--borde); padding:.25rem .4rem; }
+  table.ej td { padding:.3rem .4rem; border-bottom:1px solid var(--borde); vertical-align:top; }
+  body.proyector { font-size:1.3rem; }
+  body.proyector table.plan { font-size:1.1rem; }
+  body.proyector table.plan td input, body.proyector table.plan td textarea, body.proyector table.plan td select { font-size:1.05rem; }
+  body.proyector ul.revision li { font-size:1.15rem; }
+  body.proyector svg.gantt text { font-size:1.15em; }
   details { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.6rem 1rem; margin:.6rem 0; }
   summary { cursor:pointer; font-weight:bold; color:var(--profundo); }
   @media print { header.curso, .pie-acciones, .btn, .pestanas, .reglas, details, .ayuda { display:none !important; } main { max-width:none; padding:0; } table.plan td input, table.plan td textarea, table.plan td select { border:none; } body { background:#fff; } }
@@ -69,6 +80,18 @@
 
 <div class="reglas">
   <strong>Las reglas del renglón honesto.</strong> Cada actividad deja algo que se puede enseñar (una lista, cuarenta cajetes, una foto, un acta). Cada renglón tiene un nombre, no "el equipo". Lo que depende de otro renglón empieza cuando ese termina. Lo que se hace a la intemperie trae fecha B. Y la microintervención cabe en sus cuatro semanas sin joroba.
+</div>
+
+<div class="caja ejemplo">
+  <div class="etq">Así se ve uno hecho · la sombra del manantial</div>
+  <p>El proyecto del manantial, el de los gimnasios: una sombra de malla con piso de tarimas junto al manantial, en las cuatro semanas de la microintervención. Cada renglón es una actividad que deja algo, con un nombre y con lo que tiene que estar listo antes. Así se ven tres de sus nueve renglones:</p>
+  <table class="ej">
+    <tr><th>#</th><th>Actividad</th><th>Producto que deja</th><th>Responsable</th><th>Depende de</th><th>Cuándo</th><th>¿Se moja?</th></tr>
+    <tr><td>2</td><td>Pedir tres cotizaciones de malla, postes y cemento</td><td>Tres cotizaciones por escrito</td><td>quien lleva los números</td><td></td><td>semana 1</td><td>no</td></tr>
+    <tr><td>4</td><td>Comprar el material</td><td>Factura</td><td>quien lleva los números</td><td>2 (y la ministración)</td><td>semana 2</td><td>no</td></tr>
+    <tr><td>7</td><td>Faena 1: hincar postes y colar las bases</td><td>Foto y lista de asistencia</td><td>la faena, convocada por el comité</td><td>5, 6</td><td>semana 3</td><td>sí · fecha B: el domingo siguiente</td></tr>
+  </table>
+  <p>Lo que van a hacer ustedes es lo mismo con su componente de La Florida: abrir cada pieza en actividades, ponerles producto, nombre, dependencia y fecha, y ver si cabe. La hoja dibuja la gráfica y les dice dónde hay una ilusión. <button class="btn claro chico" id="verEjemplo">Cargar el ejemplo completo para verlo dibujado</button> <span class="ayuda">(reemplaza lo que haya en la tabla; después carguen su componente)</span></p>
 </div>
 
 <h2><span class="n">1</span>El equipo y las fechas que mandan</h2>
@@ -136,6 +159,7 @@
   <button class="btn" id="descargar">Descargar el cronograma (HTML)</button>
   <button class="btn claro" id="copiar">Copiar la tabla para la carpeta</button>
   <button class="btn claro" onclick="window.print()">Imprimir</button>
+  <button class="btn claro" onclick="document.body.classList.toggle('proyector')" title="Letra grande para proyectar el cronograma de un equipo">Aa proyector</button>
   <button class="btn peligro" id="borrar">Borrar todo</button>
   <span class="guardado" id="guardado">Se guarda solo en este navegador.</span>
 </div>
@@ -215,6 +239,21 @@
       ]
     };
     return comun.concat(por[c] || []);
+  }
+
+  /* El ejemplo completo: la sombra del manantial, en las cuatro semanas. */
+  function ejemploManantial() {
+    return [
+      { pieza:'Anuencia', actividad:'Entregar el oficio de anuencia al comité del agua', producto:'Oficio con acuse', responsable:'quien da la cara', depende:'', inicio:'2026-11-16', dur:0.5, moja:false, fechaB:'', micro:true },
+      { pieza:'Cotizaciones', actividad:'Pedir tres cotizaciones de malla sombra, postes y cemento', producto:'Tres cotizaciones por escrito', responsable:'quien lleva los números', depende:'', inicio:'2026-11-16', dur:1, moja:false, fechaB:'', micro:true },
+      { pieza:'Tarimas', actividad:'Hacer el trato por las doce tarimas de la bodega (las barremos, nos las llevamos)', producto:'Nota firmada y foto', responsable:'quien da la cara', depende:'', inicio:'2026-11-18', dur:1.5, moja:false, fechaB:'', micro:true },
+      { pieza:'Material', actividad:'Comprar la malla, los postes y el cemento, en cuanto llegue la ministración', producto:'Factura', responsable:'quien lleva los números', depende:'2', inicio:'2026-11-23', dur:0.5, moja:false, fechaB:'', micro:true },
+      { pieza:'Material', actividad:'Flete del material de la cabecera a la orilla del manantial', producto:'Nota del fletero y foto del material en el sitio', responsable:'quien lleva los números', depende:'4', inicio:'2026-11-26', dur:0.5, moja:false, fechaB:'', micro:true },
+      { pieza:'Faena', actividad:'Convocar la faena por el comité del agua, con una semana de aviso', producto:'Aviso del comité', responsable:'quien da la cara', depende:'1', inicio:'2026-11-23', dur:1, moja:false, fechaB:'', micro:true },
+      { pieza:'Sombra', actividad:'Faena 1: hincar los postes y colar las bases', producto:'Foto y lista de asistencia', responsable:'la faena, convocada por el comité', depende:'5,6', inicio:'2026-11-30', dur:1, moja:true, fechaB:'el domingo siguiente', micro:true },
+      { pieza:'Sombra', actividad:'Faena 2: tender la malla y acomodar las tarimas', producto:'Foto y lista de asistencia', responsable:'la faena, convocada por el comité', depende:'3,7', inicio:'2026-12-07', dur:0.5, moja:true, fechaB:'el domingo siguiente', micro:true },
+      { pieza:'Estreno', actividad:'Estreno con la gente, conteo de quién vino y bitácora de cuidado', producto:'Conteo, fotos y bitácora', responsable:'quien lleva la observación', depende:'8', inicio:'2026-12-10', dur:0.5, moja:true, fechaB:'el domingo siguiente', micro:true }
+    ];
   }
 
   var estado = cargar();
@@ -405,6 +444,11 @@
   $('agregar').addEventListener('click', function () { estado.filas.push(nuevaFila({ inicio: estado.inicioMicro })); pintar(); guardar(); var ultimo = $('cuerpo').lastElementChild; if (ultimo) ultimo.querySelector('textarea').focus(); });
   $('ordenar').addEventListener('click', function () { estado.filas.sort(function (p, q) { return (p.inicio || '9') < (q.inicio || '9') ? -1 : 1; }); pintar(); guardar(); });
   $('cargar').addEventListener('click', cargarBase);
+  $('verEjemplo').addEventListener('click', function () {
+    if (estado.filas.length && !confirm('Esto reemplaza lo que hay en la tabla por el ejemplo del manantial. ¿Seguimos?')) return;
+    estado.sig = 1; estado.filas = ejemploManantial().map(nuevaFila); estado.inicioMicro = '2026-11-16';
+    pintar(); guardar(); $('tabla').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
   ['equipo', 'componente', 'visita', 'inicioMicro', 'finLinea', 'pedirAntes'].forEach(function (id) {
     $(id).addEventListener('input', function () { estado[id] = $(id).value; guardar(); pintarSinTabla(); });
   });
