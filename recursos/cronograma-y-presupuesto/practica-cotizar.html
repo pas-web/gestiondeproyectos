@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica · Cobra tu taller · Gestión y Manejo de Proyectos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1.02rem; }
+  header.curso { background:var(--profundo); color:#EAF4F2; padding:1rem 1.4rem; }
+  header.curso .curso-nombre { font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; opacity:.75; }
+  header.curso .titulo { font-family:Georgia,serif; font-size:1.7rem; font-weight:bold; margin:.15rem 0 0; }
+  header.curso .migas { font-size:.85rem; opacity:.75; } header.curso .migas a { color:#EAF4F2; }
+  main { max-width:1000px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.3rem; margin:1.8rem 0 .4rem; }
+  h2 .n { color:var(--arena); font-size:1.6rem; margin-right:.3rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:1rem 1.3rem; font-family:Georgia,serif; font-size:1.08rem; }
+  .caso strong { color:var(--arena); }
+  .caja { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:.8rem 0; }
+  label { font-size:.85rem; font-weight:bold; color:var(--profundo); display:block; }
+  input[type=text], input[type=number], textarea { font:inherit; font-size:.95rem; border:1px solid var(--borde); border-radius:8px; padding:.35rem .5rem; width:100%; background:#fff; color:var(--texto); }
+  .fila { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:.7rem; }
+  .dos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .taller h3 { font-family:Georgia,serif; color:var(--profundo); margin:.2rem 0 .5rem; font-size:1.15rem; }
+  .taller h4 { font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; color:#45605a; margin:.9rem 0 .3rem; border-bottom:1px solid var(--borde); }
+  .resultado { font-family:Georgia,serif; font-size:1.6rem; color:var(--marca); margin:.3rem 0; }
+  .resultado small { font-family:'Source Sans 3',system-ui,sans-serif; font-size:.85rem; color:#45605a; display:block; }
+  .suma { display:flex; justify-content:space-between; font-size:.95rem; padding:.15rem 0; border-bottom:1px dashed var(--borde); }
+  .suma.total { font-weight:bold; border-bottom:2px solid var(--profundo); font-size:1.05rem; }
+  .suma .m { font-variant-numeric:tabular-nums; }
+  .compara { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:.8rem; }
+  .compara > div { border-radius:12px; padding:.8rem 1rem; background:#fff; border:1px solid var(--borde); }
+  .compara .t { font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:#45605a; font-weight:bold; }
+  .compara .v { font-family:Georgia,serif; font-size:1.8rem; color:var(--profundo); }
+  .compara .rojo .v { color:var(--rojo); } .compara .verde .v { color:var(--verde); }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.4rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92rem; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
+  .btn.peligro { background:#fff; color:var(--rojo); border:2px solid var(--rojo); }
+  .ayuda { font-size:.9rem; color:#45605a; }
+  .cotizacion { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1.4rem 1.8rem; margin:.8rem 0; }
+  .cotizacion h3 { font-family:Georgia,serif; color:var(--profundo); margin:0; font-size:1.4rem; }
+  .cotizacion .meta { color:#45605a; font-size:.9rem; margin:.2rem 0 1rem; }
+  .cotizacion table { width:100%; border-collapse:collapse; font-size:.93rem; }
+  .cotizacion th { text-align:left; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:#45605a; border-bottom:2px solid var(--borde); padding:.3rem .4rem; }
+  .cotizacion td { padding:.3rem .4rem; border-bottom:1px solid var(--borde); vertical-align:top; }
+  .cotizacion td.m, .cotizacion th.m { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .cotizacion tr.sub td { font-weight:bold; border-bottom:none; }
+  .cotizacion tr.gran td { font-weight:bold; font-size:1.05rem; border-top:2px solid var(--profundo); border-bottom:none; }
+  .cotizacion .cond { font-size:.9rem; color:#45605a; margin-top:1rem; }
+  .pie-acciones { position:sticky; bottom:0; background:rgba(242,247,245,.96); border-top:1px solid var(--borde); padding:.5rem .8rem; margin:1.5rem -1rem 0; display:flex; flex-wrap:wrap; align-items:center; gap:.2rem; }
+  .guardado { font-size:.85rem; color:#45605a; margin-left:auto; }
+  @media (max-width:720px) { .dos { grid-template-columns:1fr; } }
+  @media print { body { background:#fff; } header.curso, .pie-acciones, .btn, main > *:not(.solo-impresion) { display:none !important; } .solo-impresion { display:block !important; } main { max-width:none; padding:0; } }
+</style>
+</head>
+<body>
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="titulo">Práctica · Cobra tu taller</div>
+  <div class="migas"><a href="index.html">La clase de cronograma y presupuesto</a> · <a href="mazo-cobrar.html">Mazo 3</a> · en parejas</div>
+</header>
+<main>
+
+<div class="caso">
+  <strong>El caso.</strong> Son dos técnicos que viven en Jalpan. Una organización les pide un taller de producción de bioinsumos (bocashi y caldos minerales) en <strong>Huejutla de Reyes, del 14 al 16 de noviembre</strong>, y otro igual en <strong>Aquismán, del 2 al 4 de diciembre</strong>. Les piden una cotización por escrito. ¿Cuánto cobran?
+</div>
+
+<div class="caja">
+  <label>Antes de calcular nada: el número que dirían de bote pronto, por los dos talleres ($)</label>
+  <input type="number" id="botePronto" placeholder="lo primero que se les ocurra" style="max-width:260px">
+</div>
+
+<h2><span class="n">1</span>Tu día</h2>
+<div class="caja">
+  <div class="fila">
+    <div><label>Lo que necesitas ganar al mes ($)</label><input type="number" id="mensual" value="18000" step="500"></div>
+    <div><label>Días que de verdad puedes cobrar al mes</label><input type="number" id="diasCobrables" value="12" step="1"></div>
+    <div><label>Personas que facilitan</label><input type="number" id="personas" value="2" step="1" min="1"></div>
+    <div><div class="resultado" id="tarifa">$1,500<small>tu día de trabajo, por persona</small></div></div>
+  </div>
+  <p class="ayuda">Nadie que trabaja por su cuenta cobra los veintidós días hábiles: la mitad se va en buscar el siguiente trabajo, cotizar, administrar, aprender y descansar. Y con ese día hay que pagar lo que a un empleado le pagan aparte: seguro, aguinaldo, vacaciones, equipo.</p>
+</div>
+
+<h2><span class="n">2</span>Los dos talleres</h2>
+<p class="sub">Cada taller por separado, porque las distancias y la preparación cambian. El segundo taller se prepara menos: ya está diseñado.</p>
+<div class="dos" id="talleres"></div>
+
+<h2><span class="n">3</span>Impuestos y lo que de verdad llega</h2>
+<div class="caja">
+  <div class="fila">
+    <div><label><input type="checkbox" id="conFactura" checked> Cobro con factura</label><span class="ayuda">Se suma el IVA del 16% al total. No es tuyo: se lo das al SAT.</span></div>
+    <div><label><input type="checkbox" id="personaMoral" checked> Me paga una institución o empresa</label><span class="ayuda">Te retiene ISR (10%) y dos tercios del IVA, y los entera a tu nombre.</span></div>
+    <div><label>Retención de ISR (%)</label><input type="number" id="retIsr" value="10" step="0.25"></div>
+    <div><label>Retención de IVA (%)</label><input type="number" id="retIva" value="10.6667" step="0.0001"></div>
+  </div>
+  <p class="ayuda">Los porcentajes cambian según el régimen en que estés dado de alta (en RESICO, por ejemplo, la retención de ISR es del 1.25%). La lección no cambia: el precio sin impuestos, el total facturado y el depósito son tres números distintos.</p>
+</div>
+
+<h2><span class="n">4</span>Las cuentas</h2>
+<div class="compara" id="compara"></div>
+<p class="ayuda">Para saber si el número es razonable: el PROCODES paga hasta $45,000 por un curso de capacitación de 20 horas, con honorarios de hasta $600 la hora. Un taller de tres días anda en ese orden de magnitud. Si tu total queda muy abajo, algo no estás cobrando; si queda muy arriba, revisa los días de preparación y las personas que van.</p>
+
+<h2><span class="n">5</span>La cotización en una hoja</h2>
+<div class="caja">
+  <div class="fila">
+    <div><label>Quién cotiza</label><input type="text" id="quien" placeholder="nombre o nombre del equipo"></div>
+    <div><label>Para quién</label><input type="text" id="paraQuien" placeholder="la organización que pide el taller"></div>
+    <div><label>Vigencia (días)</label><input type="number" id="vigencia" value="30"></div>
+    <div><label>Anticipo (%)</label><input type="number" id="anticipo" value="50"></div>
+  </div>
+  <label style="margin-top:.6rem">Qué incluye</label><textarea id="incluye">Diseño del taller y carta descriptiva, facilitación de tres días por taller, insumos para las prácticas, memoria con fotos y lista de asistencia.</textarea>
+  <label style="margin-top:.6rem">Qué no incluye</label><textarea id="noIncluye">El espacio, el agua y la comida de las personas participantes; el transporte de los participantes; permisos locales.</textarea>
+</div>
+<div class="cotizacion solo-impresion" id="hoja"></div>
+
+<div class="pie-acciones">
+  <button class="btn" onclick="window.print()">Imprimir la cotización</button>
+  <button class="btn claro" id="descargar">Descargar (HTML)</button>
+  <button class="btn peligro" id="borrar">Borrar todo</button>
+  <span class="guardado" id="guardado">Se guarda solo en este navegador.</span>
+</div>
+
+</main>
+<script>
+(function () {
+  var CLAVE = 'gdp-cotizar-taller';
+  var $ = function (id) { return document.getElementById(id); };
+  function pesos(n) { return '$' + (Math.round(n)).toLocaleString('es-MX'); }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+  var CAMPOS = [
+    ['nombre', 'Taller', 'text'], ['diasTaller', 'Días de taller', 'number'], ['kmIda', 'Kilómetros de ida (solo ida)', 'number'],
+    ['prep', 'Días de preparación', 'number'], ['viaje', 'Días de traslado (ida y vuelta)', 'number'], ['informe', 'Días de informe', 'number'],
+    ['comidas', 'Comidas por persona y día ($)', 'number'], ['hospedaje', 'Hospedaje por persona y noche ($)', 'number'], ['noches', 'Noches', 'number'],
+    ['rendimiento', 'Rendimiento del coche (km por litro)', 'number'], ['gasolina', 'Precio del litro ($)', 'number'], ['casetas', 'Casetas ida y vuelta ($)', 'number'], ['desgaste', 'Desgaste del coche ($ por km)', 'number'],
+    ['materiales', 'Insumos del taller ($)', 'number'], ['imp', 'Imponderables (%)', 'number']
+  ];
+  var GRUPOS = { nombre:'El taller', diasTaller:'El taller', kmIda:'El taller', prep:'Los días que cobras', viaje:'Los días que cobras', informe:'Los días que cobras', comidas:'Viáticos', hospedaje:'Viáticos', noches:'Viáticos', rendimiento:'Traslado', gasolina:'Traslado', casetas:'Traslado', desgaste:'Traslado', materiales:'Insumos e imponderables', imp:'Insumos e imponderales' };
+  GRUPOS.imp = 'Insumos e imponderables';
+  function defecto() {
+    return { botePronto:'', mensual:18000, diasCobrables:12, personas:2, conFactura:true, personaMoral:true, retIsr:10, retIva:10.6667, quien:'', paraQuien:'', vigencia:30, anticipo:50,
+      incluye:'Diseño del taller y carta descriptiva, facilitación de tres días por taller, insumos para las prácticas, memoria con fotos y lista de asistencia.',
+      noIncluye:'El espacio, el agua y la comida de las personas participantes; el transporte de los participantes; permisos locales.',
+      talleres: [
+        { nombre:'Huejutla de Reyes · 14 al 16 de noviembre', diasTaller:3, kmIda:200, prep:3, viaje:2, informe:1, comidas:350, hospedaje:700, noches:3, rendimiento:12, gasolina:25.5, casetas:0, desgaste:2.5, materiales:3500, imp:5 },
+        { nombre:'Aquismán · 2 al 4 de diciembre', diasTaller:3, kmIda:130, prep:1, viaje:2, informe:0.5, comidas:350, hospedaje:700, noches:3, rendimiento:12, gasolina:25.5, casetas:0, desgaste:2.5, materiales:3500, imp:5 }
+      ] };
+  }
+  var e = cargar();
+  function cargar() { try { var s = JSON.parse(localStorage.getItem(CLAVE)); if (s && s.talleres) return s; } catch (x) {} return defecto(); }
+  function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(e)); $('guardado').textContent = 'Guardado en este navegador.'; } catch (x) {} }
+
+  function tarifa() { return (+e.mensual || 0) / Math.max(1, +e.diasCobrables || 1); }
+  function calc(t) {
+    var p = Math.max(1, +e.personas || 1), dia = tarifa();
+    var dias = (+t.prep || 0) + (+t.diasTaller || 0) + (+t.viaje || 0) + (+t.informe || 0);
+    var honorarios = dias * dia * p;
+    var soloFrente = (+t.diasTaller || 0) * dia * p;
+    var viaticos = ((+t.comidas || 0) * ((+t.diasTaller || 0) + (+t.viaje || 0)) + (+t.hospedaje || 0) * (+t.noches || 0)) * p;
+    var km = 2 * (+t.kmIda || 0);
+    var gas = (+t.rendimiento ? km / +t.rendimiento : 0) * (+t.gasolina || 0);
+    var traslado = gas + (+t.casetas || 0) + km * (+t.desgaste || 0);
+    var materiales = +t.materiales || 0;
+    var sub = honorarios + viaticos + traslado + materiales;
+    var imp = sub * (+t.imp || 0) / 100;
+    return { dias:dias, honorarios:honorarios, soloFrente:soloFrente, viaticos:viaticos, km:km, gas:gas, traslado:traslado, materiales:materiales, imp:imp, subtotal:sub + imp };
+  }
+  function totales() {
+    var sub = 0, frente = 0, partes = e.talleres.map(function (t) { var c = calc(t); sub += c.subtotal; frente += c.soloFrente; return c; });
+    var iva = e.conFactura ? sub * 0.16 : 0, total = sub + iva;
+    var retI = e.conFactura && e.personaMoral ? sub * (+e.retIsr || 0) / 100 : 0;
+    var retV = e.conFactura && e.personaMoral ? sub * (+e.retIva || 0) / 100 : 0;
+    return { partes:partes, sub:sub, iva:iva, total:total, retIsr:retI, retIva:retV, deposito:total - retI - retV, frente:frente };
+  }
+
+  function pintarTalleres() {
+    var cont = $('talleres'); cont.innerHTML = '';
+    e.talleres.forEach(function (t, i) {
+      var c = calc(t), div = document.createElement('div'); div.className = 'caja taller';
+      var h = '<h3>' + esc(t.nombre) + '</h3>', grupo = '';
+      CAMPOS.forEach(function (f) {
+        if (GRUPOS[f[0]] !== grupo) { grupo = GRUPOS[f[0]]; h += '<h4>' + grupo + '</h4>'; }
+        h += '<div style="display:grid;grid-template-columns:1fr 130px;gap:.5rem;align-items:center;margin:.2rem 0"><label style="font-weight:normal">' + f[1] + '</label><input type="' + f[2] + '" data-i="' + i + '" data-k="' + f[0] + '" value="' + esc(t[f[0]]) + '" step="0.5"></div>';
+      });
+      h += '<h4>La suma de este taller</h4>'
+        + '<div class="suma"><span>Honorarios: ' + c.dias + ' días × ' + pesos(tarifa()) + ' × ' + e.personas + ' personas</span><span class="m">' + pesos(c.honorarios) + '</span></div>'
+        + '<div class="suma"><span>Viáticos (comidas y hospedaje × personas)</span><span class="m">' + pesos(c.viaticos) + '</span></div>'
+        + '<div class="suma"><span>Traslado: ' + c.km + ' km (gasolina ' + pesos(c.gas) + ', casetas, desgaste)</span><span class="m">' + pesos(c.traslado) + '</span></div>'
+        + '<div class="suma"><span>Insumos del taller</span><span class="m">' + pesos(c.materiales) + '</span></div>'
+        + '<div class="suma"><span>Imponderables (' + t.imp + '%)</span><span class="m">' + pesos(c.imp) + '</span></div>'
+        + '<div class="suma total"><span>Subtotal sin IVA</span><span class="m">' + pesos(c.subtotal) + '</span></div>';
+      div.innerHTML = h; cont.appendChild(div);
+    });
+  }
+  function pintarCompara() {
+    var T = totales(), bp = +e.botePronto || 0;
+    $('compara').innerHTML =
+      '<div><div class="t">Subtotal sin IVA</div><div class="v">' + pesos(T.sub) + '</div><span class="ayuda">los dos talleres</span></div>'
+      + '<div><div class="t">IVA (16%)</div><div class="v">' + pesos(T.iva) + '</div><span class="ayuda">se factura, no es tuyo</span></div>'
+      + '<div><div class="t">Total de la cotización</div><div class="v">' + pesos(T.total) + '</div><span class="ayuda">lo que firma el cliente</span></div>'
+      + '<div class="verde"><div class="t">Lo que te depositan</div><div class="v">' + pesos(T.deposito) + '</div><span class="ayuda">después de retenciones: ISR ' + pesos(T.retIsr) + ', IVA ' + pesos(T.retIva) + '</span></div>'
+      + '<div class="rojo"><div class="t">Si cobraras solo las horas frente al grupo</div><div class="v">' + pesos(T.frente) + '</div><span class="ayuda">lo demás lo pagarías tú</span></div>'
+      + (bp ? '<div class="rojo"><div class="t">Lo que dijiste de bote pronto</div><div class="v">' + pesos(bp) + '</div><span class="ayuda">' + (bp < T.sub ? 'te faltaban ' + pesos(T.sub - bp) : 'ibas ' + pesos(bp - T.sub) + ' arriba') + '</span></div>' : '');
+  }
+  function pintarHoja() {
+    var T = totales(), filas = '';
+    e.talleres.forEach(function (t, i) {
+      var c = T.partes[i], dia = tarifa(), p = +e.personas || 1;
+      filas += '<tr><td colspan="5" style="font-weight:bold;color:#0B3C49;padding-top:.8rem">' + esc(t.nombre) + '</td></tr>'
+        + '<tr><td>Honorarios de facilitación (preparación, taller, traslado e informe)</td><td>día-persona</td><td class="m">' + (c.dias * p) + '</td><td class="m">' + pesos(dia) + '</td><td class="m">' + pesos(c.honorarios) + '</td></tr>'
+        + '<tr><td>Viáticos (alimentos y hospedaje)</td><td>paquete</td><td class="m">1</td><td class="m">' + pesos(c.viaticos) + '</td><td class="m">' + pesos(c.viaticos) + '</td></tr>'
+        + '<tr><td>Traslado Jalpan a ' + esc(t.nombre.split('·')[0].trim()) + ' y regreso (' + c.km + ' km)</td><td>viaje</td><td class="m">1</td><td class="m">' + pesos(c.traslado) + '</td><td class="m">' + pesos(c.traslado) + '</td></tr>'
+        + '<tr><td>Insumos para las prácticas</td><td>lote</td><td class="m">1</td><td class="m">' + pesos(c.materiales) + '</td><td class="m">' + pesos(c.materiales) + '</td></tr>'
+        + '<tr><td>Imponderables (' + t.imp + '%)</td><td></td><td></td><td></td><td class="m">' + pesos(c.imp) + '</td></tr>';
+    });
+    $('hoja').innerHTML = '<h3>Cotización · Talleres de producción de bioinsumos</h3>'
+      + '<div class="meta">' + (e.quien ? 'De: ' + esc(e.quien) + ' · ' : '') + (e.paraQuien ? 'Para: ' + esc(e.paraQuien) + ' · ' : '') + 'Fecha: ' + new Date().toLocaleDateString('es-MX') + ' · Vigencia: ' + e.vigencia + ' días</div>'
+      + '<table><tr><th>Concepto</th><th>Unidad</th><th class="m">Cant.</th><th class="m">Precio unitario</th><th class="m">Importe</th></tr>' + filas
+      + '<tr class="sub"><td colspan="4">Subtotal</td><td class="m">' + pesos(T.sub) + '</td></tr>'
+      + (e.conFactura ? '<tr class="sub"><td colspan="4">IVA 16%</td><td class="m">' + pesos(T.iva) + '</td></tr>' : '')
+      + '<tr class="gran"><td colspan="4">Total</td><td class="m">' + pesos(T.total) + '</td></tr></table>'
+      + '<div class="cond"><p><b>Incluye:</b> ' + esc(e.incluye) + '</p><p><b>No incluye:</b> ' + esc(e.noIncluye) + '</p><p><b>Condiciones:</b> anticipo del ' + e.anticipo + '% a la firma y el resto contra entrega de la memoria. Si el taller se cancela con menos de cinco días, se cobra la preparación. Precios en pesos mexicanos' + (e.conFactura ? ', con factura' : '') + '.</p></div>';
+  }
+  function pintar() {
+    ['botePronto','mensual','diasCobrables','personas','retIsr','retIva','quien','paraQuien','vigencia','anticipo','incluye','noIncluye'].forEach(function (k) { $(k).value = e[k]; });
+    $('conFactura').checked = e.conFactura; $('personaMoral').checked = e.personaMoral;
+    $('tarifa').innerHTML = pesos(tarifa()) + '<small>tu día de trabajo, por persona</small>';
+    pintarTalleres(); pintarCompara(); pintarHoja();
+  }
+  document.addEventListener('input', function (ev) {
+    var el = ev.target;
+    if (el.dataset.i !== undefined && el.dataset.k) { var t = e.talleres[+el.dataset.i]; t[el.dataset.k] = el.type === 'number' ? (parseFloat(el.value) || 0) : el.value; guardar(); pintarSinTalleres(el); return; }
+    if (e.hasOwnProperty(el.id)) { e[el.id] = el.type === 'checkbox' ? el.checked : (el.type === 'number' ? (parseFloat(el.value) || 0) : el.value); guardar(); if (el.id === 'incluye' || el.id === 'noIncluye' || el.id === 'quien' || el.id === 'paraQuien') pintarHoja(); else pintar(); }
+  });
+  function pintarSinTalleres(el) {
+    // Actualiza las sumas de cada taller sin perder el foco del campo que se edita.
+    e.talleres.forEach(function (t, i) {
+      var c = calc(t), caja = $('talleres').children[i]; if (!caja) return;
+      var sumas = caja.querySelectorAll('.suma .m'); if (sumas.length < 6) return;
+      sumas[0].textContent = pesos(c.honorarios); sumas[1].textContent = pesos(c.viaticos); sumas[2].textContent = pesos(c.traslado); sumas[3].textContent = pesos(c.materiales); sumas[4].textContent = pesos(c.imp); sumas[5].textContent = pesos(c.subtotal);
+      caja.querySelectorAll('.suma span:first-child')[0].textContent = 'Honorarios: ' + c.dias + ' días × ' + pesos(tarifa()) + ' × ' + e.personas + ' personas';
+      caja.querySelectorAll('.suma span:first-child')[2].textContent = 'Traslado: ' + c.km + ' km (gasolina ' + pesos(c.gas) + ', casetas, desgaste)';
+      if (el.dataset.k === 'nombre') caja.querySelector('h3').textContent = t.nombre;
+    });
+    pintarCompara(); pintarHoja();
+  }
+  $('borrar').addEventListener('click', function () { if (confirm('Se borra la cotización de este navegador. ¿Seguro?')) { localStorage.removeItem(CLAVE); e = defecto(); pintar(); } });
+  $('descargar').addEventListener('click', function () {
+    var T = totales();
+    var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Cotización</title><style>body{font-family:Segoe UI,system-ui,sans-serif;max-width:900px;margin:1.5rem auto;padding:0 1rem;color:#1C2B28}h3{font-family:Georgia,serif;color:#0B3C49}table{width:100%;border-collapse:collapse;font-size:.93rem}td,th{padding:.3rem .4rem;border-bottom:1px solid #CFE3DD;text-align:left;vertical-align:top}.m{text-align:right;white-space:nowrap}.cond{color:#45605a;font-size:.9rem}.meta{color:#45605a;font-size:.9rem}</style></head><body>' + $('hoja').innerHTML
+      + '<hr><p class="cond"><b>Para el equipo, no para el cliente:</b> tu día vale ' + pesos(tarifa()) + '; si cobraras solo las horas frente al grupo serían ' + pesos(T.frente) + '; de los ' + pesos(T.total) + ' facturados te depositarían ' + pesos(T.deposito) + '.</p></body></html>';
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' })); a.download = 'cotizacion-talleres-' + new Date().toISOString().slice(0, 10) + '.html'; a.click();
+  });
+  pintar();
+})();
+</script>
+</body>
+</html>
