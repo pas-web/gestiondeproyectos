@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gimnasio S10 · El cronograma iluso</title>
+<title>Gimnasio · El cronograma iluso</title>
 <style>
   :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
   * { box-sizing:border-box; }
@@ -34,55 +34,55 @@
 <body>
 <main>
 <h1>El cronograma iluso</h1>
-<p class="sub">Gimnasio · Semana 10 · Práctica libre, sin registro y sin nota.</p>
+<p class="sub">Gimnasio · Cronograma y presupuesto · Práctica libre, sin registro y sin nota.</p>
 
-<p>El cronograma del proyecto del manantial: cuatro semanas de ejecución, del 19 de octubre al 13 de noviembre. Seis renglones de su calendario: cinco traen una ilusión escondida y uno se salva. El mismo filtro que le toca al tuyo.</p>
+<p>El cronograma del proyecto del manantial: una sombra de malla con piso de tarimas, planeada para el año 2027, de enero a diciembre. Seis renglones de su calendario: cuatro traen una ilusión escondida, uno trae las dos y uno se salva. El mismo filtro que le toca al tuyo.</p>
 
 <div class="intro">
-  Las ilusiones del calendario: la <strong>dependencia invertida</strong> (instalar antes de comprar), la <strong>joroba final</strong> (todo amontonado en la última semana), el renglón <strong>sin responsable</strong> (lo que es de todos no es de nadie), la <strong>faena instantánea</strong> (convocar de un día para otro) y el calendario <strong>que no le cree al cielo</strong> (obra a la intemperie sin fecha B).
+  Las dos ilusiones del calendario: la <strong>joroba</strong> (todo amontonado al final del año, donde ya no hay margen para que algo salga mal) y el <strong>renglón sin dueño</strong> ("responsable: el equipo"; lo que es de todos no es de nadie).
 </div>
 
 <div id="casos"></div>
 
 <div class="cuaderno">
   <h2>Si trabajas en cuaderno</h2>
-  <p>Dibuja tus cuatro semanas en una hoja horizontal y pasa tres filtros en orden: primero dependencias (¿qué necesita estar listo antes de cada renglón?), luego responsables (un nombre por renglón), luego el cielo (¿qué se hace a la intemperie y cuál es su fecha B?). Si la semana 4 quedó gorda, algo migra a la 1.</p>
+  <p>Dibuja los doce meses de 2027 en una hoja horizontal, una barra por actividad, y pasa dos filtros en orden: primero responsables (un nombre o un cargo por renglón; "el equipo", "todos" y "la comunidad" no cuentan), luego la joroba (si noviembre y diciembre quedaron gordos, algo migra al primer semestre: casi siempre lo que no necesita dinero).</p>
 </div>
 
 <button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
 
 <script>
   var casos = [
-    { r: '<b>Semana 1 (19-23 oct):</b> instalar la malla sombra y anclar postes. <b>Semana 2 (26-30 oct):</b> comprar la malla, los postes y el cemento.',
-      ops: ['Joroba final', 'Dependencia invertida: se instala en la semana 1 lo que se compra en la 2; el calendario promete magia', 'Sin responsable', 'Nada: el orden de los renglones no importa'],
+    { r: '<b>Enero a septiembre:</b> cotizaciones y permisos. <b>Octubre:</b> libre, por si algo. <b>Noviembre y diciembre:</b> compra de materiales, flete, faena de postes, faena de malla y tarimas, letrero, estreno, acta de entrega e informe al donante.',
+      ops: ['El renglón sin dueño', 'La joroba: ocho actividades en los dos últimos meses del año, donde ya no hay enero para corregir; si la faena de noviembre se cae por lluvia o por fiesta, el informe al donante se entrega tarde', 'Se salva: nueve meses de preparación son prudencia', 'Nada: el orden de los renglones no importa'],
       resp: 1,
-      pista: 'Lee las dos semanas en orden y pregúntate qué malla exactamente se instala el 19 de octubre.',
-      exp: 'La dependencia invertida: el renglón de la semana 1 necesita lo que la semana 2 apenas compra. Parece error de dedo y a veces lo es, pero el Comité no puede distinguir el error de dedo del equipo que no pensó su secuencia, y evalúa lo que lee (cronograma-capacidad: 15 puntos). El filtro es mecánico y se corre renglón por renglón: ¿qué necesita estar terminado para que esto pueda empezar? Compras en la 1, instalación en la 2, y el calendario deja de prometer magia.' },
-    { r: '<b>Semana 1:</b> compras. <b>Semana 2:</b> (libre, por si algo). <b>Semana 3:</b> (libre, por si algo). <b>Semana 4 (9-13 nov):</b> limpieza del terreno, anclaje, instalación de malla, armado del piso, señalética, acta de entrega.',
-      ops: ['La joroba final: seis actividades en cinco días sin margen; si llueve el martes, el proyecto entero se entrega tarde', 'Dependencia invertida', 'Nada: así queda tiempo de sobra en medio', 'Faena instantánea'],
-      resp: 0,
-      pista: 'Cuenta las actividades de la semana 4 y los días que tiene. Ahora imagina que el miércoles llueve.',
-      exp: 'La joroba final, la ilusión más común: las semanas 2 y 3 "libres por si algo" se sienten prudentes, pero el margen guardado al final no protege nada, porque después de la semana 4 no hay semana 5. El margen sirve cuando está ANTES del riesgo, no después: limpieza y anclaje en la semana 2, piso en la 3, y la semana 4 queda para señalética, acta y los imprevistos que las otras semanas hayan dejado vivos. Regla práctica: la última semana de un cronograma sano está medio vacía a propósito.' },
-    { r: '<b>Semana 2:</b> faena de limpieza del terreno "el sábado que se pueda, según ande la gente".',
-      ops: ['Dependencia invertida', 'Se salva: la flexibilidad es respeto a la comunidad', 'La faena instantánea (y sin responsable): una faena se convoca vía delegación con una semana de anticipación, con fecha fija y alguien del equipo a cargo de que la convocatoria salga', 'Joroba final'],
+      pista: 'Cuenta las actividades de noviembre y diciembre. Ahora imagina que la primera faena se cae por la fiesta del pueblo.',
+      exp: 'La joroba, la ilusión más común: nueve meses "de preparación" se sienten prudentes, pero el margen guardado al final no protege nada, porque después de diciembre no hay enero del mismo proyecto. El margen sirve cuando está ANTES del riesgo, no después: compras en marzo, faenas en abril y mayo, estreno en junio, y el segundo semestre queda para el cuidado, el conteo y los imprevistos que el primero haya dejado vivos. Regla práctica: los dos últimos meses de un cronograma sano están medio vacíos a propósito.' },
+    { r: '<b>Marzo:</b> faena de limpieza del terreno junto al manantial. <b>Responsable:</b> el equipo.',
+      ops: ['La joroba', 'Se salva: la faena es de todos, por eso es faena', 'El renglón sin dueño: una faena la convoca el comité del agua con dos semanas de aviso, y alguien del equipo, con nombre o con cargo, se encarga de que esa convocatoria salga y de confirmar dos días antes', 'Nada: marzo es buen mes'],
       resp: 2,
-      pista: '¿Cómo se entera la gente de una faena? ¿Quién la convoca, con cuánta anticipación, y quién del equipo se asegura de que eso pase?',
-      exp: 'Dos ilusiones en un renglón: que la faena se convoca sola ("según ande la gente") y que no necesita dueño. La faena es de las tecnologías de gestión más finas que existen, pero tiene su protocolo serrano: se pide a la delegación, se anuncia con una semana de anticipación por los canales del pueblo, y alguien del equipo (con nombre) confirma dos días antes. El renglón sano dice: "faena de limpieza: sábado 24-oct, convocatoria vía delegación desde el 17-oct, responsable: quien lleva la vocería". La flexibilidad de verdad está en la fecha B, no en la fecha difusa.' },
-    { r: '<b>Semana 2:</b> gestionar la anuencia de la delegación y conseguir las dos cotizaciones que faltan.',
-      ops: ['Fuera de lugar: la anuencia y las cotizaciones son requisitos de la SOLICITUD que se entregó el viernes de la semana 10; si aparecen en el cronograma de ejecución, la solicitud se entregó incompleta', 'Sin responsable', 'Joroba final', 'Nada: nunca es tarde para los papeles'],
-      resp: 0,
-      pista: '¿Cuándo se entregó la solicitud? ¿Y qué debía llevar adentro para ser evaluada?',
-      exp: 'El renglón delator: promete hacer en noviembre lo que la solicitud necesitaba en octubre. La anuencia y las cotizaciones no son actividades del proyecto: son requisitos para que el proyecto exista, y el Comité que encuentra este renglón entiende al instante que la solicitud que tiene enfrente está coja. El cronograma de ejecución empieza donde la solicitud termina: compras, obra, faenas, registro, entrega. Los papeles previos ya no se planean: ya se tienen (por eso S9 fue la semana que fue).' },
-    { r: '<b>Semana 3 (2-6 nov):</b> colado del anclaje y sellado del piso, a cielo abierto. Sin fecha alterna. En la sección de supuestos del marco, el mismo equipo escribió: "que la temporada de lluvia no cubra la zona antes de diciembre".',
-      ops: ['Dependencia invertida', 'El calendario que no le cree al cielo: el propio equipo declaró la lluvia como riesgo y su cronograma no tiene fecha B para la única actividad que la lluvia arruina', 'Faena instantánea', 'Nada: si llueve, se moja, así es la obra'],
-      resp: 1,
-      pista: 'Compara el renglón con el supuesto que el mismo equipo escribió en su marco de la semana 8. ¿Se hablan entre sí?',
-      exp: 'La incoherencia elegante: el supuesto del marco reconoce la lluvia y el cronograma la ignora. Los documentos de una solicitud se leen juntos, y un dictaminador con oficio busca exactamente esto: que el riesgo declarado tenga respuesta operativa. El colado y el sellado son las actividades que la lluvia arruina de verdad (no se cuela sobre mojado); el renglón sano trae su fecha B en la misma semana o la siguiente, y de ser posible las horas de la mañana. No cuesta un peso: cuesta pensarlo antes.' },
-    { r: '<b>Semana 1 (19-23 oct):</b> compra de materiales (cotizaciones vigentes) y registro de gastos en el libro a 48 horas, responsable: quien lleva los números · flete el jueves 22 con la camioneta acordada (nota de S9) · <b>fecha B por lluvia:</b> el viernes 23.',
-      ops: ['Sin responsable', 'Joroba final', 'Dependencia invertida', 'Se salva: compras al inicio, responsable con nombre de oficio, dependencia del flete resuelta con su trato, registro a 48 horas y hasta fecha B'],
+      pista: '¿Cómo se entera la gente de la faena? ¿Quién la pide al comité, quién confirma, y a quién le reclamas si ese sábado no llega nadie?',
+      exp: 'El renglón sin dueño. La faena es de las tecnologías de gestión más finas que existen, pero tiene su protocolo serrano: se pide al comité o a la delegación, se anuncia con dos semanas por los canales del pueblo, y alguien del equipo confirma dos días antes. "El equipo" no hace ninguna de las tres cosas: las hace una persona. El renglón sano dice: "faena de limpieza, sábado 20 de marzo, convocada por el comité desde el 6 de marzo; responsable de la convocatoria: quien da la cara".' },
+    { r: '<b>Enero:</b> tres cotizaciones de malla, postes y cemento, responsable: quien lleva los números. <b>Marzo:</b> compra del material en cuanto el donante deposite, responsable: quien lleva los números. <b>Abril:</b> faena 1, postes y bases, convocada por el comité desde el 20 de marzo; responsable de la convocatoria: quien da la cara.',
+      ops: ['La joroba', 'El renglón sin dueño', 'Las dos ilusiones', 'Se salva: cada renglón tiene un cargo que responde, lo que no necesita dinero va en enero, la compra espera al depósito y la faena espera a la compra y a su convocatoria'],
       resp: 3,
-      pista: 'Córrele los tres filtros: dependencias, responsable, cielo. Y un cuarto: ¿las obligaciones del fondo están contempladas?',
-      exp: 'El renglón sano hace todo el trabajo aburrido: las compras van al principio (el margen queda DESPUÉS del riesgo), el responsable es el oficio de números del equipo, el flete no es un deseo sino un trato ya cerrado con su nota, la fecha B existe, y el registro a 48 horas cumple la obligación del fondo desde el primer peso gastado (la auditoría pública de noviembre se gana en octubre). Un cronograma de renglones así no impresiona a nadie en la primera lectura, y en la segunda gana: se nota que alguien ya vivió las cuatro semanas en su cabeza antes de escribirlas.' }
+      pista: 'Pásale los dos filtros: ¿cada renglón tiene quien responda? ¿Se amontona algo al final? Y de paso: ¿qué espera a qué?',
+      exp: 'El renglón sano hace todo el trabajo aburrido: las cotizaciones van en enero porque no cuestan dinero, la compra espera al depósito del donante (el hito que no depende del equipo), la faena espera a que el material esté en el sitio y a que el comité la haya convocado, y cada renglón tiene un cargo que responde. No impresiona a nadie en la primera lectura; en la segunda se nota que alguien ya vivió el año en su cabeza antes de escribirlo.' },
+    { r: '<b>Diciembre:</b> instalación de la malla, armado del piso de tarimas, letrero, estreno con la gente y acta de entrega. <b>Responsables:</b> todos.',
+      ops: ['Solo la joroba', 'Solo el renglón sin dueño', 'Las dos: cinco actividades en el último mes del año, sin margen, y sin un solo nombre que responda por ninguna', 'Se salva: terminar en diciembre es terminar a tiempo'],
+      resp: 2,
+      pista: 'Son dos preguntas: ¿cuándo se hace todo esto? y ¿quién hace cada cosa?',
+      exp: 'Las dos ilusiones en un renglón, y suelen venir juntas: cuando todo se deja para el final, ya nadie se reparte nada porque "todos le entran". Diciembre en la Sierra Gorda es mes de fiestas, de frío y de gente que viaja: la peor semana para pedirle a la comunidad una faena de estreno. La versión sana reparte el trabajo entre abril y junio, con un cargo por renglón, y deja diciembre para el informe al donante y la revisión de las piezas después de las lluvias.' },
+    { r: '<b>Octubre a diciembre:</b> riego de auxilio de los árboles sembrados en junio. <b>Responsable:</b> la comunidad.',
+      ops: ['La joroba', 'El renglón sin dueño: "la comunidad" no riega; riega una persona en un turno acordado, y el renglón necesita el cargo que responde (el comité de vigilancia, con su rol de turnos) o se seca', 'Se salva: la comunidad se apropia del proyecto', 'Nada: el riego no es una actividad del proyecto'],
+      resp: 1,
+      pista: 'Un martes de noviembre a las cuatro de la tarde, ¿quién exactamente carga la cubeta? ¿Cómo lo sabe esa persona?',
+      exp: 'El renglón sin dueño con su disfraz más simpático: "la comunidad". La comunidad no es un responsable, es un deseo. Los árboles de junio se secan en noviembre si nadie tiene un turno con su nombre, y por eso el componente de participación existe: el comité de vigilancia acuerda turnos por escrito y alguien con cargo responde cuando falla uno. El renglón sano dice: "riego de auxilio, dos veces por semana de octubre a diciembre, según el rol de turnos del comité; responsable del rol: quien coordina el comité".' },
+    { r: '<b>Enero a junio:</b> nada, "porque el dinero del donante llega hasta julio". <b>Julio a diciembre:</b> todo: permisos, cotizaciones, trato por las tarimas, compras, faenas, estreno e informe.',
+      ops: ['El renglón sin dueño', 'Se salva: sin dinero no se puede hacer nada, es realismo', 'La joroba disfrazada de realismo: la mitad del cronograma no necesita un peso (permisos, cotizaciones, el trato por las tarimas, la convocatoria, la línea base) y se puede adelantar al primer semestre; lo que no se puede es meter el año entero en seis meses', 'Nada: el donante manda'],
+      resp: 2,
+      pista: 'Recorre la lista de julio a diciembre y pregúntale a cada actividad: ¿cuánto dinero necesitas? Varias contestan "nada".',
+      exp: 'La joroba disfrazada de realismo. Es cierto que no se compra nada antes de que el donante deposite, y por eso el depósito es el hito que todo lo demás respeta. Pero medio cronograma no cuesta un peso: el oficio de anuencia, las tres cotizaciones, el trato por las tarimas, la línea base en la orilla, la convocatoria de la faena. Todo eso va de enero a junio, y cuando el dinero llega en julio el proyecto ya tiene papeles, precios, tarimas y gente convocada. El equipo que espera el dinero para empezar a pensar llega a diciembre con la joroba completa.' }
   ];
 
   var cont = document.getElementById('casos');
