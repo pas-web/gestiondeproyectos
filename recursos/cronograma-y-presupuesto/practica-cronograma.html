@@ -19,10 +19,16 @@
   .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.97rem; }
   .reglas strong { color:var(--arena); }
   .caja { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:.8rem 0; }
+  .ejemplo { border-left:6px solid var(--arena); background:#FFFDF7; }
+  .ejemplo .etq { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:#7C6222; font-weight:bold; }
+  .ejemplo p { margin:.4rem 0; }
+  table.ej { width:100%; border-collapse:collapse; font-size:.88rem; margin:.4rem 0; }
+  table.ej th { text-align:left; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:#45605a; border-bottom:2px solid var(--borde); padding:.25rem .4rem; }
+  table.ej td { padding:.3rem .4rem; border-bottom:1px solid var(--borde); vertical-align:top; }
   label { font-size:.85rem; font-weight:bold; color:var(--profundo); display:block; }
-  input[type=text], input[type=date], input[type=number], select, textarea { font:inherit; font-size:.95rem; border:1px solid var(--borde); border-radius:8px; padding:.35rem .5rem; width:100%; background:#fff; color:var(--texto); }
+  input[type=text], input[type=number], select, textarea { font:inherit; font-size:.95rem; border:1px solid var(--borde); border-radius:8px; padding:.35rem .5rem; width:100%; background:#fff; color:var(--texto); }
   textarea { min-height:3.2rem; }
-  .fila-datos { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:.8rem; }
+  .fila-datos { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:.8rem; }
   .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.4rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92rem; }
   .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
   .btn.peligro { background:#fff; color:var(--rojo); border:2px solid var(--rojo); }
@@ -34,17 +40,11 @@
   table.plan td textarea { min-height:2.3rem; resize:vertical; }
   table.plan td.num { font-family:Georgia,serif; font-weight:bold; color:var(--arena); font-size:1.1rem; text-align:center; width:2rem; }
   table.plan tr.mal td { background:#FFF7F5; }
-  table.plan tr.micro td.num { color:var(--marca); }
   .envoltura { overflow-x:auto; border:1px solid var(--borde); border-radius:12px; }
-  .chip { display:inline-block; font-size:.75rem; font-weight:bold; letter-spacing:.06em; text-transform:uppercase; border-radius:999px; padding:.1rem .6rem; margin:.1rem .2rem .1rem 0; }
-  .chip.si { background:#EEF6F0; color:var(--verde); } .chip.no { background:#FBF0EE; color:var(--rojo); } .chip.ojo { background:#FBEFD5; color:#7C6222; }
-  .pestanas { display:flex; gap:.4rem; margin:.6rem 0; flex-wrap:wrap; }
-  .pestanas button { font:inherit; border:2px solid var(--borde); background:#fff; border-radius:999px; padding:.35rem .9rem; cursor:pointer; color:var(--profundo); font-weight:bold; }
-  .pestanas button.activa { background:var(--profundo); color:#fff; border-color:var(--profundo); }
   svg.gantt { width:100%; height:auto; display:block; background:#fff; border-radius:10px; }
   .leyenda { font-size:.85rem; color:#45605a; display:flex; gap:1rem; flex-wrap:wrap; margin:.4rem 0; }
   .leyenda span::before { content:""; display:inline-block; width:14px; height:10px; border-radius:3px; margin-right:.3rem; vertical-align:middle; }
-  .leyenda .l1::before { background:var(--marca); } .leyenda .l2::before { background:#fff; border:2px dashed var(--marca); } .leyenda .l3::before { background:#D9A441; } .leyenda .l4::before { background:#DDEDE8; } .leyenda .l5::before { background:#FBEFD5; } .leyenda .l6::before { background:#8A3B2B; }
+  .leyenda .l1::before { background:var(--marca); } .leyenda .l4::before { background:#DDEDE8; } .leyenda .l5::before { background:#FBEFD5; }
   ul.revision { list-style:none; padding:0; margin:.4rem 0; }
   ul.revision li { padding:.45rem .7rem; border-radius:8px; margin:.3rem 0; border-left:5px solid var(--borde); background:#fff; }
   ul.revision li.bien { border-color:var(--verde); } ul.revision li.mal { border-color:var(--rojo); } ul.revision li.ojo { border-color:var(--arena); }
@@ -52,20 +52,14 @@
   .pie-acciones { position:sticky; bottom:0; background:rgba(242,247,245,.96); border-top:1px solid var(--borde); padding:.5rem .8rem; margin:1.5rem -1rem 0; display:flex; flex-wrap:wrap; align-items:center; gap:.2rem; }
   .guardado { font-size:.85rem; color:#45605a; margin-left:auto; }
   .ayuda { font-size:.9rem; color:#45605a; }
-  .ejemplo { border-left:6px solid var(--arena); background:#FFFDF7; }
-  .ejemplo .etq { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:#7C6222; font-weight:bold; }
-  .ejemplo p { margin:.4rem 0; }
-  table.ej { width:100%; border-collapse:collapse; font-size:.88rem; margin:.4rem 0; }
-  table.ej th { text-align:left; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:#45605a; border-bottom:2px solid var(--borde); padding:.25rem .4rem; }
-  table.ej td { padding:.3rem .4rem; border-bottom:1px solid var(--borde); vertical-align:top; }
+  details { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.6rem 1rem; margin:.6rem 0; }
+  summary { cursor:pointer; font-weight:bold; color:var(--profundo); }
   body.proyector { font-size:1.3rem; }
   body.proyector table.plan { font-size:1.1rem; }
   body.proyector table.plan td input, body.proyector table.plan td textarea, body.proyector table.plan td select { font-size:1.05rem; }
   body.proyector ul.revision li { font-size:1.15rem; }
   body.proyector svg.gantt text { font-size:1.15em; }
-  details { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.6rem 1rem; margin:.6rem 0; }
-  summary { cursor:pointer; font-weight:bold; color:var(--profundo); }
-  @media print { header.curso, .pie-acciones, .btn, .pestanas, .reglas, details, .ayuda { display:none !important; } main { max-width:none; padding:0; } table.plan td input, table.plan td textarea, table.plan td select { border:none; } body { background:#fff; } }
+  @media print { header.curso, .pie-acciones, .btn, .reglas, details, .ayuda, .ejemplo { display:none !important; } main { max-width:none; padding:0; } table.plan td input, table.plan td textarea, table.plan td select { border:none; } body { background:#fff; } }
 </style>
 </head>
 <body>
@@ -76,25 +70,25 @@
 </header>
 <main>
 
-<p class="sub">Aquí cada equipo convierte las actividades de su componente en un cronograma que cabe: se desmenuza, se ordena, se mide y se dibuja. La herramienta dibuja la gráfica sola, señala las cinco ilusiones del calendario y guarda en este navegador. Al terminar se descarga al Drive del equipo y se copia a la pestaña 5 de la carpeta del proyecto.</p>
+<p class="sub">Aquí cada equipo convierte las actividades de su componente en un cronograma de un año, de enero a diciembre de 2027: se desmenuza, se ordena, se mide y se dibuja. Cada componente se trabaja por separado; al final los cinco se ponen juntos en el muro para ver dónde se cruzan. La herramienta dibuja la gráfica sola, señala las dos ilusiones del calendario y guarda en este navegador. Al terminar se descarga al Drive del equipo y se copia a la pestaña 5 de la carpeta del proyecto.</p>
 
 <div class="reglas">
-  <strong>Las reglas del renglón honesto.</strong> Cada actividad deja algo que se puede enseñar (una lista, cuarenta cajetes, una foto, un acta). Cada renglón tiene un nombre, no "el equipo". Lo que depende de otro renglón empieza cuando ese termina. Lo que se hace a la intemperie trae fecha B. Y la microintervención cabe en sus cuatro semanas sin joroba.
+  <strong>Las reglas del renglón honesto.</strong> Cada actividad deja algo que se puede enseñar (una lista, cuarenta cajetes, una foto, un acta). Cada renglón tiene un nombre o un cargo, no "el equipo". Lo que depende de otro renglón empieza cuando ese termina. Y el año no se amontona en diciembre.
 </div>
 
 <div class="caja ejemplo">
   <div class="etq">Así se ve uno hecho · la sombra del manantial</div>
-  <p>El proyecto del manantial, el de los gimnasios: una sombra de malla con piso de tarimas junto al manantial, en las cuatro semanas de la microintervención. Cada renglón es una actividad que deja algo, con un nombre y con lo que tiene que estar listo antes. Así se ven tres de sus nueve renglones:</p>
+  <p>El proyecto del manantial, el de los gimnasios: una sombra de malla con piso de tarimas junto al manantial, hecha en el primer semestre de 2027. Cada renglón es una actividad que deja algo, con un nombre y con lo que tiene que estar listo antes. Así se ven tres de sus nueve renglones:</p>
   <table class="ej">
-    <tr><th>#</th><th>Actividad</th><th>Producto que deja</th><th>Responsable</th><th>Depende de</th><th>Cuándo</th><th>¿Se moja?</th></tr>
-    <tr><td>2</td><td>Pedir tres cotizaciones de malla, postes y cemento</td><td>Tres cotizaciones por escrito</td><td>quien lleva los números</td><td></td><td>semana 1</td><td>no</td></tr>
-    <tr><td>4</td><td>Comprar el material</td><td>Factura</td><td>quien lleva los números</td><td>2 (y la ministración)</td><td>semana 2</td><td>no</td></tr>
-    <tr><td>7</td><td>Faena 1: hincar postes y colar las bases</td><td>Foto y lista de asistencia</td><td>la faena, convocada por el comité</td><td>5, 6</td><td>semana 3</td><td>sí · fecha B: el domingo siguiente</td></tr>
+    <tr><th>#</th><th>Actividad</th><th>Producto que deja</th><th>Responsable</th><th>Depende de</th><th>Cuándo</th></tr>
+    <tr><td>2</td><td>Pedir tres cotizaciones de malla, postes y cemento</td><td>Tres cotizaciones por escrito</td><td>quien lleva los números</td><td></td><td>enero</td></tr>
+    <tr><td>4</td><td>Comprar el material, cuando llegue el dinero</td><td>Factura</td><td>quien lleva los números</td><td>2</td><td>marzo</td></tr>
+    <tr><td>7</td><td>Faena 1: hincar postes y colar las bases</td><td>Foto y lista de asistencia</td><td>la faena, convocada por el comité</td><td>5, 6</td><td>abril</td></tr>
   </table>
-  <p>Lo que van a hacer ustedes es lo mismo con su componente de La Florida: abrir cada pieza en actividades, ponerles producto, nombre, dependencia y fecha, y ver si cabe. La hoja dibuja la gráfica y les dice dónde hay una ilusión. <button class="btn claro chico" id="verEjemplo">Cargar el ejemplo completo para verlo dibujado</button> <span class="ayuda">(reemplaza lo que haya en la tabla; después carguen su componente)</span></p>
+  <p>Lo que van a hacer ustedes es lo mismo con su componente de La Florida: abrir cada pieza en actividades, ponerles producto, nombre, dependencia y mes, y ver cómo se reparte el año. La hoja dibuja la gráfica y les dice si hay una ilusión. <button class="btn claro chico" id="verEjemplo">Cargar el ejemplo completo para verlo dibujado</button> <span class="ayuda">(reemplaza lo que haya en la tabla; después carguen su componente)</span></p>
 </div>
 
-<h2><span class="n">1</span>El equipo y las fechas que mandan</h2>
+<h2><span class="n">1</span>El equipo y su componente</h2>
 <div class="caja">
   <div class="fila-datos">
     <div><label>Equipo (nombre corto)</label><input type="text" id="equipo" placeholder="como en la carpeta"></div>
@@ -108,51 +102,44 @@
         <option value="4">4 · El espacio se mantiene seguro y limpio</option>
         <option value="5">5 · Espacios de convivencia y descanso</option>
       </select></div>
-    <div><label>Visita a la orilla (hito)</label><input type="date" id="visita" value="2026-11-13"></div>
-    <div><label>Arranca la microintervención (semana 1 de 4)</label><input type="date" id="inicioMicro" value="2026-11-16"></div>
-    <div><label>Hasta cuándo se dibuja el proyecto de la línea</label><input type="date" id="finLinea" value="2027-09-30"></div>
   </div>
-  <p class="ayuda" style="margin-bottom:0">Las fechas son las del calendario real: la visita del viernes 13 de noviembre es el hito que los dos horizontes comparten. Si la Coordinación mueve la ministración, se mueve aquí la semana 1 y la gráfica se recorre sola.</p>
+  <p class="ayuda" style="margin-bottom:0">El cronograma va de enero a diciembre de 2027. Las lluvias de junio a octubre y las secas del resto del año están pintadas en la gráfica: lo que se siembra espera la lluvia, lo que se construye busca la seca.</p>
   <button class="btn claro" id="cargar">Cargar las actividades del marco lógico de este componente</button>
-  <span class="ayuda">Vienen de lo que su equipo ya escribió en el marco; donde el marco está vacío, vienen propuestas del banco de ideas para corregir. Reemplaza lo que haya en la tabla.</span>
+  <span class="ayuda">Vienen de lo que su equipo escribió en el marco lógico de La Florida (versión del 5 de noviembre), acomodadas en los meses de 2027; donde el marco deja huecos, hay propuestas para corregir. Reemplaza lo que haya en la tabla.</span>
 </div>
 
 <h2><span class="n">2</span>Desmenuzar, ordenar y medir: la tabla</h2>
-<p class="sub">Una actividad por renglón. "Depende de" lleva los números de los renglones que tienen que terminar antes, separados por coma. La duración va en semanas (0.5 es media semana). Marca ¿Micro? en las que entran en la microintervención de cuatro semanas.</p>
+<p class="sub">Una actividad por renglón. "Depende de" lleva los números de los renglones que tienen que terminar antes, separados por coma. El mes en que empieza y cuántos meses dura (0.5 es medio mes).</p>
 <div class="envoltura">
 <table class="plan" id="tabla">
   <thead><tr>
-    <th>#</th><th style="min-width:110px">Pieza</th><th style="min-width:220px">Actividad</th><th style="min-width:160px">Producto que deja</th><th style="min-width:120px">Responsable</th><th style="width:80px">Depende de</th><th style="width:130px">Empieza</th><th style="width:70px">Semanas</th><th style="min-width:130px">¿Se moja? Fecha B</th><th>Micro</th><th></th>
+    <th>#</th><th style="min-width:110px">Pieza</th><th style="min-width:240px">Actividad</th><th style="min-width:170px">Producto que deja</th><th style="min-width:140px">Responsable</th><th style="width:85px">Depende de</th><th style="width:120px">Empieza en</th><th style="width:75px">Meses</th><th></th>
   </tr></thead>
   <tbody id="cuerpo"></tbody>
 </table>
 </div>
 <button class="btn" id="agregar">+ actividad</button>
-<button class="btn claro" id="ordenar">Ordenar por fecha</button>
+<button class="btn claro" id="ordenar">Ordenar por mes</button>
 
-<h2><span class="n">3</span>Dibujar: la gráfica</h2>
-<div class="pestanas">
-  <button class="activa" data-vista="linea">El proyecto de la línea (por meses)</button>
-  <button data-vista="micro">La microintervención (cuatro semanas)</button>
-</div>
+<h2><span class="n">3</span>Dibujar: el año 2027</h2>
 <div class="caja" style="padding:.6rem">
   <div id="gantt"></div>
-  <div class="leyenda"><span class="l1">actividad</span><span class="l2">se moja (con fecha B)</span><span class="l3">de la microintervención</span><span class="l4">temporada de lluvias</span><span class="l5">secas</span><span class="l6">hito</span></div>
+  <div class="leyenda"><span class="l1">actividad</span><span class="l4">temporada de lluvias</span><span class="l5">secas</span></div>
 </div>
 
-<h2><span class="n">4</span>Las cinco ilusiones, revisadas</h2>
+<h2><span class="n">4</span>Las dos ilusiones, revisadas</h2>
 <ul class="revision" id="revision"></ul>
 
-<h2><span class="n">5</span>Lo que tiene que estar hecho antes de la visita</h2>
+<h2><span class="n">5</span>Lo que se cruza con otros equipos</h2>
 <div class="caja">
-  <p class="ayuda" id="antesVisita"></p>
-  <label>Y lo que se tiene que pedir antes (oficio, cotización, permiso, cita):</label>
-  <textarea id="pedirAntes" placeholder="la anuencia a la delegación; la cotización del vivero; la cita con el encargado del municipio..."></textarea>
+  <label>Qué renglones de tu cronograma necesitan a otro componente, y en qué mes (el riego que hace la línea 2, los árboles de sombra que siembra la 1b junto a las bancas de la 5, la faena que convoca la delegación):</label>
+  <textarea id="cruces" placeholder="julio: la siembra de los árboles de sombra la hace el equipo de revegetación; de septiembre a diciembre: el riego lo lleva el grupo de cuidado..."></textarea>
+  <p class="ayuda" style="margin-bottom:0">Es lo que se lleva al muro cuando los cinco cronogramas se ponen juntos: donde dos equipos necesitan la misma faena el mismo mes, se negocia.</p>
 </div>
 
 <details>
   <summary>Si trabajan en cuaderno</summary>
-  <p>Una hoja horizontal. A la izquierda las actividades, una por renglón, con su producto y su responsable. Arriba las semanas (para la microintervención) o los meses (para la línea). Una barra por actividad. Luego tres filtros en orden: primero dependencias (¿qué necesita estar listo antes de cada renglón?), luego responsables (un nombre por renglón), luego el cielo (¿qué se hace a la intemperie y cuál es su fecha B?). Si la semana 4 quedó gorda, algo migra a la 1. Y un rombo en el 13 de noviembre.</p>
+  <p>Una hoja horizontal. A la izquierda las actividades, una por renglón, con su producto y su responsable. Arriba los doce meses de 2027, con las lluvias marcadas de junio a octubre. Una barra por actividad. Luego dos filtros en orden: primero responsables (un nombre por renglón), luego la joroba (si noviembre y diciembre quedaron gordos, algo migra al primer semestre).</p>
 </details>
 
 <div class="pie-acciones">
@@ -168,258 +155,194 @@
 <script>
 (function () {
   var CLAVE = 'gdp-cronograma-florida';
-  var SEM = 7 * 24 * 3600 * 1000;
-  var MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var MES3 = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
   var NOMBRE_COMP = { '1a':'1a · Contener la erosión de la orilla', '1b':'1b · Revegetar con especies nativas', '2':'2 · La comunidad cuida y vigila la orilla', '3':'3 · Recreación para las distintas edades', '4':'4 · El espacio se mantiene seguro y limpio', '5':'5 · Espacios de convivencia y descanso' };
 
-  /* Las actividades de arranque por componente. Las de 1a, 1b y 4 vienen del marco lógico
-     que los equipos escribieron; las de 2, 3 y 5 son propuestas del banco de ideas. Todas se corrigen. */
+  /* Las actividades de arranque por componente, acomodadas en 2027. Las de 1a, 1b y 4 vienen del
+     marco lógico que los equipos escribieron; las de 2, 3 y 5 son propuestas del banco de ideas. Todas se corrigen. */
   function base(c) {
-    var V = '2026-11-13', M = '2026-11-16';
     var comun = [
-      { pieza:'Línea base', actividad:'Levantar la línea base en la orilla con la hoja de observación (tres rondas de domingo)', producto:'Hoja de observación llena y en el Drive', responsable:'quien lleva la observación', depende:'', inicio:V, dur:0.5, moja:true, fechaB:'domingo siguiente', micro:true }
+      { pieza:'Línea base', actividad:'Levantar la línea base en la orilla con la hoja de observación (tres domingos)', producto:'Hoja de observación llena y en el Drive', responsable:'quien lleva la observación', depende:'', inicio:1, dur:1 }
     ];
     var por = {
       '1a': [
-        { pieza:'Acuerdo con ganaderos', actividad:'Acordar con los ganaderos la zona de abrevadero y el paso al agua', producto:'Minuta firmada', responsable:'quien da la cara', depende:'1', inicio:M, dur:2, moja:false, fechaB:'', micro:true },
-        { pieza:'Perímetro', actividad:'Delimitar el perímetro de protección de los 15 m² con estacas', producto:'Acta de delimitación y foto', responsable:'', depende:'2', inicio:'2026-11-30', dur:1, moja:true, fechaB:'', micro:true },
-        { pieza:'Fajinas', actividad:'Instalar las fajinas de rama en curvas de nivel, en faena', producto:'Foto antes y después, lista de asistencia', responsable:'', depende:'3', inicio:'2026-12-07', dur:1, moja:true, fechaB:'', micro:true },
-        { pieza:'Trampa de azolve', actividad:'Colocar la trampa de azolve de costales en la parte baja', producto:'Trampa instalada, foto', responsable:'', depende:'4', inicio:'2026-12-07', dur:1, moja:true, fechaB:'', micro:true },
-        { pieza:'Cerco', actividad:'Cercar el área contra el ganado (postes y alambre)', producto:'Cerco concluido, foto', responsable:'', depende:'2,3', inicio:'2027-01-11', dur:2, moja:true, fechaB:'', micro:false },
-        { pieza:'Estacas vivas', actividad:'Cortar e hincar estacas vivas de sauce y aile al pie del talud, en plena lluvia', producto:'Tramo de 5 m de estacas hincadas, foto', responsable:'', depende:'6', inicio:'2027-06-21', dur:2, moja:true, fechaB:'', micro:false },
-        { pieza:'Prendimiento', actividad:'Registrar el prendimiento de las estacas a los tres meses', producto:'Registro de prendimiento con fecha', responsable:'', depende:'7', inicio:'2027-09-20', dur:1, moja:false, fechaB:'', micro:false },
-        { pieza:'Informe', actividad:'Armar el informe fotográfico de antes y después con la bitácora de obra', producto:'Informe en el Drive', responsable:'', depende:'4,5,6', inicio:'2027-06-28', dur:1, moja:false, fechaB:'', micro:false }
+        { pieza:'Acuerdo con ganaderos', actividad:'Acordar con los ganaderos la zona de abrevadero y el paso al agua', producto:'Minuta o acuerdo firmado con los ganaderos', responsable:'quien da la cara', depende:'1', inicio:2, dur:1 },
+        { pieza:'Perímetro', actividad:'Delimitar el perímetro de protección de los 15 m² con estacas', producto:'Acta de delimitación perimetral y foto', responsable:'', depende:'2', inicio:3, dur:0.5 },
+        { pieza:'Fajinas', actividad:'Instalar las fajinas de rama en curvas de nivel, en faena', producto:'Foto antes y después, lista de asistencia georreferenciada', responsable:'', depende:'3', inicio:3, dur:1 },
+        { pieza:'Trampa de azolve', actividad:'Colocar la trampa de azolve de costales en la parte baja', producto:'Trampa instalada, foto', responsable:'', depende:'4', inicio:4, dur:0.5 },
+        { pieza:'Cerco', actividad:'Establecer el cerco de estacas vivas o alambre para excluir al ganado', producto:'Cerco concluido, foto', responsable:'', depende:'2,3', inicio:4, dur:1.5 },
+        { pieza:'Estacas vivas', actividad:'Cortar e hincar estacas vivas de sauce y aile al pie del talud, con las primeras lluvias', producto:'Tramo de 5 m de estacas hincadas, foto', responsable:'', depende:'6', inicio:6, dur:1 },
+        { pieza:'Informe', actividad:'Armar el informe fotográfico de antes y después con la bitácora de obra (entrega: 30 de junio)', producto:'Informe en el Drive', responsable:'', depende:'4,5,6,7', inicio:7, dur:0.5 },
+        { pieza:'Prendimiento', actividad:'Registrar el prendimiento de las estacas a los tres meses', producto:'Registro de prendimiento con fecha', responsable:'', depende:'7', inicio:9, dur:0.5 }
       ],
       '1b': [
-        { pieza:'Plantas', actividad:'Pedir al vivero la lista de especies nativas (encino, cedro blanco, tepame, huizache, sauce, aile, jarilla)', producto:'Remisión o cotización del vivero', responsable:'', depende:'1', inicio:M, dur:2, moja:false, fechaB:'', micro:true },
-        { pieza:'Corredores', actividad:'Trazar los dos corredores de monte entre el humedal, el arroyo y el encinar', producto:'Plano con el trazo', responsable:'', depende:'1', inicio:'2027-01-18', dur:2, moja:true, fechaB:'', micro:false },
-        { pieza:'Corredores', actividad:'Cercar los corredores contra el ganado', producto:'Cerco, foto desde el punto fijo', responsable:'', depende:'3', inicio:'2027-02-08', dur:3, moja:true, fechaB:'', micro:false },
-        { pieza:'Siembra', actividad:'Hacer los cuarenta cajetes sobre el suelo retenido, en faena', producto:'Cuarenta cajetes, foto', responsable:'', depende:'2', inicio:'2027-05-24', dur:1, moja:true, fechaB:'', micro:false },
-        { pieza:'Siembra', actividad:'Convocar la faena de siembra por la delegación', producto:'Aviso de la delegación', responsable:'quien da la cara', depende:'5', inicio:'2027-06-07', dur:1, moja:false, fechaB:'', micro:false },
-        { pieza:'Siembra', actividad:'Sembrar los cuarenta árboles al inicio de las lluvias', producto:'Lista de asistencia, foto desde el punto fijo', responsable:'', depende:'2,5,6', inicio:'2027-06-21', dur:1, moja:true, fechaB:'', micro:false },
-        { pieza:'Sombra', actividad:'Plantar tres árboles de sombra del lado poniente junto a cada banca', producto:'Árboles sembrados, foto', responsable:'', depende:'7', inicio:'2027-06-28', dur:1, moja:true, fechaB:'', micro:false },
-        { pieza:'Riego', actividad:'Riego de auxilio el primer año, con el grupo de cuidado', producto:'Bitácora de riego', responsable:'grupo de cuidado (línea 2)', depende:'7', inicio:'2027-07-05', dur:12, moja:false, fechaB:'', micro:false },
-        { pieza:'Conteo', actividad:'Contar las plantas vivas a los tres meses y leer la tabla en asamblea', producto:'Tabla de plantas vivas, minuta de asamblea', responsable:'', depende:'7', inicio:'2027-09-20', dur:1, moja:false, fechaB:'', micro:false }
+        { pieza:'Plantas', actividad:'Seleccionar y pedir al vivero las especies nativas (encino, cedro blanco, tepame, huizache, sauce, aile, jarilla)', producto:'Remisión o ticket del vivero', responsable:'', depende:'1', inicio:1, dur:1 },
+        { pieza:'Corredores', actividad:'Trazar los dos corredores de monte (franjas de 15 a 20 m) entre el humedal, el arroyo y el encinar', producto:'Plano con el trazo', responsable:'', depende:'1', inicio:2, dur:1 },
+        { pieza:'Corredores', actividad:'Cercar los corredores contra el ganado', producto:'Cerco, foto desde el punto fijo', responsable:'', depende:'3', inicio:3, dur:1.5 },
+        { pieza:'Siembra', actividad:'Hacer los cuarenta cajetes sobre el suelo retenido, en faena', producto:'Cuarenta cajetes, foto', responsable:'', depende:'2', inicio:5, dur:0.5 },
+        { pieza:'Siembra', actividad:'Convocar la faena de siembra por la delegación', producto:'Aviso de la delegación', responsable:'quien da la cara', depende:'5', inicio:5, dur:0.5 },
+        { pieza:'Siembra', actividad:'Sembrar los cuarenta árboles con cajete al inicio de las lluvias (meta: 30 de junio)', producto:'Lista de asistencia, foto desde el punto fijo', responsable:'', depende:'2,5,6', inicio:6, dur:0.5 },
+        { pieza:'Sombra', actividad:'Plantar tres árboles de sombra del lado poniente junto a cada sombra o banca', producto:'Árboles sembrados, foto', responsable:'', depende:'7', inicio:6, dur:0.5 },
+        { pieza:'Conteo', actividad:'Contar las plantas vivas a los tres meses y leer la tabla en asamblea (meta: 30 vivos)', producto:'Tabla de plantas vivas, acta de lectura en asamblea', responsable:'', depende:'7', inicio:9, dur:0.5 },
+        { pieza:'Riego', actividad:'Riego de auxilio en la seca, con el comité de vigilancia', producto:'Bitácora de riego', responsable:'comité de vigilancia (componente 2)', depende:'7', inicio:10, dur:3 }
       ],
       '2': [
-        { pieza:'Anuencia', actividad:'Entregar en mano el oficio de anuencia a la delegación', producto:'Oficio con acuse', responsable:'quien da la cara', depende:'', inicio:V, dur:1, moja:false, fechaB:'', micro:true },
-        { pieza:'Grupo de cuidado', actividad:'Convocar, por la delegación, la reunión para formar el grupo de cuidado de la orilla', producto:'Aviso y lista de asistencia', responsable:'', depende:'1,2', inicio:M, dur:2, moja:false, fechaB:'', micro:true },
-        { pieza:'Grupo de cuidado', actividad:'Acordar los turnos de riego, vaciado de botes y vigilancia', producto:'Acta de acuerdo con turnos', responsable:'', depende:'3', inicio:'2026-11-30', dur:1, moja:false, fechaB:'', micro:true },
-        { pieza:'Letreros', actividad:'Pintar y colocar los letreros de las cinco áreas con el acuerdo escrito', producto:'Letreros colocados, foto', responsable:'', depende:'4', inicio:'2026-12-07', dur:1, moja:true, fechaB:'', micro:true },
-        { pieza:'Bitácora', actividad:'Primera ronda de cuidado con bitácora (quién, cuándo, qué se hizo)', producto:'Bitácora de cuidado', responsable:'', depende:'4', inicio:'2026-12-07', dur:4, moja:false, fechaB:'', micro:true },
-        { pieza:'Asamblea', actividad:'Leer el acuerdo y la bitácora en la asamblea de la comunidad', producto:'Minuta de la asamblea', responsable:'', depende:'6', inicio:'2027-01-18', dur:1, moja:false, fechaB:'', micro:false }
+        { pieza:'Censo', actividad:'Censo de quién cuida hoy la orilla, estado de la orilla (basura, erosión, accesos) y usos actuales', producto:'Ficha del censo con fotos', responsable:'', depende:'1', inicio:1, dur:1.5 },
+        { pieza:'Invitación', actividad:'Invitación directa a vecinos y usuarios de la presa, y registro de interesados', producto:'Lista de interesados', responsable:'', depende:'2', inicio:2, dur:1 },
+        { pieza:'Autoridad', actividad:'Informar al comisariado o delegado sobre el grupo y sus recorridos, sin pedir asamblea', producto:'Oficio o minuta con acuse', responsable:'quien da la cara', depende:'3', inicio:3, dur:0.5 },
+        { pieza:'Comité', actividad:'Constituir el comité de vigilancia de la orilla con gente de La Florida y comunidades vecinas', producto:'Acta de constitución del comité', responsable:'', depende:'3,4', inicio:3, dur:0.5 },
+        { pieza:'Comité', actividad:'Acordar con el comité los turnos, la ruta de los recorridos y a quién se reporta cada hallazgo', producto:'Acuerdo de turnos y ruta', responsable:'', depende:'5', inicio:4, dur:0.5 },
+        { pieza:'Recorridos', actividad:'Recorridos del comité con bitácora (fecha, participantes, hallazgos: basura, fauna, daños, personas ajenas)', producto:'Bitácora de recorridos', responsable:'el comité de vigilancia', depende:'6', inicio:4, dur:9 },
+        { pieza:'Revisión', actividad:'Revisar la bitácora con el comité y leer los hallazgos en asamblea', producto:'Minuta de la asamblea', responsable:'', depende:'7', inicio:7, dur:0.5 },
+        { pieza:'Entrega', actividad:'Recibir del componente 5 los espacios de convivencia, con acta y calendario de revisión', producto:'Acta de entrega-recepción', responsable:'', depende:'5', inicio:5, dur:0.5 }
       ],
       '3': [
-        { pieza:'Dato del agua', actividad:'Pedir por oficio el dato de nivel y calidad del agua de la presa', producto:'Oficio con acuse; el dato cuando llegue', responsable:'quien da la cara', depende:'', inicio:M, dur:6, moja:false, fechaB:'', micro:false },
-        { pieza:'Senderos', actividad:'Trazar y señalar las tres rutas de senderismo lejos del agua', producto:'Croquis y señales colocadas', responsable:'', depende:'1', inicio:'2026-11-23', dur:3, moja:true, fechaB:'', micro:true },
-        { pieza:'Jornada', actividad:'Jornada de juegos para distintas edades en el llanito, con la gente', producto:'Lista de asistencia, fotos, conteo por edades', responsable:'', depende:'3', inicio:'2026-12-05', dur:1, moja:true, fechaB:'', micro:true },
-        { pieza:'Muelle', actividad:'Diseñar el muelle de 8 por 4 con el dato del agua en la mano', producto:'Plano con medidas', responsable:'', depende:'2', inicio:'2027-02-01', dur:4, moja:false, fechaB:'', micro:false },
-        { pieza:'Muelle', actividad:'Gestionar la anuencia y el permiso para el muelle', producto:'Permiso o constancia de trámite', responsable:'quien da la cara', depende:'5', inicio:'2027-03-01', dur:8, moja:false, fechaB:'', micro:false },
-        { pieza:'Muelle', actividad:'Construir el muelle en secas, con el nivel bajo', producto:'Muelle, informe fotográfico', responsable:'', depende:'6', inicio:'2027-04-26', dur:4, moja:true, fechaB:'', micro:false },
-        { pieza:'Boyas', actividad:'Colocar las cinco boyas con nivel de profundidad', producto:'Boyas colocadas, foto', responsable:'', depende:'7', inicio:'2027-05-24', dur:1, moja:true, fechaB:'', micro:false }
+        { pieza:'Dato del agua', actividad:'Pedir por oficio el dato de nivel y calidad del agua de la presa', producto:'Oficio con acuse; el dato cuando llegue', responsable:'quien da la cara', depende:'', inicio:1, dur:2 },
+        { pieza:'Senderos', actividad:'Recorrer la zona de los pinos y trazar las tres rutas de senderismo', producto:'Croquis de las tres rutas', responsable:'', depende:'1', inicio:2, dur:1 },
+        { pieza:'Senderos', actividad:'Señalar las tres rutas (señales, marcas y puntos de descanso)', producto:'Señales colocadas, foto', responsable:'', depende:'3', inicio:3, dur:1.5 },
+        { pieza:'Muelle', actividad:'Diseñar el muelle de 8 por 4 m con el dato del agua en la mano', producto:'Plano con medidas', responsable:'', depende:'2', inicio:3, dur:1 },
+        { pieza:'Muelle', actividad:'Gestionar la anuencia del ejido y el permiso de CONAGUA para el muelle', producto:'Permiso o constancia de trámite', responsable:'quien da la cara', depende:'5', inicio:3, dur:2 },
+        { pieza:'Muelle', actividad:'Construir el muelle en secas, antes de las lluvias (meta: finales de mayo)', producto:'Muelle de 32 m², informe fotográfico', responsable:'', depende:'6', inicio:5, dur:1 },
+        { pieza:'Boyas', actividad:'Colocar las cinco boyas con nivel de profundidad en las zonas estratégicas', producto:'Boyas colocadas, foto', responsable:'', depende:'7', inicio:5, dur:0.5 },
+        { pieza:'Estreno', actividad:'Jornada de estreno: caminata por las rutas y conteo de quién vino, por edades', producto:'Lista de asistencia, fotos, conteo', responsable:'', depende:'4,8', inicio:6, dur:0.5 },
+        { pieza:'Revisión', actividad:'Revisar muelle, boyas y señales después de la temporada de lluvias', producto:'Ficha de estado con fotos', responsable:'', depende:'9', inicio:10, dur:0.5 }
       ],
       '4': [
-        { pieza:'Cotizaciones', actividad:'Cotizar contenedores, lámparas solares y fantasmas luminiscentes (tres por rubro)', producto:'Tres cotizaciones por escrito', responsable:'quien lleva los números', depende:'', inicio:M, dur:1, moja:false, fechaB:'', micro:true },
-        { pieza:'Recolección', actividad:'Gestionar con el municipio la ruta de recolección de residuos', producto:'Oficio con respuesta', responsable:'quien da la cara', depende:'', inicio:M, dur:4, moja:false, fechaB:'', micro:true },
-        { pieza:'Contenedores', actividad:'Colocar los nueve contenedores en las áreas principales, separando residuos', producto:'Contenedores instalados, foto por área', responsable:'', depende:'2,3', inicio:'2026-11-30', dur:1, moja:true, fechaB:'', micro:true },
-        { pieza:'Fantasmas', actividad:'Instalar los fantasmas luminiscentes en el perímetro de la presa', producto:'Fantasmas instalados, foto de noche', responsable:'', depende:'2', inicio:'2026-12-07', dur:1, moja:true, fechaB:'', micro:true },
-        { pieza:'Lámparas', actividad:'Colocar las cinco lámparas solares en las zonas más frecuentadas', producto:'Lámparas instaladas, foto', responsable:'', depende:'2', inicio:'2027-01-11', dur:2, moja:true, fechaB:'', micro:false },
-        { pieza:'Sanitarios', actividad:'Acordar con propietarios aledaños el servicio de sanitario público', producto:'Acuerdo firmado', responsable:'quien da la cara', depende:'', inicio:'2026-12-01', dur:4, moja:false, fechaB:'', micro:false },
-        { pieza:'Trancas', actividad:'Colocar trancas para que el ganado no entre a la zona del vertedor', producto:'Trancas colocadas, foto', responsable:'', depende:'', inicio:'2027-02-08', dur:1, moja:true, fechaB:'', micro:false },
-        { pieza:'Barreras vivas', actividad:'Sembrar barreras vivas en las zonas con riesgo de caída, con la lluvia', producto:'Barreras sembradas, foto', responsable:'', depende:'', inicio:'2027-06-21', dur:2, moja:true, fechaB:'', micro:false }
+        { pieza:'Cotizaciones', actividad:'Cotizar contenedores, lámparas solares y fantasmas luminiscentes (tres por rubro)', producto:'Tres cotizaciones por escrito', responsable:'quien lleva los números', depende:'', inicio:1, dur:1 },
+        { pieza:'Recolección', actividad:'Gestionar con el municipio la ruta de recolección de residuos', producto:'Oficio con respuesta', responsable:'quien da la cara', depende:'', inicio:1, dur:2 },
+        { pieza:'Contenedores', actividad:'Colocar los nueve contenedores en las áreas principales, separando residuos', producto:'Contenedores instalados, foto por área', responsable:'', depende:'2,3', inicio:3, dur:0.5 },
+        { pieza:'Fantasmas', actividad:'Instalar los fantasmas luminiscentes en el perímetro de la presa', producto:'Fantasmas instalados, foto de noche', responsable:'', depende:'2', inicio:3, dur:0.5 },
+        { pieza:'Lámparas', actividad:'Colocar las cinco lámparas solares en las zonas más frecuentadas', producto:'Lámparas instaladas, foto', responsable:'', depende:'2', inicio:4, dur:1 },
+        { pieza:'Sanitarios', actividad:'Acordar con propietarios aledaños el servicio de sanitario público', producto:'Acuerdo firmado', responsable:'quien da la cara', depende:'', inicio:2, dur:2 },
+        { pieza:'Trancas', actividad:'Colocar trancas para que el ganado no entre a la zona del vertedor', producto:'Trancas colocadas, foto', responsable:'', depende:'', inicio:5, dur:0.5 },
+        { pieza:'Barreras vivas', actividad:'Sembrar barreras vivas en las zonas con riesgo de caída, con la lluvia', producto:'Barreras sembradas, foto', responsable:'', depende:'', inicio:7, dur:1 }
       ],
       '5': [
-        { pieza:'Sitio', actividad:'Elegir con la gente, el día de la visita, dónde van las bancas y la sombra', producto:'Croquis con las marcas de la gente', responsable:'', depende:'', inicio:V, dur:1, moja:false, fechaB:'', micro:true },
-        { pieza:'Bancas', actividad:'Conseguir tarimas y troncos para las bancas (trato con la bodega)', producto:'Nota firmada y foto del material', responsable:'quien da la cara', depende:'2', inicio:M, dur:2, moja:false, fechaB:'', micro:true },
-        { pieza:'Bancas', actividad:'Armar y colocar tres bancas en faena', producto:'Tres bancas, lista de asistencia', responsable:'', depende:'3', inicio:'2026-11-30', dur:1, moja:true, fechaB:'', micro:true },
-        { pieza:'Sombra', actividad:'Instalar una sombra temporal de malla junto a las bancas', producto:'Sombra instalada, foto', responsable:'', depende:'4', inicio:'2026-12-07', dur:1, moja:true, fechaB:'', micro:true },
-        { pieza:'Convivio', actividad:'Convivio de estreno con la comunidad, con conteo de quién vino', producto:'Fotos y conteo por edades', responsable:'', depende:'4,5', inicio:'2026-12-12', dur:1, moja:true, fechaB:'', micro:true },
-        { pieza:'Sombra', actividad:'Sembrar árboles de sombra junto a las bancas (con el equipo de revegetación)', producto:'Árboles sembrados, foto', responsable:'', depende:'4', inicio:'2027-06-21', dur:1, moja:true, fechaB:'', micro:false },
-        { pieza:'Estructura', actividad:'Gestionar el permiso y construir la estructura de sombra permanente', producto:'Permiso y obra, informe fotográfico', responsable:'', depende:'6', inicio:'2027-03-01', dur:8, moja:true, fechaB:'', micro:false }
+        { pieza:'Sitios', actividad:'Preguntar a los vecinos dónde quieren sombra y bancas y para qué las usarán (mapeo en la orilla un domingo); marcar sitios fuera de la ribera en restauración y arriba de la cota de crecida', producto:'Mapa con los sitios marcados y lista de vecinos participantes', responsable:'el equipo con el comité del componente 2', depende:'1', inicio:3, dur:0.5 },
+        { pieza:'Permisos', actividad:'Presentar el croquis y la ficha de las estructuras al comisariado ejidal y consultar a CONAGUA y CONANP; obtener el visto bueno por escrito', producto:'Oficio de solicitud con sello y oficio de visto bueno', responsable:'coordinación del equipo', depende:'2', inicio:3, dur:1 },
+        { pieza:'Materiales', actividad:'Conseguir los materiales: postes y troncos de aprovechamiento autorizado o de poda, palma, tablones, alambre y herramienta; pedir donación al municipio y al ejido', producto:'Notas de compra, oficio de donación o remisión', responsable:'equipo', depende:'3', inicio:4, dur:1 },
+        { pieza:'Palapas', actividad:'Construir en faena las tres palapas de 4 por 4 con su mesa y dos bancas, postes hincados y apisonados sin concreto', producto:'Listas de asistencia y fotos georreferenciadas de cada palapa', responsable:'equipo y vecinos', depende:'4', inicio:4, dur:2 },
+        { pieza:'Bancas', actividad:'Colocar las diez bancas de la orilla, dos por área, donde el componente 1b planta los árboles de sombra', producto:'Fotos georreferenciadas de cada banca', responsable:'equipo y vecinos', depende:'4', inicio:5, dur:1 },
+        { pieza:'Explanada', actividad:'Nivelar y limpiar la explanada de 200 m², sin quitar vegetación nativa', producto:'Fotos de antes y después desde punto fijo', responsable:'equipo y vecinos', depende:'2', inicio:5, dur:1 },
+        { pieza:'Entrega', actividad:'Redactar con el comité el reglamento de uso, colocar el letrero y entregar los espacios con acta y calendario de revisión (31 de mayo)', producto:'Reglamento firmado, foto del letrero, acta de entrega', responsable:'equipo y comité del componente 2', depende:'5,6,7', inicio:5, dur:1 },
+        { pieza:'Revisión', actividad:'Revisar el estado de las piezas después de la primera temporada de lluvias', producto:'Ficha de estado de las piezas', responsable:'', depende:'8', inicio:10, dur:0.5 }
       ]
     };
     return comun.concat(por[c] || []);
   }
 
-  /* El ejemplo completo: la sombra del manantial, en las cuatro semanas. */
+  /* El ejemplo completo: la sombra del manantial, en el primer semestre de 2027. */
   function ejemploManantial() {
     return [
-      { pieza:'Anuencia', actividad:'Entregar el oficio de anuencia al comité del agua', producto:'Oficio con acuse', responsable:'quien da la cara', depende:'', inicio:'2026-11-16', dur:0.5, moja:false, fechaB:'', micro:true },
-      { pieza:'Cotizaciones', actividad:'Pedir tres cotizaciones de malla sombra, postes y cemento', producto:'Tres cotizaciones por escrito', responsable:'quien lleva los números', depende:'', inicio:'2026-11-16', dur:1, moja:false, fechaB:'', micro:true },
-      { pieza:'Tarimas', actividad:'Hacer el trato por las doce tarimas de la bodega (las barremos, nos las llevamos)', producto:'Nota firmada y foto', responsable:'quien da la cara', depende:'', inicio:'2026-11-18', dur:1.5, moja:false, fechaB:'', micro:true },
-      { pieza:'Material', actividad:'Comprar la malla, los postes y el cemento, en cuanto llegue la ministración', producto:'Factura', responsable:'quien lleva los números', depende:'2', inicio:'2026-11-23', dur:0.5, moja:false, fechaB:'', micro:true },
-      { pieza:'Material', actividad:'Flete del material de la cabecera a la orilla del manantial', producto:'Nota del fletero y foto del material en el sitio', responsable:'quien lleva los números', depende:'4', inicio:'2026-11-26', dur:0.5, moja:false, fechaB:'', micro:true },
-      { pieza:'Faena', actividad:'Convocar la faena por el comité del agua, con una semana de aviso', producto:'Aviso del comité', responsable:'quien da la cara', depende:'1', inicio:'2026-11-23', dur:1, moja:false, fechaB:'', micro:true },
-      { pieza:'Sombra', actividad:'Faena 1: hincar los postes y colar las bases', producto:'Foto y lista de asistencia', responsable:'la faena, convocada por el comité', depende:'5,6', inicio:'2026-11-30', dur:1, moja:true, fechaB:'el domingo siguiente', micro:true },
-      { pieza:'Sombra', actividad:'Faena 2: tender la malla y acomodar las tarimas', producto:'Foto y lista de asistencia', responsable:'la faena, convocada por el comité', depende:'3,7', inicio:'2026-12-07', dur:0.5, moja:true, fechaB:'el domingo siguiente', micro:true },
-      { pieza:'Estreno', actividad:'Estreno con la gente, conteo de quién vino y bitácora de cuidado', producto:'Conteo, fotos y bitácora', responsable:'quien lleva la observación', depende:'8', inicio:'2026-12-10', dur:0.5, moja:true, fechaB:'el domingo siguiente', micro:true }
+      { pieza:'Anuencia', actividad:'Entregar el oficio de anuencia al comité del agua', producto:'Oficio con acuse', responsable:'quien da la cara', depende:'', inicio:1, dur:0.5 },
+      { pieza:'Cotizaciones', actividad:'Pedir tres cotizaciones de malla sombra, postes y cemento', producto:'Tres cotizaciones por escrito', responsable:'quien lleva los números', depende:'', inicio:1, dur:1 },
+      { pieza:'Tarimas', actividad:'Hacer el trato por las doce tarimas de la bodega (las barremos, nos las llevamos)', producto:'Nota firmada y foto', responsable:'quien da la cara', depende:'', inicio:2, dur:1 },
+      { pieza:'Material', actividad:'Comprar la malla, los postes y el cemento, cuando llegue el dinero', producto:'Factura', responsable:'quien lleva los números', depende:'2', inicio:3, dur:0.5 },
+      { pieza:'Material', actividad:'Flete del material de la cabecera a la orilla del manantial', producto:'Nota del fletero y foto del material en el sitio', responsable:'quien lleva los números', depende:'4', inicio:3, dur:0.5 },
+      { pieza:'Faena', actividad:'Convocar la faena por el comité del agua, con dos semanas de aviso', producto:'Aviso del comité', responsable:'quien da la cara', depende:'1', inicio:3, dur:1 },
+      { pieza:'Sombra', actividad:'Faena 1: hincar los postes y colar las bases', producto:'Foto y lista de asistencia', responsable:'la faena, convocada por el comité', depende:'5,6', inicio:4, dur:0.5 },
+      { pieza:'Sombra', actividad:'Faena 2: tender la malla y acomodar las tarimas', producto:'Foto y lista de asistencia', responsable:'la faena, convocada por el comité', depende:'3,7', inicio:5, dur:0.5 },
+      { pieza:'Estreno', actividad:'Estreno con la gente, conteo de quién vino y bitácora de cuidado', producto:'Conteo, fotos y bitácora', responsable:'quien lleva la observación', depende:'8', inicio:6, dur:0.5 }
     ];
   }
 
   var estado = cargar();
-  var vista = 'linea';
   var $ = function (id) { return document.getElementById(id); };
 
   function cargar() {
-    try { var s = JSON.parse(localStorage.getItem(CLAVE)); if (s && s.filas) return s; } catch (e) {}
-    return { equipo:'', componente:'', visita:'2026-11-13', inicioMicro:'2026-11-16', finLinea:'2027-09-30', pedirAntes:'', filas:[], sig:1 };
+    try { var s = JSON.parse(localStorage.getItem(CLAVE)); if (s && s.filas && s.version === 2) return s; } catch (e) {}
+    return { version:2, equipo:'', componente:'', cruces:'', filas:[], sig:1 };
   }
   function guardar() {
     try { localStorage.setItem(CLAVE, JSON.stringify(estado)); $('guardado').textContent = 'Guardado en este navegador · ' + new Date().toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'}); } catch (e) { $('guardado').textContent = 'No se pudo guardar: descarga al terminar.'; }
   }
-  function fecha(iso) { if (!iso) return null; var p = iso.split('-'); return new Date(Date.UTC(+p[0], +p[1]-1, +p[2])); }
-  function iso(d) { return d.toISOString().slice(0,10); }
-  function fin(f) { var d = fecha(f.inicio); if (!d) return null; return new Date(d.getTime() + Math.max(0, +f.dur || 0) * SEM); }
-  function corta(d) { return d ? (d.getUTCDate() + ' ' + MESES[d.getUTCMonth()]) : ''; }
+  function ini(f) { return (+f.inicio || 0) - 1; }           /* enero = 0 */
+  function fin(f) { return ini(f) + Math.max(0, +f.dur || 0); } /* en meses desde enero */
   function sinDueno(r) { var t = (r || '').trim().toLowerCase(); return !t || /^(el )?equipo$|^todos$|^todas$|^nosotros$/.test(t); }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+  function cuando(f) { if (!f.inicio) return ''; var a = MESES[ini(f)], b = MESES[Math.min(11, Math.ceil(fin(f)) - 1)]; return a === b || !b ? a : a + ' a ' + b; }
 
   function nuevaFila(f) {
     f = f || {}; f.id = estado.sig++;
-    return { id:f.id, pieza:f.pieza||'', actividad:f.actividad||'', producto:f.producto||'', responsable:f.responsable||'', depende:f.depende||'', inicio:f.inicio||'', dur:(f.dur===undefined?1:f.dur), moja:!!f.moja, fechaB:f.fechaB||'', micro:!!f.micro };
+    return { id:f.id, pieza:f.pieza||'', actividad:f.actividad||'', producto:f.producto||'', responsable:f.responsable||'', depende:f.depende||'', inicio:f.inicio||0, dur:(f.dur===undefined?1:f.dur) };
   }
   function cargarBase() {
     var c = $('componente').value;
     if (!c) { alert('Primero elige el componente.'); return; }
     if (estado.filas.length && !confirm('Esto reemplaza lo que hay en la tabla. ¿Seguimos?')) return;
     estado.sig = 1; estado.filas = base(c).map(nuevaFila);
-    // Las dependencias de la base están escritas con los números de renglón: coinciden con los ids recién creados.
     pintar(); guardar();
   }
 
   function pintar() {
-    $('equipo').value = estado.equipo; $('componente').value = estado.componente;
-    $('visita').value = estado.visita; $('inicioMicro').value = estado.inicioMicro; $('finLinea').value = estado.finLinea; $('pedirAntes').value = estado.pedirAntes;
+    $('equipo').value = estado.equipo; $('componente').value = estado.componente; $('cruces').value = estado.cruces;
     var cuerpo = $('cuerpo'); cuerpo.innerHTML = '';
     var problemas = revisar();
-    estado.filas.forEach(function (f, i) {
+    estado.filas.forEach(function (f) {
       var tr = document.createElement('tr'); tr.dataset.id = f.id;
-      if (f.micro) tr.classList.add('micro');
       if (problemas.porFila[f.id]) tr.classList.add('mal');
-      tr.innerHTML = '<td class="num" title="' + (problemas.porFila[f.id] || '') + '">' + f.id + '</td>'
+      var meses = '<option value="0">mes</option>' + MESES.map(function (m, i) { return '<option value="' + (i + 1) + '"' + (+f.inicio === i + 1 ? ' selected' : '') + '>' + m + '</option>'; }).join('');
+      tr.innerHTML = '<td class="num" title="' + esc(problemas.porFila[f.id] || '') + '">' + f.id + '</td>'
         + '<td><input type="text" data-k="pieza" value="' + esc(f.pieza) + '"></td>'
         + '<td><textarea data-k="actividad">' + esc(f.actividad) + '</textarea></td>'
         + '<td><textarea data-k="producto">' + esc(f.producto) + '</textarea></td>'
-        + '<td><input type="text" data-k="responsable" value="' + esc(f.responsable) + '" placeholder="un nombre"></td>'
+        + '<td><input type="text" data-k="responsable" value="' + esc(f.responsable) + '" placeholder="un nombre o un cargo"></td>'
         + '<td><input type="text" data-k="depende" value="' + esc(f.depende) + '" placeholder="2,3"></td>'
-        + '<td><input type="date" data-k="inicio" value="' + esc(f.inicio) + '"></td>'
-        + '<td><input type="number" data-k="dur" min="0" step="0.5" value="' + f.dur + '"></td>'
-        + '<td><label style="font-weight:normal;font-size:.85rem"><input type="checkbox" data-k="moja"' + (f.moja?' checked':'') + '> se moja</label><input type="text" data-k="fechaB" value="' + esc(f.fechaB) + '" placeholder="fecha B"' + (f.moja?'':' style="display:none"') + '></td>'
-        + '<td style="text-align:center"><input type="checkbox" data-k="micro"' + (f.micro?' checked':'') + '></td>'
+        + '<td><select data-k="inicio">' + meses + '</select></td>'
+        + '<td><input type="number" data-k="dur" min="0" max="12" step="0.5" value="' + f.dur + '"></td>'
         + '<td><button class="btn claro chico" data-quitar="' + f.id + '" title="quitar">×</button></td>';
       cuerpo.appendChild(tr);
     });
-    pintarGantt(); pintarRevision(problemas); pintarAntes();
+    pintarGantt(); pintarRevision(problemas);
   }
-  function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
 
-  /* Las cinco ilusiones y algunas más */
+  /* Las dos ilusiones */
   function revisar() {
-    var fs = estado.filas, porId = {}, porFila = {}, lista = [];
-    fs.forEach(function (f) { porId[f.id] = f; });
+    var fs = estado.filas, porFila = {}, lista = [];
     function marca(f, t) { porFila[f.id] = (porFila[f.id] ? porFila[f.id] + ' · ' : '') + t; }
-    var invertidas = [], sinD = [], sinProd = [], sinFecha = [], cielo = [], fuera = [], faenas = [];
+    var sinD = [], sinMes = [];
     fs.forEach(function (f) {
-      if (!f.inicio) { sinFecha.push(f); marca(f, 'sin fecha'); }
+      if (!f.inicio) { sinMes.push(f); marca(f, 'sin mes'); }
       if (sinDueno(f.responsable)) { sinD.push(f); marca(f, 'sin responsable'); }
-      if (!(f.producto || '').trim()) { sinProd.push(f); marca(f, 'no dice qué deja'); }
-      if (f.moja && !(f.fechaB || '').trim()) { cielo.push(f); marca(f, 'se moja y no tiene fecha B'); }
-      var ini = fecha(f.inicio);
-      (f.depende || '').split(/[,\s]+/).filter(Boolean).forEach(function (d) {
-        var p = porId[+d]; if (!p) return;
-        var fp = fin(p);
-        if (ini && fp && ini.getTime() + 24 * 3600 * 1000 < fp.getTime()) { invertidas.push([f, p]); marca(f, 'empieza antes de que termine la ' + p.id); }
-      });
-      if (f.micro && ini) {
-        var a = fecha(estado.inicioMicro), b = a ? new Date(a.getTime() + 4 * SEM) : null, ff = fin(f);
-        if (a && (ini < a && iso(ini) !== estado.visita) || (b && ff > b)) { fuera.push(f); marca(f, 'se sale de las cuatro semanas'); }
-      }
-      if (/faena|jornada|convivio/i.test(f.actividad) && !/convocar/i.test(f.actividad)) {
-        var convocada = fs.some(function (g) { return g !== f && /convoc|aviso|delegaci/i.test(g.actividad + ' ' + g.producto) && fecha(g.inicio) && ini && fecha(g.inicio) < ini; });
-        if (!convocada) { faenas.push(f); marca(f, 'faena sin convocatoria previa'); }
-      }
     });
-    // La joroba: de las actividades de la microintervención, cuántas terminan en la última semana.
-    var a = fecha(estado.inicioMicro), micro = fs.filter(function (f) { return f.micro && f.inicio; }), ultima = 0;
-    if (a) micro.forEach(function (f) { var ff = fin(f); if (ff > new Date(a.getTime() + 3 * SEM)) ultima++; });
-    var joroba = micro.length >= 3 && ultima / micro.length > 0.5;
-
-    lista.push(estadoDe(invertidas.length, 'La dependencia invertida', invertidas.length ? invertidas.map(function (p) { return 'la ' + p[0].id + ' empieza antes de que termine la ' + p[1].id; }).join('; ') + '.' : 'Ningún renglón empieza antes de que termine aquello de lo que depende.'));
-    lista.push(estadoDe(joroba ? 1 : 0, 'La joroba', joroba ? ultima + ' de ' + micro.length + ' actividades de la microintervención terminan en la última semana. Algo migra a la semana 1.' : (micro.length ? 'La microintervención no se amontona en la última semana.' : 'Marca cuáles actividades son de la microintervención para revisar la joroba.')));
-    lista.push(estadoDe(sinD.length, 'El renglón sin dueño', sinD.length ? 'Sin un nombre: ' + sinD.map(function (f) { return f.id; }).join(', ') + '. Lo que es de todos no es de nadie.' : 'Cada renglón tiene quien responda.'));
-    lista.push(estadoDe(faenas.length, 'La faena instantánea', faenas.length ? 'Las faenas ' + faenas.map(function (f) { return f.id; }).join(', ') + ' no tienen antes un renglón de convocatoria (y la convoca la autoridad).' : 'Toda faena tiene su convocatoria antes.', faenas.length ? 'ojo' : null));
-    lista.push(estadoDe(cielo.length, 'No creerle al cielo', cielo.length ? 'A la intemperie y sin fecha B: ' + cielo.map(function (f) { return f.id; }).join(', ') + '.' : 'Todo lo que se moja tiene fecha B.'));
-    if (sinProd.length) lista.push(estadoDe(1, 'Actividades que no dicen qué dejan', 'Renglones ' + sinProd.map(function (f) { return f.id; }).join(', ') + ': si no deja nada que se pueda enseñar, o son dos actividades o no es ninguna.'));
-    if (fuera.length) lista.push(estadoDe(1, 'Fuera de las cuatro semanas', 'Las actividades ' + fuera.map(function (f) { return f.id; }).join(', ') + ' están marcadas como microintervención pero se salen de la ventana que fijan las reglas.'));
-    if (sinFecha.length) lista.push(estadoDe(1, 'Sin fecha', 'Los renglones ' + sinFecha.map(function (f) { return f.id; }).join(', ') + ' no tienen fecha de inicio y no se dibujan.', 'ojo'));
+    var conMes = fs.filter(function (f) { return f.inicio; });
+    var alFinal = conMes.filter(function (f) { return fin(f) > 10; }); /* termina en noviembre o diciembre */
+    var joroba = conMes.length >= 3 && alFinal.length / conMes.length > 0.5;
+    if (joroba) alFinal.forEach(function (f) { marca(f, 'parte de la joroba'); });
+    lista.push({ clase: joroba ? 'mal' : 'bien', titulo:'La joroba', texto: joroba ? alFinal.length + ' de ' + conMes.length + ' actividades terminan en noviembre o diciembre. Ahí ya no hay margen para que algo salga mal: algo migra al primer semestre.' : (conMes.length ? 'El año no se amontona al final.' : 'Ponle mes a las actividades para revisar la joroba.') });
+    lista.push({ clase: sinD.length ? 'mal' : 'bien', titulo:'El renglón sin dueño', texto: sinD.length ? 'Sin un nombre o un cargo: ' + sinD.map(function (f) { return f.id; }).join(', ') + '. Lo que es de todos no es de nadie.' : 'Cada renglón tiene quien responda.' });
+    if (sinMes.length) lista.push({ clase:'ojo', titulo:'Sin mes', texto:'Los renglones ' + sinMes.map(function (f) { return f.id; }).join(', ') + ' no tienen mes de inicio y no se dibujan.' });
     return { lista:lista, porFila:porFila };
   }
-  function estadoDe(n, titulo, texto, clase) { return { clase: clase || (n ? 'mal' : 'bien'), titulo:titulo, texto:texto }; }
   function pintarRevision(p) {
     var ul = $('revision'); ul.innerHTML = '';
     if (!estado.filas.length) { ul.innerHTML = '<li class="ojo"><b>Todavía no hay actividades.</b> Elige el componente y carga las del marco lógico, o agrega la primera.</li>'; return; }
     p.lista.forEach(function (r) { var li = document.createElement('li'); li.className = r.clase; li.innerHTML = '<b>' + r.titulo + '</b>' + esc(r.texto); ul.appendChild(li); });
   }
-  function pintarAntes() {
-    var v = fecha(estado.visita), antes = estado.filas.filter(function (f) { var fi = fecha(f.inicio); return v && fi && fi <= v; });
-    $('antesVisita').textContent = antes.length ? 'Según la tabla, el día de la visita (' + corta(v) + ') ya están en marcha o hechas: ' + antes.map(function (f) { return f.id + ' (' + f.actividad.slice(0, 50) + (f.actividad.length > 50 ? '…' : '') + ')'; }).join('; ') + '. Lo que no está aquí y se necesita ese día, se planea hacia atrás.' : 'Según la tabla, ninguna actividad empieza antes de la visita. ¿Seguro? El pliego, el plano maestro impreso y el oficio de anuencia se llevan ese día.';
-  }
 
-  /* La gráfica */
+  /* La gráfica: los doce meses de 2027 */
   function pintarGantt() {
-    var cont = $('gantt'); var fs = estado.filas.filter(function (f) { return fecha(f.inicio); });
-    if (vista === 'micro') fs = fs.filter(function (f) { return f.micro; });
-    if (!fs.length) { cont.innerHTML = '<p class="ayuda" style="padding:.6rem">Nada que dibujar todavía' + (vista === 'micro' ? ': marca las actividades de la microintervención.' : '.') + '</p>'; return; }
-    var a, b;
-    if (vista === 'micro') { a = fecha(estado.inicioMicro); var v = fecha(estado.visita); if (v && v < a) a = new Date(v.getTime() - 2 * 24 * 3600 * 1000); b = new Date(fecha(estado.inicioMicro).getTime() + 4 * SEM); }
-    else {
-      a = new Date(Math.min.apply(null, fs.map(function (f) { return fecha(f.inicio).getTime(); }).concat([fecha(estado.visita) ? fecha(estado.visita).getTime() : Infinity])));
-      a = new Date(Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), 1));
-      b = fecha(estado.finLinea) || new Date(a.getTime() + 40 * SEM);
-      var maxFin = Math.max.apply(null, fs.map(function (f) { return fin(f).getTime(); })); if (maxFin > b.getTime()) b = new Date(maxFin);
-      b = new Date(Date.UTC(b.getUTCFullYear(), b.getUTCMonth() + 1, 1));
-    }
-    var W = 1100, izq = 330, der = 20, alto = 26, arriba = 46, H = arriba + fs.length * alto + 30;
-    var esc_ = (W - izq - der) / (b - a);
-    function x(d) { return izq + (d - a) * esc_; }
+    var cont = $('gantt'); var fs = estado.filas.filter(function (f) { return f.inicio; });
+    if (!fs.length) { cont.innerHTML = '<p class="ayuda" style="padding:.6rem">Nada que dibujar todavía: ponle mes a las actividades.</p>'; return; }
+    var W = 1100, izq = 340, der = 16, alto = 26, arriba = 46, H = arriba + fs.length * alto + 16;
+    var ancho = (W - izq - der) / 12;
+    function x(m) { return izq + m * ancho; }
     var s = '<svg class="gantt" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" font-family="Source Sans 3, Segoe UI, system-ui, sans-serif">';
-    // temporadas (lluvias junio a octubre)
-    if (vista === 'linea') {
-      var m = new Date(a.getTime());
-      while (m < b) {
-        var m2 = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 1)); var mes = m.getUTCMonth();
-        var lluvia = mes >= 5 && mes <= 9;
-        s += '<rect x="' + x(m) + '" y="' + (arriba - 8) + '" width="' + (x(m2) - x(m)) + '" height="' + (H - arriba) + '" fill="' + (lluvia ? '#DDEDE8' : '#FBEFD5') + '" opacity=".55"/>';
-        s += '<line x1="' + x(m) + '" y1="' + (arriba - 8) + '" x2="' + x(m) + '" y2="' + (H - 20) + '" stroke="#CFE3DD"/>';
-        s += '<text x="' + (x(m) + 4) + '" y="' + (arriba - 14) + '" font-size="12" fill="#45605a">' + MESES[mes] + (mes === 0 || m.getTime() === a.getTime() ? ' ' + m.getUTCFullYear() : '') + '</text>';
-        m = m2;
-      }
-    } else {
-      var w0 = fecha(estado.inicioMicro);
-      for (var k = 0; k < 4; k++) {
-        var wa = new Date(w0.getTime() + k * SEM), wb = new Date(w0.getTime() + (k + 1) * SEM);
-        s += '<rect x="' + x(wa) + '" y="' + (arriba - 8) + '" width="' + (x(wb) - x(wa)) + '" height="' + (H - arriba) + '" fill="' + (k % 2 ? '#F7FAF9' : '#fff') + '"/>';
-        s += '<line x1="' + x(wa) + '" y1="' + (arriba - 8) + '" x2="' + x(wa) + '" y2="' + (H - 20) + '" stroke="#CFE3DD"/>';
-        s += '<text x="' + (x(wa) + 4) + '" y="' + (arriba - 14) + '" font-size="12" fill="#45605a">semana ' + (k + 1) + ' · ' + corta(wa) + '</text>';
-      }
-      s += '<line x1="' + x(b) + '" y1="' + (arriba - 8) + '" x2="' + x(b) + '" y2="' + (H - 20) + '" stroke="#8A3B2B" stroke-width="2"/>';
+    for (var m = 0; m < 12; m++) {
+      var lluvia = m >= 5 && m <= 9;
+      s += '<rect x="' + x(m) + '" y="' + (arriba - 8) + '" width="' + ancho + '" height="' + (H - arriba + 2) + '" fill="' + (lluvia ? '#DDEDE8' : '#FBEFD5') + '" opacity=".55"/>';
+      s += '<line x1="' + x(m) + '" y1="' + (arriba - 8) + '" x2="' + x(m) + '" y2="' + (H - 6) + '" stroke="#CFE3DD"/>';
+      s += '<text x="' + (x(m) + 5) + '" y="' + (arriba - 14) + '" font-size="12" fill="#45605a">' + MES3[m] + (m === 0 ? ' 2027' : '') + '</text>';
     }
-    // hitos
-    [[estado.visita, 'visita a la orilla'], [estado.inicioMicro, 'arranca la micro']].forEach(function (h) {
-      var d = fecha(h[0]); if (!d || d < a || d > b) return;
-      s += '<line x1="' + x(d) + '" y1="' + (arriba - 8) + '" x2="' + x(d) + '" y2="' + (H - 20) + '" stroke="#8A3B2B" stroke-dasharray="4 4"/>';
-      s += '<polygon points="' + x(d) + ',' + (H - 26) + ' ' + (x(d) + 7) + ',' + (H - 19) + ' ' + x(d) + ',' + (H - 12) + ' ' + (x(d) - 7) + ',' + (H - 19) + '" fill="#8A3B2B"/>';
-      s += '<text x="' + (x(d) + 10) + '" y="' + (H - 15) + '" font-size="11" fill="#8A3B2B">' + h[1] + '</text>';
-    });
+    s += '<text x="' + (x(5) + 4) + '" y="' + (H - 1) + '" font-size="10" fill="#45605a">lluvias</text>';
     fs.forEach(function (f, i) {
-      var y = arriba + i * alto, d1 = fecha(f.inicio), d2 = fin(f);
-      var x1 = Math.max(izq, x(d1)), x2 = Math.min(W - der, x(d2)); if (x2 - x1 < 4) x2 = x1 + 4;
-      var nombre = f.id + ' · ' + f.actividad; if (nombre.length > 52) nombre = nombre.slice(0, 50) + '…';
+      var y = arriba + i * alto, x1 = x(ini(f)), x2 = x(Math.min(12, fin(f))); if (x2 - x1 < 4) x2 = x1 + 4;
+      var nombre = f.id + ' · ' + f.actividad; if (nombre.length > 54) nombre = nombre.slice(0, 52) + '…';
       s += '<text x="6" y="' + (y + 16) + '" font-size="12" fill="#0B3C49">' + esc(nombre) + '</text>';
-      var fill = f.micro ? '#D9A441' : '#0F6E6E';
-      if (f.moja) s += '<rect x="' + x1 + '" y="' + (y + 4) + '" width="' + (x2 - x1) + '" height="' + (alto - 9) + '" rx="5" fill="' + fill + '" fill-opacity=".35" stroke="' + fill + '" stroke-width="2" stroke-dasharray="5 4"/>';
-      else s += '<rect x="' + x1 + '" y="' + (y + 4) + '" width="' + (x2 - x1) + '" height="' + (alto - 9) + '" rx="5" fill="' + fill + '"/>';
-      if (!sinDueno(f.responsable)) s += '<text x="' + (x2 + 5) + '" y="' + (y + 16) + '" font-size="11" fill="#45605a">' + esc(f.responsable.slice(0, 22)) + '</text>';
-      else s += '<text x="' + (x2 + 5) + '" y="' + (y + 16) + '" font-size="11" fill="#8A3B2B">¿quién?</text>';
+      s += '<rect x="' + x1 + '" y="' + (y + 4) + '" width="' + (x2 - x1) + '" height="' + (alto - 9) + '" rx="5" fill="#0F6E6E"/>';
+      if (!sinDueno(f.responsable)) s += '<text x="' + (Math.min(x2 + 5, W - 120)) + '" y="' + (y + 16) + '" font-size="11" fill="#45605a">' + esc(f.responsable.slice(0, 22)) + '</text>';
+      else s += '<text x="' + (Math.min(x2 + 5, W - 60)) + '" y="' + (y + 16) + '" font-size="11" fill="#8A3B2B">¿quién?</text>';
     });
     s += '</svg>';
     cont.innerHTML = s;
@@ -430,51 +353,43 @@
     var el = e.target, tr = el.closest('tr'); if (!tr) return;
     var f = estado.filas.filter(function (x) { return x.id === +tr.dataset.id; })[0]; if (!f) return;
     var k = el.dataset.k; if (!k) return;
-    if (el.type === 'checkbox') f[k] = el.checked; else if (k === 'dur') f[k] = parseFloat(el.value) || 0; else f[k] = el.value;
-    if (k === 'moja') { tr.querySelector('[data-k=fechaB]').style.display = el.checked ? '' : 'none'; }
-    guardar();
-    if (el.type === 'checkbox' || el.type === 'date' || k === 'dur' || k === 'depende') { pintarSinTabla(); } else { pintarSinTabla(); }
+    if (k === 'dur') f[k] = parseFloat(el.value) || 0; else if (k === 'inicio') f[k] = parseInt(el.value, 10) || 0; else f[k] = el.value;
+    guardar(); refrescar();
   });
-  function pintarSinTabla() { var p = revisar(); pintarGantt(); pintarRevision(p); pintarAntes();
-    estado.filas.forEach(function (f) { var tr = $('cuerpo').querySelector('tr[data-id="' + f.id + '"]'); if (!tr) return; tr.classList.toggle('mal', !!p.porFila[f.id]); tr.classList.toggle('micro', f.micro); tr.querySelector('.num').title = p.porFila[f.id] || ''; }); }
+  function refrescar() { var p = revisar(); pintarGantt(); pintarRevision(p);
+    estado.filas.forEach(function (f) { var tr = $('cuerpo').querySelector('tr[data-id="' + f.id + '"]'); if (!tr) return; tr.classList.toggle('mal', !!p.porFila[f.id]); tr.querySelector('.num').title = p.porFila[f.id] || ''; }); }
   $('cuerpo').addEventListener('click', function (e) {
     var b = e.target.closest('[data-quitar]'); if (!b) return;
     var id = +b.dataset.quitar; estado.filas = estado.filas.filter(function (f) { return f.id !== id; }); pintar(); guardar();
   });
-  $('agregar').addEventListener('click', function () { estado.filas.push(nuevaFila({ inicio: estado.inicioMicro })); pintar(); guardar(); var ultimo = $('cuerpo').lastElementChild; if (ultimo) ultimo.querySelector('textarea').focus(); });
-  $('ordenar').addEventListener('click', function () { estado.filas.sort(function (p, q) { return (p.inicio || '9') < (q.inicio || '9') ? -1 : 1; }); pintar(); guardar(); });
+  $('agregar').addEventListener('click', function () { estado.filas.push(nuevaFila({})); pintar(); guardar(); var ultimo = $('cuerpo').lastElementChild; if (ultimo) ultimo.querySelector('textarea').focus(); });
+  $('ordenar').addEventListener('click', function () { estado.filas.sort(function (p, q) { return (p.inicio || 99) - (q.inicio || 99); }); pintar(); guardar(); });
   $('cargar').addEventListener('click', cargarBase);
   $('verEjemplo').addEventListener('click', function () {
     if (estado.filas.length && !confirm('Esto reemplaza lo que hay en la tabla por el ejemplo del manantial. ¿Seguimos?')) return;
-    estado.sig = 1; estado.filas = ejemploManantial().map(nuevaFila); estado.inicioMicro = '2026-11-16';
+    estado.sig = 1; estado.filas = ejemploManantial().map(nuevaFila);
     pintar(); guardar(); $('tabla').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
-  ['equipo', 'componente', 'visita', 'inicioMicro', 'finLinea', 'pedirAntes'].forEach(function (id) {
-    $(id).addEventListener('input', function () { estado[id] = $(id).value; guardar(); pintarSinTabla(); });
-  });
-  Array.prototype.forEach.call(document.querySelectorAll('.pestanas button'), function (b) {
-    b.addEventListener('click', function () { vista = b.dataset.vista; Array.prototype.forEach.call(document.querySelectorAll('.pestanas button'), function (o) { o.classList.toggle('activa', o === b); }); pintarGantt(); });
-  });
+  ['equipo', 'componente', 'cruces'].forEach(function (id) { $(id).addEventListener('input', function () { estado[id] = $(id).value; guardar(); }); });
   $('borrar').addEventListener('click', function () { if (confirm('Se borra todo el cronograma de este navegador. ¿Seguro?')) { localStorage.removeItem(CLAVE); estado = cargar(); pintar(); } });
 
   $('copiar').addEventListener('click', function () {
-    var t = ['#\tPieza\tActividad\tProducto que deja\tResponsable\tDepende de\tEmpieza\tSemanas\tSe moja / fecha B\tMicro'];
-    estado.filas.forEach(function (f) { t.push([f.id, f.pieza, f.actividad, f.producto, f.responsable, f.depende, f.inicio, f.dur, f.moja ? ('sí · ' + f.fechaB) : 'no', f.micro ? 'sí' : ''].join('\t')); });
+    var t = ['#\tPieza\tActividad\tProducto que deja\tResponsable\tDepende de\tCuándo (2027)\tMeses'];
+    estado.filas.forEach(function (f) { t.push([f.id, f.pieza, f.actividad, f.producto, f.responsable, f.depende, cuando(f), f.dur].join('\t')); });
     navigator.clipboard.writeText(t.join('\n')).then(function () { $('guardado').textContent = 'Tabla copiada: pégala en la pestaña 5 de la carpeta o en una hoja.'; }, function () { alert('No se pudo copiar; usa Descargar.'); });
   });
   $('descargar').addEventListener('click', function () {
-    var vistaAntes = vista; vista = 'linea'; pintarGantt(); var g1 = $('gantt').innerHTML; vista = 'micro'; pintarGantt(); var g2 = $('gantt').innerHTML; vista = vistaAntes; pintarGantt();
-    var p = revisar();
-    var filas = estado.filas.map(function (f) { return '<tr><td>' + f.id + '</td><td>' + esc(f.pieza) + '</td><td>' + esc(f.actividad) + '</td><td>' + esc(f.producto) + '</td><td>' + esc(f.responsable) + '</td><td>' + esc(f.depende) + '</td><td>' + esc(f.inicio) + '</td><td>' + f.dur + '</td><td>' + (f.moja ? 'sí · ' + esc(f.fechaB) : 'no') + '</td><td>' + (f.micro ? 'sí' : '') + '</td></tr>'; }).join('');
-    var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Cronograma · ' + esc(estado.equipo) + '</title><style>body{font-family:Segoe UI,system-ui,sans-serif;max-width:1100px;margin:1rem auto;padding:0 1rem;color:#1C2B28}h1,h2{font-family:Georgia,serif;color:#0B3C49}table{border-collapse:collapse;width:100%;font-size:.9rem}td,th{border:1px solid #CFE3DD;padding:.3rem .4rem;vertical-align:top;text-align:left}th{background:#F2F7F5}svg{width:100%;height:auto}ul li{margin:.3rem 0}.mal{color:#8A3B2B}.bien{color:#1F4A2C}</style></head><body>'
-      + '<h1>El cronograma de La Florida · ' + esc(estado.equipo) + '</h1><p>' + esc(NOMBRE_COMP[estado.componente] || '') + ' · descargado el ' + new Date().toLocaleDateString('es-MX') + ' · visita a la orilla: ' + esc(estado.visita) + ' · la microintervención arranca el ' + esc(estado.inicioMicro) + '</p>'
-      + '<h2>Plan de actividades</h2><table><tr><th>#</th><th>Pieza</th><th>Actividad</th><th>Producto que deja</th><th>Responsable</th><th>Depende de</th><th>Empieza</th><th>Semanas</th><th>Se moja / fecha B</th><th>Micro</th></tr>' + filas + '</table>'
-      + '<h2>El proyecto de la línea</h2>' + g1 + '<h2>La microintervención</h2>' + g2
-      + '<h2>Las cinco ilusiones, revisadas</h2><ul>' + p.lista.map(function (r) { return '<li class="' + r.clase + '"><b>' + esc(r.titulo) + ':</b> ' + esc(r.texto) + '</li>'; }).join('') + '</ul>'
-      + '<h2>Antes de la visita</h2><p>' + esc($('antesVisita').textContent) + '</p><p><b>Lo que se pide antes:</b> ' + esc(estado.pedirAntes) + '</p>'
+    pintarGantt(); var g = $('gantt').innerHTML, p = revisar();
+    var filas = estado.filas.map(function (f) { return '<tr><td>' + f.id + '</td><td>' + esc(f.pieza) + '</td><td>' + esc(f.actividad) + '</td><td>' + esc(f.producto) + '</td><td>' + esc(f.responsable) + '</td><td>' + esc(f.depende) + '</td><td>' + esc(cuando(f)) + '</td><td>' + f.dur + '</td></tr>'; }).join('');
+    var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Cronograma 2027 · ' + esc(estado.equipo) + '</title><style>body{font-family:Segoe UI,system-ui,sans-serif;max-width:1100px;margin:1rem auto;padding:0 1rem;color:#1C2B28}h1,h2{font-family:Georgia,serif;color:#0B3C49}table{border-collapse:collapse;width:100%;font-size:.9rem}td,th{border:1px solid #CFE3DD;padding:.3rem .4rem;vertical-align:top;text-align:left}th{background:#F2F7F5}svg{width:100%;height:auto}ul li{margin:.3rem 0}.mal{color:#8A3B2B}.bien{color:#1F4A2C}.ojo{color:#7C6222}</style></head><body>'
+      + '<h1>El cronograma de La Florida, 2027 · ' + esc(estado.equipo) + '</h1><p>' + esc(NOMBRE_COMP[estado.componente] || '') + ' · descargado el ' + new Date().toLocaleDateString('es-MX') + '</p>'
+      + '<h2>Plan de actividades</h2><table><tr><th>#</th><th>Pieza</th><th>Actividad</th><th>Producto que deja</th><th>Responsable</th><th>Depende de</th><th>Cuándo</th><th>Meses</th></tr>' + filas + '</table>'
+      + '<h2>El año 2027</h2>' + g
+      + '<h2>Las dos ilusiones, revisadas</h2><ul>' + p.lista.map(function (r) { return '<li class="' + r.clase + '"><b>' + esc(r.titulo) + ':</b> ' + esc(r.texto) + '</li>'; }).join('') + '</ul>'
+      + '<h2>Lo que se cruza con otros equipos</h2><p>' + esc(estado.cruces) + '</p>'
       + '</body></html>';
     var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
-    a.download = 'cronograma-' + (estado.equipo || 'equipo').replace(/[^\wáéíóúñ-]+/gi, '-') + '-' + new Date().toISOString().slice(0, 10) + '.html'; a.click();
+    a.download = 'cronograma-2027-' + (estado.equipo || 'equipo').replace(/[^\wáéíóúñ-]+/gi, '-') + '-' + new Date().toISOString().slice(0, 10) + '.html'; a.click();
   });
 
   pintar();
