@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cronograma de la presa</title>
+<style>
+/*__FUENTES__*/
+/* Plan: una regla tipo estadal recorre 26 meses; secas y lluvias pintan el fondo; las barras se mueven cuando el simulador atrasa la anuencia, el dinero o los permisos. */
+:root {
+  --papel: #fcfcfa;
+  --papel-2: #f4f3ee;
+  --tinta: #1f2833;
+  --tinta-2: #4a5462;
+  --tinta-3: #78818e;
+  --filete: #e3e1da;
+  --regla: #c9c5b8;
+  --arena: #bb9c79;
+  --secas: rgba(206, 178, 122, .17);
+  --lluvias: rgba(52, 132, 146, .12);
+  --semana-santa: rgba(66, 77, 96, .09);
+  --alerta: #d03b3b;
+  --c-G: #424d60; --c-1a: #b8466e; --c-1b: #4b8f2a; --c-2: #6a55c2; --c-3: #168c6e; --c-4: #c0602f; --c-5: #3f6fb0;
+  --fuente: 'Jost', 'Futura', 'Century Gothic', 'Avenir Next', system-ui, sans-serif;
+  --radio: 6px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papel: #161a1d; --papel-2: #1d2226; --tinta: #e9ecef; --tinta-2: #b9c1c9; --tinta-3: #8a939c;
+    --filete: #2a3035; --regla: #3b4349; --arena: #c9ab86;
+    --secas: rgba(214, 190, 140, .07); --lluvias: rgba(60, 160, 172, .10); --semana-santa: rgba(233, 236, 239, .07);
+    --alerta: #e46161;
+    --c-G: #aab6c6; --c-1a: #d86890; --c-1b: #5ea83a; --c-2: #8f7fe0; --c-3: #22a885; --c-4: #d8743f; --c-5: #5b8bd0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --papel: #161a1d; --papel-2: #1d2226; --tinta: #e9ecef; --tinta-2: #b9c1c9; --tinta-3: #8a939c;
+  --filete: #2a3035; --regla: #3b4349; --arena: #c9ab86;
+  --secas: rgba(214, 190, 140, .07); --lluvias: rgba(60, 160, 172, .10); --semana-santa: rgba(233, 236, 239, .07);
+  --alerta: #e46161;
+  --c-G: #aab6c6; --c-1a: #d86890; --c-1b: #5ea83a; --c-2: #8f7fe0; --c-3: #22a885; --c-4: #d8743f; --c-5: #5b8bd0;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--papel); color: var(--tinta); font-family: var(--fuente); font-size: 15px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--tinta); outline-offset: 2px; border-radius: 3px; }
+.envoltura { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
+
+/* Cabecera */
+.cabecera { padding: 28px 0 18px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 32px; align-items: end; border-bottom: 1px solid var(--filete); }
+.cabecera .lugar { grid-column: 1 / -1; color: var(--tinta-2); font-size: 14px; margin: 0; }
+.cabecera h1 { font-weight: 600; font-size: clamp(28px, 4vw, 40px); line-height: 1.05; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.cabecera .lema { margin: 6px 0 0; font-size: 18px; font-style: italic; color: var(--tinta-2); max-width: 62ch; }
+.titular { display: flex; align-items: center; gap: 18px; }
+.migas-sitio { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0 0 4px; font-size: 14px; }
+.migas-sitio a, .descargas a { color: var(--tinta); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.descargas { margin: 10px 0 0; font-size: 15px; color: var(--tinta-2); max-width: 70ch; }
+.titular .emblema { height: 82px; width: auto; flex: none; }
+@media (max-width: 640px) { .titular { gap: 12px; } .titular .emblema { height: 58px; } }
+.cabecera .resumen { margin: 10px 0 0; max-width: 72ch; color: var(--tinta-2); }
+.cierre { text-align: right; min-width: 220px; }
+.cierre .et { font-size: 13px; color: var(--tinta-3); }
+.cierre .fecha { font-size: 26px; font-weight: 600; line-height: 1.1; }
+.cierre .dif { font-size: 13px; color: var(--tinta-2); min-height: 1.3em; }
+.cierre .dif.tarde { color: var(--alerta); }
+
+/* Controles */
+.controles { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; padding: 14px 0 10px; }
+.grupo-ctl { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.grupo-ctl > .et { font-size: 13px; color: var(--tinta-3); margin-right: 2px; }
+.segmentado { display: inline-flex; border: 1px solid var(--regla); border-radius: 999px; padding: 2px; }
+.segmentado button { border: 0; background: none; padding: 4px 12px; border-radius: 999px; cursor: pointer; font-size: 14px; color: var(--tinta-2); }
+.segmentado button[aria-pressed="true"] { background: var(--tinta); color: var(--papel); }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--regla); background: var(--papel); border-radius: 999px; padding: 3px 11px 3px 8px; cursor: pointer; font-size: 14px; }
+.chip .punto { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.chip[aria-pressed="false"] { color: var(--tinta-3); border-style: dashed; }
+.chip[aria-pressed="false"] .punto { background: transparent; box-shadow: inset 0 0 0 2px var(--c); }
+.boton { border: 1px solid var(--regla); background: var(--papel); border-radius: 999px; padding: 4px 13px; cursor: pointer; font-size: 14px; }
+.boton:hover, .chip:hover { border-color: var(--tinta-3); }
+.boton[aria-pressed="true"] { background: var(--tinta); color: var(--papel); border-color: var(--tinta); }
+
+/* Simulador */
+.simulador { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(260px, 1.25fr); gap: 14px 22px; padding: 14px 18px 16px; background: var(--papel-2); border-radius: 10px; margin-bottom: 14px; }
+.simulador h2 { grid-column: 1 / -1; margin: 0; font-size: 16px; font-weight: 600; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.simulador h2 small { font-weight: 400; color: var(--tinta-2); font-size: 14px; }
+.perilla label { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; }
+.perilla output { font-variant-numeric: tabular-nums; color: var(--tinta-2); white-space: nowrap; }
+.perilla input[type="range"] { width: 100%; accent-color: var(--tinta); margin: 6px 0 2px; }
+.perilla .ayuda { font-size: 12.5px; color: var(--tinta-3); }
+.alertas { font-size: 14px; }
+.alertas .titulo { font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.alertas ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; max-height: 236px; overflow: auto; }
+.alertas li button { all: unset; cursor: pointer; display: grid; grid-template-columns: 16px 1fr; gap: 6px; align-items: start; }
+.alertas li button:hover span:last-child { text-decoration: underline; }
+.alertas li button:focus-visible { outline: 2px solid var(--tinta); }
+.alertas .nada { color: var(--tinta-2); margin: 6px 0 0; }
+.icono-alerta { width: 15px; height: 15px; margin-top: 2px; color: var(--alerta); flex: none; }
+.restablecer { margin-top: 8px; }
+
+/* Gantt */
+.gantt { border: 1px solid var(--filete); border-radius: 10px; overflow: hidden; background: var(--papel); }
+.g-scroll { overflow: auto; max-height: min(78vh, 980px); position: relative; overscroll-behavior: contain; }
+.g-lienzo { position: relative; }
+.g-cab { position: sticky; top: 0; z-index: 6; display: flex; background: var(--papel); border-bottom: 1px solid var(--filete); }
+.g-esquina { position: sticky; left: 0; z-index: 7; flex: none; background: var(--papel); border-right: 1px solid var(--filete); padding: 8px 12px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 13px; color: var(--tinta-3); }
+.g-cuerpo { display: flex; }
+.g-etiquetas { position: sticky; left: 0; z-index: 5; flex: none; background: var(--papel); border-right: 1px solid var(--filete); }
+.g-tiempo { position: relative; flex: none; }
+.g-fondo, .g-hilos { position: absolute; left: 0; top: 0; pointer-events: none; }
+.g-hilos { z-index: 3; overflow: visible; }
+
+.fila { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 8px; padding: 0 10px 0 16px; font-size: 12.5px; line-height: 1.2; border-bottom: 1px solid transparent; }
+.fila.act, .fila.hito, .fila.carril { cursor: pointer; }
+.fila.act:hover, .fila.hito:hover, .fila.carril:hover { background: var(--papel-2); }
+.fila .cod { flex: none; width: 42px; color: var(--tinta-3); font-variant-numeric: tabular-nums; font-size: 11.5px; }
+.fila .nom { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.fila.grupo { font-size: 13.5px; font-weight: 600; cursor: pointer; background: var(--papel); border-top: 1px solid var(--filete); }
+.fila.grupo .cuenta { font-weight: 400; color: var(--tinta-3); margin-left: auto; font-size: 12px; white-space: nowrap; }
+.fila.grupo .flecha { flex: none; width: 12px; transition: transform .2s; color: var(--tinta-3); }
+.fila.grupo.cerrado .flecha { transform: rotate(-90deg); }
+.fila .punto { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.fila.banda { font-size: 12.5px; color: var(--tinta-2); }
+.fila.banda b { color: var(--tinta); font-weight: 600; }
+.fila.seccion { font-size: 12px; color: var(--tinta-3); align-items: flex-end; padding-bottom: 3px; }
+.fila.sel { background: var(--papel-2); box-shadow: inset 3px 0 0 var(--tinta); }
+.fila.atenuado { opacity: .32; }
+.fila .fragil { position: absolute; left: 2px; top: calc(50% - 6px); width: 12px; height: 12px; color: var(--alerta); display: none; }
+.marcar-holgura .fila.es-fragil .fragil { display: block; }
+
+.barra { position: absolute; height: 12px; border-radius: 4px; background: var(--c); border: 0; padding: 0; cursor: pointer; z-index: 2;
+  transition: left .55s cubic-bezier(.2, .7, .2, 1), width .55s cubic-bezier(.2, .7, .2, 1), top .45s cubic-bezier(.2, .7, .2, 1), opacity .25s; }
+.barra.espera { background: repeating-linear-gradient(135deg, var(--c) 0 3px, transparent 3px 6px); box-shadow: inset 0 0 0 1.5px var(--c); }
+.barra.continuo { height: 3px; border-radius: 2px; }
+.barra.continuo::after { content: ''; position: absolute; right: -5px; top: -3.5px; border-left: 6px solid var(--c); border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+.barra.continuo.cerrado::after { display: none; }
+.barra.hito { width: 13px !important; height: 13px; border-radius: 2px; transform: translateX(-6.5px) rotate(45deg); background: var(--c); }
+.barra.hito.gate { background: var(--papel); box-shadow: inset 0 0 0 2.5px var(--c); }
+.barra.fase { height: 16px; border-radius: 4px; background: var(--tinta-2); cursor: default; }
+.barra.ola { height: 9px; border-radius: 3px; background: var(--tinta-3); cursor: default; }
+.barra.ola.o3 { background: repeating-linear-gradient(135deg, var(--tinta-3) 0 3px, transparent 3px 6px); box-shadow: inset 0 0 0 1px var(--tinta-3); }
+.barra.atenuado, .barra.filtrada { opacity: .14; }
+.tenue { color: var(--tinta-3); font-weight: 400; }
+.clave { font-variant-numeric: tabular-nums; }
+.barra.sel { box-shadow: 0 0 0 2px var(--papel), 0 0 0 4px var(--tinta); }
+.barra.hito.sel { box-shadow: 0 0 0 2px var(--papel), 0 0 0 4px var(--tinta); }
+.marcar-holgura .barra.es-fragil:not(.hito) { box-shadow: 0 0 0 2px var(--papel), 0 0 0 3.5px var(--alerta); }
+.barra.movida { z-index: 3; }
+.fantasma { position: absolute; height: 12px; border-radius: 4px; border: 1.5px dotted var(--tinta-3); opacity: .7; pointer-events: none; z-index: 1; }
+.fantasma.hito { width: 11px; height: 11px; transform: translateX(-5.5px) rotate(45deg); border-radius: 2px; }
+.etq-barra { position: absolute; font-size: 11.5px; color: var(--tinta-2); white-space: nowrap; pointer-events: none; z-index: 2; transition: left .55s cubic-bezier(.2, .7, .2, 1), top .45s; }
+
+.globo { position: fixed; z-index: 30; pointer-events: none; background: var(--tinta); color: var(--papel); font-size: 13px; line-height: 1.3; padding: 6px 9px; border-radius: 6px; max-width: 300px; opacity: 0; transition: opacity .12s; }
+.globo.ver { opacity: 1; }
+.globo small { display: block; opacity: .8; }
+
+/* Ficha */
+.ficha { position: fixed; right: 16px; top: 16px; bottom: 16px; width: min(380px, calc(100vw - 32px)); z-index: 20; background: var(--papel); border: 1px solid var(--regla); border-radius: 12px; box-shadow: 0 12px 40px rgba(0, 0, 0, .14); padding: 18px 18px 22px; overflow: auto; }
+.ficha[hidden] { display: none; }
+@media (min-width: 1180px) {
+  body.con-ficha .envoltura { margin-right: 404px; margin-left: 24px; max-width: none; padding-right: 0; }
+  body.con-ficha .simulador { grid-template-columns: 1fr 1fr; }
+  body.con-ficha .cabecera { grid-template-columns: 1fr; }
+  body.con-ficha .cierre { text-align: left; }
+}
+.ficha .cerrar { position: absolute; right: 10px; top: 10px; }
+.ficha .comp { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--tinta-2); padding-right: 70px; flex-wrap: wrap; }
+.ficha .comp .punto { width: 11px; height: 11px; border-radius: 50%; background: var(--c); flex: none; }
+.ficha h3 { font-size: 19px; font-weight: 600; line-height: 1.2; margin: 8px 0 4px; text-wrap: balance; }
+.ficha .cuando { font-size: 14px; color: var(--tinta-2); margin: 0 0 12px; }
+.ficha dl { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 0; }
+.ficha dt { font-size: 12.5px; color: var(--tinta-3); }
+.ficha dd { margin: 2px 0 0; font-size: 14.5px; }
+.ficha .ligas { display: flex; flex-wrap: wrap; gap: 5px; }
+.ficha .liga { border: 1px solid var(--regla); background: none; border-radius: 6px; padding: 2px 7px; font-size: 13px; cursor: pointer; text-align: left; display: inline-flex; gap: 6px; align-items: center; }
+.ficha .liga .punto { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.ficha .liga:hover { border-color: var(--tinta-3); }
+.ficha .sino { background: var(--papel-2); border-radius: 8px; padding: 9px 11px; }
+.ficha .fragilidad.mala { color: var(--alerta); }
+.ficha .movimiento { font-size: 13.5px; background: var(--papel-2); border-radius: 8px; padding: 8px 10px; }
+
+/* Ilusiones y leyenda */
+.inferior { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; padding: 22px 0 8px; }
+.inferior h2 { font-size: 16px; font-weight: 600; margin: 0 0 8px; }
+.joroba svg { width: 100%; height: auto; display: block; }
+.joroba p, .dueno p { margin: 6px 0 0; color: var(--tinta-2); max-width: 70ch; }
+.leyenda { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--tinta-2); padding: 10px 0 0; }
+.leyenda span { display: inline-flex; align-items: center; gap: 7px; }
+.mu { display: inline-block; width: 22px; height: 10px; border-radius: 3px; }
+.notas { border-top: 1px solid var(--filete); margin-top: 18px; padding: 12px 0 40px; color: var(--tinta-2); font-size: 14px; }
+.notas summary { cursor: pointer; color: var(--tinta); font-weight: 600; }
+.notas ul { padding-left: 18px; max-width: 90ch; }
+.notas li { margin: 4px 0; }
+.aviso { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--tinta); color: var(--papel); padding: 8px 14px; border-radius: 8px; font-size: 14px; z-index: 40; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.aviso.ver { opacity: 1; }
+.respaldo { width: 100%; height: 140px; font: 12px/1.3 ui-monospace, monospace; margin-top: 8px; }
+
+@media (max-width: 980px) {
+  .simulador { grid-template-columns: 1fr 1fr; }
+  .inferior { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .envoltura { padding: 0 14px; }
+  .cabecera { grid-template-columns: 1fr; }
+  .cierre { text-align: left; }
+  .simulador { grid-template-columns: 1fr; padding: 12px; }
+  .ficha { top: auto; left: 8px; right: 8px; bottom: 8px; width: auto; max-height: 72vh; }
+  .fila .cod { width: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .barra, .etq-barra, .fila.grupo .flecha { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="envoltura">
+  <header class="cabecera">
+    <!--__SITIO__-->
+    <p class="lugar">Anteproyecto para habilitar la orilla de la Presa de La Florida, en Arroyo Seco, Querétaro.</p>
+    <div>
+      <div class="titular">
+        <img class="emblema" src="/*__EMBLEMA__*/" alt="Emblema de la Presa de La Florida" width="204" height="240">
+        <div>
+          <h1>El cronograma de la presa</h1>
+          <p class="lema">Lo que se siembra espera la lluvia; lo que se construye busca la seca.</p>
+        </div>
+      </div>
+      <p class="resumen">Calendario hipotético, sujeto a la anuencia del ejido, al consentimiento de la comunidad, al financiamiento y a los permisos. Los consentimientos llegan en diciembre de 2026; la primera prueba de uso es Semana Santa de 2027 y la segunda ola de obra se estrena en Semana Santa de 2028.</p>
+      <!--__DESCARGAS__-->
+    </div>
+    <div class="cierre" aria-live="polite">
+      <div class="et">Cierre del proyecto</div>
+      <div class="fecha" id="cierre-fecha">&nbsp;</div>
+      <div class="dif" id="cierre-dif"></div>
+    </div>
+  </header>
+
+  <div class="controles">
+    <div class="grupo-ctl">
+      <span class="et">Ver</span>
+      <div class="segmentado" role="group" aria-label="Vista">
+        <button type="button" id="v-detalle" aria-pressed="true">Detalle</button>
+        <button type="button" id="v-compacto" aria-pressed="false">Compacto</button>
+      </div>
+    </div>
+    <div class="grupo-ctl" id="chips" role="group" aria-label="Componentes visibles"><span class="et">Componentes</span></div>
+    <div class="grupo-ctl">
+      <button type="button" class="boton" id="b-holgura" aria-pressed="false">Marcar lo que no tiene holgura</button>
+      <button type="button" class="boton" id="b-copiar">Copiar la tabla</button>
+    </div>
+  </div>
+
+  <section class="simulador" aria-labelledby="sim-titulo">
+    <h2 id="sim-titulo">¿Y si algo se atrasa? <small>Mueve las perillas: el calendario respeta secas, lluvias y plazos.</small></h2>
+    <div class="perilla">
+      <label for="p-anuencia"><span>La anuencia del ejido llega tarde</span><output id="o-anuencia" for="p-anuencia">a tiempo</output></label>
+      <input type="range" id="p-anuencia" min="0" max="12" step="1" value="0">
+      <div class="ayuda">Asamblea prevista en la primera semana de diciembre de 2026.</div>
+    </div>
+    <div class="perilla">
+      <label for="p-dinero"><span>El dinero llega tarde</span><output id="o-dinero" for="p-dinero">a tiempo</output></label>
+      <input type="range" id="p-dinero" min="0" max="20" step="1" value="0">
+      <div class="ayuda">Dictamen de PROCODES y presupuesto municipal 2028.</div>
+    </div>
+    <div class="perilla">
+      <label for="p-permisos"><span>Cada permiso tarda más</span><output id="o-permisos" for="p-permisos">a tiempo</output></label>
+      <input type="range" id="p-permisos" min="0" max="20" step="1" value="0">
+      <div class="ayuda">Impacto ambiental (SEMARNAT) y zona federal (CONAGUA).</div>
+    </div>
+    <div class="alertas" aria-live="polite">
+      <div class="titulo" id="al-titulo">Lo que se rompe</div>
+      <ul id="al-lista"></ul>
+      <button type="button" class="boton restablecer" id="b-restablecer" hidden>Volver al plan base</button>
+    </div>
+  </section>
+
+  <section class="gantt" aria-label="Cronograma">
+    <div class="g-scroll" id="g-scroll">
+      <div class="g-lienzo" id="g-lienzo">
+        <div class="g-cab">
+          <div class="g-esquina" id="g-esquina">Actividad</div>
+          <svg class="g-regla" id="g-regla" aria-hidden="true"></svg>
+        </div>
+        <div class="g-cuerpo">
+          <div class="g-etiquetas" id="g-etiquetas"></div>
+          <div class="g-tiempo" id="g-tiempo">
+            <svg class="g-fondo" id="g-fondo" aria-hidden="true"></svg>
+            <svg class="g-hilos" id="g-hilos" aria-hidden="true"></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="leyenda" id="leyenda"></div>
+
+  <section class="inferior">
+    <div class="joroba">
+      <h2>La joroba, revisada</h2>
+      <div id="joroba-graf"></div>
+      <p id="joroba-texto"></p>
+    </div>
+    <div class="dueno">
+      <h2>El renglón sin dueño, revisado</h2>
+      <p id="dueno-texto"></p>
+      <p>Lo que sigue a cada compuerta (rombo hueco) solo ocurre si la compuerta se abre. Tocar un rombo muestra qué pasa si la respuesta es no.</p>
+    </div>
+  </section>
+
+  <details class="notas">
+    <summary>Cómo se armó este cronograma</summary>
+    <ul id="notas-lista"></ul>
+  </details>
+</div>
+
+<aside class="ficha" id="ficha" hidden aria-labelledby="f-titulo">
+  <button type="button" class="boton cerrar" id="f-cerrar">Cerrar</button>
+  <div id="f-cuerpo"></div>
+</aside>
+<div class="globo" id="globo" role="tooltip"></div>
+<div class="aviso" id="aviso" role="status"></div>
+
+<script>
+/*__DATOS__*/
+</script>
+<script>
+/*__MOTOR__*/
+</script>
+<script>
+(function () {
+  'use strict';
+  const D = window.DATOS, M = window.MOTOR;
+  const $ = s => document.querySelector(s);
+  const ORDEN = ['G', '1a', '1b', '2', '3', '4', '5'];
+  const COMP = {}; D.COMPONENTES.forEach(c => COMP[c.id] = c);
+  const idx = M.indexar(D);
+  const base = M.programar(D);
+  const cod = M.codigos(D, base);
+  const hijos = {}; D.A.forEach(a => a.d.forEach(d => (hijos[d] = hijos[d] || []).push(a.id)));
+  const esHito = a => a.t === 'hito' || a.t === 'aprob-municipal';
+  const fragBase = M.fragilidad(D);
+
+  const estado = {
+    vista: (location.hash === '#compacto' || (location.hash !== '#detalle' && window.innerWidth < 640)) ? 'compacto' : 'detalle',
+    filtro: new Set(ORDEN), cerrados: new Set(), sel: null, holgura: false,
+    deltas: { anuencia: 0, dinero: 0, permisos: 0 }
+  };
+  let prog = base, frag = fragBase, filas = [], unidad = 9, ejeFin = base.finEje;
+
+  const icoAlerta = '<svg class="icono-alerta" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.6 15 14H1z" fill="currentColor"/><path d="M8 6v4" stroke="var(--papel)" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="12" r=".9" fill="var(--papel)"/></svg>';
+  const icoFragil = '<svg class="fragil" viewBox="0 0 16 16" aria-label="sin holgura"><path d="M8 1.6 15 14H1z" fill="currentColor"/></svg>';
+
+  const REGLA_TXT = {
+    'libre': 'Cualquier semana hábil; no se trabaja en la última de diciembre ni en la primera de enero.',
+    'secas': 'Obra en secas: todo el trabajo cae entre noviembre y mayo.',
+    'siembra': 'Siembra al inicio de las lluvias: arranca entre la tercera semana de junio y julio.',
+    'pre-siembra': 'Preparación al final de la seca, entre la segunda quincena de mayo y la primera de junio.',
+    'entrega-planta': 'La planta se entrega cuando ya llueve, de la segunda semana de junio a la segunda de julio.',
+    'ventana-procodes': 'Ventanilla de PROCODES: la solicitud entra en las dos primeras semanas de marzo.',
+    'ventana-municipal': 'La petición al Ayuntamiento entra entre agosto y mediados de octubre, antes de integrar el presupuesto del año siguiente.',
+    'aprob-municipal': 'El Cabildo aprueba el presupuesto del año siguiente en diciembre.',
+    'espera': 'Espera de un tercero: el grupo no controla esta duración.',
+    'fija': 'Fecha fija: Semana Santa.',
+    'post-lluvias': 'Revisión en noviembre, después de una temporada completa de lluvias.',
+    'secas-inicio': 'Arranca con la primera seca, en noviembre.',
+    'continuo': 'Actividad continua.',
+    'hito': 'Hito: marca un producto o una decisión.'
+  };
+
+  function semanasTexto(n) {
+    if (n === 0) return 'a tiempo';
+    const meses = n / 4.33;
+    return '+' + n + (n === 1 ? ' semana' : ' semanas') + (n >= 4 ? ' (≈ ' + (Math.round(meses * 2) / 2).toString().replace('.', ',') + (meses < 1.25 ? ' mes)' : ' meses)') : '');
+  }
+  function fechaHito(a, p) { return a.fecha && p.s === base.P[a.id].s ? a.fecha : M.hitoTexto(p.s); }
+  function periodo(a, p) { return esHito(a) ? fechaHito(a, p) : M.rangoTexto(p.s, p.e); }
+
+  /* ───── Construcción de filas según la vista ───── */
+  const H = { banda: 24, seccion: 26, grupo: 36, act: 34, carril: 32, hito: window.innerWidth < 640 ? 34 : 28 };
+  function calcularFilas() {
+    const out = [];
+    out.push({ tipo: 'seccion', texto: 'Fases del proyecto', h: H.seccion });
+    D.FASES.forEach(f => out.push({ tipo: 'banda', clase: 'fase', id: 'fase-' + f.id, f, h: H.banda }));
+    out.push({ tipo: 'seccion', texto: 'Olas de implementación', h: H.seccion });
+    D.OLAS.forEach(o => out.push({ tipo: 'banda', clase: 'ola', id: 'ola-' + o.id, o, h: H.banda }));
+    if (estado.vista === 'compacto') {
+      out.push({ tipo: 'seccion', texto: 'Hitos y compuertas', h: H.seccion });
+      D.A.filter(esHito).sort((a, b) => base.P[a.id].s - base.P[b.id].s).forEach(a => out.push({ tipo: 'hito', id: a.id, h: H.hito }));
+      out.push({ tipo: 'seccion', texto: 'Componentes', h: H.seccion });
+      ORDEN.forEach(c => out.push({ tipo: 'carril', c, h: H.carril, atenuar: !estado.filtro.has(c) }));
+    } else {
+      ORDEN.forEach(c => {
+        if (!estado.filtro.has(c)) return;
+        const lista = D.A.filter(a => a.c === c).sort((x, y) => (base.P[x.id].s - base.P[y.id].s) || (D.A.indexOf(x) - D.A.indexOf(y)));
+        out.push({ tipo: 'grupo', c, h: H.grupo, n: lista.length });
+        if (!estado.cerrados.has(c)) lista.forEach(a => out.push({ tipo: 'act', id: a.id, h: H.act }));
+      });
+    }
+    let y = 0; out.forEach(f => { f.y = y; y += f.h; });
+    return { filas: out, alto: y };
+  }
+
+  /* ───── Elementos persistentes ───── */
+  const tiempo = $('#g-tiempo'), etiquetas = $('#g-etiquetas'), fondo = $('#g-fondo'), hilos = $('#g-hilos'), regla = $('#g-regla');
+  const barras = {}, fantasmas = {}, rotulos = {};
+  function crearBarra(id, clase, color) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'barra ' + clase; b.dataset.id = id;
+    if (color) b.style.setProperty('--c', color);
+    tiempo.appendChild(b); barras[id] = b; return b;
+  }
+  D.A.forEach(a => {
+    const cls = esHito(a) ? 'hito' + (a.gate ? ' gate' : '') : (a.t === 'espera' ? 'espera' : (a.t === 'continuo' ? 'continuo' : 'act'));
+    const b = crearBarra(a.id, cls, 'var(--c-' + a.c + ')');
+    b.setAttribute('aria-label', cod[a.id] + ' ' + a.n);
+    const g = document.createElement('div'); g.className = 'fantasma' + (esHito(a) ? ' hito' : ''); g.hidden = true; tiempo.appendChild(g); fantasmas[a.id] = g;
+  });
+  D.FASES.forEach(f => { const b = crearBarra('fase-' + f.id, 'fase'); b.tabIndex = -1; b.setAttribute('aria-hidden', 'true'); });
+  D.OLAS.forEach(o => { const b = crearBarra('ola-' + o.id, 'ola o' + o.id); b.tabIndex = -1; b.setAttribute('aria-hidden', 'true'); });
+  D.A.filter(esHito).forEach(a => { const r = document.createElement('div'); r.className = 'etq-barra'; r.textContent = a.n; tiempo.appendChild(r); rotulos[a.id] = r; });
+  const rotOla = {};
+  D.OLAS.forEach(o => { const r = document.createElement('div'); r.className = 'etq-barra'; r.textContent = o.sub; tiempo.appendChild(r); rotOla[o.id] = r; });
+
+  /* ───── Medidas ───── */
+  function anchoEtiquetas() { return window.innerWidth < 640 ? 168 : (window.innerWidth < 980 ? 250 : 330); }
+  function medir() {
+    // la escala se fija con el plan base y el ancho de la ventana: el simulador mueve barras, no la escala
+    const ancho = Math.min(window.innerWidth, 1440) - (window.innerWidth < 640 ? 28 : 48) - 2;
+    const disponible = ancho - anchoEtiquetas();
+    ejeFin = Math.max(base.finEje, prog.finEje);
+    unidad = Math.max(7, Math.min(16, disponible / base.finEje));
+    if (window.innerWidth < 640) unidad = 7;
+  }
+  const X = t => t * unidad;
+
+  /* ───── Fondo: temporadas, meses, Semana Santa, hoy ───── */
+  function dibujarFondo(alto) {
+    const w = X(ejeFin), ns = 'http://www.w3.org/2000/svg';
+    let s = '';
+    for (let m = 0; m < ejeFin / 4; m++) {
+      const c = M.cal(m * 4), seca = M.SECAS.has(c.mes);
+      s += `<rect x="${X(m * 4)}" y="0" width="${X(4)}" height="${alto}" fill="${seca ? 'var(--secas)' : 'var(--lluvias)'}"/>`;
+      s += `<line x1="${X(m * 4) + .5}" x2="${X(m * 4) + .5}" y1="0" y2="${alto}" stroke="var(--filete)" stroke-width="${c.mes === 1 ? 1.5 : 1}"/>`;
+    }
+    prog.eventos.filter(e => e.id.startsWith('SS') && e.t < ejeFin).forEach(e => {
+      s += `<rect x="${X(e.t)}" y="0" width="${X(e.u)}" height="${alto}" fill="var(--semana-santa)"/>`;
+    });
+    const hoy = hoyT();
+    s += `<line x1="${X(hoy)}" x2="${X(hoy)}" y1="0" y2="${alto}" stroke="var(--tinta)" stroke-width="1.5"/>`;
+    fondo.setAttribute('width', w); fondo.setAttribute('height', alto); fondo.setAttribute('viewBox', `0 0 ${w} ${alto}`);
+    fondo.innerHTML = s;
+    hilos.setAttribute('width', w); hilos.setAttribute('height', alto); hilos.setAttribute('viewBox', `0 0 ${w} ${alto}`);
+  }
+  function hoyT() { const [a, m, d] = D.hoy; const sem = d <= 7 ? 1 : d <= 14 ? 2 : d <= 21 ? 3 : 4; const w = M.semana(M.T(a, m, sem)); return M.T(a, m, sem) + (d - w.d1) / (w.d2 - w.d1 + 1); }
+
+  /* ───── Regla tipo estadal ───── */
+  function dibujarRegla() {
+    const w = X(ejeFin), h = 66;
+    let s = '';
+    // años
+    for (let m = 0; m < ejeFin / 4; m++) {
+      const c = M.cal(m * 4);
+      if (m === 0 || c.mes === 1) s += `<text x="${X(m * 4) + 4}" y="13" font-size="12" font-weight="600" fill="var(--tinta)">${c.anio}</text>`;
+    }
+    // meses como bloques alternos de estadal
+    for (let m = 0; m < ejeFin / 4; m++) {
+      const c = M.cal(m * 4), x = X(m * 4), par = m % 2 === 0;
+      s += `<rect x="${x}" y="18" width="${X(4)}" height="18" fill="${par ? 'var(--papel-2)' : 'var(--papel)'}"/>`;
+      for (let k = 1; k < 4; k++) s += `<line x1="${x + X(k)}" x2="${x + X(k)}" y1="${k === 2 ? 30 : 32}" y2="36" stroke="var(--regla)"/>`;
+      const txt = unidad * 4 >= 30 ? M.MES3[c.mes - 1] : M.MES3[c.mes - 1][0];
+      s += `<text x="${x + X(2)}" y="31" font-size="11.5" text-anchor="middle" fill="var(--tinta-2)">${txt}</text>`;
+    }
+    s += `<line x1="0" x2="${w}" y1="36.5" y2="36.5" stroke="var(--regla)"/>`;
+    // tira de temporadas
+    let ini = 0;
+    for (let m = 1; m <= ejeFin / 4; m++) {
+      const prev = M.SECAS.has(M.cal((m - 1) * 4).mes), cur = m < ejeFin / 4 ? M.SECAS.has(M.cal(m * 4).mes) : !prev;
+      if (cur !== prev) {
+        const x0 = X(ini * 4), x1 = X(m * 4);
+        s += `<rect x="${x0}" y="39" width="${x1 - x0}" height="11" fill="${prev ? 'var(--secas)' : 'var(--lluvias)'}"/>`;
+        if (x1 - x0 > 44) s += `<text x="${(x0 + x1) / 2}" y="48" font-size="9.5" text-anchor="middle" fill="var(--tinta-2)">${prev ? 'secas' : 'lluvias'}</text>`;
+        ini = m;
+      }
+    }
+    // eventos: Semana Santa y hoy
+    prog.eventos.filter(e => e.id.startsWith('SS') && e.t < ejeFin).forEach(e => {
+      s += `<rect x="${X(e.t)}" y="52" width="${Math.max(X(e.u), 4)}" height="12" rx="2" fill="var(--semana-santa)" stroke="var(--tinta-3)" stroke-width=".8"/>`;
+      if (unidad >= 8) s += `<text x="${X(e.t + e.u) + 4}" y="61.5" font-size="10" fill="var(--tinta-2)">Semana Santa</text>`;
+    });
+    const hoy = hoyT();
+    s += `<line x1="${X(hoy)}" x2="${X(hoy)}" y1="50" y2="${h}" stroke="var(--tinta)" stroke-width="1.5"/><text x="${X(hoy) + 4}" y="61.5" font-size="10" fill="var(--tinta)" font-weight="600">hoy</text>`;
+    regla.setAttribute('width', w); regla.setAttribute('height', h); regla.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    regla.innerHTML = s;
+    $('#g-esquina').style.width = anchoEtiquetas() + 'px';
+  }
+
+  /* ───── Etiquetas de la columna izquierda ───── */
+  function htmlEtiquetas() {
+    let s = '';
+    filas.forEach((f, i) => {
+      const est = `top:${f.y}px;height:${f.h}px`;
+      if (f.tipo === 'seccion') s += `<div class="fila seccion" style="${est}">${f.texto}</div>`;
+      else if (f.tipo === 'banda' && f.f) { const r = prog.fases[f.f.id]; s += `<div class="fila banda" style="${est}" title="${f.f.texto}"><span class="nom"><b>${f.f.id}. ${f.f.nombre}</b> <span class="tenue">${r ? M.rangoCorto(r.s, r.e) : ''}</span></span></div>`; }
+      else if (f.tipo === 'banda' && f.o) { const r = prog.olas[f.o.id]; s += `<div class="fila banda" style="${est}" title="${f.o.sub}"><span class="nom"><b>${f.o.nombre}</b> <span class="tenue">${r ? M.rangoCorto(r.s, r.e) : ''}</span></span></div>`; }
+      else if (f.tipo === 'grupo') { const c = COMP[f.c]; s += `<div class="fila grupo${estado.cerrados.has(f.c) ? ' cerrado' : ''}" data-grupo="${f.c}" style="${est};--c:var(--c-${f.c})" role="button" tabindex="0" aria-expanded="${!estado.cerrados.has(f.c)}"><svg class="flecha" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="punto"></span><span class="nom">${c.id === 'G' ? '' : '<span class="clave">' + c.clave + '</span> '}${c.nombre}</span><span class="cuenta">${f.n} renglones</span></div>`; }
+      else if (f.tipo === 'carril') { const c = COMP[f.c]; s += `<div class="fila carril${f.atenuar ? ' atenuado' : ''}" data-carril="${f.c}" style="${est};--c:var(--c-${f.c})" role="button" tabindex="0"><span class="punto"></span><span class="nom">${c.id === 'G' ? '' : '<span class="clave">' + c.clave + '</span> '}${c.nombre}</span></div>`; }
+      else if (f.tipo === 'act' || f.tipo === 'hito') {
+        const a = idx.get(f.id);
+        s += `<div class="fila ${f.tipo}${frag[f.id] ? ' es-fragil' : ''}" data-id="${f.id}" style="${est}" role="button" tabindex="0">${icoFragil}<span class="cod">${cod[f.id]}</span><span class="nom">${a.n}</span></div>`;
+      }
+    });
+    etiquetas.innerHTML = s;
+    etiquetas.style.width = anchoEtiquetas() + 'px';
+  }
+
+  /* ───── Posiciones ───── */
+  function filaDe(id) {
+    const a = idx.get(id);
+    if (estado.vista === 'compacto') {
+      if (a && esHito(a)) return filas.find(f => f.tipo === 'hito' && f.id === id);
+      return filas.find(f => f.tipo === 'carril' && a && f.c === a.c);
+    }
+    return filas.find(f => f.tipo === 'act' && f.id === id);
+  }
+  function posicionar() {
+    const movidos = new Set();
+    D.A.forEach(a => {
+      const b = barras[a.id], p = prog.P[a.id], f = filaDe(a.id), g = fantasmas[a.id], r = rotulos[a.id];
+      if (!f) { b.style.display = 'none'; g.hidden = true; if (r) r.style.display = 'none'; return; }
+      b.style.display = '';
+      const alto = esHito(a) ? 13 : (a.t === 'continuo' ? 3 : (f.tipo === 'carril' ? 14 : 12));
+      b.style.top = (f.y + f.h / 2 - alto / 2) + 'px';
+      b.style.left = X(p.s) + 'px';
+      if (!esHito(a)) b.style.width = Math.max(X(p.e - p.s) - 2, 4) + 'px';
+      if (f.tipo === 'carril') b.style.height = alto + 'px'; else b.style.height = '';
+      b.classList.toggle('cerrado', a.t === 'continuo' && a.hasta !== 'FIN');
+      const bp = base.P[a.id], mov = bp.s !== p.s || bp.e !== p.e;
+      if (mov) movidos.add(a.id);
+      b.classList.toggle('movida', mov);
+      if (mov && f.tipo !== 'carril') {
+        g.hidden = false;
+        g.style.top = (f.y + f.h / 2 - (esHito(a) ? 5.5 : 6)) + 'px';
+        g.style.left = X(bp.s) + 'px';
+        if (!esHito(a)) g.style.width = Math.max(X(bp.e - bp.s) - 2, 4) + 'px';
+      } else g.hidden = true;
+      if (r) {
+        const mostrar = true;
+        r.style.display = mostrar ? '' : 'none';
+        if (mostrar) { r.style.left = (X(p.s) + 12) + 'px'; r.style.top = (f.y + f.h / 2 - 8) + 'px'; r.textContent = fechaHito(a, p); }
+      }
+      b.classList.toggle('es-fragil', !!frag[a.id]);
+      b.classList.toggle('filtrada', estado.vista === 'compacto' && !estado.filtro.has(a.c));
+    });
+    D.FASES.forEach(fz => { const b = barras['fase-' + fz.id], r = prog.fases[fz.id], f = filas.find(x => x.id === 'fase-' + fz.id); b.style.top = (f.y + f.h / 2 - 8) + 'px'; b.style.left = X(r.s) + 'px'; b.style.width = Math.max(X(r.e - r.s) - 2, 4) + 'px'; });
+    D.OLAS.forEach(o => {
+      const b = barras['ola-' + o.id], r = prog.olas[o.id], f = filas.find(x => x.id === 'ola-' + o.id), t = rotOla[o.id];
+      b.style.top = (f.y + f.h / 2 - 4.5) + 'px'; b.style.left = X(r.s) + 'px'; b.style.width = Math.max(X(r.e - r.s) - 2, 4) + 'px';
+      // el rótulo va después de la barra si cabe; si no, antes
+      const fin = X(r.e) + 8, ancho = t.offsetWidth || 220;
+      t.style.top = (f.y + f.h / 2 - 8) + 'px';
+      t.style.left = (fin + ancho < X(ejeFin) ? fin : Math.max(4, X(r.s) - ancho - 8)) + 'px';
+    });
+    return movidos;
+  }
+
+  /* ───── Hilos de dependencia ───── */
+  function ancestros(id, acc = new Set()) { idx.get(id).d.forEach(d => { if (!acc.has(d)) { acc.add(d); ancestros(d, acc); } }); return acc; }
+  function descendientes(id, acc = new Set()) { (hijos[id] || []).forEach(h => { if (!acc.has(h)) { acc.add(h); descendientes(h, acc); } }); return acc; }
+  function dibujarHilos() {
+    hilos.innerHTML = '';
+    document.querySelectorAll('.barra.sel, .fila.sel').forEach(e => e.classList.remove('sel'));
+    document.querySelectorAll('.atenuado').forEach(e => { if (!e.classList.contains('carril')) e.classList.remove('atenuado'); });
+    if (!estado.sel) return;
+    const id = estado.sel, arriba = ancestros(id), abajo = descendientes(id), red = new Set([id, ...arriba, ...abajo]);
+    D.A.forEach(a => {
+      const enRed = red.has(a.id);
+      barras[a.id].classList.toggle('atenuado', !enRed);
+      const fl = etiquetas.querySelector(`.fila[data-id="${CSS.escape(a.id)}"]`);
+      if (fl) fl.classList.toggle('atenuado', !enRed);
+    });
+    barras[id].classList.add('sel');
+    const flSel = etiquetas.querySelector(`.fila[data-id="${CSS.escape(id)}"]`); if (flSel) flSel.classList.add('sel');
+    let s = `<defs><marker id="punta" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 8 4 0 8z" fill="var(--tinta)"/></marker></defs>`;
+    const centro = idA => { const a = idx.get(idA), f = filaDe(idA); if (!f) return null; const p = prog.P[idA]; return { y: f.y + f.h / 2, x0: X(p.s), x1: esHito(a) ? X(p.s) : X(p.e) - 2 }; };
+    red.forEach(hijo => {
+      idx.get(hijo).d.forEach(padre => {
+        if (!red.has(padre)) return;
+        if (!(arriba.has(padre) || padre === id) && !(abajo.has(hijo) || hijo === id)) return;
+        const A = centro(padre), B = centro(hijo); if (!A || !B) return;
+        const directo = padre === id || hijo === id;
+        const xa = A.x1 + (esHito(idx.get(padre)) ? 7 : 1), xb = B.x0 - (esHito(idx.get(hijo)) ? 8 : 2);
+        const xm = Math.max(xa + 6, Math.min(xb - 6, xa + 10));
+        const r = Math.min(6, Math.abs(B.y - A.y) / 2);
+        const dy = B.y > A.y ? 1 : -1;
+        let d;
+        if (Math.abs(B.y - A.y) < 1) d = `M${xa} ${A.y} H${xb}`;
+        else if (xb - xa >= 14) d = `M${xa} ${A.y} H${xm - r} Q${xm} ${A.y} ${xm} ${A.y + dy * r} V${B.y - dy * r} Q${xm} ${B.y} ${xm + r} ${B.y} H${xb}`;
+        else d = `M${xa} ${A.y} C${xa + 30} ${A.y} ${xb - 30} ${B.y} ${xb} ${B.y}`;
+        s += `<path d="${d}" fill="none" stroke="var(--tinta)" stroke-opacity="${directo ? .9 : .32}" stroke-width="${directo ? 1.8 : 1}" marker-end="url(#punta)"/>`;
+      });
+    });
+    hilos.innerHTML = s;
+  }
+
+  /* ───── Ficha ───── */
+  function liga(idL) { const a = idx.get(idL); return `<button type="button" class="liga" data-ir="${idL}" style="--c:var(--c-${a.c})"><span class="punto"></span><span class="tenue">${cod[idL]}</span> ${a.n.length > 46 ? a.n.slice(0, 44) + '…' : a.n}</button>`; }
+  function abrirFicha(id) {
+    const a = idx.get(id), p = prog.P[id], bp = base.P[id], c = COMP[a.c];
+    const fase = D.FASES.find(f => f.id === a.f), ola = a.o ? D.OLAS.find(o => o.id === a.o) : null;
+    const dur = esHito(a) ? '' : `, ${p.e - p.s} ${p.e - p.s === 1 ? 'semana' : 'semanas'}`;
+    let s = `<div class="comp" style="--c:var(--c-${a.c})"><span class="punto"></span><span>${a.c === 'G' ? c.nombre : c.clave + ' ' + c.nombre}</span><span class="tenue">${cod[id]}</span></div>`;
+    s += `<h3 id="f-titulo">${a.n}</h3>`;
+    s += `<p class="cuando">${periodo(a, p)}${dur}<br>Fase ${fase.id}, ${fase.nombre.toLowerCase()}${ola ? '; ' + ola.nombre.toLowerCase() : ''}</p>`;
+    if (bp.s !== p.s || bp.e !== p.e) s += `<p class="movimiento">En el plan base: ${periodo(a, bp)}. Con estos atrasos se mueve ${Math.abs(p.s - bp.s)} ${Math.abs(p.s - bp.s) === 1 ? 'semana' : 'semanas'}.</p>`;
+    s += '<dl>';
+    s += `<div><dt>Producto que deja</dt><dd>${a.p}</dd></div>`;
+    s += `<div><dt>Responsable</dt><dd>${a.r}</dd></div>`;
+    if (a.fondo) s += `<div><dt>Fuente de recursos</dt><dd>${D.FONDOS[a.fondo]}</dd></div>`;
+    s += `<div><dt>Regla de calendario</dt><dd>${REGLA_TXT[a.t] || ''}</dd></div>`;
+    if (a.nota) s += `<div><dt>Nota</dt><dd>${a.nota}</dd></div>`;
+    if (a.gate) s += `<div><dt>¿Y si la respuesta es no?</dt><dd class="sino">${a.siNo}</dd></div>`;
+    const deps = a.d.filter(d => idx.has(d)), hs = hijos[id] || [];
+    s += `<div><dt>Depende de</dt><dd class="ligas">${deps.length ? deps.map(liga).join('') : 'Nada: puede arrancar por sí sola.'}</dd></div>`;
+    s += `<div><dt>Detiene a</dt><dd class="ligas">${hs.length ? hs.map(liga).join('') : 'Nada depende de ella.'}</dd></div>`;
+    if (!esHito(a) && a.t !== 'continuo') {
+      const fr = frag[id];
+      let t = 'Tiene holgura: una semana de atraso no mueve el cierre ni rompe un plazo.';
+      if (fr) {
+        const partes = [];
+        if (fr.cierre > 0) partes.push(`el cierre se mueve ${fr.cierre} ${fr.cierre === 1 ? 'semana' : 'semanas'}`);
+        fr.alertas.forEach(x => partes.push(x.charAt(0).toLowerCase() + x.slice(1).replace(/\.$/, '')));
+        t = 'Sin holgura. Si se atrasa una semana: ' + partes.join('; ') + '.';
+      }
+      s += `<div><dt>Holgura</dt><dd class="fragilidad${fr ? ' mala' : ''}">${t}</dd></div>`;
+    }
+    s += '</dl>';
+    $('#f-cuerpo').innerHTML = s;
+    $('#ficha').hidden = false;
+    document.body.classList.toggle('con-ficha', window.innerWidth >= 1180);
+  }
+  function cerrarFicha() { $('#ficha').hidden = true; estado.sel = null; document.body.classList.remove('con-ficha'); dibujarHilos(); }
+  function seleccionar(id, desplazar) {
+    estado.sel = id; abrirFicha(id); dibujarHilos();
+    if (desplazar) {
+      const f = filaDe(id), sc = $('#g-scroll');
+      if (f) sc.scrollTo({ top: Math.max(0, f.y - 140), left: Math.max(0, X(prog.P[id].s) - 120), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    }
+  }
+
+  /* ───── Simulador ───── */
+  function actualizarCierre() {
+    const c = prog.P['H14'].s, b = base.P['H14'].s;
+    $('#cierre-fecha').textContent = M.hitoTexto(c);
+    const dif = c - b, el = $('#cierre-dif');
+    el.classList.toggle('tarde', dif > 0);
+    el.textContent = dif === 0 ? 'Plan base' : (dif > 0 ? `${dif} semanas después del plan base` : `${-dif} semanas antes del plan base`);
+  }
+  function actualizarAlertas() {
+    const al = M.alertas(D, prog, base), ul = $('#al-lista');
+    $('#al-titulo').innerHTML = al.length ? `${icoAlerta}<span>Lo que se rompe: ${al.length}</span>` : 'Lo que se rompe';
+    ul.innerHTML = al.length ? al.map(x => `<li><button type="button" data-ir="${x.ids[0]}">${icoAlerta}<span>${x.msg}</span></button></li>`).join('') : '';
+    if (!al.length) ul.innerHTML = '<li class="nada">Ningún plazo se rompe con estas fechas.</li>';
+    const algo = estado.deltas.anuencia || estado.deltas.dinero || estado.deltas.permisos;
+    $('#b-restablecer').hidden = !algo;
+  }
+  let pendiente = null;
+  function recalcular() {
+    prog = M.programar(D, estado.deltas);
+    clearTimeout(pendiente);
+    pendiente = setTimeout(() => { frag = M.fragilidad(D, estado.deltas); refrescarFragil(); if (estado.sel) abrirFicha(estado.sel); }, 120);
+    const finAntes = ejeFin;
+    medir();
+    if (ejeFin !== finAntes) { dibujarRegla(); }
+    construir(false);
+    actualizarCierre(); actualizarAlertas(); dibujarJoroba();
+    if (estado.sel) abrirFicha(estado.sel);
+  }
+  function refrescarFragil() {
+    etiquetas.querySelectorAll('.fila[data-id]').forEach(fl => fl.classList.toggle('es-fragil', !!frag[fl.dataset.id]));
+    D.A.forEach(a => barras[a.id].classList.toggle('es-fragil', !!frag[a.id]));
+  }
+  ['anuencia', 'dinero', 'permisos'].forEach(k => {
+    const inp = $('#p-' + k), out = $('#o-' + k);
+    inp.addEventListener('input', () => { estado.deltas[k] = +inp.value; out.textContent = semanasTexto(+inp.value); recalcular(); });
+  });
+  $('#b-restablecer').addEventListener('click', () => {
+    ['anuencia', 'dinero', 'permisos'].forEach(k => { estado.deltas[k] = 0; $('#p-' + k).value = 0; $('#o-' + k).textContent = semanasTexto(0); });
+    recalcular();
+  });
+
+  /* ───── Joroba ───── */
+  function dibujarJoroba() {
+    const cg = M.carga(D, prog), meses = Math.ceil(ejeFin / 4);
+    let max = 1, pico = 0; for (let m = 0; m < meses; m++) { if ((cg[m] || 0) > max) { max = cg[m]; pico = m; } }
+    const w = 720, h = 120, pad = 22, bw = (w - 8) / meses;
+    let s = `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Carga de trabajo por mes">`;
+    for (let m = 0; m < meses; m++) {
+      const c = M.cal(m * 4), seca = M.SECAS.has(c.mes), v = cg[m] || 0, bh = (h - pad - 14) * v / max;
+      s += `<rect x="${4 + m * bw}" y="4" width="${bw}" height="${h - pad - 4}" fill="${seca ? 'var(--secas)' : 'var(--lluvias)'}"/>`;
+      if (v) s += `<rect x="${4 + m * bw + 2}" y="${h - pad - bh}" width="${Math.max(bw - 4, 2)}" height="${bh}" rx="2" fill="var(--tinta-2)"><title>${M.mesLargo(m * 4)}: ${v} semanas-actividad</title></rect>`;
+      if (c.mes === 1 || m === 0) s += `<text x="${4 + m * bw + 2}" y="${h - 6}" font-size="11" fill="var(--tinta-3)">${c.anio}</text>`;
+    }
+    s += `<line x1="4" x2="${w - 4}" y1="${h - pad + .5}" y2="${h - pad + .5}" stroke="var(--regla)"/>`;
+    s += `<text x="${4 + pico * bw + bw / 2}" y="${h - pad - (h - pad - 14) - 2}" font-size="11" text-anchor="middle" fill="var(--tinta)">${M.MES3[M.cal(pico * 4).mes - 1]}</text></svg>`;
+    $('#joroba-graf').innerHTML = s;
+    const nov = cg[Math.floor(M.T(2027, 11, 1) / 4)] || 0, dic = cg[Math.floor(M.T(2027, 12, 1) / 4)] || 0;
+    $('#joroba-texto').textContent = `El proyecto no se amontona al final. El mes más cargado es ${M.mesLargo(pico * 4)}, con ${max} semanas-actividad: Semana Santa y la ventanilla de PROCODES jalan el arranque. Noviembre y diciembre de 2027 suman ${nov + dic}, la obra que PROCODES obliga a cerrar antes del 31 de diciembre.`;
+  }
+
+  /* ───── Construir todo ───── */
+  function construir(reEtiquetar = true) {
+    const r = calcularFilas(); filas = r.filas;
+    tiempo.style.width = X(ejeFin) + 'px'; tiempo.style.height = r.alto + 'px';
+    etiquetas.style.height = r.alto + 'px';
+    $('#g-lienzo').style.width = (anchoEtiquetas() + X(ejeFin)) + 'px';
+    dibujarFondo(r.alto);
+    htmlEtiquetas();
+    posicionar();
+    dibujarHilos();
+    $('#g-tiempo').parentElement.parentElement.classList.toggle('marcar-holgura', estado.holgura);
+  }
+
+  /* ───── Controles ───── */
+  const chips = $('#chips');
+  ORDEN.forEach(c => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.setAttribute('aria-pressed', 'true');
+    b.style.setProperty('--c', 'var(--c-' + c + ')'); b.dataset.c = c;
+    b.innerHTML = `<span class="punto"></span>${COMP[c].corto}`;
+    b.addEventListener('click', () => {
+      if (estado.filtro.has(c) && estado.filtro.size === 1) return;
+      estado.filtro.has(c) ? estado.filtro.delete(c) : estado.filtro.add(c);
+      b.setAttribute('aria-pressed', estado.filtro.has(c));
+      if (estado.sel && !estado.filtro.has(idx.get(estado.sel).c)) cerrarFicha();
+      construir();
+    });
+    b.addEventListener('dblclick', () => {
+      estado.filtro = new Set([c]); chips.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x.dataset.c === c)); construir();
+    });
+    chips.appendChild(b);
+  });
+  function ponerVista(v) {
+    estado.vista = v;
+    $('#v-detalle').setAttribute('aria-pressed', v === 'detalle'); $('#v-compacto').setAttribute('aria-pressed', v === 'compacto');
+    try { history.replaceState(null, '', '#' + v); } catch (e) { }
+    construir();
+  }
+  $('#v-detalle').addEventListener('click', () => ponerVista('detalle'));
+  $('#v-compacto').addEventListener('click', () => ponerVista('compacto'));
+  window.addEventListener('hashchange', () => {
+    const v = location.hash === '#compacto' ? 'compacto' : location.hash === '#detalle' ? 'detalle' : null;
+    if (v && v !== estado.vista) ponerVista(v);
+  });
+  $('#b-holgura').addEventListener('click', e => { estado.holgura = !estado.holgura; e.currentTarget.setAttribute('aria-pressed', estado.holgura); construir(); });
+
+  function aviso(t) { const a = $('#aviso'); a.textContent = t; a.classList.add('ver'); setTimeout(() => a.classList.remove('ver'), 2400); }
+  $('#b-copiar').addEventListener('click', async () => {
+    const cab = ['Código', 'Componente', 'Fase', 'Ola', 'Actividad', 'Producto que deja', 'Responsable', 'Depende de', 'Inicio', 'Fin', 'Semanas', 'Fuente'];
+    const filasT = D.A.slice().sort((x, y) => ORDEN.indexOf(x.c) - ORDEN.indexOf(y.c) || prog.P[x.id].s - prog.P[y.id].s).map(a => {
+      const p = prog.P[a.id];
+      return [cod[a.id], COMP[a.c].nombre, a.f, a.o ? D.OLAS[a.o - 1].nombre : '', a.n, a.p, a.r, a.d.map(d => cod[d]).join(', '),
+        esHito(a) ? fechaHito(a, p) : M.semanaTexto(p.s), esHito(a) ? '' : M.semanaTexto(p.e - 1), esHito(a) ? 0 : p.e - p.s, a.fondo || ''].join('\t');
+    });
+    const tsv = [cab.join('\t')].concat(filasT).join('\n');
+    try { await navigator.clipboard.writeText(tsv); aviso('Tabla copiada: pégala en una hoja de cálculo.'); }
+    catch (e) {
+      let ta = document.querySelector('.respaldo');
+      if (!ta) { ta = document.createElement('textarea'); ta.className = 'respaldo'; ta.setAttribute('aria-label', 'Tabla para copiar'); $('.controles').appendChild(ta); }
+      ta.value = tsv; ta.focus(); ta.select(); aviso('Selecciona y copia el texto que apareció debajo de los controles.');
+    }
+  });
+
+  // Delegación de eventos
+  etiquetas.addEventListener('click', e => {
+    const g = e.target.closest('[data-grupo]');
+    if (g) { const c = g.dataset.grupo; estado.cerrados.has(c) ? estado.cerrados.delete(c) : estado.cerrados.add(c); construir(); return; }
+    const cr = e.target.closest('[data-carril]');
+    if (cr) { const c = cr.dataset.carril; if (!estado.filtro.has(c)) { estado.filtro.add(c); chips.querySelector(`[data-c="${c}"]`).setAttribute('aria-pressed', 'true'); } estado.cerrados.delete(c); ponerVista('detalle'); const f = filas.find(x => x.tipo === 'grupo' && x.c === c); if (f) $('#g-scroll').scrollTo({ top: f.y - 10, behavior: 'smooth' }); return; }
+    const fl = e.target.closest('[data-id]'); if (fl) seleccionar(fl.dataset.id, false);
+  });
+  etiquetas.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role="button"]')) { e.preventDefault(); e.target.click(); } });
+  tiempo.addEventListener('click', e => {
+    const b = e.target.closest('.barra[data-id]');
+    if (b && idx.has(b.dataset.id)) { seleccionar(b.dataset.id, false); return; }
+    if (!b && estado.sel) cerrarFicha();
+  });
+  document.addEventListener('click', e => { const ir = e.target.closest('[data-ir]'); if (ir) { const id = ir.dataset.ir; const a = idx.get(id); if (estado.vista === 'compacto' && !esHito(a)) ponerVista('detalle'); if (!estado.filtro.has(a.c)) { estado.filtro.add(a.c); chips.querySelector(`[data-c="${a.c}"]`).setAttribute('aria-pressed', 'true'); construir(); } if (estado.cerrados.has(a.c)) { estado.cerrados.delete(a.c); construir(); } seleccionar(id, true); } });
+  $('#f-cerrar').addEventListener('click', cerrarFicha);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#ficha').hidden) cerrarFicha(); });
+
+  // Globo de ayuda al pasar el cursor
+  const globo = $('#globo');
+  tiempo.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    const b = e.target.closest('.barra[data-id]');
+    if (!b || !idx.has(b.dataset.id)) { globo.classList.remove('ver'); return; }
+    const a = idx.get(b.dataset.id), p = prog.P[a.id];
+    globo.innerHTML = `${a.n}<small>${cod[a.id]}, ${periodo(a, p)}</small>`;
+    globo.style.left = Math.min(e.clientX + 14, window.innerWidth - 320) + 'px'; globo.style.top = (e.clientY + 16) + 'px';
+    globo.classList.add('ver');
+  });
+  tiempo.addEventListener('pointerleave', () => globo.classList.remove('ver'));
+
+  // Leyenda
+  $('#leyenda').innerHTML = [
+    `<span><i class="mu" style="background:var(--secas)"></i>Secas (noviembre a mayo)</span>`,
+    `<span><i class="mu" style="background:var(--lluvias)"></i>Lluvias (junio a octubre)</span>`,
+    `<span><i class="mu" style="background:var(--semana-santa);box-shadow:inset 0 0 0 1px var(--tinta-3)"></i>Semana Santa</span>`,
+    `<span><i class="mu" style="background:repeating-linear-gradient(135deg,var(--tinta-2) 0 3px,transparent 3px 6px);box-shadow:inset 0 0 0 1.5px var(--tinta-2)"></i>Espera de un tercero</span>`,
+    `<span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="3" width="8" height="8" transform="rotate(45 7 7)" fill="var(--tinta-2)"/></svg>Hito</span>`,
+    `<span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3.2" y="3.2" width="7.6" height="7.6" transform="rotate(45 7 7)" fill="none" stroke="var(--tinta-2)" stroke-width="2"/></svg>Compuerta de decisión</span>`,
+    `<span><svg width="24" height="10" viewBox="0 0 24 10" aria-hidden="true"><line x1="0" y1="5" x2="18" y2="5" stroke="var(--tinta-2)" stroke-width="3"/><path d="M18 1 24 5 18 9z" fill="var(--tinta-2)"/></svg>Actividad continua</span>`,
+    `<span><svg width="22" height="12" viewBox="0 0 22 12" aria-hidden="true"><rect x="1" y="1.5" width="20" height="9" rx="3" fill="none" stroke="var(--tinta-3)" stroke-width="1.5" stroke-dasharray="1.5 2"/></svg>Plan base, cuando el simulador mueve algo</span>`
+  ].join('');
+
+  // Renglón sin dueño
+  const cargos = new Set(D.A.map(a => a.r));
+  $('#dueno-texto').textContent = `Cada uno de los ${D.A.length} renglones tiene un cargo que responde por él: ${cargos.size} cargos en total, del comisariado ejidal a las vocalías del comité. Ninguno dice "el equipo".`;
+
+  // Notas de elaboración
+  const NOTAS = [
+    'Integra los seis cronogramas de los equipos (erosión, revegetación, comunidad, recreación, seguridad y convivencia) y el catálogo de propuestas. Se corrigieron dependencias circulares, renglones que dependían de sí mismos o de renglones inexistentes, y cruces sin resolver entre componentes.',
+    'Las piezas que no venían en la lista de ocho se acomodaron en los seis componentes: las trancas del vertedor en 1a, el corredor de fauna en 1b, reglamento, comité, recorridos y letreros en 2, muelle, boyas y senderos en 3, estacionamiento con cerca, botes, luminaria y barreras vivas en 4, y palapas con asadores, bancas y explanada en 5.',
+    'Los botes siguen el catálogo: un contenedor metálico por sitio, sin separación, en lugar de los nueve con separación del cronograma del equipo.',
+    'Las fechas de PROCODES siguen sus reglas de operación de 2026 (DOF, 15 de enero de 2026): convocatoria a más tardar el último día hábil de febrero, 15 días hábiles para solicitudes, dictamen hasta 20 días hábiles, permisos dentro de 150 días naturales y cierre de acciones al 31 de diciembre. Se usan como referencia mientras se publican las de 2027.',
+    'La evaluación de impacto ambiental se calcula con 90 días hábiles (el rango es de 60 a 120) y la concesión de zona federal con 60 días hábiles. El caso del Parque Lineal de Concá, con la concesión detenida más de dos años, justifica tratar al muelle como el renglón más frágil.',
+    'La convocatoria a asamblea ejidal se expide de 8 a 15 días antes (Ley Agraria, art. 25); si el acuerdo tocara el destino de tierras de uso común, la ley pide un mes de anticipación, representante de la Procuraduría Agraria y fedatario.',
+    'La unidad de tiempo es la semana aproximada: cada mes se parte en cuatro (1 a 7, 8 a 14, 15 a 21 y 22 al cierre). No se programa trabajo en la última semana de diciembre ni en la primera de enero.',
+    'Responsables por cargo y no por nombre: el semestre termina el 27 de noviembre de 2026 y el cronograma vive en 2027 y 2028.',
+    'El simulador aplica los atrasos a la asamblea ejidal, a los dictámenes y presupuestos, y a cada permiso; recalcula con las mismas reglas de temporada y avisa qué plazo se rompe.'
+  ];
+  $('#notas-lista').innerHTML = NOTAS.map(n => `<li>${n}</li>`).join('');
+
+  // Arranque
+  $('#v-detalle').setAttribute('aria-pressed', estado.vista === 'detalle'); $('#v-compacto').setAttribute('aria-pressed', estado.vista === 'compacto');
+  medir(); dibujarRegla(); construir(); actualizarCierre(); actualizarAlertas(); dibujarJoroba();
+  let rz = null;
+  window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { medir(); dibujarRegla(); construir(); dibujarJoroba(); }, 120); });
+  window.__listo = true;
+})();
+</script>
+</body>
+</html>

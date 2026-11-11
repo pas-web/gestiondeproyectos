@@ -1032,3 +1032,22 @@ y evaluar como dos caras).
 - **Prompts de ilustración** en `claude/imagenes-semana-06.md` (carpeta local,
   no al repo): el eslabón que nadie dibujó, el árbol acostado, la mesa de
   cuatro patas, la acamaya y sus flechas. Placeholders comentados en la S6.
+
+## Bloque 18 (11 de noviembre de 2026): el cronograma de la presa entra al sitio
+
+- **Página nueva:** `recursos/cronograma-de-la-presa/index.html`, el calendario
+  hipotético del anteproyecto (octubre de 2026 a noviembre de 2028) que integra
+  los cronogramas de los seis equipos: 110 renglones entre la ruta de gestión y
+  los seis componentes, 14 hitos y 6 compuertas, con filtro por componente,
+  hilos de dependencia, simulador de retrasos y botón para copiar la matriz. Es
+  autocontenida (fuentes y datos dentro) y no carga `curso.js`.
+- **Tres PDF a su lado:** la versión para la asamblea (6 páginas, letra de 11
+  puntos o más), la versión completa para las instancias de financiamiento (20
+  páginas, tablas a 8 puntos; la última es una nota de elaboración que se
+  retira antes de imprimir) y el cartel de pared de 90 × 60 cm.
+- **Enlace** desde «Lo que ya existe en el curso y aquí se usa» de
+  `recursos/cronograma-y-presupuesto/index.html`.
+- **La fuente viaja con la página:** `recursos/cronograma-de-la-presa/fuente/`
+  guarda la matriz, el motor y los generadores, con su `LEEME.md`. Ninguna
+  página la enlaza. Si cambian fechas o textos, se regeneran la página y los
+  tres PDF y se suben juntos, para que no se contradigan.
