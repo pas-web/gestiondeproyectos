@@ -349,7 +349,8 @@ function calcular(e) {
   return s;
 }
 
-// La revisión: los seis agujeros de siempre y los tres de los bolsillos
+// La revisión: seis agujeros (oídas, flete, centavo, doble papel, pecado mayor y dinero que llega tarde)
+// y tres avisos que no cuentan como agujero (sin precio, sin actividad, sin bolsillo)
 function revisar(e, s) {
   // las partidas recién creadas y vacías no se revisan todavía
   var ps = (e.partidas || []).filter(function (p) { return (p.que || '').trim() || totalDe(p) > 0; }), lista = [], fila = {};
@@ -363,8 +364,8 @@ function revisar(e, s) {
   var cero = ps.filter(function (p) { if (esDinero(p) && !(+p.precio) ) { marca(p, 'sin precio'); return true; } return false; });
   if (cero.length) lista.push({ clase: 'ojo', titulo: 'Lo que todavía no tiene precio', texto: 'Partidas de compra con precio en cero: ' + ids(cero) + '. Se dejan escritas, con su pendiente, en lugar de borrarlas: lo que no se escribe lo termina pagando alguien de su bolsa.' });
 
-  var bolsa = ps.filter(function (p) { var b = !p.actividad || /\bvarios\b|diversos|\betc\b|misc/i.test(p.que || '') || (s.total > 0 && totalDe(p) > 0.5 * s.total && ps.length > 3); if (b) marca(p, 'partida bolsa'); return b; });
-  r(bolsa.length, 'La partida bolsa', 'Cada partida cuelga de una actividad y dice qué es exactamente.', 'Renglones que no dicen de qué actividad son, que dicen «varios» o que se comen casi la mitad del presupuesto: ' + ids(bolsa) + '. Se parten hasta que cada pedazo se pueda leer en voz alta.');
+  var sinAct = ps.filter(function (p) { var b = !p.actividad || /\bvarios\b|diversos|\betc\b|misc/i.test(p.que || ''); if (b) marca(p, 'sin actividad'); return b; });
+  if (sinAct.length) lista.push({ clase: 'ojo', titulo: 'La partida sin actividad', texto: 'Renglones que no dicen de qué actividad son, o que dicen «varios»: ' + ids(sinAct) + '. Cada partida tiene que poder decir en voz alta para qué actividad existe.' });
 
   var hayMaterial = ps.some(function (p) { return (p.tipo === 'materiales' || p.tipo === 'equipo') && esDinero(p) && totalDe(p) > 0; });
   var hayTraslado = (e.flete && e.flete.si) || ps.some(function (p) { return p.tipo === 'traslado'; });
@@ -385,10 +386,9 @@ function revisar(e, s) {
   if (aseMonto > 0 && aseMonto > 0.1 * s.pro.monto + 1e-9) { ase.forEach(function (p) { marca(p, 'asesoría arriba del 10%'); }); proMal.push('la asistencia técnica que se le carga a PROCODES (' + pesos(aseMonto) + ') pasa del 10% de lo que pondría el programa (' + pesos(0.1 * s.pro.monto) + ')'); }
   if (s.pro.hay && s.pro.pct > 0.8 + 1e-9) proMal.push('PROCODES pondría el ' + Math.round(100 * s.pro.pct) + '% de su proyecto y el programa pone hasta el 80%: el grupo tiene que poner al menos ' + pesos(s.pro.monto / 4 - s.pro.grupo > 0 ? s.pro.monto / 4 - s.pro.grupo : 0) + ' más en jornales, materiales o dinero, en las actividades del proyecto PROCODES');
   if (s.pro.hay && s.pro.tope > 0 && s.pro.monto > s.pro.tope) proMal.push('lo que se le pide a PROCODES (' + pesos(s.pro.monto) + ') pasa el tope de ' + s.pro.cant + ' ' + s.pro.unidad + ' (' + pesos(s.pro.tope) + ')');
-  r(pecado.length || proMal.length ? 1 : 0, 'El pecado mayor', 'Ningún fondo paga lo que sus reglas no admiten ni más de su tope.', (pecado.length ? 'Honorarios del propio equipo o comida que no es de faena cargados a un fondo: ' + ids(pecado) + '. ' : '') + (proMal.length ? proMal.join('; ') + '.' : ''));
-
-  var equivocado = ps.filter(function (p) { var t = bolsilloMal(p); if (t) marca(p, t); return !!t; });
-  r(equivocado.length, 'El bolsillo equivocado', 'Cada bolsillo paga lo que sus reglas dejan.', 'Partidas en un bolsillo que no paga esa clase de cosa: ' + equivocado.map(function (p) { return '#' + p.id + ' (' + bolsilloMal(p) + ')'; }).join('; ') + '.');
+  // pedirle a un bolsillo lo que sus reglas no admiten (dinero a CONAFOR, especie al PROCODES) también es pecado mayor
+  var reglas = ps.filter(function (p) { var t = bolsilloMal(p); if (t) marca(p, 'no lo admiten sus reglas'); return !!t; });
+  r(pecado.length || reglas.length || proMal.length ? 1 : 0, 'El pecado mayor', 'Ningún bolsillo recibe lo que sus reglas no admiten ni más de su tope.', (pecado.length ? 'Honorarios del propio equipo o comida que no es de faena cargados a un fondo: ' + ids(pecado) + '. ' : '') + (reglas.length ? 'Partidas en un bolsillo cuyas reglas no las admiten: ' + reglas.map(function (p) { return '#' + p.id + ' (' + bolsilloMal(p) + ')'; }).join('; ') + '. ' : '') + (proMal.length ? proMal.join('; ') + '.' : ''));
 
   var tarde = ps.filter(function (p) { var t = cuandoMal(p); if (t) marca(p, 'llega tarde'); return !!t; });
   if (e.flete && e.flete.si && cuandoMal(e.flete)) tarde.push({ id: 'flete', mes: e.flete.mes, bolsillo: e.flete.bolsillo, forma: e.flete.forma });

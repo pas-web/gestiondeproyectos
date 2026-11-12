@@ -1062,7 +1062,7 @@ y evaluar como dos caras).
   partidas con cantidad, unidad, precio, bolsillo, mes, tipo, forma (compra,
   faena, prestado, trocado o donado) y papel; flete e imponderables con renglón
   propio; el reloj del dinero; el tope y el 20% del PROCODES, y la asistencia
-  técnica hasta el 10%; la revisión de ocho agujeros; la hoja para cotizar y el
+  técnica hasta el 10%; la revisión de seis agujeros; la hoja para cotizar y el
   archivo para juntar (.json). El ejemplo que se carga es la ruta de gestión
   (siete partidas, $6,885, con los precios de referencia marcados como de
   oídas). Sustituye a la versión del manantial.
@@ -1075,7 +1075,7 @@ y evaluar como dos caras).
   y lee la misma matriz del cronograma: si cambian sus actividades, se corre
   `node construir.js` y se suben las dos páginas con la del cronograma.
 - **Mazo 2 rehecho para la presa** (24 láminas): entran dinero y especie, los
-  cuatro bolsillos, el reloj del dinero, el 20% que pone el grupo, los ocho
+  cuatro bolsillos, el reloj del dinero, el 20% que pone el grupo, los seis
   agujeros, la ruta de gestión como ejemplo y la lámina de juntar.
 - **Gimnasios del presupuesto con partidas de la presa:** El presupuesto
   agujerado se reescribe en el mismo archivo, y entran ¿Quién lo paga?, El
@@ -1093,4 +1093,8 @@ y evaluar como dos caras).
 - **Pendiente:** las tres cotizaciones por partida de mil pesos o más de cada
   equipo, con la fecha que fije el profesor. Con ellas se corrigen los archivos
   y se vuelve a juntar el presupuesto para la asamblea y el anexo.
-
+- **12 de noviembre, por la tarde: seis agujeros, no ocho.** Salen la partida
+  bolsa y el bolsillo equivocado. En la práctica, lo que revisaba el bolsillo
+  equivocado (dinero a CONAFOR, especie al PROCODES) pasa al pecado mayor, y la
+  partida sin actividad queda como aviso, no como agujero. El presupuesto
+  agujerado baja a seis casos.
