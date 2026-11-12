@@ -3,26 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mazo 2 · El presupuesto · Gestión y Manejo de Proyectos</title>
+<title>Mazo 2 · El presupuesto de la presa · Gestión y Manejo de Proyectos</title>
 <link rel="stylesheet" href="mazo.css">
+<style>
+  .bp { display:inline-block; width:.8em; height:.8em; border-radius:50%; background:var(--c); margin-right:.45em; vertical-align:-.05em; }
+  table.veredicto td.m { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  table.veredicto.chica { font-size:.9rem; }
+  #telon .escenario > .lam table.veredicto.chica { font-size:1.1rem; }
+  .piezas.junto { margin:.5rem 0 .6rem; }
+</style>
 </head>
 <body>
 
 <header class="curso">
   <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
-  <div class="titulo">Mazo 2 · El presupuesto</div>
-  <div class="migas"><a href="index.html">La clase de cronograma y presupuesto</a> · Segunda parte</div>
+  <div class="titulo">Mazo 2 · El presupuesto de la presa</div>
+  <div class="migas"><a href="index.html">La clase de cronograma y presupuesto</a> · <a href="practica-presupuesto.html">La práctica</a> · <a href="../presupuesto-de-la-presa/index.html">El presupuesto de la presa</a></div>
 </header>
 
 <main>
 
-<p class="pista">Un mazo de láminas: en clase se proyecta una por una con el botón <strong>Presentar</strong> (o doble clic sobre cualquier lámina). Las flechas avanzan; la tecla N muestra las notas del conductor. Una idea por lámina; la práctica viene al final.</p>
+<p class="pista">Un mazo de láminas: en clase se proyecta una por una con el botón <strong>Presentar</strong> (o doble clic sobre cualquier lámina). Las flechas avanzan; la tecla N muestra las notas del conductor. Una idea por lámina; la práctica viene al final, y al cierre los presupuestos de los equipos se juntan en uno.</p>
 
 <div class="mazo-cabeza">
   <div>
-    <div class="cuando">Segunda parte · unos 50 minutos</div>
-    <h3>Tu proyecto en pesos</h3>
-    <p class="foco">Qué es un presupuesto, de dónde sale cada renglón, cómo se defiende con papel y por qué en este curso se escribe a dos columnas.</p>
+    <div class="cuando">Segunda parte · unos 40 minutos</div>
+    <h3>El presupuesto de la presa</h3>
+    <p class="foco">Qué es un presupuesto, de dónde sale cada renglón, cómo se defiende con papel, quién paga cada cosa y cuándo llega su dinero: los cuatro bolsillos de la presa.</p>
   </div>
   <button class="btn-presentar" type="button">Presentar ▸</button>
 </div>
@@ -30,9 +37,9 @@
 <!-- 1 -->
 <section class="lam lam--portada">
   <div class="cuando">Gestión y Manejo de Proyectos · Mazo 2</div>
-  <h3>El presupuesto</h3>
-  <p class="foco">Tu proyecto en pesos.</p>
-  <p class="nota-conductor">Cada equipo con su cronograma de la práctica anterior enfrente, impreso o en la laptop. Sin cronograma no hay presupuesto: se lee de ahí.</p>
+  <h3>El presupuesto de la presa</h3>
+  <p class="foco">El cronograma en pesos, con cuatro bolsillos.</p>
+  <p class="nota-conductor">Cada equipo con su componente del cronograma integrado enfrente: el cartel en la pared o la versión interactiva en la laptop. Sin cronograma no hay presupuesto: se lee de ahí.</p>
 </section>
 
 <!-- 2 -->
@@ -40,7 +47,7 @@
   <span class="senal senal--aire">Al aire</span>
   <p class="di">¿Cuánto cuesta sembrar un árbol en la orilla de la presa?</p>
   <p class="apoyo">Así se contesta: "La planta vale como cuarenta pesos en el vivero. Pero hay que ir por ella, hacerle el hoyo, cercarla del ganado, regarla dos secas y que alguien la cuide. El árbol de cuarenta pesos cuesta como cuatrocientos." Lo caro casi nunca es la cosa: es lo que hay alrededor para que la cosa viva.</p>
-  <p class="nota-conductor">Dejar que digan un número. Anotarlos en el pizarrón y regresar a ellos al final de la práctica, cuando tengan el suyo.</p>
+  <p class="nota-conductor">Dejar que digan un número. Anotarlos en el pizarrón y regresar a ellos al cierre, cuando el presupuesto de la presa esté junto.</p>
 </section>
 
 <!-- 3 -->
@@ -56,7 +63,7 @@
   <p class="apoyo">No es una lista de cosas caras ni un número redondo que suena bien. Cada renglón contesta cinco preguntas: para qué actividad es, qué se compra o se paga, cuántas unidades, a cuánto cada una y quién dio ese precio.</p>
   <div class="tres">
     <div><div class="t">Para saber si alcanza</div>Antes de prometer, no después.</div>
-    <div><div class="t">Para pedir lo justo</div>Ni de más (el donante compara tu proyecto con otros) ni de menos (el flete que faltó lo pagas tú).</div>
+    <div><div class="t">Para pedir lo justo</div>Ni de más (quien revisa compara tu proyecto con otros) ni de menos (el flete que faltó lo pagas tú).</div>
     <div><div class="t">Para rendir cuentas</div>Lo que se pidió por renglón se comprueba por renglón.</div>
   </div>
 </section>
@@ -78,18 +85,18 @@
     <span class="pz pz--arena">precio<small>unidad, cantidad, costo, papel</small></span>
     <span class="eq">= una partida</span>
   </div>
-  <p class="apoyo">El presupuesto no se inventa en blanco: se lee del cronograma. A cada renglón se le pregunta "¿qué necesito para hacerlo?" y la respuesta se vuelve partidas. Por eso se arman en este orden, y por eso una actividad que no aparece en el presupuesto es una actividad que alguien va a pagar de su bolsa.</p>
+  <p class="apoyo">El presupuesto no se inventa en blanco: se lee del cronograma. A cada renglón se le pregunta "¿qué necesito para hacerlo?" y la respuesta se vuelve partidas. El cronograma de la presa ya trae noventa y dos actividades con su mes, en siete piezas: la ruta de gestión y los seis componentes. Una actividad que no aparece en el presupuesto es una actividad que alguien va a pagar de su bolsa.</p>
 </section>
 
 <!-- 7 -->
 <section class="lam">
   <h4>Cuatro tipos de recurso</h4>
   <table class="veredicto">
-    <tr><th>Tipo</th><th>Qué es</th><th>En La Florida</th></tr>
-    <tr><td><strong>Gente</strong></td><td>El trabajo de las personas: jornales, honorarios.</td><td>Las ocho personas de la faena, el que opera la motosierra, el técnico del vivero.</td></tr>
-    <tr><td><strong>Traslado</strong></td><td>Mover gente y cosas: flete, gasolina, pasajes, viáticos.</td><td>La camioneta que trae las plantas y los postes de la cabecera a la orilla.</td></tr>
-    <tr><td><strong>Materiales</strong></td><td>Lo que se consume o se queda instalado.</td><td>Plantas, alambre, postes, cemento, pintura, costales, botes.</td></tr>
-    <tr><td><strong>Equipo</strong></td><td>Lo que queda y se vuelve a usar.</td><td>Palas, carretilla, manguera, lámparas solares.</td></tr>
+    <tr><th>Tipo</th><th>Qué es</th><th>En la presa</th></tr>
+    <tr><td><strong>Gente</strong></td><td>El trabajo de las personas: jornales, honorarios.</td><td>Las diez personas de la faena de las palapas, el que opera la retroexcavadora, el técnico de CONAFOR.</td></tr>
+    <tr><td><strong>Traslado</strong></td><td>Mover gente y cosas: flete, gasolina, pasajes, viáticos.</td><td>La camioneta que trae la palma y los tablones de la cabecera a la orilla; los pasajes a Jalpan.</td></tr>
+    <tr><td><strong>Materiales</strong></td><td>Lo que se consume o se queda instalado.</td><td>Palma, tablones, postes, alambre, pintura, grava, planta.</td></tr>
+    <tr><td><strong>Equipo</strong></td><td>Lo que queda y se vuelve a usar.</td><td>Contenedores, lámparas solares, asadores, herramienta.</td></tr>
   </table>
   <p class="apoyo">Los formatos oficiales lo dicen con otras dos palabras: <strong>gasto corriente</strong> (gente, traslado, materiales: se consume) y <strong>gasto de inversión</strong> (equipo: queda). Casi todos los fondos ponen tope al segundo.</p>
 </section>
@@ -106,10 +113,10 @@
     <span class="eq">= total, con su papel</span>
   </div>
   <div class="contra">
-    <div class="no"><div class="t">Así no</div>"Materiales varios: $3,000."</div>
-    <div class="si"><div class="t">Así sí</div>"Malla sombra de 6 por 4 metros, 1 pieza, $2,850. Cotización de la ferretería del pueblo, 2 de noviembre."</div>
+    <div class="no"><div class="t">Así no</div>"Materiales varios para las palapas: $14,000."</div>
+    <div class="si"><div class="t">Así sí</div>"Palma para el techo de las tres palapas, 48 m² a $180: $8,640. Cotización escrita de la maderería de la cabecera, 3 de noviembre."</div>
   </div>
-  <p class="apoyo">La prueba de la partida honesta: se puede leer en voz alta frente al donante sin carraspear.</p>
+  <p class="apoyo">La prueba de la partida honesta: se puede leer en voz alta frente a la asamblea, y frente a quien pone el dinero, sin carraspear.</p>
 </section>
 
 <!-- 9 -->
@@ -129,108 +136,174 @@
     <span class="pz pz--roja">imponderables<small>alrededor del 5%, con nombre</small></span>
     <span class="eq">= un presupuesto que se defiende solo</span>
   </div>
-  <p class="apoyo">Un precio sin papel es un rumor. Casi todas las convocatorias piden tres cotizaciones por cada rubro de mil pesos o más, dos de ellas por escrito y de menos de treinta días. El flete es el renglón que todo primer presupuesto olvida: lo cotizado en la cabecera no llega solo a la orilla. Y los imponderables son el clavo que falta en domingo: un colchón chico, con nombre honesto. Un presupuesto al centavo exacto no es precisión: es optimismo disfrazado de contabilidad.</p>
+  <p class="apoyo">Un precio sin papel es un rumor. Casi todas las convocatorias piden tres cotizaciones por cada concepto de mil pesos o más, dos de ellas por escrito y de menos de treinta días. El flete es el renglón que todo primer presupuesto olvida: lo cotizado en la cabecera no llega solo a la orilla. Y los imponderables son el clavo que falta en domingo: un colchón chico, con nombre honesto. Un presupuesto al centavo exacto no es precisión: es optimismo disfrazado de contabilidad.</p>
 </section>
 
 <!-- 11 -->
 <section class="lam">
   <h4>Tres maneras de estimar</h4>
   <table class="veredicto">
-    <tr><th>Manera</th><th>Cómo se hace</th><th>Cuándo sirve</th></tr>
-    <tr><td><strong>De abajo hacia arriba</strong></td><td>Sumas el costo de cada actividad del cronograma, partida por partida, con cotización.</td><td>Lo que se hace en 2027: se cotiza en la ferretería y el vivero.</td></tr>
-    <tr><td><strong>De arriba hacia abajo</strong></td><td>Te dan el techo y recortas hasta que quepa lo que más importa.</td><td>El tope que fija la convocatoria del donante.</td></tr>
-    <tr><td><strong>Por referencia</strong></td><td>Usas lo que costó algo parecido o lo que un programa paga por unidad.</td><td>El proyecto completo de la línea, con los costos unitarios del PROCODES.</td></tr>
+    <tr><th>Manera</th><th>Cómo se hace</th><th>En la presa</th></tr>
+    <tr><td><strong>De abajo hacia arriba</strong></td><td>Sumas el costo de cada actividad del cronograma, partida por partida, con cotización.</td><td>Lo que se compra: se cotiza en la maderería, la ferretería y el vivero.</td></tr>
+    <tr><td><strong>De arriba hacia abajo</strong></td><td>Te dan el techo y recortas hasta que quepa lo que más importa.</td><td>El tope de cada bolsillo.</td></tr>
+    <tr><td><strong>Por referencia</strong></td><td>Usas lo que costó algo parecido o lo que un programa paga por unidad.</td><td>Los costos unitarios del PROCODES: $5,490 por m² de palapa techada.</td></tr>
   </table>
-  <p class="apoyo">En este curso se usan las tres a la vez: se suma de abajo hacia arriba, se compara contra el techo, y lo que no se puede cotizar se estima por referencia y se marca como estimación.</p>
+  <p class="apoyo">Se usan las tres a la vez: se suma de abajo hacia arriba, se compara contra el techo de cada bolsillo, y lo que todavía no se puede cotizar se estima por referencia y se marca como estimación.</p>
 </section>
 
 <!-- 12 -->
 <section class="lam lam--figura">
   <img class="ilustracion" src="img/dos-columnas.webp" alt="Dibujo a tinta: una balanza de dos platos; en uno, monedas; en el otro, una tarima, una pala, una camioneta, tres personas con sombrero y una manguera; los platos están parejos; una persona lee una libreta al lado">
-  <p class="pie">Dos columnas, y las dos cuentan.</p>
+  <p class="pie">Dinero y especie, y los dos cuentan.</p>
 </section>
 
 <!-- 13 -->
 <section class="lam">
-  <h4>A dos columnas</h4>
+  <h4>Dinero y especie</h4>
   <div class="contra">
-    <div class="si"><div class="t">Lo que paga el donante</div>Lo comprado: malla, postes, cemento, flete pagado, imponderables. Con cotización.</div>
-    <div class="si"><div class="t">Lo que se consigue afuera, valorizado</div>Lo prestado, trocado o donado: las tarimas de la bodega, las dos jornadas de faena, la camioneta del municipio. Con el precio que tendría si se comprara.</div>
+    <div class="si"><div class="t">Lo que se compra con dinero</div>Palma, tablones, pintura, el flete pagado, los imponderables. Con cotización.</div>
+    <div class="si"><div class="t">Lo que se consigue en especie, valorizado</div>La faena, las sillas que presta la delegación, los troncos de la poda, la camioneta del Ayuntamiento. Con el precio que tendría si se comprara, y su papel.</div>
   </div>
-  <p class="apoyo">Las cuatro palabras de la gente que hace lugares con poco dinero: <strong>comprado, prestado, trocado o donado</strong>. Solo la primera le cuesta al donante; las otras tres son gestión, y se cuentan igual de completas porque le enseñan al donante el tamaño real del proyecto. Una regla: cada cosa vive en una sola columna. Lo que ya está valorizado como contrapartida no se le cobra al donante.</p>
+  <p class="apoyo">Las cinco formas: <strong>comprado, en faena, prestado, trocado o donado</strong>. Solo la primera necesita dinero; las otras cuatro son gestión, y se cuentan igual de completas porque le enseñan a la asamblea y a los fondos el tamaño real del proyecto. Una regla: cada cosa vive en un solo bolsillo. Lo que ya se puso en especie no se le cobra a un fondo.</p>
 </section>
 
 <!-- 14 -->
-<section class="lam lam--oscura">
-  <h4>Lo que casi ningún donante perdona</h4>
-  <ol class="pasos">
-    <li>Cada convocatoria trae un <strong>tope</strong> y a veces un mínimo. Pedir más del tope se desecha sin evaluar; pedir mucho menos levanta la sospecha de que falta algo.</li>
-    <li>Casi ninguno paga honorarios del propio equipo sin un renglón que los justifique, ni comida que no sea de faena, ni nada sin comprobante.</li>
-    <li>El dinero llega por <strong>ministraciones</strong>: en partes y en fecha. No se compra antes, y eso manda sobre el cronograma.</li>
-    <li>Pedir lo que la convocatoria no permite (terrenos, vehículos, lo que ya pagó otro) se desecha sin evaluar.</li>
-  </ol>
-  <p class="nota-conductor">La lista de lo que no se paga se lee antes de armar el presupuesto, no después. Preguntar: ¿quién ha leído completa una convocatoria? Casi nadie, y ahí se pierden proyectos.</p>
+<section class="lam">
+  <h4>Los cuatro bolsillos</h4>
+  <p class="di">Un proyecto de este tamaño no lo paga un solo donante.</p>
+  <table class="veredicto chica">
+    <tr><th>Bolsillo</th><th>Qué paga en la presa</th><th>Su regla</th></tr>
+    <tr><td><strong><span class="bp" style="--c:#c0602f"></span>Autogestión y especie</strong></td><td>Faenas, lo que da o presta el ejido, la cooperación, la kermés y el capital semilla de la UAQ.</td><td>Todo valorizado y con su papel: lista, nota, foto.</td></tr>
+    <tr><td><strong><span class="bp" style="--c:#168c6e"></span>PROCODES (CONANP)</strong></td><td>El proyecto ecoturístico: palapas, bancas, explanada, letrero y panel de caminatas.</td><td>Hasta el 80%; el grupo pone el 20%. Tope por m² o por lote. Lo pide un grupo de La Florida.</td></tr>
+    <tr><td><strong><span class="bp" style="--c:#6a55c2"></span>Ayuntamiento de Arroyo Seco</strong></td><td>En 2027, especie: limpia, recolección, maquinaria, materiales. En 2028, obra: estacionamiento, cerca, luminaria, muelle.</td><td>Sin FAIS. La obra pide visto bueno de Obras Públicas y de Protección Civil.</td></tr>
+    <tr><td><strong><span class="bp" style="--c:#4b8f2a"></span>CONAFOR</strong></td><td>Planta nativa para los cuarenta árboles y su reposición, y asesoría técnica.</td><td>Solo especie: ni dinero, ni flete, ni postes.</td></tr>
+  </table>
+  <p class="nota-conductor">Preguntar antes de pasar a la siguiente: ¿quién paga el cerco que protege del ganado a los árboles de CONAFOR? (La autogestión: CONAFOR no da postes.) Es el gimnasio "¿Quién lo paga?" en una pregunta.</p>
 </section>
 
 <!-- 15 -->
 <section class="lam">
-  <h4>La prueba del donante</h4>
-  <p class="di">Cada renglón puede decir en voz alta para qué actividad existe. Y el equipo sabe cuál se cae primero si el dinero llega parcial.</p>
-  <p class="apoyo">El renglón que no puede explicar para qué está, sobra. Y quien pone el dinero siempre pregunta lo mismo: "si les damos la mitad, ¿qué hacen?". El equipo que ya marcó la partida prescindible contesta en tres segundos; el que no, improvisa frente al donante.</p>
+  <h4>El reloj del dinero</h4>
+  <svg class="gantt-mini" viewBox="0 0 1000 318" role="img" aria-label="El reloj del dinero de la presa: cuándo puede pagar cada bolsillo, de noviembre de 2026 a noviembre de 2028">
+    <g font-family="'Source Sans 3', system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0B3C49"><text x="200.0" y="18">2026</text><text x="262.4" y="18">2027</text><text x="636.8" y="18">2028</text></g>
+    <g font-family="'Source Sans 3', system-ui, sans-serif" font-size="12.5" fill="#45605a" text-anchor="middle"><text x="215.6" y="38">n</text><text x="246.8" y="38">d</text><text x="278.0" y="38">e</text><text x="309.2" y="38">f</text><text x="340.4" y="38">m</text><text x="371.6" y="38">a</text><text x="402.8" y="38">m</text><text x="434.0" y="38">j</text><text x="465.2" y="38">j</text><text x="496.4" y="38">a</text><text x="527.6" y="38">s</text><text x="558.8" y="38">o</text><text x="590.0" y="38">n</text><text x="621.2" y="38">d</text><text x="652.4" y="38">e</text><text x="683.6" y="38">f</text><text x="714.8" y="38">m</text><text x="746.0" y="38">a</text><text x="777.2" y="38">m</text><text x="808.4" y="38">j</text><text x="839.6" y="38">j</text><text x="870.8" y="38">a</text><text x="902.0" y="38">s</text><text x="933.2" y="38">o</text><text x="964.4" y="38">n</text></g>
+    <g stroke="#CFE3DD" stroke-width="1"><line x1="262.4" y1="24" x2="262.4" y2="284"/><line x1="636.8" y1="24" x2="636.8" y2="284"/></g>
+    <g font-family="Georgia, serif" font-size="17" fill="#0B3C49"><text x="8" y="86">Autogestión</text><text x="8" y="146">PROCODES</text><text x="8" y="206">Ayuntamiento</text><text x="8" y="266">CONAFOR</text></g>
+    <g><rect x="201.5" y="71" width="777.0" height="18" rx="5" fill="#c0602f"/><circle cx="340.4" cy="80" r="6" fill="#fff" stroke="#0B3C49" stroke-width="2"/><rect x="419.9" y="131" width="215.4" height="18" rx="5" fill="#168c6e"/><path d="M340.4 131 l9 9 l-9 9 l-9 -9 z" fill="#fff" stroke="#168c6e" stroke-width="2.5"/><rect x="295.1" y="191" width="340.2" height="18" rx="5" fill="#6a55c2" opacity=".35"/><rect x="638.3" y="191" width="340.2" height="18" rx="5" fill="#6a55c2"/><rect x="482.3" y="188" width="76.5" height="24" rx="6" fill="none" stroke="#3f2f8f" stroke-width="2.5" stroke-dasharray="5 3"/><path d="M309.2 251 l9 9 l-9 9 l-9 -9 z" fill="#fff" stroke="#4b8f2a" stroke-width="2.5"/><rect x="419.9" y="251" width="59.4" height="18" rx="5" fill="#4b8f2a"/><rect x="794.3" y="251" width="28.2" height="18" rx="5" fill="#4b8f2a"/></g>
+    <path d="M418.4 69 V168 M418.4 190 V286" stroke="#8A3B2B" stroke-width="2" stroke-dasharray="6 5" fill="none"/>
+    <g font-family="'Source Sans 3', system-ui, sans-serif" font-size="13.5" fill="#1C2B28" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke"><text x="200.0" y="62" text-anchor="start">capital semilla desde ya; faenas y cooperación desde febrero de 2027</text><text x="340.4" y="106" text-anchor="middle">kermés</text><text x="327.4" y="145" text-anchor="end">solicitud</text><text x="422.4" y="122" text-anchor="start">deposita desde junio</text><text x="642.8" y="145" text-anchor="start">todo comprobado al 31 de diciembre</text><text x="295.6" y="182" text-anchor="start">especie desde febrero</text><text x="512.0" y="182" text-anchor="middle">petición de obra</text><text x="640.8" y="182" text-anchor="start">obra desde enero de 2028</text><text x="309.2" y="242" text-anchor="middle">pedido</text><text x="422.4" y="242" text-anchor="start">llega la planta</text><text x="808.4" y="242" text-anchor="middle">reposición</text></g>
+    <text x="8" y="308" font-family="'Source Sans 3', system-ui, sans-serif" font-size="14" font-weight="bold" fill="#8A3B2B">Antes de junio de 2027, la línea roja, solo pagan la comunidad y la especie del Ayuntamiento.</text>
+  </svg>
+  <p class="apoyo">El dinero llega por partes y en fecha, y cada bolsillo tiene su ventanilla. Por eso cada partida lleva su mes: el mes en que se necesita, que casi siempre es antes de la actividad. Lo que cae fuera de la ventanilla de su bolsillo tiene tres remedios: se mueve de mes, se adelanta con autogestión o se cambia de bolsillo. La especie también tiene ventanilla: la planta de CONAFOR se pide en febrero para que llegue con las lluvias.</p>
+  <p class="nota-conductor">Señalar en el cartel del cronograma dos actividades que el reloj ya acomodó: las palapas se compran en junio y julio (5-04), cuando el PROCODES ya depositó, y se construyen en noviembre, sin lluvias (5-05); y la obra del Ayuntamiento se pide en agosto (G-19) para hacerse en 2028.</p>
 </section>
 
 <!-- 16 -->
+<section class="lam">
+  <h4>El 20% que pone el grupo</h4>
+  <div class="piezas junto">
+    <span class="pz pz--clara">40 m²<small>de palapa techada</small></span>
+    <span class="op">&#215;</span>
+    <span class="pz pz--clara">$5,490<small>por m², el tope</small></span>
+    <span class="eq">= $219,600, lo que pone el PROCODES: el 80%</span>
+  </div>
+  <div class="piezas junto">
+    <span class="pz pz--oscura">$274,500<small>el proyecto completo</small></span>
+    <span class="op">&#8722;</span>
+    <span class="pz pz--clara">$219,600<small>el PROCODES</small></span>
+    <span class="eq">= $54,900 del grupo</span>
+  </div>
+  <div class="piezas junto">
+    <span class="pz pz--arena">183 jornales<small>a $300</small></span>
+    <span class="eq">= dieciocho faenas de diez personas</span>
+  </div>
+  <p class="apoyo">El 20% es del proyecto completo, no de lo que pone el programa: es la cuarta parte de lo que se le pide. Se pone en jornales, materiales o dinero, en las actividades del proyecto del PROCODES, y se comprueba con listas de asistencia, notas y fotos. Es un compromiso grande, y se dice en la asamblea antes de entregar la solicitud. Un dato más: arriba de $300,000 la solicitud pide estudio de factibilidad.</p>
+  <p class="nota-conductor">Es el ejemplo resuelto de la guía del PROCODES. Preguntar cuánto bajan las faenas si el ejido dona los troncos de la poda para los postes ($4,200 menos que reunir en jornales).</p>
+</section>
+
+<!-- 17 -->
+<section class="lam lam--oscura">
+  <h4>Lo que casi ningún donante perdona</h4>
+  <ol class="pasos">
+    <li>Cada convocatoria trae un <strong>tope</strong> y a veces un mínimo. El PROCODES lo pone por unidad: de 30 a 180 m² de palapa. Pedir más del tope se desecha sin evaluar; pedir mucho menos levanta la sospecha de que falta algo.</li>
+    <li>Casi ninguno paga honorarios del propio equipo sin un renglón que los justifique, ni comida que no sea de faena, ni nada sin comprobante.</li>
+    <li>El dinero llega por <strong>ministraciones</strong>: en partes y en fecha. El PROCODES deposita hasta la mitad hacia junio y el resto contra avance, y todo se comprueba antes del 31 de diciembre. No se compra antes, y eso manda sobre el cronograma.</li>
+    <li>Pedir lo que la convocatoria no permite (terrenos, vehículos, lo que ya pagó otro) se desecha sin evaluar.</li>
+  </ol>
+  <p class="nota-conductor">La lista de lo que no se paga se lee antes de armar el presupuesto, no después. Preguntar: ¿quién ha leído completa una convocatoria? Casi nadie, y ahí se pierden proyectos. La del PROCODES está resumida en la guía del curso.</p>
+</section>
+
+<!-- 18 -->
+<section class="lam">
+  <h4>La prueba del donante, y la de la asamblea</h4>
+  <p class="di">Cada renglón puede decir en voz alta para qué actividad existe. Y el equipo sabe cuál se cae primero si un bolsillo no llega.</p>
+  <p class="apoyo">El renglón que no puede explicar para qué está, sobra. Quien pone el dinero siempre pregunta lo mismo: "si les damos la mitad, ¿qué hacen?". La asamblea pregunta otra cosa: "¿cuánto ponemos nosotros, en qué y cuándo?". El presupuesto que contesta las dos es el mismo: el que marca lo que se cae primero y escribe completo lo que pone la comunidad.</p>
+</section>
+
+<!-- 19 -->
 <section class="lam lam--figura">
   <img class="ilustracion" src="img/los-agujeros.webp" alt="Dibujo a tinta: una persona sostiene un costal de monedas con seis agujeros; de cada uno cae una moneda hasta un montoncito en el suelo">
   <p class="pie">Los agujeros del presupuesto.</p>
 </section>
 
-<!-- 17 -->
+<!-- 20 -->
 <section class="lam lam--oscura">
-  <h4>Los seis agujeros clásicos</h4>
-  <table class="veredicto">
+  <h4>Los ocho agujeros</h4>
+  <table class="veredicto chica">
     <tr><th>El agujero</th><th>Cómo se ve</th></tr>
     <tr><td><strong>El precio de oídas</strong></td><td>Sin cotización que lo respalde.</td></tr>
     <tr><td><strong>La partida bolsa</strong></td><td>Un renglón gordo que no dice para qué actividad es.</td></tr>
     <tr><td><strong>El flete olvidado</strong></td><td>El material cotizado en la cabecera, y nadie lo trae.</td></tr>
     <tr><td><strong>El presupuesto al centavo</strong></td><td>Sin imponderables.</td></tr>
-    <tr><td><strong>El doble papel</strong></td><td>Cobrarle al donante lo que ya está valorizado como contrapartida.</td></tr>
-    <tr><td><strong>El pecado mayor</strong></td><td>Pedir lo que las reglas no permiten, o más de lo que existe.</td></tr>
+    <tr><td><strong>El doble papel</strong></td><td>Lo mismo en dos bolsillos, o cobrarle a un fondo lo que ya se puso en especie.</td></tr>
+    <tr><td><strong>El pecado mayor</strong></td><td>Pedir lo que las reglas no permiten, o más del tope.</td></tr>
+    <tr><td><strong>El bolsillo equivocado</strong></td><td>Que pague quien no paga eso: dinero de CONAFOR, especie en el PROCODES.</td></tr>
+    <tr><td><strong>El dinero que llega tarde</strong></td><td>Gastar antes de que llegue el bolsillo, o después de que cierre.</td></tr>
   </table>
-  <p class="nota-conductor">Si hay tiempo, proyectar el gimnasio "El presupuesto agujerado" (ejercicios/semana-10): siete partidas del manantial, una por agujero.</p>
+  <p class="nota-conductor">Los seis primeros son de cualquier presupuesto; los dos últimos los traen los cuatro bolsillos. La práctica revisa los ocho sola. Cuatro gimnasios: El presupuesto agujerado, ¿Quién lo paga?, El dinero llega tarde y La faena también cuenta. Si hay diez minutos antes de la práctica, "¿Quién lo paga?" proyectado y en parejas.</p>
 </section>
 
-<!-- 18 -->
+<!-- 21 -->
 <section class="lam">
   <h4>A quién le compras también es un mensaje</h4>
-  <p class="di">La malla de la ferretería del pueblo y el jornal de la gente de La Florida valen más que su precio.</p>
-  <p class="apoyo">Es la pregunta que el manual de Acción sin Daño hace sobre el uso de los recursos: ¿qué efectos causa en el lugar la forma de gastar? A quién se le compra, a quién se contrata y quién se queda fuera lo lee la comunidad antes que el donante. Cuando dos cotizaciones empatan, gana la del pueblo; cuando no empatan, se dice por qué se eligió la otra.</p>
+  <p class="di">La palma de la maderería del pueblo y el jornal de la gente de La Florida valen más que su precio.</p>
+  <p class="apoyo">Es la pregunta que el manual de Acción sin Daño hace sobre el uso de los recursos: ¿qué efectos causa en el lugar la forma de gastar? A quién se le compra, a quién se contrata y quién se queda fuera lo lee la comunidad antes que cualquier fondo. Cuando dos cotizaciones empatan, gana la del pueblo; cuando no empatan, se dice por qué se eligió la otra.</p>
 </section>
 
-<!-- 19 -->
+<!-- 22 -->
 <section class="lam">
-  <h4>Así se ve uno hecho: la sombra del manantial</h4>
-  <table class="veredicto">
-    <tr><th>Partida (actividad)</th><th>Papel</th><th>Paga el donante</th><th>Afuera</th></tr>
-    <tr><td>Malla sombra de 6 por 4 m, 1 pieza (faena 2)</td><td>Ferretería del pueblo, 2 nov</td><td>$2,850</td><td></td></tr>
-    <tr><td>Postes de madera de 2.2 m, 10 piezas a $190 (faena 1)</td><td>Maderería de la cabecera, 2 nov</td><td>$1,900</td><td></td></tr>
-    <tr><td>Cemento gris, 2 bultos a $340 (faena 1)</td><td>Ferretería del pueblo, 2 nov</td><td>$680</td><td></td></tr>
-    <tr><td>Flete de la cabecera al manantial, 1 viaje</td><td>Nota del fletero, 3 nov</td><td>$400</td><td></td></tr>
-    <tr><td>Imponderables, 5%: el clavo que falta en domingo</td><td></td><td>$292</td><td></td></tr>
-    <tr><td>Doce tarimas de la bodega, trocadas por barrer el rincón (faena 2)</td><td>Nota firmada y foto</td><td></td><td>$1,200</td></tr>
-    <tr><td>Dos jornadas de faena, ocho personas: 16 jornales a $300 (faenas 1 y 2)</td><td>Jornal de la región, lista de asistencia</td><td></td><td>$4,800</td></tr>
-    <tr class="si"><td><strong>Totales</strong></td><td></td><td><strong>$6,122</strong></td><td><strong>$6,000</strong></td></tr>
+  <h4>Así se ve uno armado: la ruta de gestión</h4>
+  <table class="veredicto chica">
+    <tr><th>Partida (actividad)</th><th>Forma y mes</th><th>Papel</th><th>Total</th></tr>
+    <tr><td>Catálogo impreso para la asamblea, 25 juegos a $60 (G-05)</td><td>compra · nov 2026</td><td>de oídas: falta cotización</td><td class="m">$1,500</td></tr>
+    <tr><td>Lona del cronograma, 2.4 m² a $150 (G-05)</td><td>compra · nov 2026</td><td>de oídas: falta cotización</td><td class="m">$360</td></tr>
+    <tr><td>Sillas y sonido de la delegación (G-07)</td><td>prestado · dic 2026</td><td>constancia de préstamo</td><td class="m">$1,200</td></tr>
+    <tr><td>Montaje y limpieza, 6 jornales a $300 (G-07)</td><td>faena · dic 2026</td><td>lista de asistencia</td><td class="m">$1,800</td></tr>
+    <tr><td>Pasajes a la Reserva en Jalpan, 4 a $160 (G-13)</td><td>compra · feb 2027</td><td>de oídas: falta tarifa</td><td class="m">$640</td></tr>
+    <tr><td>Manifestación de impacto ambiental (G-14)</td><td><strong>sin bolsillo</strong> · mar 2027</td><td>sin precio todavía</td><td class="m">por cotizar</td></tr>
+    <tr><td>Informe final impreso, 10 juegos a $120 (G-22)</td><td>compra · abr 2028</td><td>de oídas: falta cotización</td><td class="m">$1,200</td></tr>
+    <tr><td>Imponderables, 5% de lo que se compra</td><td>compra</td><td>con nombre</td><td class="m">$185</td></tr>
+    <tr class="si"><td><strong>Lo que ya tiene bolsillo, en autogestión: $3,885 en dinero y $3,000 en especie</strong></td><td></td><td></td><td class="m"><strong>$6,885</strong></td></tr>
   </table>
-  <p class="apoyo">Cada partida dice para qué faena es y de dónde salió el precio; el flete y los imponderables tienen renglón propio; lo trocado y lo donado viven en la otra columna y le enseñan al donante que el proyecto vale el doble de lo que pide. Lo que se cae primero si el dinero llega parcial: los postes nuevos, que se cambian por troncos con permiso. En la práctica este ejemplo se carga con un botón.</p>
+  <p class="apoyo">Cada partida dice para qué actividad es, en qué mes se necesita y de dónde salió el precio. Todo lo pone la autogestión, porque casi todo pasa antes de que llegue cualquier fondo. Lo de oídas está marcado, y antes de la asamblea se cambia por su cotización. La manifestación de impacto ambiental se queda escrita sin precio ni bolsillo: es un gasto real que alguien tiene que gestionar. Lo que se cae primero: la lona, porque el catálogo y el cartel hacen el mismo trabajo. En la práctica, este ejemplo se carga con un botón.</p>
 </section>
 
-<!-- 20 -->
+<!-- 23 -->
 <section class="lam lam--actividad">
   <span class="senal">Ahora · práctica por equipo</span>
-  <p class="di">El presupuesto de tu componente de La Florida, partida por partida y a dos columnas.</p>
-  <p class="apoyo">Abran <a href="practica-presupuesto.html">la práctica del presupuesto</a> en la misma laptop del equipo: las actividades de su cronograma ya están ahí. A cada actividad se le cuelgan sus partidas con unidad, cantidad, precio y papel; la herramienta suma las dos columnas, agrega flete e imponderables, compara contra el tope de la convocatoria si lo hay, y señala los agujeros. Trae una lista de precios de referencia, pero son de oídas: cada uno se cambia por la cotización del equipo. Al terminar, descargar y guardar en el Drive.</p>
+  <p class="di">El presupuesto de tu componente de la presa, partida por partida y bolsillo por bolsillo.</p>
+  <p class="apoyo">Abran <a href="practica-presupuesto.html">la práctica del presupuesto</a> en la laptop del equipo y elijan su componente: sus actividades ya vienen del cronograma integrado, con su mes y, donde ya se decidió, su bolsillo. "Una partida vacía por cada actividad" arma el esqueleto; a cada actividad se le cuelgan sus partidas con cantidad, unidad, precio, bolsillo, mes, tipo, forma y papel. La hoja suma por bolsillo, dibuja el reloj del dinero, revisa el tope y el 20% del PROCODES y señala los ocho agujeros. Los precios de referencia son de oídas: sirven para el borrador de hoy. Al terminar, "Descargar para juntar", y el archivo se manda al profesor.</p>
   <a class="enlace-grande" href="practica-presupuesto.html">Abrir la práctica ▸</a>
-  <p class="nota-conductor">Rondar con la lista de agujeros. Pedir a cada equipo que marque la partida que se cae primero. Los criterios que se publican: cada partida con su papel; flete e imponderables con renglón propio; lo de afuera en la columna de contrapartida y no en el gasto; cada partida colgada de una actividad del cronograma; y la suma que cuadra dos veces.</p>
+  <p class="nota-conductor">Rondar con la lista de agujeros. Pedir a cada equipo que marque lo que se cae primero y que conteste por escrito qué suelta si un bolsillo no llega. El componente 5 es el del PROCODES: que escriban los metros cuadrados para ver el tope y el 20%. Los criterios que se publican: cada partida colgada de una actividad y con su papel; flete e imponderables con renglón propio; cada cosa en un solo bolsillo, y en uno que sí la paga; ningún peso antes de que llegue su bolsillo; lo que pone la comunidad, completo y valorizado; y lo que se cae primero, marcado.</p>
+</section>
+
+<!-- 24 -->
+<section class="lam lam--actividad">
+  <span class="senal">Al cierre · todo el grupo</span>
+  <p class="di">Los presupuestos de los equipos se juntan en uno: el de la presa.</p>
+  <p class="apoyo">Cada equipo manda su archivo y se sueltan todos en <a href="../presupuesto-de-la-presa/index.html">el presupuesto de la presa</a>, proyectado. Se leen cuatro cosas en voz alta: el tamaño real del proyecto, cuánto pone la comunidad, el mes más cargado del reloj del dinero y la lista de lo que falta. De esa lista sale la tarea: tres cotizaciones por cada partida de mil pesos o más, dos por escrito y de menos de treinta días, con la hoja para cotizar que imprime la práctica. Con las cotizaciones, el mismo archivo se vuelve a abrir, se corrige y se vuelve a juntar: eso es lo que va a la asamblea y al anexo para los fondos.</p>
+  <a class="enlace-grande" href="../presupuesto-de-la-presa/index.html">Abrir el presupuesto de la presa ▸</a>
+  <p class="nota-conductor">Los archivos llegan por el grupo de WhatsApp o al Drive del grupo, y se sueltan todos a la vez. La casilla "Sumar la ruta de gestión del ejemplo" agrega la pieza G, que no es de ningún equipo. Cerrar regresando a los números del árbol de la lámina 2, y decir la fecha de entrega de las cotizaciones.</p>
 </section>
 
 </main>

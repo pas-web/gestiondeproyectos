@@ -24,3 +24,19 @@ python3 tools/finalizar.py
 `test.js` imprime el calendario, las alertas y la ruta crítica para revisar antes de generar. `imprimir.py` avisa si alguna página desborda. Requisitos: Node 18 o más, Python 3 con `playwright` y `pypdf`, Google Chrome y `qpdf`.
 
 Al terminar se copian `out/sitio/index.html` a `../index.html` y los tres PDF de `out/` a `../`, y se suben juntos, para que la página y los PDF digan las mismas fechas.
+
+## El presupuesto de la presa
+
+`presupuesto/` arma, con las mismas actividades, la práctica del presupuesto y la página que junta los presupuestos de los equipos:
+
+- `presupuesto/nucleo.js`: los cuatro bolsillos y sus ventanas, los cálculos (por bolsillo, por mes, el tope y el 20% del PROCODES) y la revisión de los ocho agujeros. Lo usan las dos páginas.
+- `presupuesto/practica.html` y `presupuesto/integrar.html`: las dos plantillas.
+- `presupuesto/construir.js`: filtra las actividades presupuestables (sin hitos ni esperas), arma el ejemplo de la ruta de gestión y escribe `recursos/cronograma-y-presupuesto/practica-presupuesto.html` y `recursos/presupuesto-de-la-presa/index.html`.
+
+```
+cd presupuesto
+node construir.js
+```
+
+Si cambian las actividades o los meses del cronograma, se corre otra vez y se suben las dos páginas junto con la del cronograma. Los archivos que ya descargaron los equipos siguen abriendo: guardan el código de cada actividad, y uno que ya no exista se conserva con su nombre.
+

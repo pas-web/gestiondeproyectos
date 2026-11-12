@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio · ¿Quién lo paga?</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .partida { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; }
+  .partida b { color:var(--marca); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion:focus-visible { outline:3px solid var(--arena); outline-offset:2px; }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .intro p { margin:.35rem 0; }
+  .marcador { color:#45605a; font-size:.92rem; margin:.7rem 0 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>¿Quién lo paga?</h1>
+<p class="sub">Gimnasio · El presupuesto de la presa · Práctica libre, sin registro y sin nota.</p>
+
+<p>Un proyecto del tamaño de la presa no lo paga un solo donante: lo pagan cuatro bolsillos, cada uno con sus reglas y su calendario. Nueve partidas del presupuesto de la presa. Decide qué bolsillo paga cada una antes de que la ventanilla te diga que ese no era.</p>
+
+<div class="intro">
+  <p><strong>Autogestión y especie:</strong> faenas, lo que da o presta el ejido, la cooperación, la kermés de Semana Santa y el capital semilla de la UAQ. Desde ya.</p><p><strong>PROCODES (CONANP):</strong> el proyecto ecoturístico, por metro cuadrado de palapa o por lote, hasta el 80%; el grupo pone el 20%. Deposita hacia junio de 2027 y todo se comprueba antes del 31 de diciembre.</p><p><strong>Ayuntamiento de Arroyo Seco:</strong> en 2027, especie (limpia, recolección, maquinaria, materiales); en 2028, obra con recursos propios.</p><p><strong>CONAFOR:</strong> planta nativa y asesoría, en especie. Ni dinero, ni flete, ni postes.</p>
+</div>
+<p class="marcador" id="marcador" aria-live="polite"></p>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Toma las partidas de tu componente y escribe junto a cada una su bolsillo y su mes. Luego subraya las que caen antes de junio de 2027: esas solo las pueden poner la autogestión o la especie del Ayuntamiento. Si alguna no tiene bolsillo, se dice en voz alta: es una gestión pendiente, no un olvido.</p>
+</div>
+
+<button id="btn-proyector" type="button" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var PREGUNTA = "¿Quién lo paga?";
+  var casos = [
+  {
+    "r": "<b>Lona y copias del catálogo<\/b> para presentarlo en la asamblea ejidal, noviembre de 2026: $1,860.",
+    "ops": [
+      "Autogestión y especie",
+      "PROCODES",
+      "Ayuntamiento de Arroyo Seco",
+      "CONAFOR",
+      "Ninguno: no le toca a ningún bolsillo"
+    ],
+    "resp": 0,
+    "pista": "Mira el mes. En noviembre de 2026, ¿qué bolsillo ya tiene con qué pagar?",
+    "exp": "Autogestión, con el capital semilla de la UAQ. En noviembre de 2026 ningún fondo ha abierto su ventanilla: la solicitud del PROCODES entra hasta marzo de 2027 y el Ayuntamiento da especie desde febrero. Lo que se necesita antes solo lo pone la comunidad con el capital semilla, que para eso está: es la contrapartida que mueve los primeros papeles, no el corazón del proyecto."
+  },
+  {
+    "r": "<b>Palma y tablones<\/b> para el techo y las mesas de tres palapas de 4 × 4 m con mesa, bancas y asador, julio de 2027.",
+    "ops": [
+      "Autogestión y especie",
+      "PROCODES",
+      "Ayuntamiento de Arroyo Seco",
+      "CONAFOR",
+      "Ninguno: no le toca a ningún bolsillo"
+    ],
+    "resp": 1,
+    "pista": "¿Cuál de los cuatro paga proyectos ecoturísticos por metro cuadrado de palapa? ¿Y ya depositó en julio?",
+    "exp": "PROCODES: es el corazón de su proyecto ecoturístico, que se pide por metro cuadrado de palapa techada, hasta $5,490 por m² y de 30 a 180 m². Tres palapas de 4 × 4 son 48 m²: un tope de $263,520. Y llega a tiempo: la primera ministración cae hacia junio de 2027, así que la compra de julio ya tiene con qué. Ojo con los postes: si salen de la poda de la delegación no se compran, se donan, y entonces van en autogestión."
+  },
+  {
+    "r": "<b>La faena que levanta las palapas:<\/b> diez personas del grupo, tres jornadas, sin paga, noviembre de 2027.",
+    "ops": [
+      "Autogestión y especie",
+      "PROCODES",
+      "Ayuntamiento de Arroyo Seco",
+      "CONAFOR",
+      "Ninguno: no le toca a ningún bolsillo"
+    ],
+    "resp": 0,
+    "pista": "Si nadie cobra, ¿es dinero o es especie? ¿Y quién pone la especie del grupo?",
+    "exp": "Autogestión, en especie: 30 jornales a $300, $9,000, con lista de asistencia. Una faena es trabajo que no se cobra, así que no le toca al PROCODES, que da dinero: ponerla en su bolsillo sería pedirle que pague lo que nadie va a cobrar. Como es trabajo dentro del proyecto del PROCODES, cuenta en el 20% que pone el grupo."
+  },
+  {
+    "r": "<b>La recolección de basura<\/b> en la orilla los lunes del verano de 2027, después de los fines de semana con visitantes.",
+    "ops": [
+      "Autogestión y especie",
+      "PROCODES",
+      "Ayuntamiento de Arroyo Seco",
+      "CONAFOR",
+      "Ninguno: no le toca a ningún bolsillo"
+    ],
+    "resp": 2,
+    "pista": "¿Quién tiene camión de basura y ruta de recolección? ¿Desde cuándo da su especie?",
+    "exp": "El Ayuntamiento, en especie: limpia y ruta de recolección son de lo que da en 2027, y se pide por oficio en febrero, junto con la maquinaria y los materiales. Se valoriza a lo que costaría el servicio y se escribe con el oficio de respuesta. No sale un peso del Ayuntamiento, pero sale un camión cada lunes: eso también es presupuesto."
+  },
+  {
+    "r": "<b>El estacionamiento<\/b> nivelado y revestido, con su luminaria, enero de 2028.",
+    "ops": [
+      "Autogestión y especie",
+      "PROCODES",
+      "Ayuntamiento de Arroyo Seco",
+      "CONAFOR",
+      "Ninguno: no le toca a ningún bolsillo"
+    ],
+    "resp": 2,
+    "pista": "¿Quién hace obra con recursos propios, y en qué año existe ese dinero?",
+    "exp": "El Ayuntamiento, como obra con recursos propios en 2028 (sin FAIS, que no aplica en La Florida). La obra se pide entre agosto y mediados de octubre de 2027, para que entre al presupuesto municipal que se aprueba en diciembre: el dinero existe desde enero de 2028. Y pide el visto bueno de Obras Públicas y de Protección Civil, que también es papel y también va en el cronograma."
+  },
+  {
+    "r": "<b>Cuarenta árboles nativos<\/b> para la sombra de palapas y bancas, y la asesoría para plantarlos, junio de 2027.",
+    "ops": [
+      "Autogestión y especie",
+      "PROCODES",
+      "Ayuntamiento de Arroyo Seco",
+      "CONAFOR",
+      "Ninguno: no le toca a ningún bolsillo"
+    ],
+    "resp": 3,
+    "pista": "¿Quién regala planta nativa, y cuándo hay que pedirla?",
+    "exp": "CONAFOR, en especie: planta y asesoría técnica. El pedido va en febrero de 2027 y la planta llega con las lluvias, de junio a julio (por confirmar con la oficina estatal). Se valoriza al precio que tendría en un vivero, con su papel de entrega. Lo que CONAFOR no da: dinero, jornales pagados, postes, flete ni herramienta, y eso va en otros bolsillos."
+  },
+  {
+    "r": "<b>El cerco<\/b> que protege del ganado a los árboles de CONAFOR: troncos de la poda, alambre que tiene el ejido y una faena para levantarlo.",
+    "ops": [
+      "Autogestión y especie",
+      "PROCODES",
+      "Ayuntamiento de Arroyo Seco",
+      "CONAFOR",
+      "Ninguno: no le toca a ningún bolsillo"
+    ],
+    "resp": 0,
+    "pista": "CONAFOR da la planta. ¿Da también postes y alambre?",
+    "exp": "Autogestión: los troncos, el alambre del ejido y la faena, todo valorizado y con su papel. La trampa es CONAFOR: da la planta pero no postes ni alambre. Es de los renglones que se olvidan, y sin cerco la planta de CONAFOR se la come el ganado en la primera seca. Si faltara alambre, el Ayuntamiento puede darlo en especie desde febrero de 2027, y entonces ese pedazo va en su bolsillo, con su oficio."
+  },
+  {
+    "r": "<b>Una camioneta<\/b> para el grupo, para mover grava, planta y tablones durante 2027: $180,000.",
+    "ops": [
+      "Autogestión y especie",
+      "PROCODES",
+      "Ayuntamiento de Arroyo Seco",
+      "CONAFOR",
+      "Ninguno: no le toca a ningún bolsillo"
+    ],
+    "resp": 4,
+    "pista": "¿Alguno de los cuatro compra vehículos? ¿Y qué se necesita en realidad: la camioneta o los viajes?",
+    "exp": "Ninguno. Casi ningún fondo compra vehículos, y el PROCODES paga el proyecto ecoturístico, no el transporte del grupo. El traslado sí cuesta y sí se escribe, pero como flete: por viaje y con su cotización, o con la camioneta del Ayuntamiento en especie. Pedir la camioneta es de los renglones que tumban una solicitud sin que nadie la evalúe."
+  },
+  {
+    "q": "¿Quién lo paga, y cuánto?",
+    "r": "<b>Asesoría técnica especializada<\/b> para el proyecto ecoturístico de las palapas, que recibiría $219,600 del PROCODES: $40,000.",
+    "ops": [
+      "El PROCODES, completa: es parte del proyecto",
+      "El PROCODES, pero solo hasta el 10% de lo que aprueba, $21,960; el resto se recorta o se consigue en otro bolsillo",
+      "CONAFOR: da asesoría",
+      "Ninguno: los fondos no pagan asesores"
+    ],
+    "resp": 1,
+    "pista": "Busca en la guía del PROCODES la regla de la asistencia técnica. ¿Hay un límite?",
+    "exp": "El PROCODES sí paga asistencia técnica especializada, pero no más del 10% del monto aprobado: de $219,600, son $21,960. La regla tiene su razón: el asesor no se puede comer el proyecto. La asesoría de CONAFOR es otra cosa: es para plantar sus árboles, no para el proyecto ecoturístico. En la práctica, una asesoría cargada al PROCODES que pasa del 10% se marca sola."
+  }
+];
+
+  var cont = document.getElementById('casos'), resueltos = 0;
+  function marcador() {
+    document.getElementById('marcador').textContent = resueltos === casos.length
+      ? 'Completo: ' + casos.length + ' de ' + casos.length + '. Ahora pásale la misma mirada al presupuesto de tu componente.'
+      : 'Llevas ' + resueltos + ' de ' + casos.length + '.';
+  }
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ' + (c.q || PREGUNTA) + '</div>' +
+               '<span class="partida">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" type="button" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+  marcador();
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+      resueltos++; marcador();
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

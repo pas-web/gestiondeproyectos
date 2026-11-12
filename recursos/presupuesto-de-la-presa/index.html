@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El presupuesto de la presa · Gestión y Manejo de Proyectos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; --gris:#45605a; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1.02rem; }
+  header.curso { background:var(--profundo); color:#EAF4F2; padding:1rem 1.4rem; }
+  header.curso .curso-nombre { font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; opacity:.75; }
+  header.curso .titulo { font-family:Georgia,serif; font-size:1.7rem; font-weight:bold; margin:.15rem 0 0; }
+  header.curso .migas { font-size:.85rem; opacity:.8; display:flex; flex-wrap:wrap; gap:.2rem 1.2rem; } header.curso .migas a { color:#EAF4F2; }
+  main { max-width:1180px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.3rem; margin:2rem 0 .4rem; }
+  p { max-width:88ch; } .sub { color:var(--gris); margin-top:0; }
+  .caja { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:.8rem 0; }
+  .soltar { border:2px dashed var(--marca); border-radius:12px; background:#fff; padding:1.4rem 1.2rem; text-align:center; transition:background .15s; }
+  .soltar.encima { background:#E4EFEB; }
+  .soltar b { font-family:Georgia,serif; font-size:1.15rem; color:var(--profundo); display:block; margin-bottom:.3rem; }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.4rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92rem; display:inline-block; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
+  .btn.peligro { background:#fff; color:var(--rojo); border:2px solid var(--rojo); }
+  .btn.chico { padding:.15rem .55rem; font-size:.78rem; margin:0; }
+  .btn:focus-visible, input:focus-visible { outline:3px solid var(--arena); outline-offset:2px; }
+  .equipos { display:flex; flex-wrap:wrap; gap:.5rem; margin:.8rem 0 0; }
+  .equipo { background:#fff; border:1px solid var(--borde); border-radius:10px; padding:.45rem .7rem; font-size:.9rem; display:flex; align-items:center; gap:.6rem; }
+  .equipo .c { font-weight:bold; color:var(--profundo); }
+  .equipo .d { color:var(--gris); font-size:.82rem; }
+  .totales { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:.8rem; margin:.8rem 0; }
+  .total { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.8rem 1rem; }
+  .total .t { font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gris); font-weight:bold; }
+  .total .v { font-family:Georgia,serif; font-size:1.9rem; color:var(--profundo); line-height:1.15; }
+  .total .nota { font-size:.85rem; color:var(--gris); }
+  .total.grande { background:var(--profundo); border-color:var(--profundo); } .total.grande .t, .total.grande .nota { color:#cfe3dd; } .total.grande .v { color:#fff; }
+  .total.b { border-top:6px solid var(--c); }
+  .punto { display:inline-block; width:.75rem; height:.75rem; border-radius:50%; background:var(--c); margin-right:.4rem; vertical-align:-.05rem; }
+  .envoltura { overflow-x:auto; border:1px solid var(--borde); border-radius:12px; background:#fff; }
+  table.cuadro { width:100%; border-collapse:collapse; font-size:.92rem; min-width:760px; }
+  table.cuadro th, table.cuadro td { padding:.45rem .55rem; border-bottom:1px solid var(--borde); text-align:right; font-variant-numeric:tabular-nums; vertical-align:top; }
+  table.cuadro th:first-child, table.cuadro td:first-child { text-align:left; }
+  table.cuadro th { font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gris); background:#F7FAF9; }
+  table.cuadro td small { display:block; color:var(--gris); font-size:.76rem; }
+  table.cuadro tr.suma td { font-weight:bold; background:#F7FAF9; color:var(--profundo); }
+  table.cuadro td.vacio { color:#b9c9c4; }
+  .grafica { width:100%; height:auto; display:block; }
+  .grafica text { font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; }
+  .leyenda { display:flex; flex-wrap:wrap; gap:.4rem 1.2rem; font-size:.88rem; color:var(--gris); margin:.4rem 0; }
+  .leyenda span { display:inline-flex; align-items:center; gap:.35rem; }
+  .leyenda i { display:inline-block; width:.9rem; height:.9rem; border-radius:3px; }
+  ul.pend { list-style:none; padding:0; margin:.3rem 0; }
+  ul.pend li { padding:.4rem .7rem; border-radius:8px; margin:.3rem 0; border-left:5px solid var(--borde); background:#fff; font-size:.93rem; }
+  ul.pend li.mal { border-color:var(--rojo); } ul.pend li.ojo { border-color:var(--arena); }
+  ul.pend li b { display:block; }
+  .comp-pend { margin:.8rem 0; } .comp-pend h3 { font-family:Georgia,serif; font-size:1.05rem; color:var(--profundo); margin:.6rem 0 .2rem; }
+  .vacia { color:var(--gris); font-style:italic; }
+  .aviso { color:var(--rojo); font-weight:bold; }
+  .pie-acciones { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.6rem 1rem .9rem; margin:1.5rem 0 0; }
+  .estado { font-size:.88rem; color:var(--gris); margin:.5rem 0 0; }
+  .estado:empty { display:none; }
+  header.curso .fila-titulo { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:.5rem 1rem; }
+  header.curso .btn.claro { margin:0; padding:.3rem .8rem; font-size:.85rem; background:transparent; color:#EAF4F2; border-color:#EAF4F2; }
+  label.inline { display:inline-flex; align-items:center; gap:.4rem; font-size:.92rem; margin-top:.7rem; }
+  body.proyector { font-size:1.25rem; } body.proyector table.cuadro { font-size:1.05rem; }
+  @media (max-width:640px) { header.curso .titulo { font-size:1.35rem; } .total .v { font-size:1.5rem; } }
+  @media print {
+    header.curso, .pie-acciones, .soltar, label.inline, .btn { display:none !important; }
+    body { background:#fff; font-size:.82rem; } main { padding:0; max-width:none; }
+    .caja, .total, table.cuadro tr, .comp-pend { break-inside:avoid; }
+    .solo-impresion { display:block !important; }
+  }
+  .solo-impresion { display:none; }
+</style>
+</head>
+<body>
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="fila-titulo"><div class="titulo">El presupuesto de la presa</div><button class="btn claro" id="proyector" type="button" title="Letra grande para proyectar">Aa proyector</button></div>
+  <div class="migas"><a href="../../index.html">Volver al curso</a><a href="../cronograma-y-presupuesto/index.html">La clase de cronograma y presupuesto</a><a href="../cronograma-y-presupuesto/practica-presupuesto.html">La práctica del presupuesto</a><a href="../cronograma-de-la-presa/index.html">El cronograma de la presa</a></div>
+</header>
+<main>
+<div class="solo-impresion"><h1 style="font-family:Georgia,serif;margin:0">Presupuesto hipotético del anteproyecto de la Presa de La Florida</h1><p id="impFecha"></p></div>
+
+<p class="sub">Aquí se juntan los presupuestos de los equipos. Cada equipo descarga su archivo al final de <a href="../cronograma-y-presupuesto/practica-presupuesto.html">la práctica</a> y lo manda; aquí se sueltan todos. La página suma por componente y por bolsillo, dibuja el reloj del dinero del proyecto entero y junta lo que todavía falta. Nada se sube a internet: los archivos se quedan en esta computadora.</p>
+
+<div class="soltar" id="soltar">
+  <b>Suelta aquí los archivos de los equipos</b>
+  <span class="sub">Los .json que descargó cada equipo, todos juntos o uno por uno. Si llega otro del mismo componente, el más reciente sustituye al anterior.</span><br>
+  <label class="btn" for="archivos">Elegir archivos<input type="file" id="archivos" accept=".json,application/json" multiple hidden></label>
+</div>
+<label class="inline"><input type="checkbox" id="conEjemplo"> Sumar la ruta de gestión del ejemplo, con sus precios de referencia</label>
+<div class="equipos" id="equipos"></div>
+<p class="estado" id="estado" role="status" aria-live="polite"></p>
+
+<h2>El proyecto completo</h2>
+<div class="totales" id="totales"></div>
+
+<h2>Por componente y por bolsillo</h2>
+<p class="sub">Cada celda dice cuánto pone ese bolsillo en ese componente; abajo, cuánto es dinero y cuánto especie valorizada.</p>
+<div class="envoltura"><table class="cuadro" id="cuadro"></table></div>
+
+<h2>El reloj del dinero del proyecto</h2>
+<p class="sub">Lo que se necesita cada mes, apilado por bolsillo. Las franjas de abajo marcan cuándo puede pagar cada uno; el triángulo rojo, los meses en que algún equipo gastaría fuera de su tiempo.</p>
+<div class="caja"><svg class="grafica" id="grafica" viewBox="0 0 1120 368" role="img" aria-label="Gasto mensual del proyecto por bolsillo"></svg><div class="leyenda" id="leyenda"></div></div>
+<p id="lectura"></p>
+
+<h2>PROCODES, sumado</h2>
+<div class="caja" id="pro"></div>
+
+<h2>Lo que falta, por equipo</h2>
+<p class="sub">Lo que la revisión de cada práctica dejó abierto. Es la lista de trabajo antes de que el presupuesto llegue a la asamblea y al anexo para las instancias de financiamiento.</p>
+<div id="pendientes"></div>
+
+<h2>Si un bolsillo no llega</h2>
+<div id="caen"></div>
+
+<div class="pie-acciones">
+  <h2 style="margin-top:.4rem">Para llevar</h2>
+  <p class="sub">El archivo junto guarda todos los presupuestos en uno: se vuelve a soltar aquí cuando lleguen las cotizaciones. El cuadro se pega en una hoja de cálculo; la impresión es la base del anexo de presupuesto.</p>
+  <button class="btn" id="bajar" type="button">Descargar el presupuesto junto (.json)</button>
+  <button class="btn claro" id="copiar" type="button">Copiar el cuadro</button>
+  <button class="btn claro" id="imprimir" type="button">Imprimir para el anexo</button>
+  <button class="btn peligro" id="borrar" type="button">Quitar todo lo cargado</button>
+</div>
+</main>
+
+<script>
+var PRESA = {"fecha":"11 de noviembre de 2026","componentes":[{"id":"G","clave":"Gestión","nombre":"Ruta de gestión","corto":"Gestión","deja":"Catálogo, anuencias, comité, carpeta del proyecto, solicitudes de fondos y permisos."},{"id":"1a","clave":"1a","nombre":"Contener la erosión de la orilla","corto":"Erosión","deja":"Talud junto al vertedor con cerco, fajinas, trampa de azolve y estacas vivas; ganado fuera."},{"id":"1b","clave":"1b","nombre":"Revegetar con especies nativas","corto":"Revegetación","deja":"Dos corredores de monte cercados, corredor de fauna en el cauce, cuarenta árboles con cajete y sombra plantada donde irán palapas y bancas."},{"id":"2","clave":"2","nombre":"La comunidad cuida y vigila la orilla","corto":"Comunidad","deja":"Comité de la presa con acta, reglamento aprobado en asamblea, recorridos por turnos y letreros de reglas y bienvenida."},{"id":"3","clave":"3","nombre":"Recreación para las distintas edades","corto":"Recreación","deja":"Tres rutas señaladas en la zona de los pinos, muelle de 8 × 4 m con cinco boyas de profundidad y conteos de visitantes por edades."},{"id":"4","clave":"4","nombre":"El espacio se mantiene seguro y limpio","corto":"Seguridad y limpieza","deja":"Contenedores con ruta de recolección, fantasmas luminiscentes, barreras vivas, estacionamiento con cerca de acceso y cinco lámparas solares."},{"id":"5","clave":"5","nombre":"Espacios de convivencia y descanso","corto":"Convivencia","deja":"Tres palapas de 4 × 4 m con mesa, bancas y asador, diez bancas en la orilla y una explanada de 200 m²."}],"actividades":[{"id":"G1","cod":"G-01","c":"G","n":"Integrar en el catálogo las propuestas de los seis equipos","p":"Catálogo en borrador con fichas por componente","r":"Profesor responsable (UAQ)","mes":"2026-10","fin":"2026-11","per":"oct 2026 – nov 2026","f":"","ola":0},{"id":"G2","cod":"G-02","c":"G","n":"Revisar el catálogo con el grupo y cerrar fotomontajes y cronograma","p":"Catálogo final y cronograma hipotético","r":"Grupo de la Lic. PAS (UAQ)","mes":"2026-11","fin":"2026-11","per":"nov 2026","f":"","ola":0},{"id":"G3","cod":"G-03","c":"G","n":"Pedir al comisariado el punto en el orden del día de la asamblea","p":"Oficio con acuse","r":"Profesor responsable (UAQ)","mes":"2026-11","fin":"2026-11","per":"nov 2026","f":"","ola":0},{"id":"G4","cod":"G-04","c":"G","n":"Expedir la convocatoria con cédulas, de 8 a 15 días antes","p":"Cédulas fijadas en lugares visibles del ejido","r":"Comisariado ejidal","mes":"2026-11","fin":"2026-11","per":"nov 2026","f":"","ola":0},{"id":"G5","cod":"G-05","c":"G","n":"Presentar el catálogo en asamblea ejidal y recoger su retroalimentación","p":"Acta de asamblea con los acuerdos","r":"Comisariado ejidal","mes":"2026-12","fin":"2026-12","per":"dic 2026","f":"","ola":0},{"id":"G6","cod":"G-06","c":"G","n":"Ajustar el catálogo con lo que pidió la asamblea","p":"Catálogo ajustado y lista de cambios","r":"Profesor responsable (UAQ)","mes":"2026-12","fin":"2026-12","per":"dic 2026","f":"","ola":0},{"id":"G7","cod":"G-07","c":"G","n":"Presentar las propuestas a la comunidad en la orilla, un domingo","p":"Lista de asistencia y registro de interesados","r":"Delegado de La Florida","mes":"2026-12","fin":"2026-12","per":"dic 2026","f":"","ola":0},{"id":"2.1","cod":"2-01","c":"2","n":"Censar quién cuida hoy la orilla, su estado y sus usos","p":"Ficha del censo con fotos","r":"Servicio social (UAQ)","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":0},{"id":"G15","cod":"G-08","c":"G","n":"Consultar a la Dirección de la Reserva la vía de impacto ambiental","p":"Minuta u oficio de respuesta","r":"Profesor responsable (UAQ)","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":0},{"id":"G21","cod":"G-09","c":"G","n":"Levantar la línea base en la orilla con la hoja de observación (tres domingos)","p":"Hoja de observación llena y en el Drive","r":"Secretaría del comité","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":1},{"id":"1a.1","cod":"1a-01","c":"1a","n":"Acordar con ganaderos y ejido cerrar el acceso del ganado al vertedor","p":"Minuta firmada con los ganaderos","r":"Comisariado ejidal","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":1},{"id":"1b.1","cod":"1b-01","c":"1b","n":"Investigar especies nativas de la región, para siembra y estacas vivas","p":"Lista de especies investigadas","r":"Servicio social (UAQ)","mes":"2027-01","fin":"2027-02","per":"ene 2027 – feb 2027","f":"","ola":1},{"id":"3.1","cod":"3-01","c":"3","n":"Pedir por oficio a CONAGUA el dato de nivel y calidad del agua","p":"Oficio con acuse; el dato, cuando llegue","r":"Profesor responsable (UAQ)","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":1},{"id":"3.2","cod":"3-02","c":"3","n":"Medir en campo el nivel del agua en secas, con estadal y fotos","p":"Registro de niveles con fecha","r":"Servicio social (UAQ)","mes":"2027-01","fin":"2027-02","per":"ene 2027 – feb 2027","f":"","ola":1},{"id":"3.3","cod":"3-03","c":"3","n":"Recorrer la zona de los pinos y trazar las tres rutas de senderismo","p":"Croquis de las rutas con sus zonas de descanso","r":"Servicio social (UAQ)","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":1},{"id":"4.6","cod":"4-01","c":"4","n":"Trazar el estacionamiento: acceso por el camino derecho y autos frente a la barda blanca","p":"Croquis con cajones y circulación","r":"Servicio social (UAQ)","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":1},{"id":"2.2","cod":"2-02","c":"2","n":"Constituir el comité de la presa con acta (al menos cinco personas por línea de trabajo)","p":"Acta con presidencia, secretaría, tesorería y vocalías","r":"Delegado de La Florida","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":0},{"id":"1a.2","cod":"1a-02","c":"1a","n":"Colocar trancas para que el ganado no entre a la zona del vertedor","p":"Trancas colocadas, foto","r":"Vocalía de obra","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"AUT","ola":1},{"id":"3.4","cod":"3-04","c":"3","n":"Fabricar los postes para señalar rutas y zonas de descanso","p":"Postes entregados","r":"Vocalía de obra","mes":"2027-01","fin":"2027-02","per":"ene 2027 – feb 2027","f":"AUT","ola":1},{"id":"2.3","cod":"2-03","c":"2","n":"Acordar turnos, ruta de recorridos y a quién se reporta cada hallazgo","p":"Acuerdo de turnos y ruta","r":"Vocalía de vigilancia","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"5.3","cod":"5-01","c":"5","n":"Proponer con Protección Civil las reglas de fuego para asadores y fogatas","p":"Reglas de fuego para el reglamento","r":"Presidencia del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"G8","cod":"G-10","c":"G","n":"Armar la carpeta del proyecto con tres cotizaciones por partida","p":"Carpeta del proyecto con presupuesto","r":"Tesorería del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"G9","cod":"G-11","c":"G","n":"Pedir al Ayuntamiento limpia, maquinaria y materiales para 2027","p":"Oficio con acuse","r":"Presidencia del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"G10","cod":"G-12","c":"G","n":"Registrar las faenas como aportación en especie","p":"Bitácora de jornales valorizados","r":"Secretaría del comité","mes":"2027-02","fin":"2028-05","per":"feb 2027 – may 2028","f":"AUT","ola":0},{"id":"1b.3","cod":"1b-02","c":"1b","n":"Observar dónde cruza el ganado con frecuencia","p":"Croquis de cruces con fechas","r":"Vocalía de vigilancia","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"4.1","cod":"4-02","c":"4","n":"Gestionar con el Ayuntamiento la ruta de recolección de residuos","p":"Oficio con respuesta","r":"Presidencia del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"MUN","ola":1},{"id":"4.2","cod":"4-03","c":"4","n":"Cotizar contenedores, fantasmas luminiscentes y lámparas solares (tres por rubro)","p":"Tres cotizaciones por escrito","r":"Tesorería del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"4.8","cod":"4-04","c":"4","n":"Obtener el visto bueno municipal del estacionamiento y la luminaria","p":"Oficio de visto bueno","r":"Presidencia del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"5.1","cod":"5-02","c":"5","n":"Preguntar a los vecinos, en la orilla, dónde quieren sombra, bancas y asadores","p":"Mapa con sitios fuera de la ribera y arriba de la cota de crecida","r":"Servicio social (UAQ)","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"2.4","cod":"2-04","c":"2","n":"Redactar el borrador del reglamento: fuego, basura, ganado, vehículos y horarios","p":"Borrador del reglamento","r":"Secretaría del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"1b.2","cod":"1b-03","c":"1b","n":"Pedir planta de encino, cedro blanco, tepame, huizache, sauce, aile y jarilla","p":"Pedido con acuse del vivero o de CONAFOR","r":"Vocalía de siembra","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"CNF","ola":1},{"id":"3.5","cod":"3-05","c":"3","n":"Señalar las tres rutas con marcas, postes y puntos de descanso","p":"Señales colocadas, foto","r":"Vocalía de obra","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"AUT","ola":1},{"id":"3.7","cod":"3-06","c":"3","n":"Diseñar el muelle de 8 × 4 m con los niveles medidos, fijo o flotante","p":"Plano con medidas","r":"Profesor responsable (UAQ)","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"5.2","cod":"5-03","c":"5","n":"Hacer el croquis y la ficha técnica de palapas, asadores, bancas y explanada","p":"Croquis y ficha técnica","r":"Profesor responsable (UAQ)","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"4.4","cod":"4-05","c":"4","n":"Instalar fantasmas luminiscentes en el bordo y el vertedor","p":"Fantasmas instalados, foto de noche","r":"Vocalía de obra","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"AUT","ola":1},{"id":"2.5","cod":"2-05","c":"2","n":"Consultar el borrador del reglamento con la comunidad","p":"Relatoría con los cambios pedidos","r":"Presidencia del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"2.8","cod":"2-06","c":"2","n":"Diseñar los letreros de reglas, contacto y emblema de la presa","p":"Diseño con visto bueno del comité","r":"Servicio social (UAQ)","mes":"2027-02","fin":"2027-03","per":"feb 2027 – mar 2027","f":"","ola":1},{"id":"4.3","cod":"4-06","c":"4","n":"Colocar un contenedor metálico a prueba de fauna por sitio de estancia","p":"Contenedores instalados y ruta de vaciado acordada","r":"Vocalía de vigilancia","mes":"2027-02","fin":"2027-03","per":"feb 2027 – mar 2027","f":"AUT","ola":1},{"id":"2.6","cod":"2-07","c":"2","n":"Convocar la asamblea ejidal y aprobar el reglamento de uso","p":"Acta con el reglamento aprobado","r":"Comisariado ejidal","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":0},{"id":"G12","cod":"G-13","c":"G","n":"Ventanilla PROCODES: entregar la solicitud del proyecto ecoturístico","p":"Solicitud con acuse de la CONANP","r":"Presidencia del comité","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":0},{"id":"G16","cod":"G-14","c":"G","n":"Integrar y entregar a SEMARNAT la manifestación de impacto ambiental del conjunto","p":"Manifestación con acuse de ingreso","r":"Profesor responsable (UAQ)","mes":"2027-03","fin":"2027-04","per":"mar 2027 – abr 2027","f":"","ola":0},{"id":"1a.3","cod":"1a-03","c":"1a","n":"Delimitar con estacas el perímetro de protección de los 15 m²","p":"Acta de delimitación y foto","r":"Vocalía de obra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":1},{"id":"1b.4","cod":"1b-04","c":"1b","n":"Trazar los dos corredores de monte, de 15 a 20 m, entre humedal, arroyo y encinar","p":"Plano con el trazo","r":"Servicio social (UAQ)","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":1},{"id":"3.8","cod":"3-07","c":"3","n":"Cotizar los materiales del muelle (tres cotizaciones)","p":"Presupuesto de materiales","r":"Tesorería del comité","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":1},{"id":"1a.4","cod":"1a-04","c":"1a","n":"Establecer el cerco contra el ganado, de estacas vivas o alambre","p":"Cerco concluido, foto","r":"Vocalía de obra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"AUT","ola":1},{"id":"1a.5","cod":"1a-05","c":"1a","n":"Conseguir ramas y pastos para las fajinas","p":"Registro del material reunido","r":"Vocalía de obra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"AUT","ola":1},{"id":"1a.7","cod":"1a-06","c":"1a","n":"Conseguir y preparar los costales para la trampa de azolve","p":"Costales listos","r":"Vocalía de obra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"AUT","ola":1},{"id":"1b.7","cod":"1b-05","c":"1b","n":"Ubicar cajetes y árboles de sombra junto a los sitios de palapas y bancas","p":"Croquis con puntos de siembra","r":"Vocalía de siembra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":1},{"id":"2.7","cod":"2-08","c":"2","n":"Recorridos de vigilancia por turnos; Semana Santa es la primera prueba","p":"Bitácora de recorridos","r":"Vocalía de vigilancia","mes":"2027-03","fin":"2028-11","per":"mar 2027 – nov 2028","f":"","ola":1},{"id":"2.9","cod":"2-09","c":"2","n":"Fabricar e instalar los letreros de reglas","p":"Fotos y acta de instalación","r":"Vocalía de obra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"AUT","ola":1},{"id":"G11","cod":"G-16","c":"G","n":"Kermés de Semana Santa y cooperación de visitantes","p":"Corte de caja público","r":"Tesorería del comité","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"AUT","ola":0},{"id":"3.6","cod":"3-08","c":"3","n":"Estrenar las rutas en Semana Santa y contar visitantes por edades","p":"Conteo por edades y fotos","r":"Secretaría del comité","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":1},{"id":"1a.6","cod":"1a-07","c":"1a","n":"Instalar fajinas de rama en curvas de nivel, en faena","p":"Foto antes y después, lista de asistencia","r":"Vocalía de obra","mes":"2027-04","fin":"2027-04","per":"abr 2027","f":"AUT","ola":1},{"id":"1b.5","cod":"1b-06","c":"1b","n":"Cercar los corredores contra el ganado","p":"Cerco, foto desde el punto fijo","r":"Vocalía de obra","mes":"2027-04","fin":"2027-05","per":"abr 2027 – may 2027","f":"AUT","ola":1},{"id":"1a.8","cod":"1a-08","c":"1a","n":"Colocar la trampa de azolve de costales en la parte baja","p":"Trampa instalada, foto","r":"Vocalía de obra","mes":"2027-04","fin":"2027-04","per":"abr 2027","f":"AUT","ola":1},{"id":"1b.6","cod":"1b-07","c":"1b","n":"Cercar la franja del corredor de fauna sobre el cauce, con el ganado fuera","p":"Franja cercada, foto","r":"Vocalía de obra","mes":"2027-05","fin":"2027-05","per":"may 2027","f":"AUT","ola":1},{"id":"1b.8","cod":"1b-08","c":"1b","n":"Hacer los cuarenta cajetes sobre el suelo retenido, en faena","p":"Cuarenta cajetes, foto","r":"Vocalía de siembra","mes":"2027-05","fin":"2027-05","per":"may 2027","f":"AUT","ola":1},{"id":"1b.9","cod":"1b-09","c":"1b","n":"Convocar por la delegación la faena de siembra","p":"Aviso de la delegación","r":"Delegado de La Florida","mes":"2027-06","fin":"2027-06","per":"jun 2027","f":"","ola":1},{"id":"1b.10","cod":"1b-10","c":"1b","n":"Recibir la planta del vivero","p":"Remisión de entrega","r":"Vocalía de siembra","mes":"2027-06","fin":"2027-06","per":"jun 2027","f":"CNF","ola":1},{"id":"5.4","cod":"5-04","c":"5","n":"Conseguir troncos de poda, palma, tablones, alambre y herramienta","p":"Notas de compra y oficios de donación","r":"Tesorería del comité","mes":"2027-06","fin":"2027-07","per":"jun 2027 – jul 2027","f":"PRO","ola":2},{"id":"1a.9","cod":"1a-09","c":"1a","n":"Cortar estacas vivas de sauce y aile","p":"Foto de las estacas","r":"Vocalía de siembra","mes":"2027-06","fin":"2027-06","per":"jun 2027","f":"","ola":1},{"id":"1b.11","cod":"1b-11","c":"1b","n":"Sembrar los cuarenta árboles con cajete al inicio de las lluvias (meta: 30 de junio)","p":"Lista de asistencia, foto desde el punto fijo","r":"Vocalía de siembra","mes":"2027-06","fin":"2027-06","per":"jun 2027","f":"AUT","ola":1},{"id":"1a.10","cod":"1a-10","c":"1a","n":"Enterrar las estacas vivas al pie del talud con las primeras lluvias","p":"Tramo de 5 m de estacas hincadas, foto","r":"Vocalía de siembra","mes":"2027-06","fin":"2027-07","per":"jun 2027 – jul 2027","f":"AUT","ola":1},{"id":"1b.12","cod":"1b-12","c":"1b","n":"Plantar tres árboles de sombra del lado poniente de cada sitio de palapa y banca","p":"Árboles sembrados, foto","r":"Vocalía de siembra","mes":"2027-06","fin":"2027-06","per":"jun 2027","f":"","ola":1},{"id":"4.5","cod":"4-07","c":"4","n":"Sembrar barreras vivas en las zonas con riesgo de caída","p":"Barreras sembradas, foto","r":"Vocalía de siembra","mes":"2027-07","fin":"2027-07","per":"jul 2027","f":"AUT","ola":1},{"id":"1a.11","cod":"1a-11","c":"1a","n":"Armar el informe fotográfico de antes y después con la bitácora de obra","p":"Informe en el Drive","r":"Secretaría del comité","mes":"2027-07","fin":"2027-07","per":"jul 2027","f":"","ola":1},{"id":"4.7","cod":"4-08","c":"4","n":"Cerrar el camino anterior con una línea de magueyes","p":"Línea de magueyes plantada, foto","r":"Vocalía de siembra","mes":"2027-07","fin":"2027-07","per":"jul 2027","f":"AUT","ola":1},{"id":"G19","cod":"G-19","c":"G","n":"Pedir al Ayuntamiento obra para 2028: estacionamiento, cerca de acceso, luminaria y muelle","p":"Oficio con expediente técnico y acuse","r":"Presidencia del comité","mes":"2027-08","fin":"2027-08","per":"ago 2027","f":"","ola":0},{"id":"1b.13","cod":"1b-13","c":"1b","n":"Contar las plantas vivas a los tres meses y leer la tabla en asamblea (meta: 30 vivas)","p":"Tabla de plantas vivas y acta de lectura","r":"Secretaría del comité","mes":"2027-09","fin":"2027-09","per":"sep 2027","f":"","ola":1},{"id":"1a.12","cod":"1a-12","c":"1a","n":"Registrar el prendimiento de las estacas a los tres meses","p":"Registro de prendimiento con fecha","r":"Secretaría del comité","mes":"2027-10","fin":"2027-10","per":"oct 2027","f":"","ola":1},{"id":"1b.14","cod":"1b-14","c":"1b","n":"Riego de auxilio cada quince días en la primera seca, con los recorridos","p":"Bitácora de riego","r":"Vocalía de vigilancia","mes":"2027-11","fin":"2028-05","per":"nov 2027 – may 2028","f":"","ola":3},{"id":"2.10","cod":"2-10","c":"2","n":"Revisar el reglamento tras la primera temporada de uso","p":"Acta de asamblea con ajustes","r":"Comisariado ejidal","mes":"2027-11","fin":"2027-11","per":"nov 2027","f":"","ola":3},{"id":"2.11","cod":"2-11","c":"2","n":"Instalar el letrero de bienvenida y el panel de caminatas","p":"Letreros instalados, foto con una persona como escala","r":"Vocalía de obra","mes":"2027-11","fin":"2027-11","per":"nov 2027","f":"PRO","ola":2},{"id":"5.5","cod":"5-05","c":"5","n":"Construir en faena las tres palapas de 4 × 4 m con mesa, dos bancas y asador","p":"Listas de asistencia y fotos georreferenciadas","r":"Vocalía de obra","mes":"2027-11","fin":"2027-11","per":"nov 2027","f":"PRO","ola":2},{"id":"5.7","cod":"5-06","c":"5","n":"Nivelar y limpiar la explanada de 200 m² sin quitar vegetación nativa","p":"Fotos de antes y después desde punto fijo","r":"Vocalía de obra","mes":"2027-11","fin":"2027-11","per":"nov 2027","f":"PRO","ola":2},{"id":"5.6","cod":"5-07","c":"5","n":"Colocar las diez bancas de la orilla junto a los árboles de sombra ya plantados","p":"Fotos georreferenciadas de cada banca","r":"Vocalía de obra","mes":"2027-11","fin":"2027-12","per":"nov 2027 – dic 2027","f":"PRO","ola":2},{"id":"5.8","cod":"5-08","c":"5","n":"Entregar los espacios con acta, reglamento a la vista y calendario de revisión","p":"Acta de entrega y foto del letrero","r":"Presidencia del comité","mes":"2027-12","fin":"2027-12","per":"dic 2027","f":"PRO","ola":2},{"id":"G20","cod":"G-21","c":"G","n":"Comprobar PROCODES y firmar el acta de entrega-recepción","p":"Acta de entrega-recepción y comprobantes","r":"Tesorería del comité","mes":"2027-12","fin":"2027-12","per":"dic 2027","f":"","ola":0},{"id":"2.12","cod":"2-12","c":"2","n":"Recibir los espacios de convivencia y sumarlos a los recorridos","p":"Acta de entrega-recepción","r":"Presidencia del comité","mes":"2027-12","fin":"2027-12","per":"dic 2027","f":"","ola":2},{"id":"3.9","cod":"3-09","c":"3","n":"Comprar los materiales del muelle","p":"Facturas","r":"Tesorería del comité","mes":"2028-01","fin":"2028-01","per":"ene 2028","f":"MUN","ola":2},{"id":"4.9","cod":"4-09","c":"4","n":"Construir el estacionamiento: nivelar, revestir y delimitar","p":"Estacionamiento delimitado, foto","r":"Ayuntamiento · Obras Públicas","mes":"2028-01","fin":"2028-01","per":"ene 2028","f":"MUN","ola":2},{"id":"4.11","cod":"4-10","c":"4","n":"Colocar las cinco lámparas solares en las zonas más frecuentadas","p":"Lámparas instaladas, foto de noche","r":"Ayuntamiento · Obras Públicas","mes":"2028-01","fin":"2028-01","per":"ene 2028","f":"MUN","ola":2},{"id":"3.10","cod":"3-10","c":"3","n":"Construir el muelle en secas, antes de Semana Santa","p":"Muelle de 32 m², informe fotográfico","r":"Vocalía de obra","mes":"2028-01","fin":"2028-03","per":"ene 2028 – mar 2028","f":"MUN","ola":2},{"id":"4.10","cod":"4-11","c":"4","n":"Hacer la cerca de troncos con portón manual sin cadena y paso peatonal fácil","p":"Cerca y portón instalados, foto","r":"Vocalía de obra","mes":"2028-02","fin":"2028-02","per":"feb 2028","f":"MUN","ola":2},{"id":"4.12","cod":"4-12","c":"4","n":"Poner los letreros de estacionamiento con el emblema de la presa","p":"Letreros instalados, foto","r":"Vocalía de obra","mes":"2028-02","fin":"2028-02","per":"feb 2028","f":"MUN","ola":2},{"id":"3.11","cod":"3-11","c":"3","n":"Colocar las cinco boyas con nivel de profundidad","p":"Boyas colocadas, foto","r":"Vocalía de obra","mes":"2028-03","fin":"2028-03","per":"mar 2028","f":"MUN","ola":2},{"id":"3.12","cod":"3-12","c":"3","n":"Estrenar el muelle en Semana Santa y contar visitantes por edades","p":"Lista, fotos y conteo por edades","r":"Secretaría del comité","mes":"2028-04","fin":"2028-04","per":"abr 2028","f":"","ola":2},{"id":"G22","cod":"G-22","c":"G","n":"Informe final a la asamblea ejidal y a los fondos","p":"Informe con fotos de punto fijo y acta de lectura","r":"Presidencia del comité","mes":"2028-04","fin":"2028-05","per":"abr 2028 – may 2028","f":"","ola":0},{"id":"1b.15","cod":"1b-15","c":"1b","n":"Reponer las plantas muertas con las lluvias siguientes","p":"Plantas repuestas y conteo actualizado","r":"Vocalía de siembra","mes":"2028-06","fin":"2028-06","per":"jun 2028","f":"","ola":3},{"id":"3.13","cod":"3-13","c":"3","n":"Revisar muelle, boyas y señales tras la temporada de lluvias","p":"Ficha de estado con fotos","r":"Vocalía de vigilancia","mes":"2028-11","fin":"2028-11","per":"nov 2028","f":"","ola":3},{"id":"4.13","cod":"4-13","c":"4","n":"Revisar contenedores, luminaria y cerca tras las lluvias","p":"Ficha de estado con fotos","r":"Vocalía de vigilancia","mes":"2028-11","fin":"2028-11","per":"nov 2028","f":"","ola":3},{"id":"5.9","cod":"5-09","c":"5","n":"Revisar el estado de las piezas tras la primera temporada de lluvias","p":"Ficha de estado de las piezas","r":"Vocalía de vigilancia","mes":"2028-11","fin":"2028-11","per":"nov 2028","f":"","ola":3}],"ejemplo":{"version":3,"equipo":"Ejemplo: la ruta de gestión","componente":"G","partidas":[{"actividad":"G5","que":"Impresión del catálogo para la asamblea, juegos engargolados","unidad":"juego","cant":25,"precio":60,"tipo":"materiales","bolsillo":"AUT","forma":"compra","mes":"2026-11","papel":"de oídas: falta cotización de la papelería"},{"actividad":"G5","que":"Lona del cronograma de la presa, 2 por 1.2 m","unidad":"m²","cant":2.4,"precio":150,"tipo":"materiales","bolsillo":"AUT","forma":"compra","mes":"2026-11","papel":"de oídas: falta cotización de la imprenta","cae":true},{"actividad":"G7","que":"Sillas y equipo de sonido de la delegación para la presentación en la orilla","unidad":"evento","cant":1,"precio":1200,"tipo":"equipo","bolsillo":"AUT","forma":"prestado","mes":"2026-12","papel":"constancia de préstamo de la delegación, por pedir"},{"actividad":"G7","que":"Montaje y limpieza de la presentación, seis personas una jornada","unidad":"jornal","cant":6,"precio":300,"tipo":"gente","bolsillo":"AUT","forma":"faena","mes":"2026-12","papel":"lista de asistencia firmada; jornal de la región"},{"actividad":"G12","que":"Pasajes a la oficina de la Reserva en Jalpan, dos personas, dos viajes","unidad":"pasaje","cant":4,"precio":160,"tipo":"traslado","bolsillo":"AUT","forma":"compra","mes":"2027-02","papel":"de oídas: falta tarifa"},{"actividad":"G16","que":"Elaboración de la manifestación de impacto ambiental por un prestador de servicios ambientales","unidad":"servicio","cant":1,"precio":0,"tipo":"gente","bolsillo":"","forma":"compra","mes":"2027-03","papel":"sin precio: pedir tres cotizaciones"},{"actividad":"G22","que":"Impresión del informe final con fotos de punto fijo","unidad":"juego","cant":10,"precio":120,"tipo":"materiales","bolsillo":"AUT","forma":"compra","mes":"2028-04","papel":"de oídas: falta cotización de la papelería"}],"flete":{"si":false,"cant":0,"precio":0,"bolsillo":"AUT","forma":"compra","mes":"","papel":""},"imp":{"si":true,"pct":5,"nombre":"lo que falte en la papelería","bolsillo":"AUT"},"pro":{"unidad":"m²","cant":0},"seCae":"La lona del cronograma: el catálogo impreso y el cartel de pared hacen el mismo trabajo."}};
+// ── Núcleo compartido: los cuatro bolsillos, sus reglas y las cuentas de un presupuesto ──
+var BOLSILLOS = [
+  { id: 'AUT', nombre: 'Autogestión y especie', corto: 'Autogestión', color: '#c0602f', claro: '#F6E3D8' },
+  { id: 'PRO', nombre: 'PROCODES (CONANP)', corto: 'PROCODES', color: '#168c6e', claro: '#D7EEE6' },
+  { id: 'MUN', nombre: 'Ayuntamiento de Arroyo Seco', corto: 'Ayuntamiento', color: '#6a55c2', claro: '#E6E1F6' },
+  { id: 'CNF', nombre: 'CONAFOR', corto: 'CONAFOR', color: '#4b8f2a', claro: '#E0EEDA' }
+];
+var BOLS = {}; BOLSILLOS.forEach(function (b) { BOLS[b.id] = b; });
+var FORMAS = ['compra', 'faena', 'prestado', 'trocado', 'donado'];
+var TIPOS = ['materiales', 'gente', 'traslado', 'equipo'];
+var MESES_TXT = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+var MESES_LARGOS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+var MESES = [];
+(function () { var a = 2026, m = 11; while (a < 2028 || (a === 2028 && m <= 11)) { MESES.push(a + '-' + (m < 10 ? '0' + m : m)); m++; if (m > 12) { m = 1; a++; } } })();
+// Cuándo puede pagar cada bolsillo (meses en formato AAAA-MM; se comparan como texto)
+var VENTANA = {
+  PRO: { desde: '2027-06', hasta: '2027-12' },
+  MUN: { desde: '2028-01', especie: '2027-02' },
+  CNF: { desde: '2027-06' }
+};
+var PRO_M2 = 5490, PRO_LOTE = 75000, PRO_UMBRAL = 300000;
+
+function mesTxt(k) { if (!k) return ''; var p = k.split('-'); return MESES_TXT[+p[1] - 1] + ' ' + p[0]; }
+function mesLargo(k) { if (!k) return ''; var p = k.split('-'); return MESES_LARGOS[+p[1] - 1] + ' de ' + p[0]; }
+function pesos(n) { return '$' + Math.round(n || 0).toLocaleString('es-MX'); }
+function enMiles(n) { if (!n) return ''; if (n < 100) return '&lt;0.1'; var v = n / 1000; return v.toLocaleString('es-MX', { maximumFractionDigits: v < 10 ? 1 : 0 }); }
+function miles(n) { if (!n) return ''; if (n < 1000) return '$' + Math.round(n); return '$' + (n / 1000).toLocaleString('es-MX', { maximumFractionDigits: n < 10000 ? 1 : 0 }) + ' mil'; }
+function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function totalDe(p) { return (+p.cant || 0) * (+p.precio || 0); }
+function esDinero(p) { return p.forma === 'compra'; }
+// cada partida guarda el id estable de su actividad; el código (5-04) cambia si el cronograma se reacomoda
+function actividadDe(clave) { if (!clave) return null; for (var i = 0; i < PRESA.actividades.length; i++) { var a = PRESA.actividades[i]; if (a.id === clave || a.cod === clave) return a; } return null; }
+function componenteDe(id) { for (var i = 0; i < PRESA.componentes.length; i++) if (PRESA.componentes[i].id === id) return PRESA.componentes[i]; return null; }
+function nombreComp(id) { var c = componenteDe(id); return c ? (c.id === 'G' ? c.nombre : c.clave + ' · ' + c.nombre) : ''; }
+
+// Si el bolsillo no puede pagar en ese mes, devuelve el porqué
+function cuandoMal(p) {
+  if (!p.mes || !p.bolsillo) return '';
+  if (p.bolsillo === 'PRO') {
+    if (p.mes < VENTANA.PRO.desde) return 'PROCODES deposita la primera ministración hacia junio de 2027';
+    if (p.mes > VENTANA.PRO.hasta) return 'lo de PROCODES se ejecuta y se comprueba a más tardar el 31 de diciembre de 2027';
+  }
+  if (p.bolsillo === 'MUN') {
+    if (esDinero(p) && p.mes < VENTANA.MUN.desde) return 'el Ayuntamiento paga obra con el presupuesto 2028, desde enero de 2028; en 2027 apoya en especie';
+    if (!esDinero(p) && p.mes < VENTANA.MUN.especie) return 'el apoyo municipal en especie se pide en febrero de 2027';
+  }
+  if (p.bolsillo === 'CNF' && p.mes < VENTANA.CNF.desde) return 'la planta de CONAFOR llega con las lluvias, de junio a julio de 2027';
+  return '';
+}
+// Si el bolsillo no paga esa clase de cosa, devuelve el porqué
+function bolsilloMal(p) {
+  if (p.bolsillo === 'CNF' && (esDinero(p) || p.tipo === 'traslado' || p.tipo === 'equipo')) return 'CONAFOR da planta y asesoría en especie: no da dinero, ni flete, ni herramienta';
+  if (p.bolsillo === 'PRO' && !esDinero(p)) return 'PROCODES da dinero; lo que se consigue en especie es la parte del grupo y va en autogestión';
+  return '';
+}
+
+function calcular(e) {
+  var s = { bols: {}, tipos: {}, total: 0, dinero: 0, especie: 0, compras: 0, imp: 0, flete: 0, mes: {} };
+  ['AUT', 'PRO', 'MUN', 'CNF', ''].forEach(function (b) { s.bols[b] = { dinero: 0, especie: 0 }; });
+  TIPOS.forEach(function (t) { s.tipos[t] = 0; });
+  function suma(b, forma, tipo, monto, mes) {
+    var k = s.bols[b] ? b : '', din = forma === 'compra';
+    s.bols[k][din ? 'dinero' : 'especie'] += monto;
+    s.total += monto; if (din) s.dinero += monto; else s.especie += monto;
+    if (tipo) s.tipos[tipo] = (s.tipos[tipo] || 0) + monto;
+    if (mes) { if (!s.mes[mes]) s.mes[mes] = {}; s.mes[mes][k] = (s.mes[mes][k] || 0) + monto; }
+  }
+  (e.partidas || []).forEach(function (p) { var t = totalDe(p); if (esDinero(p)) s.compras += t; suma(p.bolsillo, p.forma, p.tipo, t, p.mes); });
+  if (e.flete && e.flete.si) {
+    var f = (+e.flete.cant || 0) * (+e.flete.precio || 0); s.flete = f;
+    if (e.flete.forma === 'compra') s.compras += f;
+    suma(e.flete.bolsillo, e.flete.forma, 'traslado', f, e.flete.mes);
+  }
+  if (e.imp && e.imp.si) { s.imp = s.compras * (+e.imp.pct || 0) / 100; suma(e.imp.bolsillo || 'AUT', 'compra', null, s.imp, null); }
+  s.comunidad = s.bols.AUT.dinero + s.bols.AUT.especie;
+  s.fondos = s.bols.PRO.dinero + s.bols.PRO.especie + s.bols.MUN.dinero + s.bols.MUN.especie + s.bols.CNF.dinero + s.bols.CNF.especie;
+  s.sinBolsillo = s.bols[''].dinero + s.bols[''].especie;
+  // PROCODES: lo que pone el programa, la parte del grupo en el proyecto PROCODES y el tope
+  // el proyecto PROCODES: las actividades que paga PROCODES o que el cronograma le asigna
+  var actPro = {};
+  (e.partidas || []).forEach(function (p) { var a = actividadDe(p.actividad); if (p.actividad && (p.bolsillo === 'PRO' || (a && a.f === 'PRO'))) actPro[p.actividad] = 1; });
+  var grupo = 0;
+  (e.partidas || []).forEach(function (p) { if (p.bolsillo === 'AUT' && actPro[p.actividad]) grupo += totalDe(p); });
+  var pro = s.bols.PRO.dinero + s.bols.PRO.especie;
+  var cant = e.pro ? +e.pro.cant || 0 : 0, unidad = e.pro && e.pro.unidad === 'lote' ? 'lote' : 'm²';
+  s.pro = { monto: pro, grupo: grupo, proyecto: pro + grupo, pct: pro + grupo > 0 ? pro / (pro + grupo) : 0,
+            cant: cant, unidad: unidad, tope: cant * (unidad === 'lote' ? PRO_LOTE : PRO_M2), hay: pro > 0, actividades: Object.keys(actPro) };
+  return s;
+}
+
+// La revisión: los seis agujeros de siempre y los tres de los bolsillos
+function revisar(e, s) {
+  // las partidas recién creadas y vacías no se revisan todavía
+  var ps = (e.partidas || []).filter(function (p) { return (p.que || '').trim() || totalDe(p) > 0; }), lista = [], fila = {};
+  function marca(p, t) { fila[p.id] = (fila[p.id] ? fila[p.id] + ' · ' : '') + t; }
+  function r(malos, titulo, bien, mal, clase) { lista.push({ clase: malos ? (clase || 'mal') : 'bien', titulo: titulo, texto: malos ? mal : bien }); }
+  var ids = function (a) { return a.map(function (p) { return '#' + p.id; }).join(', '); };
+
+  var oidas = ps.filter(function (p) { var sin = !(p.papel || '').trim() || /o[ií]das|aprox|creo|m[aá]s o menos|por pedir|pendiente|falta/i.test(p.papel); if (sin && totalDe(p) >= 1000) { marca(p, 'sin papel'); return true; } return false; });
+  r(oidas.length, 'El precio de oídas', 'Cada partida de mil pesos o más dice quién dio el precio y cuándo.', 'Partidas de mil pesos o más que todavía no tienen su papel: ' + ids(oidas) + '. Van a la hoja para cotizar: tres cotizaciones, dos por escrito y de menos de treinta días.');
+
+  var cero = ps.filter(function (p) { if (esDinero(p) && !(+p.precio) ) { marca(p, 'sin precio'); return true; } return false; });
+  if (cero.length) lista.push({ clase: 'ojo', titulo: 'Lo que todavía no tiene precio', texto: 'Partidas de compra con precio en cero: ' + ids(cero) + '. Se dejan escritas, con su pendiente, en lugar de borrarlas: lo que no se escribe lo termina pagando alguien de su bolsa.' });
+
+  var bolsa = ps.filter(function (p) { var b = !p.actividad || /\bvarios\b|diversos|\betc\b|misc/i.test(p.que || '') || (s.total > 0 && totalDe(p) > 0.5 * s.total && ps.length > 3); if (b) marca(p, 'partida bolsa'); return b; });
+  r(bolsa.length, 'La partida bolsa', 'Cada partida cuelga de una actividad y dice qué es exactamente.', 'Renglones que no dicen de qué actividad son, que dicen «varios» o que se comen casi la mitad del presupuesto: ' + ids(bolsa) + '. Se parten hasta que cada pedazo se pueda leer en voz alta.');
+
+  var hayMaterial = ps.some(function (p) { return (p.tipo === 'materiales' || p.tipo === 'equipo') && esDinero(p) && totalDe(p) > 0; });
+  var hayTraslado = (e.flete && e.flete.si) || ps.some(function (p) { return p.tipo === 'traslado'; });
+  r(hayMaterial && !hayTraslado ? 1 : 0, 'El flete olvidado', hayMaterial ? 'El traslado tiene renglón propio, en dinero o en especie.' : 'No hay material comprado que mover.', 'Hay material comprado y nadie lo trae a la orilla. El flete va en su renglón, pagado o conseguido en especie con su nota.');
+
+  var hayCompras = s.compras > 0;
+  r(hayCompras && !(e.imp && e.imp.si && +e.imp.pct > 0) ? 1 : 0, 'El presupuesto al centavo', hayCompras ? 'Los imponderables tienen renglón y nombre.' : 'Todavía no hay compras.', 'Sin imponderables: falta un colchón chico, alrededor del 5% de lo que se compra, con nombre honesto.');
+
+  var vistos = {}, doble = [];
+  ps.forEach(function (p) { var k = (p.que || '').trim().toLowerCase().slice(0, 28); if (!k) return; var firma = p.bolsillo + '|' + esDinero(p); if (vistos[k] && vistos[k] !== firma) { doble.push(p); marca(p, 'doble papel'); } else vistos[k] = firma; });
+  r(doble.length, 'El doble papel', 'Nada aparece dos veces en bolsillos distintos.', 'Lo mismo aparece en dos bolsillos o comprado y en especie a la vez: ' + ids(doble) + '. Cada cosa vive en un solo lugar.');
+
+  // la asistencia técnica especializada sí la paga PROCODES, hasta el 10% de lo que aprueba
+  var asesoria = function (p) { return /asesor|asistencia t[eé]cnica|acompa[ñn]amiento t[eé]cnico/i.test(p.que || ''); };
+  var pecado = ps.filter(function (p) { var mal = p.bolsillo && p.bolsillo !== 'AUT' && esDinero(p) && ((/honorario|sueldo|pago al equipo|nuestro trabajo|estudiantes/i.test(p.que || '') && !(p.bolsillo === 'PRO' && asesoria(p))) || (/comida|refresco|alimento|tamal|caf[eé]/i.test(p.que || '') && !/faena/i.test(p.que || ''))); if (mal) marca(p, 'no lo paga un fondo'); return mal; });
+  var proMal = [];
+  var ase = ps.filter(function (p) { return p.bolsillo === 'PRO' && esDinero(p) && asesoria(p); }), aseMonto = ase.reduce(function (a, p) { return a + totalDe(p); }, 0);
+  if (aseMonto > 0 && aseMonto > 0.1 * s.pro.monto + 1e-9) { ase.forEach(function (p) { marca(p, 'asesoría arriba del 10%'); }); proMal.push('la asistencia técnica que se le carga a PROCODES (' + pesos(aseMonto) + ') pasa del 10% de lo que pondría el programa (' + pesos(0.1 * s.pro.monto) + ')'); }
+  if (s.pro.hay && s.pro.pct > 0.8 + 1e-9) proMal.push('PROCODES pondría el ' + Math.round(100 * s.pro.pct) + '% de su proyecto y el programa pone hasta el 80%: el grupo tiene que poner al menos ' + pesos(s.pro.monto / 4 - s.pro.grupo > 0 ? s.pro.monto / 4 - s.pro.grupo : 0) + ' más en jornales, materiales o dinero, en las actividades del proyecto PROCODES');
+  if (s.pro.hay && s.pro.tope > 0 && s.pro.monto > s.pro.tope) proMal.push('lo que se le pide a PROCODES (' + pesos(s.pro.monto) + ') pasa el tope de ' + s.pro.cant + ' ' + s.pro.unidad + ' (' + pesos(s.pro.tope) + ')');
+  r(pecado.length || proMal.length ? 1 : 0, 'El pecado mayor', 'Ningún fondo paga lo que sus reglas no admiten ni más de su tope.', (pecado.length ? 'Honorarios del propio equipo o comida que no es de faena cargados a un fondo: ' + ids(pecado) + '. ' : '') + (proMal.length ? proMal.join('; ') + '.' : ''));
+
+  var equivocado = ps.filter(function (p) { var t = bolsilloMal(p); if (t) marca(p, t); return !!t; });
+  r(equivocado.length, 'El bolsillo equivocado', 'Cada bolsillo paga lo que sus reglas dejan.', 'Partidas en un bolsillo que no paga esa clase de cosa: ' + equivocado.map(function (p) { return '#' + p.id + ' (' + bolsilloMal(p) + ')'; }).join('; ') + '.');
+
+  var tarde = ps.filter(function (p) { var t = cuandoMal(p); if (t) marca(p, 'llega tarde'); return !!t; });
+  if (e.flete && e.flete.si && cuandoMal(e.flete)) tarde.push({ id: 'flete', mes: e.flete.mes, bolsillo: e.flete.bolsillo, forma: e.flete.forma });
+  r(tarde.length, 'El dinero que llega tarde', 'Cada peso llega antes del mes en que se gasta.', 'Se gastaría antes de que llegue el bolsillo, o después de que cierre: ' + tarde.map(function (p) { return (p.id === 'flete' ? 'el flete' : '#' + p.id) + ' en ' + mesTxt(p.mes) + ' (' + cuandoMal(p) + ')'; }).join('; ') + '. Se mueve la compra de mes, se adelanta con autogestión o se cambia de bolsillo.');
+
+  var sinB = ps.filter(function (p) { if (!p.bolsillo) { marca(p, 'sin bolsillo'); return true; } return false; });
+  r(sinB.length, 'La partida sin bolsillo', 'Cada partida dice quién la pagaría.', 'Partidas que todavía no tienen quién las pague: ' + ids(sinB) + '. Si nadie la pagaría, se dice en voz alta: es una gestión pendiente, no un olvido.', 'ojo');
+
+  var cae = ps.filter(function (p) { return p.cae; });
+  r(cae.length ? 0 : 1, 'Lo que se cae primero', 'Marcado: ' + ids(cae) + '. Si un bolsillo no llega, el equipo ya sabe qué suelta.', 'Ninguna partida está marcada. Si un bolsillo no llega, ¿qué se suelta primero y por qué el resto sigue sirviendo?');
+  return { lista: lista, fila: fila };
+}
+
+(function () {
+  var CLAVE = 'gdp-presupuesto-presa-junto';
+  var $ = function (id) { return document.getElementById(id); };
+  var ORDEN = PRESA.componentes.map(function (c) { return c.id; });
+  var guardado = (function () { try { return JSON.parse(localStorage.getItem(CLAVE)) || {}; } catch (e) { return {}; } })();
+  var equipos = guardado.equipos || {}, conEjemplo = !!guardado.conEjemplo;
+  function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify({ equipos: equipos, conEjemplo: conEjemplo })); } catch (e) {} }
+  function lista() {
+    var l = ORDEN.filter(function (id) { return equipos[id]; }).map(function (id) { return equipos[id]; });
+    if (conEjemplo && !equipos.G) l.unshift(PRESA.ejemplo);
+    return l;
+  }
+  function limpiar(e) {   // asegura ids y campos, como en la práctica
+    var sig = 1;
+    e.partidas = (e.partidas || []).map(function (p) { var q = Object.assign({ actividad: '', que: '', unidad: '', cant: 0, precio: 0, tipo: 'materiales', bolsillo: '', forma: 'compra', mes: '', papel: '', cae: false }, p); q.id = sig++; return q; });
+    e.flete = Object.assign({ si: false, cant: 0, precio: 0, bolsillo: 'AUT', forma: 'compra', mes: '', papel: '' }, e.flete || {});
+    e.imp = Object.assign({ si: false, pct: 0, nombre: '', bolsillo: 'AUT' }, e.imp || {});
+    e.pro = Object.assign({ unidad: 'm²', cant: 0 }, e.pro || {});
+    return e;
+  }
+  function recibir(files) {
+    var n = files.length, hechos = 0, notas = [];
+    Array.prototype.forEach.call(files, function (f) {
+      var r = new FileReader();
+      r.onload = function () {
+        try {
+          var e = JSON.parse(r.result); if (!e.partidas || !e.componente) throw 0;
+          e = limpiar(e); e.archivo = f.name;
+          var antes = equipos[e.componente];
+          if (antes && (antes.guardado || '') > (e.guardado || '')) notas.push(f.name + ' es más viejo que el que ya estaba de ' + nombreComp(e.componente) + ': se quedó el anterior');
+          else { if (antes) notas.push(nombreComp(e.componente) + ': se sustituyó por ' + f.name); equipos[e.componente] = e; }
+        } catch (err) { notas.push(f.name + ' no es un archivo de la práctica del presupuesto'); }
+        if (++hechos === n) { guardar(); pintar(); $('estado').textContent = notas.length ? notas.join(' · ') : n + (n === 1 ? ' archivo cargado.' : ' archivos cargados.'); }
+      };
+      r.readAsText(f);
+    });
+  }
+  var zona = $('soltar');
+  ['dragenter', 'dragover'].forEach(function (t) { zona.addEventListener(t, function (ev) { ev.preventDefault(); zona.classList.add('encima'); }); });
+  ['dragleave', 'drop'].forEach(function (t) { zona.addEventListener(t, function (ev) { ev.preventDefault(); zona.classList.remove('encima'); }); });
+  zona.addEventListener('drop', function (ev) { if (ev.dataTransfer.files.length) recibir(ev.dataTransfer.files); });
+  $('archivos').addEventListener('change', function () { if (this.files.length) recibir(this.files); this.value = ''; });
+  $('conEjemplo').checked = conEjemplo;
+  $('conEjemplo').addEventListener('change', function () { conEjemplo = this.checked; guardar(); pintar(); });
+
+  function pintar() {
+    var l = lista().map(function (e) { e = limpiar(JSON.parse(JSON.stringify(e))); return { e: e, s: calcular(e), rev: null }; });
+    l.forEach(function (x) { x.rev = revisar(x.e, x.s); });
+    $('impFecha').textContent = 'Cronograma del ' + PRESA.fecha + '; presupuesto armado por los equipos de la Licenciatura en Producción Agropecuaria Sustentable, impreso el ' + new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + '. Cifras hipotéticas, sujetas a cotización.';
+    // equipos cargados
+    $('equipos').innerHTML = l.length ? l.map(function (x) { var id = x.e.componente, ej = x.e === PRESA.ejemplo || (conEjemplo && !equipos.G && id === 'G'); return '<div class="equipo"><span class="c">' + esc(nombreComp(id)) + '</span><span class="d">' + esc(x.e.equipo || 'sin nombre') + ' · ' + pesos(x.s.total) + '</span>' + (equipos[id] ? '<button class="btn peligro chico" type="button" data-quitar="' + id + '" aria-label="Quitar ' + esc(nombreComp(id)) + '">quitar</button>' : '<span class="d">ejemplo</span>') + '</div>'; }).join('') : '<p class="vacia">Todavía no hay archivos. Mientras tanto se puede marcar la casilla del ejemplo para ver cómo se lee la página.</p>';
+    // totales
+    var T = { total: 0, dinero: 0, especie: 0, comunidad: 0, fondos: 0, sin: 0, bols: { AUT: 0, PRO: 0, MUN: 0, CNF: 0 } };
+    l.forEach(function (x) { T.total += x.s.total; T.dinero += x.s.dinero; T.especie += x.s.especie; T.comunidad += x.s.comunidad; T.fondos += x.s.fondos; T.sin += x.s.sinBolsillo; BOLSILLOS.forEach(function (b) { T.bols[b.id] += x.s.bols[b.id].dinero + x.s.bols[b.id].especie; }); });
+    var faltanComp = ORDEN.filter(function (id) { return id !== 'G' && !l.some(function (x) { return x.e.componente === id; }); });
+    var t = '<div class="total grande"><div class="t">El tamaño real del proyecto</div><div class="v">' + pesos(T.total) + '</div><div class="nota">' + l.length + ' de 7 piezas cargadas' + (faltanComp.length ? '; faltan ' + (faltanComp.length > 1 ? faltanComp.slice(0, -1).join(', ') + ' y ' + faltanComp[faltanComp.length - 1] : faltanComp[0]) : '') + '</div></div>';
+    t += '<div class="total"><div class="t">Lo que pone la comunidad</div><div class="v">' + pesos(T.comunidad) + '</div><div class="nota">' + (T.total ? Math.round(100 * T.comunidad / T.total) + '% del proyecto, en faenas, préstamos, cooperación y capital semilla' : 'faenas, préstamos, cooperación y capital semilla') + '</div></div>';
+    t += '<div class="total"><div class="t">Lo que se pide a las instituciones</div><div class="v">' + pesos(T.fondos) + '</div><div class="nota">PROCODES, Ayuntamiento y CONAFOR, en dinero y en especie</div></div>';
+    t += '<div class="total"><div class="t">En dinero, en especie</div><div class="v">' + pesos(T.dinero) + '</div><div class="nota">en dinero, y ' + pesos(T.especie) + ' en especie valorizada</div></div>';
+    if (T.sin) t += '<div class="total" style="border-color:var(--rojo)"><div class="t">Sin bolsillo todavía</div><div class="v" style="color:var(--rojo)">' + pesos(T.sin) + '</div><div class="nota">gestión pendiente</div></div>';
+    $('totales').innerHTML = t;
+    // cuadro
+    var cab = '<tr><th>Componente</th>' + BOLSILLOS.map(function (b) { return '<th><span class="punto" style="--c:' + b.color + '"></span>' + esc(b.corto) + '</th>'; }).join('') + (T.sin ? '<th>Sin bolsillo</th>' : '') + '<th>Total</th></tr>';
+    var celda = function (d, e) { var v = d + e; return v ? '<td>' + pesos(v) + '<small>' + (d && e ? pesos(d) + ' dinero · ' + pesos(e) + ' especie' : d ? 'dinero' : 'especie') + '</small></td>' : '<td class="vacio">$0</td>'; };
+    var filas = l.map(function (x) { return '<tr><td>' + esc(nombreComp(x.e.componente)) + '<small>' + esc(x.e.equipo || '') + '</small></td>' + BOLSILLOS.map(function (b) { var q = x.s.bols[b.id]; return celda(q.dinero, q.especie); }).join('') + (T.sin ? celda(x.s.bols[''].dinero, x.s.bols[''].especie) : '') + '<td><b>' + pesos(x.s.total) + '</b></td></tr>'; }).join('');
+    var suma = '<tr class="suma"><td>Todo el proyecto</td>' + BOLSILLOS.map(function (b) { return '<td>' + pesos(T.bols[b.id]) + '<small>' + (T.total ? Math.round(100 * T.bols[b.id] / T.total) + '%' : '') + '</small></td>'; }).join('') + (T.sin ? '<td>' + pesos(T.sin) + '</td>' : '') + '<td>' + pesos(T.total) + '</td></tr>';
+    $('cuadro').innerHTML = cab + (filas || '<tr><td colspan="7" class="vacia">Sin archivos todavía.</td></tr>') + (l.length ? suma : '');
+    grafica(l);
+    pintarPro(l);
+    // pendientes
+    $('pendientes').innerHTML = l.length ? l.map(function (x) { var malos = x.rev.lista.filter(function (r) { return r.clase !== 'bien'; }); return '<div class="comp-pend"><h3>' + esc(nombreComp(x.e.componente)) + '</h3>' + (malos.length ? '<ul class="pend">' + malos.map(function (r) { return '<li class="' + r.clase + '"><b>' + esc(r.titulo) + '</b>' + esc(r.texto) + '</li>'; }).join('') + '</ul>' : '<p class="vacia">La revisión no encontró agujeros.</p>') + '</div>'; }).join('') : '<p class="vacia">Aparecen al cargar los archivos.</p>';
+    $('caen').innerHTML = l.length ? '<div class="envoltura"><table class="cuadro"><tr><th>Componente</th><th style="text-align:left">Lo que se suelta primero</th></tr>' + l.map(function (x) { var marcadas = x.e.partidas.filter(function (p) { return p.cae; }).map(function (p) { return p.que; }); return '<tr><td>' + esc(nombreComp(x.e.componente)) + '</td><td style="text-align:left">' + esc(x.e.seCae || '') + (marcadas.length ? '<small>Partidas marcadas: ' + esc(marcadas.join('; ')) + '</small>' : (x.e.seCae ? '' : '<span class="vacia">sin respuesta todavía</span>')) + '</td></tr>'; }).join('') + '</table></div>' : '<p class="vacia">Aparece al cargar los archivos.</p>';
+    return { l: l, T: T };
+  }
+  function grafica(l) {
+    var W = 1120, H = 368, izq = 104, der = 12, arriba = 26, abajo = 118, ancho = (W - izq - der) / MESES.length, alto = H - arriba - abajo;
+    var por = {}, fuera = {};
+    MESES.forEach(function (m) { por[m] = { AUT: 0, PRO: 0, MUN: 0, CNF: 0, '': 0 }; });
+    l.forEach(function (x) {
+      MESES.forEach(function (m) { var q = x.s.mes[m]; if (q) for (var k in q) por[m][k] = (por[m][k] || 0) + q[k]; });
+      x.e.partidas.forEach(function (p) { if (cuandoMal(p) && totalDe(p) > 0) fuera[p.mes] = 1; });
+    });
+    var max = 0; MESES.forEach(function (m) { var v = 0; for (var k in por[m]) v += por[m][k]; if (v > max) max = v; });
+    var paso = [1000, 2000, 5000, 10000, 20000, 25000, 50000, 100000, 200000, 250000, 500000].filter(function (p) { return max / p <= 5; })[0] || 1000000;
+    var tope = Math.max(paso, Math.ceil(max / paso) * paso), y = function (v) { return arriba + alto - alto * v / tope; };
+    var g = '';
+    for (var v = 0; v <= tope; v += paso) g += '<line x1="' + izq + '" x2="' + (W - der) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="#E3ECE9"/><text x="' + (izq - 6) + '" y="' + (y(v) + 4) + '" font-size="12" text-anchor="end" fill="#45605a">' + (v / 1000).toLocaleString('es-MX') + '</text>';
+    g += '<text x="' + izq + '" y="' + (arriba - 12) + '" font-size="11" text-anchor="start" fill="#45605a">miles de $</text>';
+    var capas = BOLSILLOS.concat([{ id: '', corto: 'Sin bolsillo', color: '#8E9C98' }]);
+    MESES.forEach(function (m, i) {
+      var x0 = izq + i * ancho + 3, w = ancho - 6, acum = 0;
+      capas.forEach(function (b) {
+        var val = por[m][b.id]; if (!val) return;
+        var y1 = y(acum + val), y0 = y(acum); acum += val;
+        g += '<rect x="' + x0 + '" y="' + y1 + '" width="' + w + '" height="' + Math.max(y0 - y1 - 2, 1) + '" rx="2" fill="' + b.color + '"><title>' + esc(b.corto + ', ' + mesLargo(m) + ': ' + pesos(val)) + '</title></rect>';
+      });
+      if (acum) g += '<text x="' + (x0 + w / 2) + '" y="' + (y(acum) - 5) + '" font-size="11" text-anchor="middle" fill="#1C2B28">' + (acum / 1000).toLocaleString('es-MX', { maximumFractionDigits: acum < 10000 ? 1 : 0 }) + '</text>';
+      var c = m.split('-'), mm = +c[1];
+      g += '<text x="' + (x0 + w / 2) + '" y="' + (arriba + alto + 15) + '" font-size="11.5" text-anchor="middle" fill="#45605a">' + MESES_TXT[mm - 1].charAt(0).toUpperCase() + MESES_TXT[mm - 1].slice(1, 3) + '</text>';
+      if (mm === 1 || i === 0) g += '<text x="' + (x0 - 1) + '" y="' + (arriba + alto + 31) + '" font-size="12" font-weight="bold" fill="#0B3C49">' + c[0] + '</text>';
+      if (fuera[m]) g += '<path d="M' + (x0 + w / 2 - 6) + ' ' + (arriba + alto + 46) + ' l6 -9 l6 9 z" fill="#8A3B2B"><title>Algún equipo gasta en ' + esc(mesLargo(m)) + ' con un bolsillo que todavía no paga o ya cerró</title></path>';
+    });
+    // franjas de cuándo paga cada bolsillo
+    var filasV = [['AUT', '2026-11', '2028-11', 'Autogestión: desde ya'], ['PRO', VENTANA.PRO.desde, VENTANA.PRO.hasta, 'PROCODES: de junio a diciembre de 2027'], ['MUN', VENTANA.MUN.especie, '2028-11', 'Ayuntamiento: especie desde feb 2027, obra desde ene 2028'], ['CNF', VENTANA.CNF.desde, '2028-11', 'CONAFOR: planta desde junio de 2027']];
+    filasV.forEach(function (f, k) {
+      var b = BOLS[f[0]], i0 = MESES.indexOf(f[1]), i1 = MESES.indexOf(f[2]), yy = arriba + alto + 54 + k * 15;
+      g += '<rect x="' + (izq + i0 * ancho + 3) + '" y="' + yy + '" width="' + ((i1 - i0 + 1) * ancho - 6) + '" height="9" rx="4" fill="' + b.color + '" opacity=".85"/>';
+      if (f[0] === 'MUN') { var i2 = MESES.indexOf(VENTANA.MUN.desde); g += '<rect x="' + (izq + i0 * ancho + 3) + '" y="' + yy + '" width="' + ((i2 - i0) * ancho - 6) + '" height="9" rx="4" fill="#fff" opacity=".55"/>'; }
+      g += '<text x="' + (izq - 6) + '" y="' + (yy + 8) + '" font-size="11" text-anchor="end" fill="#45605a">' + esc(b.corto) + '</text>';
+    });
+    $('grafica').innerHTML = g;
+    $('leyenda').innerHTML = capas.map(function (b) { return '<span><i style="background:' + b.color + '"></i>' + esc(b.corto) + '</span>'; }).join('') + '<span><i style="background:#8A3B2B;clip-path:polygon(50% 0,100% 100%,0 100%)"></i>gasto fuera del tiempo de su bolsillo</span><span>En la franja del Ayuntamiento, el tramo claro es solo especie.</span>';
+    var pico = '', vPico = 0, antes = 0, total = 0;
+    MESES.forEach(function (m) { var v = 0; for (var k in por[m]) v += por[m][k]; total += v; if (v > vPico) { vPico = v; pico = m; } if (m < '2027-06') antes += v; });
+    $('lectura').innerHTML = vPico ? 'El mes más cargado del proyecto es <b>' + mesLargo(pico) + '</b>, con ' + pesos(vPico) + '. Antes de junio de 2027 se necesitan ' + pesos(antes) + ' (el ' + Math.round(100 * antes / total) + '% de todo lo que ya tiene mes): eso solo lo cubren la autogestión y el apoyo en especie, porque hasta entonces ningún fondo ha depositado.' + (Object.keys(fuera).length ? ' <span class="aviso">Hay gasto fuera de tiempo en ' + Object.keys(fuera).sort().map(mesTxt).join(', ') + '.</span>' : '') : '';
+  }
+  function pintarPro(l) {
+    var monto = 0, grupo = 0, tope = 0, m2 = 0, lotes = 0, comps = [];
+    l.forEach(function (x) { if (x.s.pro.hay) { monto += x.s.pro.monto; grupo += x.s.pro.grupo; comps.push(nombreComp(x.e.componente)); } if (x.s.pro.cant) { tope += x.s.pro.tope; if (x.s.pro.unidad === 'lote') lotes += x.s.pro.cant; else m2 += x.s.pro.cant; } });
+    if (!monto) { $('pro').innerHTML = '<p class="vacia">Ningún archivo trae partidas en el bolsillo de PROCODES todavía.</p>'; return; }
+    var pct = monto / (monto + grupo), h = '<p>Lo que se le pediría a PROCODES suma <b>' + pesos(monto) + '</b>, de ' + esc(comps.join(' y ')) + '. El grupo pondría <b>' + pesos(grupo) + '</b> en las actividades del proyecto PROCODES: el programa pondría el <b>' + Math.round(100 * pct) + '%</b> de un proyecto de ' + pesos(monto + grupo) + '.</p>';
+    if (pct > 0.8 + 1e-9) h += '<p class="aviso">Pasa del 80% que pone el programa: faltan ' + pesos(monto / 4 - grupo) + ' de aportación del grupo.</p>';
+    if (tope) h += '<p>' + (m2 ? m2 + ' m² ' : '') + (lotes ? lotes + ' lotes ' : '') + 'dan un tope de ' + pesos(tope) + (monto > tope ? ': <span class="aviso">lo pedido lo pasa.</span>' : ': lo pedido cabe.') + (m2 > 180 ? ' <span class="aviso">Por superficie se piden de 30 a 180 m² en una solicitud.</span>' : '') + '</p>';
+    else h += '<p class="vacia">Ningún equipo escribió todavía los metros cuadrados o los lotes que se pedirían.</p>';
+    if (monto + grupo > PRO_UMBRAL) h += '<p class="aviso">El proyecto PROCODES pasa de $300,000: la solicitud pide estudio de factibilidad.</p>';
+    h += '<p class="sub">Una sola solicitud: el grupo de La Florida pide el proyecto ecoturístico completo, y los componentes que lo forman se presentan juntos.</p>';
+    $('pro').innerHTML = h;
+  }
+  $('equipos').addEventListener('click', function (ev) { var b = ev.target.closest('[data-quitar]'); if (!b) return; delete equipos[b.dataset.quitar]; guardar(); pintar(); });
+  $('borrar').addEventListener('click', function () { if (confirm('Se quitan todos los archivos cargados en esta computadora. ¿Seguro?')) { equipos = {}; guardar(); pintar(); } });
+  $('proyector').addEventListener('click', function () { document.body.classList.toggle('proyector'); });
+  $('imprimir').addEventListener('click', function () { window.print(); });
+  $('bajar').addEventListener('click', function () {
+    var r = pintar(); if (!r.l.length) { alert('Todavía no hay nada que descargar.'); return; }
+    var salida = { version: 3, tipo: 'presupuesto-de-la-presa', cronograma: PRESA.fecha, juntado: new Date().toISOString(), conEjemplo: conEjemplo, totales: r.T, equipos: r.l.map(function (x) { return x.e; }) };
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(salida, null, 1)], { type: 'application/json' })); a.download = 'presupuesto-de-la-presa-' + new Date().toISOString().slice(0, 10) + '.json'; document.body.appendChild(a); a.click(); setTimeout(function () { a.remove(); }, 500);
+  });
+  $('copiar').addEventListener('click', function () {
+    var r = pintar(), t = [['Componente', 'Equipo'].concat(BOLSILLOS.map(function (b) { return b.corto; })).concat(['Sin bolsillo', 'Total']).join('\t')];
+    r.l.forEach(function (x) { t.push([nombreComp(x.e.componente), x.e.equipo || ''].concat(BOLSILLOS.map(function (b) { var q = x.s.bols[b.id]; return Math.round(q.dinero + q.especie); })).concat([Math.round(x.s.sinBolsillo), Math.round(x.s.total)]).join('\t')); });
+    t.push(['Todo el proyecto', ''].concat(BOLSILLOS.map(function (b) { return Math.round(r.T.bols[b.id]); })).concat([Math.round(r.T.sin), Math.round(r.T.total)]).join('\t'));
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t.join('\n')).then(function () { $('estado').textContent = 'Cuadro copiado: se pega en una hoja de cálculo.'; }, function () { alert('No se pudo copiar.'); });
+  });
+  pintar();
+})();
+</script>
+</body>
+</html>
