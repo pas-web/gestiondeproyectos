@@ -1062,10 +1062,9 @@ y evaluar como dos caras).
   partidas con cantidad, unidad, precio, bolsillo, mes, tipo, forma (compra,
   faena, prestado, trocado o donado) y papel; flete e imponderables con renglón
   propio; el reloj del dinero; el tope y el 20% del PROCODES, y la asistencia
-  técnica hasta el 10%; la revisión de seis agujeros; la hoja para cotizar y el
+  técnica hasta el 10%; la revisión de cinco agujeros; la hoja para cotizar y el
   archivo para juntar (.json). El ejemplo que se carga es la ruta de gestión
-  (siete partidas, $6,885, con los precios de referencia marcados como de
-  oídas). Sustituye a la versión del manantial.
+  (siete partidas, $6,885, con precios de referencia). Sustituye a la versión del manantial.
 - **Página nueva:** `recursos/presupuesto-de-la-presa/index.html` junta los
   archivos de los equipos: cuadro por componente y bolsillo, tamaño real, lo
   que pone la comunidad, reloj del dinero del proyecto, PROCODES sumado, lo que
@@ -1075,7 +1074,7 @@ y evaluar como dos caras).
   y lee la misma matriz del cronograma: si cambian sus actividades, se corre
   `node construir.js` y se suben las dos páginas con la del cronograma.
 - **Mazo 2 rehecho para la presa** (24 láminas): entran dinero y especie, los
-  cuatro bolsillos, el reloj del dinero, el 20% que pone el grupo, los seis
+  cuatro bolsillos, el reloj del dinero, el 20% que pone el grupo, los cinco
   agujeros, la ruta de gestión como ejemplo y la lámina de juntar.
 - **Gimnasios del presupuesto con partidas de la presa:** El presupuesto
   agujerado se reescribe en el mismo archivo, y entran ¿Quién lo paga?, El
@@ -1098,3 +1097,9 @@ y evaluar como dos caras).
   equivocado (dinero a CONAFOR, especie al PROCODES) pasa al pecado mayor, y la
   partida sin actividad queda como aviso, no como agujero. El presupuesto
   agujerado baja a seis casos.
+- **12 de noviembre, más tarde: sin columna de papel y cinco agujeros.** Todo
+  lo que se compra se cotiza, así que sale la columna «Papel» de la práctica y
+  sale el precio de oídas como agujero (en la práctica, el mazo y El
+  presupuesto agujerado, que baja a cinco casos). La sección «Lo que se
+  cotiza» y la hoja para cotizar listan todo lo comprado, flete incluido: tres
+  cotizaciones de mil pesos para arriba y al menos una para lo menor.

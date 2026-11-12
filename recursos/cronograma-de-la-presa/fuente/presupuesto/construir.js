@@ -27,19 +27,19 @@ const actividades = D.A
 const componentes = D.COMPONENTES.map(c => ({ id: c.id, clave: c.clave, nombre: c.nombre, corto: c.corto, deja: c.deja }));
 const act = codigo => { const a = actividades.find(x => x.cod === codigo); if (!a) throw new Error('No existe la actividad ' + codigo); return a; };
 
-// El ejemplo armado: la ruta de gestión, con precios de referencia marcados como tales.
+// El ejemplo armado: la ruta de gestión, con precios de referencia que después se cotizan.
 const ejemplo = {
   version: 3, equipo: 'Ejemplo: la ruta de gestión', componente: 'G',
   partidas: [
-    { actividad: act('G-05').id, que: 'Impresión del catálogo para la asamblea, juegos engargolados', unidad: 'juego', cant: 25, precio: 60, tipo: 'materiales', bolsillo: 'AUT', forma: 'compra', mes: '2026-11', papel: 'de oídas: falta cotización de la papelería' },
-    { actividad: act('G-05').id, que: 'Lona del cronograma de la presa, 2 por 1.2 m', unidad: 'm²', cant: 2.4, precio: 150, tipo: 'materiales', bolsillo: 'AUT', forma: 'compra', mes: '2026-11', papel: 'de oídas: falta cotización de la imprenta', cae: true },
-    { actividad: act('G-07').id, que: 'Sillas y equipo de sonido de la delegación para la presentación en la orilla', unidad: 'evento', cant: 1, precio: 1200, tipo: 'equipo', bolsillo: 'AUT', forma: 'prestado', mes: '2026-12', papel: 'constancia de préstamo de la delegación, por pedir' },
-    { actividad: act('G-07').id, que: 'Montaje y limpieza de la presentación, seis personas una jornada', unidad: 'jornal', cant: 6, precio: 300, tipo: 'gente', bolsillo: 'AUT', forma: 'faena', mes: '2026-12', papel: 'lista de asistencia firmada; jornal de la región' },
-    { actividad: act('G-13').id, que: 'Pasajes a la oficina de la Reserva en Jalpan, dos personas, dos viajes', unidad: 'pasaje', cant: 4, precio: 160, tipo: 'traslado', bolsillo: 'AUT', forma: 'compra', mes: '2027-02', papel: 'de oídas: falta tarifa' },
-    { actividad: act('G-14').id, que: 'Elaboración de la manifestación de impacto ambiental por un prestador de servicios ambientales', unidad: 'servicio', cant: 1, precio: 0, tipo: 'gente', bolsillo: '', forma: 'compra', mes: '2027-03', papel: 'sin precio: pedir tres cotizaciones' },
-    { actividad: act('G-22').id, que: 'Impresión del informe final con fotos de punto fijo', unidad: 'juego', cant: 10, precio: 120, tipo: 'materiales', bolsillo: 'AUT', forma: 'compra', mes: '2028-04', papel: 'de oídas: falta cotización de la papelería' }
+    { actividad: act('G-05').id, que: 'Impresión del catálogo para la asamblea, juegos engargolados', unidad: 'juego', cant: 25, precio: 60, tipo: 'materiales', bolsillo: 'AUT', forma: 'compra', mes: '2026-11' },
+    { actividad: act('G-05').id, que: 'Lona del cronograma de la presa, 2 por 1.2 m', unidad: 'm²', cant: 2.4, precio: 150, tipo: 'materiales', bolsillo: 'AUT', forma: 'compra', mes: '2026-11', cae: true },
+    { actividad: act('G-07').id, que: 'Sillas y equipo de sonido de la delegación para la presentación en la orilla', unidad: 'evento', cant: 1, precio: 1200, tipo: 'equipo', bolsillo: 'AUT', forma: 'prestado', mes: '2026-12' },
+    { actividad: act('G-07').id, que: 'Montaje y limpieza de la presentación, seis personas una jornada', unidad: 'jornal', cant: 6, precio: 300, tipo: 'gente', bolsillo: 'AUT', forma: 'faena', mes: '2026-12' },
+    { actividad: act('G-13').id, que: 'Pasajes a la oficina de la Reserva en Jalpan, dos personas, dos viajes', unidad: 'pasaje', cant: 4, precio: 160, tipo: 'traslado', bolsillo: 'AUT', forma: 'compra', mes: '2027-02' },
+    { actividad: act('G-14').id, que: 'Elaboración de la manifestación de impacto ambiental por un prestador de servicios ambientales', unidad: 'servicio', cant: 1, precio: 0, tipo: 'gente', bolsillo: '', forma: 'compra', mes: '2027-03' },
+    { actividad: act('G-22').id, que: 'Impresión del informe final con fotos de punto fijo', unidad: 'juego', cant: 10, precio: 120, tipo: 'materiales', bolsillo: 'AUT', forma: 'compra', mes: '2028-04' }
   ],
-  flete: { si: false, cant: 0, precio: 0, bolsillo: 'AUT', forma: 'compra', mes: '', papel: '' },
+  flete: { si: false, cant: 0, precio: 0, bolsillo: 'AUT', forma: 'compra', mes: '' },
   imp: { si: true, pct: 5, nombre: 'lo que falte en la papelería', bolsillo: 'AUT' },
   pro: { unidad: 'm²', cant: 0 },
   seCae: 'La lona del cronograma: el catálogo impreso y el cartel de pared hacen el mismo trabajo.'

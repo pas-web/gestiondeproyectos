@@ -47,8 +47,8 @@
   table.acts th { font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gris); }
   table.acts td.cod { color:var(--gris); white-space:nowrap; font-variant-numeric:tabular-nums; }
   .envoltura { overflow-x:auto; border:1px solid var(--borde); border-radius:12px; background:#fff; }
-  table.plan { width:100%; min-width:62em; border-collapse:collapse; font-size:.9rem; table-layout:fixed; }
-  table.plan col.c-num { width:2.3em; } table.plan col.c-cuanto { width:10.6em; } table.plan col.c-bol { width:9.4em; } table.plan col.c-tipo { width:8.4em; } table.plan col.c-papel { width:11.5em; } table.plan col.c-total { width:7.6em; } table.plan col.c-x { width:2.6em; }
+  table.plan { width:100%; min-width:54em; border-collapse:collapse; font-size:.9rem; table-layout:fixed; }
+  table.plan col.c-num { width:2.3em; } table.plan col.c-cuanto { width:10.6em; } table.plan col.c-bol { width:9.4em; } table.plan col.c-tipo { width:8.4em; } table.plan col.c-total { width:7.6em; } table.plan col.c-x { width:2.6em; }
   table.plan th { text-align:left; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gris); border-bottom:2px solid var(--borde); padding:.45rem .35rem; background:#F7FAF9; vertical-align:bottom; }
   table.plan td { padding:.4rem .35rem; border-bottom:1px solid var(--borde); vertical-align:top; }
   table.plan td input, table.plan td textarea, table.plan td select { padding:.25rem .35rem; font-size:.88rem; }
@@ -141,7 +141,7 @@
 
 <p class="sub">Aquí el cronograma de la presa se traduce a pesos, componente por componente. Las actividades ya vienen del <a href="../cronograma-de-la-presa/index.html">cronograma integrado</a>, con su mes y, donde ya se decidió, el bolsillo que las pagaría. A cada actividad se le cuelgan sus partidas; la hoja suma por bolsillo, revisa las reglas de cada uno, dice en qué mes se necesita cada peso y si para entonces ya llegó, y señala los agujeros. Al terminar se descarga un archivo que se junta con el de los otros equipos: así sale <a href="../presupuesto-de-la-presa/index.html">el presupuesto de la presa</a>.</p>
 
-<div class="reglas">Lo que la hoja vigila: <strong>cada partida colgada de una actividad y con su papel</strong>; flete e imponderables con renglón propio; <strong>cada cosa en un solo bolsillo</strong>; ningún bolsillo paga lo que sus reglas no admiten, ni antes de que llegue su dinero. Lo que la comunidad pone en faenas, préstamos y donaciones se escribe completo y con su precio, porque es la parte del proyecto que ningún donante puede poner.</div>
+<div class="reglas">Lo que la hoja vigila: <strong>cada partida colgada de una actividad</strong>; flete e imponderables con renglón propio; <strong>cada cosa en un solo bolsillo</strong>; ningún bolsillo paga lo que sus reglas no admiten, ni antes de que llegue su dinero. Lo que la comunidad pone en faenas, préstamos y donaciones se escribe completo y con su precio, porque es la parte del proyecto que ningún donante puede poner.</div>
 
 <h2>Los cuatro bolsillos</h2>
 <p class="sub">Un proyecto de este tamaño no lo paga un solo donante. Cada bolsillo trae lo suyo, con sus reglas y su calendario: el presupuesto se arma sabiendo qué le toca a cada quien y cuándo llega.</p>
@@ -149,10 +149,10 @@
 
 <div class="caja ejemplo">
   <div class="etq">Así se ve uno armado · la ruta de gestión</div>
-  <p>La ruta de gestión no es de ningún equipo: es el trabajo de papeles que mueve todo el proyecto, de la asamblea al informe final. Así se ven sus partidas. Cada una cuelga de una actividad del cronograma, dice qué es exactamente, cuántas y a cuánto, quién la pagaría, en qué mes y de dónde salió el precio.</p>
+  <p>La ruta de gestión no es de ningún equipo: es el trabajo de papeles que mueve todo el proyecto, de la asamblea al informe final. Así se ven sus partidas. Cada una cuelga de una actividad del cronograma, dice qué es exactamente, cuántas y a cuánto, quién la pagaría y en qué mes se necesita.</p>
   <div class="envoltura"><table class="ej" id="tablaEjemplo"></table></div>
   <p id="resumenEjemplo"></p>
-  <p>Los precios del ejemplo son de referencia y lo dicen en su papel: antes de la asamblea cada uno se cambia por su cotización. La manifestación de impacto ambiental se queda escrita aunque todavía no tenga precio ni bolsillo, porque es un gasto real que alguien tiene que gestionar. Lo que van a hacer ustedes es lo mismo con las actividades de su componente.</p>
+  <p>Los precios del ejemplo son de referencia: antes de la asamblea, cada uno se cambia por su cotización. La manifestación de impacto ambiental se queda escrita aunque todavía no tenga precio ni bolsillo, porque es un gasto real que alguien tiene que gestionar. Lo que van a hacer ustedes es lo mismo con las actividades de su componente.</p>
   <button class="btn claro" id="verEjemplo" type="button">Cargar el ejemplo completo en la hoja (reemplaza lo que haya)</button>
 </div>
 
@@ -169,11 +169,11 @@
 </div>
 
 <h2><span class="n">2</span>Las partidas</h2>
-<p class="sub">Una partida por renglón. El <b>bolsillo</b> dice quién la pagaría; la <b>forma</b>, si se compra con dinero o se consigue en faena, prestada, trocada o donada, y entonces va con el precio que tendría si se comprara. El <b>mes</b> es cuando se necesita, no cuando se hace la actividad: el material se compra antes. El <b>papel</b> es la cotización o la nota que respalda el precio.</p>
+<p class="sub">Una partida por renglón. El <b>bolsillo</b> dice quién la pagaría; la <b>forma</b>, si se compra con dinero o se consigue en faena, prestada, trocada o donada, y entonces va con el precio que tendría si se comprara. El <b>mes</b> es cuando se necesita, no cuando se hace la actividad: el material se compra antes. El <b>precio</b> de hoy es de referencia; con la tarea, se cambia por el cotizado.</p>
 <div class="envoltura">
   <table class="plan" id="tabla">
-    <colgroup><col class="c-num"><col class="c-que"><col class="c-cuanto"><col class="c-bol"><col class="c-tipo"><col class="c-papel"><col class="c-total"><col class="c-x"></colgroup>
-    <thead><tr><th>#</th><th>Actividad y qué, exactamente</th><th>Cuánto: cantidad, unidad y precio</th><th>Quién paga y en qué mes</th><th>Tipo y forma</th><th>Papel: quién dio el precio y cuándo</th><th style="text-align:right">Total</th><th><span class="visually-hidden">Quitar</span></th></tr></thead>
+    <colgroup><col class="c-num"><col class="c-que"><col class="c-cuanto"><col class="c-bol"><col class="c-tipo"><col class="c-total"><col class="c-x"></colgroup>
+    <thead><tr><th>#</th><th>Actividad y qué, exactamente</th><th>Cuánto: cantidad, unidad y precio</th><th>Quién paga y en qué mes</th><th>Tipo y forma</th><th style="text-align:right">Total</th><th><span class="visually-hidden">Quitar</span></th></tr></thead>
     <tbody id="cuerpo"></tbody>
     <tbody>
       <tr class="fijo">
@@ -182,15 +182,14 @@
         <td><div class="cuanto"><input type="number" id="fleteCant" min="0" step="any" aria-label="Viajes"><span class="fija">viaje</span><span class="por">× $</span><input type="number" id="fletePrecio" min="0" step="any" aria-label="Precio por viaje"></div></td>
         <td><div class="par"><select id="fleteBolsillo" class="bol" aria-label="Bolsillo del flete"></select><select id="fleteMes" aria-label="Mes del flete"></select></div></td>
         <td><div class="par"><span class="fija">traslado</span><select id="fleteForma" aria-label="Forma del flete"></select></div></td>
-        <td><textarea id="fletePapel" rows="2" placeholder="quién lo lleva y con qué papel" aria-label="Papel del flete"></textarea></td>
         <td class="monto" id="fleteTotal">$0</td><td></td>
       </tr>
       <tr class="fijo">
         <td class="num"><input type="checkbox" id="impSi" title="Lleva imponderables" aria-label="Lleva imponderables"></td>
-        <td><b>Imponderables,</b> con nombre<input type="text" id="impNombre" aria-label="Nombre de los imponderables" style="margin-top:.3rem"></td>
+        <td><b>Imponderables,</b> con nombre<input type="text" id="impNombre" aria-label="Nombre de los imponderables" style="margin-top:.3rem"><div class="ayuda">Alrededor del 5%. No entra al reloj del dinero porque no tiene mes: es el colchón para lo que nadie vio venir.</div></td>
         <td><div class="cuanto"><input type="number" id="impPct" min="0" step="0.5" aria-label="Porcentaje"><span class="fija">% de lo que se compra</span></div></td>
         <td><select id="impBolsillo" class="bol" aria-label="Bolsillo de los imponderables"></select></td>
-        <td colspan="2" class="ayuda">Alrededor del 5%. No entra al reloj del dinero porque no tiene mes: es el colchón para lo que nadie vio venir.</td>
+        <td><span class="fija">compra</span></td>
         <td class="monto" id="impTotal">$0</td><td></td>
       </tr>
     </tbody>
@@ -199,8 +198,8 @@
 <button class="btn claro" id="agregar" type="button">+ partida</button>
 
 <details>
-  <summary>Precios de referencia, de oídas (para el borrador de hoy; cada uno se cambia por la cotización del equipo)</summary>
-  <p class="ayuda">Son precios aproximados de la región a noviembre de 2026, sin papel que los respalde. Sirven para armar el primer borrador y para saber qué tan lejos anda la cotización de verdad. Un precio de estos en el presupuesto que va a la asamblea es un agujero: la hoja lo marca hasta que tenga su cotización.</p>
+  <summary>Precios de referencia (para el borrador de hoy; cada uno se cambia por la cotización del equipo)</summary>
+  <p class="ayuda">Son precios aproximados de la región a noviembre de 2026. Sirven para armar el primer borrador y para saber qué tan lejos anda la cotización de verdad. En el presupuesto que va a la asamblea ya no queda ninguno: todo lo que se compra se cotiza.</p>
   <table class="ref" id="refs"></table>
 </details>
 
@@ -232,14 +231,14 @@
   <textarea id="seCae"></textarea>
 </div>
 
-<h2><span class="n" id="nCot">6</span>Lo que falta cotizar</h2>
-<p class="sub">La tarea que sale de hoy: tres cotizaciones por cada partida de mil pesos o más, dos por escrito y de menos de treinta días. A quién se le compra también es un mensaje: cuando dos empatan, gana la del pueblo.</p>
+<h2><span class="n" id="nCot">6</span>Lo que se cotiza</h2>
+<p class="sub">La tarea que sale de hoy: todo lo que se compra se cotiza. Tres cotizaciones por cada partida de mil pesos o más, dos por escrito y de menos de treinta días; para lo que cuesta menos, al menos una. Con la cotización elegida, el precio de referencia se cambia por el cotizado. A quién se le compra también es un mensaje: cuando dos empatan, gana la del pueblo.</p>
 <div class="caja" id="faltaCotizar"></div>
 <button class="btn claro" id="imprimirHoja" type="button">Imprimir la hoja para cotizar</button>
 
 <div class="cuaderno">
   <b>Si trabajan en cuaderno</b>
-  <p>Una hoja con once columnas: actividad, qué, unidad, cantidad, precio, tipo, bolsillo, forma, mes, papel y total. Un renglón por partida; al final, el flete y los imponderables con renglón propio. Se suma por bolsillo, de ida y de regreso. Luego se dibuja el reloj: una tira de meses de noviembre de 2026 a noviembre de 2028, con los meses en que cada bolsillo puede pagar, y cada partida en su mes. Lo que cae fuera se encierra en rojo.</p>
+  <p>Una hoja con diez columnas: actividad, qué, unidad, cantidad, precio, tipo, bolsillo, forma, mes y total. Un renglón por partida; al final, el flete y los imponderables con renglón propio. Se suma por bolsillo, de ida y de regreso. Luego se dibuja el reloj: una tira de meses de noviembre de 2026 a noviembre de 2028, con los meses en que cada bolsillo puede pagar, y cada partida en su mes. Lo que cae fuera se encierra en rojo.</p>
 </div>
 
 <div id="hoja"></div>
@@ -282,7 +281,7 @@
     ['Boya señalizadora de 30 cm', 'pieza', 450, 'materiales'], ['Fantasma luminiscente para poste', 'pieza', 35, 'materiales']
   ];
   var $ = function (id) { return document.getElementById(id); };
-  function vacio() { return { version: 3, equipo: '', componente: '', partidas: [], sig: 1, flete: { si: false, cant: 1, precio: 0, bolsillo: 'AUT', forma: 'compra', mes: '', papel: '' }, imp: { si: true, pct: 5, nombre: 'el clavo que falta en domingo', bolsillo: 'AUT' }, pro: { unidad: 'm²', cant: 0 }, seCae: '' }; }
+  function vacio() { return { version: 3, equipo: '', componente: '', partidas: [], sig: 1, flete: { si: false, cant: 1, precio: 0, bolsillo: 'AUT', forma: 'compra', mes: '' }, imp: { si: true, pct: 5, nombre: 'el clavo que falta en domingo', bolsillo: 'AUT' }, pro: { unidad: 'm²', cant: 0 }, seCae: '' }; }
   function normal(s) {
     var v = vacio(); if (!s || !s.partidas) return v;
     var e = { version: 3, equipo: s.equipo || '', componente: s.componente || '', partidas: [], sig: 1, flete: Object.assign(v.flete, s.flete || {}), imp: Object.assign(v.imp, s.imp || {}), pro: Object.assign(v.pro, s.pro || {}), seCae: s.seCae || '' };
@@ -302,7 +301,7 @@
   function nueva(p, e) {
     p = p || {}; e = e || estado;
     var act = actividadDe(p.actividad);
-    return { id: e.sig++, actividad: act ? act.id : (p.actividad || ''), que: p.que || '', unidad: p.unidad || '', cant: p.cant === undefined ? 1 : p.cant, precio: p.precio || 0, tipo: p.tipo || 'materiales', bolsillo: p.bolsillo || '', forma: p.forma || 'compra', mes: p.mes || '', papel: p.papel || '', cae: !!p.cae };
+    return { id: e.sig++, actividad: act ? act.id : (p.actividad || ''), que: p.que || '', unidad: p.unidad || '', cant: p.cant === undefined ? 1 : p.cant, precio: p.precio || 0, tipo: p.tipo || 'materiales', bolsillo: p.bolsillo || '', forma: p.forma || 'compra', mes: p.mes || '', cae: !!p.cae };
   }
   function acts() { return PRESA.actividades.filter(function (a) { return a.c === estado.componente; }); }
   function opciones(lista, sel, vacioTxt) { return (vacioTxt !== undefined ? '<option value="">' + vacioTxt + '</option>' : '') + lista.map(function (o) { var v = o[0], t = o[1]; return '<option value="' + esc(v) + '"' + (v === sel ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join(''); }
@@ -323,8 +322,8 @@
   // ── el ejemplo
   (function () {
     var ej = normal(PRESA.ejemplo), s = calcular(ej);
-    var filas = ej.partidas.map(function (p) { var a = actividadDe(p.actividad), b = BOLS[p.bolsillo]; return '<tr><td>' + esc(a ? a.cod + ' · ' + a.n : p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + p.cant + ' ' + esc(p.unidad) + ' × ' + pesos(p.precio) + '</td><td>' + (b ? '<span class="punto" style="--c:' + b.color + '"></span>' + esc(b.corto) + ', ' + p.forma : '<b>sin bolsillo</b>') + '</td><td>' + mesTxt(p.mes) + '</td><td>' + esc(p.papel) + '</td><td class="m">' + pesos(totalDe(p)) + '</td></tr>'; }).join('');
-    $('tablaEjemplo').innerHTML = '<tr><th>Actividad</th><th>Qué</th><th>Cant. × precio</th><th>Bolsillo y forma</th><th>Mes</th><th>Papel</th><th>Total</th></tr>' + filas + '<tr><td colspan="6">Imponderables, ' + ej.imp.pct + '%: ' + esc(ej.imp.nombre) + '</td><td class="m">' + pesos(s.imp) + '</td></tr>';
+    var filas = ej.partidas.map(function (p) { var a = actividadDe(p.actividad), b = BOLS[p.bolsillo]; return '<tr><td>' + esc(a ? a.cod + ' · ' + a.n : p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + p.cant + ' ' + esc(p.unidad) + ' × ' + pesos(p.precio) + '</td><td>' + (b ? '<span class="punto" style="--c:' + b.color + '"></span>' + esc(b.corto) + ', ' + p.forma : '<b>sin bolsillo</b>') + '</td><td>' + mesTxt(p.mes) + '</td><td class="m">' + (+p.precio ? pesos(totalDe(p)) : 'por cotizar') + '</td></tr>'; }).join('');
+    $('tablaEjemplo').innerHTML = '<tr><th>Actividad</th><th>Qué</th><th>Cant. × precio</th><th>Bolsillo y forma</th><th>Mes</th><th>Total</th></tr>' + filas + '<tr><td colspan="5">Imponderables, ' + ej.imp.pct + '%: ' + esc(ej.imp.nombre) + '</td><td class="m">' + pesos(s.imp) + '</td></tr>';
     $('resumenEjemplo').innerHTML = 'Total: <b>' + pesos(s.total) + '</b>. La autogestión pone todo, ' + pesos(s.bols.AUT.dinero) + ' en dinero (sobre todo el capital semilla) y ' + pesos(s.bols.AUT.especie) + ' en préstamo y faena. Lo que se cae primero: ' + esc(ej.seCae.charAt(0).toLowerCase() + ej.seCae.slice(1));
   })();
 
@@ -353,7 +352,6 @@
       + '<select data-k="mes" aria-label="Mes' + n + '">' + opciones(OP_MES, p.mes, '¿en qué mes?') + '</select></div></td>'
       + '<td><div class="par"><select data-k="tipo" aria-label="Tipo' + n + '">' + opciones(OP_TIPO, p.tipo) + '</select>'
       + '<select data-k="forma" aria-label="Forma' + n + '">' + opciones(OP_FORMA, p.forma) + '</select></div></td>'
-      + '<td><textarea data-k="papel" rows="2" placeholder="cotización, fecha, quién" aria-label="Papel' + n + '">' + esc(p.papel) + '</textarea></td>'
       + '<td class="monto"><div class="m">' + pesos(totalDe(p)) + '</div><div class="marca"></div>'
       + '<label class="cae" title="Lo que se suelta primero si un bolsillo no llega"><input type="checkbox" data-k="cae"' + (p.cae ? ' checked' : '') + '>se cae 1º</label></td>'
       + '<td><button class="btn peligro chico" type="button" data-quitar="' + p.id + '" title="Quitar la partida" aria-label="Quitar la partida ' + p.id + '">×</button></td></tr>';
@@ -363,7 +361,7 @@
     $('cuerpo').querySelectorAll('select.bol').forEach(function (s) { colorBol(s, s.value); });
   }
   function pintarFijos() {
-    $('fleteSi').checked = estado.flete.si; $('fletePapel').value = estado.flete.papel; $('fleteCant').value = estado.flete.cant; $('fletePrecio').value = estado.flete.precio;
+    $('fleteSi').checked = estado.flete.si; $('fleteCant').value = estado.flete.cant; $('fletePrecio').value = estado.flete.precio;
     $('fleteBolsillo').innerHTML = opciones(OP_BOL, estado.flete.bolsillo); $('fleteForma').innerHTML = opciones(OP_FORMA, estado.flete.forma); $('fleteMes').innerHTML = opciones(OP_MES, estado.flete.mes, '¿cuándo?');
     $('impSi').checked = estado.imp.si; $('impNombre').value = estado.imp.nombre; $('impPct').value = estado.imp.pct; $('impBolsillo').innerHTML = opciones(OP_BOL, estado.imp.bolsillo);
     colorBol($('fleteBolsillo'), estado.flete.bolsillo); colorBol($('impBolsillo'), estado.imp.bolsillo);
@@ -435,10 +433,16 @@
     if (p.proyecto > PRO_UMBRAL) h += '<p class="aviso">El proyecto PROCODES pasa de $300,000: la solicitud pide estudio de factibilidad (campos 36 y 39.5 del formato).</p>';
     $('proLectura').innerHTML = h;
   }
-  function faltan() { return estado.partidas.filter(function (p) { if (!(p.que || '').trim()) return false; var sin = !(p.papel || '').trim() || /o[ií]das|aprox|creo|m[aá]s o menos|por pedir|pendiente|falta/i.test(p.papel); return esDinero(p) && (totalDe(p) >= 1000 || !(+p.precio)) && sin; }); }
+  // todo lo que se compra se cotiza, y el flete pagado también
+  function faltan() {
+    var l = estado.partidas.filter(function (p) { return (p.que || '').trim() && esDinero(p); });
+    if (estado.flete.si && estado.flete.forma === 'compra') l.push({ id: 'flete', que: 'Flete: el traslado del material', cant: estado.flete.cant, unidad: 'viaje', precio: estado.flete.precio, forma: 'compra', mes: estado.flete.mes, actividad: '' });
+    return l;
+  }
+  function cuantas(p) { return totalDe(p) >= 1000 || !(+p.precio) ? 3 : 1; }
   function pintarFalta() {
     var l = faltan();
-    $('faltaCotizar').innerHTML = l.length ? '<ul>' + l.map(function (p) { return '<li><b>#' + p.id + '</b> ' + esc(p.que || '(sin descripción)') + ' · ' + p.cant + ' ' + esc(p.unidad) + (+p.precio ? ', hoy en ' + pesos(totalDe(p)) + ' de referencia' : ', sin precio todavía') + '</li>'; }).join('') + '</ul>' : '<p class="ayuda">No hay partidas de mil pesos o más sin cotización. Si todavía no hay partidas, esta lista se llena sola.</p>';
+    $('faltaCotizar').innerHTML = l.length ? '<ul>' + l.map(function (p) { return '<li><b>' + (p.id === 'flete' ? 'Flete' : '#' + p.id) + '</b> ' + esc(p.que || '(sin descripción)') + ' · ' + p.cant + ' ' + esc(p.unidad) + (+p.precio ? ', hoy en ' + pesos(totalDe(p)) + ' de referencia' : ', sin precio todavía') + ' · ' + (cuantas(p) === 3 ? 'tres cotizaciones' : 'al menos una') + '</li>'; }).join('') + '</ul>' : '<p class="ayuda">Todavía no hay compras que cotizar: la lista se llena sola.</p>';
   }
 
   // ── eventos de la tabla
@@ -466,7 +470,7 @@
   });
   $('seCae').addEventListener('input', function () { estado.seCae = this.value; guardar(); });
   $('fleteSi').addEventListener('change', function () { estado.flete.si = this.checked; if (this.checked && !estado.flete.mes) { var m = estado.partidas.filter(function (p) { return p.tipo === 'materiales' && p.mes; }).map(function (p) { return p.mes; }).sort()[0]; if (m) { estado.flete.mes = m; $('fleteMes').value = m; } } guardar(); refrescar(); });
-  ['fletePapel', 'fleteCant', 'fletePrecio', 'fleteBolsillo', 'fleteForma', 'fleteMes'].forEach(function (id) { $(id).addEventListener('input', function () { var k = id.replace('flete', '').toLowerCase(); estado.flete[k] = (k === 'cant' || k === 'precio') ? parseFloat(this.value) || 0 : this.value; if (k === 'bolsillo') colorBol(this, this.value); guardar(); refrescar(); }); });
+  ['fleteCant', 'fletePrecio', 'fleteBolsillo', 'fleteForma', 'fleteMes'].forEach(function (id) { $(id).addEventListener('input', function () { var k = id.replace('flete', '').toLowerCase(); estado.flete[k] = (k === 'cant' || k === 'precio') ? parseFloat(this.value) || 0 : this.value; if (k === 'bolsillo') colorBol(this, this.value); guardar(); refrescar(); }); });
   $('impSi').addEventListener('change', function () { estado.imp.si = this.checked; guardar(); refrescar(); });
   $('impNombre').addEventListener('input', function () { estado.imp.nombre = this.value; guardar(); });
   $('impPct').addEventListener('input', function () { estado.imp.pct = parseFloat(this.value) || 0; guardar(); refrescar(); });
@@ -475,8 +479,8 @@
   $('proCant').addEventListener('input', function () { estado.pro.cant = parseFloat(this.value) || 0; guardar(); refrescar(); });
 
   // ── precios de referencia
-  $('refs').innerHTML = '<tr><th>Qué</th><th>Unidad</th><th>Precio de oídas</th><th>Tipo</th><th></th></tr>' + REFS.map(function (r, i) { return '<tr><td>' + esc(r[0]) + '</td><td>' + r[1] + '</td><td>' + pesos(r[2]) + '</td><td>' + r[3] + '</td><td><button class="btn claro chico" type="button" data-ref="' + i + '">usar</button></td></tr>'; }).join('');
-  $('refs').addEventListener('click', function (ev) { var b = ev.target.closest('[data-ref]'); if (!b) return; var r = REFS[+b.dataset.ref]; estado.partidas.push(nueva({ que: r[0], unidad: r[1], precio: r[2], tipo: r[3], forma: r[3] === 'gente' && /jornal/i.test(r[0]) ? 'faena' : 'compra', papel: 'de oídas: falta cotización' })); pintarTabla(); guardar(); refrescar(); $('tabla').scrollIntoView({ behavior: 'smooth', block: 'end' }); });
+  $('refs').innerHTML = '<tr><th>Qué</th><th>Unidad</th><th>Precio de referencia</th><th>Tipo</th><th></th></tr>' + REFS.map(function (r, i) { return '<tr><td>' + esc(r[0]) + '</td><td>' + r[1] + '</td><td>' + pesos(r[2]) + '</td><td>' + r[3] + '</td><td><button class="btn claro chico" type="button" data-ref="' + i + '">usar</button></td></tr>'; }).join('');
+  $('refs').addEventListener('click', function (ev) { var b = ev.target.closest('[data-ref]'); if (!b) return; var r = REFS[+b.dataset.ref]; estado.partidas.push(nueva({ que: r[0], unidad: r[1], precio: r[2], tipo: r[3], forma: r[3] === 'gente' && /jornal/i.test(r[0]) ? 'faena' : 'compra' })); pintarTabla(); guardar(); refrescar(); $('tabla').scrollIntoView({ behavior: 'smooth', block: 'end' }); });
 
   // ── el ejemplo, cargado en la hoja
   $('verEjemplo').addEventListener('click', function () {
@@ -500,25 +504,25 @@
     lector.readAsText(f); this.value = '';
   });
   $('copiar').addEventListener('click', function () {
-    var s = calcular(estado), t = [['#', 'Actividad', 'Qué', 'Unidad', 'Cantidad', 'Precio', 'Tipo', 'Bolsillo', 'Forma', 'Mes', 'Papel', 'Total', 'Se cae primero'].join('\t')];
-    estado.partidas.forEach(function (p) { t.push([p.id, (actividadDe(p.actividad) || {}).cod || p.actividad, p.que, p.unidad, p.cant, p.precio, p.tipo, BOLS[p.bolsillo] ? BOLS[p.bolsillo].corto : '', p.forma, mesTxt(p.mes), p.papel, totalDe(p), p.cae ? 'sí' : ''].join('\t')); });
-    if (estado.flete.si) t.push(['', 'Flete', estado.flete.papel, 'viaje', estado.flete.cant, estado.flete.precio, 'traslado', BOLS[estado.flete.bolsillo] ? BOLS[estado.flete.bolsillo].corto : '', estado.flete.forma, mesTxt(estado.flete.mes), '', s.flete, ''].join('\t'));
-    if (estado.imp.si) t.push(['', 'Imponderables', estado.imp.nombre, '%', estado.imp.pct, '', '', BOLS[estado.imp.bolsillo] ? BOLS[estado.imp.bolsillo].corto : '', 'compra', '', '', s.imp, ''].join('\t'));
-    BOLSILLOS.forEach(function (b) { t.push(['', 'Total ' + b.corto, '', '', '', '', '', '', '', '', '', s.bols[b.id].dinero + s.bols[b.id].especie, ''].join('\t')); });
-    t.push(['', 'TOTAL DEL PROYECTO', '', '', '', '', '', '', '', '', '', s.total, ''].join('\t'));
+    var s = calcular(estado), t = [['#', 'Actividad', 'Qué', 'Unidad', 'Cantidad', 'Precio', 'Tipo', 'Bolsillo', 'Forma', 'Mes', 'Total', 'Se cae primero'].join('\t')];
+    estado.partidas.forEach(function (p) { t.push([p.id, (actividadDe(p.actividad) || {}).cod || p.actividad, p.que, p.unidad, p.cant, p.precio, p.tipo, BOLS[p.bolsillo] ? BOLS[p.bolsillo].corto : '', p.forma, mesTxt(p.mes), totalDe(p), p.cae ? 'sí' : ''].join('\t')); });
+    if (estado.flete.si) t.push(['', 'Flete', 'traslado del material', 'viaje', estado.flete.cant, estado.flete.precio, 'traslado', BOLS[estado.flete.bolsillo] ? BOLS[estado.flete.bolsillo].corto : '', estado.flete.forma, mesTxt(estado.flete.mes), s.flete, ''].join('\t'));
+    if (estado.imp.si) t.push(['', 'Imponderables', estado.imp.nombre, '%', estado.imp.pct, '', '', BOLS[estado.imp.bolsillo] ? BOLS[estado.imp.bolsillo].corto : '', 'compra', '', s.imp, ''].join('\t'));
+    BOLSILLOS.forEach(function (b) { t.push(['', 'Total ' + b.corto, '', '', '', '', '', '', '', '', s.bols[b.id].dinero + s.bols[b.id].especie, ''].join('\t')); });
+    t.push(['', 'TOTAL DEL PROYECTO', '', '', '', '', '', '', '', '', s.total, ''].join('\t'));
     var texto = t.join('\n');
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(function () { aviso('Tabla copiada: se pega en una hoja de cálculo.', 5000); }, function () { alert('No se pudo copiar; usen Descargar.'); });
     else alert('Este navegador no deja copiar; usen Descargar.');
   });
   $('descargarHtml').addEventListener('click', function () {
     var s = calcular(estado), rev = revisar(estado, s), c = nombreComp(estado.componente);
-    var filas = estado.partidas.map(function (p) { var a = actividadDe(p.actividad); return '<tr><td>' + p.id + '</td><td>' + esc(a ? a.cod + ' · ' + a.n : p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + p.cant + ' ' + esc(p.unidad) + '</td><td class="m">' + pesos(p.precio) + '</td><td>' + p.tipo + '</td><td>' + (BOLS[p.bolsillo] ? BOLS[p.bolsillo].corto : 'sin bolsillo') + '</td><td>' + p.forma + '</td><td>' + mesTxt(p.mes) + '</td><td>' + esc(p.papel) + '</td><td class="m">' + pesos(totalDe(p)) + '</td></tr>'; }).join('');
-    if (estado.flete.si) filas += '<tr><td></td><td colspan="2">Flete: ' + esc(estado.flete.papel) + '</td><td>' + estado.flete.cant + ' viaje</td><td class="m">' + pesos(estado.flete.precio) + '</td><td>traslado</td><td>' + (BOLS[estado.flete.bolsillo] ? BOLS[estado.flete.bolsillo].corto : '') + '</td><td>' + estado.flete.forma + '</td><td>' + mesTxt(estado.flete.mes) + '</td><td></td><td class="m">' + pesos(s.flete) + '</td></tr>';
-    if (estado.imp.si) filas += '<tr><td></td><td colspan="2">Imponderables, ' + estado.imp.pct + '%: ' + esc(estado.imp.nombre) + '</td><td colspan="7"></td><td class="m">' + pesos(s.imp) + '</td></tr>';
+    var filas = estado.partidas.map(function (p) { var a = actividadDe(p.actividad); return '<tr><td>' + p.id + '</td><td>' + esc(a ? a.cod + ' · ' + a.n : p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + p.cant + ' ' + esc(p.unidad) + '</td><td class="m">' + pesos(p.precio) + '</td><td>' + p.tipo + '</td><td>' + (BOLS[p.bolsillo] ? BOLS[p.bolsillo].corto : 'sin bolsillo') + '</td><td>' + p.forma + '</td><td>' + mesTxt(p.mes) + '</td><td class="m">' + pesos(totalDe(p)) + '</td></tr>'; }).join('');
+    if (estado.flete.si) filas += '<tr><td></td><td colspan="2">Flete</td><td>' + estado.flete.cant + ' viaje</td><td class="m">' + pesos(estado.flete.precio) + '</td><td>traslado</td><td>' + (BOLS[estado.flete.bolsillo] ? BOLS[estado.flete.bolsillo].corto : '') + '</td><td>' + estado.flete.forma + '</td><td>' + mesTxt(estado.flete.mes) + '</td><td class="m">' + pesos(s.flete) + '</td></tr>';
+    if (estado.imp.si) filas += '<tr><td></td><td colspan="2">Imponderables, ' + estado.imp.pct + '%: ' + esc(estado.imp.nombre) + '</td><td colspan="6"></td><td class="m">' + pesos(s.imp) + '</td></tr>';
     var bol = BOLSILLOS.map(function (b) { var x = s.bols[b.id]; return '<tr><td>' + esc(b.nombre) + '</td><td class="m">' + pesos(x.dinero) + '</td><td class="m">' + pesos(x.especie) + '</td><td class="m">' + pesos(x.dinero + x.especie) + '</td></tr>'; }).join('');
     var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Presupuesto · ' + esc(c) + '</title><style>body{font-family:Segoe UI,system-ui,sans-serif;max-width:1150px;margin:1rem auto;padding:0 1rem;color:#1C2B28}h1,h2{font-family:Georgia,serif;color:#0B3C49}table{border-collapse:collapse;width:100%;font-size:.86rem;margin:.4rem 0}td,th{border:1px solid #CFE3DD;padding:.3rem .4rem;text-align:left;vertical-align:top}.m{text-align:right;white-space:nowrap}li.mal{color:#8A3B2B}li.ojo{color:#7C6222}</style></head><body>'
       + '<h1>El presupuesto de la presa · ' + esc(c) + '</h1><p>' + esc(estado.equipo) + ' · cronograma del ' + PRESA.fecha + ' · descargado el ' + new Date().toLocaleDateString('es-MX') + '</p>'
-      + '<h2>Partidas</h2><table><tr><th>#</th><th>Actividad</th><th>Qué</th><th>Cantidad</th><th>Precio</th><th>Tipo</th><th>Bolsillo</th><th>Forma</th><th>Mes</th><th>Papel</th><th>Total</th></tr>' + filas + '</table>'
+      + '<h2>Partidas</h2><table><tr><th>#</th><th>Actividad</th><th>Qué</th><th>Cantidad</th><th>Precio</th><th>Tipo</th><th>Bolsillo</th><th>Forma</th><th>Mes</th><th>Total</th></tr>' + filas + '</table>'
       + '<h2>Por bolsillo</h2><table><tr><th>Bolsillo</th><th>Dinero</th><th>Especie</th><th>Total</th></tr>' + bol + (s.sinBolsillo ? '<tr><td>Sin bolsillo</td><td colspan="2"></td><td class="m">' + pesos(s.sinBolsillo) + '</td></tr>' : '') + '<tr><th>Tamaño real del proyecto</th><th class="m">' + pesos(s.dinero) + '</th><th class="m">' + pesos(s.especie) + '</th><th class="m">' + pesos(s.total) + '</th></tr></table>'
       + (s.pro.hay ? '<p><b>PROCODES:</b> pondría ' + pesos(s.pro.monto) + ' y el grupo ' + pesos(s.pro.grupo) + ' (' + Math.round(100 * s.pro.pct) + '% del programa)' + (s.pro.tope ? '; tope de ' + s.pro.cant + ' ' + s.pro.unidad + ': ' + pesos(s.pro.tope) : '') + '.</p>' : '')
       + '<h2>La revisión</h2><ul>' + rev.lista.map(function (r) { return '<li class="' + r.clase + '"><b>' + esc(r.titulo) + ':</b> ' + esc(r.texto) + '</li>'; }).join('') + '</ul>'
@@ -529,9 +533,10 @@
   $('imprimirHoja').addEventListener('click', function () {
     var l = faltan(), c = nombreComp(estado.componente);
     if (!l.length) { alert('No hay partidas que cotizar todavía.'); return; }
-    var tabla = '<table><tr><th style="width:30%">Proveedor y lugar</th><th>Fecha</th><th>Precio por unidad</th><th>Vigencia</th><th>¿Por escrito?</th></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></table>';
-    $('hoja').innerHTML = '<h1>Hoja para cotizar · ' + esc(c) + '</h1><p>' + esc(estado.equipo) + '. Tres cotizaciones por partida, dos por escrito y de menos de treinta días. Se anota quién la dio y cuándo, y se toma foto del papel.</p>'
-      + l.map(function (p) { return '<div class="partida"><p><b>#' + p.id + ' · ' + esc(p.que || '(sin descripción)') + '</b><br>' + p.cant + ' ' + esc(p.unidad) + ' · para: ' + esc((actividadDe(p.actividad) || {}).n || p.actividad) + ' · se necesita en ' + mesTxt(p.mes) + '</p>' + tabla + '</div>'; }).join('');
+    var renglon = '<tr><td></td><td></td><td></td><td></td><td></td></tr>';
+    function tabla(n) { var t = '<table><tr><th style="width:30%">Proveedor y lugar</th><th>Fecha</th><th>Precio por unidad</th><th>Vigencia</th><th>¿Por escrito?</th></tr>'; for (var k = 0; k < n; k++) t += renglon; return t + '</table>'; }
+    $('hoja').innerHTML = '<h1>Hoja para cotizar · ' + esc(c) + '</h1><p>' + esc(estado.equipo) + '. Todo lo que se compra se cotiza: tres cotizaciones por partida de mil pesos o más, dos por escrito y de menos de treinta días; para lo que cuesta menos, al menos una. Se anota quién la dio y cuándo, y se toma foto del papel.</p>'
+      + l.map(function (p) { var a = actividadDe(p.actividad); return '<div class="partida"><p><b>' + (p.id === 'flete' ? 'Flete' : '#' + p.id) + ' · ' + esc(p.que || '(sin descripción)') + '</b><br>' + p.cant + ' ' + esc(p.unidad) + (a ? ' · para: ' + esc(a.n) : '') + (p.mes ? ' · se necesita en ' + mesTxt(p.mes) : '') + (+p.precio ? ' · precio de referencia: ' + pesos(+p.precio) + ' por ' + esc(p.unidad || 'unidad') : '') + '</p>' + tabla(cuantas(p)) + '</div>'; }).join('');
     document.body.classList.add('modo-hoja'); window.print();
   });
   window.addEventListener('afterprint', function () { document.body.classList.remove('modo-hoja'); });
