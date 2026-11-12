@@ -88,17 +88,15 @@ function calcular(e) {
   return s;
 }
 
-// La revisión: seis agujeros (oídas, flete, centavo, doble papel, pecado mayor y dinero que llega tarde)
-// y tres avisos que no cuentan como agujero (sin precio, sin actividad, sin bolsillo)
+// La revisión: cinco agujeros (flete, centavo, doble papel, pecado mayor y dinero que llega tarde)
+// y tres avisos que no cuentan como agujero (sin precio, sin actividad, sin bolsillo).
+// Todo lo que se compra se cotiza: el precio de referencia se cambia por el cotizado, sin columna de papel.
 function revisar(e, s) {
   // las partidas recién creadas y vacías no se revisan todavía
   var ps = (e.partidas || []).filter(function (p) { return (p.que || '').trim() || totalDe(p) > 0; }), lista = [], fila = {};
   function marca(p, t) { fila[p.id] = (fila[p.id] ? fila[p.id] + ' · ' : '') + t; }
   function r(malos, titulo, bien, mal, clase) { lista.push({ clase: malos ? (clase || 'mal') : 'bien', titulo: titulo, texto: malos ? mal : bien }); }
   var ids = function (a) { return a.map(function (p) { return '#' + p.id; }).join(', '); };
-
-  var oidas = ps.filter(function (p) { var sin = !(p.papel || '').trim() || /o[ií]das|aprox|creo|m[aá]s o menos|por pedir|pendiente|falta/i.test(p.papel); if (sin && totalDe(p) >= 1000) { marca(p, 'sin papel'); return true; } return false; });
-  r(oidas.length, 'El precio de oídas', 'Cada partida de mil pesos o más dice quién dio el precio y cuándo.', 'Partidas de mil pesos o más que todavía no tienen su papel: ' + ids(oidas) + '. Van a la hoja para cotizar: tres cotizaciones, dos por escrito y de menos de treinta días.');
 
   var cero = ps.filter(function (p) { if (esDinero(p) && !(+p.precio) ) { marca(p, 'sin precio'); return true; } return false; });
   if (cero.length) lista.push({ clase: 'ojo', titulo: 'Lo que todavía no tiene precio', texto: 'Partidas de compra con precio en cero: ' + ids(cero) + '. Se dejan escritas, con su pendiente, en lugar de borrarlas: lo que no se escribe lo termina pagando alguien de su bolsa.' });

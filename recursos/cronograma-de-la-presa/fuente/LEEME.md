@@ -29,7 +29,7 @@ Al terminar se copian `out/sitio/index.html` a `../index.html` y los tres PDF de
 
 `presupuesto/` arma, con las mismas actividades, la práctica del presupuesto y la página que junta los presupuestos de los equipos:
 
-- `presupuesto/nucleo.js`: los cuatro bolsillos y sus ventanas, los cálculos (por bolsillo, por mes, el tope y el 20% del PROCODES) y la revisión de los seis agujeros. Lo usan las dos páginas.
+- `presupuesto/nucleo.js`: los cuatro bolsillos y sus ventanas, los cálculos (por bolsillo, por mes, el tope y el 20% del PROCODES) y la revisión de los cinco agujeros. Lo usan las dos páginas.
 - `presupuesto/practica.html` y `presupuesto/integrar.html`: las dos plantillas.
 - `presupuesto/construir.js`: filtra las actividades presupuestables (sin hitos ni esperas), arma el ejemplo de la ruta de gestión y escribe `recursos/cronograma-y-presupuesto/practica-presupuesto.html` y `recursos/presupuesto-de-la-presa/index.html`.
 

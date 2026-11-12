@@ -142,8 +142,8 @@
   }
   function limpiar(e) {   // asegura ids y campos, como en la práctica
     var sig = 1;
-    e.partidas = (e.partidas || []).map(function (p) { var q = Object.assign({ actividad: '', que: '', unidad: '', cant: 0, precio: 0, tipo: 'materiales', bolsillo: '', forma: 'compra', mes: '', papel: '', cae: false }, p); q.id = sig++; return q; });
-    e.flete = Object.assign({ si: false, cant: 0, precio: 0, bolsillo: 'AUT', forma: 'compra', mes: '', papel: '' }, e.flete || {});
+    e.partidas = (e.partidas || []).map(function (p) { var q = Object.assign({ actividad: '', que: '', unidad: '', cant: 0, precio: 0, tipo: 'materiales', bolsillo: '', forma: 'compra', mes: '', cae: false }, p); q.id = sig++; return q; });
+    e.flete = Object.assign({ si: false, cant: 0, precio: 0, bolsillo: 'AUT', forma: 'compra', mes: '' }, e.flete || {});
     e.imp = Object.assign({ si: false, pct: 0, nombre: '', bolsillo: 'AUT' }, e.imp || {});
     e.pro = Object.assign({ unidad: 'm²', cant: 0 }, e.pro || {});
     return e;
