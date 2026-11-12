@@ -3,19 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Práctica · El presupuesto de La Florida · Gestión y Manejo de Proyectos</title>
+<title>Práctica · El presupuesto de la presa · Gestión y Manejo de Proyectos</title>
 <style>
-  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; }
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; --gris:#45605a; }
   * { box-sizing:border-box; }
   body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1.02rem; }
   header.curso { background:var(--profundo); color:#EAF4F2; padding:1rem 1.4rem; }
   header.curso .curso-nombre { font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; opacity:.75; }
   header.curso .titulo { font-family:Georgia,serif; font-size:1.7rem; font-weight:bold; margin:.15rem 0 0; }
   header.curso .migas { font-size:.85rem; opacity:.75; } header.curso .migas a { color:#EAF4F2; }
-  main { max-width:1180px; margin:0 auto; padding:1.2rem 1rem 4rem; }
-  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.3rem; margin:1.8rem 0 .4rem; }
+  main { max-width:1220px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.3rem; margin:2rem 0 .4rem; }
   h2 .n { color:var(--arena); font-size:1.6rem; margin-right:.3rem; }
-  .sub { color:#45605a; margin-top:0; }
+  .sub { color:var(--gris); margin-top:0; max-width:80ch; }
+  p { max-width:88ch; }
   .reglas { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.97rem; }
   .reglas strong { color:var(--arena); }
   .caja { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:.8rem 0; }
@@ -23,396 +24,663 @@
   .ejemplo .etq { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:#7C6222; font-weight:bold; }
   .ejemplo p { margin:.4rem 0; }
   table.ej { width:100%; border-collapse:collapse; font-size:.88rem; margin:.4rem 0; }
-  table.ej th { text-align:left; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:#45605a; border-bottom:2px solid var(--borde); padding:.25rem .4rem; }
+  table.ej th { text-align:left; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gris); border-bottom:2px solid var(--borde); padding:.25rem .4rem; }
   table.ej td { padding:.3rem .4rem; border-bottom:1px solid var(--borde); vertical-align:top; }
+  table.ej td.m { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .bolsillos { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:.8rem; margin:.8rem 0; }
+  .bolsillo { background:#fff; border:1px solid var(--borde); border-top:6px solid var(--c); border-radius:12px; padding:.8rem 1rem; font-size:.93rem; }
+  .bolsillo h3 { font-family:Georgia,serif; font-size:1.08rem; margin:0 0 .3rem; color:var(--profundo); }
+  .bolsillo dl { margin:0; } .bolsillo dt { font-size:.72rem; letter-spacing:.07em; text-transform:uppercase; color:var(--gris); font-weight:bold; margin-top:.45rem; } .bolsillo dd { margin:0; }
+  .punto { display:inline-block; width:.75rem; height:.75rem; border-radius:50%; background:var(--c); margin-right:.4rem; vertical-align:-.05rem; }
   label { font-size:.85rem; font-weight:bold; color:var(--profundo); display:block; }
   input[type=text], input[type=number], select, textarea { font:inherit; font-size:.95rem; border:1px solid var(--borde); border-radius:8px; padding:.35rem .5rem; width:100%; background:#fff; color:var(--texto); }
   textarea { min-height:3rem; }
-  .fila-datos { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:.8rem; }
+  .fila-datos { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:.8rem; }
   .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.4rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92rem; }
   .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
   .btn.peligro { background:#fff; color:var(--rojo); border:2px solid var(--rojo); }
   .btn.chico { padding:.2rem .6rem; font-size:.8rem; margin:0; }
-  .envoltura { overflow-x:auto; border:1px solid var(--borde); border-radius:12px; }
-  table.plan { width:100%; border-collapse:collapse; font-size:.9rem; background:#fff; }
-  table.plan th { text-align:left; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:#45605a; border-bottom:2px solid var(--borde); padding:.4rem .3rem; background:#F7FAF9; position:sticky; top:0; }
-  table.plan td { padding:.25rem .25rem; border-bottom:1px solid var(--borde); vertical-align:top; }
+  .btn:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline:3px solid var(--arena); outline-offset:2px; }
+  .deja { margin:.6rem 0 .2rem; color:var(--profundo); }
+  table.acts { width:100%; border-collapse:collapse; font-size:.9rem; }
+  table.acts td, table.acts th { text-align:left; padding:.3rem .4rem; border-bottom:1px solid var(--borde); vertical-align:top; }
+  table.acts th { font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gris); }
+  table.acts td.cod { color:var(--gris); white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .envoltura { overflow-x:auto; border:1px solid var(--borde); border-radius:12px; background:#fff; }
+  table.plan { width:100%; min-width:62em; border-collapse:collapse; font-size:.9rem; table-layout:fixed; }
+  table.plan col.c-num { width:2.3em; } table.plan col.c-cuanto { width:10.6em; } table.plan col.c-bol { width:9.4em; } table.plan col.c-tipo { width:8.4em; } table.plan col.c-papel { width:11.5em; } table.plan col.c-total { width:7.6em; } table.plan col.c-x { width:2.6em; }
+  table.plan th { text-align:left; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gris); border-bottom:2px solid var(--borde); padding:.45rem .35rem; background:#F7FAF9; vertical-align:bottom; }
+  table.plan td { padding:.4rem .35rem; border-bottom:1px solid var(--borde); vertical-align:top; }
   table.plan td input, table.plan td textarea, table.plan td select { padding:.25rem .35rem; font-size:.88rem; }
   table.plan td textarea { min-height:2.3rem; resize:vertical; }
-  table.plan td.num { font-family:Georgia,serif; font-weight:bold; color:var(--arena); font-size:1.1rem; text-align:center; width:2rem; }
-  table.plan td.monto { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; font-weight:bold; }
-  table.plan td.monto.afuera { color:#7C6222; }
+  table.plan .par { display:grid; gap:.3rem; }
+  table.plan .cuanto { display:grid; grid-template-columns:4.2em 1fr; gap:.3rem; align-items:center; }
+  table.plan .cuanto .por { text-align:right; color:var(--gris); font-size:.85rem; padding-right:.1rem; white-space:nowrap; }
+  table.plan .cuanto .fija { color:var(--gris); font-size:.88rem; }
+  table.plan td.num { font-family:Georgia,serif; font-weight:bold; color:var(--arena); font-size:1.05rem; text-align:center; }
+  table.plan td.monto { text-align:right; font-variant-numeric:tabular-nums; font-weight:bold; }
+  table.plan td.monto .marca { font-weight:normal; font-size:.76rem; color:var(--rojo); line-height:1.25; margin-top:.15rem; }
+  table.plan td.monto label.cae { display:flex; justify-content:flex-end; align-items:center; gap:.3rem; font-size:.74rem; font-weight:normal; color:var(--gris); margin-top:.35rem; }
   table.plan tr.mal td { background:#FFF7F5; }
-  table.plan tfoot td { font-weight:bold; background:#F7FAF9; }
+  table.plan select.bol { border-left:6px solid var(--c, var(--borde)); }
+  table.plan tr.fijo td { background:#F7FAF9; }
+  table.plan tr.fijo .ayuda { font-size:.82rem; line-height:1.35; }
   .totales { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:.8rem; margin:.8rem 0; }
   .total { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.8rem 1rem; }
-  .total .t { font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:#45605a; font-weight:bold; }
-  .total .v { font-family:Georgia,serif; font-size:1.9rem; color:var(--profundo); }
-  .total.fondo .v { color:var(--marca); } .total.afuera .v { color:#7C6222; }
-  .total.alarma { border-color:var(--rojo); background:#FBF0EE; } .total.alarma .v { color:var(--rojo); }
-  .total .nota { font-size:.85rem; color:#45605a; }
+  .total.b { border-top:6px solid var(--c); }
+  .total .t { font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gris); font-weight:bold; }
+  .total .v { font-family:Georgia,serif; font-size:1.8rem; color:var(--profundo); line-height:1.15; }
+  .total .nota { font-size:.85rem; color:var(--gris); }
+  .total.grande { background:var(--profundo); color:#EAF4F2; border-color:var(--profundo); } .total.grande .t, .total.grande .nota { color:#cfe3dd; } .total.grande .v { color:#fff; }
   .barras { margin:.4rem 0; }
   .barra { display:grid; grid-template-columns:120px 1fr 90px; align-items:center; gap:.5rem; font-size:.9rem; margin:.25rem 0; }
-  .barra .b { height:14px; background:#DDEDE8; border-radius:7px; overflow:hidden; }
-  .barra .b i { display:block; height:100%; background:var(--marca); }
-  .barra.ar .b i { background:var(--arena); }
+  .barra .b { height:14px; background:#E6EFEC; border-radius:7px; overflow:hidden; }
+  .barra .b i { display:block; height:100%; background:var(--marca); border-radius:7px; }
   .barra .m { text-align:right; font-variant-numeric:tabular-nums; }
+  .reloj-env { overflow-x:auto; border:1px solid var(--borde); border-radius:12px; background:#fff; }
+  table.reloj { border-collapse:separate; border-spacing:2px; font-size:.8rem; min-width:62em; width:100%; table-layout:fixed; }
+  table.reloj th.unidad { font-size:.7rem; text-align:left; color:var(--gris); white-space:nowrap; }
+  table.reloj th { font-weight:normal; color:var(--gris); text-align:center; padding:.1rem; }
+  table.reloj th.anio { font-weight:bold; color:var(--profundo); text-align:left; border-bottom:1px solid var(--borde); }
+  table.reloj td { height:2.3rem; text-align:center; vertical-align:middle; border-radius:5px; background:#F4F7F6; font-variant-numeric:tabular-nums; padding:0 .1rem; }
+  table.reloj td.nom { background:none; text-align:left; white-space:nowrap; font-size:.86rem; font-weight:bold; color:var(--profundo); padding-right:.5rem; }
+  table.reloj td.ventana { background:var(--claro); }
+  table.reloj td.gasto { font-weight:bold; color:var(--texto); }
+  table.reloj td.fuera { box-shadow:inset 0 0 0 2px var(--rojo); color:var(--rojo); }
+  table.reloj tr.suma td { background:none; font-weight:bold; color:var(--profundo); border-top:1px solid var(--borde); }
+  .leyenda { display:flex; flex-wrap:wrap; gap:.4rem 1.2rem; font-size:.85rem; color:var(--gris); margin:.5rem 0; }
+  .leyenda span { display:inline-flex; align-items:center; gap:.35rem; }
+  .leyenda i { display:inline-block; width:1.1rem; height:.9rem; border-radius:3px; }
   ul.revision { list-style:none; padding:0; margin:.4rem 0; }
   ul.revision li { padding:.45rem .7rem; border-radius:8px; margin:.3rem 0; border-left:5px solid var(--borde); background:#fff; }
   ul.revision li.bien { border-color:var(--verde); } ul.revision li.mal { border-color:var(--rojo); } ul.revision li.ojo { border-color:var(--arena); }
   ul.revision li b { display:block; }
-  .pie-acciones { position:sticky; bottom:0; background:rgba(242,247,245,.96); border-top:1px solid var(--borde); padding:.5rem .8rem; margin:1.5rem -1rem 0; display:flex; flex-wrap:wrap; align-items:center; gap:.2rem; }
-  .guardado { font-size:.85rem; color:#45605a; margin-left:auto; }
-  .ayuda { font-size:.9rem; color:#45605a; }
+  .pro { border-left:6px solid #168c6e; }
+  .pro .rejilla { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:.8rem; align-items:end; }
+  .aviso { color:var(--rojo); font-weight:bold; }
+  .pie-acciones { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.6rem 1rem .9rem; margin:1.5rem 0 0; }
+  .pie-acciones p { margin:.2rem 0 .3rem; }
+  .guardado { position:fixed; right:1rem; bottom:1rem; z-index:6; font-size:.82rem; color:var(--profundo); background:#fff; border:1px solid var(--borde); border-radius:999px; padding:.3rem .8rem; box-shadow:0 1px 4px rgba(11,60,73,.15); opacity:0; pointer-events:none; transition:opacity .25s; }
+  .guardado.ver { opacity:1; }
+  header.curso .fila-titulo { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:.5rem 1rem; }
+  header.curso .btn.claro { margin:0; padding:.3rem .8rem; font-size:.85rem; background:transparent; color:#EAF4F2; border-color:#EAF4F2; }
+  .visually-hidden { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .ayuda { font-size:.9rem; color:var(--gris); }
   details { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.6rem 1rem; margin:.6rem 0; }
   summary { cursor:pointer; font-weight:bold; color:var(--profundo); }
   table.ref { width:100%; border-collapse:collapse; font-size:.88rem; }
   table.ref td, table.ref th { border-bottom:1px solid var(--borde); padding:.3rem .4rem; text-align:left; }
-  table.ref th { font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:#45605a; }
+  table.ref th { font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gris); }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  #hoja { display:none; }
   body.proyector { font-size:1.3rem; }
-  body.proyector table.plan { font-size:1.1rem; }
-  body.proyector table.plan td input, body.proyector table.plan td textarea, body.proyector table.plan td select { font-size:1.05rem; }
+  body.proyector table.plan { font-size:1.08rem; }
+  body.proyector table.plan td input, body.proyector table.plan td textarea, body.proyector table.plan td select { font-size:1.02rem; }
   body.proyector ul.revision li { font-size:1.15rem; }
-  body.proyector .total .v { font-size:2.6rem; }
-  @media print { header.curso, .pie-acciones, .btn, .reglas, details, .ayuda, .ejemplo { display:none !important; } main { max-width:none; padding:0; } table.plan td input, table.plan td textarea, table.plan td select { border:none; } body { background:#fff; } }
+  body.proyector table.reloj { font-size:.95rem; }
+  @media (max-width:640px) { header.curso .titulo { font-size:1.35rem; } .total .v { font-size:1.5rem; } .barra { grid-template-columns:90px 1fr 80px; } }
+  @media print {
+    header.curso, .pie-acciones, .btn, details, .cuaderno, .guardado { display:none !important; }
+    body { background:#fff; font-size:.85rem; } .caja, .total, .bolsillo { break-inside:avoid; }
+    body.modo-hoja main > :not(#hoja) { display:none !important; }
+    body.modo-hoja #hoja { display:block; }
+    #hoja h1 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .2rem; }
+    #hoja .partida { break-inside:avoid; margin:0 0 .9rem; }
+    #hoja table { width:100%; border-collapse:collapse; font-size:.85rem; }
+    #hoja td, #hoja th { border:1px solid #999; padding:.35rem .4rem; height:1.9rem; text-align:left; }
+  }
 </style>
 </head>
 <body>
 <header class="curso">
   <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
-  <div class="titulo">Práctica · El presupuesto de La Florida</div>
-  <div class="migas"><a href="index.html">La clase de cronograma y presupuesto</a> · <a href="mazo-presupuesto.html">Mazo 2</a> · la misma laptop del equipo</div>
+  <div class="fila-titulo"><div class="titulo">Práctica · El presupuesto de la presa</div><button class="btn claro" id="proyector" type="button" title="Letra grande para proyectar">Aa proyector</button></div>
+  <div class="migas"><a href="index.html">La clase de cronograma y presupuesto</a> · <a href="mazo-presupuesto.html">Mazo 2</a> · <a href="../presupuesto-de-la-presa/index.html">El presupuesto de la presa</a></div>
 </header>
 <main>
 
-<p class="sub">Aquí el cronograma 2027 de su componente se traduce a pesos, partida por partida y a dos columnas: lo que se le pediría al donante y lo que se conseguiría afuera, valorizado. La herramienta suma, agrega el flete y los imponderables, compara contra el tope de la convocatoria si lo hay, y señala los seis agujeros. Guarda en este navegador; al terminar se descarga al Drive y se copia a la pestaña 6 de la carpeta.</p>
+<p class="sub">Aquí el cronograma de la presa se traduce a pesos, componente por componente. Las actividades ya vienen del <a href="../cronograma-de-la-presa/index.html">cronograma integrado</a>, con su mes y, donde ya se decidió, el bolsillo que las pagaría. A cada actividad se le cuelgan sus partidas; la hoja suma por bolsillo, revisa las reglas de cada uno, dice en qué mes se necesita cada peso y si para entonces ya llegó, y señala los agujeros. Al terminar se descarga un archivo que se junta con el de los otros equipos: así sale <a href="../presupuesto-de-la-presa/index.html">el presupuesto de la presa</a>.</p>
 
-<div class="reglas">
-  <strong>Lo que casi ningún donante perdona, y la hoja vigila.</strong> Pedir más del tope de la convocatoria. Honorarios del propio equipo sin un renglón que los justifique, comida que no sea de faena, nada sin comprobante. Precios de mil pesos o más sin cotización escrita. Y cada cosa vive en una sola columna: lo que ya se cuenta como contrapartida no se le cobra al donante.
-</div>
+<div class="reglas">Lo que la hoja vigila: <strong>cada partida colgada de una actividad y con su papel</strong>; flete e imponderables con renglón propio; <strong>cada cosa en un solo bolsillo</strong>; ningún bolsillo paga lo que sus reglas no admiten, ni antes de que llegue su dinero. Lo que la comunidad pone en faenas, préstamos y donaciones se escribe completo y con su precio, porque es la parte del proyecto que ningún donante puede poner.</div>
+
+<h2>Los cuatro bolsillos</h2>
+<p class="sub">Un proyecto de este tamaño no lo paga un solo donante. Cada bolsillo trae lo suyo, con sus reglas y su calendario: el presupuesto se arma sabiendo qué le toca a cada quien y cuándo llega.</p>
+<div class="bolsillos" id="tarjetas"></div>
 
 <div class="caja ejemplo">
-  <div class="etq">Así se ve uno hecho · la sombra del manantial</div>
-  <p>El mismo proyecto del manantial, ahora en pesos. Cada partida dice para qué actividad es, qué es exactamente, cuántas y a cuánto, y de dónde salió el precio. Lo <strong>comprado</strong> lo paga el donante; lo <strong>prestado, trocado o donado</strong> va a la otra columna con el precio que tendría. Así se ven cuatro de sus siete partidas:</p>
-  <table class="ej">
-    <tr><th>Actividad</th><th>Qué</th><th>Cant. × precio</th><th>Papel</th><th>Paga el donante</th><th>Afuera</th></tr>
-    <tr><td>Faena 2: tender la malla</td><td>Malla sombra 90%, 6 por 4 m</td><td>1 pieza × $2,850</td><td>Ferretería del pueblo, 2 nov</td><td>$2,850</td><td></td></tr>
-    <tr><td>Flete del material</td><td>Viaje de la cabecera al manantial</td><td>1 viaje × $400</td><td>Nota del fletero, 3 nov</td><td>$400</td><td></td></tr>
-    <tr><td>Faena 2: acomodar las tarimas</td><td>Tarimas de pino de la bodega, trocadas por barrer el rincón</td><td>12 × $100</td><td>Nota firmada y foto</td><td></td><td>$1,200</td></tr>
-    <tr><td>Faenas 1 y 2</td><td>Jornales de la faena, ocho personas por dos jornadas</td><td>16 × $300</td><td>Jornal de la región, lista de asistencia</td><td></td><td>$4,800</td></tr>
-  </table>
-  <p>Con el flete y los imponderables, al donante se le pedirían $6,122 y afuera se conseguirían $6,000: el proyecto vale el doble de lo que pide. Lo que van a hacer ustedes es lo mismo con las actividades de su cronograma. <button class="btn claro chico" id="verEjemplo">Cargar el ejemplo completo para ver las sumas</button> <span class="ayuda">(reemplaza lo que haya en la tabla)</span></p>
+  <div class="etq">Así se ve uno armado · la ruta de gestión</div>
+  <p>La ruta de gestión no es de ningún equipo: es el trabajo de papeles que mueve todo el proyecto, de la asamblea al informe final. Así se ven sus partidas. Cada una cuelga de una actividad del cronograma, dice qué es exactamente, cuántas y a cuánto, quién la pagaría, en qué mes y de dónde salió el precio.</p>
+  <div class="envoltura"><table class="ej" id="tablaEjemplo"></table></div>
+  <p id="resumenEjemplo"></p>
+  <p>Los precios del ejemplo son de referencia y lo dicen en su papel: antes de la asamblea cada uno se cambia por su cotización. La manifestación de impacto ambiental se queda escrita aunque todavía no tenga precio ni bolsillo, porque es un gasto real que alguien tiene que gestionar. Lo que van a hacer ustedes es lo mismo con las actividades de su componente.</p>
+  <button class="btn claro" id="verEjemplo" type="button">Cargar el ejemplo completo en la hoja (reemplaza lo que haya)</button>
 </div>
 
-<h2><span class="n">1</span>El equipo, las actividades y la convocatoria</h2>
+<h2><span class="n">1</span>El equipo y su componente</h2>
 <div class="caja">
   <div class="fila-datos">
-    <div><label>Equipo</label><input type="text" id="equipo"></div>
-    <div><label>Componente</label>
-      <select id="componente">
-        <option value="">Elige el componente</option>
-        <option value="1a">1a · Contener la erosión de la orilla</option>
-        <option value="1b">1b · Revegetar con especies nativas</option>
-        <option value="2">2 · La comunidad cuida y vigila la orilla</option>
-        <option value="3">3 · Recreación para las distintas edades</option>
-        <option value="4">4 · El espacio se mantiene seguro y limpio</option>
-        <option value="5">5 · Espacios de convivencia y descanso</option>
-      </select></div>
-    <div><label>Tope de la convocatoria ($, si lo hay)</label><input type="number" id="bolsa" step="100" placeholder="lo que el donante da como máximo"></div>
-    <div><label>Mínimo por solicitud ($, si lo hay)</label><input type="number" id="minimo" step="100" placeholder="si la convocatoria lo fija"></div>
+    <div><label for="equipo">Equipo</label><input type="text" id="equipo" placeholder="Nombres de quienes arman este presupuesto"></div>
+    <div><label for="componente">Componente</label><select id="componente"></select></div>
   </div>
-  <button class="btn claro" id="traer">Traer las actividades del cronograma</button>
-  <span class="ayuda" id="traidas">Si hicieron la práctica del cronograma en este mismo navegador, sus actividades aparecen aquí para colgarles partidas.</span>
+  <p class="deja" id="deja"></p>
+  <details id="detActs"><summary id="sumActs">Las actividades del componente</summary><table class="acts" id="tablaActs"></table></details>
+  <button class="btn" id="porActividad" type="button">Una partida vacía por cada actividad</button>
+  <p class="ayuda">Las actividades que no cuestan nada (un oficio, una reunión) se borran de la tabla o se dejan sin partida. Lo que sí cuesta se parte en tantas partidas como haga falta: una por cada cosa que se compra, se presta o se trabaja.</p>
 </div>
 
-<h2><span class="n">2</span>Las partidas de tu componente, a dos columnas</h2>
-<p class="sub">Una partida por renglón: para qué actividad, qué es, unidad, cantidad y precio de cada una. El tipo dice qué clase de recurso es; la fuente dice en qué columna vive: lo <strong>comprado</strong> lo paga el donante; lo <strong>prestado, trocado o donado</strong> va a la columna de afuera, con el precio que tendría. El papel es la cotización: quién la dio y cuándo.</p>
+<h2><span class="n">2</span>Las partidas</h2>
+<p class="sub">Una partida por renglón. El <b>bolsillo</b> dice quién la pagaría; la <b>forma</b>, si se compra con dinero o se consigue en faena, prestada, trocada o donada, y entonces va con el precio que tendría si se comprara. El <b>mes</b> es cuando se necesita, no cuando se hace la actividad: el material se compra antes. El <b>papel</b> es la cotización o la nota que respalda el precio.</p>
 <div class="envoltura">
-<table class="plan" id="tabla">
-  <thead><tr>
-    <th>#</th><th style="min-width:170px">Actividad</th><th style="min-width:200px">Qué (descripción exacta)</th><th style="width:90px">Unidad</th><th style="width:70px">Cant.</th><th style="width:90px">Precio c/u</th><th style="width:110px">Tipo</th><th style="width:110px">Fuente</th><th style="min-width:150px">Papel (quién cotizó, fecha)</th><th>Paga el donante</th><th>Afuera</th><th title="Se cae primero si el dinero llega parcial">Se cae 1º</th><th></th>
-  </tr></thead>
-  <tbody id="cuerpo"></tbody>
-  <tfoot>
-    <tr id="filaFlete"><td></td><td colspan="2"><label style="font-weight:normal"><input type="checkbox" id="fleteSi"> <strong>Flete</strong>: el material no camina solo</label><input type="text" id="fletePapel" placeholder="quién lo cobra o lo presta, de dónde a dónde"></td><td>viaje</td><td><input type="number" id="fleteCant" min="0" value="1"></td><td><input type="number" id="fletePrecio" min="0" step="10" placeholder="$"></td><td>traslado</td><td><select id="fleteFuente"><option value="comprado">comprado</option><option value="prestado">prestado</option><option value="donado">donado</option></select></td><td></td><td class="monto" id="fleteFondo">$0</td><td class="monto afuera" id="fleteAfuera">$0</td><td></td><td></td></tr>
-    <tr id="filaImp"><td></td><td colspan="2"><label style="font-weight:normal"><input type="checkbox" id="impSi"> <strong>Imponderables</strong>, con nombre</label><input type="text" id="impNombre" placeholder="el clavo que falta en domingo: qué podría faltar"></td><td>%</td><td><input type="number" id="impPct" min="0" max="20" step="0.5" value="5"></td><td colspan="4" class="ayuda">del subtotal que paga el donante</td><td class="monto" id="impFondo">$0</td><td></td><td></td><td></td></tr>
-  </tfoot>
-</table>
+  <table class="plan" id="tabla">
+    <colgroup><col class="c-num"><col class="c-que"><col class="c-cuanto"><col class="c-bol"><col class="c-tipo"><col class="c-papel"><col class="c-total"><col class="c-x"></colgroup>
+    <thead><tr><th>#</th><th>Actividad y qué, exactamente</th><th>Cuánto: cantidad, unidad y precio</th><th>Quién paga y en qué mes</th><th>Tipo y forma</th><th>Papel: quién dio el precio y cuándo</th><th style="text-align:right">Total</th><th><span class="visually-hidden">Quitar</span></th></tr></thead>
+    <tbody id="cuerpo"></tbody>
+    <tbody>
+      <tr class="fijo">
+        <td class="num"><input type="checkbox" id="fleteSi" title="Lleva flete" aria-label="Lleva flete"></td>
+        <td><b>Flete:</b> el material no camina solo<div class="ayuda">Si el traslado ya está en una partida, se deja sin marcar.</div></td>
+        <td><div class="cuanto"><input type="number" id="fleteCant" min="0" step="any" aria-label="Viajes"><span class="fija">viaje</span><span class="por">× $</span><input type="number" id="fletePrecio" min="0" step="any" aria-label="Precio por viaje"></div></td>
+        <td><div class="par"><select id="fleteBolsillo" class="bol" aria-label="Bolsillo del flete"></select><select id="fleteMes" aria-label="Mes del flete"></select></div></td>
+        <td><div class="par"><span class="fija">traslado</span><select id="fleteForma" aria-label="Forma del flete"></select></div></td>
+        <td><textarea id="fletePapel" rows="2" placeholder="quién lo lleva y con qué papel" aria-label="Papel del flete"></textarea></td>
+        <td class="monto" id="fleteTotal">$0</td><td></td>
+      </tr>
+      <tr class="fijo">
+        <td class="num"><input type="checkbox" id="impSi" title="Lleva imponderables" aria-label="Lleva imponderables"></td>
+        <td><b>Imponderables,</b> con nombre<input type="text" id="impNombre" aria-label="Nombre de los imponderables" style="margin-top:.3rem"></td>
+        <td><div class="cuanto"><input type="number" id="impPct" min="0" step="0.5" aria-label="Porcentaje"><span class="fija">% de lo que se compra</span></div></td>
+        <td><select id="impBolsillo" class="bol" aria-label="Bolsillo de los imponderables"></select></td>
+        <td colspan="2" class="ayuda">Alrededor del 5%. No entra al reloj del dinero porque no tiene mes: es el colchón para lo que nadie vio venir.</td>
+        <td class="monto" id="impTotal">$0</td><td></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<button class="btn" id="agregar">+ partida</button>
-<button class="btn claro" id="porActividad">Una partida vacía por cada actividad del cronograma</button>
+<button class="btn claro" id="agregar" type="button">+ partida</button>
 
 <details>
-  <summary>Precios de referencia, de oídas (para empezar; cada uno se cambia por la cotización del equipo)</summary>
-  <p class="ayuda">Son precios aproximados de la región a noviembre de 2026, sin papel que los respalde. Sirven para armar el primer borrador y para saber qué tan lejos anda la cotización de verdad. Un precio de estos en la solicitud final es un agujero.</p>
+  <summary>Precios de referencia, de oídas (para el borrador de hoy; cada uno se cambia por la cotización del equipo)</summary>
+  <p class="ayuda">Son precios aproximados de la región a noviembre de 2026, sin papel que los respalde. Sirven para armar el primer borrador y para saber qué tan lejos anda la cotización de verdad. Un precio de estos en el presupuesto que va a la asamblea es un agujero: la hoja lo marca hasta que tenga su cotización.</p>
   <table class="ref" id="refs"></table>
 </details>
 
-<h2><span class="n">3</span>Las dos sumas</h2>
-<div class="totales">
-  <div class="total fondo" id="tFondo"><div class="t">Se le pide al donante</div><div class="v">$0</div><div class="nota"></div></div>
-  <div class="total afuera" id="tAfuera"><div class="t">Se consigue afuera, valorizado</div><div class="v">$0</div><div class="nota">la contrapartida</div></div>
-  <div class="total" id="tTotal"><div class="t">El tamaño real del proyecto</div><div class="v">$0</div><div class="nota">las dos columnas juntas</div></div>
-</div>
-<div class="caja">
-  <div class="fila-datos">
-    <div><strong>Por tipo de recurso</strong><div class="barras" id="porTipo"></div></div>
-    <div><strong>Por fuente</strong><div class="barras" id="porFuente"></div></div>
+<h2><span class="n">3</span>Cuánto pone cada bolsillo</h2>
+<div class="totales" id="totales"></div>
+<div class="caja"><b>Por tipo de recurso</b><div class="barras" id="porTipo"></div></div>
+
+<h2><span class="n">4</span>El reloj del dinero</h2>
+<p class="sub">Cada partida en el mes en que se necesita, por bolsillo. El fondo de color marca los meses en que ese bolsillo puede pagar; el recuadro rojo, lo que se gastaría antes de que llegue o después de que cierre.</p>
+<div class="reloj-env"><table class="reloj" id="reloj"></table></div>
+<div class="leyenda" id="leyendaReloj"></div>
+<p id="lecturaReloj"></p>
+
+<div id="cajaPro" class="caja pro" hidden>
+  <h2 style="margin-top:.2rem"><span class="n">5</span>Si va a PROCODES: el tope y el 20%</h2>
+  <p class="ayuda">PROCODES paga un proyecto ecoturístico por superficie o por lote: hasta $5,490 por metro cuadrado (de 30 a 180) o $75,000 por lote (de 1 a 6), y pone hasta el 80% del proyecto. El 20% lo pone el grupo en jornales, materiales o dinero, en las actividades del proyecto que va a PROCODES: las que el cronograma le asigna o las que tienen partidas suyas. Arriba de $300,000 la solicitud pide estudio de factibilidad. Antes de usar un número en la solicitud, se verifica en las páginas 54 y 55 del DOF con <a href="../procodes-2026.html">la guía del PROCODES</a> abierta.</p>
+  <div class="rejilla">
+    <div><label for="proUnidad">Se pide por</label><select id="proUnidad"><option value="m²">metro cuadrado de palapa techada</option><option value="lote">lote de equipamiento</option></select></div>
+    <div><label for="proCant">¿Cuántos?</label><input type="number" id="proCant" min="0" step="1"></div>
+    <div class="total"><div class="t">Tope de PROCODES</div><div class="v" id="proTope">$0</div></div>
   </div>
+  <div id="proLectura"></div>
 </div>
 
-<h2><span class="n">4</span>Los seis agujeros, revisados</h2>
+<h2><span class="n" id="nRev">5</span>Los agujeros, revisados</h2>
 <ul class="revision" id="revision"></ul>
 <div class="caja">
-  <label>Si el dinero llega parcial, ¿qué se cae primero y por qué sigue sirviendo el proyecto sin eso?</label>
-  <textarea id="seCae" placeholder="Se cae la malla sombra (es la partida más cara y la sombra la dan los sabinos mientras crece lo sembrado); se quedan las plantas y el cerco, que son el medio."></textarea>
+  <label for="seCae">Si un bolsillo no llega, ¿qué se cae primero y por qué el resto sigue sirviendo?</label>
+  <textarea id="seCae"></textarea>
 </div>
 
-<h2><span class="n">5</span>Lo que no se puede cotizar hoy, estimado por referencia</h2>
-<p class="sub">Lo que se compra en la ferretería y el vivero se cotiza. Lo que todavía no tiene proveedor (una hectárea de restauración, un vivero, un curso) se estima con los conceptos y costos unitarios que publica el PROCODES: la meta en unidades por lo que el programa paga por cada una, y se marca como estimación. Los conceptos y topes están en <a href="../procodes-2026.html" target="_blank">la guía del PROCODES del curso</a>.</p>
-<div class="envoltura">
-<table class="plan" id="tablaPro">
-  <thead><tr><th>#</th><th style="min-width:220px">Concepto de apoyo del PROCODES</th><th style="width:110px">Unidad</th><th style="width:90px">Meta</th><th style="width:120px">Costo unitario</th><th>Total estimado</th><th></th></tr></thead>
-  <tbody id="cuerpoPro"></tbody>
-  <tfoot><tr><td colspan="5">Estimación por referencia</td><td class="monto" id="totalPro">$0</td><td></td></tr></tfoot>
-</table>
-</div>
-<button class="btn" id="agregarPro">+ concepto</button>
-<p class="ayuda">Referencias de la guía: restauración de suelos $6,950 por hectárea (de 10 a 140 ha); viveros $1,300 por m² (de 40 a 1,000 m²); cursos de capacitación hasta $45,000 por evento (mínimo 20 horas y 5 participantes); proyectos ecoturísticos desde $4,720 por hectárea hasta $75,000 por lote. Los proyectos productivos piden el 20% de contrapartida del grupo.</p>
+<h2><span class="n" id="nCot">6</span>Lo que falta cotizar</h2>
+<p class="sub">La tarea que sale de hoy: tres cotizaciones por cada partida de mil pesos o más, dos por escrito y de menos de treinta días. A quién se le compra también es un mensaje: cuando dos empatan, gana la del pueblo.</p>
+<div class="caja" id="faltaCotizar"></div>
+<button class="btn claro" id="imprimirHoja" type="button">Imprimir la hoja para cotizar</button>
 
-<details>
-  <summary>Si trabajan en cuaderno</summary>
-  <p>Una hoja con ocho columnas: actividad, qué, unidad, cantidad, precio, papel, donante, afuera. Un renglón por partida; al final, el flete y los imponderables con renglón propio. Se suma de ida y de regreso. Luego se pasa la lista de los seis agujeros renglón por renglón y se marca con un círculo la partida que se cae primero.</p>
-</details>
+<div class="cuaderno">
+  <b>Si trabajan en cuaderno</b>
+  <p>Una hoja con once columnas: actividad, qué, unidad, cantidad, precio, tipo, bolsillo, forma, mes, papel y total. Un renglón por partida; al final, el flete y los imponderables con renglón propio. Se suma por bolsillo, de ida y de regreso. Luego se dibuja el reloj: una tira de meses de noviembre de 2026 a noviembre de 2028, con los meses en que cada bolsillo puede pagar, y cada partida en su mes. Lo que cae fuera se encierra en rojo.</p>
+</div>
+
+<div id="hoja"></div>
 
 <div class="pie-acciones">
-  <button class="btn" id="descargar">Descargar el presupuesto (HTML)</button>
-  <button class="btn claro" id="copiar">Copiar la tabla para la carpeta</button>
-  <button class="btn claro" onclick="window.print()">Imprimir</button>
-  <button class="btn claro" onclick="document.body.classList.toggle('proyector')" title="Letra grande para proyectar el presupuesto de un equipo">Aa proyector</button>
-  <button class="btn peligro" id="borrar">Borrar todo</button>
-  <span class="guardado" id="guardado">Se guarda solo en este navegador.</span>
+  <h2 style="margin-top:.4rem">Al terminar</h2>
+  <p class="ayuda">La hoja se guarda sola en este navegador, pero solo aquí. El archivo para juntar es el que llega a <a href="../presupuesto-de-la-presa/index.html">el presupuesto de la presa</a>: se descarga y se manda al profesor con el nombre del equipo. El mismo archivo se vuelve a abrir aquí para seguir trabajando con las cotizaciones.</p>
+  <button class="btn" id="descargarJson" type="button">Descargar para juntar (.json)</button>
+  <button class="btn claro" id="descargarHtml" type="button">Descargar el presupuesto (HTML)</button>
+  <button class="btn claro" id="copiar" type="button">Copiar la tabla</button>
+  <button class="btn claro" id="imprimir" type="button">Imprimir</button>
+  <label class="btn claro" for="abrir" style="display:inline-block;margin:.4rem .4rem 0 0">Abrir un archivo guardado<input type="file" id="abrir" accept=".json,application/json" hidden></label>
+  <button class="btn peligro" id="borrar" type="button">Borrar todo</button>
 </div>
-
+<span class="guardado" id="guardado" role="status" aria-live="polite"></span>
 </main>
+
 <script>
+var PRESA = {"fecha":"11 de noviembre de 2026","componentes":[{"id":"G","clave":"Gestión","nombre":"Ruta de gestión","corto":"Gestión","deja":"Catálogo, anuencias, comité, carpeta del proyecto, solicitudes de fondos y permisos."},{"id":"1a","clave":"1a","nombre":"Contener la erosión de la orilla","corto":"Erosión","deja":"Talud junto al vertedor con cerco, fajinas, trampa de azolve y estacas vivas; ganado fuera."},{"id":"1b","clave":"1b","nombre":"Revegetar con especies nativas","corto":"Revegetación","deja":"Dos corredores de monte cercados, corredor de fauna en el cauce, cuarenta árboles con cajete y sombra plantada donde irán palapas y bancas."},{"id":"2","clave":"2","nombre":"La comunidad cuida y vigila la orilla","corto":"Comunidad","deja":"Comité de la presa con acta, reglamento aprobado en asamblea, recorridos por turnos y letreros de reglas y bienvenida."},{"id":"3","clave":"3","nombre":"Recreación para las distintas edades","corto":"Recreación","deja":"Tres rutas señaladas en la zona de los pinos, muelle de 8 × 4 m con cinco boyas de profundidad y conteos de visitantes por edades."},{"id":"4","clave":"4","nombre":"El espacio se mantiene seguro y limpio","corto":"Seguridad y limpieza","deja":"Contenedores con ruta de recolección, fantasmas luminiscentes, barreras vivas, estacionamiento con cerca de acceso y cinco lámparas solares."},{"id":"5","clave":"5","nombre":"Espacios de convivencia y descanso","corto":"Convivencia","deja":"Tres palapas de 4 × 4 m con mesa, bancas y asador, diez bancas en la orilla y una explanada de 200 m²."}],"actividades":[{"id":"G1","cod":"G-01","c":"G","n":"Integrar en el catálogo las propuestas de los seis equipos","p":"Catálogo en borrador con fichas por componente","r":"Profesor responsable (UAQ)","mes":"2026-10","fin":"2026-11","per":"oct 2026 – nov 2026","f":"","ola":0},{"id":"G2","cod":"G-02","c":"G","n":"Revisar el catálogo con el grupo y cerrar fotomontajes y cronograma","p":"Catálogo final y cronograma hipotético","r":"Grupo de la Lic. PAS (UAQ)","mes":"2026-11","fin":"2026-11","per":"nov 2026","f":"","ola":0},{"id":"G3","cod":"G-03","c":"G","n":"Pedir al comisariado el punto en el orden del día de la asamblea","p":"Oficio con acuse","r":"Profesor responsable (UAQ)","mes":"2026-11","fin":"2026-11","per":"nov 2026","f":"","ola":0},{"id":"G4","cod":"G-04","c":"G","n":"Expedir la convocatoria con cédulas, de 8 a 15 días antes","p":"Cédulas fijadas en lugares visibles del ejido","r":"Comisariado ejidal","mes":"2026-11","fin":"2026-11","per":"nov 2026","f":"","ola":0},{"id":"G5","cod":"G-05","c":"G","n":"Presentar el catálogo en asamblea ejidal y recoger su retroalimentación","p":"Acta de asamblea con los acuerdos","r":"Comisariado ejidal","mes":"2026-12","fin":"2026-12","per":"dic 2026","f":"","ola":0},{"id":"G6","cod":"G-06","c":"G","n":"Ajustar el catálogo con lo que pidió la asamblea","p":"Catálogo ajustado y lista de cambios","r":"Profesor responsable (UAQ)","mes":"2026-12","fin":"2026-12","per":"dic 2026","f":"","ola":0},{"id":"G7","cod":"G-07","c":"G","n":"Presentar las propuestas a la comunidad en la orilla, un domingo","p":"Lista de asistencia y registro de interesados","r":"Delegado de La Florida","mes":"2026-12","fin":"2026-12","per":"dic 2026","f":"","ola":0},{"id":"2.1","cod":"2-01","c":"2","n":"Censar quién cuida hoy la orilla, su estado y sus usos","p":"Ficha del censo con fotos","r":"Servicio social (UAQ)","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":0},{"id":"G15","cod":"G-08","c":"G","n":"Consultar a la Dirección de la Reserva la vía de impacto ambiental","p":"Minuta u oficio de respuesta","r":"Profesor responsable (UAQ)","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":0},{"id":"G21","cod":"G-09","c":"G","n":"Levantar la línea base en la orilla con la hoja de observación (tres domingos)","p":"Hoja de observación llena y en el Drive","r":"Secretaría del comité","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":1},{"id":"1a.1","cod":"1a-01","c":"1a","n":"Acordar con ganaderos y ejido cerrar el acceso del ganado al vertedor","p":"Minuta firmada con los ganaderos","r":"Comisariado ejidal","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":1},{"id":"1b.1","cod":"1b-01","c":"1b","n":"Investigar especies nativas de la región, para siembra y estacas vivas","p":"Lista de especies investigadas","r":"Servicio social (UAQ)","mes":"2027-01","fin":"2027-02","per":"ene 2027 – feb 2027","f":"","ola":1},{"id":"3.1","cod":"3-01","c":"3","n":"Pedir por oficio a CONAGUA el dato de nivel y calidad del agua","p":"Oficio con acuse; el dato, cuando llegue","r":"Profesor responsable (UAQ)","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":1},{"id":"3.2","cod":"3-02","c":"3","n":"Medir en campo el nivel del agua en secas, con estadal y fotos","p":"Registro de niveles con fecha","r":"Servicio social (UAQ)","mes":"2027-01","fin":"2027-02","per":"ene 2027 – feb 2027","f":"","ola":1},{"id":"3.3","cod":"3-03","c":"3","n":"Recorrer la zona de los pinos y trazar las tres rutas de senderismo","p":"Croquis de las rutas con sus zonas de descanso","r":"Servicio social (UAQ)","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":1},{"id":"4.6","cod":"4-01","c":"4","n":"Trazar el estacionamiento: acceso por el camino derecho y autos frente a la barda blanca","p":"Croquis con cajones y circulación","r":"Servicio social (UAQ)","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":1},{"id":"2.2","cod":"2-02","c":"2","n":"Constituir el comité de la presa con acta (al menos cinco personas por línea de trabajo)","p":"Acta con presidencia, secretaría, tesorería y vocalías","r":"Delegado de La Florida","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"","ola":0},{"id":"1a.2","cod":"1a-02","c":"1a","n":"Colocar trancas para que el ganado no entre a la zona del vertedor","p":"Trancas colocadas, foto","r":"Vocalía de obra","mes":"2027-01","fin":"2027-01","per":"ene 2027","f":"AUT","ola":1},{"id":"3.4","cod":"3-04","c":"3","n":"Fabricar los postes para señalar rutas y zonas de descanso","p":"Postes entregados","r":"Vocalía de obra","mes":"2027-01","fin":"2027-02","per":"ene 2027 – feb 2027","f":"AUT","ola":1},{"id":"2.3","cod":"2-03","c":"2","n":"Acordar turnos, ruta de recorridos y a quién se reporta cada hallazgo","p":"Acuerdo de turnos y ruta","r":"Vocalía de vigilancia","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"5.3","cod":"5-01","c":"5","n":"Proponer con Protección Civil las reglas de fuego para asadores y fogatas","p":"Reglas de fuego para el reglamento","r":"Presidencia del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"G8","cod":"G-10","c":"G","n":"Armar la carpeta del proyecto con tres cotizaciones por partida","p":"Carpeta del proyecto con presupuesto","r":"Tesorería del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"G9","cod":"G-11","c":"G","n":"Pedir al Ayuntamiento limpia, maquinaria y materiales para 2027","p":"Oficio con acuse","r":"Presidencia del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"G10","cod":"G-12","c":"G","n":"Registrar las faenas como aportación en especie","p":"Bitácora de jornales valorizados","r":"Secretaría del comité","mes":"2027-02","fin":"2028-05","per":"feb 2027 – may 2028","f":"AUT","ola":0},{"id":"1b.3","cod":"1b-02","c":"1b","n":"Observar dónde cruza el ganado con frecuencia","p":"Croquis de cruces con fechas","r":"Vocalía de vigilancia","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"4.1","cod":"4-02","c":"4","n":"Gestionar con el Ayuntamiento la ruta de recolección de residuos","p":"Oficio con respuesta","r":"Presidencia del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"MUN","ola":1},{"id":"4.2","cod":"4-03","c":"4","n":"Cotizar contenedores, fantasmas luminiscentes y lámparas solares (tres por rubro)","p":"Tres cotizaciones por escrito","r":"Tesorería del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"4.8","cod":"4-04","c":"4","n":"Obtener el visto bueno municipal del estacionamiento y la luminaria","p":"Oficio de visto bueno","r":"Presidencia del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"5.1","cod":"5-02","c":"5","n":"Preguntar a los vecinos, en la orilla, dónde quieren sombra, bancas y asadores","p":"Mapa con sitios fuera de la ribera y arriba de la cota de crecida","r":"Servicio social (UAQ)","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"2.4","cod":"2-04","c":"2","n":"Redactar el borrador del reglamento: fuego, basura, ganado, vehículos y horarios","p":"Borrador del reglamento","r":"Secretaría del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"1b.2","cod":"1b-03","c":"1b","n":"Pedir planta de encino, cedro blanco, tepame, huizache, sauce, aile y jarilla","p":"Pedido con acuse del vivero o de CONAFOR","r":"Vocalía de siembra","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"CNF","ola":1},{"id":"3.5","cod":"3-05","c":"3","n":"Señalar las tres rutas con marcas, postes y puntos de descanso","p":"Señales colocadas, foto","r":"Vocalía de obra","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"AUT","ola":1},{"id":"3.7","cod":"3-06","c":"3","n":"Diseñar el muelle de 8 × 4 m con los niveles medidos, fijo o flotante","p":"Plano con medidas","r":"Profesor responsable (UAQ)","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"5.2","cod":"5-03","c":"5","n":"Hacer el croquis y la ficha técnica de palapas, asadores, bancas y explanada","p":"Croquis y ficha técnica","r":"Profesor responsable (UAQ)","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":1},{"id":"4.4","cod":"4-05","c":"4","n":"Instalar fantasmas luminiscentes en el bordo y el vertedor","p":"Fantasmas instalados, foto de noche","r":"Vocalía de obra","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"AUT","ola":1},{"id":"2.5","cod":"2-05","c":"2","n":"Consultar el borrador del reglamento con la comunidad","p":"Relatoría con los cambios pedidos","r":"Presidencia del comité","mes":"2027-02","fin":"2027-02","per":"feb 2027","f":"","ola":0},{"id":"2.8","cod":"2-06","c":"2","n":"Diseñar los letreros de reglas, contacto y emblema de la presa","p":"Diseño con visto bueno del comité","r":"Servicio social (UAQ)","mes":"2027-02","fin":"2027-03","per":"feb 2027 – mar 2027","f":"","ola":1},{"id":"4.3","cod":"4-06","c":"4","n":"Colocar un contenedor metálico a prueba de fauna por sitio de estancia","p":"Contenedores instalados y ruta de vaciado acordada","r":"Vocalía de vigilancia","mes":"2027-02","fin":"2027-03","per":"feb 2027 – mar 2027","f":"AUT","ola":1},{"id":"2.6","cod":"2-07","c":"2","n":"Convocar la asamblea ejidal y aprobar el reglamento de uso","p":"Acta con el reglamento aprobado","r":"Comisariado ejidal","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":0},{"id":"G12","cod":"G-13","c":"G","n":"Ventanilla PROCODES: entregar la solicitud del proyecto ecoturístico","p":"Solicitud con acuse de la CONANP","r":"Presidencia del comité","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":0},{"id":"G16","cod":"G-14","c":"G","n":"Integrar y entregar a SEMARNAT la manifestación de impacto ambiental del conjunto","p":"Manifestación con acuse de ingreso","r":"Profesor responsable (UAQ)","mes":"2027-03","fin":"2027-04","per":"mar 2027 – abr 2027","f":"","ola":0},{"id":"1a.3","cod":"1a-03","c":"1a","n":"Delimitar con estacas el perímetro de protección de los 15 m²","p":"Acta de delimitación y foto","r":"Vocalía de obra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":1},{"id":"1b.4","cod":"1b-04","c":"1b","n":"Trazar los dos corredores de monte, de 15 a 20 m, entre humedal, arroyo y encinar","p":"Plano con el trazo","r":"Servicio social (UAQ)","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":1},{"id":"3.8","cod":"3-07","c":"3","n":"Cotizar los materiales del muelle (tres cotizaciones)","p":"Presupuesto de materiales","r":"Tesorería del comité","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":1},{"id":"1a.4","cod":"1a-04","c":"1a","n":"Establecer el cerco contra el ganado, de estacas vivas o alambre","p":"Cerco concluido, foto","r":"Vocalía de obra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"AUT","ola":1},{"id":"1a.5","cod":"1a-05","c":"1a","n":"Conseguir ramas y pastos para las fajinas","p":"Registro del material reunido","r":"Vocalía de obra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"AUT","ola":1},{"id":"1a.7","cod":"1a-06","c":"1a","n":"Conseguir y preparar los costales para la trampa de azolve","p":"Costales listos","r":"Vocalía de obra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"AUT","ola":1},{"id":"1b.7","cod":"1b-05","c":"1b","n":"Ubicar cajetes y árboles de sombra junto a los sitios de palapas y bancas","p":"Croquis con puntos de siembra","r":"Vocalía de siembra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":1},{"id":"2.7","cod":"2-08","c":"2","n":"Recorridos de vigilancia por turnos; Semana Santa es la primera prueba","p":"Bitácora de recorridos","r":"Vocalía de vigilancia","mes":"2027-03","fin":"2028-11","per":"mar 2027 – nov 2028","f":"","ola":1},{"id":"2.9","cod":"2-09","c":"2","n":"Fabricar e instalar los letreros de reglas","p":"Fotos y acta de instalación","r":"Vocalía de obra","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"AUT","ola":1},{"id":"G11","cod":"G-16","c":"G","n":"Kermés de Semana Santa y cooperación de visitantes","p":"Corte de caja público","r":"Tesorería del comité","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"AUT","ola":0},{"id":"3.6","cod":"3-08","c":"3","n":"Estrenar las rutas en Semana Santa y contar visitantes por edades","p":"Conteo por edades y fotos","r":"Secretaría del comité","mes":"2027-03","fin":"2027-03","per":"mar 2027","f":"","ola":1},{"id":"1a.6","cod":"1a-07","c":"1a","n":"Instalar fajinas de rama en curvas de nivel, en faena","p":"Foto antes y después, lista de asistencia","r":"Vocalía de obra","mes":"2027-04","fin":"2027-04","per":"abr 2027","f":"AUT","ola":1},{"id":"1b.5","cod":"1b-06","c":"1b","n":"Cercar los corredores contra el ganado","p":"Cerco, foto desde el punto fijo","r":"Vocalía de obra","mes":"2027-04","fin":"2027-05","per":"abr 2027 – may 2027","f":"AUT","ola":1},{"id":"1a.8","cod":"1a-08","c":"1a","n":"Colocar la trampa de azolve de costales en la parte baja","p":"Trampa instalada, foto","r":"Vocalía de obra","mes":"2027-04","fin":"2027-04","per":"abr 2027","f":"AUT","ola":1},{"id":"1b.6","cod":"1b-07","c":"1b","n":"Cercar la franja del corredor de fauna sobre el cauce, con el ganado fuera","p":"Franja cercada, foto","r":"Vocalía de obra","mes":"2027-05","fin":"2027-05","per":"may 2027","f":"AUT","ola":1},{"id":"1b.8","cod":"1b-08","c":"1b","n":"Hacer los cuarenta cajetes sobre el suelo retenido, en faena","p":"Cuarenta cajetes, foto","r":"Vocalía de siembra","mes":"2027-05","fin":"2027-05","per":"may 2027","f":"AUT","ola":1},{"id":"1b.9","cod":"1b-09","c":"1b","n":"Convocar por la delegación la faena de siembra","p":"Aviso de la delegación","r":"Delegado de La Florida","mes":"2027-06","fin":"2027-06","per":"jun 2027","f":"","ola":1},{"id":"1b.10","cod":"1b-10","c":"1b","n":"Recibir la planta del vivero","p":"Remisión de entrega","r":"Vocalía de siembra","mes":"2027-06","fin":"2027-06","per":"jun 2027","f":"CNF","ola":1},{"id":"5.4","cod":"5-04","c":"5","n":"Conseguir troncos de poda, palma, tablones, alambre y herramienta","p":"Notas de compra y oficios de donación","r":"Tesorería del comité","mes":"2027-06","fin":"2027-07","per":"jun 2027 – jul 2027","f":"PRO","ola":2},{"id":"1a.9","cod":"1a-09","c":"1a","n":"Cortar estacas vivas de sauce y aile","p":"Foto de las estacas","r":"Vocalía de siembra","mes":"2027-06","fin":"2027-06","per":"jun 2027","f":"","ola":1},{"id":"1b.11","cod":"1b-11","c":"1b","n":"Sembrar los cuarenta árboles con cajete al inicio de las lluvias (meta: 30 de junio)","p":"Lista de asistencia, foto desde el punto fijo","r":"Vocalía de siembra","mes":"2027-06","fin":"2027-06","per":"jun 2027","f":"AUT","ola":1},{"id":"1a.10","cod":"1a-10","c":"1a","n":"Enterrar las estacas vivas al pie del talud con las primeras lluvias","p":"Tramo de 5 m de estacas hincadas, foto","r":"Vocalía de siembra","mes":"2027-06","fin":"2027-07","per":"jun 2027 – jul 2027","f":"AUT","ola":1},{"id":"1b.12","cod":"1b-12","c":"1b","n":"Plantar tres árboles de sombra del lado poniente de cada sitio de palapa y banca","p":"Árboles sembrados, foto","r":"Vocalía de siembra","mes":"2027-06","fin":"2027-06","per":"jun 2027","f":"","ola":1},{"id":"4.5","cod":"4-07","c":"4","n":"Sembrar barreras vivas en las zonas con riesgo de caída","p":"Barreras sembradas, foto","r":"Vocalía de siembra","mes":"2027-07","fin":"2027-07","per":"jul 2027","f":"AUT","ola":1},{"id":"1a.11","cod":"1a-11","c":"1a","n":"Armar el informe fotográfico de antes y después con la bitácora de obra","p":"Informe en el Drive","r":"Secretaría del comité","mes":"2027-07","fin":"2027-07","per":"jul 2027","f":"","ola":1},{"id":"4.7","cod":"4-08","c":"4","n":"Cerrar el camino anterior con una línea de magueyes","p":"Línea de magueyes plantada, foto","r":"Vocalía de siembra","mes":"2027-07","fin":"2027-07","per":"jul 2027","f":"AUT","ola":1},{"id":"G19","cod":"G-19","c":"G","n":"Pedir al Ayuntamiento obra para 2028: estacionamiento, cerca de acceso, luminaria y muelle","p":"Oficio con expediente técnico y acuse","r":"Presidencia del comité","mes":"2027-08","fin":"2027-08","per":"ago 2027","f":"","ola":0},{"id":"1b.13","cod":"1b-13","c":"1b","n":"Contar las plantas vivas a los tres meses y leer la tabla en asamblea (meta: 30 vivas)","p":"Tabla de plantas vivas y acta de lectura","r":"Secretaría del comité","mes":"2027-09","fin":"2027-09","per":"sep 2027","f":"","ola":1},{"id":"1a.12","cod":"1a-12","c":"1a","n":"Registrar el prendimiento de las estacas a los tres meses","p":"Registro de prendimiento con fecha","r":"Secretaría del comité","mes":"2027-10","fin":"2027-10","per":"oct 2027","f":"","ola":1},{"id":"1b.14","cod":"1b-14","c":"1b","n":"Riego de auxilio cada quince días en la primera seca, con los recorridos","p":"Bitácora de riego","r":"Vocalía de vigilancia","mes":"2027-11","fin":"2028-05","per":"nov 2027 – may 2028","f":"","ola":3},{"id":"2.10","cod":"2-10","c":"2","n":"Revisar el reglamento tras la primera temporada de uso","p":"Acta de asamblea con ajustes","r":"Comisariado ejidal","mes":"2027-11","fin":"2027-11","per":"nov 2027","f":"","ola":3},{"id":"2.11","cod":"2-11","c":"2","n":"Instalar el letrero de bienvenida y el panel de caminatas","p":"Letreros instalados, foto con una persona como escala","r":"Vocalía de obra","mes":"2027-11","fin":"2027-11","per":"nov 2027","f":"PRO","ola":2},{"id":"5.5","cod":"5-05","c":"5","n":"Construir en faena las tres palapas de 4 × 4 m con mesa, dos bancas y asador","p":"Listas de asistencia y fotos georreferenciadas","r":"Vocalía de obra","mes":"2027-11","fin":"2027-11","per":"nov 2027","f":"PRO","ola":2},{"id":"5.7","cod":"5-06","c":"5","n":"Nivelar y limpiar la explanada de 200 m² sin quitar vegetación nativa","p":"Fotos de antes y después desde punto fijo","r":"Vocalía de obra","mes":"2027-11","fin":"2027-11","per":"nov 2027","f":"PRO","ola":2},{"id":"5.6","cod":"5-07","c":"5","n":"Colocar las diez bancas de la orilla junto a los árboles de sombra ya plantados","p":"Fotos georreferenciadas de cada banca","r":"Vocalía de obra","mes":"2027-11","fin":"2027-12","per":"nov 2027 – dic 2027","f":"PRO","ola":2},{"id":"5.8","cod":"5-08","c":"5","n":"Entregar los espacios con acta, reglamento a la vista y calendario de revisión","p":"Acta de entrega y foto del letrero","r":"Presidencia del comité","mes":"2027-12","fin":"2027-12","per":"dic 2027","f":"PRO","ola":2},{"id":"G20","cod":"G-21","c":"G","n":"Comprobar PROCODES y firmar el acta de entrega-recepción","p":"Acta de entrega-recepción y comprobantes","r":"Tesorería del comité","mes":"2027-12","fin":"2027-12","per":"dic 2027","f":"","ola":0},{"id":"2.12","cod":"2-12","c":"2","n":"Recibir los espacios de convivencia y sumarlos a los recorridos","p":"Acta de entrega-recepción","r":"Presidencia del comité","mes":"2027-12","fin":"2027-12","per":"dic 2027","f":"","ola":2},{"id":"3.9","cod":"3-09","c":"3","n":"Comprar los materiales del muelle","p":"Facturas","r":"Tesorería del comité","mes":"2028-01","fin":"2028-01","per":"ene 2028","f":"MUN","ola":2},{"id":"4.9","cod":"4-09","c":"4","n":"Construir el estacionamiento: nivelar, revestir y delimitar","p":"Estacionamiento delimitado, foto","r":"Ayuntamiento · Obras Públicas","mes":"2028-01","fin":"2028-01","per":"ene 2028","f":"MUN","ola":2},{"id":"4.11","cod":"4-10","c":"4","n":"Colocar las cinco lámparas solares en las zonas más frecuentadas","p":"Lámparas instaladas, foto de noche","r":"Ayuntamiento · Obras Públicas","mes":"2028-01","fin":"2028-01","per":"ene 2028","f":"MUN","ola":2},{"id":"3.10","cod":"3-10","c":"3","n":"Construir el muelle en secas, antes de Semana Santa","p":"Muelle de 32 m², informe fotográfico","r":"Vocalía de obra","mes":"2028-01","fin":"2028-03","per":"ene 2028 – mar 2028","f":"MUN","ola":2},{"id":"4.10","cod":"4-11","c":"4","n":"Hacer la cerca de troncos con portón manual sin cadena y paso peatonal fácil","p":"Cerca y portón instalados, foto","r":"Vocalía de obra","mes":"2028-02","fin":"2028-02","per":"feb 2028","f":"MUN","ola":2},{"id":"4.12","cod":"4-12","c":"4","n":"Poner los letreros de estacionamiento con el emblema de la presa","p":"Letreros instalados, foto","r":"Vocalía de obra","mes":"2028-02","fin":"2028-02","per":"feb 2028","f":"MUN","ola":2},{"id":"3.11","cod":"3-11","c":"3","n":"Colocar las cinco boyas con nivel de profundidad","p":"Boyas colocadas, foto","r":"Vocalía de obra","mes":"2028-03","fin":"2028-03","per":"mar 2028","f":"MUN","ola":2},{"id":"3.12","cod":"3-12","c":"3","n":"Estrenar el muelle en Semana Santa y contar visitantes por edades","p":"Lista, fotos y conteo por edades","r":"Secretaría del comité","mes":"2028-04","fin":"2028-04","per":"abr 2028","f":"","ola":2},{"id":"G22","cod":"G-22","c":"G","n":"Informe final a la asamblea ejidal y a los fondos","p":"Informe con fotos de punto fijo y acta de lectura","r":"Presidencia del comité","mes":"2028-04","fin":"2028-05","per":"abr 2028 – may 2028","f":"","ola":0},{"id":"1b.15","cod":"1b-15","c":"1b","n":"Reponer las plantas muertas con las lluvias siguientes","p":"Plantas repuestas y conteo actualizado","r":"Vocalía de siembra","mes":"2028-06","fin":"2028-06","per":"jun 2028","f":"","ola":3},{"id":"3.13","cod":"3-13","c":"3","n":"Revisar muelle, boyas y señales tras la temporada de lluvias","p":"Ficha de estado con fotos","r":"Vocalía de vigilancia","mes":"2028-11","fin":"2028-11","per":"nov 2028","f":"","ola":3},{"id":"4.13","cod":"4-13","c":"4","n":"Revisar contenedores, luminaria y cerca tras las lluvias","p":"Ficha de estado con fotos","r":"Vocalía de vigilancia","mes":"2028-11","fin":"2028-11","per":"nov 2028","f":"","ola":3},{"id":"5.9","cod":"5-09","c":"5","n":"Revisar el estado de las piezas tras la primera temporada de lluvias","p":"Ficha de estado de las piezas","r":"Vocalía de vigilancia","mes":"2028-11","fin":"2028-11","per":"nov 2028","f":"","ola":3}],"ejemplo":{"version":3,"equipo":"Ejemplo: la ruta de gestión","componente":"G","partidas":[{"actividad":"G5","que":"Impresión del catálogo para la asamblea, juegos engargolados","unidad":"juego","cant":25,"precio":60,"tipo":"materiales","bolsillo":"AUT","forma":"compra","mes":"2026-11","papel":"de oídas: falta cotización de la papelería"},{"actividad":"G5","que":"Lona del cronograma de la presa, 2 por 1.2 m","unidad":"m²","cant":2.4,"precio":150,"tipo":"materiales","bolsillo":"AUT","forma":"compra","mes":"2026-11","papel":"de oídas: falta cotización de la imprenta","cae":true},{"actividad":"G7","que":"Sillas y equipo de sonido de la delegación para la presentación en la orilla","unidad":"evento","cant":1,"precio":1200,"tipo":"equipo","bolsillo":"AUT","forma":"prestado","mes":"2026-12","papel":"constancia de préstamo de la delegación, por pedir"},{"actividad":"G7","que":"Montaje y limpieza de la presentación, seis personas una jornada","unidad":"jornal","cant":6,"precio":300,"tipo":"gente","bolsillo":"AUT","forma":"faena","mes":"2026-12","papel":"lista de asistencia firmada; jornal de la región"},{"actividad":"G12","que":"Pasajes a la oficina de la Reserva en Jalpan, dos personas, dos viajes","unidad":"pasaje","cant":4,"precio":160,"tipo":"traslado","bolsillo":"AUT","forma":"compra","mes":"2027-02","papel":"de oídas: falta tarifa"},{"actividad":"G16","que":"Elaboración de la manifestación de impacto ambiental por un prestador de servicios ambientales","unidad":"servicio","cant":1,"precio":0,"tipo":"gente","bolsillo":"","forma":"compra","mes":"2027-03","papel":"sin precio: pedir tres cotizaciones"},{"actividad":"G22","que":"Impresión del informe final con fotos de punto fijo","unidad":"juego","cant":10,"precio":120,"tipo":"materiales","bolsillo":"AUT","forma":"compra","mes":"2028-04","papel":"de oídas: falta cotización de la papelería"}],"flete":{"si":false,"cant":0,"precio":0,"bolsillo":"AUT","forma":"compra","mes":"","papel":""},"imp":{"si":true,"pct":5,"nombre":"lo que falte en la papelería","bolsillo":"AUT"},"pro":{"unidad":"m²","cant":0},"seCae":"La lona del cronograma: el catálogo impreso y el cartel de pared hacen el mismo trabajo."}};
+// ── Núcleo compartido: los cuatro bolsillos, sus reglas y las cuentas de un presupuesto ──
+var BOLSILLOS = [
+  { id: 'AUT', nombre: 'Autogestión y especie', corto: 'Autogestión', color: '#c0602f', claro: '#F6E3D8' },
+  { id: 'PRO', nombre: 'PROCODES (CONANP)', corto: 'PROCODES', color: '#168c6e', claro: '#D7EEE6' },
+  { id: 'MUN', nombre: 'Ayuntamiento de Arroyo Seco', corto: 'Ayuntamiento', color: '#6a55c2', claro: '#E6E1F6' },
+  { id: 'CNF', nombre: 'CONAFOR', corto: 'CONAFOR', color: '#4b8f2a', claro: '#E0EEDA' }
+];
+var BOLS = {}; BOLSILLOS.forEach(function (b) { BOLS[b.id] = b; });
+var FORMAS = ['compra', 'faena', 'prestado', 'trocado', 'donado'];
+var TIPOS = ['materiales', 'gente', 'traslado', 'equipo'];
+var MESES_TXT = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+var MESES_LARGOS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+var MESES = [];
+(function () { var a = 2026, m = 11; while (a < 2028 || (a === 2028 && m <= 11)) { MESES.push(a + '-' + (m < 10 ? '0' + m : m)); m++; if (m > 12) { m = 1; a++; } } })();
+// Cuándo puede pagar cada bolsillo (meses en formato AAAA-MM; se comparan como texto)
+var VENTANA = {
+  PRO: { desde: '2027-06', hasta: '2027-12' },
+  MUN: { desde: '2028-01', especie: '2027-02' },
+  CNF: { desde: '2027-06' }
+};
+var PRO_M2 = 5490, PRO_LOTE = 75000, PRO_UMBRAL = 300000;
+
+function mesTxt(k) { if (!k) return ''; var p = k.split('-'); return MESES_TXT[+p[1] - 1] + ' ' + p[0]; }
+function mesLargo(k) { if (!k) return ''; var p = k.split('-'); return MESES_LARGOS[+p[1] - 1] + ' de ' + p[0]; }
+function pesos(n) { return '$' + Math.round(n || 0).toLocaleString('es-MX'); }
+function enMiles(n) { if (!n) return ''; if (n < 100) return '&lt;0.1'; var v = n / 1000; return v.toLocaleString('es-MX', { maximumFractionDigits: v < 10 ? 1 : 0 }); }
+function miles(n) { if (!n) return ''; if (n < 1000) return '$' + Math.round(n); return '$' + (n / 1000).toLocaleString('es-MX', { maximumFractionDigits: n < 10000 ? 1 : 0 }) + ' mil'; }
+function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function totalDe(p) { return (+p.cant || 0) * (+p.precio || 0); }
+function esDinero(p) { return p.forma === 'compra'; }
+// cada partida guarda el id estable de su actividad; el código (5-04) cambia si el cronograma se reacomoda
+function actividadDe(clave) { if (!clave) return null; for (var i = 0; i < PRESA.actividades.length; i++) { var a = PRESA.actividades[i]; if (a.id === clave || a.cod === clave) return a; } return null; }
+function componenteDe(id) { for (var i = 0; i < PRESA.componentes.length; i++) if (PRESA.componentes[i].id === id) return PRESA.componentes[i]; return null; }
+function nombreComp(id) { var c = componenteDe(id); return c ? (c.id === 'G' ? c.nombre : c.clave + ' · ' + c.nombre) : ''; }
+
+// Si el bolsillo no puede pagar en ese mes, devuelve el porqué
+function cuandoMal(p) {
+  if (!p.mes || !p.bolsillo) return '';
+  if (p.bolsillo === 'PRO') {
+    if (p.mes < VENTANA.PRO.desde) return 'PROCODES deposita la primera ministración hacia junio de 2027';
+    if (p.mes > VENTANA.PRO.hasta) return 'lo de PROCODES se ejecuta y se comprueba a más tardar el 31 de diciembre de 2027';
+  }
+  if (p.bolsillo === 'MUN') {
+    if (esDinero(p) && p.mes < VENTANA.MUN.desde) return 'el Ayuntamiento paga obra con el presupuesto 2028, desde enero de 2028; en 2027 apoya en especie';
+    if (!esDinero(p) && p.mes < VENTANA.MUN.especie) return 'el apoyo municipal en especie se pide en febrero de 2027';
+  }
+  if (p.bolsillo === 'CNF' && p.mes < VENTANA.CNF.desde) return 'la planta de CONAFOR llega con las lluvias, de junio a julio de 2027';
+  return '';
+}
+// Si el bolsillo no paga esa clase de cosa, devuelve el porqué
+function bolsilloMal(p) {
+  if (p.bolsillo === 'CNF' && (esDinero(p) || p.tipo === 'traslado' || p.tipo === 'equipo')) return 'CONAFOR da planta y asesoría en especie: no da dinero, ni flete, ni herramienta';
+  if (p.bolsillo === 'PRO' && !esDinero(p)) return 'PROCODES da dinero; lo que se consigue en especie es la parte del grupo y va en autogestión';
+  return '';
+}
+
+function calcular(e) {
+  var s = { bols: {}, tipos: {}, total: 0, dinero: 0, especie: 0, compras: 0, imp: 0, flete: 0, mes: {} };
+  ['AUT', 'PRO', 'MUN', 'CNF', ''].forEach(function (b) { s.bols[b] = { dinero: 0, especie: 0 }; });
+  TIPOS.forEach(function (t) { s.tipos[t] = 0; });
+  function suma(b, forma, tipo, monto, mes) {
+    var k = s.bols[b] ? b : '', din = forma === 'compra';
+    s.bols[k][din ? 'dinero' : 'especie'] += monto;
+    s.total += monto; if (din) s.dinero += monto; else s.especie += monto;
+    if (tipo) s.tipos[tipo] = (s.tipos[tipo] || 0) + monto;
+    if (mes) { if (!s.mes[mes]) s.mes[mes] = {}; s.mes[mes][k] = (s.mes[mes][k] || 0) + monto; }
+  }
+  (e.partidas || []).forEach(function (p) { var t = totalDe(p); if (esDinero(p)) s.compras += t; suma(p.bolsillo, p.forma, p.tipo, t, p.mes); });
+  if (e.flete && e.flete.si) {
+    var f = (+e.flete.cant || 0) * (+e.flete.precio || 0); s.flete = f;
+    if (e.flete.forma === 'compra') s.compras += f;
+    suma(e.flete.bolsillo, e.flete.forma, 'traslado', f, e.flete.mes);
+  }
+  if (e.imp && e.imp.si) { s.imp = s.compras * (+e.imp.pct || 0) / 100; suma(e.imp.bolsillo || 'AUT', 'compra', null, s.imp, null); }
+  s.comunidad = s.bols.AUT.dinero + s.bols.AUT.especie;
+  s.fondos = s.bols.PRO.dinero + s.bols.PRO.especie + s.bols.MUN.dinero + s.bols.MUN.especie + s.bols.CNF.dinero + s.bols.CNF.especie;
+  s.sinBolsillo = s.bols[''].dinero + s.bols[''].especie;
+  // PROCODES: lo que pone el programa, la parte del grupo en el proyecto PROCODES y el tope
+  // el proyecto PROCODES: las actividades que paga PROCODES o que el cronograma le asigna
+  var actPro = {};
+  (e.partidas || []).forEach(function (p) { var a = actividadDe(p.actividad); if (p.actividad && (p.bolsillo === 'PRO' || (a && a.f === 'PRO'))) actPro[p.actividad] = 1; });
+  var grupo = 0;
+  (e.partidas || []).forEach(function (p) { if (p.bolsillo === 'AUT' && actPro[p.actividad]) grupo += totalDe(p); });
+  var pro = s.bols.PRO.dinero + s.bols.PRO.especie;
+  var cant = e.pro ? +e.pro.cant || 0 : 0, unidad = e.pro && e.pro.unidad === 'lote' ? 'lote' : 'm²';
+  s.pro = { monto: pro, grupo: grupo, proyecto: pro + grupo, pct: pro + grupo > 0 ? pro / (pro + grupo) : 0,
+            cant: cant, unidad: unidad, tope: cant * (unidad === 'lote' ? PRO_LOTE : PRO_M2), hay: pro > 0, actividades: Object.keys(actPro) };
+  return s;
+}
+
+// La revisión: los seis agujeros de siempre y los tres de los bolsillos
+function revisar(e, s) {
+  // las partidas recién creadas y vacías no se revisan todavía
+  var ps = (e.partidas || []).filter(function (p) { return (p.que || '').trim() || totalDe(p) > 0; }), lista = [], fila = {};
+  function marca(p, t) { fila[p.id] = (fila[p.id] ? fila[p.id] + ' · ' : '') + t; }
+  function r(malos, titulo, bien, mal, clase) { lista.push({ clase: malos ? (clase || 'mal') : 'bien', titulo: titulo, texto: malos ? mal : bien }); }
+  var ids = function (a) { return a.map(function (p) { return '#' + p.id; }).join(', '); };
+
+  var oidas = ps.filter(function (p) { var sin = !(p.papel || '').trim() || /o[ií]das|aprox|creo|m[aá]s o menos|por pedir|pendiente|falta/i.test(p.papel); if (sin && totalDe(p) >= 1000) { marca(p, 'sin papel'); return true; } return false; });
+  r(oidas.length, 'El precio de oídas', 'Cada partida de mil pesos o más dice quién dio el precio y cuándo.', 'Partidas de mil pesos o más que todavía no tienen su papel: ' + ids(oidas) + '. Van a la hoja para cotizar: tres cotizaciones, dos por escrito y de menos de treinta días.');
+
+  var cero = ps.filter(function (p) { if (esDinero(p) && !(+p.precio) ) { marca(p, 'sin precio'); return true; } return false; });
+  if (cero.length) lista.push({ clase: 'ojo', titulo: 'Lo que todavía no tiene precio', texto: 'Partidas de compra con precio en cero: ' + ids(cero) + '. Se dejan escritas, con su pendiente, en lugar de borrarlas: lo que no se escribe lo termina pagando alguien de su bolsa.' });
+
+  var bolsa = ps.filter(function (p) { var b = !p.actividad || /\bvarios\b|diversos|\betc\b|misc/i.test(p.que || '') || (s.total > 0 && totalDe(p) > 0.5 * s.total && ps.length > 3); if (b) marca(p, 'partida bolsa'); return b; });
+  r(bolsa.length, 'La partida bolsa', 'Cada partida cuelga de una actividad y dice qué es exactamente.', 'Renglones que no dicen de qué actividad son, que dicen «varios» o que se comen casi la mitad del presupuesto: ' + ids(bolsa) + '. Se parten hasta que cada pedazo se pueda leer en voz alta.');
+
+  var hayMaterial = ps.some(function (p) { return (p.tipo === 'materiales' || p.tipo === 'equipo') && esDinero(p) && totalDe(p) > 0; });
+  var hayTraslado = (e.flete && e.flete.si) || ps.some(function (p) { return p.tipo === 'traslado'; });
+  r(hayMaterial && !hayTraslado ? 1 : 0, 'El flete olvidado', hayMaterial ? 'El traslado tiene renglón propio, en dinero o en especie.' : 'No hay material comprado que mover.', 'Hay material comprado y nadie lo trae a la orilla. El flete va en su renglón, pagado o conseguido en especie con su nota.');
+
+  var hayCompras = s.compras > 0;
+  r(hayCompras && !(e.imp && e.imp.si && +e.imp.pct > 0) ? 1 : 0, 'El presupuesto al centavo', hayCompras ? 'Los imponderables tienen renglón y nombre.' : 'Todavía no hay compras.', 'Sin imponderables: falta un colchón chico, alrededor del 5% de lo que se compra, con nombre honesto.');
+
+  var vistos = {}, doble = [];
+  ps.forEach(function (p) { var k = (p.que || '').trim().toLowerCase().slice(0, 28); if (!k) return; var firma = p.bolsillo + '|' + esDinero(p); if (vistos[k] && vistos[k] !== firma) { doble.push(p); marca(p, 'doble papel'); } else vistos[k] = firma; });
+  r(doble.length, 'El doble papel', 'Nada aparece dos veces en bolsillos distintos.', 'Lo mismo aparece en dos bolsillos o comprado y en especie a la vez: ' + ids(doble) + '. Cada cosa vive en un solo lugar.');
+
+  // la asistencia técnica especializada sí la paga PROCODES, hasta el 10% de lo que aprueba
+  var asesoria = function (p) { return /asesor|asistencia t[eé]cnica|acompa[ñn]amiento t[eé]cnico/i.test(p.que || ''); };
+  var pecado = ps.filter(function (p) { var mal = p.bolsillo && p.bolsillo !== 'AUT' && esDinero(p) && ((/honorario|sueldo|pago al equipo|nuestro trabajo|estudiantes/i.test(p.que || '') && !(p.bolsillo === 'PRO' && asesoria(p))) || (/comida|refresco|alimento|tamal|caf[eé]/i.test(p.que || '') && !/faena/i.test(p.que || ''))); if (mal) marca(p, 'no lo paga un fondo'); return mal; });
+  var proMal = [];
+  var ase = ps.filter(function (p) { return p.bolsillo === 'PRO' && esDinero(p) && asesoria(p); }), aseMonto = ase.reduce(function (a, p) { return a + totalDe(p); }, 0);
+  if (aseMonto > 0 && aseMonto > 0.1 * s.pro.monto + 1e-9) { ase.forEach(function (p) { marca(p, 'asesoría arriba del 10%'); }); proMal.push('la asistencia técnica que se le carga a PROCODES (' + pesos(aseMonto) + ') pasa del 10% de lo que pondría el programa (' + pesos(0.1 * s.pro.monto) + ')'); }
+  if (s.pro.hay && s.pro.pct > 0.8 + 1e-9) proMal.push('PROCODES pondría el ' + Math.round(100 * s.pro.pct) + '% de su proyecto y el programa pone hasta el 80%: el grupo tiene que poner al menos ' + pesos(s.pro.monto / 4 - s.pro.grupo > 0 ? s.pro.monto / 4 - s.pro.grupo : 0) + ' más en jornales, materiales o dinero, en las actividades del proyecto PROCODES');
+  if (s.pro.hay && s.pro.tope > 0 && s.pro.monto > s.pro.tope) proMal.push('lo que se le pide a PROCODES (' + pesos(s.pro.monto) + ') pasa el tope de ' + s.pro.cant + ' ' + s.pro.unidad + ' (' + pesos(s.pro.tope) + ')');
+  r(pecado.length || proMal.length ? 1 : 0, 'El pecado mayor', 'Ningún fondo paga lo que sus reglas no admiten ni más de su tope.', (pecado.length ? 'Honorarios del propio equipo o comida que no es de faena cargados a un fondo: ' + ids(pecado) + '. ' : '') + (proMal.length ? proMal.join('; ') + '.' : ''));
+
+  var equivocado = ps.filter(function (p) { var t = bolsilloMal(p); if (t) marca(p, t); return !!t; });
+  r(equivocado.length, 'El bolsillo equivocado', 'Cada bolsillo paga lo que sus reglas dejan.', 'Partidas en un bolsillo que no paga esa clase de cosa: ' + equivocado.map(function (p) { return '#' + p.id + ' (' + bolsilloMal(p) + ')'; }).join('; ') + '.');
+
+  var tarde = ps.filter(function (p) { var t = cuandoMal(p); if (t) marca(p, 'llega tarde'); return !!t; });
+  if (e.flete && e.flete.si && cuandoMal(e.flete)) tarde.push({ id: 'flete', mes: e.flete.mes, bolsillo: e.flete.bolsillo, forma: e.flete.forma });
+  r(tarde.length, 'El dinero que llega tarde', 'Cada peso llega antes del mes en que se gasta.', 'Se gastaría antes de que llegue el bolsillo, o después de que cierre: ' + tarde.map(function (p) { return (p.id === 'flete' ? 'el flete' : '#' + p.id) + ' en ' + mesTxt(p.mes) + ' (' + cuandoMal(p) + ')'; }).join('; ') + '. Se mueve la compra de mes, se adelanta con autogestión o se cambia de bolsillo.');
+
+  var sinB = ps.filter(function (p) { if (!p.bolsillo) { marca(p, 'sin bolsillo'); return true; } return false; });
+  r(sinB.length, 'La partida sin bolsillo', 'Cada partida dice quién la pagaría.', 'Partidas que todavía no tienen quién las pague: ' + ids(sinB) + '. Si nadie la pagaría, se dice en voz alta: es una gestión pendiente, no un olvido.', 'ojo');
+
+  var cae = ps.filter(function (p) { return p.cae; });
+  r(cae.length ? 0 : 1, 'Lo que se cae primero', 'Marcado: ' + ids(cae) + '. Si un bolsillo no llega, el equipo ya sabe qué suelta.', 'Ninguna partida está marcada. Si un bolsillo no llega, ¿qué se suelta primero y por qué el resto sigue sirviendo?');
+  return { lista: lista, fila: fila };
+}
+
 (function () {
-  var CLAVE = 'gdp-presupuesto-florida', CLAVE_CRONO = 'gdp-cronograma-florida';
-  var TIPOS = ['materiales', 'gente', 'traslado', 'equipo'], FUENTES = ['comprado', 'prestado', 'trocado', 'donado'];
-  var NOMBRE_COMP = { '1a':'1a · Contener la erosión de la orilla', '1b':'1b · Revegetar con especies nativas', '2':'2 · La comunidad cuida y vigila la orilla', '3':'3 · Recreación para las distintas edades', '4':'4 · El espacio se mantiene seguro y limpio', '5':'5 · Espacios de convivencia y descanso' };
+  var CLAVE = 'gdp-presupuesto-presa';
+  var TARJETAS = {
+    AUT: { paga: 'Las faenas, los materiales que da o presta el ejido, la cooperación, la kermés de Semana Santa y el capital semilla de la UAQ.', cuando: 'El capital semilla, desde ya; las faenas y la cooperación, desde febrero de 2027; la kermés, en Semana Santa de 2027.', regla: 'Todo se valoriza con su papel: lista de asistencia, nota firmada, foto. Es la parte que pone la comunidad, y la que cualquier donante quiere ver.' },
+    PRO: { paga: 'El proyecto ecoturístico: palapas con mesa, bancas y asador, bancas de la orilla, explanada, letrero de bienvenida y panel de caminatas.', cuando: 'La solicitud entra en marzo de 2027; la primera ministración, hasta la mitad, llega hacia junio, y el resto contra avance verificado. Todo se comprueba antes del 31 de diciembre de 2027.', regla: 'Pone hasta el 80% del proyecto y el grupo el 20%. Tope de $5,490 por m² o $75,000 por lote. Lo pide un grupo de La Florida: la UAQ acompaña y no puede ser solicitante.' },
+    MUN: { paga: 'En 2027, en especie: limpia, ruta de recolección, maquinaria y materiales. En 2028, como obra con recursos propios: estacionamiento, cerca de acceso, luminaria y muelle.', cuando: 'La especie se pide en febrero de 2027. La obra se pide entre agosto y mediados de octubre de 2027, y el presupuesto 2028 se aprueba en diciembre: el dinero existe desde enero de 2028.', regla: 'Sin FAIS, que no aplica en La Florida. La obra pide el visto bueno de Obras Públicas y de Protección Civil.' },
+    CNF: { paga: 'La planta nativa para los cuarenta árboles, la sombra de palapas y bancas y la reposición, y asesoría técnica.', cuando: 'El pedido va en febrero de 2027 y la planta llega con las lluvias, de junio a julio. Por confirmar con la oficina estatal.', regla: 'Da planta y asesoría en especie: no da dinero, ni jornales pagados, ni postes, flete o herramienta.' }
+  };
   var REFS = [
     ['Planta nativa de vivero, bolsa de 1 litro', 'pieza', 45, 'materiales'], ['Estaca viva de sauce o aile (corte propio)', 'pieza', 0, 'materiales'], ['Poste de madera de 2.2 m', 'pieza', 90, 'materiales'],
-    ['Poste de madera de 4 m para palapa', 'pieza', 350, 'materiales'], ['Palma para techo, por m² cubierto', 'm²', 180, 'materiales'],
+    ['Poste de madera de 4 m para palapa', 'pieza', 350, 'materiales'], ['Palma para techo, por m² cubierto', 'm²', 180, 'materiales'], ['Tablón de pino de 2.5 m', 'pieza', 250, 'materiales'],
     ['Alambre de púas, rollo de 500 m', 'rollo', 1400, 'materiales'], ['Grapas para cerco', 'kg', 60, 'materiales'], ['Cemento, bulto de 50 kg', 'bulto', 240, 'materiales'], ['Malla sombra 90%, 4 m de ancho', 'metro', 75, 'materiales'],
-    ['Costal de rafia', 'pieza', 8, 'materiales'], ['Estaca de madera para delimitar', 'pieza', 15, 'materiales'], ['Bote de basura de 120 L con tapa', 'pieza', 650, 'equipo'], ['Lámpara solar de poste, 100 W', 'pieza', 1200, 'equipo'],
-    ['Pintura esmalte, 4 L', 'cubeta', 420, 'materiales'], ['Letrero de lámina impreso, 60 por 40 cm', 'pieza', 350, 'materiales'], ['Tarima de pino usada', 'pieza', 100, 'materiales'], ['Banca rústica de tronco o tablón', 'pieza', 1200, 'materiales'], ['Manguera de media, rollo de 50 m', 'rollo', 550, 'equipo'],
-    ['Cubeta de 19 L', 'pieza', 60, 'equipo'], ['Pala o pico', 'pieza', 280, 'equipo'], ['Carretilla', 'pieza', 1300, 'equipo'], ['Jornal de la región', 'jornal', 300, 'gente'], ['Comida de faena, por persona', 'persona', 80, 'gente'],
-    ['Flete en camioneta, cabecera a La Florida', 'viaje', 600, 'traslado'], ['Gasolina', 'litro', 25.5, 'traslado'], ['Boya señalizadora de 30 cm', 'pieza', 450, 'materiales'], ['Fantasma luminiscente para poste', 'pieza', 35, 'materiales']
+    ['Costal de rafia', 'pieza', 8, 'materiales'], ['Estaca de madera para delimitar', 'pieza', 15, 'materiales'], ['Grava o revestimiento', 'm³', 450, 'materiales'],
+    ['Bote de basura de 120 L con tapa', 'pieza', 650, 'equipo'], ['Contenedor metálico a prueba de fauna, hecho por herrero', 'pieza', 4500, 'equipo'], ['Lámpara solar de poste, 100 W', 'pieza', 1200, 'equipo'],
+    ['Pintura esmalte, 4 L', 'cubeta', 420, 'materiales'], ['Letrero de lámina impreso, 60 por 40 cm', 'pieza', 350, 'materiales'], ['Lona impresa', 'm²', 150, 'materiales'], ['Impresión a color', 'hoja', 8, 'materiales'],
+    ['Tarima de pino usada', 'pieza', 100, 'materiales'], ['Banca rústica de tronco o tablón', 'pieza', 1200, 'materiales'], ['Manguera de media, rollo de 50 m', 'rollo', 550, 'equipo'],
+    ['Cubeta de 19 L', 'pieza', 60, 'equipo'], ['Pala o pico', 'pieza', 280, 'equipo'], ['Carretilla', 'pieza', 1300, 'equipo'], ['Renta de retroexcavadora', 'hora', 900, 'equipo'],
+    ['Jornal de la región', 'jornal', 300, 'gente'], ['Comida de faena, por persona', 'persona', 80, 'gente'],
+    ['Flete en camioneta, cabecera a La Florida', 'viaje', 600, 'traslado'], ['Pasaje Arroyo Seco a Jalpan, ida y vuelta', 'pasaje', 160, 'traslado'], ['Gasolina', 'litro', 25.5, 'traslado'],
+    ['Boya señalizadora de 30 cm', 'pieza', 450, 'materiales'], ['Fantasma luminiscente para poste', 'pieza', 35, 'materiales']
   ];
   var $ = function (id) { return document.getElementById(id); };
-  var estado = cargar();
-  var actividades = [];
+  function vacio() { return { version: 3, equipo: '', componente: '', partidas: [], sig: 1, flete: { si: false, cant: 1, precio: 0, bolsillo: 'AUT', forma: 'compra', mes: '', papel: '' }, imp: { si: true, pct: 5, nombre: 'el clavo que falta en domingo', bolsillo: 'AUT' }, pro: { unidad: 'm²', cant: 0 }, seCae: '' }; }
+  function normal(s) {
+    var v = vacio(); if (!s || !s.partidas) return v;
+    var e = { version: 3, equipo: s.equipo || '', componente: s.componente || '', partidas: [], sig: 1, flete: Object.assign(v.flete, s.flete || {}), imp: Object.assign(v.imp, s.imp || {}), pro: Object.assign(v.pro, s.pro || {}), seCae: s.seCae || '' };
+    s.partidas.forEach(function (p) { e.partidas.push(nueva(p, e)); });
+    return e;
+  }
+  function cargar() { try { var s = JSON.parse(localStorage.getItem(CLAVE)); if (s && s.version === 3) return normal(s); } catch (err) {} return vacio(); }
+  var estado = cargar(), relojAviso = null;
+  function aviso(texto, ms) {
+    var el = $('guardado'); el.textContent = texto; el.classList.add('ver');
+    clearTimeout(relojAviso); relojAviso = setTimeout(function () { el.classList.remove('ver'); }, ms || 4000);
+  }
+  function guardar() {
+    try { localStorage.setItem(CLAVE, JSON.stringify(estado)); aviso('Guardado en este navegador, ' + new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }), 1800); }
+    catch (err) { aviso('Este navegador no deja guardar: descarguen el archivo al terminar.', 8000); }
+  }
+  function nueva(p, e) {
+    p = p || {}; e = e || estado;
+    var act = actividadDe(p.actividad);
+    return { id: e.sig++, actividad: act ? act.id : (p.actividad || ''), que: p.que || '', unidad: p.unidad || '', cant: p.cant === undefined ? 1 : p.cant, precio: p.precio || 0, tipo: p.tipo || 'materiales', bolsillo: p.bolsillo || '', forma: p.forma || 'compra', mes: p.mes || '', papel: p.papel || '', cae: !!p.cae };
+  }
+  function acts() { return PRESA.actividades.filter(function (a) { return a.c === estado.componente; }); }
+  function opciones(lista, sel, vacioTxt) { return (vacioTxt !== undefined ? '<option value="">' + vacioTxt + '</option>' : '') + lista.map(function (o) { var v = o[0], t = o[1]; return '<option value="' + esc(v) + '"' + (v === sel ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join(''); }
+  var OP_BOL = BOLSILLOS.map(function (b) { return [b.id, b.corto]; });
+  var OP_FORMA = FORMAS.map(function (f) { return [f, f]; });
+  var OP_TIPO = TIPOS.map(function (t) { return [t, t]; });
+  var OP_MES = MESES.map(function (m) { return [m, mesTxt(m)]; });
+  function opAct(sel) {
+    var l = acts().map(function (a) { return [a.id, a.cod + ' · ' + (a.n.length > 58 ? a.n.slice(0, 57) + '…' : a.n) + ' (' + a.per + ')']; });
+    if (sel && !l.some(function (o) { return o[0] === sel; })) { var a = actividadDe(sel); l.push([sel, a ? a.cod + ' · ' + a.n : sel]); }
+    return opciones(l, sel, '¿para qué actividad?');
+  }
+  function colorBol(sel, id) { sel.style.setProperty('--c', BOLS[id] ? BOLS[id].color : '#CFE3DD'); }
 
-  function cargar() {
-    try { var s = JSON.parse(localStorage.getItem(CLAVE)); if (s && s.partidas && s.version === 2) return s; } catch (e) {}
-    return { version:2, equipo:'', componente:'', bolsa:0, minimo:0, partidas:[], sig:1, flete:{si:false, papel:'', cant:1, precio:0, fuente:'comprado'}, imp:{si:true, nombre:'', pct:5}, pro:[], sigPro:1, seCae:'' };
-  }
-  function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(estado)); $('guardado').textContent = 'Guardado en este navegador · ' + new Date().toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'}); } catch (e) { $('guardado').textContent = 'No se pudo guardar: descarga al terminar.'; } }
-  function pesos(n) { return '$' + Math.round(n).toLocaleString('es-MX', { maximumFractionDigits: 0 }); }
-  function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
-  function nueva(p) { p = p || {}; return { id: estado.sig++, actividad:p.actividad||'', que:p.que||'', unidad:p.unidad||'', cant:p.cant===undefined?1:p.cant, precio:p.precio||0, tipo:p.tipo||'materiales', fuente:p.fuente||'comprado', papel:p.papel||'', cae:false }; }
-  function total(p) { return (+p.cant || 0) * (+p.precio || 0); }
+  // ── tarjetas de los bolsillos
+  $('tarjetas').innerHTML = BOLSILLOS.map(function (b) { var t = TARJETAS[b.id]; return '<div class="bolsillo" style="--c:' + b.color + '"><h3><span class="punto"></span>' + esc(b.nombre) + '</h3><dl><dt>Qué paga en la presa</dt><dd>' + esc(t.paga) + '</dd><dt>Cuándo llega</dt><dd>' + esc(t.cuando) + '</dd><dt>Su regla</dt><dd>' + esc(t.regla) + '</dd></dl></div>'; }).join('');
 
-  function leerCrono() {
-    try { var c = JSON.parse(localStorage.getItem(CLAVE_CRONO)); if (c && c.filas) return c; } catch (e) {}
-    return null;
-  }
-  function traer() {
-    var c = leerCrono();
-    if (!c || !c.filas.length) { $('traidas').textContent = 'No hay cronograma guardado en este navegador: escribe las actividades a mano en cada partida.'; return; }
-    actividades = c.filas.map(function (f) { return { id:f.id, texto:f.id + ' · ' + f.actividad }; });
-    if (!estado.equipo && c.equipo) estado.equipo = c.equipo;
-    if (!estado.componente && c.componente) estado.componente = c.componente;
-    $('traidas').textContent = actividades.length + ' actividades del cronograma 2027 de ' + (c.equipo || 'su equipo') + '.';
-    pintar(); guardar();
-  }
-  function opcionesAct(sel) {
-    var o = '<option value="">para qué actividad</option>';
-    actividades.forEach(function (a) { o += '<option value="' + esc(a.texto) + '"' + (sel === a.texto ? ' selected' : '') + '>' + esc(a.texto.slice(0, 60)) + '</option>'; });
-    if (sel && !actividades.some(function (a) { return a.texto === sel; })) o += '<option value="' + esc(sel) + '" selected>' + esc(sel.slice(0, 60)) + '</option>';
-    o += '<option value="__otra">otra (escribir)</option>';
-    return o;
+  // ── el ejemplo
+  (function () {
+    var ej = normal(PRESA.ejemplo), s = calcular(ej);
+    var filas = ej.partidas.map(function (p) { var a = actividadDe(p.actividad), b = BOLS[p.bolsillo]; return '<tr><td>' + esc(a ? a.cod + ' · ' + a.n : p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + p.cant + ' ' + esc(p.unidad) + ' × ' + pesos(p.precio) + '</td><td>' + (b ? '<span class="punto" style="--c:' + b.color + '"></span>' + esc(b.corto) + ', ' + p.forma : '<b>sin bolsillo</b>') + '</td><td>' + mesTxt(p.mes) + '</td><td>' + esc(p.papel) + '</td><td class="m">' + pesos(totalDe(p)) + '</td></tr>'; }).join('');
+    $('tablaEjemplo').innerHTML = '<tr><th>Actividad</th><th>Qué</th><th>Cant. × precio</th><th>Bolsillo y forma</th><th>Mes</th><th>Papel</th><th>Total</th></tr>' + filas + '<tr><td colspan="6">Imponderables, ' + ej.imp.pct + '%: ' + esc(ej.imp.nombre) + '</td><td class="m">' + pesos(s.imp) + '</td></tr>';
+    $('resumenEjemplo').innerHTML = 'Total: <b>' + pesos(s.total) + '</b>. La autogestión pone todo, ' + pesos(s.bols.AUT.dinero) + ' en dinero (sobre todo el capital semilla) y ' + pesos(s.bols.AUT.especie) + ' en préstamo y faena. Lo que se cae primero: ' + esc(ej.seCae.charAt(0).toLowerCase() + ej.seCae.slice(1));
+  })();
+
+  // ── componente y actividades
+  $('componente').innerHTML = opciones(PRESA.componentes.map(function (c) { return [c.id, nombreComp(c.id)]; }), estado.componente, 'Elige el componente');
+  function pintarComponente() {
+    var c = componenteDe(estado.componente), l = acts();
+    $('deja').innerHTML = c ? '<b>Deja:</b> ' + esc(c.deja) + '.' : '';
+    $('sumActs').textContent = c ? 'Las ' + l.length + ' actividades del componente, del cronograma integrado' : 'Las actividades del componente';
+    $('tablaActs').innerHTML = c ? '<tr><th>Código</th><th>Actividad</th><th>Cuándo</th><th>Bolsillo sugerido</th><th>Responsable</th></tr>' + l.map(function (a) { var b = BOLS[a.f]; return '<tr><td class="cod">' + a.cod + '</td><td>' + esc(a.n) + '</td><td>' + esc(a.per) + '</td><td>' + (b ? '<span class="punto" style="--c:' + b.color + '"></span>' + esc(b.corto) : '<span class="ayuda">por decidir</span>') + '</td><td>' + esc(a.r) + '</td></tr>'; }).join('') : '';
+    $('cajaPro').hidden = !(estado.componente === '5' || estado.componente === '2' || estado.partidas.some(function (p) { return p.bolsillo === 'PRO'; }));
+    $('nRev').textContent = $('cajaPro').hidden ? '5' : '6'; $('nCot').textContent = $('cajaPro').hidden ? '6' : '7';
   }
 
-  function pintar() {
-    $('equipo').value = estado.equipo; $('componente').value = estado.componente; $('bolsa').value = estado.bolsa || ''; $('minimo').value = estado.minimo || ''; $('seCae').value = estado.seCae;
-    $('fleteSi').checked = estado.flete.si; $('fletePapel').value = estado.flete.papel; $('fleteCant').value = estado.flete.cant; $('fletePrecio').value = estado.flete.precio || ''; $('fleteFuente').value = estado.flete.fuente;
-    $('impSi').checked = estado.imp.si; $('impNombre').value = estado.imp.nombre; $('impPct').value = estado.imp.pct;
-    var rev = revisar();
-    var cuerpo = $('cuerpo'); cuerpo.innerHTML = '';
+  // ── la tabla de partidas
+  function filaHTML(p) {
+    var n = ' de la partida ' + p.id;
+    return '<tr data-id="' + p.id + '">'
+      + '<td class="num">' + p.id + '</td>'
+      + '<td><div class="par"><select data-k="actividad" aria-label="Actividad' + n + '">' + opAct(p.actividad) + '</select>'
+      + '<textarea data-k="que" rows="2" placeholder="qué es, exactamente: medida, material, para qué" aria-label="Descripción' + n + '">' + esc(p.que) + '</textarea></div></td>'
+      + '<td><div class="cuanto"><input type="number" data-k="cant" min="0" step="any" value="' + esc(p.cant) + '" aria-label="Cantidad' + n + '">'
+      + '<input type="text" data-k="unidad" value="' + esc(p.unidad) + '" placeholder="unidad" aria-label="Unidad' + n + '">'
+      + '<span class="por">× $</span><input type="number" data-k="precio" min="0" step="any" value="' + esc(p.precio) + '" aria-label="Precio por unidad' + n + '"></div></td>'
+      + '<td><div class="par"><select data-k="bolsillo" class="bol" aria-label="Bolsillo' + n + '">' + opciones(OP_BOL, p.bolsillo, '¿quién paga?') + '</select>'
+      + '<select data-k="mes" aria-label="Mes' + n + '">' + opciones(OP_MES, p.mes, '¿en qué mes?') + '</select></div></td>'
+      + '<td><div class="par"><select data-k="tipo" aria-label="Tipo' + n + '">' + opciones(OP_TIPO, p.tipo) + '</select>'
+      + '<select data-k="forma" aria-label="Forma' + n + '">' + opciones(OP_FORMA, p.forma) + '</select></div></td>'
+      + '<td><textarea data-k="papel" rows="2" placeholder="cotización, fecha, quién" aria-label="Papel' + n + '">' + esc(p.papel) + '</textarea></td>'
+      + '<td class="monto"><div class="m">' + pesos(totalDe(p)) + '</div><div class="marca"></div>'
+      + '<label class="cae" title="Lo que se suelta primero si un bolsillo no llega"><input type="checkbox" data-k="cae"' + (p.cae ? ' checked' : '') + '>se cae 1º</label></td>'
+      + '<td><button class="btn peligro chico" type="button" data-quitar="' + p.id + '" title="Quitar la partida" aria-label="Quitar la partida ' + p.id + '">×</button></td></tr>';
+  }
+  function pintarTabla() {
+    $('cuerpo').innerHTML = estado.partidas.map(filaHTML).join('');
+    $('cuerpo').querySelectorAll('select.bol').forEach(function (s) { colorBol(s, s.value); });
+  }
+  function pintarFijos() {
+    $('fleteSi').checked = estado.flete.si; $('fletePapel').value = estado.flete.papel; $('fleteCant').value = estado.flete.cant; $('fletePrecio').value = estado.flete.precio;
+    $('fleteBolsillo').innerHTML = opciones(OP_BOL, estado.flete.bolsillo); $('fleteForma').innerHTML = opciones(OP_FORMA, estado.flete.forma); $('fleteMes').innerHTML = opciones(OP_MES, estado.flete.mes, '¿cuándo?');
+    $('impSi').checked = estado.imp.si; $('impNombre').value = estado.imp.nombre; $('impPct').value = estado.imp.pct; $('impBolsillo').innerHTML = opciones(OP_BOL, estado.imp.bolsillo);
+    colorBol($('fleteBolsillo'), estado.flete.bolsillo); colorBol($('impBolsillo'), estado.imp.bolsillo);
+    $('proUnidad').value = estado.pro.unidad; $('proCant').value = estado.pro.cant || ''; $('seCae').value = estado.seCae; $('equipo').value = estado.equipo; $('componente').value = estado.componente;
+  }
+  function pintarTodo() { pintarComponente(); pintarTabla(); pintarFijos(); refrescar(); }
+
+  // ── sumas, reloj, PROCODES y revisión
+  function refrescar() {
+    var s = calcular(estado), rev = revisar(estado, s);
     estado.partidas.forEach(function (p) {
-      var tr = document.createElement('tr'); tr.dataset.id = p.id; if (rev.porFila[p.id]) tr.classList.add('mal');
-      var esFondo = p.fuente === 'comprado';
-      tr.innerHTML = '<td class="num" title="' + esc(rev.porFila[p.id] || '') + '">' + p.id + '</td>'
-        + '<td>' + (actividades.length ? '<select data-k="actividad">' + opcionesAct(p.actividad) + '</select>' : '<input type="text" data-k="actividad" value="' + esc(p.actividad) + '" placeholder="para qué actividad">') + '</td>'
-        + '<td><textarea data-k="que" placeholder="malla sombra de 6 por 4 m...">' + esc(p.que) + '</textarea></td>'
-        + '<td><input type="text" data-k="unidad" value="' + esc(p.unidad) + '" placeholder="pieza, m, jornal"></td>'
-        + '<td><input type="number" data-k="cant" min="0" step="0.5" value="' + p.cant + '"></td>'
-        + '<td><input type="number" data-k="precio" min="0" step="0.5" value="' + (p.precio || '') + '"></td>'
-        + '<td><select data-k="tipo">' + TIPOS.map(function (t) { return '<option' + (p.tipo === t ? ' selected' : '') + '>' + t + '</option>'; }).join('') + '</select></td>'
-        + '<td><select data-k="fuente">' + FUENTES.map(function (t) { return '<option' + (p.fuente === t ? ' selected' : '') + '>' + t + '</option>'; }).join('') + '</select></td>'
-        + '<td><input type="text" data-k="papel" value="' + esc(p.papel) + '" placeholder="Ferretería X, 2 nov"></td>'
-        + '<td class="monto">' + (esFondo ? pesos(total(p)) : '') + '</td><td class="monto afuera">' + (!esFondo ? pesos(total(p)) : '') + '</td>'
-        + '<td style="text-align:center"><input type="checkbox" data-k="cae"' + (p.cae ? ' checked' : '') + '></td>'
-        + '<td><button class="btn claro chico" data-quitar="' + p.id + '">×</button></td>';
-      cuerpo.appendChild(tr);
+      var tr = $('cuerpo').querySelector('tr[data-id="' + p.id + '"]'); if (!tr) return;
+      tr.querySelector('.monto .m').textContent = pesos(totalDe(p));
+      tr.querySelector('.monto .marca').textContent = rev.fila[p.id] || '';
+      tr.className = rev.fila[p.id] ? 'mal' : '';
     });
-    var cp = $('cuerpoPro'); cp.innerHTML = '';
-    estado.pro.forEach(function (p) {
-      var tr = document.createElement('tr'); tr.dataset.id = p.id;
-      tr.innerHTML = '<td class="num">' + p.id + '</td><td><input type="text" data-k="concepto" value="' + esc(p.concepto) + '" placeholder="restauración de suelos, vivero..."></td><td><input type="text" data-k="unidad" value="' + esc(p.unidad) + '" placeholder="ha, m², evento"></td><td><input type="number" data-k="meta" min="0" step="0.1" value="' + p.meta + '"></td><td><input type="number" data-k="costo" min="0" step="10" value="' + (p.costo || '') + '"></td><td class="monto">' + pesos((+p.meta || 0) * (+p.costo || 0)) + '</td><td><button class="btn claro chico" data-quitarpro="' + p.id + '">×</button></td>';
-      cp.appendChild(tr);
-    });
-    pintarSumas(rev);
-  }
-
-  function sumas() {
-    var fondo = 0, afuera = 0, porTipo = {}, porFuente = {};
-    TIPOS.forEach(function (t) { porTipo[t] = 0; }); FUENTES.forEach(function (f) { porFuente[f] = 0; });
-    estado.partidas.forEach(function (p) { var t = total(p); if (p.fuente === 'comprado') fondo += t; else afuera += t; porTipo[p.tipo] = (porTipo[p.tipo] || 0) + t; porFuente[p.fuente] = (porFuente[p.fuente] || 0) + t; });
-    var flete = estado.flete.si ? (+estado.flete.cant || 0) * (+estado.flete.precio || 0) : 0;
-    var fleteFondo = estado.flete.fuente === 'comprado' ? flete : 0, fleteAfuera = flete - fleteFondo;
-    porTipo.traslado += flete; porFuente[estado.flete.fuente] += flete;
-    var sub = fondo + fleteFondo;
-    var imp = estado.imp.si ? sub * (+estado.imp.pct || 0) / 100 : 0;
-    return { fondo: sub + imp, afuera: afuera + fleteAfuera, subFondo: sub, flete: flete, fleteFondo: fleteFondo, fleteAfuera: fleteAfuera, imp: imp, porTipo: porTipo, porFuente: porFuente };
-  }
-  function pintarSumas(rev) {
-    var s = sumas(), tope = +estado.bolsa || 0, minimo = +estado.minimo || 0;
-    $('fleteFondo').textContent = pesos(s.fleteFondo); $('fleteAfuera').textContent = s.fleteAfuera ? pesos(s.fleteAfuera) : ''; $('impFondo').textContent = pesos(s.imp);
-    $('tFondo').querySelector('.v').textContent = pesos(s.fondo); $('tAfuera').querySelector('.v').textContent = pesos(s.afuera); $('tTotal').querySelector('.v').textContent = pesos(s.fondo + s.afuera);
-    var nota = '', alarma = false;
-    if (s.fondo > 0 && minimo && s.fondo < minimo) { nota = 'Abajo del mínimo de ' + pesos(minimo) + ' que fija la convocatoria.'; alarma = true; }
-    else if (tope && s.fondo > tope) { nota = 'Más que el tope de ' + pesos(tope) + ': se desecha sin evaluar.'; alarma = true; }
-    else if (tope && s.fondo > tope * 0.9) { nota = 'Pegado al tope de ' + pesos(tope) + ': sin margen para el imprevisto.'; alarma = true; }
-    else if (tope && s.fondo > 0) nota = 'Cabe en el tope de ' + pesos(tope) + '.';
-    else if (s.fondo > 0) nota = 'Sin tope capturado: cuando tengan la convocatoria, pónganlo arriba.';
-    $('tFondo').querySelector('.nota').textContent = nota; $('tFondo').classList.toggle('alarma', alarma);
-    var max = Math.max(1, s.fondo + s.afuera);
-    $('porTipo').innerHTML = TIPOS.map(function (t) { return '<div class="barra"><span>' + t + '</span><div class="b"><i style="width:' + (100 * s.porTipo[t] / max) + '%"></i></div><span class="m">' + pesos(s.porTipo[t]) + '</span></div>'; }).join('');
-    $('porFuente').innerHTML = FUENTES.map(function (f) { return '<div class="barra' + (f === 'comprado' ? '' : ' ar') + '"><span>' + f + '</span><div class="b"><i style="width:' + (100 * s.porFuente[f] / max) + '%"></i></div><span class="m">' + pesos(s.porFuente[f]) + '</span></div>'; }).join('');
-    var tp = 0; estado.pro.forEach(function (p) { tp += (+p.meta || 0) * (+p.costo || 0); }); $('totalPro').textContent = pesos(tp);
+    $('fleteTotal').textContent = pesos(s.flete); $('impTotal').textContent = pesos(s.imp);
+    // totales por bolsillo
+    var t = '<div class="total grande"><div class="t">El tamaño real del proyecto</div><div class="v">' + pesos(s.total) + '</div><div class="nota">' + pesos(s.dinero) + ' en dinero y ' + pesos(s.especie) + ' en especie, valorizado</div></div>';
+    t += BOLSILLOS.map(function (b) { var x = s.bols[b.id], tot = x.dinero + x.especie; return '<div class="total b" style="--c:' + b.color + '"><div class="t">' + esc(b.corto) + '</div><div class="v">' + pesos(tot) + '</div><div class="nota">' + (tot ? pesos(x.dinero) + ' en dinero · ' + pesos(x.especie) + ' en especie' + (s.total ? ' · ' + Math.round(100 * tot / s.total) + '% del proyecto' : '') : 'todavía nada') + '</div></div>'; }).join('');
+    if (s.sinBolsillo) t += '<div class="total" style="border-color:var(--rojo)"><div class="t">Sin bolsillo</div><div class="v" style="color:var(--rojo)">' + pesos(s.sinBolsillo) + '</div><div class="nota">todavía no tiene quién lo pague</div></div>';
+    $('totales').innerHTML = t;
+    var max = Math.max.apply(null, TIPOS.map(function (k) { return s.tipos[k]; }).concat([1]));
+    $('porTipo').innerHTML = TIPOS.map(function (k) { return '<div class="barra"><span>' + k + '</span><div class="b"><i style="width:' + (100 * s.tipos[k] / max) + '%"></i></div><span class="m">' + pesos(s.tipos[k]) + '</span></div>'; }).join('');
+    pintarReloj(s);
+    pintarPro(s);
     var ul = $('revision'); ul.innerHTML = '';
-    if (!estado.partidas.length) ul.innerHTML = '<li class="ojo"><b>Todavía no hay partidas.</b> Agrega la primera o crea una por cada actividad del cronograma.</li>';
-    else rev.lista.forEach(function (r) { var li = document.createElement('li'); li.className = r.clase; li.innerHTML = '<b>' + r.titulo + '</b>' + esc(r.texto); ul.appendChild(li); });
+    rev.lista.forEach(function (r) { var li = document.createElement('li'); li.className = r.clase; li.innerHTML = '<b>' + esc(r.titulo) + '</b>' + esc(r.texto); ul.appendChild(li); });
+    pintarFalta();
+    return s;
+  }
+  function pintarReloj(s) {
+    var filas = BOLSILLOS.slice(), malos = {};
+    estado.partidas.forEach(function (p) { if (cuandoMal(p)) malos[p.mes + '|' + p.bolsillo] = 1; });
+    if (estado.flete.si && cuandoMal(estado.flete)) malos[estado.flete.mes + '|' + estado.flete.bolsillo] = 1;
+    if (s.sinBolsillo) filas.push({ id: '', corto: 'Sin bolsillo', color: '#8A3B2B', claro: '#F4F7F6' });
+    var anios = {}; MESES.forEach(function (m) { var a = m.slice(0, 4); anios[a] = (anios[a] || 0) + 1; });
+    var h = '<colgroup><col style="width:9.2em">' + MESES.map(function () { return '<col>'; }).join('') + '</colgroup>';
+    h += '<tr><th></th>' + Object.keys(anios).map(function (a) { return '<th class="anio" colspan="' + anios[a] + '">' + a + '</th>'; }).join('') + '</tr>';
+    h += '<tr><th class="unidad">en miles de $</th>' + MESES.map(function (m) { return '<th>' + MESES_TXT[+m.slice(5) - 1] + '</th>'; }).join('') + '</tr>';
+    filas.forEach(function (b) {
+      h += '<tr style="--claro:' + b.claro + '"><td class="nom"><span class="punto" style="--c:' + b.color + '"></span>' + esc(b.corto) + '</td>';
+      MESES.forEach(function (m) {
+        var v = s.mes[m] && s.mes[m][b.id] || 0, cls = [];
+        if (b.id === 'AUT' || (b.id === 'PRO' && m >= VENTANA.PRO.desde && m <= VENTANA.PRO.hasta) || (b.id === 'MUN' && m >= VENTANA.MUN.especie) || (b.id === 'CNF' && m >= VENTANA.CNF.desde)) cls.push('ventana');
+        if (v) cls.push('gasto'); if (malos[m + '|' + b.id]) cls.push('fuera');
+        h += '<td class="' + cls.join(' ') + '" title="' + esc(b.corto + ', ' + mesLargo(m) + (v ? ': ' + pesos(v) : '')) + '">' + enMiles(v) + '</td>';
+      });
+      h += '</tr>';
+    });
+    h += '<tr class="suma"><td class="nom">Total del mes</td>' + MESES.map(function (m) { var v = 0; if (s.mes[m]) for (var k in s.mes[m]) v += s.mes[m][k]; return '<td title="' + esc(mesLargo(m) + (v ? ': ' + pesos(v) : '')) + '">' + enMiles(v) + '</td>'; }).join('') + '</tr>';
+    $('reloj').innerHTML = h;
+    $('leyendaReloj').innerHTML = BOLSILLOS.map(function (b) { return '<span><i style="background:' + b.claro + '"></i>' + esc(b.corto) + ' puede pagar</span>'; }).join('') + '<span><i style="box-shadow:inset 0 0 0 2px #8A3B2B"></i>fuera de su tiempo</span><span>El Ayuntamiento: especie desde febrero de 2027, dinero de obra desde enero de 2028.</span>';
+    var pico = '', vPico = 0, antes = 0;
+    MESES.forEach(function (m) { var v = 0; if (s.mes[m]) for (var k in s.mes[m]) v += s.mes[m][k]; if (v > vPico) { vPico = v; pico = m; } if (m < '2027-06') antes += v; });
+    $('lecturaReloj').innerHTML = vPico ? 'El mes más cargado es <b>' + mesLargo(pico) + '</b>, con ' + pesos(vPico) + '. Antes de junio de 2027 se necesitan ' + pesos(antes) + ': eso solo lo pueden poner la autogestión y el apoyo en especie, porque ningún fondo ha depositado todavía.' : '';
+  }
+  function pintarPro(s) {
+    var p = s.pro, h = '';
+    $('proTope').textContent = pesos(p.tope);
+    if (!p.hay) { $('proLectura').innerHTML = '<p class="ayuda">Todavía no hay partidas en el bolsillo de PROCODES.</p>'; return; }
+    h += '<p>PROCODES pondría <b>' + pesos(p.monto) + '</b> y el grupo <b>' + pesos(p.grupo) + '</b> en las actividades del proyecto PROCODES: el programa pone el <b>' + Math.round(100 * p.pct) + '%</b> de ese proyecto de ' + pesos(p.proyecto) + '.</p>';
+    if (p.pct > 0.8 + 1e-9) h += '<p class="aviso">Pasa del 80%: el grupo tiene que poner al menos ' + pesos(p.monto / 4 - p.grupo) + ' más en jornales, materiales o dinero, en autogestión y colgado de las actividades del proyecto PROCODES.</p>';
+    if (p.cant > 0) {
+      var rango = p.unidad === 'lote' ? (p.cant < 1 || p.cant > 6) : (p.cant < 30 || p.cant > 180);
+      if (rango) h += '<p class="aviso">' + (p.unidad === 'lote' ? 'Se piden de 1 a 6 lotes.' : 'Se piden de 30 a 180 metros cuadrados.') + '</p>';
+      h += p.monto > p.tope ? '<p class="aviso">Lo que se le pide (' + pesos(p.monto) + ') pasa el tope de ' + pesos(p.tope) + '.</p>' : '<p>Lo que se le pide cabe en el tope de ' + pesos(p.tope) + '.</p>';
+    } else h += '<p class="ayuda">Escriban cuántos metros cuadrados de palapa techada o cuántos lotes se pedirían, para comparar contra el tope.</p>';
+    if (p.proyecto > PRO_UMBRAL) h += '<p class="aviso">El proyecto PROCODES pasa de $300,000: la solicitud pide estudio de factibilidad (campos 36 y 39.5 del formato).</p>';
+    $('proLectura').innerHTML = h;
+  }
+  function faltan() { return estado.partidas.filter(function (p) { if (!(p.que || '').trim()) return false; var sin = !(p.papel || '').trim() || /o[ií]das|aprox|creo|m[aá]s o menos|por pedir|pendiente|falta/i.test(p.papel); return esDinero(p) && (totalDe(p) >= 1000 || !(+p.precio)) && sin; }); }
+  function pintarFalta() {
+    var l = faltan();
+    $('faltaCotizar').innerHTML = l.length ? '<ul>' + l.map(function (p) { return '<li><b>#' + p.id + '</b> ' + esc(p.que || '(sin descripción)') + ' · ' + p.cant + ' ' + esc(p.unidad) + (+p.precio ? ', hoy en ' + pesos(totalDe(p)) + ' de referencia' : ', sin precio todavía') + '</li>'; }).join('') + '</ul>' : '<p class="ayuda">No hay partidas de mil pesos o más sin cotización. Si todavía no hay partidas, esta lista se llena sola.</p>';
   }
 
-  /* Los seis agujeros */
-  function revisar() {
-    var ps = estado.partidas, porFila = {}, lista = [], s = sumas(), tope = +estado.bolsa || 0;
-    function marca(p, t) { porFila[p.id] = (porFila[p.id] ? porFila[p.id] + ' · ' : '') + t; }
-    function r(n, titulo, texto, clase) { lista.push({ clase: clase || (n ? 'mal' : 'bien'), titulo: titulo, texto: texto }); }
-    var oidas = ps.filter(function (p) { var sin = !(p.papel || '').trim() || /o[ií]das|aprox|creo|más o menos/i.test(p.papel); if (sin && total(p) >= 1000) { marca(p, 'precio sin papel'); return true; } return false; });
-    r(oidas.length, 'El precio de oídas', oidas.length ? 'Partidas de mil pesos o más sin cotización: ' + oidas.map(function (p) { return p.id; }).join(', ') + '. Casi todas las convocatorias piden tres por rubro, dos por escrito.' : 'Todo lo que pasa de mil pesos trae su papel.');
-    var bolsa = ps.filter(function (p) { var b = !(p.actividad || '').trim() || /varios|diversos|etc|misc/i.test(p.que) || (s.fondo > 0 && p.fuente === 'comprado' && total(p) > s.fondo * 0.5 && ps.length > 2); if (b) marca(p, 'partida bolsa'); return b; });
-    r(bolsa.length, 'La partida bolsa', bolsa.length ? 'Renglones gordos o que no dicen para qué actividad son: ' + bolsa.map(function (p) { return p.id; }).join(', ') + '. Se parten hasta que cada uno diga qué es y para qué.' : 'Cada partida dice qué es y a qué actividad sirve.');
-    var hayMaterial = ps.some(function (p) { return (p.tipo === 'materiales' || p.tipo === 'equipo') && total(p) > 0; });
-    var hayFlete = estado.flete.si || ps.some(function (p) { return p.tipo === 'traslado' && total(p) > 0; });
-    r(hayMaterial && !hayFlete ? 1 : 0, 'El flete olvidado', hayMaterial && !hayFlete ? 'Hay materiales o equipo y ningún renglón de traslado: ¿cómo llegan de la cabecera a la orilla? Marca el flete o agrégalo como partida.' : 'El traslado tiene su renglón.');
-    r(estado.imp.si ? 0 : 1, 'El presupuesto al centavo', estado.imp.si ? 'Hay imponderables (' + estado.imp.pct + '%)' + (estado.imp.nombre ? ', con nombre: ' + estado.imp.nombre + '.' : '; ponles nombre.') : 'Sin imponderables. Un presupuesto exacto al centavo es optimismo disfrazado de contabilidad.', estado.imp.si && !estado.imp.nombre ? 'ojo' : null);
-    var doble = [], vistos = {};
-    ps.forEach(function (p) { var k = (p.que || '').trim().toLowerCase().slice(0, 25); if (!k) return; if (vistos[k] && vistos[k] !== p.fuente) { doble.push(p); marca(p, 'está en las dos columnas'); } vistos[k] = vistos[k] || p.fuente; });
-    r(doble.length, 'El doble papel', doble.length ? 'Lo mismo aparece comprado y conseguido afuera: ' + doble.map(function (p) { return p.id; }).join(', ') + '. Cada cosa vive en una sola columna.' : 'Nada se cobra al donante y se cuenta como contrapartida a la vez.');
-    var pecado = ps.filter(function (p) { var mal = p.fuente === 'comprado' && (/honorario|sueldo|pago al equipo|nuestro trabajo/i.test(p.que) || (p.tipo === 'gente' && /equipo|nosotr|estudiante/i.test(p.que)) || (/comida|refresco|torta|pizza/i.test(p.que) && !/faena/i.test(p.que + ' ' + p.actividad))); if (mal) marca(p, 'casi ningún donante lo paga'); return mal; });
-    var excede = tope && s.fondo > tope;
-    r(pecado.length || excede ? 1 : 0, 'El pecado mayor', (pecado.length ? 'Casi ningún donante paga honorarios del propio equipo sin justificarlos ni comida que no sea de faena: ' + pecado.map(function (p) { return p.id; }).join(', ') + '. ' : '') + (excede ? 'Y el total pide más que el tope de la convocatoria. ' : '') + (!pecado.length && !excede ? 'Nada de lo pedido está fuera de lo que una convocatoria suele permitir.' : 'Se desecha sin evaluar.'));
-    var cae = ps.filter(function (p) { return p.cae; });
-    r(cae.length ? 0 : 1, 'Lo que se cae primero', cae.length ? 'Marcado: ' + cae.map(function (p) { return p.id; }).join(', ') + '. El donante lo va a preguntar y ustedes contestan en tres segundos.' : 'Ninguna partida está marcada como la que se cae si el dinero llega parcial. Decídanlo hoy.', cae.length ? 'bien' : 'ojo');
-    return { lista: lista, porFila: porFila };
-  }
-
-  /* Eventos */
-  function filaDe(el) { var tr = el.closest('tr'); return tr ? +tr.dataset.id : null; }
-  $('cuerpo').addEventListener('input', function (e) {
-    var el = e.target, id = filaDe(el), p = estado.partidas.filter(function (x) { return x.id === id; })[0]; if (!p) return;
-    var k = el.dataset.k; if (!k) return;
-    if (k === 'actividad' && el.value === '__otra') { var t = prompt('¿Para qué actividad es esta partida?', ''); if (t) { actividades.push({ id: 0, texto: t }); p.actividad = t; } pintar(); guardar(); return; }
-    if (el.type === 'checkbox') p[k] = el.checked; else if (k === 'cant' || k === 'precio') p[k] = parseFloat(el.value) || 0; else p[k] = el.value;
-    guardar();
-    if (k === 'que' || k === 'unidad' || k === 'papel' || k === 'actividad') { refrescarLigero(); } else { pintar(); }
+  // ── eventos de la tabla
+  function partidaDe(el) { var tr = el.closest('tr'); var id = tr ? +tr.dataset.id : null; return estado.partidas.filter(function (x) { return x.id === id; })[0]; }
+  $('cuerpo').addEventListener('input', function (ev) {
+    var el = ev.target, p = partidaDe(el), k = el.dataset.k; if (!p || !k) return;
+    if (k === 'cae') p.cae = el.checked; else if (k === 'cant' || k === 'precio') p[k] = parseFloat(el.value) || 0; else p[k] = el.value;
+    if (k === 'actividad') { var a = actividadDe(el.value), tr = el.closest('tr'); if (a) { if (!p.mes) { p.mes = a.mes; tr.querySelector('[data-k="mes"]').value = a.mes; } if (!p.bolsillo && a.f) { p.bolsillo = a.f; var sb = tr.querySelector('[data-k="bolsillo"]'); sb.value = a.f; colorBol(sb, a.f); } } }
+    if (k === 'bolsillo') { colorBol(el, el.value); if (el.value === 'PRO') pintarComponente(); }
+    guardar(); refrescar();
   });
-  function refrescarLigero() { var rev = revisar(); estado.partidas.forEach(function (p) { var tr = $('cuerpo').querySelector('tr[data-id="' + p.id + '"]'); if (tr) { tr.classList.toggle('mal', !!rev.porFila[p.id]); tr.querySelector('.num').title = rev.porFila[p.id] || ''; } }); pintarSumas(rev); }
-  $('cuerpo').addEventListener('click', function (e) { var b = e.target.closest('[data-quitar]'); if (!b) return; estado.partidas = estado.partidas.filter(function (p) { return p.id !== +b.dataset.quitar; }); pintar(); guardar(); });
-  $('cuerpoPro').addEventListener('input', function (e) { var el = e.target, id = filaDe(el), p = estado.pro.filter(function (x) { return x.id === id; })[0]; if (!p) return; var k = el.dataset.k; p[k] = (k === 'meta' || k === 'costo') ? (parseFloat(el.value) || 0) : el.value; guardar(); if (k === 'meta' || k === 'costo') pintar(); });
-  $('cuerpoPro').addEventListener('click', function (e) { var b = e.target.closest('[data-quitarpro]'); if (!b) return; estado.pro = estado.pro.filter(function (p) { return p.id !== +b.dataset.quitarpro; }); pintar(); guardar(); });
-  $('agregar').addEventListener('click', function () { estado.partidas.push(nueva()); pintar(); guardar(); });
-  $('agregarPro').addEventListener('click', function () { estado.pro.push({ id: estado.sigPro++, concepto: '', unidad: '', meta: 1, costo: 0 }); pintar(); guardar(); });
+  $('cuerpo').addEventListener('change', function (ev) { if (ev.target.type === 'checkbox') { var p = partidaDe(ev.target); if (p) { p.cae = ev.target.checked; guardar(); refrescar(); } } });
+  $('cuerpo').addEventListener('click', function (ev) { var b = ev.target.closest('[data-quitar]'); if (!b) return; estado.partidas = estado.partidas.filter(function (p) { return p.id !== +b.dataset.quitar; }); pintarTabla(); guardar(); refrescar(); });
+  $('agregar').addEventListener('click', function () { estado.partidas.push(nueva()); pintarTabla(); guardar(); refrescar(); });
   $('porActividad').addEventListener('click', function () {
-    if (!actividades.length) traer();
-    if (!actividades.length) { alert('No hay cronograma guardado en este navegador.'); return; }
-    actividades.forEach(function (a) { if (!estado.partidas.some(function (p) { return p.actividad === a.texto; })) estado.partidas.push(nueva({ actividad: a.texto })); });
-    pintar(); guardar();
+    if (!estado.componente) { alert('Primero elijan el componente.'); return; }
+    var n = 0; acts().forEach(function (a) { if (!estado.partidas.some(function (p) { return p.actividad === a.id; })) { estado.partidas.push(nueva({ actividad: a.id, mes: a.mes, bolsillo: a.f })); n++; } });
+    pintarTabla(); guardar(); refrescar(); aviso(n + ' partidas nuevas, una por actividad.', 4000);
   });
-  $('traer').addEventListener('click', traer);
+  $('equipo').addEventListener('input', function () { estado.equipo = this.value; guardar(); });
+  $('componente').addEventListener('change', function () {
+    var antes = estado.componente; estado.componente = this.value;
+    if (antes && antes !== this.value && estado.partidas.length && !confirm('Las partidas que ya escribieron se quedan; las actividades de la lista cambian al nuevo componente. ¿Seguimos?')) { estado.componente = antes; this.value = antes; return; }
+    pintarComponente(); pintarTabla(); guardar(); refrescar();
+  });
+  $('seCae').addEventListener('input', function () { estado.seCae = this.value; guardar(); });
+  $('fleteSi').addEventListener('change', function () { estado.flete.si = this.checked; if (this.checked && !estado.flete.mes) { var m = estado.partidas.filter(function (p) { return p.tipo === 'materiales' && p.mes; }).map(function (p) { return p.mes; }).sort()[0]; if (m) { estado.flete.mes = m; $('fleteMes').value = m; } } guardar(); refrescar(); });
+  ['fletePapel', 'fleteCant', 'fletePrecio', 'fleteBolsillo', 'fleteForma', 'fleteMes'].forEach(function (id) { $(id).addEventListener('input', function () { var k = id.replace('flete', '').toLowerCase(); estado.flete[k] = (k === 'cant' || k === 'precio') ? parseFloat(this.value) || 0 : this.value; if (k === 'bolsillo') colorBol(this, this.value); guardar(); refrescar(); }); });
+  $('impSi').addEventListener('change', function () { estado.imp.si = this.checked; guardar(); refrescar(); });
+  $('impNombre').addEventListener('input', function () { estado.imp.nombre = this.value; guardar(); });
+  $('impPct').addEventListener('input', function () { estado.imp.pct = parseFloat(this.value) || 0; guardar(); refrescar(); });
+  $('impBolsillo').addEventListener('input', function () { estado.imp.bolsillo = this.value; colorBol(this, this.value); guardar(); refrescar(); });
+  $('proUnidad').addEventListener('change', function () { estado.pro.unidad = this.value; guardar(); refrescar(); });
+  $('proCant').addEventListener('input', function () { estado.pro.cant = parseFloat(this.value) || 0; guardar(); refrescar(); });
+
+  // ── precios de referencia
+  $('refs').innerHTML = '<tr><th>Qué</th><th>Unidad</th><th>Precio de oídas</th><th>Tipo</th><th></th></tr>' + REFS.map(function (r, i) { return '<tr><td>' + esc(r[0]) + '</td><td>' + r[1] + '</td><td>' + pesos(r[2]) + '</td><td>' + r[3] + '</td><td><button class="btn claro chico" type="button" data-ref="' + i + '">usar</button></td></tr>'; }).join('');
+  $('refs').addEventListener('click', function (ev) { var b = ev.target.closest('[data-ref]'); if (!b) return; var r = REFS[+b.dataset.ref]; estado.partidas.push(nueva({ que: r[0], unidad: r[1], precio: r[2], tipo: r[3], forma: r[3] === 'gente' && /jornal/i.test(r[0]) ? 'faena' : 'compra', papel: 'de oídas: falta cotización' })); pintarTabla(); guardar(); refrescar(); $('tabla').scrollIntoView({ behavior: 'smooth', block: 'end' }); });
+
+  // ── el ejemplo, cargado en la hoja
   $('verEjemplo').addEventListener('click', function () {
-    if (estado.partidas.length && !confirm('Esto reemplaza lo que hay en la tabla por el ejemplo del manantial. ¿Seguimos?')) return;
-    estado.sig = 1; estado.partidas = [
-      nueva({ actividad:'8 · Faena 2: tender la malla y acomodar las tarimas', que:'Malla sombra 90%, 6 por 4 m', unidad:'pieza', cant:1, precio:2850, tipo:'materiales', fuente:'comprado', papel:'Ferretería del pueblo, 2 nov' }),
-      nueva({ actividad:'7 · Faena 1: hincar los postes y colar las bases', que:'Poste de madera de 2.2 m', unidad:'pieza', cant:10, precio:190, tipo:'materiales', fuente:'comprado', papel:'Maderería de la cabecera, 2 nov' }),
-      nueva({ actividad:'7 · Faena 1: hincar los postes y colar las bases', que:'Cemento gris, bulto de 50 kg', unidad:'bulto', cant:2, precio:340, tipo:'materiales', fuente:'comprado', papel:'Ferretería del pueblo, 2 nov' }),
-      nueva({ actividad:'8 · Faena 2: tender la malla y acomodar las tarimas', que:'Tarimas de pino de la bodega, trocadas por barrer el rincón', unidad:'pieza', cant:12, precio:100, tipo:'materiales', fuente:'trocado', papel:'Nota firmada y foto, 20 feb' }),
-      nueva({ actividad:'7 y 8 · Las dos faenas', que:'Jornal de la faena, ocho personas por dos jornadas', unidad:'jornal', cant:16, precio:300, tipo:'gente', fuente:'donado', papel:'Jornal de la región; lista de asistencia' })
-    ];
-    estado.partidas[1].cae = true;
-    estado.flete = { si:true, papel:'El fletero del pueblo, de la cabecera al manantial, 3 mar', cant:1, precio:400, fuente:'comprado' };
-    estado.imp = { si:true, nombre:'el clavo que falta en domingo: grapas, alambre, un bulto más', pct:5 };
-    estado.seCae = 'Se caen los postes nuevos: se cambian por troncos del monte con permiso del comité. La malla y el cemento se quedan, que son lo que no se consigue afuera.';
-    actividades = []; pintar(); guardar(); $('tabla').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (estado.partidas.length && !confirm('El ejemplo reemplaza lo que hay en la hoja. ¿Seguro?')) return;
+    estado = normal(JSON.parse(JSON.stringify(PRESA.ejemplo))); pintarTodo(); guardar(); window.scrollTo({ top: $('tabla').getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
   });
-  ['equipo', 'componente', 'seCae'].forEach(function (id) { $(id).addEventListener('input', function () { estado[id] = $(id).value; guardar(); }); });
-  ['bolsa', 'minimo'].forEach(function (id) { $(id).addEventListener('input', function () { estado[id] = parseFloat($(id).value) || 0; guardar(); pintarSumas(revisar()); }); });
-  $('fleteSi').addEventListener('change', function () { estado.flete.si = this.checked; guardar(); pintar(); });
-  $('fletePapel').addEventListener('input', function () { estado.flete.papel = this.value; guardar(); });
-  $('fleteCant').addEventListener('input', function () { estado.flete.cant = parseFloat(this.value) || 0; guardar(); pintarSumas(revisar()); });
-  $('fletePrecio').addEventListener('input', function () { estado.flete.precio = parseFloat(this.value) || 0; guardar(); pintarSumas(revisar()); });
-  $('fleteFuente').addEventListener('change', function () { estado.flete.fuente = this.value; guardar(); pintarSumas(revisar()); });
-  $('impSi').addEventListener('change', function () { estado.imp.si = this.checked; guardar(); pintarSumas(revisar()); });
-  $('impNombre').addEventListener('input', function () { estado.imp.nombre = this.value; guardar(); pintarSumas(revisar()); });
-  $('impPct').addEventListener('input', function () { estado.imp.pct = parseFloat(this.value) || 0; guardar(); pintarSumas(revisar()); });
-  $('borrar').addEventListener('click', function () { if (confirm('Se borra todo el presupuesto de este navegador. ¿Seguro?')) { localStorage.removeItem(CLAVE); estado = cargar(); pintar(); } });
 
-  // Precios de referencia
-  $('refs').innerHTML = '<tr><th>Qué</th><th>Unidad</th><th>Precio de oídas</th><th>Tipo</th><th></th></tr>' + REFS.map(function (r, i) { return '<tr><td>' + esc(r[0]) + '</td><td>' + r[1] + '</td><td>' + pesos(r[2]) + '</td><td>' + r[3] + '</td><td><button class="btn claro chico" data-ref="' + i + '">usar</button></td></tr>'; }).join('');
-  $('refs').addEventListener('click', function (e) { var b = e.target.closest('[data-ref]'); if (!b) return; var r = REFS[+b.dataset.ref]; estado.partidas.push(nueva({ que: r[0], unidad: r[1], precio: r[2], tipo: r[3], papel: 'de oídas: falta cotización' })); pintar(); guardar(); window.scrollTo({ top: $('tabla').getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); });
-
+  // ── archivos
+  function nombreArchivo(ext) { return 'presupuesto-' + (estado.componente || 'sin-componente') + '-' + ((estado.equipo || 'equipo').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'equipo') + '.' + ext; }
+  function bajar(contenido, tipo, nombre) { var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([contenido], { type: tipo })); a.download = nombre; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000); }
+  $('descargarJson').addEventListener('click', function () {
+    if (!estado.componente) { alert('Elijan el componente antes de descargar: el archivo se junta por componente.'); return; }
+    var s = calcular(estado), salida = JSON.parse(JSON.stringify(estado)); salida.guardado = new Date().toISOString(); salida.cronograma = PRESA.fecha;
+    salida.resumen = { total: s.total, dinero: s.dinero, especie: s.especie, comunidad: s.comunidad, bolsillos: s.bols };
+    bajar(JSON.stringify(salida, null, 1), 'application/json', nombreArchivo('json'));
+    aviso('Archivo descargado: mándenlo al profesor para juntarlo con los de los otros equipos.', 7000);
+  });
+  $('abrir').addEventListener('change', function () {
+    var f = this.files[0]; if (!f) return; var lector = new FileReader();
+    lector.onload = function () { try { var s = JSON.parse(lector.result); if (!s.partidas) throw 0; if (estado.partidas.length && !confirm('El archivo reemplaza lo que hay en la hoja. ¿Seguro?')) return; estado = normal(s); pintarTodo(); guardar(); } catch (err) { alert('Ese archivo no es un presupuesto de esta práctica.'); } };
+    lector.readAsText(f); this.value = '';
+  });
   $('copiar').addEventListener('click', function () {
-    var s = sumas(), t = ['#\tActividad\tQué\tUnidad\tCantidad\tPrecio\tTipo\tFuente\tPapel\tPaga el donante\tAfuera\tSe cae primero'];
-    estado.partidas.forEach(function (p) { t.push([p.id, p.actividad, p.que, p.unidad, p.cant, p.precio, p.tipo, p.fuente, p.papel, p.fuente === 'comprado' ? total(p) : '', p.fuente !== 'comprado' ? total(p) : '', p.cae ? 'sí' : ''].join('\t')); });
-    t.push(['', 'Flete', estado.flete.papel, 'viaje', estado.flete.cant, estado.flete.precio, 'traslado', estado.flete.fuente, '', s.fleteFondo, s.fleteAfuera, ''].join('\t'));
-    t.push(['', 'Imponderables', estado.imp.nombre, '%', estado.imp.pct, '', '', '', '', s.imp, '', ''].join('\t'));
-    t.push(['', 'TOTAL', '', '', '', '', '', '', '', s.fondo, s.afuera, ''].join('\t'));
-    navigator.clipboard.writeText(t.join('\n')).then(function () { $('guardado').textContent = 'Tabla copiada: pégala en la pestaña 6 de la carpeta o en una hoja.'; }, function () { alert('No se pudo copiar; usa Descargar.'); });
+    var s = calcular(estado), t = [['#', 'Actividad', 'Qué', 'Unidad', 'Cantidad', 'Precio', 'Tipo', 'Bolsillo', 'Forma', 'Mes', 'Papel', 'Total', 'Se cae primero'].join('\t')];
+    estado.partidas.forEach(function (p) { t.push([p.id, (actividadDe(p.actividad) || {}).cod || p.actividad, p.que, p.unidad, p.cant, p.precio, p.tipo, BOLS[p.bolsillo] ? BOLS[p.bolsillo].corto : '', p.forma, mesTxt(p.mes), p.papel, totalDe(p), p.cae ? 'sí' : ''].join('\t')); });
+    if (estado.flete.si) t.push(['', 'Flete', estado.flete.papel, 'viaje', estado.flete.cant, estado.flete.precio, 'traslado', BOLS[estado.flete.bolsillo] ? BOLS[estado.flete.bolsillo].corto : '', estado.flete.forma, mesTxt(estado.flete.mes), '', s.flete, ''].join('\t'));
+    if (estado.imp.si) t.push(['', 'Imponderables', estado.imp.nombre, '%', estado.imp.pct, '', '', BOLS[estado.imp.bolsillo] ? BOLS[estado.imp.bolsillo].corto : '', 'compra', '', '', s.imp, ''].join('\t'));
+    BOLSILLOS.forEach(function (b) { t.push(['', 'Total ' + b.corto, '', '', '', '', '', '', '', '', '', s.bols[b.id].dinero + s.bols[b.id].especie, ''].join('\t')); });
+    t.push(['', 'TOTAL DEL PROYECTO', '', '', '', '', '', '', '', '', '', s.total, ''].join('\t'));
+    var texto = t.join('\n');
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(function () { aviso('Tabla copiada: se pega en una hoja de cálculo.', 5000); }, function () { alert('No se pudo copiar; usen Descargar.'); });
+    else alert('Este navegador no deja copiar; usen Descargar.');
   });
-  $('descargar').addEventListener('click', function () {
-    var s = sumas(), rev = revisar();
-    var filas = estado.partidas.map(function (p) { return '<tr><td>' + p.id + '</td><td>' + esc(p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + esc(p.unidad) + '</td><td>' + p.cant + '</td><td>' + pesos(p.precio) + '</td><td>' + p.tipo + '</td><td>' + p.fuente + '</td><td>' + esc(p.papel) + '</td><td class="m">' + (p.fuente === 'comprado' ? pesos(total(p)) : '') + '</td><td class="m">' + (p.fuente !== 'comprado' ? pesos(total(p)) : '') + '</td><td>' + (p.cae ? 'se cae primero' : '') + '</td></tr>'; }).join('');
-    filas += '<tr><td></td><td colspan="2">Flete · ' + esc(estado.flete.papel) + '</td><td>viaje</td><td>' + estado.flete.cant + '</td><td>' + pesos(estado.flete.precio) + '</td><td>traslado</td><td>' + estado.flete.fuente + '</td><td></td><td class="m">' + pesos(s.fleteFondo) + '</td><td class="m">' + (s.fleteAfuera ? pesos(s.fleteAfuera) : '') + '</td><td></td></tr>';
-    filas += '<tr><td></td><td colspan="2">Imponderables · ' + esc(estado.imp.nombre) + '</td><td>%</td><td>' + estado.imp.pct + '</td><td colspan="4"></td><td class="m">' + pesos(s.imp) + '</td><td></td><td></td></tr>';
-    filas += '<tr><th colspan="9">Totales</th><th class="m">' + pesos(s.fondo) + '</th><th class="m">' + pesos(s.afuera) + '</th><th></th></tr>';
-    var pro = estado.pro.map(function (p) { return '<tr><td>' + esc(p.concepto) + '</td><td>' + esc(p.unidad) + '</td><td>' + p.meta + '</td><td>' + pesos(p.costo) + '</td><td class="m">' + pesos((+p.meta || 0) * (+p.costo || 0)) + '</td></tr>'; }).join('');
-    var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Presupuesto · ' + esc(estado.equipo) + '</title><style>body{font-family:Segoe UI,system-ui,sans-serif;max-width:1100px;margin:1rem auto;padding:0 1rem;color:#1C2B28}h1,h2{font-family:Georgia,serif;color:#0B3C49}table{border-collapse:collapse;width:100%;font-size:.88rem}td,th{border:1px solid #CFE3DD;padding:.3rem .4rem;vertical-align:top;text-align:left}th{background:#F2F7F5}.m{text-align:right;white-space:nowrap}ul li{margin:.3rem 0}.mal{color:#8A3B2B}.bien{color:#1F4A2C}.ojo{color:#7C6222}</style></head><body>'
-      + '<h1>El presupuesto de La Florida · ' + esc(estado.equipo) + '</h1><p>' + esc(NOMBRE_COMP[estado.componente] || '') + ' · descargado el ' + new Date().toLocaleDateString('es-MX') + (estado.bolsa ? ' · tope de la convocatoria: ' + pesos(estado.bolsa) : '') + '</p>'
-      + '<h2>El presupuesto 2027, a dos columnas</h2><table><tr><th>#</th><th>Actividad</th><th>Qué</th><th>Unidad</th><th>Cant.</th><th>Precio</th><th>Tipo</th><th>Fuente</th><th>Papel</th><th>Paga el donante</th><th>Afuera</th><th></th></tr>' + filas + '</table>'
-      + '<p><b>Se le pide al donante:</b> ' + pesos(s.fondo) + ' · <b>Se consigue afuera, valorizado:</b> ' + pesos(s.afuera) + ' · <b>Tamaño real del proyecto:</b> ' + pesos(s.fondo + s.afuera) + '</p>'
-      + '<h2>Los seis agujeros, revisados</h2><ul>' + rev.lista.map(function (r) { return '<li class="' + r.clase + '"><b>' + esc(r.titulo) + ':</b> ' + esc(r.texto) + '</li>'; }).join('') + '</ul>'
-      + '<p><b>Si el dinero llega parcial:</b> ' + esc(estado.seCae) + '</p>'
-      + (estado.pro.length ? '<h2>Lo estimado por referencia, con costos unitarios del PROCODES</h2><table><tr><th>Concepto</th><th>Unidad</th><th>Meta</th><th>Costo unitario</th><th>Total estimado</th></tr>' + pro + '<tr><th colspan="4">Estimación</th><th class="m">' + $('totalPro').textContent + '</th></tr></table>' : '')
-      + '</body></html>';
-    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
-    a.download = 'presupuesto-' + (estado.equipo || 'equipo').replace(/[^\wáéíóúñ-]+/gi, '-') + '-' + new Date().toISOString().slice(0, 10) + '.html'; a.click();
+  $('descargarHtml').addEventListener('click', function () {
+    var s = calcular(estado), rev = revisar(estado, s), c = nombreComp(estado.componente);
+    var filas = estado.partidas.map(function (p) { var a = actividadDe(p.actividad); return '<tr><td>' + p.id + '</td><td>' + esc(a ? a.cod + ' · ' + a.n : p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + p.cant + ' ' + esc(p.unidad) + '</td><td class="m">' + pesos(p.precio) + '</td><td>' + p.tipo + '</td><td>' + (BOLS[p.bolsillo] ? BOLS[p.bolsillo].corto : 'sin bolsillo') + '</td><td>' + p.forma + '</td><td>' + mesTxt(p.mes) + '</td><td>' + esc(p.papel) + '</td><td class="m">' + pesos(totalDe(p)) + '</td></tr>'; }).join('');
+    if (estado.flete.si) filas += '<tr><td></td><td colspan="2">Flete: ' + esc(estado.flete.papel) + '</td><td>' + estado.flete.cant + ' viaje</td><td class="m">' + pesos(estado.flete.precio) + '</td><td>traslado</td><td>' + (BOLS[estado.flete.bolsillo] ? BOLS[estado.flete.bolsillo].corto : '') + '</td><td>' + estado.flete.forma + '</td><td>' + mesTxt(estado.flete.mes) + '</td><td></td><td class="m">' + pesos(s.flete) + '</td></tr>';
+    if (estado.imp.si) filas += '<tr><td></td><td colspan="2">Imponderables, ' + estado.imp.pct + '%: ' + esc(estado.imp.nombre) + '</td><td colspan="7"></td><td class="m">' + pesos(s.imp) + '</td></tr>';
+    var bol = BOLSILLOS.map(function (b) { var x = s.bols[b.id]; return '<tr><td>' + esc(b.nombre) + '</td><td class="m">' + pesos(x.dinero) + '</td><td class="m">' + pesos(x.especie) + '</td><td class="m">' + pesos(x.dinero + x.especie) + '</td></tr>'; }).join('');
+    var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Presupuesto · ' + esc(c) + '</title><style>body{font-family:Segoe UI,system-ui,sans-serif;max-width:1150px;margin:1rem auto;padding:0 1rem;color:#1C2B28}h1,h2{font-family:Georgia,serif;color:#0B3C49}table{border-collapse:collapse;width:100%;font-size:.86rem;margin:.4rem 0}td,th{border:1px solid #CFE3DD;padding:.3rem .4rem;text-align:left;vertical-align:top}.m{text-align:right;white-space:nowrap}li.mal{color:#8A3B2B}li.ojo{color:#7C6222}</style></head><body>'
+      + '<h1>El presupuesto de la presa · ' + esc(c) + '</h1><p>' + esc(estado.equipo) + ' · cronograma del ' + PRESA.fecha + ' · descargado el ' + new Date().toLocaleDateString('es-MX') + '</p>'
+      + '<h2>Partidas</h2><table><tr><th>#</th><th>Actividad</th><th>Qué</th><th>Cantidad</th><th>Precio</th><th>Tipo</th><th>Bolsillo</th><th>Forma</th><th>Mes</th><th>Papel</th><th>Total</th></tr>' + filas + '</table>'
+      + '<h2>Por bolsillo</h2><table><tr><th>Bolsillo</th><th>Dinero</th><th>Especie</th><th>Total</th></tr>' + bol + (s.sinBolsillo ? '<tr><td>Sin bolsillo</td><td colspan="2"></td><td class="m">' + pesos(s.sinBolsillo) + '</td></tr>' : '') + '<tr><th>Tamaño real del proyecto</th><th class="m">' + pesos(s.dinero) + '</th><th class="m">' + pesos(s.especie) + '</th><th class="m">' + pesos(s.total) + '</th></tr></table>'
+      + (s.pro.hay ? '<p><b>PROCODES:</b> pondría ' + pesos(s.pro.monto) + ' y el grupo ' + pesos(s.pro.grupo) + ' (' + Math.round(100 * s.pro.pct) + '% del programa)' + (s.pro.tope ? '; tope de ' + s.pro.cant + ' ' + s.pro.unidad + ': ' + pesos(s.pro.tope) : '') + '.</p>' : '')
+      + '<h2>La revisión</h2><ul>' + rev.lista.map(function (r) { return '<li class="' + r.clase + '"><b>' + esc(r.titulo) + ':</b> ' + esc(r.texto) + '</li>'; }).join('') + '</ul>'
+      + '<p><b>Si un bolsillo no llega:</b> ' + esc(estado.seCae) + '</p></body></html>';
+    bajar(html, 'text/html', nombreArchivo('html'));
   });
+  $('imprimir').addEventListener('click', function () { window.print(); });
+  $('imprimirHoja').addEventListener('click', function () {
+    var l = faltan(), c = nombreComp(estado.componente);
+    if (!l.length) { alert('No hay partidas que cotizar todavía.'); return; }
+    var tabla = '<table><tr><th style="width:30%">Proveedor y lugar</th><th>Fecha</th><th>Precio por unidad</th><th>Vigencia</th><th>¿Por escrito?</th></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></table>';
+    $('hoja').innerHTML = '<h1>Hoja para cotizar · ' + esc(c) + '</h1><p>' + esc(estado.equipo) + '. Tres cotizaciones por partida, dos por escrito y de menos de treinta días. Se anota quién la dio y cuándo, y se toma foto del papel.</p>'
+      + l.map(function (p) { return '<div class="partida"><p><b>#' + p.id + ' · ' + esc(p.que || '(sin descripción)') + '</b><br>' + p.cant + ' ' + esc(p.unidad) + ' · para: ' + esc((actividadDe(p.actividad) || {}).n || p.actividad) + ' · se necesita en ' + mesTxt(p.mes) + '</p>' + tabla + '</div>'; }).join('');
+    document.body.classList.add('modo-hoja'); window.print();
+  });
+  window.addEventListener('afterprint', function () { document.body.classList.remove('modo-hoja'); });
+  $('proyector').addEventListener('click', function () { document.body.classList.toggle('proyector'); });
+  $('borrar').addEventListener('click', function () { if (confirm('Se borra todo el presupuesto de este navegador. ¿Seguro?')) { try { localStorage.removeItem(CLAVE); } catch (err) {} estado = vacio(); pintarTodo(); } });
 
-  if (leerCrono()) traer(); else pintar();
+  pintarTodo();
 })();
 </script>
 </body>

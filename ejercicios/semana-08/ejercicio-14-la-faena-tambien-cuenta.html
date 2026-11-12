@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimnasio · La faena también cuenta</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; font-size:1.02rem; }
+  main { max-width:700px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; color:var(--profundo); font-size:1.5rem; margin:.8rem 0 .2rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:1.1rem 0; }
+  .partida { background:#F7F5EF; border:1px solid var(--borde); border-radius:8px; padding:.6rem .9rem; display:block; margin:.4rem 0 .7rem; font-size:.95rem; }
+  .partida b { color:var(--marca); }
+  .num-caso { font-family:Georgia,serif; color:var(--arena); font-weight:bold; }
+  .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
+  button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
+  button.opcion:hover { border-color:var(--marca); }
+  button.opcion:focus-visible { outline:3px solid var(--arena); outline-offset:2px; }
+  button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
+  button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
+  .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
+  .pista { background:#F7F1E3; border-left:4px solid var(--arena); }
+  .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
+  .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
+  .intro strong { color:var(--arena); }
+  .intro p { margin:.35rem 0; }
+  .marcador { color:#45605a; font-size:.92rem; margin:.7rem 0 0; }
+  .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
+  .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
+  #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
+  body.proyector { font-size:1.35rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>La faena también cuenta</h1>
+<p class="sub">Gimnasio · El presupuesto de la presa · Práctica libre, sin registro y sin nota.</p>
+
+<p>Lo que la comunidad pone sin dinero (faenas, préstamos, trueques, donaciones) es la parte del proyecto que ningún donante puede poner, y la primera que se olvida de escribir. Ocho situaciones de la presa. Decide cómo se escribe cada una para que cuente, y cuente bien.</p>
+
+<div class="intro">
+  <p>Las cinco formas: <strong>comprado, en faena, prestado, trocado o donado</strong>. Solo la primera necesita dinero; las otras cuatro son especie y se escriben completas, con el precio que tendrían si se compraran y con su papel.</p><p>El <strong>jornal de la región</strong> es de $300. En el proyecto del PROCODES, el programa pone hasta el 80% y <strong>el grupo pone el 20%</strong> en jornales, materiales o dinero.</p>
+</div>
+<p class="marcador" id="marcador" aria-live="polite"></p>
+
+<div id="casos"></div>
+
+<div class="cuaderno">
+  <h2>Si trabajas en cuaderno</h2>
+  <p>Haz la lista de lo que tu componente consigue sin dinero: faenas, préstamos, trueques y donaciones. Junto a cada cosa escribe cuánto vale, al precio de la región, y qué papel lo prueba. Si tu componente es del proyecto del PROCODES, suma lo que cae en sus actividades y compáralo con la cuarta parte de lo que se le pide al programa.</p>
+</div>
+
+<button id="btn-proyector" type="button" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+
+<script>
+  var PREGUNTA = "¿Cómo se escribe?";
+  var casos = [
+  {
+    "r": "<b>La faena de las palapas:<\/b> diez personas del grupo, tres jornadas, sin paga.",
+    "ops": [
+      "No va: es trabajo voluntario y no cuesta",
+      "Tres jornadas a $300: $900",
+      "Treinta jornales a $300, $9,000, en autogestión y en forma de faena, con lista de asistencia firmada",
+      "Treinta jornales a $300, cobrados al PROCODES"
+    ],
+    "resp": 2,
+    "pista": "Un jornal es una persona un día. ¿Cuántas personas, cuántos días? Y si nadie cobra, ¿en qué columna va?",
+    "exp": "Treinta jornales (diez personas por tres días) al jornal de la región: $9,000. Nadie cobra, así que no es dinero: es especie, en autogestión, y se escribe completo porque es la parte del proyecto que ningún donante puede poner. El papel es la lista de asistencia de cada jornada, con nombre y firma, y una foto. Dejarla fuera es esconder el tamaño real del proyecto; cobrársela al PROCODES es pedirle que pague lo que nadie va a cobrar."
+  },
+  {
+    "q": "¿Cuánto pone el grupo?",
+    "r": "<b>El 20% del PROCODES:<\/b> el grupo pide 40 m² de palapa techada, $219,600 del programa, que es el 80% del proyecto.",
+    "ops": [
+      "$43,920: el 20% de $219,600",
+      "$54,900: el 20% del proyecto completo, que es de $274,500; o sea, la cuarta parte de lo que pone el programa",
+      "$0: la UAQ pone el capital semilla",
+      "$21,960: el 10%"
+    ],
+    "resp": 1,
+    "pista": "El 80% y el 20% son partes del mismo entero. Si $219,600 es el 80%, ¿cuánto es el entero?",
+    "exp": "El 20% es del proyecto completo, no de lo que pone el programa: $219,600 entre 0.8 da $274,500, y la diferencia, $54,900, la pone el grupo en jornales, materiales o dinero. El atajo para la asamblea: la parte del grupo es la cuarta parte de lo que pone el PROCODES. El error de $43,920 es el más común, y deja la solicitud corta por $10,980 de aportación: el tipo de detalle que la ventanilla sí revisa."
+  },
+  {
+    "q": "¿Cuánta faena es eso?",
+    "r": "<b>Los $54,900 del grupo<\/b>, si se pusieran todos en jornales de $300 y en faenas de diez personas.",
+    "ops": [
+      "Una faena grande",
+      "Unos 183 jornales: más de dieciocho faenas de diez personas, que se reparten en el año y se pueden aligerar con materiales que da el ejido",
+      "Seis faenas, una por componente",
+      "No se puede saber hasta que llegue el dinero"
+    ],
+    "resp": 1,
+    "pista": "Divide $54,900 entre $300, y luego entre diez personas.",
+    "exp": "$54,900 entre $300 son 183 jornales: dieciocho faenas de diez personas y un poco más. Es un compromiso grande, y por eso se dice en la asamblea antes de entregar la solicitud, no después. Se aligera de dos maneras, las dos válidas: con materiales que da el ejido (los troncos de la poda, piedra, palma), valorizados con su nota, y repartiendo las faenas en las actividades del proyecto a lo largo de 2027. Lo que no se vale es prometerlo sin contarlo."
+  },
+  {
+    "r": "<b>Las sillas y el equipo de sonido<\/b> que presta la delegación para presentar las propuestas en la orilla, un domingo de diciembre de 2026. Rentados costarían $1,200.",
+    "ops": [
+      "No va: no se compra",
+      "Va como compra de $1,200 en autogestión",
+      "Va prestado, valorizado a $1,200, en autogestión y con la constancia de préstamo de la delegación",
+      "Va en el Ayuntamiento como dinero"
+    ],
+    "resp": 2,
+    "pista": "No sale un peso, pero el proyecto sí lo necesita. ¿Qué papel prueba que se prestó?",
+    "exp": "Prestado, valorizado a lo que costaría rentarlo, y con su papel: la constancia de préstamo de la delegación. No sale un peso, pero el proyecto sí lo usa, y escribirlo le enseña a quien revisa cuánto se mueve sin dinero. Es una de las partidas del ejemplo de la ruta de gestión: en la práctica se carga con un botón."
+  },
+  {
+    "r": "<b>Doce troncos de la poda<\/b> que la delegación regala para los postes de las palapas. Comprado, un poste de 4 m cuesta $350.",
+    "ops": [
+      "No va: fue regalo",
+      "Donado, valorizado a $4,200 (12 a $350), en autogestión, con nota firmada y foto; y cuenta en el 20% del grupo en el proyecto del PROCODES",
+      "Donado a $4,200, y además se le piden los postes al PROCODES, por si acaso",
+      "Comprado, $4,200, en el PROCODES"
+    ],
+    "resp": 1,
+    "pista": "Un regalo que el proyecto necesita también tiene precio. ¿Y de qué actividades es: de las del proyecto del PROCODES o de otras?",
+    "exp": "Donado y valorizado al precio que tendría comprado: 12 troncos a $350, $4,200, con nota firmada de quien dona y foto. Como los postes son de las palapas, que son el proyecto del PROCODES, entran en el 20% que pone el grupo: son $4,200 menos que reunir en jornales. Pedirle además los postes al PROCODES \"por si acaso\" es el doble papel."
+  },
+  {
+    "r": "<b>Los tres asadores<\/b> de las palapas los hace el taller de herrería del pueblo, a cambio de que el grupo le chapee el terreno dos domingos. Comprado, un asador así costaría unos $1,800.",
+    "ops": [
+      "No va: no hubo dinero de por medio",
+      "Trocado, valorizado a $5,400 (3 a $1,800), en autogestión, con una nota del trato firmada por el taller y por el grupo",
+      "Va como compra de $5,400",
+      "Va en especie, pero a $1,800 por los tres"
+    ],
+    "resp": 1,
+    "pista": "En un trueque cada parte da algo que vale. ¿Cuánto valen los asadores que entran al proyecto?",
+    "exp": "Trocado: el proyecto recibe tres asadores que valen $5,400 y los paga con trabajo. Se valoriza lo que entra (los asadores, a precio de mercado) y se escribe con una nota del trato firmada por las dos partes. Cuidado con contar dos veces: los domingos de chapeo ya pagaron los asadores, así que no se vuelven a contar como faena del proyecto."
+  },
+  {
+    "q": "¿Está bien?",
+    "r": "<b>El jornal a $800:<\/b> un equipo valoriza sus faenas a $800 por jornal \"porque el trabajo de la comunidad vale mucho\". En la región, el jornal se paga a $300.",
+    "ops": [
+      "Bien: así el 20% se junta más rápido",
+      "Mal: el jornal se valoriza a lo que se paga en la región, con su papel; inflado, la aportación pierde credibilidad y la revisión la baja o la descarta",
+      "Bien, si se explica en la solicitud",
+      "Da igual: nadie revisa la especie"
+    ],
+    "resp": 1,
+    "pista": "Si quien revisa pregunta \"¿por qué $800?\", ¿qué papel enseñas?",
+    "exp": "El trabajo de la comunidad vale mucho, y por eso se escribe completo; pero su precio no se decide por cariño: es el jornal que se paga en la región, el que cualquiera puede comprobar. Valorizar a $800 cuando el jornal es de $300 es inflar la aportación, y quien revisa lo nota antes que nada, porque es el atajo más viejo para llegar al 20% sin poner el 20%. Si hay trabajo de oficio (un carpintero, un herrero), va a su precio de oficio, con su papel y en su propio renglón."
+  },
+  {
+    "q": "¿Qué se hace?",
+    "r": "<b>Las faenas sin lista:<\/b> a fin de año, el grupo dice que \"se hicieron muchísimas faenas\", pero no hay listas de asistencia ni fotos.",
+    "ops": [
+      "No importa: todos vieron que se hicieron",
+      "Se estima un número razonable y se escribe",
+      "Lo que no tiene papel no se puede comprobar: cada faena lleva su lista (fecha, actividad, nombres y firmas) y una foto, desde la primera",
+      "Se piden firmas en diciembre para todas"
+    ],
+    "resp": 2,
+    "pista": "En la comprobación del 31 de diciembre, ¿qué se le enseña al PROCODES para probar el 20%?",
+    "exp": "La faena que no tiene lista no existe para la comprobación, por mucho que todo el pueblo la haya visto. El papel se hace el mismo día: fecha, actividad del cronograma, nombres y firmas, y una foto de antes y otra de después. Juntar firmas en diciembre para todo el año es fabricar papel, y eso es peor que no tenerlo. En el cronograma integrado, registrar las faenas como aportación es una actividad propia (G-12) que corre de febrero de 2027 a mayo de 2028."
+  }
+];
+
+  var cont = document.getElementById('casos'), resueltos = 0;
+  function marcador() {
+    document.getElementById('marcador').textContent = resueltos === casos.length
+      ? 'Completo: ' + casos.length + ' de ' + casos.length + '. Ahora pásale la misma mirada al presupuesto de tu componente.'
+      : 'Llevas ' + resueltos + ' de ' + casos.length + '.';
+  }
+  casos.forEach(function (c, i) {
+    var d = document.createElement('div');
+    d.className = 'caso';
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ' + (c.q || PREGUNTA) + '</div>' +
+               '<span class="partida">' + c.r + '</span>';
+    c.ops.forEach(function (op, j) {
+      html += '<button class="opcion" type="button" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+    });
+    html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
+            '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
+    d.innerHTML = html;
+    cont.appendChild(d);
+  });
+  marcador();
+
+  function responder(i, j, btn) {
+    var c = casos[i];
+    var pista = document.getElementById('p' + i);
+    var acierto = document.getElementById('a' + i);
+    if (j === c.resp) {
+      btn.classList.add('elegida-bien');
+      pista.style.display = 'none';
+      acierto.style.display = 'block';
+      btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+      resueltos++; marcador();
+    } else {
+      btn.classList.add('elegida-mal');
+      pista.style.display = 'block';
+      setTimeout(function () { btn.classList.remove('elegida-mal'); }, 1200);
+    }
+  }
+</script>
+</main>
+</body>
+</html>

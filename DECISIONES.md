@@ -1051,3 +1051,46 @@ y evaluar como dos caras).
   guarda la matriz, el motor y los generadores, con su `LEEME.md`. Ninguna
   página la enlaza. Si cambian fechas o textos, se regeneran la página y los
   tres PDF y se suben juntos, para que no se contradigan.
+
+## Bloque 19 (12 de noviembre de 2026): el presupuesto de la presa
+
+- **La práctica del presupuesto se rehace sobre la presa**
+  (`recursos/cronograma-y-presupuesto/practica-presupuesto.html`): trae las 92
+  actividades presupuestables del cronograma integrado, por componente, con su
+  mes y el bolsillo sugerido. Cuatro bolsillos con sus reglas y su calendario
+  (autogestión y especie, PROCODES, Ayuntamiento de Arroyo Seco y CONAFOR);
+  partidas con cantidad, unidad, precio, bolsillo, mes, tipo, forma (compra,
+  faena, prestado, trocado o donado) y papel; flete e imponderables con renglón
+  propio; el reloj del dinero; el tope y el 20% del PROCODES, y la asistencia
+  técnica hasta el 10%; la revisión de ocho agujeros; la hoja para cotizar y el
+  archivo para juntar (.json). El ejemplo que se carga es la ruta de gestión
+  (siete partidas, $6,885, con los precios de referencia marcados como de
+  oídas). Sustituye a la versión del manantial.
+- **Página nueva:** `recursos/presupuesto-de-la-presa/index.html` junta los
+  archivos de los equipos: cuadro por componente y bolsillo, tamaño real, lo
+  que pone la comunidad, reloj del dinero del proyecto, PROCODES sumado, lo que
+  falta por equipo y lo que se cae primero. Impresa, es la base del anexo de
+  presupuesto. Los archivos no salen de la computadora donde se abren.
+- **La fuente** vive en `recursos/cronograma-de-la-presa/fuente/presupuesto/`
+  y lee la misma matriz del cronograma: si cambian sus actividades, se corre
+  `node construir.js` y se suben las dos páginas con la del cronograma.
+- **Mazo 2 rehecho para la presa** (24 láminas): entran dinero y especie, los
+  cuatro bolsillos, el reloj del dinero, el 20% que pone el grupo, los ocho
+  agujeros, la ruta de gestión como ejemplo y la lámina de juntar.
+- **Gimnasios del presupuesto con partidas de la presa:** El presupuesto
+  agujerado se reescribe en el mismo archivo, y entran ¿Quién lo paga?, El
+  dinero llega tarde y La faena también cuenta
+  (`ejercicios/semana-08/ejercicio-12`, `-13` y `-14`). En el gimnasio y en la
+  semana 8 van como 5, 6 y 7, para no mover los números que citan las
+  sesiones.
+- **El viernes 13 en una clase de dos horas:** el plan minuto a minuto va en el
+  hub de la clase. La semana 8 (todavía cerrada en `DISPONIBLES`) lleva una
+  tarjeta que dice que su sesión del presupuesto se da con el de la presa y
+  que sustituye los bloques 3 a 8; sus bloques 3, 5 y 8 ya describen la
+  práctica nueva.
+- **La pestaña 6 de la carpeta** queda sustituida, para la presa, por el
+  archivo que descarga la práctica.
+- **Pendiente:** las tres cotizaciones por partida de mil pesos o más de cada
+  equipo, con la fecha que fije el profesor. Con ellas se corrigen los archivos
+  y se vuelve a juntar el presupuesto para la asamblea y el anexo.
+

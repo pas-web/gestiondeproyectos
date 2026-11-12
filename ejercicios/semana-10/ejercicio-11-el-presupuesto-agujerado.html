@@ -18,6 +18,7 @@
   .situacion { font-size:1.02rem; color:var(--profundo); margin:.2rem 0 .5rem; }
   button.opcion { display:block; width:100%; text-align:left; font:inherit; background:#fff; color:var(--profundo); border:2px solid var(--borde); border-radius:8px; padding:.55rem .8rem; cursor:pointer; margin:.4rem 0; font-size:.95rem; }
   button.opcion:hover { border-color:var(--marca); }
+  button.opcion:focus-visible { outline:3px solid var(--arena); outline-offset:2px; }
   button.opcion.elegida-bien { background:var(--marca); border-color:var(--marca); color:#fff; }
   button.opcion.elegida-mal { border-color:#C97B5D; color:#8a4b3a; }
   .pista, .acierto { display:none; padding:.7rem 1rem; border-radius:0 8px 8px 0; margin-top:.7rem; font-size:.95rem; }
@@ -25,6 +26,8 @@
   .acierto { background:#E4EFEB; border-left:4px solid var(--marca); }
   .intro { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:.9rem 1.2rem; font-size:.95rem; }
   .intro strong { color:var(--arena); }
+  .intro p { margin:.35rem 0; }
+  .marcador { color:#45605a; font-size:.92rem; margin:.7rem 0 0; }
   .cuaderno { border:2px dashed var(--borde); border-radius:12px; padding:.9rem 1.2rem; margin-top:2rem; font-size:.95rem; background:#fff; }
   .cuaderno h2 { font-size:1.05rem; color:var(--marca); margin:.1rem 0 .4rem; }
   #btn-proyector { position:fixed; right:.8rem; bottom:.8rem; background:var(--profundo); color:#fff; border:none; border-radius:999px; padding:.6rem .9rem; box-shadow:0 2px 8px rgba(0,0,0,.25); z-index:10; font:inherit; font-weight:bold; cursor:pointer; }
@@ -34,76 +37,133 @@
 <body>
 <main>
 <h1>El presupuesto agujerado</h1>
-<p class="sub">Gimnasio · Cronograma y presupuesto · Práctica libre, sin registro y sin nota.</p>
+<p class="sub">Gimnasio · El presupuesto de la presa · Práctica libre, sin registro y sin nota.</p>
 
-<p>El proyecto del manantial le lleva su presupuesto a un donante, igual que tú. Siete piezas de ese presupuesto: cinco traen agujero, una comete algo peor y una se salva. Encuéntralos antes de que el donante los encuentre en el tuyo.</p>
+<p>El presupuesto de la presa va a la asamblea ejidal y a cuatro bolsillos. Siete piezas de un borrador: cinco traen agujero, una comete algo peor y una se salva. Encuéntralos antes de que los encuentre la asamblea, o la ventanilla del PROCODES.</p>
 
 <div class="intro">
-  Los agujeros clásicos: el <strong>precio de oídas</strong> (sin cotización que lo respalde), la <strong>partida bolsa</strong> (un renglón gordo que no dice para qué actividad), el <strong>flete olvidado</strong> (el material no camina solo), el <strong>presupuesto al centavo</strong> (sin imponderables), el <strong>doble papel</strong> (cobrarle al donante lo que ya es contrapartida) y el pecado mayor: <strong>pedir lo que la convocatoria no permite</strong> (más del tope, o lo que la lista de gastos no admite: se desecha sin evaluar).
+  <p>Los agujeros clásicos: el <strong>precio de oídas</strong> (sin cotización que lo respalde), la <strong>partida bolsa</strong> (un renglón gordo que no dice para qué actividad), el <strong>flete olvidado</strong> (el material no camina solo), el <strong>presupuesto al centavo</strong> (sin imponderables), el <strong>doble papel</strong> (lo mismo en dos bolsillos, o cobrarle a un fondo lo que ya se puso en especie) y el pecado mayor: <strong>pedir lo que las reglas no permiten</strong> (más del tope, o lo que la lista de gastos no admite: se desecha sin evaluar).</p><p>Los dos agujeros que traen los cuatro bolsillos, el bolsillo equivocado y el dinero que llega tarde, tienen su propio gimnasio.</p>
 </div>
+<p class="marcador" id="marcador" aria-live="polite"></p>
 
 <div id="casos"></div>
 
 <div class="cuaderno">
   <h2>Si trabajas en cuaderno</h2>
-  <p>Escribe el presupuesto de tu componente partida por partida y pásale esta lista de agujeros, renglón por renglón. Suma dos veces (una de ida y una de regreso) y compara contra el tope de la convocatoria, si lo hay. Cada agujero que tapes hoy es uno que el donante no encuentra.</p>
+  <p>Escribe el presupuesto de tu componente partida por partida y pásale esta lista de agujeros, renglón por renglón. Suma dos veces, una de ida y una de regreso, por bolsillo y en total. Cada agujero que tapes hoy es uno que la asamblea no encuentra.</p>
 </div>
 
-<button id="btn-proyector" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
+<button id="btn-proyector" type="button" onclick="document.body.classList.toggle('proyector')">Aa proyector</button>
 
 <script>
+  var PREGUNTA = "¿Qué tiene esta pieza?";
   var casos = [
-    { r: '<b>Partida:</b> malla sombra 6×4 m: $2,800. <b>Fuente:</b> "es lo que nos dijo un señor que sabe de eso".',
-      ops: ['Partida bolsa: no dice para qué', 'Precio de oídas: sin cotización escrita y fechada, ese número no se puede defender ni reclamar si sube', 'Flete olvidado', 'Nada: el señor sabe'],
-      resp: 1,
-      pista: 'Si el donante pregunta "¿de dónde salió este número?", ¿qué papel enseñas?',
-      exp: 'El precio de oídas: quizá hasta es correcto, pero no se puede defender (no hay papel) ni reclamar (si en marzo la malla cuesta $3,400, el proveedor no le debe nada a nadie). La cotización escrita y fechada convierte el rumor en compromiso: es al presupuesto lo que el medio de verificación es al indicador. Y de paso: con tres cotizaciones, el número no solo se defiende, se elige.' },
-    { r: '<b>Partida:</b> materiales varios de construcción: $3,500.',
-      ops: ['Precio de oídas', 'Sin imponderables', 'Partida bolsa: un renglón gordo que no dice qué se compra ni para qué actividad; imposible de evaluar y facilísimo de recortar', 'Nada: siempre se necesitan materiales'],
-      resp: 2,
-      pista: 'Intenta auditar este renglón: ¿qué exactamente se compra con esos $3,500? ¿Para qué actividad del cronograma?',
-      exp: 'La partida bolsa: el renglón que lo puede ser todo no es nada. Quien pone el dinero no puede evaluar si $3,500 de "varios" es razonable o inflado, así que hace lo que hacen todos los donantes: lo recorta o lo pregunta, y en ambos casos el equipo queda mal parado. La versión sana desagrega: cemento (2 bultos, $340), clavo y alambre ($180), brochas y sellador ($260)... con su cotización cada grupo. Lo que se nombra se puede defender; lo "vario" se sacrifica primero.' },
-    { r: '<b>Situación:</b> los postes y la malla están cotizados en la ferretería de la cabecera, puestos EN la ferretería. El presupuesto no tiene ningún renglón de traslado, y la orilla del manantial está a 40 minutos de terracería.',
-      ops: ['Doble papel', 'Nada: el material ya está cotizado, es lo que importa', 'El flete olvidado: mover el material cuesta, en dinero o en trato, y aquí no está ni en el presupuesto ni en la contrapartida', 'Partida bolsa'],
-      resp: 2,
-      pista: '¿Cómo llegan seis postes de tres metros de la cabecera a la orilla? ¿Quién los lleva, en qué y con qué dinero?',
-      exp: 'El agujero favorito de los primeros presupuestos: cotizar el material y olvidar que no camina solo. El flete se resuelve de dos maneras y las dos se escriben: con dinero (renglón de flete con su cotización) o con trato (la camioneta del municipio o del taller que apareció en el mapa de actores; entonces no es renglón de gasto, es contrapartida cuantificada: "flete resuelto en especie, valor $400, nota de acuerdo firmada"). Lo que no se puede es dejarlo en el aire, porque el día de la faena el material va a estar muy bonito... en la ferretería.' },
-    { r: '<b>El total del equipo:</b> $9,847.50, todo cotizado y desagregado, al centavo. No hay renglón de imponderables "porque ya está todo contemplado".',
-      ops: ['El presupuesto al centavo: la precisión aparente sin colchón es optimismo disfrazado; el clavo de domingo no está contemplado nunca', 'Partida bolsa', 'Doble papel', 'Nada: la exactitud es virtud'],
-      resp: 0,
-      pista: '¿Qué pasa el domingo de la segunda faena, cuando falte una bisagra y la ferretería del pueblo cobre lo que cobra?',
-      exp: '"Ya está todo contemplado" es la frase que la segunda faena se encarga de desmentir: el precio que subió, la bisagra que nadie contó, el bulto que se rompió. El colchón honesto es chico (alrededor del 5%: aquí unos $490) y va en su propio renglón con su nombre: imponderables. No es dinero escondido, es humildad presupuestal: la diferencia entre "nos falló el plan" y "el plan ya sabía que algo iba a fallar". Un donante con oficio desconfía más del presupuesto perfecto que del que trae su colchón declarado.' },
-    { r: '<b>En el presupuesto:</b> renglón "12 tarimas para piso: $1,200". <b>En la sección de contrapartida:</b> "12 tarimas conseguidas en especie con la bodega de materiales: $1,200".',
-      ops: ['Flete olvidado', 'El doble papel: las mismas tarimas no pueden ser gasto del donante Y contrapartida; conseguidas no se cobran, se presumen', 'Precio de oídas', 'Nada: así se registran las cosas dos veces para que quede claro'],
-      resp: 1,
-      pista: 'Sigue el dinero: si las tarimas ya las dio la bodega, ¿a quién le pagarías los $1,200 del donante?',
-      exp: 'El doble papel: el trato con la bodega consiguió las tarimas sin dinero, así que ese renglón de gasto pagaría... nada, y ese dinero quedaría flotando, que es exactamente lo que una auditoría encuentra y no perdona. Las tarimas conseguidas van en UN solo lugar: la contrapartida, cuantificada y con su nota firmada, donde cuentan la mejor historia del equipo ante el donante (este proyecto ya consiguió $1,200 antes de recibir un peso). El presupuesto pide lo que falta, no lo que ya se tiene.' },
-    { r: '<b>El total de otro equipo:</b> $112,850, bien desagregado y todo cotizado. La convocatoria dice: tope de $100,000 por proyecto. "Pedimos lo que el proyecto vale y que el donante decida."',
-      ops: ['Sin imponderables', 'Partida bolsa', 'Nada: un total bien cotizado siempre es válido', 'Pide lo que la convocatoria no permite: más del tope se desecha sin evaluar, y el total confiesa que no se leyeron las bases'],
-      resp: 3,
-      pista: 'Relee la primera página de cualquier convocatoria. ¿Qué dice del monto máximo, y qué pasa con lo que se pasa?',
-      exp: 'Pedir más del tope no es ambición: es el único error que no se evalúa. Casi todas las convocatorias lo dicen en la primera página y casi todos los equipos la leen después de armar el presupuesto. Pasarse manda un mensaje que ningún donante pasa por alto: este equipo no leyó las bases, o las leyó y no le importaron. Si el proyecto de verdad cuesta $112,850, el camino es el de la clase de contrapartida: pedirle al donante lo que solo el donante puede dar y conseguir el resto en faenas, préstamos y aliados, que de paso cuentan a favor en la columna de afuera.' },
-    { r: '<b>Partida:</b> cemento gris, 4 bultos: $680 (cotización ferretería La Espuela, 5 de febrero, vigencia 15 días) · para el anclaje de postes, faena 1, abril · flete incluido en el viaje general de marzo · respaldo: segunda cotización de la cabecera por $720.',
-      ops: ['Precio de oídas: falta el papel', 'Doble papel', 'Se salva: cotización fechada y vigente, actividad y mes claros, flete resuelto y hasta plan B de proveedor', 'Partida bolsa: mucho detalle sospechoso'],
-      resp: 2,
-      pista: 'Pásale la lista completa de agujeros, uno por uno. ¿Encontraste alguno?',
-      exp: 'Así se ve el renglón sano, y fíjate que no es elegante: es completo. Tiene papel (cotización fechada y con vigencia, que en tiempos de precios inquietos vale doble), dice para qué actividad y en qué mes (el presupuesto y el cronograma se dan la mano), el flete está resuelto y declarado, y la segunda cotización es el plan B que conviene tener antes de tocar puertas. Un presupuesto entero hecho de renglones así se defiende solo: el equipo nada más lo acompaña.' }
-  ];
+  {
+    "r": "<b>Partida del componente 5:<\/b> palma para el techo de las tres palapas, 48 m² a $180: $8,640. <b>Papel:<\/b> \"es lo que cobró el señor que techó la palapa de la cabecera, hace como dos años\".",
+    "ops": [
+      "La partida bolsa: no dice para qué actividad",
+      "El precio de oídas: sin cotización escrita, fechada y vigente, ese número no se defiende ni se reclama",
+      "El flete olvidado",
+      "Nada: el señor sabe de techos"
+    ],
+    "resp": 1,
+    "pista": "Si en la asamblea alguien pregunta \"¿y de dónde salió ese número?\", ¿qué papel enseñas?",
+    "exp": "El precio de oídas, y viejo: hace dos años la palma costaba otra cosa. Quizá hasta es correcto, pero no se puede defender (no hay papel) ni reclamar (si en julio de 2027 el metro cuesta $240, nadie le debe nada al grupo). Casi todas las convocatorias piden tres cotizaciones por cada concepto de mil pesos o más, dos de ellas por escrito y de menos de treinta días. Con tres, el número no solo se defiende: se elige. Y la del señor que techó la palapa de la cabecera puede ser una de las tres, si la da por escrito."
+  },
+  {
+    "r": "<b>Partida del componente 3:<\/b> \"Materiales varios para juegos y bancas: $14,000\".",
+    "ops": [
+      "El precio de oídas",
+      "El presupuesto al centavo",
+      "La partida bolsa: un renglón gordo que no dice qué se compra ni para qué actividad; imposible de evaluar y facilísimo de recortar",
+      "Nada: siempre se necesitan materiales"
+    ],
+    "resp": 2,
+    "pista": "Trata de auditarla: ¿qué exactamente se compra con esos $14,000? ¿Para cuál actividad del cronograma?",
+    "exp": "La partida bolsa: el renglón que lo puede ser todo no es nada. Quien pone el dinero no puede saber si $14,000 de \"varios\" es razonable o inflado, así que hace lo que haría cualquiera: lo recorta o lo pregunta, y en los dos casos el equipo queda mal parado. La versión sana se parte por actividad del cronograma: tablones para las bancas (tantos, a tanto), tornillería, pintura, llantas para el juego, cada grupo con su cotización y su mes. En la práctica, una partida sin actividad o con la palabra \"varios\" se marca sola."
+  },
+  {
+    "r": "<b>Situación:<\/b> la palma y los tablones de las palapas están cotizados puestos en la maderería de la cabecera municipal, y los cuarenta árboles llegan a un vivero de la región. El presupuesto no tiene ningún renglón de traslado. \"CONAFOR nos da los árboles.\"",
+    "ops": [
+      "El doble papel",
+      "Nada: CONAFOR se encarga de la planta y la madera ya está cotizada",
+      "El flete olvidado: ni la madera ni la planta caminan solas, y CONAFOR da la planta pero no el flete",
+      "La partida bolsa"
+    ],
+    "resp": 2,
+    "pista": "¿Cómo llegan la palma, los tablones y cuarenta árboles a la orilla? ¿Quién los lleva, en qué, y con qué dinero o con qué trato?",
+    "exp": "El agujero favorito de los primeros presupuestos: cotizar el material y olvidar que no camina solo. Y aquí trae trampa: CONAFOR da planta y asesoría, pero no da flete. El traslado se resuelve de dos maneras y las dos se escriben: con dinero (renglón de flete con su cotización, en el bolsillo que lo pague) o con trato (la camioneta del Ayuntamiento, que da especie desde febrero de 2027, o la de alguien del ejido; entonces va en especie, valorizada y con su nota). Lo que no se puede es dejarlo en el aire, porque el día de la siembra los árboles van a estar muy bonitos... en el vivero."
+  },
+  {
+    "r": "<b>El total del componente 4:<\/b> $23,418.60, todo cotizado y desagregado, al centavo. No hay renglón de imponderables \"porque ya está todo contemplado\".",
+    "ops": [
+      "El presupuesto al centavo: precisión aparente sin colchón; el clavo que falta en domingo no está contemplado nunca",
+      "La partida bolsa",
+      "El doble papel",
+      "Nada: la exactitud es virtud"
+    ],
+    "resp": 0,
+    "pista": "¿Qué pasa el domingo de la faena, cuando falte una abrazadera y la ferretería del pueblo cobre lo que cobra?",
+    "exp": "\"Ya está todo contemplado\" es la frase que la primera faena se encarga de desmentir: el precio que subió, la pieza que nadie contó, el bulto que se mojó. El colchón honesto es chico (alrededor del 5% de lo que se compra: aquí unos $1,170) y va en su propio renglón y con su nombre: imponderables. No es dinero escondido, es humildad presupuestal: la diferencia entre \"nos falló el plan\" y \"el plan ya sabía que algo iba a fallar\". Quien revisa presupuestos desconfía más del perfecto que del que declara su colchón."
+  },
+  {
+    "r": "<b>En el componente 5:<\/b> \"Doce troncos de la poda, donados por la delegación para los postes de las palapas: $4,200, autogestión, en especie\". <b>Y en lo que se le pide al PROCODES:<\/b> \"Postes para las palapas: $4,200\".",
+    "ops": [
+      "El flete olvidado",
+      "El doble papel: los mismos postes no pueden ser donación y compra del PROCODES a la vez; cada cosa vive en un solo bolsillo",
+      "El precio de oídas",
+      "Nada: así queda claro de dónde salieron"
+    ],
+    "resp": 1,
+    "pista": "Sigue el dinero: si los troncos ya los dio la delegación, ¿a quién le pagaría el PROCODES los $4,200?",
+    "exp": "El doble papel: los troncos llegaron sin dinero, así que ese renglón del PROCODES pagaría... nada, y esos $4,200 quedarían flotando, que es justo lo que una revisión encuentra y no perdona. Los troncos donados van en un solo lugar: autogestión en especie, valorizados con nota firmada y foto. Ahí sí cuentan a favor: le enseñan a quien revisa que el grupo ya consiguió algo antes de recibir un peso, y entran en el 20% que el grupo pone en el proyecto del PROCODES."
+  },
+  {
+    "r": "<b>Lo que se le pide al PROCODES:<\/b> 200 m² de palapa techada a $5,490: $1,098,000. \"Así cabe todo lo que pidió la consulta, y que el comité decida.\"",
+    "ops": [
+      "El presupuesto al centavo",
+      "La partida bolsa",
+      "Nada: un total bien calculado siempre es válido",
+      "El pecado mayor: el concepto paga de 30 a 180 m²; pedir 200 se desecha sin evaluar, y arriba de $300,000 la solicitud además pide estudio de factibilidad"
+    ],
+    "resp": 3,
+    "pista": "Abre la guía del PROCODES en la tabla de proyectos ecoturísticos. ¿Cuántos metros cuadrados admite el concepto, como mínimo y como máximo?",
+    "exp": "Pedir más de lo que las reglas permiten no es ambición: es el único error que no se evalúa. El concepto de proyectos ecoturísticos paga hasta $5,490 por m², de 30 a 180 m², y 200 m² se pasa del máximo. Aunque se ajustara a 180 m² ($988,200), arriba de $300,000 la solicitud pide un estudio de factibilidad, que es otro trámite con su costo y su tiempo. Si el proyecto de verdad es tan grande, el camino es el de los cuatro bolsillos: al PROCODES lo que solo el PROCODES paga, a la medida que la regla admite, y el resto con el Ayuntamiento, CONAFOR y la autogestión."
+  },
+  {
+    "r": "<b>Partida del componente 5:<\/b> tablón de pino de 2.5 m para las diez bancas de la orilla, 20 piezas a $250: $5,000 · actividad 5-07, noviembre de 2027 · PROCODES, compra · tres cotizaciones: la maderería de la cabecera, $5,000, y una de Jalpan, $5,400, las dos por escrito el 3 de noviembre, y una por teléfono de $5,600; se vuelven a pedir en febrero, antes de la solicitud · el flete va en su renglón, con la camioneta del Ayuntamiento, en especie.",
+    "ops": [
+      "El precio de oídas: una de las cotizaciones es por teléfono",
+      "El doble papel",
+      "Se salva: papel completo y con plan para que siga vigente, actividad y mes claros, un bolsillo que sí lo paga y a tiempo, y el flete resuelto",
+      "La partida bolsa: demasiado detalle sospechoso"
+    ],
+    "resp": 2,
+    "pista": "Pásale la lista completa de agujeros, uno por uno. ¿Encontraste alguno de verdad?",
+    "exp": "Así se ve el renglón sano, y no es elegante: es completo. Tiene papel (tres cotizaciones, dos por escrito; la de teléfono no estorba), sabe que una cotización de noviembre ya no vale en marzo y por eso se vuelve a pedir, dice para qué actividad y en qué mes (el presupuesto y el cronograma se dan la mano), cae en un bolsillo que paga bancas y que en noviembre de 2027 ya depositó, y el flete está resuelto y declarado. Un presupuesto hecho de renglones así se defiende solo: el equipo nada más lo acompaña."
+  }
+];
 
-  var cont = document.getElementById('casos');
+  var cont = document.getElementById('casos'), resueltos = 0;
+  function marcador() {
+    document.getElementById('marcador').textContent = resueltos === casos.length
+      ? 'Completo: ' + casos.length + ' de ' + casos.length + '. Ahora pásale la misma mirada al presupuesto de tu componente.'
+      : 'Llevas ' + resueltos + ' de ' + casos.length + '.';
+  }
   casos.forEach(function (c, i) {
     var d = document.createElement('div');
     d.className = 'caso';
-    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ¿Qué tiene esta pieza?</div>' +
+    var html = '<div class="situacion"><span class="num-caso">' + (i + 1) + '.</span> ' + (c.q || PREGUNTA) + '</div>' +
                '<span class="partida">' + c.r + '</span>';
     c.ops.forEach(function (op, j) {
-      html += '<button class="opcion" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
+      html += '<button class="opcion" type="button" onclick="responder(' + i + ',' + j + ',this)">' + op + '</button>';
     });
     html += '<div class="pista" id="p' + i + '">' + c.pista + '</div>' +
             '<div class="acierto" id="a' + i + '">' + c.exp + '</div>';
     d.innerHTML = html;
     cont.appendChild(d);
   });
+  marcador();
 
   function responder(i, j, btn) {
     var c = casos[i];
@@ -114,6 +174,7 @@
       pista.style.display = 'none';
       acierto.style.display = 'block';
       btn.parentNode.querySelectorAll('.opcion').forEach(function (b) { b.disabled = true; if (b !== btn) b.style.opacity = .5; });
+      resueltos++; marcador();
     } else {
       btn.classList.add('elegida-mal');
       pista.style.display = 'block';
