@@ -1155,3 +1155,7 @@ y evaluar como dos caras).
   larga ni raya corta en lo que se ve.
 - **Pendiente:** decidir si la mochila entra también al mapa del curso (`FIJAS`
   en `curso.js`), para que se encuentre desde la portada.
+- **13 de noviembre, más tarde: la mochila entra al mapa del curso.** Un
+  renglón nuevo al final de «Empieza aquí» (`FIJAS` en `curso.js`), después de
+  «Todo el gimnasio». Así se encuentra desde la portada y desde el menú de todas
+  las páginas del curso, siempre abierta, sin pasar por `DISPONIBLES`.

@@ -37,7 +37,8 @@
     { href: 'evaluacion/contrato-de-gestion.html', t: 'Mi contrato de gestión', d: 'Tus dos compromisos firmados del semestre.' },
     { href: 'evaluacion/pacto-de-evaluacion.html', t: 'Pacto de evaluación', d: 'El acuerdo sobre cómo se califica. Se firma en el aterrizaje, después de discutirlo.' },
     { href: 'evaluacion/pacto-de-ia.html', t: 'Pacto de uso de IA', d: 'Qué sí, qué no y cómo se declara. Se firma en el aterrizaje.' },
-    { href: 'gimnasio.html', t: 'Todo el gimnasio', d: 'Los ejercicios de las diecisiete semanas, siempre abiertos.' }
+    { href: 'gimnasio.html', t: 'Todo el gimnasio', d: 'Los ejercicios de las diecisiete semanas, siempre abiertos.' },
+    { href: 'mochila/index.html', t: 'La mochila del gestor', d: 'El regalo de fin de curso: cuatro herramientas para cotizar y cobrar un servicio, armar el cronograma y el presupuesto, y pedirle a una IA el árbol o el marco lógico. Cada una entrega una hoja con tu nombre.' }
   ];
 
   /* Barra de navegación: las secciones que se usan todo el semestre. */
