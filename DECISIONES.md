@@ -1103,3 +1103,55 @@ y evaluar como dos caras).
   presupuesto agujerado, que baja a cinco casos). La sección «Lo que se
   cotiza» y la hoja para cotizar listan todo lo comprado, flete incluido: tres
   cotizaciones de mil pesos para arriba y al menos una para lo menor.
+
+## Bloque 20 (13 de noviembre de 2026): la mochila del gestor
+
+- **Carpeta nueva `mochila/`:** el regalo de fin de curso. Una portada
+  (`mochila/index.html`) y cuatro herramientas para después de la clase. Cada
+  una entrega una hoja carta con el membrete de quien la usa (nombre o logo,
+  contacto, color y firma, que se llenan una vez para las cuatro), sin marca del
+  curso, con la tipografía de los PDF del cronograma de la presa, y se guarda en
+  PDF desde la ventana de imprimir.
+- **`cobrar.html`, cotizar y cobrar.** La cuenta va en el sobre: horas de
+  trabajo en cuatro casillas (preparar, ir y volver, hacer, entregar) por el
+  valor de la hora que cada quien pone, viáticos (con calculadora de gasolina),
+  materiales, otros gastos, imprevistos y redondeo. Sale lo de cuánto ganar al
+  mes. El cliente ve un solo precio, servicio y gastos aparte, o todo
+  desglosado; el precio es el mismo en las tres. Del mismo llenado salen la
+  cotización (folio, vigencia, incluye y no incluye, anticipo, IVA opcional,
+  cantidad con letra) y el recibo de pago (anticipo, pago final o total, saldo,
+  y el aviso de que no sustituye una factura). Cualquier cotización guardada se
+  vuelve recibo desde «Mis cotizaciones».
+- **`cronograma.html`.** Actividades por semanas o por meses desde una fecha
+  real, con fases de color, hitos en rombo, dependencias y la temporada de
+  lluvias. Revisa el renglón sin dueño, la joroba, lo que espera a otro, el
+  producto que deja y la obra o la siembra fuera de temporada. Al cambiar de
+  unidad ofrece convertir las fechas. Sale el Gantt en hoja horizontal y el
+  calendario con fechas.
+- **`presupuesto.html`.** Partidas por rubro, fuentes en dinero o en especie e
+  imponderables sobre lo que se compra. Revisa el flete, los imponderables, la
+  especie sin valor, las partidas sin precio y el doble papel. Sale la matriz de
+  aportaciones (horizontal con más de tres fuentes), el resumen por rubro,
+  firmas de elaboró y visto bueno, y un CSV para Excel.
+- **`prompts.html`, prompts y dibujos.** Árbol de problemas, árbol de
+  objetivos, teoría del cambio y marco lógico. El prompt lleva la anatomía de la
+  clase (contexto, encargo, reglas estrictas, formato y ejemplo), los datos que
+  faltan entre corchetes dobles y, por omisión, la instrucción de que la IA
+  pregunte antes de escribir. La respuesta se pega, se audita con las pruebas de
+  la clase (pasa o falla, más avisos automáticos), la segunda vuelta se arma
+  sola y la hoja la dibuja: el árbol con las hipótesis punteadas, la cadena con
+  sus «siempre que» y el eslabón frágil, la matriz del marco. La hoja declara el
+  uso de IA.
+- **La práctica de Huejutla se queda igual** (`practica-cotizar.html`, con la
+  tarifa diaria del Mazo 3). La mochila trae la versión para cobrar de verdad.
+- **Enlace:** banda «La mochila del gestor» debajo de las tres partes de
+  `recursos/cronograma-y-presupuesto/index.html` (ancla `#mochila`) y botón
+  «Cotizar de verdad» en la tarjeta de la Parte 3.
+- **Nada sale del navegador:** todo se guarda en `localStorage` con el prefijo
+  `mochila:`; cada herramienta descarga y abre un `.mochila.json` para pasar de
+  un aparato a otro o guardarlo en el Drive.
+- **La fuente viaja con las páginas:** `mochila/fuente/`, con su `LEEME.md`. Se
+  edita ahí y se corre `node construir.js`, que también revisa que no haya raya
+  larga ni raya corta en lo que se ve.
+- **Pendiente:** decidir si la mochila entra también al mapa del curso (`FIJAS`
+  en `curso.js`), para que se encuentre desde la portada.

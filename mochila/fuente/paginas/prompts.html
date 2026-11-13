@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompts y dibujos · La mochila del gestor</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%230B3C49%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M9 5.5V4.6a3 3 0 0 1 6 0v.9%22/%3E%3Crect x=%224.5%22 y=%225.5%22 width=%2215%22 height=%2215.5%22 rx=%224.5%22/%3E%3Cpath d=%22M4.5 11.5h15%22/%3E%3C/svg%3E">
+<meta name="description" content="Prompts para pedirle a una IA el árbol de problemas, el árbol de objetivos, la teoría del cambio y el marco lógico de tu proyecto, y una hoja que los dibuja en limpio.">
+<style>
+/*@FUENTES*/
+/*@COMUN_CSS*/
+
+/* Las herramientas */
+.herramientas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.herramientas label { position: relative; display: block; }
+.herramientas input { position: absolute; opacity: 0; pointer-events: none; }
+.herramientas .tarjeta { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 12px; align-items: center; height: 100%; background: #fff; border: 1px solid var(--campo-borde); border-radius: 10px; padding: 12px; cursor: pointer; }
+.herramientas .tarjeta svg { width: 64px; height: 48px; grid-row: span 2; }
+.herramientas .tarjeta b { font-weight: 600; color: var(--petroleo); font-size: 15.5px; line-height: 1.25; }
+.herramientas .tarjeta span { font-size: 13px; color: var(--tinta-2); line-height: 1.35; }
+.herramientas input:checked + .tarjeta { border-color: var(--petroleo); box-shadow: 0 0 0 2px var(--petroleo); }
+.herramientas input:focus-visible + .tarjeta { outline: 2px solid var(--verde); outline-offset: 2px; }
+@media (max-width: 520px) { .herramientas { grid-template-columns: 1fr; } }
+
+/* El prompt, con sus piezas a la vista */
+.piezas-leyenda { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--tinta-2); margin: 0 0 10px; }
+.piezas-leyenda span { display: inline-flex; align-items: center; gap: 6px; }
+.piezas-leyenda i { width: 12px; height: 12px; border-radius: 3px; }
+.prompt-vista { background: #fff; border: 1px solid var(--campo-borde); border-radius: 10px; padding: 6px 0; max-height: 560px; overflow: auto; font-size: 14px; line-height: 1.5; }
+.prompt-vista section { border-left: 4px solid var(--linea); margin: 8px 0; padding: 2px 14px 2px 12px; }
+.prompt-vista .pieza { font-size: 11.5px; font-weight: 600; color: var(--tenue); margin-bottom: 2px; }
+.prompt-vista pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font: inherit; color: var(--tinta); }
+.prompt-vista pre .bloque { display: block; font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12.5px; background: #F4F7F6; border-radius: 6px; padding: 8px 10px; margin: 6px 0; white-space: pre-wrap; }
+.prompt-vista .p-contexto { border-left-color: #0B3C49; } .prompt-vista .p-encargo { border-left-color: #0F6E6E; }
+.prompt-vista .p-reglas { border-left-color: #8A3B2B; } .prompt-vista .p-formato { border-left-color: #A8781A; } .prompt-vista .p-ejemplo { border-left-color: #7B52AE; }
+.prompt-vista .p-preguntas { border-left-color: #D9A441; }
+mark.hueco { background: #FBEBC2; color: #6B4E0E; border-radius: 4px; padding: 0 3px; font-weight: 500; }
+.acciones-prompt { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: center; }
+.acciones-prompt .rot { font-size: 13.5px; color: var(--tenue); margin-left: 4px; }
+.contador { font-size: 13px; color: var(--tenue); margin-top: 6px; }
+
+/* La respuesta pegada */
+textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 13.5px; line-height: 1.45; }
+.lectura { font-size: 14px; margin-top: 8px; padding: 8px 12px; border-radius: 8px; background: #fff; border: 1px solid var(--linea); color: var(--tinta-2); }
+.lectura.bien { background: var(--bien-fondo); color: var(--bien); border-color: transparent; }
+.lectura.mal { background: var(--aviso-fondo); color: var(--aviso); border-color: transparent; }
+
+/* La auditoría */
+.auditoria { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.auditoria li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; background: #fff; border: 1px solid var(--linea); border-radius: 8px; padding: 8px 10px 8px 12px; font-size: 14.5px; }
+.auditoria li b { font-weight: 600; color: var(--petroleo); }
+.auditoria .dos-botones { display: flex; gap: 4px; }
+.auditoria .dos-botones button { border: 1px solid var(--campo-borde); background: #fff; border-radius: 999px; padding: 5px 11px; font-size: 13.5px; cursor: pointer; color: var(--tinta-2); }
+.auditoria .dos-botones button[aria-pressed="true"].pasa { background: var(--bien); color: #fff; border-color: var(--bien); }
+.auditoria .dos-botones button[aria-pressed="true"].falla { background: var(--aviso); color: #fff; border-color: var(--aviso); }
+.auditoria li.falla { border-color: #E9C5BC; background: #FFF8F6; }
+
+/* Las hojas de los dibujos */
+.hoja .lienzo-marco { position: relative; margin-top: .12in; }
+.hoja .lienzo { position: absolute; left: 0; top: 0; transform-origin: top left; }
+.hoja .lienzo svg.conectores { position: absolute; left: 0; top: 0; overflow: visible; }
+.hoja .caja { position: absolute; border: .9pt solid; border-radius: 4pt; padding: 4.5pt 6.5pt 5pt; font-size: 8.6pt; line-height: 1.3; background: #fff; color: var(--t-tinta); }
+.hoja .caja .rot-caja { display: block; font-size: 6.8pt; font-weight: 600; color: var(--t-tenue); margin-bottom: 1pt; letter-spacing: .02em; }
+.hoja .caja em { display: block; font-style: normal; font-size: 6.6pt; color: var(--t-tenue); margin-top: 2pt; }
+.hoja .caja.hip { border-style: dashed; }
+.hoja .caja.fuera { opacity: .55; }
+.hoja .caja.causa { border-color: #c46a1f; background: #FCF4EC; }
+.hoja .caja.efecto { border-color: #00899e; background: #EBF6F8; }
+.hoja .caja.tronco { background: var(--acento); border-color: var(--acento); color: #fff; font-size: 10.5pt; font-weight: 500; text-align: center; padding: 8pt 10pt; }
+.hoja .caja.tronco .rot-caja { color: rgba(255, 255, 255, .75); }
+.hoja .ley-dibujo { display: flex; flex-wrap: wrap; gap: 4pt 16pt; font-size: 7.8pt; color: var(--t-2); margin-top: 6pt; }
+.hoja .ley-dibujo span { display: inline-flex; align-items: center; gap: 5pt; }
+.hoja .ley-dibujo i { display: inline-block; width: 14pt; height: 8pt; border-radius: 2pt; border: .9pt solid; }
+.hoja .esquema { font-size: 8.8pt; margin-top: .12in; columns: 2; column-gap: .4in; }
+.hoja .esquema h3 { font-size: 9pt; font-weight: 600; color: var(--acento); margin: 0 0 3pt; break-after: avoid; }
+.hoja .esquema ul { margin: 0 0 8pt; padding-left: 12pt; }
+.hoja .esquema li { margin: 2pt 0; break-inside: avoid; }
+.hoja .esquema .tronco-e { column-span: all; font-size: 11pt; font-weight: 500; padding: 6pt 9pt; background: var(--acento); color: #fff; border-radius: 4pt; margin-bottom: 9pt; }
+
+.hoja .apuesta { margin-top: .14in; padding: 8pt 11pt; border-left: 3pt solid var(--acento); background: var(--acento-suave); font-size: 10.5pt; line-height: 1.4; }
+.hoja .apuesta b { font-weight: 600; }
+.hoja .cadena { display: grid; grid-template-columns: minmax(0, 1fr) 1.15in minmax(0, 1fr) 1.15in minmax(0, 1fr) 1.15in minmax(0, 1fr); margin-top: .16in; align-items: start; }
+.hoja .escalon h4 { margin: 0 0 5pt; font-size: 7.6pt; font-weight: 500; color: var(--t-tenue); line-height: 1.25; }
+.hoja .escalon h4 b { display: block; font-size: 9.8pt; font-weight: 600; color: var(--t-tinta); }
+.hoja .escalon .caja-c { border: .9pt solid; border-radius: 4pt; padding: 5pt 7pt; font-size: 8.5pt; line-height: 1.3; margin-bottom: 5pt; background: #fff; break-inside: avoid; }
+.hoja .escalon.responde .caja-c { border-color: #00899e; background: #EBF6F8; }
+.hoja .escalon.apuesta-e .caja-c { border-color: #c46a1f; background: #FCF4EC; }
+.hoja .escalon .caja-c.hip { border-style: dashed; }
+.hoja .paso-c { padding: 14pt 6pt 0; text-align: center; }
+.hoja .paso-c svg { width: 100%; height: 12pt; display: block; }
+.hoja .paso-c .sq { text-align: left; font-size: 7.4pt; line-height: 1.3; color: var(--t-2); margin-top: 5pt; padding: 4pt 5pt; border: .7pt dashed #A9B4B6; border-radius: 3pt; background: #fff; }
+.hoja .paso-c .sq b { display: block; font-size: 6.8pt; font-weight: 600; color: var(--t-tenue); }
+.hoja .paso-c.critico svg path { stroke: #8A3B2B; }
+.hoja .tramos { display: grid; grid-template-columns: minmax(0, 1fr) 1.15in minmax(0, 1fr) 1.15in minmax(0, 1fr) 1.15in minmax(0, 1fr); margin-top: 6pt; }
+.hoja .tramos div { border-top: 1.4pt solid; padding-top: 3pt; font-size: 7.8pt; font-weight: 500; }
+.hoja .tramos .t1 { grid-column: 1 / 4; border-color: #00899e; color: #0A6B7B; }
+.hoja .tramos .t2 { grid-column: 5 / 8; border-color: #c46a1f; color: #8E4A12; }
+.hoja .fragil { margin-top: .16in; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3pt 12pt; padding: 8pt 11pt; border: .9pt solid #8A3B2B; border-radius: 4pt; font-size: 9pt; break-inside: avoid; }
+.hoja .fragil .rot { color: #8A3B2B; font-weight: 600; font-size: 8pt; margin: 0; }
+.hoja .supuestos-sueltos { margin-top: 8pt; font-size: 8pt; color: var(--t-2); }
+
+.hoja table.marco-t { font-size: 8pt; table-layout: fixed; }
+.hoja table.marco-t td { padding: 5pt 6pt; line-height: 1.32; }
+.hoja table.marco-t td.nivel { font-weight: 600; color: var(--acento); font-size: 8.2pt; }
+.hoja table.marco-t tr.n-fin td, .hoja table.marco-t tr.n-proposito td { background: var(--acento-suave); }
+.hoja table.marco-t tr.n-proposito td.nivel { color: var(--t-tinta); }
+.hoja table.marco-t tr.n-actividad td { font-size: 7.7pt; }
+.hoja .declara { font-size: 7.6pt; color: var(--t-tenue); margin-top: .14in; }
+</style>
+</head>
+<body data-vista="llenar">
+
+<header class="barra">
+  <a class="casa" href="index.html" data-ico="mochila"><span>La mochila</span></a>
+  <div class="herramienta">Prompts y dibujos</div>
+  <div class="acciones"><span class="estado" id="estado" aria-live="polite"></span><button type="button" class="btn-barra" id="ver-docs">Mis proyectos</button></div>
+</header>
+
+<main class="banco">
+<section class="formulario" aria-label="Lo que llenas">
+
+  <div class="entrada">
+    <p>Llenas tu proyecto una vez y la página arma el prompt para pedirle a una IA el árbol de problemas, el árbol de objetivos, la teoría del cambio o el marco lógico, con las reglas de la clase adentro. Pegas lo que te conteste, lo auditas con las mismas pruebas y la hoja lo dibuja en limpio. La IA propone; tú decides.</p>
+    <div class="acciones-entrada">
+      <button type="button" class="btn claro chico" id="nueva" data-ico="mas">Nuevo proyecto</button>
+      <button type="button" class="btn claro chico" id="ejemplo">Ver un ejemplo</button>
+    </div>
+  </div>
+
+  <details class="paso" id="paso-membrete">
+    <summary><span class="n">1</span><h2>Tu membrete</h2><span class="resumen-paso" id="res-membrete"></span></summary>
+    <div class="cuerpo" id="membrete"></div>
+  </details>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">2</span><h2>Tu proyecto</h2></div>
+    <p class="guia">Esto es el contexto del prompt: lo que la IA no sabe y tú sí. Entre más concreto, menos inventa.</p>
+    <div class="cuerpo campos">
+      <div class="campo"><label for="p-nombre">Nombre del proyecto</label><input id="p-nombre" type="text" data-k="proyecto.nombre" placeholder="Ej. Vivero escolar de especies nativas"></div>
+      <div class="campo c3"><label for="p-lugar">Dónde</label><input id="p-lugar" type="text" data-k="proyecto.lugar" placeholder="Comunidad, municipio y estado"></div>
+      <div class="campo c3"><label for="p-gente">Con quién y para quién</label><input id="p-gente" type="text" data-k="proyecto.gente" placeholder="Ej. Familias que reforestan en faena"></div>
+      <div class="campo"><label for="p-problema">El problema, en tus palabras</label><textarea id="p-problema" data-k="proyecto.problema" rows="2" placeholder="Lo que pasa, no lo que falta."></textarea></div>
+      <div class="campo"><label for="p-diag">Lo que ya saben por el diagnóstico</label><textarea id="p-diag" data-k="proyecto.diagnostico" rows="4" placeholder="Lo que salió de la consulta, la observación o las entrevistas: conteos, frases de la gente, fechas."></textarea></div>
+      <div class="campo c3"><label for="p-rec">Lo que ya tienen (opcional)</label><textarea id="p-rec" data-k="proyecto.recursos" rows="2" placeholder="Terreno, aliados, dinero, herramienta."></textarea></div>
+      <div class="campo c3"><label for="p-lim">Lo que hay que respetar (opcional)</label><textarea id="p-lim" data-k="proyecto.limites" rows="2" placeholder="Ej. No prometer obras; no pasar de un año."></textarea></div>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">3</span><h2>La herramienta</h2></div>
+    <div class="cuerpo">
+      <div class="herramientas" role="radiogroup" aria-label="Herramienta">
+        <label><input type="radio" name="herr" value="arbol" data-k="herramienta"><span class="tarjeta">
+          <svg viewBox="0 0 64 48" aria-hidden="true"><g fill="none" stroke="#9BB0AA" stroke-width="1.4"><path d="M32 20v-6M14 14h36M14 14v-2M50 14v-2M32 28v6M14 34h36M14 34v2M50 34v2"/></g><rect x="3" y="3" width="22" height="9" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="39" y="3" width="22" height="9" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="18" y="19" width="28" height="10" rx="2" fill="#0B3C49"/><rect x="3" y="36" width="22" height="9" rx="2" fill="#FCF4EC" stroke="#c46a1f"/><rect x="39" y="36" width="22" height="9" rx="2" fill="#FCF4EC" stroke="#c46a1f"/></svg>
+          <b>Árbol de problemas</b><span>El tronco, sus raíces y sus ramas. Semana 5.</span></span></label>
+        <label><input type="radio" name="herr" value="objetivos" data-k="herramienta"><span class="tarjeta">
+          <svg viewBox="0 0 64 48" aria-hidden="true"><g fill="none" stroke="#9BB0AA" stroke-width="1.4"><path d="M32 20v-6M14 14h36M14 14v-2M50 14v-2M32 28v6M14 34h36M14 34v2M50 34v2"/></g><rect x="3" y="3" width="22" height="9" rx="2" fill="#fff" stroke="#00899e"/><rect x="39" y="3" width="22" height="9" rx="2" fill="#fff" stroke="#00899e"/><rect x="18" y="19" width="28" height="10" rx="2" fill="#0F6E6E"/><path d="M27 24l3 3 7-7" stroke="#fff" stroke-width="1.8" fill="none"/><rect x="3" y="36" width="22" height="9" rx="2" fill="#fff" stroke="#c46a1f"/><rect x="39" y="36" width="22" height="9" rx="2" fill="#fff" stroke="#c46a1f"/></svg>
+          <b>Árbol de objetivos</b><span>El mismo árbol, volteado. Semana 5.</span></span></label>
+        <label><input type="radio" name="herr" value="cambio" data-k="herramienta"><span class="tarjeta">
+          <svg viewBox="0 0 64 48" aria-hidden="true"><rect x="1" y="17" width="12" height="14" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="18" y="17" width="12" height="14" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="35" y="17" width="12" height="14" rx="2" fill="#FCF4EC" stroke="#c46a1f"/><rect x="52" y="17" width="11" height="14" rx="2" fill="#FCF4EC" stroke="#c46a1f"/><g stroke="#44584F" stroke-width="1.4" fill="none"><path d="M13.5 24h3.5M30.5 24h3.5M47.5 24h3.5"/></g><path d="M31 36h4v4h-4z" fill="none" stroke="#8A3B2B" stroke-dasharray="1.5 1.5"/></svg>
+          <b>Teoría del cambio</b><span>Si hacemos esto, entonces, siempre que. Semana 6.</span></span></label>
+        <label><input type="radio" name="herr" value="marco" data-k="herramienta"><span class="tarjeta">
+          <svg viewBox="0 0 64 48" aria-hidden="true"><rect x="2" y="4" width="60" height="40" rx="3" fill="#fff" stroke="#9BB0AA"/><g stroke="#C9D6D2"><path d="M2 14h60M2 24h60M2 34h60M17 4v40M32 4v40M47 4v40"/></g><rect x="2" y="4" width="15" height="40" fill="#0B3C49" opacity=".85"/></svg>
+          <b>Marco lógico</b><span>Cuatro renglones y cuatro columnas. Semana 6.</span></span></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">4</span><h2 id="titulo-necesita">Lo que esta herramienta necesita</h2></div>
+    <div class="cuerpo campos" id="campos-herramienta"></div>
+    <div class="cuerpo" style="margin-top:10px"><label class="palomita"><input type="checkbox" data-k="preguntar"><span>Que la IA me haga preguntas antes de escribir<br><span class="ayuda">El método de la clase: «antes de escribir nada, hazme las preguntas que necesites para hacerlo bien». Tarda un poco más y sale mejor.</span></span></label></div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">5</span><h2>Tu prompt</h2></div>
+    <p class="guia">Lleva las cuatro piezas que vimos en clase y las reglas estrictas de la herramienta. Lo que te falta llenar sale marcado entre corchetes dobles.</p>
+    <div class="cuerpo">
+      <div class="piezas-leyenda"><span><i style="background:#0B3C49"></i>contexto</span><span><i style="background:#0F6E6E"></i>encargo</span><span><i style="background:#8A3B2B"></i>reglas</span><span><i style="background:#A8781A"></i>formato</span><span><i style="background:#7B52AE"></i>ejemplo</span></div>
+      <div class="prompt-vista" id="prompt-vista" aria-live="polite"></div>
+      <div class="contador" id="contador"></div>
+      <div class="acciones-prompt">
+        <button type="button" class="btn" id="copiar" data-ico="copiar">Copiar el prompt</button>
+        <span class="rot">Copiar y abrir:</span>
+        <button type="button" class="btn claro chico" data-abrir="https://chatgpt.com/">ChatGPT</button>
+        <button type="button" class="btn claro chico" data-abrir="https://claude.ai/new">Claude</button>
+        <button type="button" class="btn claro chico" data-abrir="https://gemini.google.com/app">Gemini</button>
+        <button type="button" class="btn-texto" id="txt">Descargar .txt</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">6</span><h2>Pega la respuesta y dibújala</h2></div>
+    <p class="guia">Copia de la respuesta de la IA el bloque que va entre las marcas <b>===</b> (en el marco lógico, la tabla) y pégalo aquí. Si prefieres hacerlo sin IA, empieza con el formato vacío y escríbelo tú. Lo que cambies aquí se redibuja al momento.</p>
+    <div class="cuerpo">
+      <textarea class="respuesta" id="respuesta" aria-label="La respuesta de la IA" spellcheck="false"></textarea>
+      <div class="botones-fila" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+        <button type="button" class="btn claro chico" id="a-mano">Empezar con el formato vacío</button>
+        <button type="button" class="btn-texto peligro" id="limpiar">Borrar la respuesta</button>
+      </div>
+      <div class="lectura" id="lectura"></div>
+      <label class="palomita" style="margin-top:10px"><input type="checkbox" data-k="declarar"><span>Declarar en la hoja que se hizo con apoyo de IA<br><span class="ayuda">Así lo pide el pacto de IA del curso: el uso se dice, no se esconde.</span></span></label>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">7</span><h2>Audítala</h2></div>
+    <p class="guia">Una respuesta puede sonar muy segura y traer errores. Pásala por las pruebas de la clase, una por una, y marca cada una.</p>
+    <div class="cuerpo">
+      <ul class="revision" id="avisos" style="margin-bottom:12px"></ul>
+      <ul class="auditoria" id="auditoria"></ul>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">8</span><h2>La segunda vuelta</h2></div>
+    <p class="guia">Lo que marcaste como falla entra solo. Agrega lo que encontraron y lo que saben por haber estado ahí, y pídele a la IA la versión corregida.</p>
+    <div class="cuerpo campos">
+      <div class="campo"><label for="v-enc">Lo que encontraron, con el número de caja o de renglón</label><textarea id="v-enc" rows="3" data-vuelta="encontraron" placeholder="Ej. La causa 2.1 trae dos ideas en una caja."></textarea></div>
+      <div class="campo"><label for="v-campo">Lo que saben por haber estado ahí y la IA no podía saber</label><textarea id="v-campo" rows="2" data-vuelta="campo" placeholder="Ej. En la consulta, tres señoras dijeron que el agua se acaba en abril."></textarea></div>
+      <div class="campo"><div class="prompt-vista" id="vuelta-vista"></div>
+        <div class="acciones-prompt"><button type="button" class="btn" id="copiar-vuelta" data-ico="copiar">Copiar la segunda vuelta</button></div></div>
+    </div>
+  </section>
+
+</section>
+
+<section class="panel-hoja" aria-label="La hoja que se entrega">
+  <div class="mesa-hoja">
+    <span class="ayuda" id="resumen-hoja"></span>
+    <div class="derecha">
+      <button type="button" class="btn" id="pdf" data-ico="pdf">Guardar en PDF</button>
+      <button type="button" class="btn claro" id="descargar" data-ico="descargar">Archivo</button>
+    </div>
+  </div>
+  <div class="marco-hoja" id="marco"></div>
+  <p class="pista-impresion" id="pista">La hoja sale horizontal. Para el PDF: en la ventana de imprimir elige «Guardar como PDF»; si sale vertical, cambia la orientación a «Horizontal».</p>
+</section>
+</main>
+
+<nav class="conmutador" aria-label="Cambiar de vista">
+  <div class="dos"><button type="button" data-ver="llenar">Llenar</button><button type="button" data-ver="hoja">Ver la hoja</button></div>
+  <button type="button" class="btn" id="pdf-movil" data-ico="pdf">PDF</button>
+</nav>
+
+<script>
+//@COMUN_JS
+//@INCLUIR prompts.js
+</script>
+</body>
+</html>

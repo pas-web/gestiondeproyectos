@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presupuesto · La mochila del gestor</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%230B3C49%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M9 5.5V4.6a3 3 0 0 1 6 0v.9%22/%3E%3Crect x=%224.5%22 y=%225.5%22 width=%2215%22 height=%2215.5%22 rx=%224.5%22/%3E%3Cpath d=%22M4.5 11.5h15%22/%3E%3C/svg%3E">
+<meta name="description" content="Arma el presupuesto de un proyecto por rubros, con lo que pone cada quien en dinero o en especie, y entrégalo con tu nombre.">
+<style>
+/*@FUENTES*/
+/*@COMUN_CSS*/
+
+/* Presupuesto: el formulario */
+.fuentes-lista .renglon { grid-template-columns: 20px minmax(0, 1fr) 150px 36px; }
+.fuentes-lista .muestra { width: 18px; height: 18px; border-radius: 5px; }
+@media (max-width: 520px) { .fuentes-lista .renglon { grid-template-columns: 20px minmax(0, 1fr) 36px; } .fuentes-lista select { grid-column: 2 / 3; } }
+.rubro { border: 1px solid var(--campo-borde); background: #fff; border-radius: 10px; margin-bottom: 12px; }
+.rubro-cabeza { display: grid; grid-template-columns: minmax(0, 1fr) auto 36px; gap: 8px; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--linea); background: #F7FAF9; border-radius: 10px 10px 0 0; }
+.rubro-cabeza input { font-weight: 600; color: var(--petroleo); border-color: transparent; background: transparent; padding-left: 4px; }
+.rubro-cabeza input:hover { border-color: var(--campo-borde); background: #fff; }
+.rubro-cabeza .subtotal { font-variant-numeric: tabular-nums; font-weight: 500; color: var(--tinta-2); }
+.partidas { padding: 8px 12px 12px; display: flex; flex-direction: column; gap: 10px; }
+.partida { display: grid; grid-template-columns: minmax(0, 1fr) 96px 36px; grid-template-areas: "c i x" "d d d"; gap: 6px 8px; align-items: center; padding-bottom: 10px; border-bottom: 1px dashed var(--linea); }
+.partida:last-child { border-bottom: none; padding-bottom: 0; }
+.partida .c { grid-area: c; } .partida .importe { grid-area: i; text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; } .partida .quitar { grid-area: x; }
+.partida .detalle { grid-area: d; display: grid; grid-template-columns: 96px 78px 118px minmax(0, 1fr); gap: 8px; }
+@media (max-width: 560px) { .partida .detalle { grid-template-columns: 1fr 1fr; } }
+.partida input, .partida select { min-height: 40px; }
+.partida .detalle label { display: block; min-width: 0; }
+.partida .mini { font-size: 12px; color: var(--tenue); display: block; margin-bottom: 2px; }
+.rubro .pie-rubro { padding: 0 12px 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.botones-fila { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.resumen-fuentes { margin-top: 6px; }
+.resumen-fuentes .fila-f { display: grid; grid-template-columns: 12px minmax(0, 1fr) auto auto; gap: 8px; align-items: center; font-size: 14.5px; padding: 5px 0; border-bottom: 1px dotted var(--linea); }
+.resumen-fuentes .fila-f i { width: 12px; height: 12px; border-radius: 3px; }
+.resumen-fuentes .fila-f b { font-variant-numeric: tabular-nums; font-weight: 500; }
+.resumen-fuentes .fila-f span.p { color: var(--tenue); font-variant-numeric: tabular-nums; min-width: 42px; text-align: right; }
+
+/* Presupuesto: la hoja */
+.hoja .resumen-p { display: grid; grid-template-columns: 2.3in minmax(0, 1fr); gap: .3in; align-items: start; margin: .2in 0 .12in; padding: .16in 0; border-top: .5pt solid var(--t-filete); border-bottom: .5pt solid var(--t-filete); }
+.hoja .resumen-p .gran-total .rot { margin-bottom: 2pt; }
+.hoja .resumen-p .gran-total .cifra { font-size: 20pt; font-weight: 600; color: var(--acento); letter-spacing: -.01em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.hoja .resumen-p .gran-total .letra-p { font-size: 7.2pt; color: var(--t-2); margin-top: 3pt; line-height: 1.35; }
+.hoja .resumen-p .gran-total .dos { font-size: 8.2pt; color: var(--t-2); margin-top: 6pt; }
+.hoja .seg-p { display: flex; gap: 1.5pt; height: 20pt; margin: 2pt 0 7pt; }
+.hoja .seg-p > div { border-radius: 3pt; display: flex; align-items: center; padding: 0 5pt; color: #fff; font-size: 8pt; font-weight: 600; white-space: nowrap; min-width: 0; }
+.hoja .ley-p { display: grid; grid-template-columns: 9pt minmax(0, 1fr) auto auto; gap: 2pt 7pt; font-size: 8.2pt; align-items: center; }
+.hoja .ley-p i { width: 8pt; height: 8pt; border-radius: 2pt; }
+.hoja .ley-p .tipo-f { color: var(--t-tenue); font-size: 7.4pt; }
+.hoja .ley-p .m { text-align: right; font-variant-numeric: tabular-nums; }
+.hoja .ley-p .p { text-align: right; color: var(--t-2); font-variant-numeric: tabular-nums; min-width: 26pt; }
+.hoja table.matriz { font-size: 8.3pt; table-layout: fixed; }
+.hoja table.matriz td, .hoja table.matriz th { padding-top: 4pt; padding-bottom: 4pt; }
+.hoja table.matriz th.f { text-align: right; line-height: 1.2; }
+.hoja table.matriz th.f i { display: inline-block; width: 6pt; height: 6pt; border-radius: 1.5pt; margin-right: 3pt; vertical-align: 0; }
+.hoja table.matriz td.vacia { color: transparent; }
+.hoja table.matriz .unidad { color: var(--t-2); }
+.hoja table.matriz tr.grupo td { padding-top: 8pt; }
+.hoja .rubros-p { margin-top: .22in; break-inside: avoid; }
+.hoja .rubros-p h3 { font-size: 9pt; font-weight: 600; color: var(--acento); margin-bottom: 4pt; }
+.hoja .rubros-p .fila-r { display: grid; grid-template-columns: 2.4in minmax(0, 1fr) .9in .45in; gap: 8pt; align-items: center; font-size: 8.4pt; padding: 2.5pt 0; }
+.hoja .rubros-p .pista-r { height: 6pt; background: var(--acento-suave); border-radius: 3pt; overflow: hidden; }
+.hoja .rubros-p .pista-r div { height: 100%; background: var(--acento); border-radius: 3pt; }
+.hoja .rubros-p .m, .hoja .rubros-p .p { text-align: right; font-variant-numeric: tabular-nums; }
+.hoja .rubros-p .p { color: var(--t-2); }
+.hoja .notas-p { font-size: 8.4pt; color: var(--t-2); margin-top: .18in; }
+.hoja .notas-p b { font-weight: 500; color: var(--t-tinta); }
+</style>
+</head>
+<body data-vista="llenar">
+
+<header class="barra">
+  <a class="casa" href="index.html" data-ico="mochila"><span>La mochila</span></a>
+  <div class="herramienta">Presupuesto</div>
+  <div class="acciones"><span class="estado" id="estado" aria-live="polite"></span><button type="button" class="btn-barra" id="ver-docs">Mis presupuestos</button></div>
+</header>
+
+<main class="banco">
+<section class="formulario" aria-label="Lo que llenas">
+
+  <div class="entrada">
+    <p>El cronograma, traducido a pesos: cada partida con su unidad, su cantidad y su precio, y con quién la pone, en dinero o en especie. La hoja suma por rubro y por fuente y revisa los agujeros que vimos en clase.</p>
+    <div class="acciones-entrada">
+      <button type="button" class="btn claro chico" id="nueva" data-ico="mas">Nuevo presupuesto</button>
+      <button type="button" class="btn claro chico" id="ejemplo">Ver un ejemplo</button>
+    </div>
+  </div>
+
+  <details class="paso" id="paso-membrete">
+    <summary><span class="n">1</span><h2>Tu membrete</h2><span class="resumen-paso" id="res-membrete"></span></summary>
+    <div class="cuerpo" id="membrete"></div>
+  </details>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">2</span><h2>El proyecto</h2></div>
+    <div class="cuerpo campos">
+      <div class="campo"><label for="p-nombre">Nombre del proyecto</label><input id="p-nombre" type="text" data-k="proyecto" placeholder="Ej. Vivero escolar de especies nativas"></div>
+      <div class="campo c3"><label for="p-lugar">Dónde</label><input id="p-lugar" type="text" data-k="lugar" placeholder="Ej. Concá, Arroyo Seco"></div>
+      <div class="campo c3"><label for="p-org">Quién lo presenta</label><input id="p-org" type="text" data-k="organizacion" placeholder="Ej. Grupo de 5.º semestre"></div>
+      <div class="campo c3"><label for="p-fecha">Fecha</label><input id="p-fecha" type="date" data-k="fecha"></div>
+      <div class="campo c3"><label for="p-periodo">Periodo en que se gasta</label><input id="p-periodo" type="text" data-k="periodo" placeholder="Ej. Enero a diciembre de 2027"></div>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">3</span><h2>¿Quién pone?</h2></div>
+    <p class="guia">Las fuentes del dinero, que en clase llamamos bolsillos. Lo que pone la comunidad en jornales, materiales o préstamo de herramienta va en especie y también se escribe en pesos.</p>
+    <div class="cuerpo">
+      <div class="renglones fuentes-lista" id="lista-fuentes"></div>
+      <div class="sugerencias" id="sug-fuentes"><span class="rot">Agregar:</span><button type="button" data-tipo="dinero">Apoyo solicitado</button><button type="button" data-tipo="especie">Aportación del grupo</button><button type="button" data-tipo="dinero">Municipio</button><button type="button" data-tipo="dinero">Otra</button></div>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">4</span><h2>Las partidas</h2></div>
+    <p class="guia">Una partida es algo que se puede cotizar: «Malla sombra al 50%, 70 m² a $38» sí; «materiales varios» no. Agrupa por rubro; cambia el nombre de un rubro tocándolo.</p>
+    <div class="cuerpo">
+      <div id="lista-rubros"></div>
+      <div class="botones-fila"><button type="button" class="btn claro chico" id="agregar-rubro" data-ico="mas">Rubro</button></div>
+      <datalist id="unidades"><option value="pieza"></option><option value="kilo"></option><option value="litro"></option><option value="metro"></option><option value="m²"></option><option value="m³"></option><option value="costal"></option><option value="bulto"></option><option value="rollo"></option><option value="millar"></option><option value="lote"></option><option value="jornal"></option><option value="servicio"></option><option value="viaje"></option><option value="mes"></option><option value="día"></option></datalist>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">5</span><h2>Imponderables</h2></div>
+    <p class="guia">El clavo que falta en domingo: un colchón chico, con renglón propio y nombre honesto, sobre lo que se compra.</p>
+    <div class="cuerpo campos">
+      <div class="campo"><div class="opciones" role="radiogroup" aria-label="Imponderables">
+        <label><input type="radio" name="imp" value="0" data-k="imp.pct" data-tipo="num"><span>Sin imponderables</span></label>
+        <label><input type="radio" name="imp" value="3" data-k="imp.pct" data-tipo="num"><span>3%</span></label>
+        <label><input type="radio" name="imp" value="5" data-k="imp.pct" data-tipo="num"><span>5%</span></label>
+        <label><input type="radio" name="imp" value="10" data-k="imp.pct" data-tipo="num"><span>10%</span></label>
+      </div></div>
+      <div class="campo c3"><label for="imp-f">¿Quién los pone?</label><select id="imp-f" data-k="imp.f"></select></div>
+      <div class="campo c3"><span class="etiqueta">Sobre lo que se compra</span><span class="ayuda" id="imp-txt"></span></div>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">6</span><h2>Cuánto pone cada quien</h2></div>
+    <div class="cuerpo"><div class="segmentos" id="seg-fuentes"></div><div class="resumen-fuentes" id="res-fuentes"></div></div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">7</span><h2>Revisión</h2></div>
+    <p class="guia">Avisos que atrapan los agujeros típicos, no todos. Que no marque nada no quiere decir que el presupuesto se defienda solo.</p>
+    <div class="cuerpo"><ul class="revision" id="revision"></ul></div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">8</span><h2>La hoja</h2></div>
+    <div class="cuerpo campos">
+      <div class="campo"><label class="palomita"><input type="checkbox" data-k="ver.rubros"><span>Agregar el resumen por rubro</span></label></div>
+      <div class="campo"><label for="notas">Notas (opcional)</label><textarea id="notas" data-k="notas" rows="3" placeholder="Ej. Precios con IVA, de cotizaciones de octubre de 2026. La aportación del grupo se valoriza a $300 el jornal."></textarea></div>
+      <div class="campo c3"><label for="rev-nombre">Visto bueno (opcional)</label><input id="rev-nombre" type="text" data-k="reviso.nombre" placeholder="Nombre"></div>
+      <div class="campo c3"><label for="rev-cargo">Cargo</label><input id="rev-cargo" type="text" data-k="reviso.cargo" placeholder="Ej. Tesorera del comité"></div>
+    </div>
+  </section>
+
+</section>
+
+<section class="panel-hoja" aria-label="La hoja que se entrega">
+  <div class="mesa-hoja">
+    <span class="ayuda" id="resumen-hoja"></span>
+    <div class="derecha">
+      <button type="button" class="btn" id="pdf" data-ico="pdf">Guardar en PDF</button>
+      <button type="button" class="btn claro" id="csv" data-ico="descargar">Excel (CSV)</button>
+      <button type="button" class="btn claro" id="descargar" data-ico="descargar">Archivo</button>
+    </div>
+  </div>
+  <div class="marco-hoja" id="marco"></div>
+  <p class="pista-impresion" id="pista">Para el PDF: en la ventana de imprimir elige «Guardar como PDF». El CSV abre en Excel o en Hojas de cálculo de Google. Con más de tres fuentes, la hoja sale horizontal; si en tu teléfono sale vertical, cambia la orientación en la ventana de imprimir.</p>
+</section>
+</main>
+
+<nav class="conmutador" aria-label="Cambiar de vista">
+  <div class="dos"><button type="button" data-ver="llenar">Llenar</button><button type="button" data-ver="hoja">Ver la hoja</button></div>
+  <button type="button" class="btn" id="pdf-movil" data-ico="pdf">PDF</button>
+</nav>
+
+<script>
+//@COMUN_JS
+//@INCLUIR presupuesto.js
+</script>
+</body>
+</html>

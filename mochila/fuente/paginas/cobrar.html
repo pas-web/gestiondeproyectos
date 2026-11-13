@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cotizar y cobrar · La mochila del gestor</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%230B3C49%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M9 5.5V4.6a3 3 0 0 1 6 0v.9%22/%3E%3Crect x=%224.5%22 y=%225.5%22 width=%2215%22 height=%2215.5%22 rx=%224.5%22/%3E%3Cpath d=%22M4.5 11.5h15%22/%3E%3C/svg%3E">
+<meta name="description" content="Saca la cuenta de un taller o un servicio y entrega una cotización y un recibo con tu nombre.">
+<style>
+/*@FUENTES*/
+/*@COMUN_CSS*/
+
+/* Cotizar y cobrar */
+.horas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.horas .campo, .tarifa .campo, .gasolina .campo { grid-column: auto; }
+.horas .campo > label { font-size: 13px; }
+@media (max-width: 520px) { .horas { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tarifa { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px 14px; margin-top: 12px; }
+@media (max-width: 520px) { .tarifa { grid-template-columns: 1fr; } }
+.renglon.r-monto { grid-template-columns: minmax(0, 1fr) 130px 36px; }
+.renglon.r-material { grid-template-columns: minmax(0, 1fr) 74px 112px 96px 36px; }
+.encabezado-renglones.r-material { grid-template-columns: minmax(0, 1fr) 74px 112px 96px 36px; }
+.renglon .importe { text-align: right; font-variant-numeric: tabular-nums; font-size: 15px; color: var(--kraft-tinta); }
+@media (max-width: 560px) {
+  .renglon.r-material { grid-template-columns: 74px minmax(0, 1fr) 92px; grid-template-areas: "c c q" "n p x"; }
+  .renglon.r-material .c { grid-area: c; } .renglon.r-material .q { grid-area: n; } .renglon.r-material .p { grid-area: p; }
+  .renglon.r-material .importe { grid-area: x; } .renglon.r-material .quitar { grid-area: q; justify-self: end; }
+  .encabezado-renglones.r-material { display: none; }
+  .renglon.r-material { padding-bottom: 8px; border-bottom: 1px dashed var(--kraft-borde); }
+}
+.gasolina { background: #F3E6CE; border: 1px dashed var(--kraft-borde); border-radius: 8px; padding: 12px; margin-top: 10px; }
+.gasolina .campos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.gasolina .campo { grid-column: span 1; }
+@media (max-width: 520px) { .gasolina .campos { grid-template-columns: 1fr; } }
+.gasolina .resultado-gas { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px; font-size: 15px; }
+
+.vistas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 560px) { .vistas { grid-template-columns: 1fr; } }
+.vistas label { position: relative; display: block; }
+.vistas input { position: absolute; opacity: 0; pointer-events: none; }
+.vistas .tarjeta { display: flex; flex-direction: column; gap: 8px; height: 100%; background: #fff; border: 1px solid var(--campo-borde); border-radius: 10px; padding: 12px; cursor: pointer; }
+.vistas input:checked + .tarjeta { border-color: var(--petroleo); box-shadow: 0 0 0 2px var(--petroleo); }
+.vistas input:focus-visible + .tarjeta { outline: 2px solid var(--verde); outline-offset: 2px; }
+.vistas .tarjeta b { font-weight: 600; color: var(--petroleo); font-size: 15px; }
+.vistas .tarjeta span { font-size: 13.5px; color: var(--tinta-2); line-height: 1.4; }
+.vistas svg { width: 100%; height: 46px; display: block; }
+
+/* La hoja del recibo */
+.hoja .recibi { margin: .3in 0 .15in; padding: .24in .3in; border: .75pt solid var(--acento-linea); border-radius: 6pt; background: var(--acento-suave); }
+.hoja .recibi .frase { font-size: 11pt; line-height: 1.5; }
+.hoja .recibi .frase b { font-weight: 600; }
+.hoja .recibi .monto-recibo { font-size: 26pt; font-weight: 600; color: var(--acento); letter-spacing: -.01em; margin: 6pt 0 2pt; font-variant-numeric: tabular-nums; }
+.hoja .recibi .letra-recibo { font-size: 8.6pt; color: var(--t-2); margin-bottom: 8pt; letter-spacing: .01em; }
+.hoja .cuenta-recibo { width: 3.6in; margin-left: auto; font-size: 9.4pt; margin-top: .1in; }
+.hoja .cuenta-recibo .fila { display: flex; justify-content: space-between; padding: 3.5pt 0; border-bottom: .5pt solid var(--t-filete); }
+.hoja .cuenta-recibo .fila b { font-weight: 500; font-variant-numeric: tabular-nums; }
+.hoja .cuenta-recibo .fila.fuerte { font-weight: 600; border-bottom: 1pt solid var(--acento); }
+.hoja .cuenta-recibo .fila.fuerte b { font-weight: 600; }
+.hoja .nota-fiscal { font-size: 8pt; color: var(--t-tenue); margin: 0; max-width: 3.6in; }
+</style>
+</head>
+<body data-vista="llenar">
+
+<header class="barra">
+  <a class="casa" href="index.html" data-ico="mochila"><span>La mochila</span></a>
+  <div class="herramienta">Cotizar y cobrar</div>
+  <div class="acciones"><span class="estado" id="estado" aria-live="polite"></span><button type="button" class="btn-barra" id="ver-docs">Mis cotizaciones</button></div>
+</header>
+
+<main class="banco">
+<section class="formulario" aria-label="Lo que llenas">
+
+  <div class="entrada">
+    <p>Saca la cuenta de un taller o de un servicio y entrega una cotización con tu nombre. Cuando te paguen, la misma cotización se vuelve recibo. Lo que gastas y lo que vale tu hora se quedan en el sobre: tu cliente ve solo lo que tú decidas.</p>
+    <div class="acciones-entrada">
+      <button type="button" class="btn claro chico" id="nueva" data-ico="mas">Nueva cotización</button>
+      <button type="button" class="btn claro chico" id="ejemplo">Ver un ejemplo</button>
+    </div>
+  </div>
+
+  <details class="paso" id="paso-membrete">
+    <summary><span class="n">1</span><h2>Tu membrete</h2><span class="resumen-paso" id="res-membrete"></span></summary>
+    <div class="cuerpo" id="membrete"></div>
+  </details>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">2</span><h2>¿Para quién?</h2></div>
+    <div class="cuerpo campos">
+      <div class="campo"><label for="c-nombre">Cliente: persona, grupo u organización</label><input id="c-nombre" type="text" data-k="cliente.nombre" placeholder="Ej. Comité de productoras de traspatio"></div>
+      <div class="campo"><label for="c-contacto">A quién va dirigida (opcional)</label><input id="c-contacto" type="text" data-k="cliente.contacto" placeholder="Ej. Presidenta del comité"></div>
+      <div class="campo c3"><label for="c-tel">Teléfono (opcional)</label><input id="c-tel" type="tel" data-k="cliente.telefono"></div>
+      <div class="campo c3"><label for="c-correo">Correo (opcional)</label><input id="c-correo" type="email" data-k="cliente.correo"></div>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">3</span><h2>¿Qué vas a hacer?</h2></div>
+    <p class="guia">Escríbelo como lo leería tu cliente: qué se hace, cuánto dura y qué se lleva la gente.</p>
+    <div class="cuerpo campos">
+      <div class="campo"><label for="s-titulo">El servicio, en pocas palabras</label><input id="s-titulo" type="text" data-k="servicio.titulo" placeholder="Ej. Taller de bocashi y caldo sulfocálcico"></div>
+      <div class="campo"><label for="s-desc">En qué consiste</label><textarea id="s-desc" data-k="servicio.descripcion" rows="3" placeholder="Ej. Dos sesiones prácticas de cuatro horas: preparación de una pila de 500 kg de bocashi y visita de seguimiento a los 15 días."></textarea></div>
+      <div class="campo c3"><label for="s-lugar">Dónde</label><input id="s-lugar" type="text" data-k="servicio.lugar" placeholder="Ej. Concá, Arroyo Seco"></div>
+      <div class="campo c3"><label for="s-cuando">Cuándo</label><input id="s-cuando" type="text" data-k="servicio.cuando" placeholder="Ej. 14 y 15 de enero de 2027"></div>
+      <div class="campo c3"><label for="s-part">Para cuántas personas</label><input id="s-part" type="text" data-k="servicio.participantes" placeholder="Ej. 20 personas"></div>
+      <div class="campo c3"><label for="s-dur">Duración</label><input id="s-dur" type="text" data-k="servicio.duracion" placeholder="Ej. 8 horas en dos sesiones"></div>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">4</span><h2>Saca la cuenta</h2></div>
+    <p class="guia">Todo lo que cuesta hacer el trabajo, y lo que vale tu tiempo. Esto va en el sobre.</p>
+    <div class="cuerpo">
+      <div class="sobre">
+        <div class="rotulo"><b>El sobre</b><span>Solo tú lo ves. No sale en la hoja.</span></div>
+
+        <h3>Tu trabajo</h3>
+        <p class="ayuda" style="margin:0 0 10px">Cuenta todas las horas, también las que nadie ve: preparar, ir y volver, y entregar lo que se pide al final.</p>
+        <div class="horas">
+          <div class="campo"><label for="h-prep">Preparar</label><input id="h-prep" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.preparar" data-tipo="num" placeholder="0"></div>
+          <div class="campo"><label for="h-tras">Ir y volver</label><input id="h-tras" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.traslado" data-tipo="num" placeholder="0"></div>
+          <div class="campo"><label for="h-hacer">Hacer el trabajo</label><input id="h-hacer" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.hacer" data-tipo="num" placeholder="0"></div>
+          <div class="campo"><label for="h-ent">Entregar (informe, fotos)</label><input id="h-ent" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.entregar" data-tipo="num" placeholder="0"></div>
+        </div>
+        <div class="tarifa">
+          <div class="campo"><label for="t-pers">Personas que trabajan</label><input id="t-pers" class="cant" type="number" inputmode="numeric" min="1" step="1" data-k="trabajan" data-tipo="num"></div>
+          <div class="campo"><label for="t-tarifa">¿Cuánto vale tu hora?</label><div class="con-prefijo"><span>$</span><input id="t-tarifa" class="monto" type="number" inputmode="decimal" min="0" step="10" data-k="tarifa" data-tipo="num" placeholder="Lo decides tú"></div></div>
+        </div>
+        <p class="ayuda" style="margin:8px 0 0">El valor de la hora lo pones tú. Piensa en lo que cobra en la región alguien con tu formación, y en que esa hora ya no se la puedes vender a nadie más.</p>
+        <div class="subtotal-sobre"><span id="txt-trabajo">Tu trabajo</span><b id="sub-trabajo">$0.00</b></div>
+
+        <hr>
+        <h3>Viáticos y traslado</h3>
+        <div class="renglones" id="lista-viaticos"></div>
+        <div class="sugerencias" data-lista="viaticos"><span class="rot">Agregar:</span><button type="button">Gasolina</button><button type="button">Casetas</button><button type="button">Pasajes</button><button type="button">Comidas</button><button type="button">Hospedaje</button></div>
+        <button type="button" class="btn-texto" id="abrir-gas">Calcular la gasolina</button>
+        <div class="gasolina oculto" id="gasolina">
+          <div class="campos">
+            <div class="campo"><label for="g-km">Kilómetros de ida y vuelta</label><input id="g-km" class="cant" type="number" inputmode="decimal" min="0" data-k="gas.km" data-tipo="num"></div>
+            <div class="campo"><label for="g-rend">Kilómetros por litro</label><input id="g-rend" class="cant" type="number" inputmode="decimal" min="1" data-k="gas.rend" data-tipo="num"></div>
+            <div class="campo"><label for="g-precio">Precio del litro</label><div class="con-prefijo"><span>$</span><input id="g-precio" class="monto" type="number" inputmode="decimal" min="0" step="0.1" data-k="gas.precio" data-tipo="num" placeholder="el de hoy"></div></div>
+          </div>
+          <div class="resultado-gas"><span id="gas-res">Llena los tres datos.</span><button type="button" class="btn claro chico" id="gas-agregar">Poner en viáticos</button></div>
+        </div>
+        <div class="subtotal-sobre"><span>Viáticos y traslado</span><b id="sub-viaticos">$0.00</b></div>
+
+        <hr>
+        <h3>Materiales e insumos</h3>
+        <div class="encabezado-renglones r-material"><span>Qué</span><span style="text-align:right">Cantidad</span><span style="text-align:right">Precio c/u</span><span style="text-align:right">Importe</span><span></span></div>
+        <div class="renglones" id="lista-materiales"></div>
+        <div class="sugerencias" data-lista="materiales"><span class="rot">Agregar:</span><button type="button">Copias del manual</button><button type="button">Papelógrafos y plumones</button><button type="button">Insumos para la práctica</button><button type="button">Constancias</button><button type="button">Refrigerio</button></div>
+        <div class="subtotal-sobre"><span>Materiales e insumos</span><b id="sub-materiales">$0.00</b></div>
+
+        <hr>
+        <h3>Otros gastos</h3>
+        <div class="renglones" id="lista-otros"></div>
+        <div class="sugerencias" data-lista="otros"><span class="rot">Agregar:</span><button type="button">Renta de equipo</button><button type="button">Ayudante</button><button type="button">Impresión de la memoria</button></div>
+        <div class="subtotal-sobre"><span>Otros gastos</span><b id="sub-otros">$0.00</b></div>
+
+        <hr>
+        <h3>Imprevistos y redondeo</h3>
+        <p class="ayuda" style="margin:0 0 8px">Lo que en clase llamamos imponderables: la llanta ponchada, el hotel que subió, el día extra que pidió el cliente. Alrededor del 5%.</p>
+        <div class="opciones" role="radiogroup" aria-label="Imprevistos">
+          <label><input type="radio" name="imp" value="0" data-k="imprevistos" data-tipo="num"><span>Sin colchón</span></label>
+          <label><input type="radio" name="imp" value="5" data-k="imprevistos" data-tipo="num"><span>5%</span></label>
+          <label><input type="radio" name="imp" value="10" data-k="imprevistos" data-tipo="num"><span>10%</span></label>
+          <label><input type="radio" name="imp" value="15" data-k="imprevistos" data-tipo="num"><span>15%</span></label>
+        </div>
+        <div class="campo" style="margin-top:12px"><label for="redondeo">Redondear el precio hacia arriba</label>
+          <select id="redondeo" data-k="redondeo" data-tipo="num">
+            <option value="0">No redondear</option><option value="10">A los 10 pesos</option><option value="50">A los 50 pesos</option><option value="100">A los 100 pesos</option>
+          </select>
+        </div>
+
+        <hr>
+        <div class="cuenta" id="cuenta"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">5</span><h2>Lo que ve tu cliente</h2></div>
+    <p class="guia">Con cualquiera de las tres, el precio es el mismo. Elige cuánto del sobre se asoma en la hoja.</p>
+    <div class="cuerpo">
+      <div class="vistas" role="radiogroup" aria-label="Lo que ve tu cliente">
+        <label><input type="radio" name="vista" value="unico" data-k="vista"><span class="tarjeta">
+          <svg viewBox="0 0 120 46" aria-hidden="true"><rect x="1" y="6" width="118" height="11" rx="2" fill="#E4ECE9"/><rect x="6" y="9.5" width="58" height="4" rx="2" fill="#0B3C49"/><rect x="92" y="9.5" width="22" height="4" rx="2" fill="#0B3C49"/><rect x="72" y="30" width="47" height="10" rx="2" fill="#0B3C49"/></svg>
+          <b>Un solo precio</b><span>El servicio y su total, nada más.</span></span></label>
+        <label><input type="radio" name="vista" value="gastos" data-k="vista"><span class="tarjeta">
+          <svg viewBox="0 0 120 46" aria-hidden="true"><rect x="6" y="3" width="58" height="4" rx="2" fill="#0B3C49"/><rect x="92" y="3" width="22" height="4" rx="2" fill="#0B3C49"/><rect x="6" y="12" width="40" height="4" rx="2" fill="#9BB0AA"/><rect x="96" y="12" width="18" height="4" rx="2" fill="#9BB0AA"/><rect x="6" y="21" width="46" height="4" rx="2" fill="#9BB0AA"/><rect x="96" y="21" width="18" height="4" rx="2" fill="#9BB0AA"/><rect x="72" y="32" width="47" height="10" rx="2" fill="#0B3C49"/></svg>
+          <b>Servicio y gastos</b><span>Tu trabajo en un renglón; materiales y viáticos aparte.</span></span></label>
+        <label><input type="radio" name="vista" value="desglose" data-k="vista"><span class="tarjeta">
+          <svg viewBox="0 0 120 46" aria-hidden="true"><g fill="#9BB0AA"><rect x="6" y="1" width="50" height="3" rx="1.5"/><rect x="100" y="1" width="14" height="3" rx="1.5"/><rect x="6" y="7" width="36" height="3" rx="1.5"/><rect x="100" y="7" width="14" height="3" rx="1.5"/><rect x="6" y="13" width="44" height="3" rx="1.5"/><rect x="100" y="13" width="14" height="3" rx="1.5"/><rect x="6" y="19" width="30" height="3" rx="1.5"/><rect x="100" y="19" width="14" height="3" rx="1.5"/><rect x="6" y="25" width="40" height="3" rx="1.5"/><rect x="100" y="25" width="14" height="3" rx="1.5"/></g><rect x="72" y="33" width="47" height="10" rx="2" fill="#0B3C49"/></svg>
+          <b>Todo desglosado</b><span>Horas, cada material y cada gasto. Para quien lo pide así.</span></span></label>
+      </div>
+
+      <div class="campos" style="margin-top:16px">
+        <div class="campo c3"><label for="incluye">Qué incluye (uno por renglón)</label><textarea id="incluye" data-k="incluye" rows="4"></textarea>
+          <div class="sugerencias" data-texto="incluye"><button type="button">Materiales para cada participante</button><button type="button">Constancia de participación</button><button type="button">Memoria con fotos</button><button type="button">Informe final</button></div></div>
+        <div class="campo c3"><label for="noincluye">Qué no incluye (uno por renglón)</label><textarea id="noincluye" data-k="noIncluye" rows="4"></textarea>
+          <div class="sugerencias" data-texto="noIncluye"><button type="button">El espacio y el mobiliario</button><button type="button">La comida de las personas participantes</button><button type="button">El transporte de las personas participantes</button></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="cabeza"><span class="n">6</span><h2>Condiciones</h2></div>
+    <div class="cuerpo campos">
+      <div class="campo c2 par"><label for="folio">Número</label><input id="folio" type="text" data-k="folio"></div>
+      <div class="campo c2 par"><label for="fecha">Fecha</label><input id="fecha" type="date" data-k="fecha"></div>
+      <div class="campo c2"><label for="vigencia">Vale por (días)</label><input id="vigencia" class="cant" type="number" inputmode="numeric" min="1" data-k="vigencia" data-tipo="num"></div>
+      <div class="campo"><span class="etiqueta">Anticipo para apartar la fecha</span>
+        <div class="opciones" role="radiogroup" aria-label="Anticipo">
+          <label><input type="radio" name="anticipo" value="0" data-k="anticipo" data-tipo="num"><span>Sin anticipo</span></label>
+          <label><input type="radio" name="anticipo" value="30" data-k="anticipo" data-tipo="num"><span>30%</span></label>
+          <label><input type="radio" name="anticipo" value="50" data-k="anticipo" data-tipo="num"><span>50%</span></label>
+          <label><input type="radio" name="anticipo" value="100" data-k="anticipo" data-tipo="num"><span>Todo por adelantado</span></label>
+        </div></div>
+      <div class="campo"><label class="palomita"><input type="checkbox" data-k="iva"><span>Sumar IVA (16%)<br><span class="ayuda">Solo si vas a dar factura. Si no estás dado de alta en el SAT, déjalo sin marcar.</span></span></label></div>
+      <div class="campo"><label for="forma">Forma de pago</label><input id="forma" type="text" data-k="formaPago" placeholder="Transferencia o efectivo"></div>
+      <div class="campo"><label for="notas">Otras condiciones (una por renglón)</label><textarea id="notas" data-k="notas" rows="3" placeholder="Ej. Si el taller se cancela con menos de cinco días, se cobra la preparación."></textarea></div>
+      <p class="ayuda campo">Cuando te paguen, cambia la hoja a <b>Recibo</b> (arriba de la hoja) y aparece lo que hace falta para el recibo.</p>
+    </div>
+  </section>
+
+  <section class="paso oculto" id="paso-recibo">
+    <div class="cabeza"><span class="n">7</span><h2>El recibo</h2></div>
+    <p class="guia">Un recibo por cada pago. Si te pagan en dos partes, haz el del anticipo y después el del pago final.</p>
+    <div class="cuerpo campos">
+      <div class="campo"><span class="etiqueta">¿Qué te pagaron?</span>
+        <div class="opciones" role="radiogroup" aria-label="Qué te pagaron">
+          <label><input type="radio" name="concepto" value="anticipo" data-k="recibo.concepto"><span>El anticipo</span></label>
+          <label><input type="radio" name="concepto" value="final" data-k="recibo.concepto"><span>El pago final</span></label>
+          <label><input type="radio" name="concepto" value="total" data-k="recibo.concepto"><span>Todo de una vez</span></label>
+          <label><input type="radio" name="concepto" value="otro" data-k="recibo.concepto"><span>Otra cantidad</span></label>
+        </div></div>
+      <div class="campo c3"><label for="r-monto">Cantidad recibida</label><div class="con-prefijo"><span>$</span><input id="r-monto" class="monto" type="number" inputmode="decimal" min="0" step="0.01" data-k="recibo.monto" data-tipo="num"></div></div>
+      <div class="campo c3"><label for="r-ant">Pagos anteriores</label><div class="con-prefijo"><span>$</span><input id="r-ant" class="monto" type="number" inputmode="decimal" min="0" step="0.01" data-k="recibo.anteriores" data-tipo="num"></div></div>
+      <div class="campo c2 par"><label for="r-folio">Número</label><input id="r-folio" type="text" data-k="recibo.folio"></div>
+      <div class="campo c2 par"><label for="r-fecha">Fecha del pago</label><input id="r-fecha" type="date" data-k="recibo.fecha"></div>
+      <div class="campo c2"><label for="r-forma">Cómo te pagaron</label>
+        <select id="r-forma" data-k="recibo.forma"><option>Efectivo</option><option>Transferencia</option><option>Depósito</option><option>Cheque</option></select></div>
+      <div class="campo"><label for="r-ref">Referencia o número de operación (opcional)</label><input id="r-ref" type="text" data-k="recibo.referencia"></div>
+      <div class="campo"><label class="palomita"><input type="checkbox" data-k="recibo.notaFiscal"><span>Aclarar que el recibo no sustituye una factura</span></label></div>
+    </div>
+  </section>
+
+</section>
+
+<section class="panel-hoja" aria-label="La hoja que se entrega">
+  <div class="mesa-hoja">
+    <div class="opciones" role="radiogroup" aria-label="Qué documento">
+      <label><input type="radio" name="tipoDoc" value="cotizacion" data-k="tipoDoc"><span>Cotización</span></label>
+      <label><input type="radio" name="tipoDoc" value="recibo" data-k="tipoDoc"><span>Recibo</span></label>
+    </div>
+    <div class="derecha">
+      <button type="button" class="btn" id="pdf" data-ico="pdf">Guardar en PDF</button>
+      <button type="button" class="btn claro" id="descargar" data-ico="descargar">Descargar archivo</button>
+    </div>
+  </div>
+  <div class="marco-hoja" id="marco"></div>
+  <p class="pista-impresion" id="pista">Para el PDF: en la ventana de imprimir elige «Guardar como PDF». El archivo (.mochila.json) sirve para abrir esta cotización en otro aparato o para guardarla en tu Drive.</p>
+</section>
+</main>
+
+<nav class="conmutador" aria-label="Cambiar de vista">
+  <div class="dos"><button type="button" data-ver="llenar">Llenar</button><button type="button" data-ver="hoja">Ver la hoja</button></div>
+  <button type="button" class="btn" id="pdf-movil" data-ico="pdf">PDF</button>
+</nav>
+
+<script>
+//@COMUN_JS
+//@INCLUIR cobrar.js
+</script>
+</body>
+</html>

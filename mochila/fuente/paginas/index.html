@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La mochila del gestor · Gestión y Manejo de Proyectos</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%230B3C49%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M9 5.5V4.6a3 3 0 0 1 6 0v.9%22/%3E%3Crect x=%224.5%22 y=%225.5%22 width=%2215%22 height=%2215.5%22 rx=%224.5%22/%3E%3Cpath d=%22M4.5 11.5h15%22/%3E%3C/svg%3E">
+<meta name="description" content="Cuatro herramientas para después del curso: cotizar y cobrar, cronograma, presupuesto y prompts para la lógica de un proyecto. Cada una entrega una hoja con tu nombre.">
+<style>
+/*@FUENTES*/
+/*@COMUN_CSS*/
+
+.portada { max-width: 1200px; margin: 0 auto; padding: 34px 28px 72px; }
+.heroe { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 36px; align-items: center; }
+.heroe h1 { font-size: clamp(44px, 6.4vw, 78px); font-weight: 600; letter-spacing: -.025em; line-height: .98; color: var(--petroleo); margin: 0 0 20px; }
+.heroe .lead { font-size: 19.5px; line-height: 1.5; color: var(--tinta-2); max-width: 42ch; margin: 0 0 22px; }
+.tu-membrete { display: inline-flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--linea); border-radius: 999px; padding: 6px 16px 6px 6px; font-size: 15px; color: var(--tinta-2); }
+.tu-membrete .mini { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 13px; overflow: hidden; background: #fff; }
+.tu-membrete .mini img { width: 100%; height: 100%; object-fit: contain; }
+.tu-membrete b { color: var(--petroleo); font-weight: 600; }
+
+.mesa { position: relative; height: 560px; }
+.mesa a.hm { position: absolute; display: block; background: #fff; box-shadow: var(--sombra-hoja); border-radius: 2px; transition: transform .28s cubic-bezier(.2, .7, .2, 1), box-shadow .28s; text-decoration: none; color: inherit; }
+.mesa a.hm img { display: block; width: 100%; height: auto; border-radius: 2px; }
+.mesa a.hm .chip { position: absolute; left: 12px; bottom: 12px; background: var(--petroleo); color: #fff; font-size: 13.5px; font-weight: 500; padding: 5px 11px; border-radius: 999px; box-shadow: 0 2px 8px rgba(11, 60, 73, .25); }
+.mesa a.hm:hover, .mesa a.hm:focus-visible { transform: rotate(0deg) translateY(-10px) scale(1.03); z-index: 20; box-shadow: 0 2px 4px rgba(11, 60, 73, .12), 0 24px 48px -12px rgba(11, 60, 73, .35); }
+.mesa .h-crono { width: 64%; left: 33%; top: 0; transform: rotate(3.5deg); z-index: 1; }
+.mesa .h-crono .chip, .mesa .h-presu .chip { left: auto; right: 12px; bottom: auto; top: 12px; }
+.mesa .h-coti { width: 39%; left: 0; top: 46px; transform: rotate(-5deg); z-index: 3; }
+.mesa .h-presu { width: 36%; left: 60%; top: 168px; transform: rotate(6.5deg); z-index: 2; }
+.mesa .h-arbol { width: 58%; left: 17%; top: 318px; transform: rotate(-2deg); z-index: 4; }
+@media (prefers-reduced-motion: reduce) { .mesa a.hm { transition: none; } }
+
+.seccion-p { margin-top: 64px; }
+.seccion-p > h2 { font-size: 26px; font-weight: 500; color: var(--petroleo); margin: 0 0 6px; letter-spacing: -.01em; }
+.seccion-p > p.sub { color: var(--tinta-2); margin: 0 0 18px; max-width: 64ch; }
+.cuatro { border-top: 1px solid var(--linea); }
+.herr { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) auto; gap: 8px 32px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--linea); }
+.herr h3 { font-size: 22px; font-weight: 500; margin: 0 0 4px; color: var(--tinta); }
+.herr p { margin: 0; color: var(--tinta-2); font-size: 15.5px; max-width: 60ch; }
+.herr .sale { font-size: 14.5px; color: var(--tinta-2); }
+.herr .sale b { display: block; font-size: 12.5px; color: var(--tenue); font-weight: 500; margin-bottom: 2px; }
+.herr .btn { white-space: nowrap; }
+
+.dos-notas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin-top: 56px; }
+.dos-notas h3 { font-size: 18px; font-weight: 600; color: var(--petroleo); margin: 0 0 6px; }
+.dos-notas p { margin: 0; color: var(--tinta-2); font-size: 15.5px; max-width: 56ch; }
+
+/* La etiqueta de la mochila */
+.etiqueta-m { position: relative; margin: 64px auto 0; max-width: 640px; background: var(--kraft); color: var(--kraft-tinta); border: 1px solid var(--kraft-borde); border-radius: 6px 22px 22px 6px; padding: 30px 34px 26px 74px; transform: rotate(-.8deg); }
+.etiqueta-m::before { content: ""; position: absolute; left: 24px; top: 50%; width: 20px; height: 20px; margin-top: -10px; border-radius: 50%; background: var(--plano); border: 1px solid var(--kraft-borde); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .15); }
+.etiqueta-m::after { content: ""; position: absolute; left: -64px; top: 50%; width: 98px; height: 1.5px; background: #9C7B4C; transform: rotate(-14deg); transform-origin: right center; }
+.etiqueta-m p { margin: 0 0 10px; font-size: 16.5px; line-height: 1.55; }
+.etiqueta-m .firma-e { margin: 14px 0 0; font-size: 15px; color: var(--kraft-tenue); }
+.etiqueta-m .firma-e b { color: var(--kraft-tinta); font-weight: 600; }
+
+.pie-p { text-align: center; font-size: 13.5px; color: var(--tenue); margin-top: 56px; }
+.pie-p a { color: var(--tenue); }
+
+@media (max-width: 920px) {
+  .heroe { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .mesa { height: auto; display: flex; gap: 16px; overflow-x: auto; padding: 10px 4px 24px; scroll-snap-type: x mandatory; }
+  .mesa a.hm { position: relative; left: auto !important; top: auto !important; transform: none !important; flex: none; scroll-snap-align: start; }
+  .mesa .h-coti, .mesa .h-presu { width: 62vw; max-width: 300px; }
+  .mesa .h-crono, .mesa .h-arbol { width: 84vw; max-width: 440px; }
+  .herr { grid-template-columns: minmax(0, 1fr); }
+  .dos-notas { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .etiqueta-m { padding: 26px 22px 22px 56px; transform: none; }
+  .etiqueta-m::before { left: 18px; }
+  .etiqueta-m::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <a class="casa" href="index.html" data-ico="mochila" aria-current="page"><span>La mochila del gestor</span></a>
+  <div class="acciones"><a class="btn-barra" href="../index.html" style="text-decoration:none">Volver al curso</a></div>
+</header>
+
+<main class="portada">
+  <section class="heroe">
+    <div>
+      <h1>La mochila del gestor</h1>
+      <p class="lead">Cuatro herramientas para cuando el curso termine. Cada una entrega una hoja con tu nombre, lista para mandar: la cotización y el recibo de un servicio, el cronograma, el presupuesto, y el árbol, la teoría del cambio o el marco lógico de un proyecto.</p>
+      <div id="estado-membrete"></div>
+    </div>
+    <div class="mesa" aria-label="Las hojas que salen de la mochila">
+      <a class="hm h-crono" href="cronograma.html"><img src="img/cronograma.webp" alt="Muestra de un cronograma: gráfica de Gantt de un vivero escolar, por meses, con fases de colores, hitos y la temporada de lluvias" width="720" height="556"><span class="chip">Cronograma</span></a>
+      <a class="hm h-presu" href="presupuesto.html"><img src="img/presupuesto.webp" alt="Muestra de un presupuesto: total del proyecto, barra de lo que pone cada fuente y la matriz de partidas por rubro" width="720" height="932"><span class="chip">Presupuesto</span></a>
+      <a class="hm h-coti" href="cobrar.html"><img src="img/cotizacion.webp" alt="Muestra de una cotización: membrete, cliente, servicio, renglones, total con cantidad con letra, condiciones y firma" width="720" height="932"><span class="chip">Cotizar y cobrar</span></a>
+      <a class="hm h-arbol" href="prompts.html"><img src="img/arbol.webp" alt="Muestra de un árbol de problemas dibujado: el problema central al centro, causas abajo y efectos arriba" width="900" height="695"><span class="chip">Prompts y dibujos</span></a>
+    </div>
+  </section>
+
+  <section class="seccion-p">
+    <h2>Lo que trae</h2>
+    <p class="sub">Las cuatro hablan el idioma de la clase: el sobre, los imponderables, la joroba, el renglón sin dueño, las pruebas del árbol. Ninguna necesita cuenta ni contraseña.</p>
+    <div class="cuatro">
+      <article class="herr">
+        <div><h3>Cotizar y cobrar</h3><p>Saca la cuenta de un taller o de un servicio: las horas de trabajo por lo que vale tu hora, los viáticos, los materiales y un colchón para imprevistos. Tu cliente ve solo lo que tú decidas.</p></div>
+        <div class="sale"><b>Sale</b>La cotización y, cuando te paguen, el recibo con la cantidad con letra.</div>
+        <a class="btn" href="cobrar.html">Abrir</a>
+      </article>
+      <article class="herr">
+        <div><h3>Cronograma</h3><p>Actividades con quién responde, qué dejan y cuándo, por semanas o por meses, con fases, hitos y la temporada de lluvias. Te avisa de la joroba y de las dependencias que no cuadran.</p></div>
+        <div class="sale"><b>Sale</b>La gráfica de Gantt y el calendario con fechas, en hoja horizontal.</div>
+        <a class="btn" href="cronograma.html">Abrir</a>
+      </article>
+      <article class="herr">
+        <div><h3>Presupuesto</h3><p>Partidas por rubro con unidad, cantidad y precio, y con quién pone cada una, en dinero o en especie. Los imponderables van con renglón propio y la hoja revisa el flete.</p></div>
+        <div class="sale"><b>Sale</b>La matriz de aportaciones con firmas, en PDF y en Excel.</div>
+        <a class="btn" href="presupuesto.html">Abrir</a>
+      </article>
+      <article class="herr">
+        <div><h3>Prompts y dibujos</h3><p>Prompts con las reglas de la clase para pedirle a una IA el árbol de problemas, el árbol de objetivos, la teoría del cambio y el marco lógico. Pegas la respuesta, la auditas y la hoja la dibuja.</p></div>
+        <div class="sale"><b>Sale</b>El árbol, la cadena o la matriz, en limpio y listos para imprimir.</div>
+        <a class="btn" href="prompts.html">Abrir</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="dos-notas">
+    <div><h3>Tu membrete, una vez</h3><p>Nombre o logo, contacto, color y firma se llenan en cualquiera de las cuatro y salen en todo lo que hagas. Si todavía no tienes logo, la hoja pone tus iniciales.</p></div>
+    <div><h3>Dónde se guarda</h3><p>En el navegador donde lo llenas; nada se sube a internet. Para pasarlo a otro aparato o guardarlo en tu Drive, cada herramienta descarga un archivo que se vuelve a abrir. En una computadora prestada, borra tus datos al terminar.</p></div>
+  </section>
+
+  <aside class="etiqueta-m" aria-label="Dedicatoria">
+    <p>Para la generación 2026 de Gestión y Manejo de Proyectos. En la presa de La Florida aprendieron a poner en papel lo que cuesta un taller y lo que tarda una obra.</p>
+    <p>Esta mochila es para después: el día que alguien les pida una cotización o un cronograma, que lo entreguen con su nombre y cobren lo justo.</p>
+    <p class="firma-e"><b>Eduardo Luna Sánchez</b>, noviembre de 2026</p>
+  </aside>
+
+  <p class="pie-p">Gestión y Manejo de Proyectos, UAQ Campus Concá. La mochila del gestor, @VERSION. <a href="../index.html">Volver al curso</a></p>
+</main>
+
+<script>
+//@COMUN_JS
+(function () {
+  var m = M.membrete.leer(), cont = M.$('#estado-membrete');
+  if (m.nombre) {
+    var mini = m.logo ? '<img alt="" src="' + m.logo + '">' : '<span style="background:' + M.esc(m.color) + ';width:100%;height:100%;display:grid;place-items:center">' + M.esc(M.membrete.iniciales(m.nombre)) + '</span>';
+    cont.innerHTML = '<span class="tu-membrete"><span class="mini">' + mini + '</span><span>Tu membrete ya está puesto: <b>' + M.esc(m.nombre) + '</b></span></span>';
+  } else {
+    cont.innerHTML = '<span class="tu-membrete" style="padding-left:16px">Empieza por tu membrete, en cualquiera de las cuatro.</span>';
+  }
+})();
+</script>
+</body>
+</html>

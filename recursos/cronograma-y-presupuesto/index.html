@@ -23,6 +23,12 @@
   .galeria figcaption { font-size:.8rem; color:#45605a; padding:.3rem .2rem 0; }
   h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.35rem; margin:2.2rem 0 .6rem; }
   .consulta dt { font-weight:bold; color:var(--profundo); margin-top:.8rem; } .consulta dd { margin:.15rem 0 .3rem; }
+  .mochila-banda { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.8rem 1.4rem; align-items:center; background:var(--profundo); color:#EAF4F2; border-radius:14px; padding:1.1rem 1.4rem; text-decoration:none; margin:1.4rem 0 .4rem; }
+  .mochila-banda strong { display:block; font-family:Georgia,serif; color:var(--arena); font-size:1.3rem; margin-bottom:.2rem; }
+  .mochila-banda .mb-texto > span { font-size:.97rem; opacity:.92; line-height:1.5; }
+  .mochila-banda .mb-ir { background:var(--arena); color:#2b2206; font-weight:bold; border-radius:999px; padding:.55rem 1.2rem; white-space:nowrap; }
+  .mochila-banda:hover .mb-ir { filter:brightness(1.06); }
+  @media (max-width:640px) { .mochila-banda { grid-template-columns:1fr; } .mochila-banda .mb-ir { justify-self:start; } }
 </style>
 </head>
 <body>
@@ -56,9 +62,14 @@
     <h3>¿Cuánto vale tu día?</h3>
     <div class="min">Mazo de 13 láminas · unos 35 min · práctica de 30 min</div>
     <p>Cobrar una capacitación sin regalarse: la tarifa diaria, los días que de verdad se cobran, viáticos, traslado, insumos, imponderables e impuestos, y la cotización en una hoja. La práctica cotiza dos talleres de bioinsumos, en Huejutla y en Aquismón, desde Jalpan.</p>
-    <div class="enlaces"><a class="enlace-grande" href="mazo-cobrar.html">Mazo 3</a> <a class="enlace-grande claro" href="practica-cotizar.html">Calculadora</a></div>
+    <div class="enlaces"><a class="enlace-grande" href="mazo-cobrar.html">Mazo 3</a> <a class="enlace-grande claro" href="practica-cotizar.html">Calculadora</a> <a class="enlace-grande claro" href="../../mochila/cobrar.html">Cotizar de verdad</a></div>
   </div>
 </div>
+
+<a class="mochila-banda" href="../../mochila/index.html" id="mochila">
+  <span class="mb-texto"><strong>La mochila del gestor</strong><span>El regalo de fin de curso: cuatro herramientas para después de la clase. Cotizar y cobrar un servicio, con recibo; el cronograma; el presupuesto; y los prompts para el árbol de problemas, el árbol de objetivos, la teoría del cambio y el marco lógico, con la hoja que los dibuja. Cada una entrega una hoja con su nombre, lista para mandar.</span></span>
+  <span class="mb-ir">Abrir la mochila</span>
+</a>
 
 <h2>El viernes 13: el presupuesto de la presa en una clase</h2>
 <p class="pista" style="font-size:1rem">Dos horas, de la pregunta del árbol a la tarea de las cotizaciones. Lo que sale de la clase es el primer borrador del presupuesto del anteproyecto, con precios de referencia; con las cotizaciones de la tarea se convierte en el que va a la asamblea y al anexo para los fondos.</p>
