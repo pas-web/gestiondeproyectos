@@ -13,11 +13,7 @@
   var HERR = {
     arbol: {
       nombre: 'Árbol de problemas', articulo: 'el árbol de problemas', corto: 'árbol de problemas', completo: 'completo',
-      campos: [
-        { k: 'efectos', l: 'Lo que se ve que pasa (los efectos)', t: 'area', ph: 'Ej. Las plantas se secan en abril; la gente ya no va a las faenas.', hueco: 'LOS EFECTOS QUE SE VEN' },
-        { k: 'causas', l: 'Lo que creen que lo causa', t: 'area', ph: 'Ej. Nadie riega después de la faena; el ganado entra.', hueco: 'LO QUE CREEMOS QUE LO CAUSA' },
-        { k: 'tarjetas', l: 'Frases textuales de la gente (las tarjetas de la consulta), una por renglón', t: 'area', ph: 'Como las dijeron, sin arreglarlas.', hueco: 'FRASES TEXTUALES DE LA CONSULTA' }
-      ],
+      pide: '<b>Para el árbol de problemas te voy a preguntar</b> el problema en sus palabras, lo que dijo la gente, lo que saben por el diagnóstico, lo que creen que lo causa y lo que provoca.',
       necesita: function (d) {
         return 'LO QUE YA TENEMOS PARA EL ÁRBOL\n- Lo que se ve que pasa: ' + v(d.efectos, 'LOS EFECTOS QUE SE VEN') +
           '\n- Lo que creemos que lo causa: ' + v(d.causas, 'LO QUE CREEMOS QUE LO CAUSA') +
@@ -48,12 +44,10 @@
     },
     objetivos: {
       nombre: 'Árbol de objetivos', articulo: 'el árbol de objetivos', corto: 'árbol de objetivos', completo: 'completo',
-      campos: [
-        { k: 'arbol', l: 'Su árbol de problemas, con el formato de la mochila', t: 'mono', ph: 'Pega aquí el bloque del árbol de problemas.', usar: [['arbol', 'Usar el árbol de problemas que dibujé']] },
-        { k: 'alcance', l: 'Lo que el grupo sí puede mover (opcional)', t: 'texto', ph: 'Ej. El vivero y la asamblea, no el ganado.' }
-      ],
+      pide: '<b>Para el árbol de objetivos necesitas tu árbol de problemas.</b> Si lo dibujaste aquí, lo traes con un botón; si no, lo pegas. También te pregunto qué sí puede mover el grupo.',
       necesita: function (d) {
-        return 'NUESTRO ÁRBOL DE PROBLEMAS\n' + (d.arbol ? B0 + d.arbol.trim() + B1 : '[[ PEGA AQUÍ EL ÁRBOL DE PROBLEMAS ]]') + (d.alcance ? '\n- Lo que el grupo sí puede mover: ' + d.alcance : '');
+        var arbol = String(d.arbol || '').trim(), alcance = String(d.alcance || '').trim();
+        return 'NUESTRO ÁRBOL DE PROBLEMAS\n' + (arbol ? B0 + arbol + B1 : '[[ PEGA AQUÍ EL ÁRBOL DE PROBLEMAS ]]') + (alcance ? '\n- Lo que el grupo sí puede mover: ' + alcance : '');
       },
       encargo: 'Voltea el árbol de problemas en un árbol de objetivos: cada caja negativa se reescribe como la situación positiva que se alcanzaría. El problema central se vuelve el objetivo central; las causas se vuelven medios; los efectos se vuelven fines.',
       reglas: [
@@ -78,19 +72,14 @@
     },
     cambio: {
       nombre: 'Teoría del cambio', articulo: 'la teoría del cambio', corto: 'teoría del cambio', completo: 'completa',
-      campos: [
-        { k: 'grande', l: 'El cambio grande que buscan, a largo plazo', t: 'texto', ph: 'Ej. Que los cerros del valle recuperen sombra y suelo.', hueco: 'EL CAMBIO GRANDE QUE BUSCAMOS' },
-        { k: 'hacer', l: 'Lo que van a hacer', t: 'area', ph: 'Las actividades, en pocas palabras.', hueco: 'LO QUE VAMOS A HACER' },
-        { k: 'entregar', l: 'Lo que van a entregar', t: 'area', ph: 'Lo que queda al terminar: plantas sembradas, un acta, un taller dado.', hueco: 'LO QUE VAMOS A ENTREGAR' },
-        { k: 'quien', l: 'Quién tendría que hacer algo distinto para que lo entregado sirva', t: 'texto', ph: 'Un cargo o un rol, no un nombre.', hueco: 'QUIÉN TENDRÍA QUE HACER ALGO DISTINTO' },
-        { k: 'objetivos', l: 'Su árbol de objetivos (opcional)', t: 'mono', ph: 'Si ya lo tienen, pégalo aquí.', usar: [['objetivos', 'Usar el árbol de objetivos que dibujé']] }
-      ],
+      pide: '<b>Para la teoría del cambio te voy a preguntar</b> el cambio grande que buscan, lo que van a hacer, lo que van a entregar y quién tendría que hacer algo distinto para que sirva. Si ya tienes tu árbol de objetivos, ayuda mucho.',
       necesita: function (d) {
+        var objetivos = String(d.objetivos || '').trim();
         return 'LO QUE YA TENEMOS PARA LA TEORÍA DEL CAMBIO\n- El cambio grande que buscamos: ' + v(d.grande, 'EL CAMBIO GRANDE QUE BUSCAMOS') +
           '\n- Lo que vamos a hacer: ' + v(d.hacer, 'LO QUE VAMOS A HACER') +
           '\n- Lo que vamos a entregar: ' + v(d.entregar, 'LO QUE VAMOS A ENTREGAR') +
           '\n- Quién tendría que hacer algo distinto para que sirva: ' + v(d.quien, 'QUIÉN TENDRÍA QUE HACER ALGO DISTINTO') +
-          (d.objetivos ? '\n- Nuestro árbol de objetivos:\n' + B0 + d.objetivos.trim() + B1 : '');
+          (objetivos ? '\n- Nuestro árbol de objetivos:\n' + B0 + objetivos + B1 : '');
       },
       encargo: 'Arma la teoría del cambio del proyecto como una cadena de «si hacemos esto, entonces pasa esto otro, siempre que...». Sube por la escalera: lo que hacemos (actividades), lo que entregamos (productos), lo que la gente hace distinto (resultados) y el cambio grande y lento (impacto). Entre escalón y escalón escribe el «siempre que»: la condición que el equipo no controla y que tiene que cumplirse para que el siguiente escalón ocurra.',
       reglas: [
@@ -115,21 +104,19 @@
     },
     marco: {
       nombre: 'Marco lógico', articulo: 'el marco lógico', corto: 'marco lógico', completo: 'completo',
-      campos: [
-        { k: 'cadena', l: 'Su teoría del cambio o su árbol de objetivos', t: 'mono', ph: 'Pega aquí la cadena o el árbol.', usar: [['cambio', 'Usar la teoría del cambio que dibujé'], ['objetivos', 'Usar el árbol de objetivos']], hueco: 'PEGA AQUÍ LA TEORÍA DEL CAMBIO O EL ÁRBOL DE OBJETIVOS' },
-        { k: 'base', l: 'Datos que ya tienen para la línea base', t: 'area', ph: 'Conteos, fechas y de dónde salen. Ej. 31 de 200 plantas vivas en el conteo de noviembre.', hueco: 'LOS DATOS DE LÍNEA BASE QUE YA TENEMOS' },
-        { k: 'fondo', l: 'Para qué fondo o convocatoria es (opcional)', t: 'texto', ph: 'Ej. PROCODES, modalidad proyectos.' }
-      ],
+      pide: '<b>Para el marco lógico necesitas tu teoría del cambio o tu árbol de objetivos.</b> También te pregunto cuándo empieza y cuándo termina el proyecto, qué datos tienen del antes y para qué convocatoria es.',
       necesita: function (d) {
-        return 'LO QUE YA TENEMOS PARA EL MARCO\n- Nuestra cadena:\n' + (d.cadena ? B0 + d.cadena.trim() + B1 : '[[ PEGA AQUÍ LA TEORÍA DEL CAMBIO O EL ÁRBOL DE OBJETIVOS ]]') +
+        var cadena = String(d.cadena || '').trim(), fondo = String(d.fondo || '').trim();
+        return 'LO QUE YA TENEMOS PARA EL MARCO\n- Nuestra cadena:\n' + (cadena ? B0 + cadena + B1 : '[[ PEGA AQUÍ LA TEORÍA DEL CAMBIO O EL ÁRBOL DE OBJETIVOS ]]') +
+          '\n- El plazo del proyecto: ' + v(d.plazo, 'CUÁNDO EMPIEZA Y CUÁNDO TERMINA') +
           '\n- Datos que ya tenemos para la línea base: ' + v(d.base, 'LOS DATOS DE LÍNEA BASE QUE YA TENEMOS') +
-          (d.fondo ? '\n- Es para: ' + d.fondo : '');
+          (fondo ? '\n- Es para: ' + fondo : '');
       },
       encargo: 'Traduce la cadena a una matriz de marco lógico: cuatro niveles (fin, propósito, componentes y actividades) y cuatro columnas (resumen narrativo, indicadores, medios de verificación y supuestos).',
       reglas: [
         'Lógica vertical: si se hacen las actividades y se cumplen sus supuestos, se logran los componentes; si se logran los componentes y se cumplen sus supuestos, se logra el propósito; y de ahí, el fin. Cada salto tiene que sonar derecho leído en voz alta.',
         'Un solo propósito: el cambio al que el proyecto le apuesta, escrito como situación alcanzada.',
-        'Indicadores que se pueden contar sin fe: qué se mide, cuánto y para cuándo, con su línea base (el antes). Si no te di el dato de la línea base, escribe «línea base por levantar» en lugar de inventarla.',
+        'Indicadores que se pueden contar sin fe: qué se mide, cuánto y para cuándo (una fecha dentro del plazo del proyecto), con su línea base (el antes). Si no te di el dato de la línea base, escribe «línea base por levantar» en lugar de inventarla.',
         'Medios de verificación concretos: una lista, un acta, una foto con fecha, un conteo firmado. «Encuesta», sola, no alcanza.',
         'Supuestos externos, escritos en positivo, que el equipo no controla. Lo que depende del equipo es actividad, no supuesto.'
       ],
@@ -162,14 +149,20 @@
 
   /* ================= El prompt ================= */
   function armarPrompt() {
-    var H = HERR[s.herramienta], p = s.proyecto, d = s.datos[s.herramienta] || {};
+    var herr = s.herramienta, H = HERR[herr], p = s.proyecto, d = s.datos[herr] || {};
+    /* El contexto lleva siempre el nombre, el lugar y la gente. El problema y el diagnóstico los
+       pregunta el árbol de problemas: ahí, si faltan, van entre corchetes. Lo que se llenó para
+       otra herramienta también entra, sin corchetes, porque es dato real del proyecto. */
+    var ctx = ['- Proyecto: ' + v(p.nombre, 'NOMBRE DEL PROYECTO'), '- Dónde: ' + v(p.lugar, 'COMUNIDAD, MUNICIPIO Y ESTADO'), '- Con quién y para quién: ' + v(p.gente, 'QUIÉN PARTICIPA Y A QUIÉN LE SIRVE')];
+    function mas(x, etiqueta, hueco) { x = String(x || '').trim(); if (x) ctx.push('- ' + etiqueta + ': ' + x); else if (hueco) ctx.push('- ' + etiqueta + ': [[ ' + hueco + ' ]]'); }
+    var esArbol = herr === 'arbol';
+    mas(p.problema, 'El problema, en nuestras palabras', esArbol && 'LO QUE PASA, NO LO QUE FALTA');
+    mas(p.diagnostico, 'Lo que ya sabemos por el diagnóstico', esArbol && 'LO QUE SALIÓ DE LA CONSULTA, LA OBSERVACIÓN O LAS ENTREVISTAS');
+    mas(p.recursos, 'Lo que ya tenemos');
+    mas(p.limites, 'Lo que hay que respetar');
     var sec = [];
     sec.push({ p: 'contexto', n: 'Contexto', t: 'Eres un asesor con experiencia en formular proyectos de desarrollo rural y comunitario en México. Vas a ayudarme con ' + H.articulo + ' de un proyecto real. Trabaja solo con lo que te escribo aquí.\n\nCONTEXTO DEL PROYECTO\n' +
-      '- Proyecto: ' + v(p.nombre, 'NOMBRE DEL PROYECTO') + '\n- Dónde: ' + v(p.lugar, 'COMUNIDAD, MUNICIPIO Y ESTADO') +
-      '\n- Con quién y para quién: ' + v(p.gente, 'QUIÉN PARTICIPA Y A QUIÉN LE SIRVE') + '\n- El problema, en nuestras palabras: ' + v(p.problema, 'LO QUE PASA, NO LO QUE FALTA') +
-      '\n- Lo que ya sabemos por el diagnóstico: ' + v(p.diagnostico, 'LO QUE SALIÓ DE LA CONSULTA, LA OBSERVACIÓN O LAS ENTREVISTAS') +
-      (String(p.recursos || '').trim() ? '\n- Lo que ya tenemos: ' + p.recursos.trim() : '') + (String(p.limites || '').trim() ? '\n- Lo que hay que respetar: ' + p.limites.trim() : '') +
-      '\n\n' + H.necesita(d) });
+      ctx.join('\n') + '\n\n' + H.necesita(d) });
     if (s.preguntar) sec.push({ p: 'preguntas', n: 'Antes de empezar', t: 'ANTES DE EMPEZAR\nAntes de escribir nada, hazme las preguntas que necesites para hacerlo bien: máximo cinco, numeradas. Espera mis respuestas y después entrega el resultado con el formato de abajo.' });
     sec.push({ p: 'encargo', n: 'Encargo', t: 'ENCARGO\n' + H.encargo });
     sec.push({ p: 'reglas', n: 'Reglas estrictas', t: 'REGLAS ESTRICTAS\n' + H.reglas.concat(COMUNES).map(function (r, i) { return (i + 1) + '. ' + r; }).join('\n') });
@@ -463,17 +456,13 @@
   var pintarHoja = M.debounce(pintarHojaYa, 120);
 
   /* ================= El formulario ================= */
-  function pintarCampos() {
-    var H = HERR[s.herramienta], d = s.datos[s.herramienta];
-    $('#titulo-necesita').textContent = 'Lo que necesita ' + H.articulo;
-    $('#campos-herramienta').innerHTML = H.campos.map(function (cp) {
-      var k = 'datos.' + s.herramienta + '.' + cp.k, id = 'c-' + s.herramienta + '-' + cp.k;
-      var input = cp.t === 'texto' ? '<input id="' + id + '" type="text" data-k="' + k + '" placeholder="' + esc(cp.ph) + '">'
-        : '<textarea id="' + id + '" data-k="' + k + '" rows="' + (cp.t === 'mono' ? 6 : 3) + '" placeholder="' + esc(cp.ph) + '"' + (cp.t === 'mono' ? ' class="respuesta" style="min-height:130px" spellcheck="false"' : '') + '></textarea>';
-      var usar = (cp.usar || []).map(function (u) { return '<button type="button" class="btn-texto" data-usar="' + u[0] + '" data-en="' + k + '">' + esc(u[1]) + '</button>'; }).join(' ');
-      return '<div class="campo"><label for="' + id + '">' + esc(cp.l) + '</label>' + input + (usar ? '<div>' + usar + '</div>' : '') + '</div>';
-    }).join('');
-    M.llenar($('#campos-herramienta'), s);
+  /* Las preguntas de cada herramienta están en la página, con data-si; aquí solo se dice qué va a
+     preguntar la que se escogió y se enseñan los botones para traer un dibujo de este proyecto */
+  function pintarPide() { $('#pide').innerHTML = HERR[s.herramienta].pide; }
+  function hayDibujo(h) { return !!String(s.respuestas[h] || '').trim(); }
+  function pintarUsar() {
+    M.$$('[data-usar]', banco).forEach(function (b) { b.hidden = !hayDibujo(b.dataset.usar); });
+    M.$$('[data-sin]', banco).forEach(function (el) { el.hidden = el.dataset.sin.split(' ').some(hayDibujo); });
   }
   function pintarPrompt() {
     var sec = armarPrompt();
@@ -531,7 +520,7 @@
     }
     lec.className = 'lectura ' + (ok ? 'bien' : 'mal'); lec.textContent = msg;
   }
-  function todoHerramienta() { pintarCampos(); pintarPrompt(); pintarRespuesta(); pintarAuditoria(); pintarVuelta(); pintarHoja(); }
+  function todoHerramienta() { pintarPide(); pintarUsar(); pintarPrompt(); pintarRespuesta(); pintarAuditoria(); pintarVuelta(); pintarHoja(); }
 
   /* ================= Datos, guardar y abrir ================= */
   function nuevo() {
@@ -563,20 +552,20 @@
     $('#estado').textContent = s.tocado ? 'Guardado' : 'Se guarda solo al escribir';
     if (s.tocado) A.marcarActual(s.id);
     if (guardarYa) { s.tocado = true; guardarLuego(); }
-    guia.abrir({ paso: paso, primero: memb.nombre ? 'proyecto' : 'mb-nombre', sinFoco: true });
+    guia.abrir({ paso: paso, primero: 'herramienta', sinFoco: true });
     if (mensaje) M.aviso(mensaje);
   }
 
   M.escuchar(banco, function () { return s; }, function (k) {
     s.tocado = true;
-    if (k === 'herramienta') { todoHerramienta(); guardarLuego(); return; }
+    if (k === 'herramienta') { todoHerramienta(); guia.refrescar(); guardarLuego(); return; }
     if (k === 'declarar') { pintarHoja(); guardarLuego(); return; }
     pintarPrompt(); if (/^proyecto\./.test(k)) pintarHoja();
     guardarLuego();
   });
   $('#respuesta').addEventListener('input', function () {
     s.tocado = true; s.respuestas[s.herramienta] = this.value;
-    pintarRespuesta(); pintarAuditoria(); pintarHoja(); guardarLuego();
+    pintarRespuesta(); pintarAuditoria(); pintarUsar(); pintarHoja(); guardarLuego();
   });
   M.$$('[data-vuelta]').forEach(function (el) {
     el.addEventListener('input', function () { s.tocado = true; s.vuelta[s.herramienta][el.dataset.vuelta] = el.value; pintarVuelta(); guardarLuego(); });
@@ -589,10 +578,14 @@
       pintarAuditoria(); pintarVuelta(); guardarLuego(); return;
     }
     if ((b = e.target.closest('[data-usar]'))) {
-      var origen = s.respuestas[b.dataset.usar] || '';
-      if (!origen.trim()) { M.aviso('Todavía no hay ' + HERR[b.dataset.usar].articulo + ' dibujado. Hazlo primero en esa herramienta.', 'mal'); return; }
-      M.ponerRuta(s, b.dataset.en, origen); s.tocado = true; M.llenar($('#campos-herramienta'), s); pintarPrompt(); guardarLuego();
-      M.aviso('Listo: ' + HERR[b.dataset.usar].articulo + ' quedó dentro del prompt.');
+      var origen = String(s.respuestas[b.dataset.usar] || '').trim(), H = HERR[b.dataset.usar];
+      if (!origen) { M.aviso('Todavía no hay ' + H.articulo + ' dibujado. Hazlo primero en esa herramienta.', 'mal'); return; }
+      var ya = String(M.obtenerRuta(s, b.dataset.en) || '').trim();
+      if (ya && ya !== origen && !window.confirm('Ya hay algo pegado aquí. ¿Lo cambio por ' + H.articulo + ' que dibujaste?')) return;
+      M.ponerRuta(s, b.dataset.en, origen); s.tocado = true;
+      var campo = M.$('[data-k="' + b.dataset.en + '"]', banco); if (campo) campo.value = origen;
+      pintarPrompt(); guardarLuego();
+      M.aviso('Listo: ' + H.articulo + ' quedó dentro del prompt.');
     }
   });
   function copiarPrompt(abrirEn) {
@@ -637,10 +630,10 @@
     d.respuestas.objetivos = '=== ÁRBOL DE OBJETIVOS ===\nOBJETIVO CENTRAL: Las plantas que se siembran en las faenas del valle sobreviven a la primera seca\nFIN 1: El trabajo de las faenas deja árboles vivos\nFIN 1.1: La gente vuelve a las faenas de reforestación (hipótesis)\nFIN 2: Los cerros dejan de perder suelo\nMEDIO 1: Las plantas que se siembran vienen de un vivero con el clima del valle\nMEDIO 1.1: Las plantas se eligen por su origen, no solo por su precio\nMEDIO 2: Alguien riega las plantas en la primera seca\nMEDIO 2.1: Después de la faena, cada área sembrada tiene quien quede a cargo\nMEDIO 2.2: Quienes cuidan el terreno saben que la planta necesita riego el primer año (hipótesis)\nMEDIO 3: Las plantas quedan a salvo del ganado\nMEDIO 3.1: Las áreas sembradas se cercan con acuerdo de los ganaderos (fuera de alcance)\n=== CIERRE ===';
     d.datos.cambio = { grande: 'Que los cerros del valle recuperen sombra y suelo.', hacer: 'Producir plantas nativas en el vivero del campus; acordar en asamblea quién cuida cada área; sembrar en faena con las lluvias.', entregar: 'Plantas nativas sembradas en cajete y un acta con quien queda a cargo de cada área.', quien: 'Quien cuida cada área sembrada', objetivos: d.respuestas.objetivos };
     d.respuestas.cambio = '=== TEORÍA DEL CAMBIO ===\nAPUESTA: Si producimos plantas nativas del valle y dejamos cada área sembrada con alguien a cargo, entonces las plantas sobreviven a la primera seca, siempre que quien cuida el área tenga agua para regarlas.\nACTIVIDAD: Producir 1,500 plantas nativas en el vivero del campus\nACTIVIDAD: Acordar en asamblea quién recibe las plantas y quién cuida cada área\nACTIVIDAD: Sembrar en faena al inicio de las lluvias\nSIEMPRE QUE: La delegación convoque la faena al inicio de las lluvias\nPRODUCTO: 1,000 plantas nativas sembradas en cajete\nPRODUCTO: Un acta con quien queda a cargo de cada área\nSIEMPRE QUE: Quien cuida cada área tenga agua cerca para regar\nSIEMPRE QUE: Los ganaderos respeten el acuerdo de la asamblea\nRESULTADO: Quien cuida cada área riega las plantas en la primera seca\nRESULTADO: El ganado no entra a las áreas sembradas\nSIEMPRE QUE: Las lluvias del año siguiente lleguen a tiempo\nIMPACTO: Los cerros del valle recuperan sombra y suelo\nESLABÓN FRÁGIL: Que alguien riegue las plantas de marzo a mayo, cuando el grupo ya no está\nQUIÉN: Quien cuida cada área, según el acta de la asamblea\n=== CIERRE ===';
-    d.datos.marco = { cadena: d.respuestas.cambio, base: 'En el conteo de noviembre de 2026 quedaban 31 de los 200 encinos sembrados en julio. Ninguna área sembrada tiene hoy quien la cuide.', fondo: '' };
+    d.datos.marco = { cadena: d.respuestas.cambio, plazo: 'De enero de 2027 a junio de 2028', base: 'En el conteo de noviembre de 2026 quedaban 31 de los 200 encinos sembrados en julio. Ninguna área sembrada tiene hoy quien la cuide.', fondo: '' };
     d.respuestas.marco = '| Nivel | Resumen narrativo | Indicadores | Medios de verificación | Supuestos |\n|---|---|---|---|---|\n| Fin | Los cerros del valle recuperan sombra y suelo | No se mide en este proyecto: se le apuesta | | Las lluvias de los próximos años llegan a tiempo |\n| Propósito | Las plantas sembradas en las faenas del valle sobreviven a la primera seca | Al menos 700 de 1,000 plantas vivas en junio de 2028 (línea base: 31 de 200 vivas en noviembre de 2026) | Conteo por área con fotos y fecha, firmado por quien la cuida | Quien cuida cada área tiene agua cerca para regar |\n| Componente 1 | Plantas nativas producidas en el vivero del campus | 1,500 plantas listas para sembrar en junio de 2027 (línea base: 0) | Bitácora del vivero y conteo con fotos | La toma del campus da agua todo el año |\n| Componente 2 | Cada área sembrada tiene quien quede a cargo | Acta firmada con una persona responsable para cada una de las 5 áreas, antes de la faena (línea base: 0 áreas con responsable) | Acta de la asamblea | La delegación convoca la asamblea en enero |\n| Actividad 1.1 | Conseguir semilla y esquejes de especies nativas | Semilla etiquetada de al menos cuatro especies en marzo de 2027 | Inventario con fotos | Hay semilla disponible en la temporada |\n| Actividad 1.2 | Llenar bolsas, sembrar y regar por turnos | 1,500 bolsas sembradas en abril de 2027 | Bitácora de riego firmada | El servicio de agua del campus es continuo en abril |\n| Actividad 2.1 | Acordar en asamblea quién cuida cada área | Una asamblea con acta en enero de 2027 | Acta y lista de asistencia | La comunidad acepta repartir las áreas |';
     d.preguntar = true;
-    abrir(d, 'Un ejemplo con las cuatro herramientas: en «La herramienta» cambia de una a otra para ver cada dibujo.', true, 'proyecto');
+    abrir(d, 'Un ejemplo con las cuatro herramientas ya llenas: escoge una para ver sus preguntas y su dibujo.', true, 'herramienta');
   }
   $('#ver-docs').onclick = function () {
     M.listaDocs({
@@ -727,9 +720,12 @@
     { ico: 'archivo', t: 'Archivo de la mochila', d: 'Tu proyecto con las cuatro herramientas, para abrirlo en otro aparato.', hacer: function () { s.tocado = true; guardarLuego(); M.descargarArchivo('prompts', 'proyecto-' + (s.proyecto.nombre || ''), s); } }
   ]);
   $('#entregas').insertAdjacentHTML('afterend', '<p class="pista-impresion">Para el PDF: ' + pistaPDF + '</p>');
+  /* Cada paso de «Tu proyecto» es de una herramienta (data-si="h-…") */
+  function deHerramienta(h) { return function () { return !!s && s.herramienta === h; }; }
   var guia = M.guia({
     raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: true,
     estado: function () { return s; }, guardar: function () { guardarLuego(); },
+    si: { 'h-arbol': deHerramienta('arbol'), 'h-objetivos': deHerramienta('objetivos'), 'h-cambio': deHerramienta('cambio'), 'h-marco': deHerramienta('marco') },
     listo: {
       respuesta: function () { return !!String(s.respuestas[s.herramienta] || '').trim(); },
       auditoria: function () { var a = s.auditoria[s.herramienta] || {}; return HERR[s.herramienta].auditoria.every(function (x, i) { return a[i]; }); },

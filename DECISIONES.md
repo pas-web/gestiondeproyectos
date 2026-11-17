@@ -1278,3 +1278,21 @@ y evaluar como dos caras).
   privado hasta que se comparta.
 - **Pendiente:** probarlo con el grupo en celular antes de la primera sesión de
   Pieza por pieza, y compartir el artifact por enlace.
+- **17 de noviembre, más tarde: en Prompts y dibujos, primero la herramienta
+  (pedido de Eduardo).** La página empieza por escoger qué se le pide a la IA:
+  cada herramienta con su dibujo, qué es y para qué sirve, y abajo un recuadro
+  que dice qué se va a preguntar. Después, «Tu proyecto» pide solo lo que esa
+  herramienta necesita, una cosa por tarjeta. Árbol de problemas: el problema,
+  lo que dijo la gente, el diagnóstico, las causas y los efectos. Árbol de
+  objetivos: el árbol de problemas (con un botón que trae el que se dibujó en el
+  mismo proyecto) y lo que el grupo sí puede mover. Teoría del cambio: el árbol
+  de objetivos si lo hay, el cambio grande, lo que van a hacer, lo que van a
+  entregar, quién tendría que hacer algo distinto y lo que tienen y hay que
+  respetar. Marco lógico: la teoría del cambio o el árbol de objetivos, el plazo
+  (nuevo: cada indicador dice para cuándo, dentro del plazo), la línea base y la
+  convocatoria. El nombre, el lugar y la gente se preguntan para las cuatro. El
+  prompt ya no pone entre corchetes datos que esa herramienta no pregunta; lo
+  que se llenó para otra sí entra, como dato del proyecto. La casilla «que la IA
+  me haga preguntas» pasó al paso del prompt, y el membrete, al final, antes de
+  entregar. Los pasos llevan `data-si="h-…"` y la guía los enseña según la
+  herramienta. Los proyectos guardados abren igual, en «La herramienta».

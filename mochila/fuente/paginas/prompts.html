@@ -11,16 +11,21 @@
 /*@COMUN_CSS*/
 
 /* Las herramientas */
-.herramientas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.herramientas { display: grid; grid-template-columns: 1fr; gap: 10px; }
 .herramientas label { position: relative; display: block; }
 .herramientas input { position: absolute; opacity: 0; pointer-events: none; }
-.herramientas .tarjeta { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 12px; align-items: center; height: 100%; background: #fff; border: 1px solid var(--campo-borde); border-radius: 10px; padding: 12px; cursor: pointer; }
+.herramientas .tarjeta { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 3px 14px; align-items: center; height: 100%; background: #fff; border: 1px solid var(--campo-borde); border-radius: 10px; padding: 12px 14px; cursor: pointer; }
 .herramientas .tarjeta svg { width: 64px; height: 48px; grid-row: span 2; }
 .herramientas .tarjeta b { font-weight: 600; color: var(--petroleo); font-size: 15.5px; line-height: 1.25; }
-.herramientas .tarjeta span { font-size: 13px; color: var(--tinta-2); line-height: 1.35; }
+.herramientas .tarjeta span { font-size: 13.5px; color: var(--tinta-2); line-height: 1.4; }
 .herramientas input:checked + .tarjeta { border-color: var(--petroleo); box-shadow: 0 0 0 2px var(--petroleo); }
 .herramientas input:focus-visible + .tarjeta { outline: 2px solid var(--verde); outline-offset: 2px; }
-@media (max-width: 520px) { .herramientas { grid-template-columns: 1fr; } }
+/* Lo que la herramienta escogida va a preguntar */
+.pide { margin: 14px 0 0; font-size: 15px; line-height: 1.5; color: var(--tinta-2); background: #fff; border: 1px dashed var(--campo-borde); border-radius: 10px; padding: 10px 14px; max-width: none; }
+.pide b { font-weight: 600; color: var(--petroleo); }
+/* Traer un dibujo que ya está en este proyecto */
+.usar { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 10px; }
+.usar .ayuda { font-size: 13.5px; color: var(--tenue); line-height: 1.4; }
 
 /* El prompt, con sus piezas a la vista */
 .piezas-leyenda { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--tinta-2); margin: 0 0 10px; }
@@ -123,14 +128,32 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
 <section class="formulario guia" id="guia" aria-label="Las preguntas">
 
   <div class="entrada">
-    <p>Tu proyecto, contado una vez, se vuelve un prompt con las reglas de la clase para pedirle a una IA el árbol de problemas, el de objetivos, la teoría del cambio o el marco lógico. Pegas lo que conteste, lo auditas y la hoja lo dibuja en limpio.</p>
+    <p>Escoges qué le vas a pedir a una IA: el árbol de problemas, el de objetivos, la teoría del cambio o el marco lógico. Te pregunto lo que esa herramienta necesita de tu proyecto, una cosa a la vez, y te armo el prompt con las reglas de la clase. Pegas lo que conteste, lo auditas y la hoja lo dibuja en limpio.</p>
     <div class="acciones-entrada">
       <button type="button" class="btn claro chico" id="nueva" data-ico="mas">Nuevo proyecto</button>
       <button type="button" class="btn claro chico" id="ejemplo">Ver un ejemplo</button>
     </div>
   </div>
 
-  <div id="preguntas-membrete"></div>
+  <section class="pregunta" data-paso="herramienta" data-tramo="La herramienta" data-foco="folio dibujo">
+    <h2>¿Qué le vas a pedir a la IA?</h2>
+    <p class="porque">Escoge una. Según la que escojas, te pregunto lo que esa herramienta necesita saber de tu proyecto. Van en orden: el árbol de problemas se voltea en el de objetivos, de ahí sale la teoría del cambio y de ella el marco lógico.</p>
+    <div class="herramientas" role="radiogroup" aria-label="Herramienta">
+        <label><input type="radio" name="herr" value="arbol" data-k="herramienta"><span class="tarjeta">
+          <svg viewBox="0 0 64 48" aria-hidden="true"><g fill="none" stroke="#9BB0AA" stroke-width="1.4"><path d="M32 20v-6M14 14h36M14 14v-2M50 14v-2M32 28v6M14 34h36M14 34v2M50 34v2"/></g><rect x="3" y="3" width="22" height="9" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="39" y="3" width="22" height="9" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="18" y="19" width="28" height="10" rx="2" fill="#0B3C49"/><rect x="3" y="36" width="22" height="9" rx="2" fill="#FCF4EC" stroke="#c46a1f"/><rect x="39" y="36" width="22" height="9" rx="2" fill="#FCF4EC" stroke="#c46a1f"/></svg>
+          <b>Árbol de problemas</b><span>El problema al centro, lo que lo causa abajo y lo que provoca arriba. Sirve para entender el problema antes de buscarle solución. Semana 5.</span></span></label>
+        <label><input type="radio" name="herr" value="objetivos" data-k="herramienta"><span class="tarjeta">
+          <svg viewBox="0 0 64 48" aria-hidden="true"><g fill="none" stroke="#9BB0AA" stroke-width="1.4"><path d="M32 20v-6M14 14h36M14 14v-2M50 14v-2M32 28v6M14 34h36M14 34v2M50 34v2"/></g><rect x="3" y="3" width="22" height="9" rx="2" fill="#fff" stroke="#00899e"/><rect x="39" y="3" width="22" height="9" rx="2" fill="#fff" stroke="#00899e"/><rect x="18" y="19" width="28" height="10" rx="2" fill="#0F6E6E"/><path d="M27 24l3 3 7-7" stroke="#fff" stroke-width="1.8" fill="none"/><rect x="3" y="36" width="22" height="9" rx="2" fill="#fff" stroke="#c46a1f"/><rect x="39" y="36" width="22" height="9" rx="2" fill="#fff" stroke="#c46a1f"/></svg>
+          <b>Árbol de objetivos</b><span>El árbol de problemas, volteado en positivo. Sirve para ver qué hay que lograr y escoger por dónde entrarle. Semana 5.</span></span></label>
+        <label><input type="radio" name="herr" value="cambio" data-k="herramienta"><span class="tarjeta">
+          <svg viewBox="0 0 64 48" aria-hidden="true"><rect x="1" y="17" width="12" height="14" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="18" y="17" width="12" height="14" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="35" y="17" width="12" height="14" rx="2" fill="#FCF4EC" stroke="#c46a1f"/><rect x="52" y="17" width="11" height="14" rx="2" fill="#FCF4EC" stroke="#c46a1f"/><g stroke="#44584F" stroke-width="1.4" fill="none"><path d="M13.5 24h3.5M30.5 24h3.5M47.5 24h3.5"/></g><path d="M31 36h4v4h-4z" fill="none" stroke="#8A3B2B" stroke-dasharray="1.5 1.5"/></svg>
+          <b>Teoría del cambio</b><span>La cadena de «si hacemos esto, entonces pasa aquello, siempre que...». Sirve para explicar por qué lo que van a hacer traería el cambio. Semana 6.</span></span></label>
+        <label><input type="radio" name="herr" value="marco" data-k="herramienta"><span class="tarjeta">
+          <svg viewBox="0 0 64 48" aria-hidden="true"><rect x="2" y="4" width="60" height="40" rx="3" fill="#fff" stroke="#9BB0AA"/><g stroke="#C9D6D2"><path d="M2 14h60M2 24h60M2 34h60M17 4v40M32 4v40M47 4v40"/></g><rect x="2" y="4" width="15" height="40" fill="#0B3C49" opacity=".85"/></svg>
+          <b>Marco lógico</b><span>Una tabla de cuatro renglones por cuatro columnas. Sirve para decir qué van a lograr, cómo se mide y con qué papel se comprueba. Semana 6.</span></span></label>
+    </div>
+    <p class="pide" id="pide" aria-live="polite"></p>
+  </section>
 
   <section class="pregunta" data-paso="proyecto" data-tramo="Tu proyecto" data-foco="proyecto">
     <h2>¿Cómo se llama tu proyecto?</h2>
@@ -146,54 +169,122 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
     <div class="campo"><label for="p-gente">Con quién y para quién</label><input id="p-gente" type="text" data-k="proyecto.gente" placeholder="Ej. Familias que reforestan en faena"></div>
   </section>
 
-  <section class="pregunta" data-paso="problema" data-tramo="Tu proyecto" data-foco="dibujo">
+  <!-- Lo que pregunta cada herramienta: data-si dice para cuál es cada paso -->
+
+  <!-- Árbol de problemas -->
+  <section class="pregunta" data-paso="problema" data-tramo="Tu proyecto" data-si="h-arbol" data-foco="dibujo">
     <h2>¿Qué problema ven, en sus palabras?</h2>
-    <p class="porque">Lo que pasa, no lo que falta. «Las plantas se mueren antes de la seca» sí; «falta un vivero» no.</p>
+    <p class="porque">Lo que pasa, no lo que falta. «Las plantas se mueren antes de la seca» sí; «falta un vivero» no. Va al centro del árbol.</p>
     <div class="campo"><label for="p-problema" class="sr">El problema</label><textarea id="p-problema" class="grande" data-k="proyecto.problema" rows="3" data-requerido="el problema" placeholder="Lo que pasa, no lo que falta."></textarea></div>
   </section>
 
-  <section class="pregunta" data-paso="diagnostico" data-tramo="Tu proyecto" data-foco="dibujo">
+  <section class="pregunta" data-paso="a-tarjetas" data-tramo="Tu proyecto" data-si="h-arbol" data-foco="dibujo">
+    <h2>¿Qué dijo la gente?</h2>
+    <p class="porque">Las frases de la consulta o de las entrevistas, como las dijeron, sin arreglarlas. Una por renglón. Cada caja del árbol se apoya en una de ellas; la que no, sale marcada como hipótesis.</p>
+    <div class="campo"><label for="a-tarjetas-t" class="sr">Frases textuales de la gente</label><textarea id="a-tarjetas-t" class="grande" data-k="datos.arbol.tarjetas" rows="5" placeholder="Ej. Nadie las riega después de la faena"></textarea></div>
+  </section>
+
+  <section class="pregunta" data-paso="diagnostico" data-tramo="Tu proyecto" data-si="h-arbol" data-foco="dibujo">
     <h2>¿Qué saben ya por el diagnóstico?</h2>
-    <p class="porque">Lo que salió de la consulta, la observación o las entrevistas: conteos, frases de la gente, fechas. Entre más concreto, menos inventa la IA.</p>
+    <p class="porque">Lo que contaron o vieron en el lugar: números, fechas, lo que observaron. Entre más concreto, menos inventa la IA.</p>
     <div class="campo"><label for="p-diag" class="sr">Lo que saben por el diagnóstico</label><textarea id="p-diag" class="grande" data-k="proyecto.diagnostico" rows="5" placeholder="Ej. En la faena de julio se sembraron 200 encinos; en noviembre quedaban 31."></textarea></div>
   </section>
 
-  <section class="pregunta" data-paso="recursos" data-tramo="Tu proyecto" data-foco="dibujo">
+  <section class="pregunta" data-paso="a-causas" data-tramo="Tu proyecto" data-si="h-arbol" data-foco="dibujo">
+    <h2>¿Por qué creen que pasa?</h2>
+    <p class="porque">Sus sospechas, aunque no estén seguros. La IA las ordena y baja preguntando «¿y eso por qué pasa?» hasta llegar a lo que el grupo sí puede cambiar. Son las raíces.</p>
+    <div class="campo"><label for="a-causas-t" class="sr">Lo que creen que lo causa</label><textarea id="a-causas-t" class="grande" data-k="datos.arbol.causas" rows="4" placeholder="Ej. Nadie riega después de la faena; el ganado entra."></textarea></div>
+  </section>
+
+  <section class="pregunta" data-paso="a-efectos" data-tramo="Tu proyecto" data-si="h-arbol" data-foco="dibujo">
+    <h2>¿Y eso qué provoca?</h2>
+    <p class="porque">Lo que ya se nota por culpa del problema: en la gente, en el lugar, en el dinero. Son las ramas.</p>
+    <div class="campo"><label for="a-efectos-t" class="sr">Lo que provoca el problema</label><textarea id="a-efectos-t" class="grande" data-k="datos.arbol.efectos" rows="4" placeholder="Ej. Se gasta trabajo en faenas que no dejan árboles; la gente ya no quiere ir."></textarea></div>
+  </section>
+
+  <!-- Árbol de objetivos -->
+  <section class="pregunta" data-paso="o-arbol" data-tramo="Tu proyecto" data-si="h-objetivos" data-foco="dibujo">
+    <h2>¿Cuál es su árbol de problemas?</h2>
+    <p class="porque">El árbol de objetivos es el mismo árbol, volteado en positivo: la IA lo trabaja caja por caja. Pégalo con el formato de la mochila.</p>
+    <div class="campo"><label for="o-arbol-t" class="sr">Su árbol de problemas</label><textarea id="o-arbol-t" class="respuesta" data-k="datos.objetivos.arbol" rows="8" spellcheck="false" data-requerido="el árbol de problemas" placeholder="=== ÁRBOL DE PROBLEMAS ===&#10;PROBLEMA CENTRAL: ...&#10;EFECTO 1: ...&#10;CAUSA 1: ...&#10;=== CIERRE ==="></textarea></div>
+    <div class="usar"><button type="button" class="btn claro chico" data-usar="arbol" data-en="datos.objetivos.arbol">Traer el árbol de problemas que dibujé aquí</button><span class="ayuda" data-sin="arbol">Si lo dibujas aquí, en «Árbol de problemas», aparece un botón para traerlo.</span></div>
+  </section>
+
+  <section class="pregunta" data-paso="o-alcance" data-tramo="Tu proyecto" data-si="h-objetivos" data-foco="dibujo">
+    <h2>¿Qué sí puede mover el grupo, y qué no?</h2>
+    <p class="porque">Lo que queda fuera de su alcance se marca, no se fuerza. De lo que sí pueden mover salen las líneas del proyecto.</p>
+    <div class="campo"><label for="o-alcance-t" class="sr">Lo que el grupo sí puede mover</label><textarea id="o-alcance-t" class="grande" data-k="datos.objetivos.alcance" rows="3" placeholder="Ej. El vivero y la asamblea, sí; el ganado depende de los ganaderos."></textarea></div>
+  </section>
+
+  <!-- Teoría del cambio -->
+  <section class="pregunta" data-paso="c-objetivos" data-tramo="Tu proyecto" data-si="h-cambio" data-foco="dibujo">
+    <h2>¿Ya tienen su árbol de objetivos?</h2>
+    <p class="porque">No es indispensable, pero ayuda mucho: de su objetivo central sale el cambio que se busca y de sus medios, lo que van a hacer. Si no lo tienen, sigue.</p>
+    <div class="campo"><label for="c-objetivos-t" class="sr">Su árbol de objetivos</label><textarea id="c-objetivos-t" class="respuesta" data-k="datos.cambio.objetivos" rows="7" spellcheck="false" placeholder="=== ÁRBOL DE OBJETIVOS ===&#10;OBJETIVO CENTRAL: ...&#10;FIN 1: ...&#10;MEDIO 1: ...&#10;=== CIERRE ==="></textarea></div>
+    <div class="usar"><button type="button" class="btn claro chico" data-usar="objetivos" data-en="datos.cambio.objetivos">Traer el árbol de objetivos que dibujé aquí</button><span class="ayuda" data-sin="objetivos">Si lo dibujas aquí, en «Árbol de objetivos», aparece un botón para traerlo.</span></div>
+  </section>
+
+  <section class="pregunta" data-paso="c-grande" data-tramo="Tu proyecto" data-si="h-cambio" data-foco="dibujo">
+    <h2>¿Qué cambio grande buscan, a largo plazo?</h2>
+    <p class="porque">Lo que querrían ver en unos años, aunque no dependa solo de ustedes. Es el impacto: a eso se le apuesta, no se promete.</p>
+    <div class="campo"><label for="c-grande-t" class="sr">El cambio grande que buscan</label><input id="c-grande-t" class="grande" type="text" data-k="datos.cambio.grande" placeholder="Ej. Que los cerros del valle recuperen sombra y suelo."></div>
+  </section>
+
+  <section class="pregunta" data-paso="c-hacer" data-tramo="Tu proyecto" data-si="h-cambio" data-foco="dibujo">
+    <h2>¿Qué van a hacer?</h2>
+    <p class="porque">Las actividades, en pocas palabras: lo que hace el equipo con sus manos y su tiempo.</p>
+    <div class="campo"><label for="c-hacer-t" class="sr">Lo que van a hacer</label><textarea id="c-hacer-t" class="grande" data-k="datos.cambio.hacer" rows="4" placeholder="Ej. Producir plantas nativas en el vivero; acordar en asamblea quién cuida cada área; sembrar en faena."></textarea></div>
+  </section>
+
+  <section class="pregunta" data-paso="c-entregar" data-tramo="Tu proyecto" data-si="h-cambio" data-foco="dibujo">
+    <h2>¿Qué van a entregar?</h2>
+    <p class="porque">Lo que queda al terminar y se puede contar: plantas sembradas, un acta firmada, un taller dado.</p>
+    <div class="campo"><label for="c-entregar-t" class="sr">Lo que van a entregar</label><textarea id="c-entregar-t" class="grande" data-k="datos.cambio.entregar" rows="3" placeholder="Ej. Plantas nativas sembradas en cajete y un acta con quien queda a cargo de cada área."></textarea></div>
+  </section>
+
+  <section class="pregunta" data-paso="c-quien" data-tramo="Tu proyecto" data-si="h-cambio" data-foco="dibujo">
+    <h2>¿Quién tendría que hacer algo distinto para que sirva?</h2>
+    <p class="porque">Entregar no es que lo usen. Escribe un cargo o un rol, no un nombre: quien cuida el área, la delegación, los ganaderos.</p>
+    <div class="campo"><label for="c-quien-t" class="sr">Quién tendría que hacer algo distinto</label><input id="c-quien-t" class="grande" type="text" data-k="datos.cambio.quien" placeholder="Un cargo o un rol, no un nombre"></div>
+  </section>
+
+  <section class="pregunta" data-paso="recursos" data-tramo="Tu proyecto" data-si="h-cambio" data-foco="dibujo">
     <h2>¿Qué tienen, y qué hay que respetar?</h2>
-    <p class="porque">Opcional, pero ayuda: la IA propone dentro de lo posible y no promete lo que no se puede.</p>
+    <p class="porque">Opcional, pero ayuda: la IA propone dentro de lo posible, no promete lo que no se puede y encuentra mejor los «siempre que».</p>
     <div class="campo"><label for="p-rec">Lo que ya tienen</label><textarea id="p-rec" data-k="proyecto.recursos" rows="2" placeholder="Terreno, aliados, dinero, herramienta."></textarea></div>
     <div class="campo"><label for="p-lim">Lo que hay que respetar</label><textarea id="p-lim" data-k="proyecto.limites" rows="2" placeholder="Ej. No prometer obras; no pasar de un año."></textarea></div>
   </section>
 
-  <section class="pregunta" data-paso="herramienta" data-tramo="La herramienta" data-foco="folio dibujo">
-    <h2>¿Qué le vas a pedir a la IA?</h2>
-    <p class="porque">Van en orden: el árbol de problemas se voltea en el de objetivos, de ahí sale la teoría del cambio y de ella el marco lógico.</p>
-    <div class="herramientas" role="radiogroup" aria-label="Herramienta">
-        <label><input type="radio" name="herr" value="arbol" data-k="herramienta"><span class="tarjeta">
-          <svg viewBox="0 0 64 48" aria-hidden="true"><g fill="none" stroke="#9BB0AA" stroke-width="1.4"><path d="M32 20v-6M14 14h36M14 14v-2M50 14v-2M32 28v6M14 34h36M14 34v2M50 34v2"/></g><rect x="3" y="3" width="22" height="9" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="39" y="3" width="22" height="9" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="18" y="19" width="28" height="10" rx="2" fill="#0B3C49"/><rect x="3" y="36" width="22" height="9" rx="2" fill="#FCF4EC" stroke="#c46a1f"/><rect x="39" y="36" width="22" height="9" rx="2" fill="#FCF4EC" stroke="#c46a1f"/></svg>
-          <b>Árbol de problemas</b><span>El tronco, sus raíces y sus ramas. Semana 5.</span></span></label>
-        <label><input type="radio" name="herr" value="objetivos" data-k="herramienta"><span class="tarjeta">
-          <svg viewBox="0 0 64 48" aria-hidden="true"><g fill="none" stroke="#9BB0AA" stroke-width="1.4"><path d="M32 20v-6M14 14h36M14 14v-2M50 14v-2M32 28v6M14 34h36M14 34v2M50 34v2"/></g><rect x="3" y="3" width="22" height="9" rx="2" fill="#fff" stroke="#00899e"/><rect x="39" y="3" width="22" height="9" rx="2" fill="#fff" stroke="#00899e"/><rect x="18" y="19" width="28" height="10" rx="2" fill="#0F6E6E"/><path d="M27 24l3 3 7-7" stroke="#fff" stroke-width="1.8" fill="none"/><rect x="3" y="36" width="22" height="9" rx="2" fill="#fff" stroke="#c46a1f"/><rect x="39" y="36" width="22" height="9" rx="2" fill="#fff" stroke="#c46a1f"/></svg>
-          <b>Árbol de objetivos</b><span>El mismo árbol, volteado. Semana 5.</span></span></label>
-        <label><input type="radio" name="herr" value="cambio" data-k="herramienta"><span class="tarjeta">
-          <svg viewBox="0 0 64 48" aria-hidden="true"><rect x="1" y="17" width="12" height="14" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="18" y="17" width="12" height="14" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="35" y="17" width="12" height="14" rx="2" fill="#FCF4EC" stroke="#c46a1f"/><rect x="52" y="17" width="11" height="14" rx="2" fill="#FCF4EC" stroke="#c46a1f"/><g stroke="#44584F" stroke-width="1.4" fill="none"><path d="M13.5 24h3.5M30.5 24h3.5M47.5 24h3.5"/></g><path d="M31 36h4v4h-4z" fill="none" stroke="#8A3B2B" stroke-dasharray="1.5 1.5"/></svg>
-          <b>Teoría del cambio</b><span>Si hacemos esto, entonces, siempre que. Semana 6.</span></span></label>
-        <label><input type="radio" name="herr" value="marco" data-k="herramienta"><span class="tarjeta">
-          <svg viewBox="0 0 64 48" aria-hidden="true"><rect x="2" y="4" width="60" height="40" rx="3" fill="#fff" stroke="#9BB0AA"/><g stroke="#C9D6D2"><path d="M2 14h60M2 24h60M2 34h60M17 4v40M32 4v40M47 4v40"/></g><rect x="2" y="4" width="15" height="40" fill="#0B3C49" opacity=".85"/></svg>
-          <b>Marco lógico</b><span>Cuatro renglones y cuatro columnas. Semana 6.</span></span></label>
-      </div>
+  <!-- Marco lógico -->
+  <section class="pregunta" data-paso="m-cadena" data-tramo="Tu proyecto" data-si="h-marco" data-foco="dibujo">
+    <h2>¿Cuál es su teoría del cambio, o su árbol de objetivos?</h2>
+    <p class="porque">El marco lógico traduce esa cadena a una tabla: de ahí salen el fin, el propósito, los componentes y las actividades. Mejor la teoría del cambio, si ya la tienen.</p>
+    <div class="campo"><label for="m-cadena-t" class="sr">Su teoría del cambio o su árbol de objetivos</label><textarea id="m-cadena-t" class="respuesta" data-k="datos.marco.cadena" rows="8" spellcheck="false" data-requerido="la teoría del cambio o el árbol de objetivos" placeholder="Pega aquí la cadena o el árbol."></textarea></div>
+    <div class="usar"><button type="button" class="btn claro chico" data-usar="cambio" data-en="datos.marco.cadena">Traer la teoría del cambio que dibujé aquí</button><button type="button" class="btn claro chico" data-usar="objetivos" data-en="datos.marco.cadena">Traer el árbol de objetivos</button><span class="ayuda" data-sin="cambio objetivos">Si dibujas aquí la teoría del cambio o el árbol de objetivos, aparece un botón para traerlos.</span></div>
   </section>
 
-  <section class="pregunta" data-paso="necesita" data-tramo="La herramienta" data-foco="dibujo">
-    <h2 id="titulo-necesita">Lo que necesita esta herramienta</h2>
-    <p class="porque">Lo que la IA necesita saber para esta herramienta en particular.</p>
-    <div class="campos" id="campos-herramienta"></div>
-    <div class="campo" style="margin-top:14px"><label class="palomita"><input type="checkbox" data-k="preguntar"><span>Que la IA me haga preguntas antes de escribir<br><span class="ayuda">El método de la clase: «antes de escribir nada, hazme las preguntas que necesites para hacerlo bien». Tarda un poco más y sale mejor.</span></span></label></div>
+  <section class="pregunta" data-paso="m-plazo" data-tramo="Tu proyecto" data-si="h-marco" data-foco="dibujo">
+    <h2>¿Cuándo empieza y cuándo termina?</h2>
+    <p class="porque">Cada indicador dice para cuándo. Sin el plazo, la IA inventa fechas.</p>
+    <div class="campo"><label for="m-plazo-t" class="sr">El plazo del proyecto</label><input id="m-plazo-t" class="grande" type="text" data-k="datos.marco.plazo" data-requerido="el plazo" placeholder="Ej. De enero a diciembre de 2027"></div>
+  </section>
+
+  <section class="pregunta" data-paso="m-base" data-tramo="Tu proyecto" data-si="h-marco" data-foco="dibujo">
+    <h2>¿Qué datos tienen del antes?</h2>
+    <p class="porque">La línea base: cuánto hay hoy de lo que quieren cambiar, con su fecha y de dónde sale. Lo que no tengan, la IA lo marca «por levantar» en lugar de inventarlo.</p>
+    <div class="campo"><label for="m-base-t" class="sr">Datos para la línea base</label><textarea id="m-base-t" class="grande" data-k="datos.marco.base" rows="4" placeholder="Ej. En el conteo de noviembre de 2026 quedaban 31 de 200 plantas vivas."></textarea></div>
+  </section>
+
+  <section class="pregunta" data-paso="m-fondo" data-tramo="Tu proyecto" data-si="h-marco" data-foco="dibujo">
+    <h2>¿Para qué convocatoria o donante es?</h2>
+    <p class="porque">Opcional. Si la convocatoria pide algo en particular, la IA lo toma en cuenta. Si todavía no saben, déjalo en blanco.</p>
+    <div class="campo"><label for="m-fondo-t" class="sr">La convocatoria o el donante</label><input id="m-fondo-t" class="grande" type="text" data-k="datos.marco.fondo" placeholder="Ej. PROCODES, modalidad proyectos"></div>
   </section>
 
   <section class="pregunta" data-paso="prompt" data-tramo="El prompt">
     <h2>Tu prompt está listo</h2>
-    <p class="porque">Lleva las cuatro piezas de la clase y las reglas estrictas de la herramienta. Lo que te falta llenar sale entre corchetes dobles.</p>
+    <p class="porque">Lleva las cuatro piezas de la clase, lo que contaste de tu proyecto y las reglas estrictas de la herramienta. Lo que te falta llenar sale entre corchetes dobles.</p>
+    <div class="campo" style="margin:0 0 14px"><label class="palomita"><input type="checkbox" data-k="preguntar"><span>Que la IA me haga preguntas antes de escribir<br><span class="ayuda">El método de la clase: «antes de escribir nada, hazme las preguntas que necesites para hacerlo bien». Tarda un poco más y sale mejor.</span></span></label></div>
     <div class="piezas-leyenda"><span><i style="background:#0B3C49"></i>contexto</span><span><i style="background:#0F6E6E"></i>encargo</span><span><i style="background:#8A3B2B"></i>reglas</span><span><i style="background:#A8781A"></i>formato</span><span><i style="background:#7B52AE"></i>ejemplo</span></div>
     <div class="prompt-vista" id="prompt-vista" aria-live="polite"></div>
     <div class="contador" id="contador"></div>
@@ -234,6 +325,8 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
     <div class="prompt-vista" id="vuelta-vista" style="margin-top:12px"></div>
     <div class="acciones-prompt"><button type="button" class="btn" id="copiar-vuelta" data-ico="copiar">Copiar la segunda vuelta</button></div>
   </section>
+
+  <div id="preguntas-membrete"></div>
 
   <section class="pregunta" data-paso="entregar" data-tramo="Entregar">
     <h2>Tu dibujo está listo</h2>
