@@ -1013,6 +1013,15 @@ window.EMBLEMA = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADwCAMAAAB7
     { id: 'otros', nombre: 'Otros', corto: 'Otros' }
   ];
 
+  // Quién hace la pieza: para el plano que se lleva a revisar antes de cotizar
+  D.OFICIOS = [
+    { id: 'herreria', nombre: 'Herrería', persona: 'el herrero', hace: 'un herrero, al que se le paga' },
+    { id: 'carpinteria', nombre: 'Carpintería', persona: 'el carpintero', hace: 'un carpintero, al que se le paga' },
+    { id: 'albanileria', nombre: 'Albañilería', persona: 'el albañil', hace: 'un albañil, al que se le paga' },
+    { id: 'otro', nombre: 'Otro oficio', persona: 'quien la va a hacer', hace: 'otro oficio, al que se le paga' },
+    { id: 'faena', nombre: 'La comunidad, en faena', persona: 'quien coordina la faena', hace: 'la comunidad, en faena' }
+  ];
+
   /* ---------- Las piezas ---------- */
   D.PIEZAS = [
     { id: '1a-trancas', c: '1a', nombre: 'Trancas para el ganado en el vertedor', acts: ['1a.2'],
@@ -2983,6 +2992,70 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
   };
 
   /* ---------- Leer respuestas ---------- */
+  /* ---------- El plano para quien hace la pieza ---------- */
+  AG.oficio = function (id) { return D.OFICIOS.filter(function (o) { return o.id === id; })[0] || D.OFICIOS[3]; };
+  function lleno(v) { return String(v == null ? '' : v).trim() !== ''; }
+  AG.aPersona = function (x) { return /^el /i.test(x) ? 'al ' + x.slice(3) : 'a ' + x; };
+  // Lo que pide el plano: las mismas partes y reglas en Pieza por pieza y en la práctica del presupuesto
+  AG.partesPlano = function (quien) {
+    return [
+      'ENCARGO',
+      'Haz el plano como una página para imprimir en tamaño carta (en Claude, como artifact), con los dibujos en SVG, las medidas acotadas y estas partes, en este orden:',
+      '1. Ficha: qué es, en una frase; sus medidas clave; el material; lo que hay que comprar, en piezas o tramos que sí se venden; y el peso aproximado.',
+      '2. La pieza armada, en una vista que se entienda de un vistazo.',
+      '3. Un corte por el centro, con alturas y anchos.',
+      '4. La planta, vista desde arriba, con sus medidas.',
+      '5. La pieza que se repite, si la hay, sobre una cuadrícula para trazarla a tamaño real.',
+      '6. Una tabla de material y cortes: pieza, cantidad, material, largo, forma y lugar. Al final, lo que se compra y cuánto sobra.',
+      '7. Notas para ' + quien + ': cómo se toman las medidas (a eje, exteriores o interiores), las uniones, los dobleces o ensambles, los empalmes, el acabado y la protección contra el sol, la humedad y el óxido.',
+      '8. Antes de mandarla a hacer: la medida que manda y cómo comprobarla en el lugar, y las decisiones que tomaste y que se pueden cambiar.',
+      '9. Preguntas para ' + quien + ': de tres a cinco, para que diga si así funciona y qué cambiaría.',
+      '',
+      'REGLAS ESTRICTAS',
+      '1. Medidas en metros y centímetros; di siempre si son a eje, exteriores o interiores.',
+      '2. La tabla de cortes cuadra con lo que se compra: piezas o tramos que sí se venden (tubo de 6 m, tablón de 2.5 m, varilla de 12 m) y lo que sobra.',
+      '3. No pongas precios: el precio lo da quien la hace.',
+      '4. No garantices que aguanta. Si haces una cuenta de resistencia, di con qué carga la hiciste y pide que el experto la confirme.',
+      '5. Respeta lo que te escribí y las reglas del sitio. Lo que propongas tú, márcalo «propuesta».',
+      '6. Si te falta un dato para dibujar, pregúntalo antes de empezar.',
+      '7. Español llano y frases cortas, con las palabras que usa el oficio.'
+    ].join('\n');
+  };
+  AG.ajustePlano = function (o, quien) {
+    return [
+      'Llevamos el plano ' + AG.aPersona(lleno(o.quien) ? o.quien.trim() : quien) + '. Esto dijo:',
+      lleno(o.dijo) ? o.dijo.trim() : '[[ LO QUE DIJO DEL PLANO ]]',
+      '',
+      'Ajusta el plano con esto: ' + (lleno(o.ajustes) ? o.ajustes.trim() : '[[ LO QUE HAY QUE AJUSTAR ]]'),
+      '',
+      'No cambies lo que ya estaba bien. Marca en el plano lo que cambió, actualiza la tabla de material y cortes y lo que se compra, y al final deja una lista corta de los cambios.'
+    ].join('\n');
+  };
+  AG.encargoPlano = function (p) {
+    var o = p.plano || {}, of = AG.oficio(o.oficio);
+    var rs = ((p.lista && p.lista.renglones) || []).filter(function (r) { return (+r.cantidad || 0) > 0 && r.tipo !== 'flete'; });
+    var l = [
+      'Eres dibujante técnico y conoces la obra rural en México. Vas a dibujar el plano de una pieza del proyecto comunitario de la Presa de La Florida para que ' + of.persona + ' lo revise, lo cotice y la haga. Abajo van el expediente del proyecto y lo que ya sabemos de la pieza. Trabaja solo con eso; lo que propongas tú, márcalo «propuesta».' +
+        ((p.fotos || []).length ? ' Si te adjunto el fotomontaje, úsalo para la forma general; las medidas mandan sobre la foto.' : ''),
+      '',
+      D.EXPEDIENTE,
+      '',
+      AG.bloquePieza(p)
+    ];
+    if (p.lectura) l.push('', AG.bloqueLectura(p), '', AG.bloqueRespuestas(p));
+    if (rs.length) {
+      l.push('', 'LO QUE LLEVA, SEGÚN LA LISTA DEL EQUIPO');
+      rs.forEach(function (r) { l.push('- ' + r.que + ': ' + r.cantidad + ' ' + r.unidad + (r.calculo ? ' (' + r.calculo + ')' : '')); });
+    }
+    l.push('', 'PARA EL PLANO');
+    l.push('- Quién la hace: ' + of.hace);
+    l.push('- La medida que manda (la que no se mueve): ' + (lleno(o.manda) ? o.manda.trim() : '[[ LA MEDIDA QUE MANDA ]]'));
+    if (lleno(o.respetar)) l.push('- Lo que no debe cambiar: ' + o.respetar.trim());
+    l.push('', AG.partesPlano(of.persona));
+    return l.join('\n');
+  };
+  AG.encargoPlanoAjuste = function (p) { var o = p.plano || {}; return AG.ajustePlano(o, AG.oficio(o.oficio).persona); };
+
   AG.leerJSON = function (texto) {
     var t = String(texto || '').trim();
     if (!t) throw new Error('No hay nada pegado.');
@@ -3241,7 +3314,12 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
         r7: { causas: ['producto'], texto: 'La IA estimó la cadena sin fuente; la más barata de la región salió un poco más cara.' },
         r16: { causas: ['flete'], texto: 'El viaje a La Florida es más largo que el del catálogo y el camino es de terracería.' }
       },
-      bolsillos: {}, acts: {}
+      bolsillos: {}, acts: {},
+      plano: {
+        oficio: 'carpinteria', manda: 'La viga queda a 2.40 m del piso', respetar: 'Que las cadenas se puedan revisar y apretar cada temporada',
+        quien: 'Carpintero de ejemplo', dijo: 'Los troncos de 15 cm aguantan, pero la viga de 15 cm se cimbra con dos niños columpiándose. Mejor de 20 cm y con cartelas de tablón en las esquinas.',
+        ajustes: 'Viga de 20 cm de diámetro; cartelas de tablón en las cuatro esquinas de cada marco.'
+      }
     };
   };
 })();
@@ -3330,13 +3408,15 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
       equipo: { nombres: '', contacto: '', telefono: '' },
       componente: '', piezaId: '', nombre: '', actividades: [], decidido: '', propuesta: '',
       fotos: [], lectura: null, respuestas: {}, lista: null, imp: 5,
-      cotizaciones: [], eleccion: {}, explicaciones: {}, bolsillos: {}, acts: {}
+      cotizaciones: [], eleccion: {}, explicaciones: {}, bolsillos: {}, acts: {},
+      plano: { oficio: '', manda: '', respetar: '', quien: '', dijo: '', ajustes: '' }
     };
   }
   function normal(p) {
     var v = nueva();
     Object.keys(v).forEach(function (k) { if (p[k] === undefined || (p[k] === null && v[k] !== null)) p[k] = v[k]; });
     p.equipo = Object.assign(v.equipo, p.equipo || {});
+    p.plano = Object.assign(v.plano, p.plano || {});
     if (p.lista && !p.lista.sig) p.lista.sig = (p.lista.renglones || []).length + 1;
     return p;
   }
@@ -3511,10 +3591,12 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
     en(T.pedir, 6);
     var gs = P.lista ? grupos() : [];
     paso({ id: 'contacto', foco: 'contacto', titulo: '¿Quién recibe las cotizaciones?', cuerpo: cContacto });
+    if (P.lista) paso({ id: 'plano', foco: 'plano', titulo: 'Un plano para quien la va a hacer', cuerpo: cPlano });
     gs.forEach(function (g) { paso({ id: 's-' + g.id, grupo: g.id, foco: 'para conceptos', titulo: 'Pide la cotización: ' + g.p.corto, cuerpo: function () { return cSolicitud(g.id); } }); });
 
     en(T.llegaron, 7);
     gs.forEach(function (g) { paso({ id: 'c-' + g.id, grupo: g.id, foco: 'cot-' + g.id, titulo: 'Lo que cotizaron: ' + g.p.corto, cuerpo: function () { return cCotizaciones(g.id); } }); });
+    if (conPlano()) paso({ id: 'plano-rev', foco: 'plano-rev', titulo: '¿Qué dijo del plano?', cuerpo: cPlanoRev });
     if (gs.length) paso({ id: 'elegir', foco: 'elegidas', titulo: '¿Con cuál se quedan?', cuerpo: cElegir });
 
     en(T.partida, 7);
@@ -3618,6 +3700,8 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
       case 'ref': return P.lista ? undefined : false;
       case 'sinfuente': return sinFuente().length ? undefined : true;
       case 'contacto': return tiene(P.equipo.contacto);
+      case 'plano': return P.plano && P.plano.oficio ? true : undefined;
+      case 'plano-rev': return tiene(P.plano.dijo);
       case 'contraste': return contraste().length ? undefined : false;
     }
     if (/^pr-/.test(id)) { q = preguntaPorId(id.slice(3)); return q ? tieneValor(q) : undefined; }
@@ -3887,6 +3971,42 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
       '<div data-entregas="sol-' + gid + '" style="margin-top:16px"></div>';
   }
 
+  /* ---------- El plano para quien hace la pieza ---------- */
+  function oficio(id) { return A.oficio(id); }
+  function conPlano() { return !!(P && P.plano && P.plano.oficio); }
+  // Por lo que trae la lista, quién parece que la hace
+  function oficioSugerido() {
+    var t = renglones().map(function (r) { return (r.proveedor || '') + ' ' + (r.que || ''); }).join(' ');
+    if (/herrer|soldad/i.test(t)) return 'herreria';
+    if (/madereria|carpinter/i.test(t)) return 'carpinteria';
+    if (/alba[ñn]il|cemento|block|tabique|mortero/i.test(t)) return 'albanileria';
+    return '';
+  }
+  function cPlano() {
+    var o = P.plano, sug = oficioSugerido();
+    var h = '<p class="porque">Si la pieza la hace un oficio, un plano evita malentendidos: medidas, cortes y uniones en una hoja, como el plano de un temazcal para el herrero. Claude lo dibuja con lo que ya trae la lista; ustedes lo llevan con la solicitud y le piden a quien la va a hacer que lo revise antes de cotizar. Si no hace falta, sigue.</p>' +
+      '<div class="campo"><label for="pl-oficio">¿Quién la va a hacer?</label><select id="pl-oficio" data-k="plano.oficio">' + opciones(D.OFICIOS.map(function (x) { return [x.id, x.nombre]; }), o.oficio, 'Sin plano') + '</select>' +
+      (sug && !o.oficio ? '<div class="ayuda">Por lo que trae la lista, parece de ' + esc(minus(oficio(sug).nombre)) + '.</div>' : '') + '</div>';
+    if (!o.oficio) return h;
+    var of = oficio(o.oficio);
+    h += '<div class="campo"><label for="pl-manda">La medida que manda</label><input class="grande" type="text" id="pl-manda" data-k="plano.manda" data-requerido="la medida que manda" placeholder="Por ejemplo: la viga queda a 2.40 m del piso" autocomplete="off"><div class="ayuda">La que no se mueve aunque cambie lo demás.</div></div>' +
+      '<div class="campo"><label for="pl-respetar">Lo que no debe cambiar <span class="ayuda">(opcional)</span></label><input type="text" id="pl-respetar" data-k="plano.respetar" placeholder="Por ejemplo: que se pueda desarmar para guardarla en lluvias" autocomplete="off"></div>' +
+      '<ol class="encargo-pasos"><li>Copia el encargo del plano: ya trae la pieza, la lectura de la foto, las medidas y la lista.<div class="ias"><button type="button" class="btn chico" data-accion="copiar-plano">' + M.ico.copiar + 'Copiar el encargo</button></div></li>' +
+      '<li>Pégalo en una IA' + (P.fotos.length ? ' con la foto' : '') + '. Claude lo dibuja como una página para imprimir.<div class="ias">' + IAS.map(function (x) { return '<a class="btn claro chico" href="' + x[1] + '" target="_blank" rel="noopener">' + x[0] + '</a>'; }).join('') + '</div></li>' +
+      '<li>Imprímelo o guárdalo en PDF y llévalo ' + esc(A.aPersona(of.persona)) + ' con la solicitud de cotización.</li></ol>' +
+      '<details class="ver-encargo"><summary>Ver el encargo</summary><pre>' + esc(A.encargoPlano(P)) + '</pre></details>';
+    return h;
+  }
+  function cPlanoRev() {
+    var o = P.plano, of = oficio(o.oficio);
+    return '<p class="porque">Anota lo que dijo ' + esc(of.persona) + ' del plano. Si algo no funciona, el encargo de abajo le pide a Claude el plano corregido, en el mismo chat; y si cambia el material, corrige también la lista.</p>' +
+      '<div class="campo"><label for="pl-quien">Quién lo revisó</label><input class="grande" type="text" id="pl-quien" data-k="plano.quien" placeholder="Por ejemplo: el herrero de Concá" autocomplete="off"></div>' +
+      '<div class="campo"><label for="pl-dijo">Lo que dijo</label><textarea class="grande" id="pl-dijo" data-k="plano.dijo" rows="3" data-requerido="lo que dijo del plano" placeholder="Por ejemplo: con tubo de 3/4 se cimbra; las patas, mejor de 1 pulgada"></textarea></div>' +
+      '<div class="campo"><label for="pl-ajustes">Lo que hay que ajustar</label><textarea id="pl-ajustes" data-k="plano.ajustes" rows="2" placeholder="Por ejemplo: patas de tubo de 1 pulgada; lo demás igual"></textarea></div>' +
+      '<div class="ias"><button type="button" class="btn chico" data-accion="copiar-plano-ajuste">' + M.ico.copiar + 'Copiar el encargo del ajuste</button></div>' +
+      '<p class="nota-chica">Si el ajuste cambia materiales o cantidades: <button type="button" class="btn-texto" data-ir="armar">corregir la lista</button>.</p>';
+  }
+
   /* ---------- 7 · Lo que cotizaron ---------- */
   function cCotizaciones(gid) {
     var g = grupo(gid); if (!g) return '';
@@ -4138,6 +4258,8 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
       g.rs.map(function (r, i) { return '<tr><td>' + (i + 1) + '</td><td>' + esc(r.que) + '</td><td class="num">' + cifra(r.cantidad) + '</td><td>' + esc(r.unidad) + '</td><td class="linea-vacia"></td><td class="linea-vacia"></td></tr>'; }).join('') +
       '</tbody></table>';
     c += '<div class="caja-doc"><b>Le pedimos indicar:</b> si el precio incluye IVA; el costo del flete hasta La Florida, Arroyo Seco; la vigencia de la cotización; el tiempo de entrega y la forma de pago.</div>';
+    c += conPlano() ? '<div class="caja-doc" data-parte="plano"><b>Va con un plano de la pieza.</b> Le pedimos revisarlo y anotar en él lo que cambiaría; si algo no funciona, lo ajustamos antes de cotizar.</div>'
+      : '<div class="caja-doc hueco" data-parte="plano">Si escogen quién la va a hacer, aquí se avisa que la solicitud va con un plano.</div>';
     c += '<p class="aviso-doc">Esta solicitud sirve para elaborar un presupuesto. No es una orden de compra ni compromete una compra.</p>';
     c += '<div class="firma-linea"><div data-parte="contacto">Contacto: ' + esc(P.equipo.contacto || '') + '</div><div>Recibió (nombre y firma)</div></div>';
     return hoja(c, { pieIzq: PROYECTO.nombre, pieDer: 'Folio ' + folioSol(g.id) });
@@ -4172,6 +4294,12 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
         c += '<div class="caja-doc" data-parte="dif-' + x.r.id + '"><b>' + esc(x.r.que) + '.</b> ' + (cs.length ? esc(cs.join(', ')) + '. ' : '') + (e.texto ? esc(e.texto) : '<span class="gris">Falta la explicación del equipo.</span>') + '</div>';
       });
       c += '</div>';
+    }
+    if (conPlano()) {
+      var pl = P.plano, ofp = oficio(pl.oficio);
+      c += '<div class="seccion anexo' + (tiene(pl.dijo) ? '' : ' hueco') + '" data-parte="plano-rev"><h3 class="titulo-doc">Anexo C · La revisión del plano</h3>' +
+        (tiene(pl.dijo) ? '<p class="texto-doc">Lo revisó ' + esc(tiene(pl.quien) ? pl.quien : ofp.persona) + '. ' + esc(pl.dijo) + (tiene(pl.ajustes) ? ' <b>Se ajusta:</b> ' + esc(pl.ajustes) : '') + '</p>'
+          : '<p class="texto-doc gris">Aquí va lo que dijo ' + esc(ofp.persona) + ' del plano.</p>') + '</div>';
     }
     c += '<p class="aviso-doc">Precios de las cotizaciones que consiguió el equipo; donde falta cotización se usa el precio de referencia y se marca. La precotización de la IA solo sirve para comparar (anexo B). La faena se valoriza al salario mínimo general de 2026.</p>';
     c += '<div class="firma-linea"><div>Elaboró: ' + esc(P.equipo.nombres || '') + '</div><div>Revisó</div></div>';
@@ -4416,6 +4544,7 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
     M.docxTablaDatos(d, [{ t: '#', ancho: 0.35 }, { t: 'Concepto', ancho: resto }, { t: 'Cantidad', ancho: 0.8, alin: 'der' }, { t: 'Unidad', ancho: 0.8 }, { t: 'Precio unitario', ancho: 1.1, alin: 'der' }, { t: 'Importe', ancho: 1.1, alin: 'der' }],
       g.rs.map(function (r, i) { return [String(i + 1), r.que, M.cifra(+r.cantidad || 0), r.unidad, '', '']; }), { tam: 9.4, margen: 0.08 });
     d.p([{ t: 'Le pedimos indicar: ', b: true, tam: 9.2 }, { t: 'si el precio incluye IVA; el costo del flete hasta La Florida, Arroyo Seco; la vigencia de la cotización; el tiempo de entrega y la forma de pago.', tam: 9.2, color: GRIS }], { antes: 12, despues: 6, fondo: d.suave(0.09) });
+    if (conPlano()) d.p([{ t: 'Va con un plano de la pieza. ', b: true, tam: 9.2 }, { t: 'Le pedimos revisarlo y anotar en él lo que cambiaría; si algo no funciona, lo ajustamos antes de cotizar.', tam: 9.2, color: GRIS }], { despues: 6, fondo: d.suave(0.09) });
     d.p([{ t: 'Esta solicitud sirve para elaborar un presupuesto. No es una orden de compra ni compromete una compra.', tam: 8.4, color: TENUE }], { despues: 4 });
     M.docxFirmas(d, [{ que: 'Contacto', nombre: P.equipo.contacto || '', cargo: P.equipo.telefono ? 'Tel. ' + P.equipo.telefono : '' }, { que: 'Recibió (nombre y firma)', nombre: '' }]);
     return Promise.resolve(d);
@@ -4478,6 +4607,12 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
           var cs = (e.causas || []).map(function (k) { var cc = CAUSAS.filter(function (y) { return y[0] === k; })[0]; return cc ? cc[1] : k; });
           d.p([{ t: x.r.que + '. ', b: true, tam: 9 }, { t: (cs.length ? cs.join(', ') + '. ' : '') + (e.texto || 'Falta la explicación del equipo.'), tam: 9, color: GRIS }], { antes: 6, despues: 2, fondo: d.suave(0.07) });
         });
+      }
+      // Anexo C
+      if (conPlano() && tiene(P.plano.dijo)) {
+        var pl = P.plano;
+        d.p([{ t: 'Anexo C · La revisión del plano', b: true, tam: 10.5, color: VERDE }], { antes: 16, despues: 3, junto: true });
+        d.p([{ t: 'Lo revisó ' + (tiene(pl.quien) ? pl.quien : oficio(pl.oficio).persona) + '. ', b: true, tam: 9 }, { t: pl.dijo + (tiene(pl.ajustes) ? ' Se ajusta: ' + pl.ajustes : ''), tam: 9, color: GRIS }], { despues: 2, fondo: d.suave(0.07) });
       }
       d.p([{ t: 'Precios de las cotizaciones que consiguió el equipo; donde falta cotización se usa el precio de referencia y se marca. La precotización de la IA solo sirve para comparar (anexo B). La faena se valoriza al salario mínimo general de 2026.', tam: 8, color: TENUE }], { antes: 12, despues: 2 });
       M.docxFirmas(d, [{ que: 'Elaboró', nombre: P.equipo.nombres || '' }, { que: 'Revisó', nombre: '' }]);
@@ -4771,6 +4906,14 @@ var PRESA = window.PRESA = {"fecha":"11 de noviembre de 2026","actividades":[{"i
     'copiar-investigar': function () {
       var t = A.encargoInvestigar(P, sinFuente());
       M.copiar(t).then(function (ok) { if (ok) M.aviso('Encargo copiado. Pégalo en una IA con búsqueda en la web.'); else mostrarTexto('Copia el encargo', t, 'Selecciona el texto y cópialo.'); });
+    },
+    'copiar-plano': function () {
+      var t = A.encargoPlano(P);
+      M.copiar(t).then(function (ok) { if (ok) M.aviso('Encargo del plano copiado. Pégalo en Claude' + (P.fotos.length ? ' con la foto.' : '.')); else mostrarTexto('Copia el encargo del plano', t, 'Selecciona el texto y cópialo.'); });
+    },
+    'copiar-plano-ajuste': function () {
+      var t = A.encargoPlanoAjuste(P);
+      M.copiar(t).then(function (ok) { if (ok) M.aviso('Encargo del ajuste copiado. Pégalo en el mismo chat del plano.'); else mostrarTexto('Copia el encargo del ajuste', t, 'Selecciona el texto y cópialo.'); });
     },
     'leer-tabla': leerTabla,
     'agregar-cot': function (b) {

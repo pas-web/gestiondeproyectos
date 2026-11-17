@@ -56,6 +56,15 @@
     { id: 'otros', nombre: 'Otros', corto: 'Otros' }
   ];
 
+  // Quién hace la pieza: para el plano que se lleva a revisar antes de cotizar
+  D.OFICIOS = [
+    { id: 'herreria', nombre: 'Herrería', persona: 'el herrero', hace: 'un herrero, al que se le paga' },
+    { id: 'carpinteria', nombre: 'Carpintería', persona: 'el carpintero', hace: 'un carpintero, al que se le paga' },
+    { id: 'albanileria', nombre: 'Albañilería', persona: 'el albañil', hace: 'un albañil, al que se le paga' },
+    { id: 'otro', nombre: 'Otro oficio', persona: 'quien la va a hacer', hace: 'otro oficio, al que se le paga' },
+    { id: 'faena', nombre: 'La comunidad, en faena', persona: 'quien coordina la faena', hace: 'la comunidad, en faena' }
+  ];
+
   /* ---------- Las piezas ---------- */
   D.PIEZAS = [
     { id: '1a-trancas', c: '1a', nombre: 'Trancas para el ganado en el vertedor', acts: ['1a.2'],

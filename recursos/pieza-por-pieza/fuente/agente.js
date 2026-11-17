@@ -162,6 +162,70 @@
   };
 
   /* ---------- Leer respuestas ---------- */
+  /* ---------- El plano para quien hace la pieza ---------- */
+  AG.oficio = function (id) { return D.OFICIOS.filter(function (o) { return o.id === id; })[0] || D.OFICIOS[3]; };
+  function lleno(v) { return String(v == null ? '' : v).trim() !== ''; }
+  AG.aPersona = function (x) { return /^el /i.test(x) ? 'al ' + x.slice(3) : 'a ' + x; };
+  // Lo que pide el plano: las mismas partes y reglas en Pieza por pieza y en la práctica del presupuesto
+  AG.partesPlano = function (quien) {
+    return [
+      'ENCARGO',
+      'Haz el plano como una página para imprimir en tamaño carta (en Claude, como artifact), con los dibujos en SVG, las medidas acotadas y estas partes, en este orden:',
+      '1. Ficha: qué es, en una frase; sus medidas clave; el material; lo que hay que comprar, en piezas o tramos que sí se venden; y el peso aproximado.',
+      '2. La pieza armada, en una vista que se entienda de un vistazo.',
+      '3. Un corte por el centro, con alturas y anchos.',
+      '4. La planta, vista desde arriba, con sus medidas.',
+      '5. La pieza que se repite, si la hay, sobre una cuadrícula para trazarla a tamaño real.',
+      '6. Una tabla de material y cortes: pieza, cantidad, material, largo, forma y lugar. Al final, lo que se compra y cuánto sobra.',
+      '7. Notas para ' + quien + ': cómo se toman las medidas (a eje, exteriores o interiores), las uniones, los dobleces o ensambles, los empalmes, el acabado y la protección contra el sol, la humedad y el óxido.',
+      '8. Antes de mandarla a hacer: la medida que manda y cómo comprobarla en el lugar, y las decisiones que tomaste y que se pueden cambiar.',
+      '9. Preguntas para ' + quien + ': de tres a cinco, para que diga si así funciona y qué cambiaría.',
+      '',
+      'REGLAS ESTRICTAS',
+      '1. Medidas en metros y centímetros; di siempre si son a eje, exteriores o interiores.',
+      '2. La tabla de cortes cuadra con lo que se compra: piezas o tramos que sí se venden (tubo de 6 m, tablón de 2.5 m, varilla de 12 m) y lo que sobra.',
+      '3. No pongas precios: el precio lo da quien la hace.',
+      '4. No garantices que aguanta. Si haces una cuenta de resistencia, di con qué carga la hiciste y pide que el experto la confirme.',
+      '5. Respeta lo que te escribí y las reglas del sitio. Lo que propongas tú, márcalo «propuesta».',
+      '6. Si te falta un dato para dibujar, pregúntalo antes de empezar.',
+      '7. Español llano y frases cortas, con las palabras que usa el oficio.'
+    ].join('\n');
+  };
+  AG.ajustePlano = function (o, quien) {
+    return [
+      'Llevamos el plano ' + AG.aPersona(lleno(o.quien) ? o.quien.trim() : quien) + '. Esto dijo:',
+      lleno(o.dijo) ? o.dijo.trim() : '[[ LO QUE DIJO DEL PLANO ]]',
+      '',
+      'Ajusta el plano con esto: ' + (lleno(o.ajustes) ? o.ajustes.trim() : '[[ LO QUE HAY QUE AJUSTAR ]]'),
+      '',
+      'No cambies lo que ya estaba bien. Marca en el plano lo que cambió, actualiza la tabla de material y cortes y lo que se compra, y al final deja una lista corta de los cambios.'
+    ].join('\n');
+  };
+  AG.encargoPlano = function (p) {
+    var o = p.plano || {}, of = AG.oficio(o.oficio);
+    var rs = ((p.lista && p.lista.renglones) || []).filter(function (r) { return (+r.cantidad || 0) > 0 && r.tipo !== 'flete'; });
+    var l = [
+      'Eres dibujante técnico y conoces la obra rural en México. Vas a dibujar el plano de una pieza del proyecto comunitario de la Presa de La Florida para que ' + of.persona + ' lo revise, lo cotice y la haga. Abajo van el expediente del proyecto y lo que ya sabemos de la pieza. Trabaja solo con eso; lo que propongas tú, márcalo «propuesta».' +
+        ((p.fotos || []).length ? ' Si te adjunto el fotomontaje, úsalo para la forma general; las medidas mandan sobre la foto.' : ''),
+      '',
+      D.EXPEDIENTE,
+      '',
+      AG.bloquePieza(p)
+    ];
+    if (p.lectura) l.push('', AG.bloqueLectura(p), '', AG.bloqueRespuestas(p));
+    if (rs.length) {
+      l.push('', 'LO QUE LLEVA, SEGÚN LA LISTA DEL EQUIPO');
+      rs.forEach(function (r) { l.push('- ' + r.que + ': ' + r.cantidad + ' ' + r.unidad + (r.calculo ? ' (' + r.calculo + ')' : '')); });
+    }
+    l.push('', 'PARA EL PLANO');
+    l.push('- Quién la hace: ' + of.hace);
+    l.push('- La medida que manda (la que no se mueve): ' + (lleno(o.manda) ? o.manda.trim() : '[[ LA MEDIDA QUE MANDA ]]'));
+    if (lleno(o.respetar)) l.push('- Lo que no debe cambiar: ' + o.respetar.trim());
+    l.push('', AG.partesPlano(of.persona));
+    return l.join('\n');
+  };
+  AG.encargoPlanoAjuste = function (p) { var o = p.plano || {}; return AG.ajustePlano(o, AG.oficio(o.oficio).persona); };
+
   AG.leerJSON = function (texto) {
     var t = String(texto || '').trim();
     if (!t) throw new Error('No hay nada pegado.');

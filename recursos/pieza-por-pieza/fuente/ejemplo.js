@@ -138,7 +138,12 @@
         r7: { causas: ['producto'], texto: 'La IA estimó la cadena sin fuente; la más barata de la región salió un poco más cara.' },
         r16: { causas: ['flete'], texto: 'El viaje a La Florida es más largo que el del catálogo y el camino es de terracería.' }
       },
-      bolsillos: {}, acts: {}
+      bolsillos: {}, acts: {},
+      plano: {
+        oficio: 'carpinteria', manda: 'La viga queda a 2.40 m del piso', respetar: 'Que las cadenas se puedan revisar y apretar cada temporada',
+        quien: 'Carpintero de ejemplo', dijo: 'Los troncos de 15 cm aguantan, pero la viga de 15 cm se cimbra con dos niños columpiándose. Mejor de 20 cm y con cartelas de tablón en las esquinas.',
+        ajustes: 'Viga de 20 cm de diámetro; cartelas de tablón en las cuatro esquinas de cada marco.'
+      }
     };
   };
 })();

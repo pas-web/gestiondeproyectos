@@ -40,6 +40,12 @@
   .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
   .btn.peligro { background:#fff; color:var(--rojo); border:2px solid var(--rojo); }
   .btn.chico { padding:.2rem .6rem; font-size:.8rem; margin:0; }
+  a.btn { display:inline-block; text-decoration:none; }
+  .plano-campos { display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:.6rem 1rem; margin-top:.6rem; }
+  .plano .ias { display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; margin-top:.8rem; }
+  .plano details { margin-top:.6rem; } .plano summary { cursor:pointer; color:var(--profundo); font-size:.9rem; }
+  .plano pre { white-space:pre-wrap; word-wrap:break-word; font-size:.78rem; background:#F4F7F6; border-radius:8px; padding:.6rem .8rem; max-height:320px; overflow:auto; }
+  .plano h4 { margin:1.1rem 0 0; color:var(--profundo); font-family:Georgia,serif; font-size:1rem; }
   .btn:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline:3px solid var(--arena); outline-offset:2px; }
   .deja { margin:.6rem 0 .2rem; color:var(--profundo); }
   table.acts { width:100%; border-collapse:collapse; font-size:.9rem; }
@@ -236,6 +242,16 @@
 <div class="caja" id="faltaCotizar"></div>
 <button class="btn claro" id="imprimirHoja" type="button">Imprimir la hoja para cotizar</button>
 
+<h3 style="margin-top:1.6rem">Un plano para quien la va a hacer</h3>
+<p class="sub">Si una partida la hace un oficio (el contenedor del herrero, las bancas del carpintero, las bases del albañil), un plano evita malentendidos: medidas, cortes y uniones en una hoja, como el plano de un temazcal para el herrero. Claude lo dibuja con lo que escriban aquí; ustedes lo llevan con la solicitud de cotización y le piden a quien la va a hacer que lo revise. Si algo no funciona, se anota lo que dijo y se pide el plano ajustado.</p>
+<div class="caja plano" id="plano">
+  <div class="plano-campos">
+    <div><label for="planoPartida">¿De qué partida?</label><select id="planoPartida"></select></div>
+    <div><label for="planoOficio">¿Quién la va a hacer?</label><select id="planoOficio"></select></div>
+  </div>
+  <div id="planoCuerpo"></div>
+</div>
+
 <div class="cuaderno">
   <b>Si trabajan en cuaderno</b>
   <p>Una hoja con diez columnas: actividad, qué, unidad, cantidad, precio, tipo, bolsillo, forma, mes y total. Un renglón por partida; al final, el flete y los imponderables con renglón propio. Se suma por bolsillo, de ida y de regreso. Luego se dibuja el reloj: una tira de meses de noviembre de 2026 a noviembre de 2028, con los meses en que cada bolsillo puede pagar, y cada partida en su mes. Lo que cae fuera se encierra en rojo.</p>
@@ -423,11 +439,15 @@ function revisar(e, s) {
     ['Boya señalizadora de 30 cm', 'pieza', 450, 'materiales'], ['Fantasma luminiscente para poste', 'pieza', 35, 'materiales']
   ];
   var $ = function (id) { return document.getElementById(id); };
-  function vacio() { return { version: 3, equipo: '', componente: '', partidas: [], sig: 1, flete: { si: false, cant: 1, precio: 0, bolsillo: 'AUT', forma: 'compra', mes: '' }, imp: { si: true, pct: 5, nombre: 'el clavo que falta en domingo', bolsillo: 'AUT' }, pro: { unidad: 'm²', cant: 0 }, seCae: '' }; }
+  function vacio() { return { version: 3, equipo: '', componente: '', partidas: [], sig: 1, flete: { si: false, cant: 1, precio: 0, bolsillo: 'AUT', forma: 'compra', mes: '' }, imp: { si: true, pct: 5, nombre: 'el clavo que falta en domingo', bolsillo: 'AUT' }, pro: { unidad: 'm²', cant: 0 }, seCae: '', planos: {}, planoSel: '' }; }
   function normal(s) {
     var v = vacio(); if (!s || !s.partidas) return v;
     var e = { version: 3, equipo: s.equipo || '', componente: s.componente || '', partidas: [], sig: 1, flete: Object.assign(v.flete, s.flete || {}), imp: Object.assign(v.imp, s.imp || {}), pro: Object.assign(v.pro, s.pro || {}), seCae: s.seCae || '' };
-    s.partidas.forEach(function (p) { e.partidas.push(nueva(p, e)); });
+    // las partidas se vuelven a numerar: los planos siguen a su partida
+    var mapa = {};
+    s.partidas.forEach(function (p) { var n = nueva(p, e); if (p.id !== undefined) mapa[p.id] = n.id; e.partidas.push(n); });
+    e.planos = {}; Object.keys(s.planos || {}).forEach(function (k) { if (mapa[k] !== undefined) e.planos[mapa[k]] = s.planos[k]; });
+    e.planoSel = s.planoSel !== '' && mapa[s.planoSel] !== undefined ? mapa[s.planoSel] : '';
     return e;
   }
   function cargar() { try { var s = JSON.parse(localStorage.getItem(CLAVE)); if (s && s.version === 3) return normal(s); } catch (err) {} return vacio(); }
@@ -512,7 +532,7 @@ function revisar(e, s) {
     colorBol($('fleteBolsillo'), estado.flete.bolsillo); colorBol($('impBolsillo'), estado.imp.bolsillo);
     $('proUnidad').value = estado.pro.unidad; $('proCant').value = estado.pro.cant || ''; $('seCae').value = estado.seCae; $('equipo').value = estado.equipo; $('componente').value = estado.componente;
   }
-  function pintarTodo() { pintarComponente(); pintarTabla(); pintarFijos(); refrescar(); }
+  function pintarTodo() { pintarComponente(); pintarTabla(); pintarFijos(); refrescar(); pintarPlano(); }
 
   // ── sumas, reloj, PROCODES y revisión
   function refrescar() {
@@ -536,6 +556,7 @@ function revisar(e, s) {
     var ul = $('revision'); ul.innerHTML = '';
     rev.lista.forEach(function (r) { var li = document.createElement('li'); li.className = r.clase; li.innerHTML = '<b>' + esc(r.titulo) + '</b>' + esc(r.texto); ul.appendChild(li); });
     pintarFalta();
+    pintarPlanoSel();
     return s;
   }
   function pintarReloj(s) {
@@ -588,6 +609,136 @@ function revisar(e, s) {
   function pintarFalta() {
     var l = faltan();
     $('faltaCotizar').innerHTML = l.length ? '<ul>' + l.map(function (p) { return '<li><b>' + (p.id === 'flete' ? 'Flete' : '#' + p.id) + '</b> ' + esc(p.que || '(sin descripción)') + ' · ' + p.cant + ' ' + esc(p.unidad) + (+p.precio ? ', hoy en ' + pesos(totalDe(p)) + ' de referencia' : ', sin precio todavía') + ' · ' + (cuantas(p) === 3 ? 'tres cotizaciones' : 'al menos una') + '</li>'; }).join('') + '</ul>' : '<p class="ayuda">Todavía no hay compras que cotizar: la lista se llena sola.</p>';
+  }
+
+  // ── el plano para quien la va a hacer (las mismas partes y reglas que en Pieza por pieza)
+  var OFICIOS = [
+    { id: 'herreria', nombre: 'Herrería', persona: 'el herrero', hace: 'un herrero, al que se le paga' },
+    { id: 'carpinteria', nombre: 'Carpintería', persona: 'el carpintero', hace: 'un carpintero, al que se le paga' },
+    { id: 'albanileria', nombre: 'Albañilería', persona: 'el albañil', hace: 'un albañil, al que se le paga' },
+    { id: 'otro', nombre: 'Otro oficio', persona: 'quien la va a hacer', hace: 'otro oficio, al que se le paga' },
+    { id: 'faena', nombre: 'La comunidad, en faena', persona: 'quien coordina la faena', hace: 'la comunidad, en faena' }
+  ];
+  var IAS_PLANO = [['Claude', 'https://claude.ai/new'], ['ChatGPT', 'https://chatgpt.com/'], ['Gemini', 'https://gemini.google.com/app']];
+  function oficioDe(id) { return OFICIOS.filter(function (o) { return o.id === id; })[0] || OFICIOS[3]; }
+  function txt(v) { return String(v == null ? '' : v).trim(); }
+  function aPersona(x) { return /^el /i.test(x) ? 'al ' + x.slice(3) : 'a ' + x; }
+  function partesPlano(quien) {
+    return [
+      'ENCARGO',
+      'Haz el plano como una página para imprimir en tamaño carta (en Claude, como artifact), con los dibujos en SVG, las medidas acotadas y estas partes, en este orden:',
+      '1. Ficha: qué es, en una frase; sus medidas clave; el material; lo que hay que comprar, en piezas o tramos que sí se venden; y el peso aproximado.',
+      '2. La pieza armada, en una vista que se entienda de un vistazo.',
+      '3. Un corte por el centro, con alturas y anchos.',
+      '4. La planta, vista desde arriba, con sus medidas.',
+      '5. La pieza que se repite, si la hay, sobre una cuadrícula para trazarla a tamaño real.',
+      '6. Una tabla de material y cortes: pieza, cantidad, material, largo, forma y lugar. Al final, lo que se compra y cuánto sobra.',
+      '7. Notas para ' + quien + ': cómo se toman las medidas (a eje, exteriores o interiores), las uniones, los dobleces o ensambles, los empalmes, el acabado y la protección contra el sol, la humedad y el óxido.',
+      '8. Antes de mandarla a hacer: la medida que manda y cómo comprobarla en el lugar, y las decisiones que tomaste y que se pueden cambiar.',
+      '9. Preguntas para ' + quien + ': de tres a cinco, para que diga si así funciona y qué cambiaría.',
+      '',
+      'REGLAS ESTRICTAS',
+      '1. Medidas en metros y centímetros; di siempre si son a eje, exteriores o interiores.',
+      '2. La tabla de cortes cuadra con lo que se compra: piezas o tramos que sí se venden (tubo de 6 m, tablón de 2.5 m, varilla de 12 m) y lo que sobra.',
+      '3. No pongas precios: el precio lo da quien la hace.',
+      '4. No garantices que aguanta. Si haces una cuenta de resistencia, di con qué carga la hiciste y pide que el experto la confirme.',
+      '5. Respeta lo que te escribí y las reglas del sitio. Lo que propongas tú, márcalo «propuesta».',
+      '6. Si te falta un dato para dibujar, pregúntalo antes de empezar.',
+      '7. Español llano y frases cortas, con las palabras que usa el oficio.'
+    ].join('\n');
+  }
+  function ajustePlano(o, quien) {
+    return [
+      'Llevamos el plano ' + aPersona(txt(o.quien) || quien) + '. Esto dijo:',
+      txt(o.dijo) || '[[ LO QUE DIJO DEL PLANO ]]',
+      '',
+      'Ajusta el plano con esto: ' + (txt(o.ajustes) || '[[ LO QUE HAY QUE AJUSTAR ]]'),
+      '',
+      'No cambies lo que ya estaba bien. Marca en el plano lo que cambió, actualiza la tabla de material y cortes y lo que se compra, y al final deja una lista corta de los cambios.'
+    ].join('\n');
+  }
+  function encargoPlano(p, o) {
+    var a = actividadDe(p.actividad), c = componenteDe(estado.componente), of = oficioDe(o.oficio);
+    var que = txt(o.que) || (p.tipo !== 'gente' ? txt(p.que) : '');
+    var l = ['Eres dibujante técnico y conoces la obra rural en México. Vas a dibujar el plano de una pieza del proyecto comunitario de la Presa de La Florida, en Arroyo Seco, Querétaro, para que ' + of.persona + ' lo revise, lo cotice y la haga. Trabaja solo con lo que te escribo; lo que propongas tú, márcalo «propuesta».', '', 'LA PIEZA'];
+    l.push('- Qué es y para qué sirve: ' + (que || '[[ QUÉ ES Y PARA QUÉ SIRVE ]]'));
+    if (c) l.push('- Componente del proyecto: ' + nombreComp(c.id) + '. Deja: ' + c.deja);
+    if (a) l.push('- Actividad del cronograma ' + a.cod + ': ' + a.n + ' (' + a.per + ').');
+    if (p.tipo !== 'gente' && +p.cant) l.push('- Cuántas: ' + p.cant + ' ' + (p.unidad || 'piezas'));
+    l.push('- Dónde va: en la orilla de la presa, a la intemperie, con sol fuerte, humedad, crecidas y ganado cerca.');
+    l.push('- Quién la hace: ' + of.hace);
+    l.push('- Las medidas que ya sabemos: ' + (txt(o.medidas) || '[[ LAS MEDIDAS QUE YA SABEMOS ]]'));
+    l.push('- La medida que manda (la que no se mueve): ' + (txt(o.manda) || '[[ LA MEDIDA QUE MANDA ]]'));
+    l.push('- El material pensado: ' + (txt(o.material) || '[[ EL MATERIAL PENSADO ]]'));
+    if (txt(o.respetar)) l.push('- Lo que hay que respetar: ' + txt(o.respetar));
+    l.push('', partesPlano(of.persona));
+    return l.join('\n');
+  }
+  function partidaPorId(id) { return estado.partidas.filter(function (p) { return p.id === +id; })[0] || null; }
+  function planoDe(id) {
+    var k = String(id);
+    if (!estado.planos[k]) estado.planos[k] = { oficio: '', que: '', medidas: '', manda: '', material: '', respetar: '', quien: '', dijo: '', ajustes: '' };
+    return estado.planos[k];
+  }
+  function partidaPlano() { var p = estado.planoSel !== '' ? partidaPorId(estado.planoSel) : null; return p && txt(p.que) ? p : null; }
+  function pintarPlanoSel() {
+    var sel = $('planoPartida'), p = partidaPlano();
+    if (!p && estado.planoSel !== '') { estado.planoSel = ''; pintarPlano(); }
+    if (document.activeElement === sel) return;
+    var l = estado.partidas.filter(function (x) { return txt(x.que); }).map(function (x) { var q = txt(x.que); return [String(x.id), '#' + x.id + ' · ' + (q.length > 60 ? q.slice(0, 59) + '…' : q)]; });
+    sel.innerHTML = opciones(l, p ? String(p.id) : '', l.length ? 'Escoge la partida' : 'Primero escriban las partidas');
+  }
+  function campoP(k, etiqueta, ph, area) {
+    return '<div><label for="pl-' + k + '">' + etiqueta + '</label>' + (area ? '<textarea id="pl-' + k + '" data-p="' + k + '" rows="2" placeholder="' + esc(ph) + '"></textarea>' : '<input type="text" id="pl-' + k + '" data-p="' + k + '" placeholder="' + esc(ph) + '">') + '</div>';
+  }
+  function pintarPlano() {
+    var cuerpo = $('planoCuerpo'), p = partidaPlano(), ofSel = $('planoOficio');
+    ofSel.disabled = !p;
+    if (!p) { ofSel.value = ''; cuerpo.innerHTML = '<p class="ayuda" style="margin:.6rem 0 0">Escojan la partida que va a hacer un oficio; aquí sale el encargo para que Claude dibuje su plano.</p>'; pintarPlanoSel(); return; }
+    var o = planoDe(p.id);
+    ofSel.value = o.oficio || '';
+    if (!o.oficio) { cuerpo.innerHTML = '<p class="ayuda" style="margin:.6rem 0 0">Digan quién la va a hacer: el plano se escribe para esa persona.</p>'; return; }
+    var of = oficioDe(o.oficio), ej = p.tipo !== 'gente' ? txt(p.que) : '';
+    cuerpo.innerHTML = '<div class="plano-campos">' +
+      campoP('que', 'Qué es y para qué sirve', ej || 'Por ejemplo: contenedor de basura a prueba de fauna para la explanada', true) +
+      campoP('medidas', 'Las medidas que ya saben', 'Por ejemplo: 1.20 m de alto, para dos tambos de 200 litros', true) +
+      campoP('manda', 'La medida que manda', 'La que no se mueve aunque cambie lo demás') +
+      campoP('material', 'El material pensado', 'Por ejemplo: ángulo de 1 1/2 pulgadas y reja de varilla') +
+      campoP('respetar', 'Lo que hay que respetar (opcional)', 'Por ejemplo: que el camión de la basura lo pueda vaciar') +
+      '</div>' +
+      '<div class="ias"><button type="button" class="btn chico" data-plano="encargo">Copiar el encargo del plano</button><span class="ayuda">y pegarlo en</span>' + IAS_PLANO.map(function (x) { return '<a class="btn claro chico" href="' + x[1] + '" target="_blank" rel="noopener">' + x[0] + '</a>'; }).join('') + '</div>' +
+      '<p class="ayuda" style="margin:.5rem 0 0">Claude lo dibuja como una página para imprimir. Imprímanlo o guárdenlo en PDF y llévenlo ' + esc(aPersona(of.persona)) + ' con la solicitud de cotización.</p>' +
+      '<details><summary>Ver el encargo</summary><pre id="planoEncargo"></pre></details>' +
+      '<h4>Lo que dijo ' + esc(of.persona) + ' del plano</h4>' +
+      '<div class="plano-campos">' + campoP('quien', 'Quién lo revisó', 'Por ejemplo: el herrero de Concá') + campoP('dijo', 'Lo que dijo', 'Por ejemplo: la malla ciclónica se oxida; mejor reja de varilla', true) + campoP('ajustes', 'Lo que hay que ajustar', 'Por ejemplo: reja de varilla de 3/8 a cada 10 cm', true) + '</div>' +
+      '<div class="ias"><button type="button" class="btn claro chico" data-plano="ajuste">Copiar el encargo del ajuste</button><span class="ayuda">se pega en el mismo chat del plano</span></div>' +
+      '<p class="ayuda" style="margin:.5rem 0 0">Si el ajuste cambia el material o la cantidad, corríjanlo también en la partida #' + p.id + '.</p>';
+    cuerpo.querySelectorAll('[data-p]').forEach(function (el) { el.value = o[el.dataset.p] || ''; });
+    pintarEncargoPlano();
+  }
+  function pintarEncargoPlano() { var pre = $('planoEncargo'), p = partidaPlano(); if (pre && p) pre.textContent = encargoPlano(p, planoDe(p.id)); }
+  function copiarTexto(texto, msj) {
+    function aMano() { var t = document.createElement('textarea'); t.value = texto; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} t.remove(); if (ok) aviso(msj, 5000); else alert('No se pudo copiar solo: abran «Ver el encargo» y cópienlo a mano.'); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(function () { aviso(msj, 5000); }, aMano); else aMano();
+  }
+  $('planoOficio').innerHTML = opciones(OFICIOS.map(function (o) { return [o.id, o.nombre]; }), '', 'Escoge');
+  $('planoPartida').addEventListener('change', function () { estado.planoSel = this.value ? +this.value : ''; guardar(); pintarPlano(); });
+  $('planoOficio').addEventListener('change', function () { var p = partidaPlano(); if (!p) return; planoDe(p.id).oficio = this.value; guardar(); pintarPlano(); });
+  $('planoCuerpo').addEventListener('input', function (ev) { var k = ev.target.dataset.p, p = partidaPlano(); if (!k || !p) return; planoDe(p.id)[k] = ev.target.value; guardar(); pintarEncargoPlano(); });
+  $('planoCuerpo').addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-plano]'), p = partidaPlano(); if (!b || !p) return;
+    var o = planoDe(p.id);
+    if (b.dataset.plano === 'ajuste') copiarTexto(ajustePlano(o, oficioDe(o.oficio).persona), 'Encargo del ajuste copiado: péguenlo en el mismo chat del plano.');
+    else copiarTexto(encargoPlano(p, o), 'Encargo del plano copiado: péguenlo en Claude.');
+  });
+  function planosHtml() {
+    var l = estado.partidas.filter(function (p) { var o = estado.planos[String(p.id)]; return o && o.oficio; });
+    if (!l.length) return '';
+    return '<h2>Planos para quien la va a hacer</h2><ul>' + l.map(function (p) {
+      var o = estado.planos[String(p.id)], of = oficioDe(o.oficio);
+      return '<li><b>#' + p.id + ' ' + esc(txt(o.que) || txt(p.que)) + '</b> · ' + esc(of.nombre) + (txt(o.manda) ? ' · la medida que manda: ' + esc(o.manda) : '') +
+        (txt(o.dijo) ? '<br>Lo revisó ' + esc(txt(o.quien) || of.persona) + ': ' + esc(o.dijo) + (txt(o.ajustes) ? ' <b>Se ajusta:</b> ' + esc(o.ajustes) : '') : '<br>Todavía sin revisión.') + '</li>';
+    }).join('') + '</ul>';
   }
 
   // ── eventos de la tabla
@@ -671,6 +822,7 @@ function revisar(e, s) {
       + '<h2>Por bolsillo</h2><table><tr><th>Bolsillo</th><th>Dinero</th><th>Especie</th><th>Total</th></tr>' + bol + (s.sinBolsillo ? '<tr><td>Sin bolsillo</td><td colspan="2"></td><td class="m">' + pesos(s.sinBolsillo) + '</td></tr>' : '') + '<tr><th>Tamaño real del proyecto</th><th class="m">' + pesos(s.dinero) + '</th><th class="m">' + pesos(s.especie) + '</th><th class="m">' + pesos(s.total) + '</th></tr></table>'
       + (s.pro.hay ? '<p><b>PROCODES:</b> pondría ' + pesos(s.pro.monto) + ' y el grupo ' + pesos(s.pro.grupo) + ' (' + Math.round(100 * s.pro.pct) + '% del programa)' + (s.pro.tope ? '; tope de ' + s.pro.cant + ' ' + s.pro.unidad + ': ' + pesos(s.pro.tope) : '') + '.</p>' : '')
       + '<h2>La revisión</h2><ul>' + rev.lista.map(function (r) { return '<li class="' + r.clase + '"><b>' + esc(r.titulo) + ':</b> ' + esc(r.texto) + '</li>'; }).join('') + '</ul>'
+      + planosHtml()
       + '<p><b>Si un bolsillo no llega:</b> ' + esc(estado.seCae) + '</p></body></html>';
     bajar(html, 'text/html', nombreArchivo('html'));
   });

@@ -82,13 +82,15 @@
       equipo: { nombres: '', contacto: '', telefono: '' },
       componente: '', piezaId: '', nombre: '', actividades: [], decidido: '', propuesta: '',
       fotos: [], lectura: null, respuestas: {}, lista: null, imp: 5,
-      cotizaciones: [], eleccion: {}, explicaciones: {}, bolsillos: {}, acts: {}
+      cotizaciones: [], eleccion: {}, explicaciones: {}, bolsillos: {}, acts: {},
+      plano: { oficio: '', manda: '', respetar: '', quien: '', dijo: '', ajustes: '' }
     };
   }
   function normal(p) {
     var v = nueva();
     Object.keys(v).forEach(function (k) { if (p[k] === undefined || (p[k] === null && v[k] !== null)) p[k] = v[k]; });
     p.equipo = Object.assign(v.equipo, p.equipo || {});
+    p.plano = Object.assign(v.plano, p.plano || {});
     if (p.lista && !p.lista.sig) p.lista.sig = (p.lista.renglones || []).length + 1;
     return p;
   }
@@ -263,10 +265,12 @@
     en(T.pedir, 6);
     var gs = P.lista ? grupos() : [];
     paso({ id: 'contacto', foco: 'contacto', titulo: '¿Quién recibe las cotizaciones?', cuerpo: cContacto });
+    if (P.lista) paso({ id: 'plano', foco: 'plano', titulo: 'Un plano para quien la va a hacer', cuerpo: cPlano });
     gs.forEach(function (g) { paso({ id: 's-' + g.id, grupo: g.id, foco: 'para conceptos', titulo: 'Pide la cotización: ' + g.p.corto, cuerpo: function () { return cSolicitud(g.id); } }); });
 
     en(T.llegaron, 7);
     gs.forEach(function (g) { paso({ id: 'c-' + g.id, grupo: g.id, foco: 'cot-' + g.id, titulo: 'Lo que cotizaron: ' + g.p.corto, cuerpo: function () { return cCotizaciones(g.id); } }); });
+    if (conPlano()) paso({ id: 'plano-rev', foco: 'plano-rev', titulo: '¿Qué dijo del plano?', cuerpo: cPlanoRev });
     if (gs.length) paso({ id: 'elegir', foco: 'elegidas', titulo: '¿Con cuál se quedan?', cuerpo: cElegir });
 
     en(T.partida, 7);
@@ -370,6 +374,8 @@
       case 'ref': return P.lista ? undefined : false;
       case 'sinfuente': return sinFuente().length ? undefined : true;
       case 'contacto': return tiene(P.equipo.contacto);
+      case 'plano': return P.plano && P.plano.oficio ? true : undefined;
+      case 'plano-rev': return tiene(P.plano.dijo);
       case 'contraste': return contraste().length ? undefined : false;
     }
     if (/^pr-/.test(id)) { q = preguntaPorId(id.slice(3)); return q ? tieneValor(q) : undefined; }
@@ -639,6 +645,42 @@
       '<div data-entregas="sol-' + gid + '" style="margin-top:16px"></div>';
   }
 
+  /* ---------- El plano para quien hace la pieza ---------- */
+  function oficio(id) { return A.oficio(id); }
+  function conPlano() { return !!(P && P.plano && P.plano.oficio); }
+  // Por lo que trae la lista, quién parece que la hace
+  function oficioSugerido() {
+    var t = renglones().map(function (r) { return (r.proveedor || '') + ' ' + (r.que || ''); }).join(' ');
+    if (/herrer|soldad/i.test(t)) return 'herreria';
+    if (/madereria|carpinter/i.test(t)) return 'carpinteria';
+    if (/alba[ñn]il|cemento|block|tabique|mortero/i.test(t)) return 'albanileria';
+    return '';
+  }
+  function cPlano() {
+    var o = P.plano, sug = oficioSugerido();
+    var h = '<p class="porque">Si la pieza la hace un oficio, un plano evita malentendidos: medidas, cortes y uniones en una hoja, como el plano de un temazcal para el herrero. Claude lo dibuja con lo que ya trae la lista; ustedes lo llevan con la solicitud y le piden a quien la va a hacer que lo revise antes de cotizar. Si no hace falta, sigue.</p>' +
+      '<div class="campo"><label for="pl-oficio">¿Quién la va a hacer?</label><select id="pl-oficio" data-k="plano.oficio">' + opciones(D.OFICIOS.map(function (x) { return [x.id, x.nombre]; }), o.oficio, 'Sin plano') + '</select>' +
+      (sug && !o.oficio ? '<div class="ayuda">Por lo que trae la lista, parece de ' + esc(minus(oficio(sug).nombre)) + '.</div>' : '') + '</div>';
+    if (!o.oficio) return h;
+    var of = oficio(o.oficio);
+    h += '<div class="campo"><label for="pl-manda">La medida que manda</label><input class="grande" type="text" id="pl-manda" data-k="plano.manda" data-requerido="la medida que manda" placeholder="Por ejemplo: la viga queda a 2.40 m del piso" autocomplete="off"><div class="ayuda">La que no se mueve aunque cambie lo demás.</div></div>' +
+      '<div class="campo"><label for="pl-respetar">Lo que no debe cambiar <span class="ayuda">(opcional)</span></label><input type="text" id="pl-respetar" data-k="plano.respetar" placeholder="Por ejemplo: que se pueda desarmar para guardarla en lluvias" autocomplete="off"></div>' +
+      '<ol class="encargo-pasos"><li>Copia el encargo del plano: ya trae la pieza, la lectura de la foto, las medidas y la lista.<div class="ias"><button type="button" class="btn chico" data-accion="copiar-plano">' + M.ico.copiar + 'Copiar el encargo</button></div></li>' +
+      '<li>Pégalo en una IA' + (P.fotos.length ? ' con la foto' : '') + '. Claude lo dibuja como una página para imprimir.<div class="ias">' + IAS.map(function (x) { return '<a class="btn claro chico" href="' + x[1] + '" target="_blank" rel="noopener">' + x[0] + '</a>'; }).join('') + '</div></li>' +
+      '<li>Imprímelo o guárdalo en PDF y llévalo ' + esc(A.aPersona(of.persona)) + ' con la solicitud de cotización.</li></ol>' +
+      '<details class="ver-encargo"><summary>Ver el encargo</summary><pre>' + esc(A.encargoPlano(P)) + '</pre></details>';
+    return h;
+  }
+  function cPlanoRev() {
+    var o = P.plano, of = oficio(o.oficio);
+    return '<p class="porque">Anota lo que dijo ' + esc(of.persona) + ' del plano. Si algo no funciona, el encargo de abajo le pide a Claude el plano corregido, en el mismo chat; y si cambia el material, corrige también la lista.</p>' +
+      '<div class="campo"><label for="pl-quien">Quién lo revisó</label><input class="grande" type="text" id="pl-quien" data-k="plano.quien" placeholder="Por ejemplo: el herrero de Concá" autocomplete="off"></div>' +
+      '<div class="campo"><label for="pl-dijo">Lo que dijo</label><textarea class="grande" id="pl-dijo" data-k="plano.dijo" rows="3" data-requerido="lo que dijo del plano" placeholder="Por ejemplo: con tubo de 3/4 se cimbra; las patas, mejor de 1 pulgada"></textarea></div>' +
+      '<div class="campo"><label for="pl-ajustes">Lo que hay que ajustar</label><textarea id="pl-ajustes" data-k="plano.ajustes" rows="2" placeholder="Por ejemplo: patas de tubo de 1 pulgada; lo demás igual"></textarea></div>' +
+      '<div class="ias"><button type="button" class="btn chico" data-accion="copiar-plano-ajuste">' + M.ico.copiar + 'Copiar el encargo del ajuste</button></div>' +
+      '<p class="nota-chica">Si el ajuste cambia materiales o cantidades: <button type="button" class="btn-texto" data-ir="armar">corregir la lista</button>.</p>';
+  }
+
   /* ---------- 7 · Lo que cotizaron ---------- */
   function cCotizaciones(gid) {
     var g = grupo(gid); if (!g) return '';
@@ -890,6 +932,8 @@
       g.rs.map(function (r, i) { return '<tr><td>' + (i + 1) + '</td><td>' + esc(r.que) + '</td><td class="num">' + cifra(r.cantidad) + '</td><td>' + esc(r.unidad) + '</td><td class="linea-vacia"></td><td class="linea-vacia"></td></tr>'; }).join('') +
       '</tbody></table>';
     c += '<div class="caja-doc"><b>Le pedimos indicar:</b> si el precio incluye IVA; el costo del flete hasta La Florida, Arroyo Seco; la vigencia de la cotización; el tiempo de entrega y la forma de pago.</div>';
+    c += conPlano() ? '<div class="caja-doc" data-parte="plano"><b>Va con un plano de la pieza.</b> Le pedimos revisarlo y anotar en él lo que cambiaría; si algo no funciona, lo ajustamos antes de cotizar.</div>'
+      : '<div class="caja-doc hueco" data-parte="plano">Si escogen quién la va a hacer, aquí se avisa que la solicitud va con un plano.</div>';
     c += '<p class="aviso-doc">Esta solicitud sirve para elaborar un presupuesto. No es una orden de compra ni compromete una compra.</p>';
     c += '<div class="firma-linea"><div data-parte="contacto">Contacto: ' + esc(P.equipo.contacto || '') + '</div><div>Recibió (nombre y firma)</div></div>';
     return hoja(c, { pieIzq: PROYECTO.nombre, pieDer: 'Folio ' + folioSol(g.id) });
@@ -924,6 +968,12 @@
         c += '<div class="caja-doc" data-parte="dif-' + x.r.id + '"><b>' + esc(x.r.que) + '.</b> ' + (cs.length ? esc(cs.join(', ')) + '. ' : '') + (e.texto ? esc(e.texto) : '<span class="gris">Falta la explicación del equipo.</span>') + '</div>';
       });
       c += '</div>';
+    }
+    if (conPlano()) {
+      var pl = P.plano, ofp = oficio(pl.oficio);
+      c += '<div class="seccion anexo' + (tiene(pl.dijo) ? '' : ' hueco') + '" data-parte="plano-rev"><h3 class="titulo-doc">Anexo C · La revisión del plano</h3>' +
+        (tiene(pl.dijo) ? '<p class="texto-doc">Lo revisó ' + esc(tiene(pl.quien) ? pl.quien : ofp.persona) + '. ' + esc(pl.dijo) + (tiene(pl.ajustes) ? ' <b>Se ajusta:</b> ' + esc(pl.ajustes) : '') + '</p>'
+          : '<p class="texto-doc gris">Aquí va lo que dijo ' + esc(ofp.persona) + ' del plano.</p>') + '</div>';
     }
     c += '<p class="aviso-doc">Precios de las cotizaciones que consiguió el equipo; donde falta cotización se usa el precio de referencia y se marca. La precotización de la IA solo sirve para comparar (anexo B). La faena se valoriza al salario mínimo general de 2026.</p>';
     c += '<div class="firma-linea"><div>Elaboró: ' + esc(P.equipo.nombres || '') + '</div><div>Revisó</div></div>';
@@ -1168,6 +1218,7 @@
     M.docxTablaDatos(d, [{ t: '#', ancho: 0.35 }, { t: 'Concepto', ancho: resto }, { t: 'Cantidad', ancho: 0.8, alin: 'der' }, { t: 'Unidad', ancho: 0.8 }, { t: 'Precio unitario', ancho: 1.1, alin: 'der' }, { t: 'Importe', ancho: 1.1, alin: 'der' }],
       g.rs.map(function (r, i) { return [String(i + 1), r.que, M.cifra(+r.cantidad || 0), r.unidad, '', '']; }), { tam: 9.4, margen: 0.08 });
     d.p([{ t: 'Le pedimos indicar: ', b: true, tam: 9.2 }, { t: 'si el precio incluye IVA; el costo del flete hasta La Florida, Arroyo Seco; la vigencia de la cotización; el tiempo de entrega y la forma de pago.', tam: 9.2, color: GRIS }], { antes: 12, despues: 6, fondo: d.suave(0.09) });
+    if (conPlano()) d.p([{ t: 'Va con un plano de la pieza. ', b: true, tam: 9.2 }, { t: 'Le pedimos revisarlo y anotar en él lo que cambiaría; si algo no funciona, lo ajustamos antes de cotizar.', tam: 9.2, color: GRIS }], { despues: 6, fondo: d.suave(0.09) });
     d.p([{ t: 'Esta solicitud sirve para elaborar un presupuesto. No es una orden de compra ni compromete una compra.', tam: 8.4, color: TENUE }], { despues: 4 });
     M.docxFirmas(d, [{ que: 'Contacto', nombre: P.equipo.contacto || '', cargo: P.equipo.telefono ? 'Tel. ' + P.equipo.telefono : '' }, { que: 'Recibió (nombre y firma)', nombre: '' }]);
     return Promise.resolve(d);
@@ -1230,6 +1281,12 @@
           var cs = (e.causas || []).map(function (k) { var cc = CAUSAS.filter(function (y) { return y[0] === k; })[0]; return cc ? cc[1] : k; });
           d.p([{ t: x.r.que + '. ', b: true, tam: 9 }, { t: (cs.length ? cs.join(', ') + '. ' : '') + (e.texto || 'Falta la explicación del equipo.'), tam: 9, color: GRIS }], { antes: 6, despues: 2, fondo: d.suave(0.07) });
         });
+      }
+      // Anexo C
+      if (conPlano() && tiene(P.plano.dijo)) {
+        var pl = P.plano;
+        d.p([{ t: 'Anexo C · La revisión del plano', b: true, tam: 10.5, color: VERDE }], { antes: 16, despues: 3, junto: true });
+        d.p([{ t: 'Lo revisó ' + (tiene(pl.quien) ? pl.quien : oficio(pl.oficio).persona) + '. ', b: true, tam: 9 }, { t: pl.dijo + (tiene(pl.ajustes) ? ' Se ajusta: ' + pl.ajustes : ''), tam: 9, color: GRIS }], { despues: 2, fondo: d.suave(0.07) });
       }
       d.p([{ t: 'Precios de las cotizaciones que consiguió el equipo; donde falta cotización se usa el precio de referencia y se marca. La precotización de la IA solo sirve para comparar (anexo B). La faena se valoriza al salario mínimo general de 2026.', tam: 8, color: TENUE }], { antes: 12, despues: 2 });
       M.docxFirmas(d, [{ que: 'Elaboró', nombre: P.equipo.nombres || '' }, { que: 'Revisó', nombre: '' }]);
@@ -1523,6 +1580,14 @@
     'copiar-investigar': function () {
       var t = A.encargoInvestigar(P, sinFuente());
       M.copiar(t).then(function (ok) { if (ok) M.aviso('Encargo copiado. Pégalo en una IA con búsqueda en la web.'); else mostrarTexto('Copia el encargo', t, 'Selecciona el texto y cópialo.'); });
+    },
+    'copiar-plano': function () {
+      var t = A.encargoPlano(P);
+      M.copiar(t).then(function (ok) { if (ok) M.aviso('Encargo del plano copiado. Pégalo en Claude' + (P.fotos.length ? ' con la foto.' : '.')); else mostrarTexto('Copia el encargo del plano', t, 'Selecciona el texto y cópialo.'); });
+    },
+    'copiar-plano-ajuste': function () {
+      var t = A.encargoPlanoAjuste(P);
+      M.copiar(t).then(function (ok) { if (ok) M.aviso('Encargo del ajuste copiado. Pégalo en el mismo chat del plano.'); else mostrarTexto('Copia el encargo del ajuste', t, 'Selecciona el texto y cópialo.'); });
     },
     'leer-tabla': leerTabla,
     'agregar-cot': function (b) {

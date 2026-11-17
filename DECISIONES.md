@@ -1305,3 +1305,21 @@ y evaluar como dos caras).
   Al usarlos entran «con dinero» y salen en lo que se cotiza; solo el jornal de
   faena entra «en faena». La forma se lee «con dinero», «en faena», «prestado»,
   «trocado» o «donado» (el archivo guarda los mismos valores de antes).
+- **17 de noviembre, más tarde: el plano para quien la va a hacer (pedido de
+  Eduardo).** En Pieza por pieza y en la práctica del presupuesto, una pieza que
+  hace un oficio (herrería, carpintería, albañilería u otro) o la comunidad en
+  faena puede llevar un plano como el del temazcal metálico para el herrero. La
+  página arma el encargo y Claude dibuja el plano como una página para imprimir:
+  ficha, vista armada, corte, planta, la pieza que se repite sobre cuadrícula,
+  tabla de material y cortes, notas para el oficio, lo que hay que comprobar
+  antes de mandarla a hacer y preguntas para el experto; sin precios y sin
+  garantizar que aguanta. El plano viaja con la solicitud de cotización. Lo que
+  diga el experto se anota y sale el encargo del ajuste, para pedir el plano
+  corregido en el mismo chat. En Pieza por pieza: paso «Un plano para quien la
+  va a hacer» en «Pedir cotizaciones», paso «¿Qué dijo del plano?» en «Lo que
+  cotizaron» (solo si hay plano), aviso en la solicitud y anexo C en la partida,
+  también en Word; el ejemplo de los columpios ya lo trae. En la práctica: una
+  sección debajo de «Lo que se cotiza», un plano por partida, que también sale en
+  el presupuesto que se descarga. Las partes y reglas del encargo son las mismas
+  en las dos páginas (`AG.partesPlano` en Pieza por pieza, `partesPlano` en la
+  práctica): si se cambian, se cambian en las dos.

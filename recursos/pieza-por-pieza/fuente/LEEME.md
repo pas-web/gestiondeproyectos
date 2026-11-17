@@ -44,14 +44,30 @@ llenando iluminada. Los tramos y sus pasos:
 | La hoja de campo | imprimir la hoja y una medida por paso (`md-…`) | Hoja de campo |
 | La lista | armar la lista y un paso por número de la foto (`g-1`, `g-2`… y `g-0`, lo de toda la pieza) | Lo que lleva la pieza |
 | La precotización | cómo queda, los precios sin fuente, los imponderables | Precotización |
-| Pedir cotizaciones | quién las recibe y una solicitud por proveedor (`s-…`) | Solicitud |
-| Lo que cotizaron | las cotizaciones de cada solicitud (`c-…`) y con cuál se quedan | Partida |
+| Pedir cotizaciones | quién las recibe, el plano para quien la va a hacer (`plano`, opcional) y una solicitud por proveedor (`s-…`) | Solicitud |
+| Lo que cotizaron | las cotizaciones de cada solicitud (`c-…`), lo que dijo el experto del plano (`plano-rev`, solo si hay plano) y con cuál se quedan | Partida |
 | La partida | el contraste, las tres diferencias (`d-1` a `d-3`), actividad y bolsillo, entregar | Partida |
 
 Los pasos salen de la pieza, así que `app.js` los dibuja (`estructura()`) y,
 si cambia cuántos hay, la guía los vuelve a leer antes de moverse. La pieza
 guarda dónde se quedó en `guia.paso`; las de la versión 1 abren en el primer
 paso del tramo donde iban (`paso`).
+
+## El plano para quien la va a hacer
+
+Si la pieza la hace un oficio (herrería, carpintería, albañilería u otro) o la
+comunidad en faena, el paso `plano` arma el encargo para que Claude dibuje un
+plano como el del temazcal metálico: ficha, vista armada, corte, planta, la
+pieza que se repite sobre cuadrícula, tabla de material y cortes, notas para el
+oficio, lo que hay que comprobar antes de mandarla a hacer y preguntas para el
+experto. El encargo (`AG.encargoPlano` en `agente.js`) lleva el expediente, la
+pieza, la lectura de la foto, las respuestas, la lista y «la medida que manda».
+Sus partes y reglas (`AG.partesPlano`) son las mismas que usa la práctica del
+presupuesto. El plano se dibuja fuera de la página, se imprime y viaja con la
+solicitud; la solicitud lo avisa. En `plano-rev` se anota lo que dijo el
+experto y sale el encargo del ajuste (`AG.encargoPlanoAjuste`); la revisión va
+en la partida como anexo C. Se guarda en `plano` (`oficio`, `manda`,
+`respetar`, `quien`, `dijo`, `ajustes`); `D.OFICIOS` está en `datos.js`.
 
 ## Lo que sale
 
