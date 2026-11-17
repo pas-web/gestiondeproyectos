@@ -431,7 +431,7 @@
   /* ---------- 1 · La pieza ---------- */
   function cEquipo() {
     return '<p class="porque">Sus nombres salen en cada hoja que entreguen.</p>' +
-      '<div class="campo"><label for="f-nombres">Nombres del equipo</label><input class="grande" type="text" id="f-nombres" data-k="equipo.nombres" data-requerido="los nombres del equipo" placeholder="Por ejemplo: Citlalli, Heli y Mariana" autocomplete="off"></div>';
+      '<div class="campo"><label for="f-nombres">Nombres del equipo</label><input class="grande" type="text" id="f-nombres" data-k="equipo.nombres" data-requerido="los nombres del equipo" placeholder="Por ejemplo: Ana, Luis y Sofía" autocomplete="off"></div>';
   }
   function cComponente() {
     return '<p class="porque">Es la parte del proyecto de la presa en la que trabaja tu equipo.</p><div class="opciones-grandes">' + D.COMPONENTES.map(function (c) {
