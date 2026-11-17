@@ -1296,3 +1296,12 @@ y evaluar como dos caras).
   me haga preguntas» pasó al paso del prompt, y el membrete, al final, antes de
   entregar. Los pasos llevan `data-si="h-…"` y la guía los enseña según la
   herramienta. Los proyectos guardados abren igual, en «La herramienta».
+- **17 de noviembre, más tarde: la mano de obra no tiene que ser faena
+  (pedido de Eduardo).** En la práctica del presupuesto, lo que la comunidad no
+  alcance a cubrir en faena se le paga a un oficio. Los precios de referencia
+  traen, además del jornal de faena ($300, sin cambio), ayudante o peón ($360),
+  albañil oficial ($560), carpintero ($750), herrero o soldador ($950) y «otro
+  oficio, a cotizar»; son los de Pieza por pieza, con su fuente en ese catálogo.
+  Al usarlos entran «con dinero» y salen en lo que se cotiza; solo el jornal de
+  faena entra «en faena». La forma se lee «con dinero», «en faena», «prestado»,
+  «trocado» o «donado» (el archivo guarda los mismos valores de antes).

@@ -169,7 +169,7 @@
 </div>
 
 <h2><span class="n">2</span>Las partidas</h2>
-<p class="sub">Una partida por renglón. El <b>bolsillo</b> dice quién la pagaría; la <b>forma</b>, si se compra con dinero o se consigue en faena, prestada, trocada o donada, y entonces va con el precio que tendría si se comprara. El <b>mes</b> es cuando se necesita, no cuando se hace la actividad: el material se compra antes. El <b>precio</b> de hoy es de referencia; con la tarea, se cambia por el cotizado.</p>
+<p class="sub">Una partida por renglón. El <b>bolsillo</b> dice quién la pagaría; la <b>forma</b>, si se compra con dinero o se consigue en faena, prestada, trocada o donada, y entonces va con el precio que tendría si se comprara. La mano de obra no tiene que ser faena: lo que la comunidad no alcance a cubrir se le paga a un albañil, un herrero, un carpintero u otro oficio, y entonces va <b>con dinero</b>, con el jornal de ese oficio, y se cotiza como lo demás. El <b>mes</b> es cuando se necesita, no cuando se hace la actividad: el material se compra antes. El <b>precio</b> de hoy es de referencia; con la tarea, se cambia por el cotizado.</p>
 <div class="envoltura">
   <table class="plan" id="tabla">
     <colgroup><col class="c-num"><col class="c-que"><col class="c-cuanto"><col class="c-bol"><col class="c-tipo"><col class="c-total"><col class="c-x"></colgroup>
@@ -199,7 +199,7 @@
 
 <details>
   <summary>Precios de referencia (para el borrador de hoy; cada uno se cambia por la cotización del equipo)</summary>
-  <p class="ayuda">Son precios aproximados de la región a noviembre de 2026. Sirven para armar el primer borrador y para saber qué tan lejos anda la cotización de verdad. En el presupuesto que va a la asamblea ya no queda ninguno: todo lo que se compra se cotiza.</p>
+  <p class="ayuda">Son precios aproximados de la región a noviembre de 2026. Sirven para armar el primer borrador y para saber qué tan lejos anda la cotización de verdad. En el presupuesto que va a la asamblea ya no queda ninguno: todo lo que se compra se cotiza. Para la mano de obra hay dos caminos: el jornal de faena, que pone la comunidad y se valoriza, y el jornal de un oficio que se paga, que va con dinero y se cotiza con quien lo va a hacer.</p>
   <table class="ref" id="refs"></table>
 </details>
 
@@ -416,7 +416,9 @@ function revisar(e, s) {
     ['Pintura esmalte, 4 L', 'cubeta', 420, 'materiales'], ['Letrero de lámina impreso, 60 por 40 cm', 'pieza', 350, 'materiales'], ['Lona impresa', 'm²', 150, 'materiales'], ['Impresión a color', 'hoja', 8, 'materiales'],
     ['Tarima de pino usada', 'pieza', 100, 'materiales'], ['Banca rústica de tronco o tablón', 'pieza', 1200, 'materiales'], ['Manguera de media, rollo de 50 m', 'rollo', 550, 'equipo'],
     ['Cubeta de 19 L', 'pieza', 60, 'equipo'], ['Pala o pico', 'pieza', 280, 'equipo'], ['Carretilla', 'pieza', 1300, 'equipo'], ['Renta de retroexcavadora', 'hora', 900, 'equipo'],
-    ['Jornal de la región', 'jornal', 300, 'gente'], ['Comida de faena, por persona', 'persona', 80, 'gente'],
+    ['Jornal de faena, valorizado al de la región', 'jornal', 300, 'gente', 'faena'], ['Comida de faena, por persona', 'persona', 80, 'gente'],
+    ['Ayudante o peón, pagado', 'jornal', 360, 'gente'], ['Albañil oficial, pagado', 'jornal', 560, 'gente'], ['Carpintero, pagado', 'jornal', 750, 'gente'],
+    ['Herrero o soldador, pagado', 'jornal', 950, 'gente'], ['Otro oficio (electricista, plomero, pintor), a cotizar', 'jornal', 0, 'gente'],
     ['Flete en camioneta, cabecera a La Florida', 'viaje', 600, 'traslado'], ['Pasaje Arroyo Seco a Jalpan, ida y vuelta', 'pasaje', 160, 'traslado'], ['Gasolina', 'litro', 25.5, 'traslado'],
     ['Boya señalizadora de 30 cm', 'pieza', 450, 'materiales'], ['Fantasma luminiscente para poste', 'pieza', 35, 'materiales']
   ];
@@ -446,7 +448,10 @@ function revisar(e, s) {
   function acts() { return PRESA.actividades.filter(function (a) { return a.c === estado.componente; }); }
   function opciones(lista, sel, vacioTxt) { return (vacioTxt !== undefined ? '<option value="">' + vacioTxt + '</option>' : '') + lista.map(function (o) { var v = o[0], t = o[1]; return '<option value="' + esc(v) + '"' + (v === sel ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join(''); }
   var OP_BOL = BOLSILLOS.map(function (b) { return [b.id, b.corto]; });
-  var OP_FORMA = FORMAS.map(function (f) { return [f, f]; });
+  // Lo que se ve de cada forma; «compra» también es pagarle a un oficio
+  var FORMA_TXT = { compra: 'con dinero', faena: 'en faena', prestado: 'prestado', trocado: 'trocado', donado: 'donado' };
+  function formaTxt(f) { return FORMA_TXT[f] || f || ''; }
+  var OP_FORMA = FORMAS.map(function (f) { return [f, formaTxt(f)]; });
   var OP_TIPO = TIPOS.map(function (t) { return [t, t]; });
   var OP_MES = MESES.map(function (m) { return [m, mesTxt(m)]; });
   function opAct(sel) {
@@ -462,7 +467,7 @@ function revisar(e, s) {
   // ── el ejemplo
   (function () {
     var ej = normal(PRESA.ejemplo), s = calcular(ej);
-    var filas = ej.partidas.map(function (p) { var a = actividadDe(p.actividad), b = BOLS[p.bolsillo]; return '<tr><td>' + esc(a ? a.cod + ' · ' + a.n : p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + p.cant + ' ' + esc(p.unidad) + ' × ' + pesos(p.precio) + '</td><td>' + (b ? '<span class="punto" style="--c:' + b.color + '"></span>' + esc(b.corto) + ', ' + p.forma : '<b>sin bolsillo</b>') + '</td><td>' + mesTxt(p.mes) + '</td><td class="m">' + (+p.precio ? pesos(totalDe(p)) : 'por cotizar') + '</td></tr>'; }).join('');
+    var filas = ej.partidas.map(function (p) { var a = actividadDe(p.actividad), b = BOLS[p.bolsillo]; return '<tr><td>' + esc(a ? a.cod + ' · ' + a.n : p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + p.cant + ' ' + esc(p.unidad) + ' × ' + pesos(p.precio) + '</td><td>' + (b ? '<span class="punto" style="--c:' + b.color + '"></span>' + esc(b.corto) + ', ' + formaTxt(p.forma) : '<b>sin bolsillo</b>') + '</td><td>' + mesTxt(p.mes) + '</td><td class="m">' + (+p.precio ? pesos(totalDe(p)) : 'por cotizar') + '</td></tr>'; }).join('');
     $('tablaEjemplo').innerHTML = '<tr><th>Actividad</th><th>Qué</th><th>Cant. × precio</th><th>Bolsillo y forma</th><th>Mes</th><th>Total</th></tr>' + filas + '<tr><td colspan="5">Imponderables, ' + ej.imp.pct + '%: ' + esc(ej.imp.nombre) + '</td><td class="m">' + pesos(s.imp) + '</td></tr>';
     $('resumenEjemplo').innerHTML = 'Total: <b>' + pesos(s.total) + '</b>. La autogestión pone todo, ' + pesos(s.bols.AUT.dinero) + ' en dinero (sobre todo el capital semilla) y ' + pesos(s.bols.AUT.especie) + ' en préstamo y faena. Lo que se cae primero: ' + esc(ej.seCae.charAt(0).toLowerCase() + ej.seCae.slice(1));
   })();
@@ -620,7 +625,7 @@ function revisar(e, s) {
 
   // ── precios de referencia
   $('refs').innerHTML = '<tr><th>Qué</th><th>Unidad</th><th>Precio de referencia</th><th>Tipo</th><th></th></tr>' + REFS.map(function (r, i) { return '<tr><td>' + esc(r[0]) + '</td><td>' + r[1] + '</td><td>' + pesos(r[2]) + '</td><td>' + r[3] + '</td><td><button class="btn claro chico" type="button" data-ref="' + i + '">usar</button></td></tr>'; }).join('');
-  $('refs').addEventListener('click', function (ev) { var b = ev.target.closest('[data-ref]'); if (!b) return; var r = REFS[+b.dataset.ref]; estado.partidas.push(nueva({ que: r[0], unidad: r[1], precio: r[2], tipo: r[3], forma: r[3] === 'gente' && /jornal/i.test(r[0]) ? 'faena' : 'compra' })); pintarTabla(); guardar(); refrescar(); $('tabla').scrollIntoView({ behavior: 'smooth', block: 'end' }); });
+  $('refs').addEventListener('click', function (ev) { var b = ev.target.closest('[data-ref]'); if (!b) return; var r = REFS[+b.dataset.ref]; estado.partidas.push(nueva({ que: r[0], unidad: r[1], precio: r[2], tipo: r[3], forma: r[4] || 'compra' })); pintarTabla(); guardar(); refrescar(); $('tabla').scrollIntoView({ behavior: 'smooth', block: 'end' }); });
 
   // ── el ejemplo, cargado en la hoja
   $('verEjemplo').addEventListener('click', function () {
@@ -656,8 +661,8 @@ function revisar(e, s) {
   });
   $('descargarHtml').addEventListener('click', function () {
     var s = calcular(estado), rev = revisar(estado, s), c = nombreComp(estado.componente);
-    var filas = estado.partidas.map(function (p) { var a = actividadDe(p.actividad); return '<tr><td>' + p.id + '</td><td>' + esc(a ? a.cod + ' · ' + a.n : p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + p.cant + ' ' + esc(p.unidad) + '</td><td class="m">' + pesos(p.precio) + '</td><td>' + p.tipo + '</td><td>' + (BOLS[p.bolsillo] ? BOLS[p.bolsillo].corto : 'sin bolsillo') + '</td><td>' + p.forma + '</td><td>' + mesTxt(p.mes) + '</td><td class="m">' + pesos(totalDe(p)) + '</td></tr>'; }).join('');
-    if (estado.flete.si) filas += '<tr><td></td><td colspan="2">Flete</td><td>' + estado.flete.cant + ' viaje</td><td class="m">' + pesos(estado.flete.precio) + '</td><td>traslado</td><td>' + (BOLS[estado.flete.bolsillo] ? BOLS[estado.flete.bolsillo].corto : '') + '</td><td>' + estado.flete.forma + '</td><td>' + mesTxt(estado.flete.mes) + '</td><td class="m">' + pesos(s.flete) + '</td></tr>';
+    var filas = estado.partidas.map(function (p) { var a = actividadDe(p.actividad); return '<tr><td>' + p.id + '</td><td>' + esc(a ? a.cod + ' · ' + a.n : p.actividad) + '</td><td>' + esc(p.que) + '</td><td>' + p.cant + ' ' + esc(p.unidad) + '</td><td class="m">' + pesos(p.precio) + '</td><td>' + p.tipo + '</td><td>' + (BOLS[p.bolsillo] ? BOLS[p.bolsillo].corto : 'sin bolsillo') + '</td><td>' + formaTxt(p.forma) + '</td><td>' + mesTxt(p.mes) + '</td><td class="m">' + pesos(totalDe(p)) + '</td></tr>'; }).join('');
+    if (estado.flete.si) filas += '<tr><td></td><td colspan="2">Flete</td><td>' + estado.flete.cant + ' viaje</td><td class="m">' + pesos(estado.flete.precio) + '</td><td>traslado</td><td>' + (BOLS[estado.flete.bolsillo] ? BOLS[estado.flete.bolsillo].corto : '') + '</td><td>' + formaTxt(estado.flete.forma) + '</td><td>' + mesTxt(estado.flete.mes) + '</td><td class="m">' + pesos(s.flete) + '</td></tr>';
     if (estado.imp.si) filas += '<tr><td></td><td colspan="2">Imponderables, ' + estado.imp.pct + '%: ' + esc(estado.imp.nombre) + '</td><td colspan="6"></td><td class="m">' + pesos(s.imp) + '</td></tr>';
     var bol = BOLSILLOS.map(function (b) { var x = s.bols[b.id]; return '<tr><td>' + esc(b.nombre) + '</td><td class="m">' + pesos(x.dinero) + '</td><td class="m">' + pesos(x.especie) + '</td><td class="m">' + pesos(x.dinero + x.especie) + '</td></tr>'; }).join('');
     var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Presupuesto · ' + esc(c) + '</title><style>body{font-family:Segoe UI,system-ui,sans-serif;max-width:1150px;margin:1rem auto;padding:0 1rem;color:#1C2B28}h1,h2{font-family:Georgia,serif;color:#0B3C49}table{border-collapse:collapse;width:100%;font-size:.86rem;margin:.4rem 0}td,th{border:1px solid #CFE3DD;padding:.3rem .4rem;text-align:left;vertical-align:top}.m{text-align:right;white-space:nowrap}li.mal{color:#8A3B2B}li.ojo{color:#7C6222}</style></head><body>'
