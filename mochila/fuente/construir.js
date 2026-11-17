@@ -9,14 +9,16 @@ const path = require('path');
 const F = __dirname;
 const SALIDA = path.join(F, '..');
 const leer = (p) => fs.readFileSync(path.join(F, p), 'utf8');
-const VERSION = 'versión 1 · 13 de noviembre de 2026';
+const VERSION = 'versión 2 · 16 de noviembre de 2026';
 
 const fuentes = [400, 500, 600, 700].map((w) =>
   "@font-face{font-family:'Jost';font-style:normal;font-weight:" + w + ';font-display:swap;src:url(data:font/woff2;base64,' +
   fs.readFileSync(path.join(F, 'fuentes', 'jost-' + w + '.woff2')).toString('base64') + ") format('woff2');}"
 ).join('\n');
-const css = leer('comun.css');
-const js = leer('comun.js');
+// Lo común: estilos y piezas de todas las herramientas, más la guía de una cosa
+// a la vez, el Word y las imágenes.
+const css = leer('comun.css') + '\n' + leer('guia.css');
+const js = ['comun.js', 'lienzo.js', 'docx.js', 'guia.js'].map(leer).join('\n');
 
 // Ojo: siempre con función de reemplazo, porque el código trae «$'» y «$&».
 const poner = (h, marca, contenido) => h.split(marca).join('\u0000').replace(/\u0000/g, () => contenido);

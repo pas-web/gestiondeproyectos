@@ -106,9 +106,12 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
 .hoja table.marco-t tr.n-proposito td.nivel { color: var(--t-tinta); }
 .hoja table.marco-t tr.n-actividad td { font-size: 7.7pt; }
 .hoja .declara { font-size: 7.6pt; color: var(--t-tenue); margin-top: .14in; }
+.conmutador .btn.claro { flex: 1; }
+.guia .prompt-vista { max-height: 46vh; overflow: auto; }
+.guia #respuesta { min-height: 200px; }
 </style>
 </head>
-<body data-vista="llenar">
+<body data-vista="llenar" class="guiada">
 
 <header class="barra">
   <a class="casa" href="index.html" data-ico="mochila"><span>La mochila</span></a>
@@ -117,39 +120,55 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
 </header>
 
 <main class="banco">
-<section class="formulario" aria-label="Lo que llenas">
+<section class="formulario guia" id="guia" aria-label="Las preguntas">
 
   <div class="entrada">
-    <p>Llenas tu proyecto una vez y la página arma el prompt para pedirle a una IA el árbol de problemas, el árbol de objetivos, la teoría del cambio o el marco lógico, con las reglas de la clase adentro. Pegas lo que te conteste, lo auditas con las mismas pruebas y la hoja lo dibuja en limpio. La IA propone; tú decides.</p>
+    <p>Tu proyecto, contado una vez, se vuelve un prompt con las reglas de la clase para pedirle a una IA el árbol de problemas, el de objetivos, la teoría del cambio o el marco lógico. Pegas lo que conteste, lo auditas y la hoja lo dibuja en limpio.</p>
     <div class="acciones-entrada">
       <button type="button" class="btn claro chico" id="nueva" data-ico="mas">Nuevo proyecto</button>
       <button type="button" class="btn claro chico" id="ejemplo">Ver un ejemplo</button>
     </div>
   </div>
 
-  <details class="paso" id="paso-membrete">
-    <summary><span class="n">1</span><h2>Tu membrete</h2><span class="resumen-paso" id="res-membrete"></span></summary>
-    <div class="cuerpo" id="membrete"></div>
-  </details>
+  <div id="preguntas-membrete"></div>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">2</span><h2>Tu proyecto</h2></div>
-    <p class="guia">Esto es el contexto del prompt: lo que la IA no sabe y tú sí. Entre más concreto, menos inventa.</p>
-    <div class="cuerpo campos">
-      <div class="campo"><label for="p-nombre">Nombre del proyecto</label><input id="p-nombre" type="text" data-k="proyecto.nombre" placeholder="Ej. Vivero escolar de especies nativas"></div>
-      <div class="campo c3"><label for="p-lugar">Dónde</label><input id="p-lugar" type="text" data-k="proyecto.lugar" placeholder="Comunidad, municipio y estado"></div>
-      <div class="campo c3"><label for="p-gente">Con quién y para quién</label><input id="p-gente" type="text" data-k="proyecto.gente" placeholder="Ej. Familias que reforestan en faena"></div>
-      <div class="campo"><label for="p-problema">El problema, en tus palabras</label><textarea id="p-problema" data-k="proyecto.problema" rows="2" placeholder="Lo que pasa, no lo que falta."></textarea></div>
-      <div class="campo"><label for="p-diag">Lo que ya saben por el diagnóstico</label><textarea id="p-diag" data-k="proyecto.diagnostico" rows="4" placeholder="Lo que salió de la consulta, la observación o las entrevistas: conteos, frases de la gente, fechas."></textarea></div>
-      <div class="campo c3"><label for="p-rec">Lo que ya tienen (opcional)</label><textarea id="p-rec" data-k="proyecto.recursos" rows="2" placeholder="Terreno, aliados, dinero, herramienta."></textarea></div>
-      <div class="campo c3"><label for="p-lim">Lo que hay que respetar (opcional)</label><textarea id="p-lim" data-k="proyecto.limites" rows="2" placeholder="Ej. No prometer obras; no pasar de un año."></textarea></div>
-    </div>
+  <section class="pregunta" data-paso="proyecto" data-tramo="Tu proyecto" data-foco="proyecto">
+    <h2>¿Cómo se llama tu proyecto?</h2>
+    <p class="porque">Va arriba del dibujo y es lo primero que la IA lee de tu proyecto.</p>
+    <div class="campo"><label for="p-nombre" class="sr">Nombre del proyecto</label><input id="p-nombre" class="grande" type="text" data-k="proyecto.nombre" data-requerido="el nombre del proyecto" placeholder="El proyecto, en una línea"></div>
+    <div class="ejemplos" data-para="p-nombre"><span>Por ejemplo</span><button type="button">Vivero escolar de especies nativas</button><button type="button">La presa que queremos</button></div>
   </section>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">3</span><h2>La herramienta</h2></div>
-    <div class="cuerpo">
-      <div class="herramientas" role="radiogroup" aria-label="Herramienta">
+  <section class="pregunta" data-paso="lugar" data-tramo="Tu proyecto" data-foco="proyecto">
+    <h2>¿Dónde, y con quién?</h2>
+    <p class="porque">La IA no conoce el lugar ni a la gente. Lo que no le digas, lo inventa.</p>
+    <div class="campo"><label for="p-lugar">Dónde</label><input id="p-lugar" type="text" data-k="proyecto.lugar" placeholder="Comunidad, municipio y estado"></div>
+    <div class="campo"><label for="p-gente">Con quién y para quién</label><input id="p-gente" type="text" data-k="proyecto.gente" placeholder="Ej. Familias que reforestan en faena"></div>
+  </section>
+
+  <section class="pregunta" data-paso="problema" data-tramo="Tu proyecto" data-foco="dibujo">
+    <h2>¿Qué problema ven, en sus palabras?</h2>
+    <p class="porque">Lo que pasa, no lo que falta. «Las plantas se mueren antes de la seca» sí; «falta un vivero» no.</p>
+    <div class="campo"><label for="p-problema" class="sr">El problema</label><textarea id="p-problema" class="grande" data-k="proyecto.problema" rows="3" data-requerido="el problema" placeholder="Lo que pasa, no lo que falta."></textarea></div>
+  </section>
+
+  <section class="pregunta" data-paso="diagnostico" data-tramo="Tu proyecto" data-foco="dibujo">
+    <h2>¿Qué saben ya por el diagnóstico?</h2>
+    <p class="porque">Lo que salió de la consulta, la observación o las entrevistas: conteos, frases de la gente, fechas. Entre más concreto, menos inventa la IA.</p>
+    <div class="campo"><label for="p-diag" class="sr">Lo que saben por el diagnóstico</label><textarea id="p-diag" class="grande" data-k="proyecto.diagnostico" rows="5" placeholder="Ej. En la faena de julio se sembraron 200 encinos; en noviembre quedaban 31."></textarea></div>
+  </section>
+
+  <section class="pregunta" data-paso="recursos" data-tramo="Tu proyecto" data-foco="dibujo">
+    <h2>¿Qué tienen, y qué hay que respetar?</h2>
+    <p class="porque">Opcional, pero ayuda: la IA propone dentro de lo posible y no promete lo que no se puede.</p>
+    <div class="campo"><label for="p-rec">Lo que ya tienen</label><textarea id="p-rec" data-k="proyecto.recursos" rows="2" placeholder="Terreno, aliados, dinero, herramienta."></textarea></div>
+    <div class="campo"><label for="p-lim">Lo que hay que respetar</label><textarea id="p-lim" data-k="proyecto.limites" rows="2" placeholder="Ej. No prometer obras; no pasar de un año."></textarea></div>
+  </section>
+
+  <section class="pregunta" data-paso="herramienta" data-tramo="La herramienta" data-foco="folio dibujo">
+    <h2>¿Qué le vas a pedir a la IA?</h2>
+    <p class="porque">Van en orden: el árbol de problemas se voltea en el de objetivos, de ahí sale la teoría del cambio y de ella el marco lógico.</p>
+    <div class="herramientas" role="radiogroup" aria-label="Herramienta">
         <label><input type="radio" name="herr" value="arbol" data-k="herramienta"><span class="tarjeta">
           <svg viewBox="0 0 64 48" aria-hidden="true"><g fill="none" stroke="#9BB0AA" stroke-width="1.4"><path d="M32 20v-6M14 14h36M14 14v-2M50 14v-2M32 28v6M14 34h36M14 34v2M50 34v2"/></g><rect x="3" y="3" width="22" height="9" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="39" y="3" width="22" height="9" rx="2" fill="#EBF6F8" stroke="#00899e"/><rect x="18" y="19" width="28" height="10" rx="2" fill="#0B3C49"/><rect x="3" y="36" width="22" height="9" rx="2" fill="#FCF4EC" stroke="#c46a1f"/><rect x="39" y="36" width="22" height="9" rx="2" fill="#FCF4EC" stroke="#c46a1f"/></svg>
           <b>Árbol de problemas</b><span>El tronco, sus raíces y sus ramas. Semana 5.</span></span></label>
@@ -163,84 +182,76 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
           <svg viewBox="0 0 64 48" aria-hidden="true"><rect x="2" y="4" width="60" height="40" rx="3" fill="#fff" stroke="#9BB0AA"/><g stroke="#C9D6D2"><path d="M2 14h60M2 24h60M2 34h60M17 4v40M32 4v40M47 4v40"/></g><rect x="2" y="4" width="15" height="40" fill="#0B3C49" opacity=".85"/></svg>
           <b>Marco lógico</b><span>Cuatro renglones y cuatro columnas. Semana 6.</span></span></label>
       </div>
+  </section>
+
+  <section class="pregunta" data-paso="necesita" data-tramo="La herramienta" data-foco="dibujo">
+    <h2 id="titulo-necesita">Lo que necesita esta herramienta</h2>
+    <p class="porque">Lo que la IA necesita saber para esta herramienta en particular.</p>
+    <div class="campos" id="campos-herramienta"></div>
+    <div class="campo" style="margin-top:14px"><label class="palomita"><input type="checkbox" data-k="preguntar"><span>Que la IA me haga preguntas antes de escribir<br><span class="ayuda">El método de la clase: «antes de escribir nada, hazme las preguntas que necesites para hacerlo bien». Tarda un poco más y sale mejor.</span></span></label></div>
+  </section>
+
+  <section class="pregunta" data-paso="prompt" data-tramo="El prompt">
+    <h2>Tu prompt está listo</h2>
+    <p class="porque">Lleva las cuatro piezas de la clase y las reglas estrictas de la herramienta. Lo que te falta llenar sale entre corchetes dobles.</p>
+    <div class="piezas-leyenda"><span><i style="background:#0B3C49"></i>contexto</span><span><i style="background:#0F6E6E"></i>encargo</span><span><i style="background:#8A3B2B"></i>reglas</span><span><i style="background:#A8781A"></i>formato</span><span><i style="background:#7B52AE"></i>ejemplo</span></div>
+    <div class="prompt-vista" id="prompt-vista" aria-live="polite"></div>
+    <div class="contador" id="contador"></div>
+    <div class="acciones-prompt">
+      <button type="button" class="btn" id="copiar" data-ico="copiar">Copiar el prompt</button>
+      <span class="rot">Copiar y abrir:</span>
+      <button type="button" class="btn claro chico" data-abrir="https://chatgpt.com/">ChatGPT</button>
+      <button type="button" class="btn claro chico" data-abrir="https://claude.ai/new">Claude</button>
+      <button type="button" class="btn claro chico" data-abrir="https://gemini.google.com/app">Gemini</button>
+      <button type="button" class="btn-texto" id="txt">Descargar .txt</button>
     </div>
   </section>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">4</span><h2 id="titulo-necesita">Lo que esta herramienta necesita</h2></div>
-    <div class="cuerpo campos" id="campos-herramienta"></div>
-    <div class="cuerpo" style="margin-top:10px"><label class="palomita"><input type="checkbox" data-k="preguntar"><span>Que la IA me haga preguntas antes de escribir<br><span class="ayuda">El método de la clase: «antes de escribir nada, hazme las preguntas que necesites para hacerlo bien». Tarda un poco más y sale mejor.</span></span></label></div>
+  <section class="pregunta" data-paso="respuesta" data-tramo="La respuesta" data-foco="dibujo">
+    <h2>Pega lo que te contestó</h2>
+    <p class="porque">Copia el bloque que va entre las marcas <b>===</b> (en el marco lógico, la tabla) y pégalo aquí. La hoja lo dibuja al momento. Sin IA, empieza con el formato vacío y escríbelo tú.</p>
+    <div class="campo"><label for="respuesta" class="sr">La respuesta de la IA</label><textarea class="respuesta" id="respuesta" spellcheck="false"></textarea></div>
+    <div class="botones-fila" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+      <button type="button" class="btn claro chico" id="a-mano">Empezar con el formato vacío</button>
+      <button type="button" class="btn-texto peligro" id="limpiar">Borrar la respuesta</button>
+    </div>
+    <div class="lectura" id="lectura"></div>
+    <div class="campo" style="margin-top:12px"><label class="palomita" style="margin-top:10px"><input type="checkbox" data-k="declarar"><span>Declarar en la hoja que se hizo con apoyo de IA<br><span class="ayuda">Así lo pide el pacto de IA del curso: el uso se dice, no se esconde.</span></span></label></div>
   </section>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">5</span><h2>Tu prompt</h2></div>
-    <p class="guia">Lleva las cuatro piezas que vimos en clase y las reglas estrictas de la herramienta. Lo que te falta llenar sale marcado entre corchetes dobles.</p>
-    <div class="cuerpo">
-      <div class="piezas-leyenda"><span><i style="background:#0B3C49"></i>contexto</span><span><i style="background:#0F6E6E"></i>encargo</span><span><i style="background:#8A3B2B"></i>reglas</span><span><i style="background:#A8781A"></i>formato</span><span><i style="background:#7B52AE"></i>ejemplo</span></div>
-      <div class="prompt-vista" id="prompt-vista" aria-live="polite"></div>
-      <div class="contador" id="contador"></div>
-      <div class="acciones-prompt">
-        <button type="button" class="btn" id="copiar" data-ico="copiar">Copiar el prompt</button>
-        <span class="rot">Copiar y abrir:</span>
-        <button type="button" class="btn claro chico" data-abrir="https://chatgpt.com/">ChatGPT</button>
-        <button type="button" class="btn claro chico" data-abrir="https://claude.ai/new">Claude</button>
-        <button type="button" class="btn claro chico" data-abrir="https://gemini.google.com/app">Gemini</button>
-        <button type="button" class="btn-texto" id="txt">Descargar .txt</button>
-      </div>
-    </div>
+  <section class="pregunta" data-paso="auditoria" data-tramo="La auditoría" data-foco="dibujo">
+    <h2>¿Pasa las pruebas de la clase?</h2>
+    <p class="porque">Una respuesta puede sonar muy segura y traer errores. Mírala en la hoja y marca cada prueba: pasa o falla.</p>
+    <ul class="revision" id="avisos" style="margin-bottom:12px"></ul>
+    <ul class="auditoria" id="auditoria"></ul>
   </section>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">6</span><h2>Pega la respuesta y dibújala</h2></div>
-    <p class="guia">Copia de la respuesta de la IA el bloque que va entre las marcas <b>===</b> (en el marco lógico, la tabla) y pégalo aquí. Si prefieres hacerlo sin IA, empieza con el formato vacío y escríbelo tú. Lo que cambies aquí se redibuja al momento.</p>
-    <div class="cuerpo">
-      <textarea class="respuesta" id="respuesta" aria-label="La respuesta de la IA" spellcheck="false"></textarea>
-      <div class="botones-fila" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
-        <button type="button" class="btn claro chico" id="a-mano">Empezar con el formato vacío</button>
-        <button type="button" class="btn-texto peligro" id="limpiar">Borrar la respuesta</button>
-      </div>
-      <div class="lectura" id="lectura"></div>
-      <label class="palomita" style="margin-top:10px"><input type="checkbox" data-k="declarar"><span>Declarar en la hoja que se hizo con apoyo de IA<br><span class="ayuda">Así lo pide el pacto de IA del curso: el uso se dice, no se esconde.</span></span></label>
-    </div>
+  <section class="pregunta" data-paso="vuelta" data-tramo="La segunda vuelta" data-foco="dibujo">
+    <h2>La segunda vuelta</h2>
+    <p class="porque">Lo que marcaste como falla entra solo. Agrega lo que encontraron y lo que saben por haber estado ahí, y pídele a la IA la versión corregida en el mismo chat.</p>
+    <div class="campo"><label for="v-enc">Lo que encontraron, con el número de caja o de renglón</label><textarea id="v-enc" rows="3" data-vuelta="encontraron" placeholder="Ej. La causa 2.1 trae dos ideas en una caja."></textarea></div>
+    <div class="campo"><label for="v-campo">Lo que saben por haber estado ahí y la IA no podía saber</label><textarea id="v-campo" rows="2" data-vuelta="campo" placeholder="Ej. En la consulta, tres señoras dijeron que el agua se acaba en abril."></textarea></div>
+    <div class="prompt-vista" id="vuelta-vista" style="margin-top:12px"></div>
+    <div class="acciones-prompt"><button type="button" class="btn" id="copiar-vuelta" data-ico="copiar">Copiar la segunda vuelta</button></div>
   </section>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">7</span><h2>Audítala</h2></div>
-    <p class="guia">Una respuesta puede sonar muy segura y traer errores. Pásala por las pruebas de la clase, una por una, y marca cada una.</p>
-    <div class="cuerpo">
-      <ul class="revision" id="avisos" style="margin-bottom:12px"></ul>
-      <ul class="auditoria" id="auditoria"></ul>
-    </div>
-  </section>
-
-  <section class="paso">
-    <div class="cabeza"><span class="n">8</span><h2>La segunda vuelta</h2></div>
-    <p class="guia">Lo que marcaste como falla entra solo. Agrega lo que encontraron y lo que saben por haber estado ahí, y pídele a la IA la versión corregida.</p>
-    <div class="cuerpo campos">
-      <div class="campo"><label for="v-enc">Lo que encontraron, con el número de caja o de renglón</label><textarea id="v-enc" rows="3" data-vuelta="encontraron" placeholder="Ej. La causa 2.1 trae dos ideas en una caja."></textarea></div>
-      <div class="campo"><label for="v-campo">Lo que saben por haber estado ahí y la IA no podía saber</label><textarea id="v-campo" rows="2" data-vuelta="campo" placeholder="Ej. En la consulta, tres señoras dijeron que el agua se acaba en abril."></textarea></div>
-      <div class="campo"><div class="prompt-vista" id="vuelta-vista"></div>
-        <div class="acciones-prompt"><button type="button" class="btn" id="copiar-vuelta" data-ico="copiar">Copiar la segunda vuelta</button></div></div>
-    </div>
+  <section class="pregunta" data-paso="entregar" data-tramo="Entregar">
+    <h2>Tu dibujo está listo</h2>
+    <p class="porque">La hoja sale horizontal, con el dibujo en limpio. Elige cómo lo entregas.</p>
+    <div id="faltan"></div>
+    <div id="entregas"></div>
   </section>
 
 </section>
 
 <section class="panel-hoja" aria-label="La hoja que se entrega">
-  <div class="mesa-hoja">
-    <span class="ayuda" id="resumen-hoja"></span>
-    <div class="derecha">
-      <button type="button" class="btn" id="pdf" data-ico="pdf">Guardar en PDF</button>
-      <button type="button" class="btn claro" id="descargar" data-ico="descargar">Archivo</button>
-    </div>
-  </div>
+  <div class="mesa-hoja"><span class="rot-hoja" id="resumen-hoja"></span></div>
   <div class="marco-hoja" id="marco"></div>
-  <p class="pista-impresion" id="pista">La hoja sale horizontal. Para el PDF: en la ventana de imprimir elige «Guardar como PDF»; si sale vertical, cambia la orientación a «Horizontal».</p>
 </section>
 </main>
 
-<nav class="conmutador" aria-label="Cambiar de vista">
-  <div class="dos"><button type="button" data-ver="llenar">Llenar</button><button type="button" data-ver="hoja">Ver la hoja</button></div>
+<nav class="conmutador" aria-label="Volver a las preguntas">
+  <button type="button" class="btn claro" data-ver="llenar">Volver a las preguntas</button>
   <button type="button" class="btn" id="pdf-movil" data-ico="pdf">PDF</button>
 </nav>
 

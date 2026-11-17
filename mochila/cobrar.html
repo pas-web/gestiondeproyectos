@@ -424,6 +424,240 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
 
+/* La mochila del gestor · una cosa a la vez
+   La tarjeta de la pregunta, el camino de arriba, la ventanita del celular,
+   la hoja con la parte en foco y las salidas del final. */
+
+/* ---------- El banco cuando la guía manda ---------- */
+body.guiada .banco { grid-template-columns: minmax(0, 560px) minmax(0, 1fr); gap: 36px; padding-bottom: 60px; }
+body.guiada .panel-hoja { top: 74px; max-height: calc(100vh - 88px); overflow: auto; padding: 2px 14px 18px 4px; overscroll-behavior: contain; scrollbar-width: thin; }
+body.guiada .panel-hoja .mesa-hoja { position: sticky; top: -2px; z-index: 2; background: var(--plano); padding: 8px 0 10px; margin-bottom: 4px; }
+body.guiada .panel-hoja .mesa-hoja .rot-hoja { font-size: 14px; color: var(--tenue); }
+.formulario.guia { position: relative; }
+
+/* ---------- El camino: los tramos del documento ---------- */
+.camino { margin: 6px 0 18px; }
+.camino-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.camino-lista button {
+  display: inline-flex; align-items: center; gap: 7px; border: none; background: none; padding: 3px 0;
+  font-size: 14px; color: var(--tenue); cursor: pointer; text-align: left; line-height: 1.2;
+}
+.camino-lista button:hover .nom { color: var(--petroleo); }
+.camino-lista .num {
+  flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--campo-borde); background: #fff;
+  display: grid; place-items: center; font-size: 11.5px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--tenue);
+}
+.camino-lista button.actual { color: var(--petroleo); font-weight: 600; }
+.camino-lista button.actual .num { background: var(--petroleo); border-color: var(--petroleo); color: #fff; }
+.camino-lista button.hecho { color: var(--tinta-2); }
+.camino-lista button.hecho .num { background: var(--bien-fondo); border-color: #A9CDB6; color: transparent; position: relative; }
+.camino-lista button.hecho .num::after { content: ""; position: absolute; left: 6.5px; top: 3.5px; width: 5px; height: 9px; border: solid var(--bien); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.avance { height: 3px; background: var(--linea); border-radius: 3px; margin-top: 12px; overflow: hidden; }
+.avance i { display: block; height: 100%; width: 0; background: var(--verde); border-radius: 3px; transition: width .35s ease; }
+.camino-pie { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 4px; font-size: 13px; color: var(--tenue); }
+.camino-pie .btn-texto { font-size: 13.5px; padding: 2px 0; }
+@media (max-width: 640px) {
+  .camino-lista { gap: 6px 8px; }
+  .camino-lista button:not(.actual) .nom { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .camino-lista button.actual .nom { font-size: 14.5px; }
+}
+
+/* ---------- La tarjeta de la pregunta ---------- */
+.guia .pregunta {
+  position: relative; background: #fff; border: 1px solid var(--linea); border-radius: 16px;
+  padding: 24px 28px 26px; box-shadow: 0 1px 2px rgba(11, 60, 73, .05), 0 10px 28px -18px rgba(11, 60, 73, .28);
+}
+.guia .pregunta[hidden] { display: none; }
+.guia .pregunta .donde { display: flex; gap: 10px; align-items: baseline; margin: 0 0 8px; font-size: 14px; }
+.guia .pregunta .donde .tramo { color: var(--verde); font-weight: 600; }
+.guia .pregunta .donde .de { color: var(--tenue); font-variant-numeric: tabular-nums; }
+.guia .pregunta h2 { font-size: 27px; line-height: 1.16; font-weight: 500; letter-spacing: -.014em; color: var(--petroleo); margin: 0 0 8px; max-width: 22ch; text-wrap: balance; }
+.guia .pregunta .porque { font-size: 16px; line-height: 1.5; color: var(--tinta-2); margin: 0 0 20px; max-width: 50ch; }
+.guia .pregunta h3 { font-size: 16px; font-weight: 600; color: var(--petroleo); margin: 20px 0 8px; }
+.guia [hidden] { display: none !important; }
+.guia .pregunta > .campos + .campos, .guia .pregunta > .campo + .campo, .guia .pregunta > .campos + .campo, .guia .pregunta > .campo + .campos { margin-top: 14px; }
+.guia .pregunta > p:last-child { margin-bottom: 0; }
+input.grande, textarea.grande { font-size: 19px; min-height: 56px; padding: 12px 14px; border-radius: 10px; }
+textarea.grande { min-height: 120px; line-height: 1.45; }
+.guia .campo > label { font-size: 14.5px; }
+@media (max-width: 640px) {
+  .guia .pregunta { padding: 18px 16px 20px; border-radius: 14px; }
+  .guia .pregunta h2 { font-size: 23px; }
+  .guia .pregunta .porque { font-size: 15.5px; margin-bottom: 16px; }
+}
+.pregunta.entra { animation: entra .24s ease-out; }
+.pregunta.entra-atras { animation: entra-atras .24s ease-out; }
+@keyframes entra { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+@keyframes entra-atras { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
+
+/* Ejemplos que se tocan para llenar */
+.ejemplos { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 12px; }
+.ejemplos > span { font-size: 13.5px; color: var(--tenue); margin-right: 2px; }
+.ejemplos button {
+  border: 1px dashed var(--campo-borde); background: transparent; border-radius: 999px; padding: 6px 12px;
+  font-size: 14.5px; color: var(--tinta-2); cursor: pointer; text-align: left; line-height: 1.3;
+}
+.ejemplos button:hover { border-style: solid; border-color: var(--verde); color: var(--verde); }
+details.mas { margin-top: 16px; }
+details.mas > summary { cursor: pointer; color: var(--verde); font-weight: 500; font-size: 15px; list-style: none; }
+details.mas > summary::-webkit-details-marker { display: none; }
+details.mas > summary::before { content: "+ "; }
+details.mas[open] > summary::before { content: "\2212  "; }
+details.mas[open] > summary { margin-bottom: 12px; }
+
+/* Lo que se está armando, dentro de la tarjeta: un renglón con su resultado */
+.asi-va { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 16px; padding: 12px 14px; border-radius: 10px; background: var(--plano); font-size: 15px; }
+.asi-va b { font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--petroleo); white-space: nowrap; }
+.asi-va span { color: var(--tinta-2); }
+
+/* El sobre: las preguntas que solo ve quien cotiza */
+.guia .pregunta.en-sobre { background: var(--kraft); border-color: var(--kraft-borde); color: var(--kraft-tinta); padding-top: 60px; box-shadow: 0 10px 28px -18px rgba(58, 41, 19, .5); }
+.guia .pregunta.en-sobre::before {
+  content: ""; position: absolute; left: -1px; right: -1px; top: -1px; height: 44px; border-radius: 16px 16px 0 0;
+  background: var(--kraft-solapa); border: 1px solid var(--kraft-borde); border-bottom: none;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 30%, 0 100%);
+}
+.guia .pregunta.en-sobre::after {
+  content: "El sobre: solo tú lo ves"; position: absolute; top: 12px; right: 18px; font-size: 13px; font-weight: 500; color: var(--kraft-tinta);
+}
+.guia .pregunta.en-sobre .donde { position: absolute; top: 11px; left: 26px; }
+.guia .pregunta.en-sobre .donde .tramo { color: var(--kraft-tinta); }
+.guia .pregunta.en-sobre .donde .de, .guia .pregunta.en-sobre .porque, .guia .pregunta.en-sobre .ayuda, .guia .pregunta.en-sobre .encabezado-renglones { color: var(--kraft-tenue); }
+.guia .pregunta.en-sobre h2, .guia .pregunta.en-sobre h3, .guia .pregunta.en-sobre .campo > label { color: var(--kraft-tinta); }
+.guia .pregunta.en-sobre input, .guia .pregunta.en-sobre select { border-color: var(--kraft-borde); }
+.guia .pregunta.en-sobre .sugerencias button, .guia .pregunta.en-sobre .ejemplos button { border-color: var(--kraft-borde); color: var(--kraft-tinta); }
+.guia .pregunta.en-sobre .asi-va { background: #FFF9EE; border: 1px solid var(--kraft-borde); }
+.guia .pregunta.en-sobre .asi-va b { color: var(--kraft-tinta); }
+.guia .pregunta.en-sobre .btn.claro { border-color: var(--kraft-borde); }
+@media (max-width: 640px) {
+  .guia .pregunta.en-sobre { padding-top: 58px; }
+  .guia .pregunta.en-sobre .donde { left: 16px; }
+  .guia .pregunta.en-sobre::after { right: 14px; content: "Solo tú lo ves"; }
+}
+
+/* Lo que falta, cuando se quiere seguir sin llenarlo */
+.falta { background: var(--ojo-fondo); color: var(--ojo); border-radius: 10px; padding: 10px 14px; font-size: 14.5px; margin: 12px 0 0; }
+
+/* ---------- Los botones de abajo ---------- */
+.pie-guia { display: flex; gap: 10px; align-items: center; margin-top: 16px; }
+.pie-guia .seguir { margin-left: auto; min-width: 150px; }
+.pie-guia .ver-hoja { display: none; }
+@media (max-width: 1020px) {
+  body.guiada .banco { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-bottom: 104px; }
+  .pie-guia {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; margin: 0;
+    background: rgba(255, 255, 255, .97); border-top: 1px solid var(--linea);
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -6px 18px rgba(11, 60, 73, .08);
+  }
+  .pie-guia .ver-hoja { display: inline-flex; padding-left: 12px; padding-right: 12px; }
+  .pie-guia .seguir { flex: 1; min-width: 0; }
+  .pie-guia .atras { padding-left: 12px; padding-right: 12px; }
+  body.guiada .conmutador { display: none; }
+  body.guiada[data-vista="hoja"] .conmutador { display: flex; }
+  body.guiada[data-vista="hoja"] .pie-guia { display: none; }
+}
+
+/* ---------- La ventanita del celular: así va tu hoja ---------- */
+.ventanita { display: none; }
+@media (max-width: 1020px) {
+  .ventanita { display: block; width: 100%; margin: 14px 0 0; border: 1px solid var(--linea); border-radius: 14px; background: #fff; padding: 10px 10px 8px; text-align: left; cursor: pointer; font: inherit; color: inherit; }
+  .ventanita .rot { display: block; font-size: 13px; color: var(--tenue); margin: 0 2px 6px; }
+  .ventanita .marco-mini { display: block; position: relative; height: 190px; overflow: hidden; border-radius: 8px; background: var(--plano); }
+  .ventanita .marco-mini .hoja { box-shadow: none; }
+  .ventanita .ver { display: block; font-size: 13.5px; color: var(--verde); font-weight: 500; margin: 7px 2px 0; }
+}
+
+/* ---------- La hoja: la parte que se está escribiendo ---------- */
+.hoja [data-parte] { transition: background-color .6s ease, box-shadow .6s ease; border-radius: 3pt; }
+.hoja .en-foco { background-color: rgba(217, 164, 65, .13); box-shadow: 0 0 0 5pt rgba(217, 164, 65, .13); }
+.hoja tr.en-foco { box-shadow: none; background-color: transparent; }
+.hoja tr.en-foco > td { background-color: rgba(217, 164, 65, .13); }
+.hoja tr.en-foco.late { animation: none; }
+.hoja tr.en-foco.late > td { animation: latido-celda 1.1s ease-out; }
+@keyframes latido-celda { 0% { background-color: rgba(217, 164, 65, .42); } 100% { background-color: rgba(217, 164, 65, .13); } }
+.hoja .en-foco.late { animation: latido 1.1s ease-out; }
+@keyframes latido {
+  0% { background-color: rgba(217, 164, 65, .42); box-shadow: 0 0 0 7pt rgba(217, 164, 65, .36); }
+  100% { background-color: rgba(217, 164, 65, .13); box-shadow: 0 0 0 5pt rgba(217, 164, 65, .13); }
+}
+#impresion .en-foco, #impresion [data-parte] { background-color: transparent !important; box-shadow: none !important; animation: none !important; }
+#impresion tr.en-foco > td { background-color: transparent !important; animation: none !important; }
+
+/* ---------- La tarjeta del membrete ---------- */
+.tarjeta-membrete { display: flex; gap: 16px; align-items: center; padding: 16px 18px; border-radius: 12px; background: var(--plano); border-left: 4px solid var(--acento, var(--petroleo)); }
+.tm-logo { width: 64px; height: 64px; flex: none; display: grid; place-items: center; }
+.tm-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.tm-logo .mono { width: 60px; height: 60px; border-radius: 50%; color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 22px; }
+.tm-quien { min-width: 0; }
+.tm-quien b { display: block; font-size: 18px; font-weight: 600; color: var(--tinta); line-height: 1.25; }
+.tm-quien span { display: block; font-size: 14.5px; color: var(--tinta-2); }
+.tm-quien small { display: block; font-size: 13px; color: var(--tenue); margin-top: 4px; line-height: 1.45; }
+.cara { display: flex; flex-direction: column; gap: 18px; }
+
+/* ---------- Una lista que se llena de uno en uno ---------- */
+.rg-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.rg-van { font-size: 14px; font-weight: 500; color: var(--tinta-2); margin: 18px 0 8px; }
+.rg-mas { list-style: none; padding: 2px 0 0 38px; }
+.rg-mas .btn-texto { font-size: 14px; }
+.rg-fila .rg-aqui { font-size: 13px; color: var(--verde); font-weight: 500; padding: 6px; }
+.rg-fila { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 2px 10px; align-items: center; padding: 8px 10px; border-radius: 10px; background: var(--plano); border-left: 4px solid var(--color, var(--campo-borde)); }
+.rg-fila.actual { background: #fff; box-shadow: 0 0 0 2px var(--verde) inset; }
+.rg-fila .rg-n { font-size: 13px; font-weight: 600; color: var(--tenue); font-variant-numeric: tabular-nums; text-align: center; }
+.rg-fila .rg-t { font-size: 15px; font-weight: 500; color: var(--tinta); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rg-fila .rg-t.vacio-t { color: var(--tenue); font-weight: 400; }
+.rg-fila .rg-d { grid-column: 2; font-size: 13px; color: var(--tenue); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rg-fila .rg-a { grid-column: 3; grid-row: 1 / span 2; display: flex; gap: 2px; }
+.rg-fila .rg-a button { border: none; background: transparent; color: var(--verde); font-weight: 500; font-size: 14px; padding: 6px 6px; cursor: pointer; border-radius: 6px; }
+.rg-fila .rg-a button:hover { background: rgba(15, 110, 110, .08); }
+.rg-editor { border: 1px solid var(--campo-borde); border-radius: 12px; padding: 16px; background: #FBFCFC; }
+.rg-editor .rg-cual { font-size: 14px; font-weight: 600; color: var(--verde); margin: 0 0 10px; }
+.rg-editor .rg-botones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; align-items: center; }
+.rg-editor .rg-botones .peligro { margin-left: auto; }
+.rg-vacio { font-size: 15px; color: var(--tenue); margin: 0 0 12px; }
+.en-sobre .rg-fila { background: rgba(255, 249, 238, .7); }
+.en-sobre .rg-editor { background: #FFF9EE; border-color: var(--kraft-borde); }
+
+/* ---------- Revisar y entregar ---------- */
+.entregas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 4px; }
+.entrega {
+  display: grid; grid-template-columns: 32px minmax(0, 1fr); column-gap: 12px; row-gap: 2px; align-items: start; text-align: left;
+  padding: 14px 16px; border: 1px solid var(--campo-borde); border-radius: 12px; background: #fff; cursor: pointer; font: inherit; color: inherit;
+}
+.entrega svg { grid-row: 1 / span 2; width: 30px; height: 30px; color: var(--verde); margin-top: 1px; }
+.entrega .t { font-weight: 600; color: var(--petroleo); font-size: 16px; line-height: 1.25; }
+.entrega .d { font-size: 13.5px; color: var(--tinta-2); line-height: 1.38; }
+.entrega:hover { border-color: var(--petroleo); }
+.entrega.principal { background: var(--petroleo); border-color: var(--petroleo); }
+.entrega.principal svg, .entrega.principal .t { color: #fff; }
+.entrega.principal .d { color: rgba(255, 255, 255, .82); }
+.entrega.principal:hover { background: #072a33; }
+.entrega.haciendo { opacity: .6; cursor: progress; }
+@media (max-width: 520px) { .entregas { grid-template-columns: minmax(0, 1fr); } }
+.pendientes { background: var(--ojo-fondo); color: var(--ojo); border-radius: 12px; padding: 12px 16px; margin: 0 0 16px; font-size: 15px; }
+.pendientes ul { margin: 6px 0 0; padding-left: 18px; }
+.pendientes a { color: var(--ojo); font-weight: 500; }
+.todo-listo { background: var(--bien-fondo); color: var(--bien); border-radius: 12px; padding: 10px 14px; margin: 0 0 16px; font-size: 15px; }
+.guia .revision { margin-bottom: 16px; }
+
+/* ---------- El índice de todos los pasos ---------- */
+.indice-pasos { list-style: none; margin: 8px 0 0; padding: 0; }
+.indice-pasos > li { padding: 10px 0; border-top: 1px solid var(--linea); }
+.indice-pasos > li > b { font-weight: 600; color: var(--petroleo); }
+.indice-pasos ul { list-style: none; margin: 4px 0 0; padding: 0 0 0 4px; }
+.indice-pasos ul li { position: relative; padding-left: 22px; }
+.indice-pasos ul li::before { content: ""; position: absolute; left: 4px; top: 13px; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--campo-borde); }
+.indice-pasos ul li.listo::before { background: var(--bien); border-color: var(--bien); }
+.indice-pasos ul li.aqui .btn-texto { font-weight: 600; color: var(--petroleo); }
+.indice-pasos .btn-texto { text-align: left; text-decoration: none; font-weight: 400; color: var(--tinta); }
+.indice-pasos .btn-texto:hover { text-decoration: underline; }
+
+/* Huecos: el lugar de algo que todavía no se llena. Solo se ve cuando se está en esa pregunta. */
+.hoja .hueco { display: none; }
+.hoja .hueco.en-foco { display: block; color: var(--t-tenue); border: 1pt dashed #D9C08A; border-radius: 4pt; padding: 6pt 9pt; font-size: 8.8pt; }
+.hoja tr.hueco.en-foco { display: table-row; border: none; padding: 0; }
+.hoja tr.hueco.en-foco td { color: var(--t-tenue); font-size: 8.4pt; border-bottom: 1pt dashed #D9C08A; }
+#impresion .hueco { display: none !important; }
+
 
 /* Cotizar y cobrar */
 .horas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
@@ -472,9 +706,20 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
 .hoja .cuenta-recibo .fila.fuerte { font-weight: 600; border-bottom: 1pt solid var(--acento); }
 .hoja .cuenta-recibo .fila.fuerte b { font-weight: 600; }
 .hoja .nota-fiscal { font-size: 8pt; color: var(--t-tenue); margin: 0; max-width: 3.6in; }
+
+/* La guía de cotizar */
+.guia .horas { margin-top: 4px; }
+.guia .tarifa { grid-template-columns: 1.3fr 1fr; align-items: end; }
+.guia .tarifa .monto.grande { padding-left: 28px; }
+.guia .con-prefijo > input.grande + span, .guia .con-prefijo > span { font-size: 17px; }
+.guia .cuenta { margin-top: 16px; }
+.guia .despues { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--linea); }
+.guia .despues h3 { margin-top: 0; }
+.guia .despues .btn { margin-top: 8px; }
+.conmutador .btn.claro { flex: 1; }
 </style>
 </head>
-<body data-vista="llenar">
+<body data-vista="llenar" class="guiada">
 
 <header class="barra">
   <a class="casa" href="index.html" data-ico="mochila"><span>La mochila</span></a>
@@ -483,37 +728,49 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
 </header>
 
 <main class="banco">
-<section class="formulario" aria-label="Lo que llenas">
+<section class="formulario guia" id="guia" aria-label="Las preguntas">
 
   <div class="entrada">
-    <p>Saca la cuenta de un taller o de un servicio y entrega una cotización con tu nombre. Cuando te paguen, la misma cotización se vuelve recibo. Lo que gastas y lo que vale tu hora se quedan en el sobre: tu cliente ve solo lo que tú decidas.</p>
+    <p>Una cotización con tu nombre, pregunta por pregunta. Cuando te paguen, la misma cotización se vuelve recibo.</p>
     <div class="acciones-entrada">
       <button type="button" class="btn claro chico" id="nueva" data-ico="mas">Nueva cotización</button>
       <button type="button" class="btn claro chico" id="ejemplo">Ver un ejemplo</button>
     </div>
   </div>
 
-  <details class="paso" id="paso-membrete">
-    <summary><span class="n">1</span><h2>Tu membrete</h2><span class="resumen-paso" id="res-membrete"></span></summary>
-    <div class="cuerpo" id="membrete"></div>
-  </details>
+  <div id="preguntas-membrete"></div>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">2</span><h2>¿Para quién?</h2></div>
-    <div class="cuerpo campos">
-      <div class="campo"><label for="c-nombre">Cliente: persona, grupo u organización</label><input id="c-nombre" type="text" data-k="cliente.nombre" placeholder="Ej. Comité de productoras de traspatio"></div>
-      <div class="campo"><label for="c-contacto">A quién va dirigida (opcional)</label><input id="c-contacto" type="text" data-k="cliente.contacto" placeholder="Ej. Presidenta del comité"></div>
-      <div class="campo c3"><label for="c-tel">Teléfono (opcional)</label><input id="c-tel" type="tel" data-k="cliente.telefono"></div>
-      <div class="campo c3"><label for="c-correo">Correo (opcional)</label><input id="c-correo" type="email" data-k="cliente.correo"></div>
-    </div>
+  <section class="pregunta" data-paso="cliente" data-tramo="Para quién" data-foco="cliente">
+    <h2>¿A quién le vas a cotizar?</h2>
+    <p class="porque">Una persona, un grupo o una organización. Va arriba, donde dice «Para».</p>
+    <div class="campo"><label for="c-nombre" class="sr">Cliente</label><input id="c-nombre" class="grande" type="text" data-k="cliente.nombre" data-requerido="el nombre del cliente" placeholder="Persona, grupo u organización"></div>
+    <div class="ejemplos" data-para="c-nombre"><span>Por ejemplo</span><button type="button">Comité de productoras de traspatio</button><button type="button">Ejido La Florida</button><button type="button">Escuela Secundaria General</button></div>
+    <details class="mas"><summary>A quién va dirigida, teléfono y correo</summary>
+      <div class="campos">
+        <div class="campo"><label for="c-contacto">A quién va dirigida</label><input id="c-contacto" type="text" data-k="cliente.contacto" placeholder="Ej. Presidenta del comité"></div>
+        <div class="campo c3"><label for="c-tel">Teléfono</label><input id="c-tel" type="tel" data-k="cliente.telefono"></div>
+        <div class="campo c3"><label for="c-correo">Correo</label><input id="c-correo" type="email" data-k="cliente.correo"></div>
+      </div>
+    </details>
   </section>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">3</span><h2>¿Qué vas a hacer?</h2></div>
-    <p class="guia">Escríbelo como lo leería tu cliente: qué se hace, cuánto dura y qué se lleva la gente.</p>
-    <div class="cuerpo campos">
-      <div class="campo"><label for="s-titulo">El servicio, en pocas palabras</label><input id="s-titulo" type="text" data-k="servicio.titulo" placeholder="Ej. Taller de bocashi y caldo sulfocálcico"></div>
-      <div class="campo"><label for="s-desc">En qué consiste</label><textarea id="s-desc" data-k="servicio.descripcion" rows="3" placeholder="Ej. Dos sesiones prácticas de cuatro horas: preparación de una pila de 500 kg de bocashi y visita de seguimiento a los 15 días."></textarea></div>
+  <section class="pregunta" data-paso="servicio" data-tramo="El trabajo" data-foco="servicio">
+    <h2>¿Qué vas a hacer, en pocas palabras?</h2>
+    <p class="porque">Es el título de la cotización. Escríbelo como lo diría tu cliente.</p>
+    <div class="campo"><label for="s-titulo" class="sr">El servicio</label><input id="s-titulo" class="grande" type="text" data-k="servicio.titulo" data-requerido="el nombre del servicio" placeholder="El servicio, en una línea"></div>
+    <div class="ejemplos" data-para="s-titulo"><span>Por ejemplo</span><button type="button">Taller de bocashi y caldo sulfocálcico</button><button type="button">Diagnóstico de suelo de una parcela</button><button type="button">Asesoría para armar un vivero</button></div>
+  </section>
+
+  <section class="pregunta" data-paso="descripcion" data-tramo="El trabajo" data-foco="servicio">
+    <h2>¿En qué consiste?</h2>
+    <p class="porque">Qué se hace, cuánto dura y qué se lleva la gente. Dos o tres líneas bastan; van debajo del título.</p>
+    <div class="campo"><label for="s-desc" class="sr">En qué consiste</label><textarea id="s-desc" class="grande" data-k="servicio.descripcion" rows="4" placeholder="Ej. Dos sesiones prácticas de cuatro horas: preparación de una pila de 500 kg de bocashi y visita de seguimiento a los 15 días."></textarea></div>
+  </section>
+
+  <section class="pregunta" data-paso="datos-servicio" data-tramo="El trabajo" data-foco="datos tabla">
+    <h2>¿Dónde, cuándo y para cuántas personas?</h2>
+    <p class="porque">Salen junto a la fecha y en el renglón del servicio. Lo que todavía no sepas, déjalo en blanco.</p>
+    <div class="campos">
       <div class="campo c3"><label for="s-lugar">Dónde</label><input id="s-lugar" type="text" data-k="servicio.lugar" placeholder="Ej. Concá, Arroyo Seco"></div>
       <div class="campo c3"><label for="s-cuando">Cuándo</label><input id="s-cuando" type="text" data-k="servicio.cuando" placeholder="Ej. 14 y 15 de enero de 2027"></div>
       <div class="campo c3"><label for="s-part">Para cuántas personas</label><input id="s-part" type="text" data-k="servicio.participantes" placeholder="Ej. 20 personas"></div>
@@ -521,135 +778,165 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
     </div>
   </section>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">4</span><h2>Saca la cuenta</h2></div>
-    <p class="guia">Todo lo que cuesta hacer el trabajo, y lo que vale tu tiempo. Esto va en el sobre.</p>
-    <div class="cuerpo">
-      <div class="sobre">
-        <div class="rotulo"><b>El sobre</b><span>Solo tú lo ves. No sale en la hoja.</span></div>
+  <section class="pregunta en-sobre" data-paso="horas" data-tramo="La cuenta" data-foco="totales">
+    <h2>¿Cuántas horas te lleva, de principio a fin?</h2>
+    <p class="porque">Cuenta también las que nadie ve: preparar, ir y volver, y entregar lo que se pide al final.</p>
+    <div class="horas">
+      <div class="campo"><label for="h-prep">Preparar</label><input id="h-prep" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.preparar" data-tipo="num" placeholder="0"></div>
+      <div class="campo"><label for="h-tras">Ir y volver</label><input id="h-tras" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.traslado" data-tipo="num" placeholder="0"></div>
+      <div class="campo"><label for="h-hacer">Hacer el trabajo</label><input id="h-hacer" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.hacer" data-tipo="num" placeholder="0" data-requerido="las horas de trabajo"></div>
+      <div class="campo"><label for="h-ent">Entregar</label><input id="h-ent" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.entregar" data-tipo="num" placeholder="0"></div>
+    </div>
+    <div class="asi-va"><span id="txt-horas">Horas en total</span><b id="sub-horas">0 h</b></div>
+  </section>
 
-        <h3>Tu trabajo</h3>
-        <p class="ayuda" style="margin:0 0 10px">Cuenta todas las horas, también las que nadie ve: preparar, ir y volver, y entregar lo que se pide al final.</p>
-        <div class="horas">
-          <div class="campo"><label for="h-prep">Preparar</label><input id="h-prep" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.preparar" data-tipo="num" placeholder="0"></div>
-          <div class="campo"><label for="h-tras">Ir y volver</label><input id="h-tras" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.traslado" data-tipo="num" placeholder="0"></div>
-          <div class="campo"><label for="h-hacer">Hacer el trabajo</label><input id="h-hacer" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.hacer" data-tipo="num" placeholder="0"></div>
-          <div class="campo"><label for="h-ent">Entregar (informe, fotos)</label><input id="h-ent" class="cant" type="number" inputmode="decimal" min="0" step="0.5" data-k="horas.entregar" data-tipo="num" placeholder="0"></div>
-        </div>
-        <div class="tarifa">
-          <div class="campo"><label for="t-pers">Personas que trabajan</label><input id="t-pers" class="cant" type="number" inputmode="numeric" min="1" step="1" data-k="trabajan" data-tipo="num"></div>
-          <div class="campo"><label for="t-tarifa">¿Cuánto vale tu hora?</label><div class="con-prefijo"><span>$</span><input id="t-tarifa" class="monto" type="number" inputmode="decimal" min="0" step="10" data-k="tarifa" data-tipo="num" placeholder="Lo decides tú"></div></div>
-        </div>
-        <p class="ayuda" style="margin:8px 0 0">El valor de la hora lo pones tú. Piensa en lo que cobra en la región alguien con tu formación, y en que esa hora ya no se la puedes vender a nadie más.</p>
-        <div class="subtotal-sobre"><span id="txt-trabajo">Tu trabajo</span><b id="sub-trabajo">$0.00</b></div>
+  <section class="pregunta en-sobre" data-paso="tarifa" data-tramo="La cuenta" data-foco="totales">
+    <h2>¿Cuánto vale tu hora?</h2>
+    <p class="porque">Lo decides tú. Piensa en lo que cobra en la región alguien con tu formación, y en que esa hora ya no se la puedes vender a nadie más.</p>
+    <div class="tarifa">
+      <div class="campo"><label for="t-tarifa">Tu hora</label><div class="con-prefijo"><span>$</span><input id="t-tarifa" class="monto grande" type="number" inputmode="decimal" min="0" step="10" data-k="tarifa" data-tipo="num" placeholder="Lo decides tú" data-requerido="el valor de tu hora"></div></div>
+      <div class="campo"><label for="t-pers">Personas que trabajan</label><input id="t-pers" class="cant" type="number" inputmode="numeric" min="1" step="1" data-k="trabajan" data-tipo="num"></div>
+    </div>
+    <div class="asi-va"><span id="txt-trabajo">Tu trabajo</span><b id="sub-trabajo">$0.00</b></div>
+  </section>
 
-        <hr>
-        <h3>Viáticos y traslado</h3>
-        <div class="renglones" id="lista-viaticos"></div>
-        <div class="sugerencias" data-lista="viaticos"><span class="rot">Agregar:</span><button type="button">Gasolina</button><button type="button">Casetas</button><button type="button">Pasajes</button><button type="button">Comidas</button><button type="button">Hospedaje</button></div>
-        <button type="button" class="btn-texto" id="abrir-gas">Calcular la gasolina</button>
-        <div class="gasolina oculto" id="gasolina">
-          <div class="campos">
-            <div class="campo"><label for="g-km">Kilómetros de ida y vuelta</label><input id="g-km" class="cant" type="number" inputmode="decimal" min="0" data-k="gas.km" data-tipo="num"></div>
-            <div class="campo"><label for="g-rend">Kilómetros por litro</label><input id="g-rend" class="cant" type="number" inputmode="decimal" min="1" data-k="gas.rend" data-tipo="num"></div>
-            <div class="campo"><label for="g-precio">Precio del litro</label><div class="con-prefijo"><span>$</span><input id="g-precio" class="monto" type="number" inputmode="decimal" min="0" step="0.1" data-k="gas.precio" data-tipo="num" placeholder="el de hoy"></div></div>
-          </div>
-          <div class="resultado-gas"><span id="gas-res">Llena los tres datos.</span><button type="button" class="btn claro chico" id="gas-agregar">Poner en viáticos</button></div>
-        </div>
-        <div class="subtotal-sobre"><span>Viáticos y traslado</span><b id="sub-viaticos">$0.00</b></div>
-
-        <hr>
-        <h3>Materiales e insumos</h3>
-        <div class="encabezado-renglones r-material"><span>Qué</span><span style="text-align:right">Cantidad</span><span style="text-align:right">Precio c/u</span><span style="text-align:right">Importe</span><span></span></div>
-        <div class="renglones" id="lista-materiales"></div>
-        <div class="sugerencias" data-lista="materiales"><span class="rot">Agregar:</span><button type="button">Copias del manual</button><button type="button">Papelógrafos y plumones</button><button type="button">Insumos para la práctica</button><button type="button">Constancias</button><button type="button">Refrigerio</button></div>
-        <div class="subtotal-sobre"><span>Materiales e insumos</span><b id="sub-materiales">$0.00</b></div>
-
-        <hr>
-        <h3>Otros gastos</h3>
-        <div class="renglones" id="lista-otros"></div>
-        <div class="sugerencias" data-lista="otros"><span class="rot">Agregar:</span><button type="button">Renta de equipo</button><button type="button">Ayudante</button><button type="button">Impresión de la memoria</button></div>
-        <div class="subtotal-sobre"><span>Otros gastos</span><b id="sub-otros">$0.00</b></div>
-
-        <hr>
-        <h3>Imprevistos y redondeo</h3>
-        <p class="ayuda" style="margin:0 0 8px">Lo que en clase llamamos imponderables: la llanta ponchada, el hotel que subió, el día extra que pidió el cliente. Alrededor del 5%.</p>
-        <div class="opciones" role="radiogroup" aria-label="Imprevistos">
-          <label><input type="radio" name="imp" value="0" data-k="imprevistos" data-tipo="num"><span>Sin colchón</span></label>
-          <label><input type="radio" name="imp" value="5" data-k="imprevistos" data-tipo="num"><span>5%</span></label>
-          <label><input type="radio" name="imp" value="10" data-k="imprevistos" data-tipo="num"><span>10%</span></label>
-          <label><input type="radio" name="imp" value="15" data-k="imprevistos" data-tipo="num"><span>15%</span></label>
-        </div>
-        <div class="campo" style="margin-top:12px"><label for="redondeo">Redondear el precio hacia arriba</label>
-          <select id="redondeo" data-k="redondeo" data-tipo="num">
-            <option value="0">No redondear</option><option value="10">A los 10 pesos</option><option value="50">A los 50 pesos</option><option value="100">A los 100 pesos</option>
-          </select>
-        </div>
-
-        <hr>
-        <div class="cuenta" id="cuenta"></div>
+  <section class="pregunta en-sobre" data-paso="viaticos" data-tramo="La cuenta" data-foco="totales">
+    <h2>¿Qué gastas en ir y venir?</h2>
+    <p class="porque">Gasolina, casetas, pasajes, comidas, hospedaje. Toca lo que aplique y escribe cuánto.</p>
+    <div class="renglones" id="lista-viaticos" data-sin-enter></div>
+    <div class="sugerencias" data-lista="viaticos"><span class="rot">Agregar:</span><button type="button">Gasolina</button><button type="button">Casetas</button><button type="button">Pasajes</button><button type="button">Comidas</button><button type="button">Hospedaje</button></div>
+    <button type="button" class="btn-texto" id="abrir-gas">Calcular la gasolina</button>
+    <div class="gasolina oculto" id="gasolina">
+      <div class="campos">
+        <div class="campo"><label for="g-km">Kilómetros de ida y vuelta</label><input id="g-km" class="cant" type="number" inputmode="decimal" min="0" data-k="gas.km" data-tipo="num"></div>
+        <div class="campo"><label for="g-rend">Kilómetros por litro</label><input id="g-rend" class="cant" type="number" inputmode="decimal" min="1" data-k="gas.rend" data-tipo="num"></div>
+        <div class="campo"><label for="g-precio">Precio del litro</label><div class="con-prefijo"><span>$</span><input id="g-precio" class="monto" type="number" inputmode="decimal" min="0" step="0.1" data-k="gas.precio" data-tipo="num" placeholder="el de hoy"></div></div>
       </div>
+      <div class="resultado-gas"><span id="gas-res">Llena los tres datos.</span><button type="button" class="btn claro chico" id="gas-agregar">Poner en viáticos</button></div>
+    </div>
+    <div class="asi-va"><span>Viáticos y traslado</span><b id="sub-viaticos">$0.00</b></div>
+  </section>
+
+  <section class="pregunta en-sobre" data-paso="materiales" data-tramo="La cuenta" data-foco="totales">
+    <h2>¿Qué materiales e insumos lleva?</h2>
+    <p class="porque">Lo que compras para el trabajo y para la gente: copias, insumos de la práctica, constancias.</p>
+    <div class="encabezado-renglones r-material"><span>Qué</span><span style="text-align:right">Cantidad</span><span style="text-align:right">Precio c/u</span><span style="text-align:right">Importe</span><span></span></div>
+    <div class="renglones" id="lista-materiales" data-sin-enter></div>
+    <div class="sugerencias" data-lista="materiales"><span class="rot">Agregar:</span><button type="button">Copias del manual</button><button type="button">Papelógrafos y plumones</button><button type="button">Insumos para la práctica</button><button type="button">Constancias</button><button type="button">Refrigerio</button></div>
+    <div class="asi-va"><span>Materiales e insumos</span><b id="sub-materiales">$0.00</b></div>
+  </section>
+
+  <section class="pregunta en-sobre" data-paso="otros" data-tramo="La cuenta" data-foco="totales">
+    <h2>¿Algún otro gasto?</h2>
+    <p class="porque">Renta de equipo, un ayudante, la impresión de la memoria. Si no hay, sigue.</p>
+    <div class="renglones" id="lista-otros" data-sin-enter></div>
+    <div class="sugerencias" data-lista="otros"><span class="rot">Agregar:</span><button type="button">Renta de equipo</button><button type="button">Ayudante</button><button type="button">Impresión de la memoria</button></div>
+    <div class="asi-va"><span>Otros gastos</span><b id="sub-otros">$0.00</b></div>
+  </section>
+
+  <section class="pregunta en-sobre" data-paso="colchon" data-tramo="La cuenta" data-foco="totales">
+    <h2>El colchón, y el precio que sale</h2>
+    <p class="porque">Los imprevistos, que en clase llamamos imponderables: la llanta ponchada, el hotel que subió, el día extra que pidió el cliente. Alrededor del 5%.</p>
+    <div class="opciones" role="radiogroup" aria-label="Imprevistos">
+      <label><input type="radio" name="imp" value="0" data-k="imprevistos" data-tipo="num"><span>Sin colchón</span></label>
+      <label><input type="radio" name="imp" value="5" data-k="imprevistos" data-tipo="num"><span>5%</span></label>
+      <label><input type="radio" name="imp" value="10" data-k="imprevistos" data-tipo="num"><span>10%</span></label>
+      <label><input type="radio" name="imp" value="15" data-k="imprevistos" data-tipo="num"><span>15%</span></label>
+    </div>
+    <div class="campo" style="margin-top:14px"><label for="redondeo">Redondear el precio hacia arriba</label>
+      <select id="redondeo" data-k="redondeo" data-tipo="num">
+        <option value="0">No redondear</option><option value="10">A los 10 pesos</option><option value="50">A los 50 pesos</option><option value="100">A los 100 pesos</option>
+      </select>
+    </div>
+    <div class="cuenta" id="cuenta"></div>
+  </section>
+
+  <section class="pregunta" data-paso="vista" data-tramo="Lo que ve tu cliente" data-foco="tabla">
+    <h2>¿Cuánto del sobre se asoma en la hoja?</h2>
+    <p class="porque">Con cualquiera de las tres, el precio es el mismo. Cambia solo lo que tu cliente alcanza a ver.</p>
+    <div class="vistas" role="radiogroup" aria-label="Lo que ve tu cliente">
+      <label><input type="radio" name="vista" value="unico" data-k="vista"><span class="tarjeta">
+        <svg viewBox="0 0 120 46" aria-hidden="true"><rect x="1" y="6" width="118" height="11" rx="2" fill="#E4ECE9"/><rect x="6" y="9.5" width="58" height="4" rx="2" fill="#0B3C49"/><rect x="92" y="9.5" width="22" height="4" rx="2" fill="#0B3C49"/><rect x="72" y="30" width="47" height="10" rx="2" fill="#0B3C49"/></svg>
+        <b>Un solo precio</b><span>El servicio y su total, nada más.</span></span></label>
+      <label><input type="radio" name="vista" value="gastos" data-k="vista"><span class="tarjeta">
+        <svg viewBox="0 0 120 46" aria-hidden="true"><rect x="6" y="3" width="58" height="4" rx="2" fill="#0B3C49"/><rect x="92" y="3" width="22" height="4" rx="2" fill="#0B3C49"/><rect x="6" y="12" width="40" height="4" rx="2" fill="#9BB0AA"/><rect x="96" y="12" width="18" height="4" rx="2" fill="#9BB0AA"/><rect x="6" y="21" width="46" height="4" rx="2" fill="#9BB0AA"/><rect x="96" y="21" width="18" height="4" rx="2" fill="#9BB0AA"/><rect x="72" y="32" width="47" height="10" rx="2" fill="#0B3C49"/></svg>
+        <b>Servicio y gastos</b><span>Tu trabajo en un renglón; materiales y viáticos aparte.</span></span></label>
+      <label><input type="radio" name="vista" value="desglose" data-k="vista"><span class="tarjeta">
+        <svg viewBox="0 0 120 46" aria-hidden="true"><g fill="#9BB0AA"><rect x="6" y="1" width="50" height="3" rx="1.5"/><rect x="100" y="1" width="14" height="3" rx="1.5"/><rect x="6" y="7" width="36" height="3" rx="1.5"/><rect x="100" y="7" width="14" height="3" rx="1.5"/><rect x="6" y="13" width="44" height="3" rx="1.5"/><rect x="100" y="13" width="14" height="3" rx="1.5"/><rect x="6" y="19" width="30" height="3" rx="1.5"/><rect x="100" y="19" width="14" height="3" rx="1.5"/><rect x="6" y="25" width="40" height="3" rx="1.5"/><rect x="100" y="25" width="14" height="3" rx="1.5"/></g><rect x="72" y="33" width="47" height="10" rx="2" fill="#0B3C49"/></svg>
+        <b>Todo desglosado</b><span>Horas, cada material y cada gasto. Para quien lo pide así.</span></span></label>
     </div>
   </section>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">5</span><h2>Lo que ve tu cliente</h2></div>
-    <p class="guia">Con cualquiera de las tres, el precio es el mismo. Elige cuánto del sobre se asoma en la hoja.</p>
-    <div class="cuerpo">
-      <div class="vistas" role="radiogroup" aria-label="Lo que ve tu cliente">
-        <label><input type="radio" name="vista" value="unico" data-k="vista"><span class="tarjeta">
-          <svg viewBox="0 0 120 46" aria-hidden="true"><rect x="1" y="6" width="118" height="11" rx="2" fill="#E4ECE9"/><rect x="6" y="9.5" width="58" height="4" rx="2" fill="#0B3C49"/><rect x="92" y="9.5" width="22" height="4" rx="2" fill="#0B3C49"/><rect x="72" y="30" width="47" height="10" rx="2" fill="#0B3C49"/></svg>
-          <b>Un solo precio</b><span>El servicio y su total, nada más.</span></span></label>
-        <label><input type="radio" name="vista" value="gastos" data-k="vista"><span class="tarjeta">
-          <svg viewBox="0 0 120 46" aria-hidden="true"><rect x="6" y="3" width="58" height="4" rx="2" fill="#0B3C49"/><rect x="92" y="3" width="22" height="4" rx="2" fill="#0B3C49"/><rect x="6" y="12" width="40" height="4" rx="2" fill="#9BB0AA"/><rect x="96" y="12" width="18" height="4" rx="2" fill="#9BB0AA"/><rect x="6" y="21" width="46" height="4" rx="2" fill="#9BB0AA"/><rect x="96" y="21" width="18" height="4" rx="2" fill="#9BB0AA"/><rect x="72" y="32" width="47" height="10" rx="2" fill="#0B3C49"/></svg>
-          <b>Servicio y gastos</b><span>Tu trabajo en un renglón; materiales y viáticos aparte.</span></span></label>
-        <label><input type="radio" name="vista" value="desglose" data-k="vista"><span class="tarjeta">
-          <svg viewBox="0 0 120 46" aria-hidden="true"><g fill="#9BB0AA"><rect x="6" y="1" width="50" height="3" rx="1.5"/><rect x="100" y="1" width="14" height="3" rx="1.5"/><rect x="6" y="7" width="36" height="3" rx="1.5"/><rect x="100" y="7" width="14" height="3" rx="1.5"/><rect x="6" y="13" width="44" height="3" rx="1.5"/><rect x="100" y="13" width="14" height="3" rx="1.5"/><rect x="6" y="19" width="30" height="3" rx="1.5"/><rect x="100" y="19" width="14" height="3" rx="1.5"/><rect x="6" y="25" width="40" height="3" rx="1.5"/><rect x="100" y="25" width="14" height="3" rx="1.5"/></g><rect x="72" y="33" width="47" height="10" rx="2" fill="#0B3C49"/></svg>
-          <b>Todo desglosado</b><span>Horas, cada material y cada gasto. Para quien lo pide así.</span></span></label>
-      </div>
-
-      <div class="campos" style="margin-top:16px">
-        <div class="campo c3"><label for="incluye">Qué incluye (uno por renglón)</label><textarea id="incluye" data-k="incluye" rows="4"></textarea>
-          <div class="sugerencias" data-texto="incluye"><button type="button">Materiales para cada participante</button><button type="button">Constancia de participación</button><button type="button">Memoria con fotos</button><button type="button">Informe final</button></div></div>
-        <div class="campo c3"><label for="noincluye">Qué no incluye (uno por renglón)</label><textarea id="noincluye" data-k="noIncluye" rows="4"></textarea>
-          <div class="sugerencias" data-texto="noIncluye"><button type="button">El espacio y el mobiliario</button><button type="button">La comida de las personas participantes</button><button type="button">El transporte de las personas participantes</button></div></div>
-      </div>
-    </div>
+  <section class="pregunta" data-paso="incluye" data-tramo="Lo que ve tu cliente" data-foco="incluye">
+    <h2>¿Qué incluye y qué no?</h2>
+    <p class="porque">Lo que no se dice, se discute después. Uno por renglón; toca los ejemplos para agregarlos.</p>
+    <div class="campo"><label for="incluye">Incluye</label><textarea id="incluye" data-k="incluye" rows="3"></textarea>
+      <div class="ejemplos" data-para="incluye" data-modo="renglon"><button type="button">Materiales para cada participante</button><button type="button">Constancia de participación</button><button type="button">Memoria con fotos</button><button type="button">Informe final</button></div></div>
+    <div class="campo"><label for="noincluye">No incluye</label><textarea id="noincluye" data-k="noIncluye" rows="3"></textarea>
+      <div class="ejemplos" data-para="noincluye" data-modo="renglon"><button type="button">El espacio y el mobiliario</button><button type="button">La comida de las personas participantes</button><button type="button">El transporte de las personas participantes</button></div></div>
   </section>
 
-  <section class="paso">
-    <div class="cabeza"><span class="n">6</span><h2>Condiciones</h2></div>
-    <div class="cuerpo campos">
+  <section class="pregunta" data-paso="folio" data-tramo="Condiciones" data-foco="folio datos">
+    <h2>¿Qué número lleva y hasta cuándo vale?</h2>
+    <p class="porque">El número sirve para encontrarla después y para que el recibo diga a qué cotización corresponde.</p>
+    <div class="campos">
       <div class="campo c2 par"><label for="folio">Número</label><input id="folio" type="text" data-k="folio"></div>
       <div class="campo c2 par"><label for="fecha">Fecha</label><input id="fecha" type="date" data-k="fecha"></div>
       <div class="campo c2"><label for="vigencia">Vale por (días)</label><input id="vigencia" class="cant" type="number" inputmode="numeric" min="1" data-k="vigencia" data-tipo="num"></div>
-      <div class="campo"><span class="etiqueta">Anticipo para apartar la fecha</span>
-        <div class="opciones" role="radiogroup" aria-label="Anticipo">
-          <label><input type="radio" name="anticipo" value="0" data-k="anticipo" data-tipo="num"><span>Sin anticipo</span></label>
-          <label><input type="radio" name="anticipo" value="30" data-k="anticipo" data-tipo="num"><span>30%</span></label>
-          <label><input type="radio" name="anticipo" value="50" data-k="anticipo" data-tipo="num"><span>50%</span></label>
-          <label><input type="radio" name="anticipo" value="100" data-k="anticipo" data-tipo="num"><span>Todo por adelantado</span></label>
-        </div></div>
-      <div class="campo"><label class="palomita"><input type="checkbox" data-k="iva"><span>Sumar IVA (16%)<br><span class="ayuda">Solo si vas a dar factura. Si no estás dado de alta en el SAT, déjalo sin marcar.</span></span></label></div>
-      <div class="campo"><label for="forma">Forma de pago</label><input id="forma" type="text" data-k="formaPago" placeholder="Transferencia o efectivo"></div>
-      <div class="campo"><label for="notas">Otras condiciones (una por renglón)</label><textarea id="notas" data-k="notas" rows="3" placeholder="Ej. Si el taller se cancela con menos de cinco días, se cobra la preparación."></textarea></div>
-      <p class="ayuda campo">Cuando te paguen, cambia la hoja a <b>Recibo</b> (arriba de la hoja) y aparece lo que hace falta para el recibo.</p>
     </div>
   </section>
 
-  <section class="paso oculto" id="paso-recibo">
-    <div class="cabeza"><span class="n">7</span><h2>El recibo</h2></div>
-    <p class="guia">Un recibo por cada pago. Si te pagan en dos partes, haz el del anticipo y después el del pago final.</p>
-    <div class="cuerpo campos">
-      <div class="campo"><span class="etiqueta">¿Qué te pagaron?</span>
-        <div class="opciones" role="radiogroup" aria-label="Qué te pagaron">
-          <label><input type="radio" name="concepto" value="anticipo" data-k="recibo.concepto"><span>El anticipo</span></label>
-          <label><input type="radio" name="concepto" value="final" data-k="recibo.concepto"><span>El pago final</span></label>
-          <label><input type="radio" name="concepto" value="total" data-k="recibo.concepto"><span>Todo de una vez</span></label>
-          <label><input type="radio" name="concepto" value="otro" data-k="recibo.concepto"><span>Otra cantidad</span></label>
-        </div></div>
+  <section class="pregunta" data-paso="pago" data-tramo="Condiciones" data-foco="condiciones totales">
+    <h2>¿Cómo te van a pagar?</h2>
+    <p class="porque">Un anticipo aparta la fecha y cubre lo que gastas antes de empezar.</p>
+    <div class="campo"><span class="etiqueta">Anticipo para apartar la fecha</span>
+      <div class="opciones" role="radiogroup" aria-label="Anticipo">
+        <label><input type="radio" name="anticipo" value="0" data-k="anticipo" data-tipo="num"><span>Sin anticipo</span></label>
+        <label><input type="radio" name="anticipo" value="30" data-k="anticipo" data-tipo="num"><span>30%</span></label>
+        <label><input type="radio" name="anticipo" value="50" data-k="anticipo" data-tipo="num"><span>50%</span></label>
+        <label><input type="radio" name="anticipo" value="100" data-k="anticipo" data-tipo="num"><span>Todo por adelantado</span></label>
+      </div></div>
+    <div class="campo"><label for="forma">Forma de pago</label><input id="forma" type="text" data-k="formaPago" placeholder="Transferencia o efectivo"></div>
+    <div class="campo"><label class="palomita"><input type="checkbox" data-k="iva"><span>Sumar IVA (16%)<br><span class="ayuda">Solo si vas a dar factura. Si no estás dado de alta en el SAT, déjalo sin marcar.</span></span></label></div>
+    <details class="mas"><summary>Tus datos para que te paguen</summary>
+      <div class="campo"><label for="m-pago" class="sr">Datos para el pago</label><textarea id="m-pago" data-mk="pago" rows="2" placeholder="Banco, nombre de la cuenta y CLABE"></textarea><span class="ayuda">Salen en las condiciones. Se guardan con tu membrete, solo en este navegador.</span></div>
+    </details>
+  </section>
+
+  <section class="pregunta" data-paso="notas" data-tramo="Condiciones" data-foco="condiciones">
+    <h2>¿Alguna otra condición?</h2>
+    <p class="porque">Lo que conviene dejar por escrito, una por renglón. Si no hay, sigue.</p>
+    <div class="campo"><label for="notas" class="sr">Otras condiciones</label><textarea id="notas" data-k="notas" rows="3"></textarea></div>
+    <div class="ejemplos" data-para="notas" data-modo="renglon"><span>Por ejemplo</span><button type="button">Si el taller se cancela con menos de cinco días, se cobra la preparación.</button><button type="button">El cliente pone el espacio, las mesas y el agua.</button><button type="button">Los cambios de fecha se avisan con una semana de anticipación.</button></div>
+  </section>
+
+  <section class="pregunta" data-paso="entregar" data-tramo="Entregar" data-seguir="Hacer el recibo">
+    <h2>Tu cotización está lista</h2>
+    <p class="porque">Dale una última leída a la hoja y elige cómo la entregas.</p>
+    <div id="faltan-cot"></div>
+    <div id="entregas-cot"></div>
+    <div class="despues"><h3>¿Ya te pagaron?</h3><p class="ayuda" style="margin:0">La misma cotización se vuelve recibo: uno por cada pago.</p><button type="button" class="btn claro" id="hacer-recibo">Hacer el recibo</button></div>
+  </section>
+
+  <section class="pregunta" data-paso="recibo-que" data-tramo="El recibo" data-si="recibo" data-foco="recibi cuenta-recibo">
+    <h2>¿Qué te pagaron?</h2>
+    <p class="porque">Un recibo por cada pago. Si te pagan en dos partes, haz uno del anticipo y después otro del pago final.</p>
+    <div class="opciones" role="radiogroup" aria-label="Qué te pagaron">
+      <label><input type="radio" name="concepto" value="anticipo" data-k="recibo.concepto"><span>El anticipo</span></label>
+      <label><input type="radio" name="concepto" value="final" data-k="recibo.concepto"><span>El pago final</span></label>
+      <label><input type="radio" name="concepto" value="total" data-k="recibo.concepto"><span>Todo de una vez</span></label>
+      <label><input type="radio" name="concepto" value="otro" data-k="recibo.concepto"><span>Otra cantidad</span></label>
+    </div>
+    <div class="campos" style="margin-top:16px">
       <div class="campo c3"><label for="r-monto">Cantidad recibida</label><div class="con-prefijo"><span>$</span><input id="r-monto" class="monto" type="number" inputmode="decimal" min="0" step="0.01" data-k="recibo.monto" data-tipo="num"></div></div>
       <div class="campo c3"><label for="r-ant">Pagos anteriores</label><div class="con-prefijo"><span>$</span><input id="r-ant" class="monto" type="number" inputmode="decimal" min="0" step="0.01" data-k="recibo.anteriores" data-tipo="num"></div></div>
+    </div>
+  </section>
+
+  <section class="pregunta" data-paso="recibo-datos" data-tramo="El recibo" data-si="recibo" data-foco="folio datos nota">
+    <h2>Número, fecha y forma del pago</h2>
+    <p class="porque">Con esto el recibo se puede rastrear: cuándo llegó el dinero y por qué camino.</p>
+    <div class="campos">
       <div class="campo c2 par"><label for="r-folio">Número</label><input id="r-folio" type="text" data-k="recibo.folio"></div>
       <div class="campo c2 par"><label for="r-fecha">Fecha del pago</label><input id="r-fecha" type="date" data-k="recibo.fecha"></div>
       <div class="campo c2"><label for="r-forma">Cómo te pagaron</label>
@@ -657,6 +944,13 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
       <div class="campo"><label for="r-ref">Referencia o número de operación (opcional)</label><input id="r-ref" type="text" data-k="recibo.referencia"></div>
       <div class="campo"><label class="palomita"><input type="checkbox" data-k="recibo.notaFiscal"><span>Aclarar que el recibo no sustituye una factura</span></label></div>
     </div>
+  </section>
+
+  <section class="pregunta" data-paso="recibo-entregar" data-tramo="El recibo" data-si="recibo">
+    <h2>Tu recibo está listo</h2>
+    <p class="porque">Entrégalo firmado. Si te vuelven a pagar, guarda este y haz otro.</p>
+    <div id="entregas-rec"></div>
+    <div class="despues"><button type="button" class="btn claro" id="otro-recibo">Hacer otro recibo</button> <button type="button" class="btn-texto" data-ir="entregar">Volver a la cotización</button></div>
   </section>
 
 </section>
@@ -667,18 +961,14 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
       <label><input type="radio" name="tipoDoc" value="cotizacion" data-k="tipoDoc"><span>Cotización</span></label>
       <label><input type="radio" name="tipoDoc" value="recibo" data-k="tipoDoc"><span>Recibo</span></label>
     </div>
-    <div class="derecha">
-      <button type="button" class="btn" id="pdf" data-ico="pdf">Guardar en PDF</button>
-      <button type="button" class="btn claro" id="descargar" data-ico="descargar">Descargar archivo</button>
-    </div>
+    <span class="rot-hoja" id="rot-hoja"></span>
   </div>
   <div class="marco-hoja" id="marco"></div>
-  <p class="pista-impresion" id="pista">Para el PDF: en la ventana de imprimir elige «Guardar como PDF». El archivo (.mochila.json) sirve para abrir esta cotización en otro aparato o para guardarla en tu Drive.</p>
 </section>
 </main>
 
-<nav class="conmutador" aria-label="Cambiar de vista">
-  <div class="dos"><button type="button" data-ver="llenar">Llenar</button><button type="button" data-ver="hoja">Ver la hoja</button></div>
+<nav class="conmutador" aria-label="Volver a las preguntas">
+  <button type="button" class="btn claro" data-ver="llenar">Volver a las preguntas</button>
   <button type="button" class="btn" id="pdf-movil" data-ico="pdf">PDF</button>
 </nav>
 
@@ -1020,19 +1310,19 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
     var logo = m.logo ? '<img alt="" src="' + m.logo + '">' : '<div class="mono">' + M.esc(M.membrete.iniciales(m.nombre || 'Tu nombre')) + '</div>';
     var contacto = [m.telefono && 'Tel. ' + m.telefono, m.correo, m.lugar, m.rfc && 'RFC ' + m.rfc, m.web]
       .filter(Boolean).map(function (x) { return '<span>' + M.esc(x) + '</span>'; }).join('');
-    return '<header class="membrete">' +
+    return '<header class="membrete" data-parte="membrete">' +
       '<div class="logo">' + logo + '</div>' +
       '<div class="quien"><div class="nombre"' + (m.nombre ? '' : ' style="color:var(--t-tenue)"') + '>' + M.esc(nombre) + '</div>' +
       (m.giro ? '<div class="giro">' + M.esc(m.giro) + '</div>' : '') +
       (contacto ? '<div class="contacto">' + contacto + '</div>' : '') + '</div>' +
-      (derecha ? '<div class="doc">' + derecha + '</div>' : '') + '</header>';
+      (derecha ? '<div class="doc" data-parte="folio">' + derecha + '</div>' : '') + '</header>';
   };
   M.firma = function (m, que, opciones) {
     opciones = opciones || {};
     var nombre = opciones.nombre != null ? opciones.nombre : (m.firmaNombre || m.nombre || '');
     var cargo = opciones.cargo != null ? opciones.cargo : (m.titulo || '');
     var img = opciones.sinImagen ? '' : (m.firma ? '<img alt="" src="' + m.firma + '">' : '');
-    return '<div class="firma">' + (que ? '<div class="que">' + M.esc(que) + '</div>' : '') +
+    return '<div class="firma" data-parte="' + (opciones.parte || 'firma') + '">' + (que ? '<div class="que">' + M.esc(que) + '</div>' : '') +
       '<div class="trazo">' + img + '</div>' +
       '<div class="quien-firma">' + (M.esc(nombre) || '&nbsp;') + '</div>' +
       (cargo ? '<div class="cargo">' + M.esc(cargo) + '</div>' : '') + '</div>';
@@ -1179,14 +1469,1156 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
   M.$$('[data-ico]').forEach(function (el) { if (M.ico[el.dataset.ico]) el.insertAdjacentHTML('afterbegin', M.ico[el.dataset.ico]); });
 })();
 
-/* Cotizar y cobrar: la cuenta en el sobre, la cotización y el recibo en la hoja. */
+/* La mochila del gestor · imágenes para WhatsApp
+   Se dibujan en un canvas, con la misma letra de las hojas (Jost). En el celular
+   se mandan con el menú de compartir; en la computadora se descargan. */
+(function () {
+  'use strict';
+  var M = window.M || (window.M = {});
+  var FAMILIA = "'Jost', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
+
+  function fuente(f) { return (f.peso || 400) + ' ' + Math.round(f.tam || 28) + 'px ' + FAMILIA; }
+  function lineas(g, texto, ancho, f) {
+    g.font = fuente(f);
+    var salida = [];
+    String(texto == null ? '' : texto).split(/\r?\n/).forEach(function (parrafo) {
+      var palabras = parrafo.split(/\s+/).filter(Boolean), linea = '';
+      if (!palabras.length) { salida.push(''); return; }
+      palabras.forEach(function (p) {
+        var prueba = linea ? linea + ' ' + p : p;
+        if (g.measureText(prueba).width <= ancho || !linea) {
+          if (!linea && g.measureText(p).width > ancho) {
+            // una palabra que no cabe: se parte
+            var trozo = '';
+            p.split('').forEach(function (ch) { if (g.measureText(trozo + ch).width > ancho && trozo) { salida.push(trozo); trozo = ch; } else trozo += ch; });
+            linea = trozo;
+          } else linea = prueba;
+        } else { salida.push(linea); linea = p; }
+      });
+      if (linea) salida.push(linea);
+    });
+    return salida;
+  }
+
+  M.lienzo = {
+    crear: function (w, h, fondo) {
+      var c = document.createElement('canvas'); c.width = w; c.height = h;
+      var g = c.getContext('2d'); g.fillStyle = fondo || '#FFFFFF'; g.fillRect(0, 0, w, h);
+      g.textBaseline = 'alphabetic';
+      return { c: c, g: g };
+    },
+    /* Espera a que la letra esté lista, para que la imagen no salga con otra */
+    fuentes: function () {
+      if (!document.fonts || !document.fonts.load) return Promise.resolve();
+      return Promise.all([400, 500, 600].map(function (p) { return document.fonts.load(p + " 40px 'Jost'").catch(function () {}); })).then(function () {}, function () {});
+    },
+    medir: function (g, texto, f) { g.font = fuente(f); return g.measureText(String(texto == null ? '' : texto)).width; },
+    lineas: lineas,
+    /* Escribe un texto con salto de línea. y es la parte de arriba de la primera línea. Devuelve dónde termina. */
+    texto: function (g, texto, x, y, f) {
+      f = f || {};
+      var tam = f.tam || 28, alto = tam * (f.interlinea || 1.28);
+      var ls = f.ancho ? lineas(g, texto, f.ancho, f) : String(texto == null ? '' : texto).split(/\r?\n/);
+      if (f.max && ls.length > f.max) {
+        ls = ls.slice(0, f.max);
+        var ult = ls[f.max - 1]; g.font = fuente(f);
+        while (ult.length > 1 && g.measureText(ult + '…').width > (f.ancho || 1e9)) ult = ult.slice(0, -1);
+        ls[f.max - 1] = ult.replace(/[\s,.;:]+$/, '') + '…';
+      }
+      g.font = fuente(f); g.fillStyle = f.color || '#1D2A2E';
+      g.textAlign = f.alin === 'der' ? 'right' : f.alin === 'centro' ? 'center' : 'left';
+      ls.forEach(function (l, i) { g.fillText(l, x, y + tam * 0.92 + i * alto); });
+      g.textAlign = 'left';
+      return y + ls.length * alto;
+    },
+    /* Cuánto mide de alto un texto, sin dibujarlo */
+    alto: function (g, texto, f) { var ls = f.ancho ? lineas(g, texto, f.ancho, f) : String(texto == null ? '' : texto).split(/\r?\n/); if (f.max) ls = ls.slice(0, f.max); return ls.length * (f.tam || 28) * (f.interlinea || 1.28); },
+    rect: function (g, x, y, w, h, r, relleno, borde, grosor) {
+      r = Math.max(0, Math.min(r || 0, w / 2, h / 2));
+      g.beginPath();
+      g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r);
+      g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
+      if (relleno) { g.fillStyle = relleno; g.fill(); }
+      if (borde) { g.strokeStyle = borde; g.lineWidth = grosor || 2; g.stroke(); }
+    },
+    linea: function (g, x1, y1, x2, y2, color, grosor, punteada) {
+      g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.strokeStyle = color || '#DCE2E3'; g.lineWidth = grosor || 2;
+      g.setLineDash(punteada ? [6, 6] : []); g.stroke(); g.setLineDash([]);
+    },
+    cargar: function (src) {
+      return new Promise(function (listo) {
+        if (!src) { listo(null); return; }
+        var i = new Image(); i.onload = function () { listo(i); }; i.onerror = function () { listo(null); }; i.src = src;
+      });
+    },
+    /* Una imagen dentro de una caja, sin deformarla */
+    poner: function (g, img, x, y, w, h, alin) {
+      if (!img) return;
+      var k = Math.min(w / img.naturalWidth, h / img.naturalHeight), iw = img.naturalWidth * k, ih = img.naturalHeight * k;
+      var ix = alin === 'izq' ? x : alin === 'der' ? x + w - iw : x + (w - iw) / 2;
+      g.drawImage(img, ix, y + (h - ih) / 2, iw, ih);
+    },
+    /* El logo, o un círculo con las iniciales en el color del membrete */
+    logo: function (g, m, x, y, lado, fondoClaro) {
+      return M.lienzo.cargar(m.logo).then(function (img) {
+        if (img) {
+          if (fondoClaro) { M.lienzo.rect(g, x, y, lado, lado, lado * 0.18, '#FFFFFF'); M.lienzo.poner(g, img, x + lado * 0.08, y + lado * 0.08, lado * 0.84, lado * 0.84); }
+          else M.lienzo.poner(g, img, x, y, lado, lado);
+          return;
+        }
+        g.beginPath(); g.arc(x + lado / 2, y + lado / 2, lado / 2, 0, Math.PI * 2);
+        g.fillStyle = fondoClaro ? '#FFFFFF' : (m.color || '#0B3C49'); g.fill();
+        var ini = M.membrete ? M.membrete.iniciales(m.nombre || 'Tu nombre') : '?';
+        g.font = fuente({ peso: 600, tam: lado * 0.38 }); g.fillStyle = fondoClaro ? (m.color || '#0B3C49') : '#FFFFFF';
+        g.textAlign = 'center'; g.fillText(ini, x + lado / 2, y + lado / 2 + lado * 0.135); g.textAlign = 'left';
+      });
+    },
+    /* Para Word: las iniciales como imagen, cuando no hay logo */
+    iniciales: function (m, lado) {
+      lado = lado || 160;
+      var x = M.lienzo.crear(lado, lado, 'rgba(0,0,0,0)'), g = x.g;
+      g.clearRect(0, 0, lado, lado);
+      g.beginPath(); g.arc(lado / 2, lado / 2, lado / 2, 0, Math.PI * 2); g.fillStyle = m.color || '#0B3C49'; g.fill();
+      g.font = fuente({ peso: 600, tam: lado * 0.38 }); g.fillStyle = '#FFFFFF'; g.textAlign = 'center';
+      g.fillText(M.membrete ? M.membrete.iniciales(m.nombre || 'Tu nombre') : '?', lado / 2, lado / 2 + lado * 0.135);
+      return x.c.toDataURL('image/png');
+    },
+    /* Pinta en un canvas lo que se ve de un pedazo de la página: fondos, bordes,
+       texto, imágenes y los trazos de los SVG. Sirve para los dibujos de la hoja. */
+    desdeDom: function (raiz, op) {
+      op = op || {};
+      var r0 = raiz.getBoundingClientRect(), S = (op.ancho || 1800) / Math.max(1, r0.width), mg = op.margen || 0;
+      var W = Math.round(r0.width * S) + 2 * mg, H = Math.round(r0.height * S) + 2 * mg;
+      var x = M.lienzo.crear(W, H, op.fondo || '#FFFFFF'), g = x.g;
+      function X(v) { return (v - r0.left) * S + mg; }
+      function Y(v) { return (v - r0.top) * S + mg; }
+      function px(v) { return parseFloat(v) || 0; }
+      function factor(el) { var r = el.getBoundingClientRect(); return el.offsetWidth ? r.width / el.offsetWidth : 1; }
+      function transparente(c) { return !c || c === 'transparent' || /rgba\([^)]*,\s*0\)$/.test(c); }
+      function caja(el, cs, r, f) {
+        var rad = px(cs.borderTopLeftRadius) * f * S;
+        var bx = X(r.left), by = Y(r.top), bw = r.width * S, bh = r.height * S;
+        if (!transparente(cs.backgroundColor)) M.lienzo.rect(g, bx, by, bw, bh, rad, cs.backgroundColor);
+        var lados = ['Top', 'Right', 'Bottom', 'Left'].map(function (l) { return { w: px(cs['border' + l + 'Width']) * f * S, c: cs['border' + l + 'Color'], s: cs['border' + l + 'Style'] }; });
+        var iguales = lados.every(function (l) { return l.w === lados[0].w && l.c === lados[0].c && l.s === lados[0].s; });
+        if (iguales && lados[0].w > 0 && lados[0].s !== 'none' && !transparente(lados[0].c)) {
+          g.setLineDash(lados[0].s === 'dashed' ? [lados[0].w * 3, lados[0].w * 2.5] : lados[0].s === 'dotted' ? [lados[0].w, lados[0].w * 1.6] : []);
+          M.lienzo.rect(g, bx + lados[0].w / 2, by + lados[0].w / 2, bw - lados[0].w, bh - lados[0].w, Math.max(0, rad - lados[0].w / 2), null, lados[0].c, lados[0].w);
+          g.setLineDash([]);
+        } else {
+          var seg = [[bx, by, bx + bw, by], [bx + bw, by, bx + bw, by + bh], [bx, by + bh, bx + bw, by + bh], [bx, by, bx, by + bh]];
+          lados.forEach(function (l, i) {
+            if (!(l.w > 0) || l.s === 'none' || transparente(l.c)) return;
+            var s0 = seg[i], o = l.w / 2 * (i === 0 || i === 3 ? 1 : -1);
+            if (i % 2 === 0) M.lienzo.linea(g, s0[0], s0[1] + o, s0[2], s0[3] + o, l.c, l.w, l.s === 'dashed' || l.s === 'dotted');
+            else M.lienzo.linea(g, s0[0] + o, s0[1], s0[2] + o, s0[3], l.c, l.w, l.s === 'dashed' || l.s === 'dotted');
+          });
+        }
+      }
+      function trazos(svg) {
+        var r = svg.getBoundingClientRect(), vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+        var vw = vb.length === 4 ? vb[2] : r.width, vh = vb.length === 4 ? vb[3] : r.height;
+        g.save(); g.translate(X(r.left), Y(r.top)); g.scale(r.width * S / (vw || 1), r.height * S / (vh || 1));
+        M.$$('path, line, polyline, rect, circle', svg).forEach(function (el) {
+          var cs = getComputedStyle(el), d = el.getAttribute('d'), p;
+          if (el.tagName === 'path' && d) p = new Path2D(d);
+          else if (el.tagName === 'line') { p = new Path2D(); p.moveTo(+el.getAttribute('x1'), +el.getAttribute('y1')); p.lineTo(+el.getAttribute('x2'), +el.getAttribute('y2')); }
+          else if (el.tagName === 'rect') { p = new Path2D(); p.rect(+el.getAttribute('x') || 0, +el.getAttribute('y') || 0, +el.getAttribute('width') || 0, +el.getAttribute('height') || 0); }
+          else if (el.tagName === 'circle') { p = new Path2D(); p.arc(+el.getAttribute('cx') || 0, +el.getAttribute('cy') || 0, +el.getAttribute('r') || 0, 0, Math.PI * 2); }
+          if (!p) return;
+          if (cs.fill && cs.fill !== 'none' && !transparente(cs.fill)) { g.fillStyle = cs.fill; g.fill(p); }
+          if (cs.stroke && cs.stroke !== 'none' && !transparente(cs.stroke)) { g.strokeStyle = cs.stroke; g.lineWidth = px(cs.strokeWidth) || 1; g.stroke(p); }
+        });
+        g.restore();
+      }
+      function textos(nodo) {
+        var el = nodo.parentElement, cs = getComputedStyle(el), f = factor(el), t = nodo.nodeValue;
+        if (!t || !t.trim()) return;
+        var tam = px(cs.fontSize) * f * S, peso = cs.fontWeight;
+        g.font = (cs.fontStyle === 'italic' ? 'italic ' : '') + peso + ' ' + tam + 'px ' + "'Jost', system-ui, sans-serif";
+        g.fillStyle = cs.color; g.textBaseline = 'alphabetic';
+        var m0 = g.measureText('Hg'), asc = m0.fontBoundingBoxAscent || tam * 0.94, des = m0.fontBoundingBoxDescent || tam * 0.26;
+        var mayus = cs.textTransform === 'uppercase';
+        var rango = document.createRange(), lineas = [], actual = null;
+        for (var i = 0; i < t.length; i++) {
+          rango.setStart(nodo, i); rango.setEnd(nodo, i + 1);
+          var rs = rango.getClientRects(); if (!rs.length) continue;
+          var rc = rs[0];
+          if (!actual || Math.abs(rc.top - actual.top) > rc.height * 0.5) { actual = { top: rc.top, h: rc.height, left: null, txt: '' }; lineas.push(actual); }
+          if (actual.left == null && /\S/.test(t[i])) actual.left = rc.left;
+          actual.txt += t[i];
+        }
+        lineas.forEach(function (l) {
+          var txt = l.txt.replace(/\s+$/, ''); if (!txt.trim()) return;
+          if (mayus) txt = txt.toUpperCase();
+          var by = Y(l.top) + (l.h * S - (asc + des)) / 2 + asc;
+          if (l.left == null) return;
+          g.fillText(txt.replace(/^\s+/, ''), X(l.left), by);
+        });
+      }
+      function pintar(el, alfa) {
+        var cs = getComputedStyle(el);
+        if (cs.display === 'none' || cs.visibility === 'hidden') return;
+        var al = alfa * (parseFloat(cs.opacity) || 0);
+        g.globalAlpha = al;
+        if (el.tagName.toLowerCase() === 'svg') { trazos(el); g.globalAlpha = 1; return; }
+        var r = el.getBoundingClientRect();
+        if (r.width && r.height) {
+          caja(el, cs, r, factor(el));
+          if (el.tagName === 'IMG' && el.complete && el.naturalWidth) { try { g.drawImage(el, X(r.left), Y(r.top), r.width * S, r.height * S); } catch (e) {} }
+        }
+        for (var h = el.firstChild; h; h = h.nextSibling) {
+          if (h.nodeType === 1) pintar(h, al);
+          else if (h.nodeType === 3) { g.globalAlpha = al; textos(h); }
+        }
+        g.globalAlpha = 1;
+      }
+      pintar(raiz, 1);
+      return x.c;
+    },
+    blob: function (c) {
+      return new Promise(function (listo) {
+        if (c.toBlob) c.toBlob(function (b) { listo(b); }, 'image/png');
+        else { var u = c.toDataURL('image/png'), bin = atob(u.split(',')[1]), a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); listo(new Blob([a], { type: 'image/png' })); }
+      });
+    },
+    /* En el celular abre el menú de compartir (WhatsApp, correo); si no se puede, descarga */
+    entregar: function (c, nombre, titulo) {
+      return M.lienzo.blob(c).then(function (b) {
+        var archivo = null;
+        try { archivo = new File([b], nombre, { type: 'image/png' }); } catch (e) { archivo = null; }
+        var tactil = window.matchMedia && matchMedia('(pointer: coarse)').matches;
+        if (tactil && archivo && navigator.canShare && navigator.canShare({ files: [archivo] })) {
+          return navigator.share({ files: [archivo], title: titulo || nombre }).then(function () { return 'compartida'; }, function (e) {
+            if (e && e.name === 'AbortError') return 'cancelada';
+            M.descargar(nombre, b, 'image/png'); return 'descargada';
+          });
+        }
+        M.descargar(nombre, b, 'image/png');
+        return 'descargada';
+      });
+    }
+  };
+})();
+
+/* La mochila del gestor · Word editable, hecho en el navegador
+   Un .docx es un ZIP con XML adentro. Aquí se arma sin librerías: un ZIP sin
+   compresión y el XML mínimo que abren Word, Google Docs y LibreOffice.
+   Medidas: pulgadas hacia afuera; adentro, dxa (1/1440 de pulgada) y EMU. */
+(function () {
+  'use strict';
+  var M = window.M || (window.M = {});
+
+  /* ---------- ZIP sin compresión ---------- */
+  var TABLA = (function () {
+    var t = new Uint32Array(256);
+    for (var i = 0; i < 256; i++) { var c = i; for (var k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[i] = c >>> 0; }
+    return t;
+  })();
+  function crc32(b) { var c = 0xFFFFFFFF; for (var i = 0; i < b.length; i++) c = TABLA[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+  var utf8 = new TextEncoder();
+  function zip(archivos) {
+    var d = new Date();
+    var hora = (d.getHours() << 11) | (d.getMinutes() << 5) | (Math.floor(d.getSeconds() / 2));
+    var dia = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
+    var trozos = [], central = [], pos = 0;
+    archivos.forEach(function (a) {
+      var nombre = utf8.encode(a.nombre), datos = typeof a.datos === 'string' ? utf8.encode(a.datos) : a.datos;
+      var crc = crc32(datos), largo = datos.length;
+      var h = new DataView(new ArrayBuffer(30));
+      h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0, true); h.setUint16(8, 0, true);
+      h.setUint16(10, hora, true); h.setUint16(12, dia, true); h.setUint32(14, crc, true);
+      h.setUint32(18, largo, true); h.setUint32(22, largo, true); h.setUint16(26, nombre.length, true); h.setUint16(28, 0, true);
+      var c = new DataView(new ArrayBuffer(46));
+      c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0, true); c.setUint16(10, 0, true);
+      c.setUint16(12, hora, true); c.setUint16(14, dia, true); c.setUint32(16, crc, true); c.setUint32(20, largo, true); c.setUint32(24, largo, true);
+      c.setUint16(28, nombre.length, true); c.setUint16(30, 0, true); c.setUint16(32, 0, true); c.setUint16(34, 0, true); c.setUint16(36, 0, true);
+      c.setUint32(38, 0, true); c.setUint32(42, pos, true);
+      trozos.push(new Uint8Array(h.buffer), nombre, datos);
+      central.push(new Uint8Array(c.buffer), nombre);
+      pos += 30 + nombre.length + largo;
+    });
+    var tamCentral = central.reduce(function (s, x) { return s + x.length; }, 0);
+    var fin = new DataView(new ArrayBuffer(22));
+    fin.setUint32(0, 0x06054b50, true); fin.setUint16(4, 0, true); fin.setUint16(6, 0, true);
+    fin.setUint16(8, archivos.length, true); fin.setUint16(10, archivos.length, true);
+    fin.setUint32(12, tamCentral, true); fin.setUint32(16, pos, true); fin.setUint16(20, 0, true);
+    return new Blob(trozos.concat(central, [new Uint8Array(fin.buffer)]), { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+  }
+
+  /* ---------- XML ---------- */
+  function x(s) {
+    return String(s == null ? '' : s).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F￾￿]/g, '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function hex(c, def) { var m = /^#?([0-9a-f]{6})$/i.exec(String(c || '').trim()); return m ? m[1].toUpperCase() : (def || '1D2A2E'); }
+  function aclarar(c, k) {
+    var v = parseInt(hex(c), 16), rgb = [v >> 16 & 255, v >> 8 & 255, v & 255];
+    return rgb.map(function (y) { return Math.round(y * k + 255 * (1 - k)).toString(16).padStart(2, '0'); }).join('').toUpperCase();
+  }
+  var DXA = 1440, EMU = 914400;
+  var NS = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"';
+  var NS_DIB = ' xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"';
+  var REL = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/';
+  var CAB = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n';
+
+  /* Un trozo de texto: cadena, o { t, b, i, color, tam, sub } o una lista de esos */
+  function runs(contenido, f) {
+    f = f || {};
+    var l = Array.isArray(contenido) ? contenido : [typeof contenido === 'object' && contenido !== null ? contenido : { t: contenido }];
+    return l.map(function (r) {
+      if (typeof r !== 'object' || r === null) r = { t: r };
+      if (r.tab) return '<w:r><w:tab/></w:r>';
+      var b = r.b != null ? r.b : f.b, i = r.i != null ? r.i : f.i, color = r.color || f.color, tam = r.tam || f.tam;
+      var pr = '';
+      if (b) pr += '<w:b/><w:bCs/>';
+      if (i) pr += '<w:i/><w:iCs/>';
+      if (color) pr += '<w:color w:val="' + hex(color) + '"/>';
+      if (r.esp || f.esp) pr += '<w:spacing w:val="' + Math.round((r.esp || f.esp) * 20) + '"/>';
+      if (tam) pr += '<w:sz w:val="' + Math.round(tam * 2) + '"/><w:szCs w:val="' + Math.round(tam * 2) + '"/>';
+      var partes = String(r.t == null ? '' : r.t).split(/\r?\n/);
+      var cuerpo = partes.map(function (p, j) { return (j ? '<w:br/>' : '') + '<w:t xml:space="preserve">' + x(p) + '</w:t>'; }).join('');
+      return '<w:r>' + (pr ? '<w:rPr>' + pr + '</w:rPr>' : '') + cuerpo + '</w:r>';
+    }).join('');
+  }
+  function borde(lado, b) {
+    if (!b) return '';
+    if (b === 'nada') return '<w:' + lado + ' w:val="nil"/>';
+    return '<w:' + lado + ' w:val="single" w:sz="' + Math.round((b.g || 0.5) * 8) + '" w:space="' + (b.esp || 0) + '" w:color="' + hex(b.c, 'DCE2E3') + '"/>';
+  }
+  function pPr(f) {
+    f = f || {};
+    var s = '';
+    if (f.estilo) s += '<w:pStyle w:val="' + f.estilo + '"/>';
+    if (f.junto) s += '<w:keepNext/>';
+    if (f.entero) s += '<w:keepLines/>';
+    if (f.saltoAntes) s += '<w:pageBreakBefore/>';
+    if (f.vineta) s += '<w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr>';
+    if (f.raya || f.rayaArriba) {
+      s += '<w:pBdr>' + (f.rayaArriba ? borde('top', { c: f.rayaArriba.c, g: f.rayaArriba.g || 0.75, esp: 4 }) : '') +
+        (f.raya ? borde('bottom', { c: f.raya.c, g: f.raya.g || 0.75, esp: f.raya.esp != null ? f.raya.esp : 6 }) : '') + '</w:pBdr>';
+    }
+    if (f.fondo) s += '<w:shd w:val="clear" w:color="auto" w:fill="' + hex(f.fondo) + '"/>';
+    if (f.tabDer) s += '<w:tabs><w:tab w:val="right" w:pos="' + Math.round(f.tabDer * DXA) + '"/></w:tabs>';
+    var antes = f.antes != null ? f.antes : null, despues = f.despues != null ? f.despues : null;
+    if (antes != null || despues != null || f.linea) {
+      s += '<w:spacing' + (antes != null ? ' w:before="' + Math.round(antes * 20) + '"' : '') + (despues != null ? ' w:after="' + Math.round(despues * 20) + '"' : '') +
+        (f.linea ? ' w:line="' + Math.round(f.linea * 240) + '" w:lineRule="auto"' : '') + '/>';
+    }
+    if (f.sangria) s += '<w:ind w:left="' + Math.round(f.sangria * DXA) + '"/>';
+    if (f.alin) s += '<w:jc w:val="' + ({ izq: 'left', centro: 'center', der: 'right', just: 'both' }[f.alin] || 'left') + '"/>';
+    return s ? '<w:pPr>' + s + '</w:pPr>' : '';
+  }
+
+  /* ---------- El documento ---------- */
+  M.docx = function (o) {
+    o = o || {};
+    var horizontal = !!o.horizontal;
+    var anchoPag = horizontal ? 15840 : 12240, altoPag = horizontal ? 12240 : 15840;
+    var mg = o.margen || {};
+    var mI = mg.izq != null ? mg.izq : 0.7, mD = mg.der != null ? mg.der : 0.7, mS = mg.sup != null ? mg.sup : 0.6, mF = mg.inf != null ? mg.inf : 0.75;
+    var util = (anchoPag / DXA) - mI - mD;
+    var acento = hex(o.acento, '0B3C49');
+    var bloques = [], imagenes = [], idDib = 0;
+
+    function imagen(src, ancho, alto) {
+      var im = { id: 'rIdImg' + (imagenes.length + 1), n: imagenes.length + 1, src: src, ancho: ancho || 1, alto: alto || 1, dib: ++idDib };
+      imagenes.push(im);
+      return im;
+    }
+    function dibujo(im) {
+      var cx = Math.round(im.w * EMU), cy = Math.round(im.h * EMU);
+      return '<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="' + cx + '" cy="' + cy + '"/><wp:effectExtent l="0" t="0" r="0" b="0"/>' +
+        '<wp:docPr id="' + im.dib + '" name="Imagen ' + im.dib + '"/><wp:cNvGraphicFramePr><a:graphicFrameLocks noChangeAspect="1"/></wp:cNvGraphicFramePr>' +
+        '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic><pic:nvPicPr><pic:cNvPr id="' + im.dib + '" name="imagen' + im.n + '.' + im.ext + '"/><pic:cNvPicPr/></pic:nvPicPr>' +
+        '<pic:blipFill><a:blip r:embed="' + im.id + '"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>' +
+        '<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>';
+    }
+    /* Un párrafo como objeto: se vuelve XML al final, cuando ya se saben las medidas de las imágenes */
+    function parrafo(contenido, f) { return { tipo: 'p', c: contenido, f: f || {} }; }
+    function xmlParrafo(b) {
+      if (b.img) return '<w:p>' + pPr(b.f) + dibujo(b.img) + '</w:p>';
+      return '<w:p>' + pPr(b.f) + runs(b.c == null ? '' : b.c, b.f) + '</w:p>';
+    }
+    function xmlCelda(cel, ancho, t) {
+      if (cel == null || typeof cel !== 'object' || Array.isArray(cel)) cel = { t: cel };
+      var tc = '<w:tcW w:w="' + Math.round(ancho * DXA) + '" w:type="dxa"/>';
+      if (cel.span > 1) tc += '<w:gridSpan w:val="' + cel.span + '"/>';
+      var bs = cel.bordes || t.bordesCelda;
+      if (bs) tc += '<w:tcBorders>' + ['top', 'left', 'bottom', 'right'].map(function (l) { return borde(l, bs[l]); }).join('') + '</w:tcBorders>';
+      if (cel.fondo) tc += '<w:shd w:val="clear" w:color="auto" w:fill="' + hex(cel.fondo) + '"/>';
+      if (cel.mar) tc += '<w:tcMar><w:top w:w="' + Math.round(cel.mar * DXA) + '" w:type="dxa"/><w:bottom w:w="' + Math.round(cel.mar * DXA) + '" w:type="dxa"/></w:tcMar>';
+      tc += '<w:vAlign w:val="' + (cel.vAlin || t.vAlin || 'top') + '"/>';
+      var f = { alin: cel.alin, b: cel.b, color: cel.color, tam: cel.tam || t.tam, antes: cel.antes != null ? cel.antes : 0, despues: cel.despues != null ? cel.despues : 0, linea: cel.linea || t.linea };
+      var ps = [];
+      if (cel.img) ps.push(xmlParrafo({ img: cel.img, f: { alin: cel.alin, antes: 0, despues: 0 } }));
+      if (cel.parrafos) {
+        cel.parrafos.forEach(function (p) { var ff = {}; for (var k in f) ff[k] = f[k]; for (var j in (p.f || {})) ff[j] = p.f[j]; ps.push(xmlParrafo({ c: p.c, f: ff })); });
+      } else if (Array.isArray(cel.t)) {
+        ps.push(xmlParrafo({ c: cel.t, f: f }));
+      } else if (!cel.img || (cel.t != null && cel.t !== '')) {
+        String(cel.t == null ? '' : cel.t).split(/\n\n/).forEach(function (trozo) { ps.push(xmlParrafo({ c: trozo, f: f })); });
+      }
+      if (!ps.length) ps.push('<w:p/>');
+      return '<w:tc><w:tcPr>' + tc + '</w:tcPr>' + ps.join('') + '</w:tc>';
+    }
+    function xmlTabla(t) {
+      var anchos = t.anchos, total = anchos.reduce(function (s, a) { return s + a; }, 0);
+      var tb = '<w:tblW w:w="' + Math.round(total * DXA) + '" w:type="dxa"/>';
+      if (t.alin === 'der') tb += '<w:jc w:val="right"/>'; else if (t.alin === 'centro') tb += '<w:jc w:val="center"/>';
+      var B = t.bordes || {};
+      tb += '<w:tblBorders>' + borde('top', B.top || 'nada') + borde('left', B.left || 'nada') + borde('bottom', B.bottom || 'nada') + borde('right', B.right || 'nada') +
+        borde('insideH', B.insideH || 'nada') + borde('insideV', B.insideV || 'nada') + '</w:tblBorders>';
+      tb += '<w:tblLayout w:type="fixed"/>';
+      var m = t.margenCelda != null ? t.margenCelda : 0.06, mv = t.margenV != null ? t.margenV : 0.03;
+      tb += '<w:tblCellMar><w:top w:w="' + Math.round(mv * DXA) + '" w:type="dxa"/><w:left w:w="' + Math.round(m * DXA) + '" w:type="dxa"/><w:bottom w:w="' + Math.round(mv * DXA) + '" w:type="dxa"/><w:right w:w="' + Math.round(m * DXA) + '" w:type="dxa"/></w:tblCellMar>';
+      tb += '<w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>';
+      var grid = '<w:tblGrid>' + anchos.map(function (a) { return '<w:gridCol w:w="' + Math.round(a * DXA) + '"/>'; }).join('') + '</w:tblGrid>';
+      var filas = t.filas.map(function (fila, fi) {
+        var celdas = Array.isArray(fila) ? fila : fila.celdas, extra = Array.isArray(fila) ? {} : fila;
+        var tr = '<w:cantSplit/>' + (fi < (t.encabezado || 0) ? '<w:tblHeader/>' : '');
+        var col = 0;
+        var tcs = celdas.map(function (cel) {
+          var span = cel && typeof cel === 'object' && !Array.isArray(cel) && cel.span > 1 ? cel.span : 1;
+          var ancho = anchos.slice(col, col + span).reduce(function (s, a) { return s + a; }, 0);
+          col += span;
+          var cc = cel;
+          if (extra.fondo || extra.b || extra.color || extra.bordes || extra.tam) {
+            cc = (cel && typeof cel === 'object' && !Array.isArray(cel)) ? Object.assign({}, cel) : { t: cel };
+            if (extra.fondo && !cc.fondo) cc.fondo = extra.fondo;
+            if (extra.b && cc.b == null) cc.b = extra.b;
+            if (extra.color && !cc.color) cc.color = extra.color;
+            if (extra.tam && !cc.tam) cc.tam = extra.tam;
+            if (extra.bordes && !cc.bordes) cc.bordes = extra.bordes;
+          }
+          return xmlCelda(cc, ancho, t);
+        }).join('');
+        return '<w:tr><w:trPr>' + tr + '</w:trPr>' + tcs + '</w:tr>';
+      }).join('');
+      return '<w:tbl><w:tblPr>' + tb + '</w:tblPr>' + grid + filas + '</w:tbl>';
+    }
+
+    var api = {
+      util: util, acento: '#' + acento,
+      suave: function (k) { return '#' + aclarar('#' + acento, k == null ? 0.09 : k); },
+      p: function (contenido, f) { bloques.push(parrafo(contenido, f)); return api; },
+      titulo: function (texto, f) {
+        f = f || {};
+        bloques.push(parrafo([{ t: texto, b: f.b != null ? f.b : false, color: f.color || ('#' + acento), tam: f.tam || 13 }], { antes: f.antes != null ? f.antes : 12, despues: f.despues != null ? f.despues : 4, junto: true, estilo: f.nivel === 2 ? 'Heading2' : 'Heading1' }));
+        return api;
+      },
+      lista: function (items, f) {
+        (items || []).forEach(function (it) { var ff = { vineta: true, despues: 1.5, tam: (f && f.tam) || 9.5, color: f && f.color }; bloques.push(parrafo(it, ff)); });
+        return api;
+      },
+      raya: function (color, f) { bloques.push(parrafo('', { raya: { c: color || ('#' + aclarar('#' + acento, 0.55)), g: 0.75, esp: 1 }, despues: (f && f.despues) || 6, tam: 2 })); return api; },
+      espacio: function (pt) { bloques.push(parrafo('', { antes: 0, despues: 0, tam: Math.max(1, pt || 6) })); return api; },
+      salto: function () { bloques.push({ tipo: 'salto' }); return api; },
+      tabla: function (t) { bloques.push({ tipo: 'tabla', t: t }); return api; },
+      /* Imagen suelta, cabe en una caja de ancho × alto (pulgadas) */
+      imagen: function (src, ancho, alto, f) { if (!src) return api; bloques.push({ tipo: 'p', img: imagen(src, ancho, alto), f: f || {} }); return api; },
+      /* Imagen dentro de una celda: { img: d.img(src, ancho, alto) } */
+      img: function (src, ancho, alto) { return src ? imagen(src, ancho, alto) : null; },
+      /* Un bloque de XML ya armado (para casos raros) */
+      crudo: function (xml) { bloques.push({ tipo: 'crudo', x: xml }); return api; },
+
+      blob: function () {
+        return Promise.all(imagenes.map(preparar)).then(function () {
+          var cuerpo = bloques.map(function (b) {
+            if (b.tipo === 'tabla') return xmlTabla(b.t) + (b.t.sinPie ? '' : '<w:p><w:pPr><w:spacing w:before="0" w:after="0"/></w:pPr><w:r><w:rPr><w:sz w:val="4"/><w:szCs w:val="4"/></w:rPr><w:t xml:space="preserve"> </w:t></w:r></w:p>');
+            if (b.tipo === 'salto') return '<w:p><w:r><w:br w:type="page"/></w:r></w:p>';
+            if (b.tipo === 'crudo') return b.x;
+            return xmlParrafo(b);
+          }).join('');
+          var pie = o.pie || '';
+          var doc = CAB + '<w:document ' + NS + NS_DIB + '><w:body>' + cuerpo + '<w:p/>' +
+            '<w:sectPr><w:footerReference w:type="default" r:id="rIdPie"/><w:pgSz w:w="' + anchoPag + '" w:h="' + altoPag + '"' + (horizontal ? ' w:orient="landscape"' : '') + '/>' +
+            '<w:pgMar w:top="' + Math.round(mS * DXA) + '" w:right="' + Math.round(mD * DXA) + '" w:bottom="' + Math.round(mF * DXA) + '" w:left="' + Math.round(mI * DXA) + '" w:header="432" w:footer="360" w:gutter="0"/>' +
+            '<w:cols w:space="708"/></w:sectPr></w:body></w:document>';
+          var footer = CAB + '<w:ftr ' + NS + '><w:p><w:pPr><w:pStyle w:val="Footer"/><w:tabs><w:tab w:val="right" w:pos="' + Math.round(util * DXA) + '"/></w:tabs></w:pPr>' +
+            runs(pie) + '<w:r><w:tab/></w:r>' + runs('Página ') + '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r>' +
+            runs(' de ') + '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> NUMPAGES </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></w:ftr>';
+          var archivos = [
+            { nombre: '[Content_Types].xml', datos: CAB + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+              '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>' +
+              '<Default Extension="png" ContentType="image/png"/><Default Extension="jpeg" ContentType="image/jpeg"/>' +
+              '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>' +
+              '<Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>' +
+              '<Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/>' +
+              '<Override PartName="/word/numbering.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml"/>' +
+              '<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>' +
+              '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>' +
+              '<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/></Types>' },
+            { nombre: '_rels/.rels', datos: CAB + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+              '<Relationship Id="rId1" Type="' + REL + 'officeDocument" Target="word/document.xml"/>' +
+              '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>' +
+              '<Relationship Id="rId3" Type="' + REL + 'extended-properties" Target="docProps/app.xml"/></Relationships>' },
+            { nombre: 'docProps/core.xml', datos: CAB + '<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
+              '<dc:title>' + x(o.titulo || 'Documento') + '</dc:title><dc:creator>' + x(o.autor || '') + '</dc:creator>' +
+              '<dcterms:created xsi:type="dcterms:W3CDTF">' + new Date().toISOString().replace(/\.\d+Z$/, 'Z') + '</dcterms:created>' +
+              '<dcterms:modified xsi:type="dcterms:W3CDTF">' + new Date().toISOString().replace(/\.\d+Z$/, 'Z') + '</dcterms:modified></cp:coreProperties>' },
+            { nombre: 'docProps/app.xml', datos: CAB + '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>' + x(o.programa || 'La mochila del gestor') + '</Application></Properties>' },
+            { nombre: 'word/_rels/document.xml.rels', datos: CAB + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+              '<Relationship Id="rIdEst" Type="' + REL + 'styles" Target="styles.xml"/><Relationship Id="rIdAju" Type="' + REL + 'settings" Target="settings.xml"/>' +
+              '<Relationship Id="rIdNum" Type="' + REL + 'numbering" Target="numbering.xml"/><Relationship Id="rIdPie" Type="' + REL + 'footer" Target="footer1.xml"/>' +
+              imagenes.map(function (im) { return '<Relationship Id="' + im.id + '" Type="' + REL + 'image" Target="media/imagen' + im.n + '.' + im.ext + '"/>'; }).join('') + '</Relationships>' },
+            { nombre: 'word/document.xml', datos: doc },
+            { nombre: 'word/styles.xml', datos: estilos(o) },
+            { nombre: 'word/settings.xml', datos: CAB + '<w:settings ' + NS + '><w:defaultTabStop w:val="708"/><w:characterSpacingControl w:val="doNotCompress"/><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>' },
+            { nombre: 'word/numbering.xml', datos: CAB + '<w:numbering ' + NS + '><w:abstractNum w:abstractNumId="0"><w:multiLevelType w:val="singleLevel"/>' +
+              '<w:lvl w:ilvl="0"><w:start w:val="1"/><w:numFmt w:val="bullet"/><w:lvlText w:val="•"/><w:lvlJc w:val="left"/><w:pPr><w:ind w:left="300" w:hanging="200"/></w:pPr><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri"/><w:color w:val="' + aclarar('#' + acento, 0.8) + '"/></w:rPr></w:lvl>' +
+              '</w:abstractNum><w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num></w:numbering>' },
+            { nombre: 'word/footer1.xml', datos: footer }
+          ];
+          imagenes.forEach(function (im) { archivos.push({ nombre: 'word/media/imagen' + im.n + '.' + im.ext, datos: im.bytes }); });
+          return zip(archivos);
+        });
+      },
+      descargar: function (nombre) {
+        return api.blob().then(function (b) {
+          var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = nombre;
+          document.body.appendChild(a); a.click();
+          setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+          return b;
+        });
+      }
+    };
+    return api;
+  };
+
+  function estilos(o) {
+    var f = o.fuente || 'Calibri';
+    return CAB + '<w:styles ' + NS + '><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="' + f + '" w:hAnsi="' + f + '" w:eastAsia="' + f + '" w:cs="' + f + '"/>' +
+      '<w:color w:val="1D2A2E"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:lang w:val="es-MX" w:eastAsia="es-MX" w:bidi="ar-SA"/></w:rPr></w:rPrDefault>' +
+      '<w:pPrDefault><w:pPr><w:spacing w:after="60" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>' +
+      '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:uiPriority w:val="9"/><w:qFormat/>' +
+      '<w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="240" w:after="80"/><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:rFonts w:ascii="' + f + '" w:hAnsi="' + f + '"/><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:uiPriority w:val="9"/><w:qFormat/>' +
+      '<w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="160" w:after="60"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:rFonts w:ascii="' + f + '" w:hAnsi="' + f + '"/><w:b/><w:bCs/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Footer"><w:name w:val="footer"/><w:basedOn w:val="Normal"/><w:uiPriority w:val="99"/><w:pPr><w:spacing w:after="0"/></w:pPr><w:rPr><w:color w:val="7B898C"/><w:sz w:val="15"/><w:szCs w:val="15"/></w:rPr></w:style>' +
+      '<w:style w:type="table" w:default="1" w:styleId="TableNormal"><w:name w:val="Normal Table"/><w:uiPriority w:val="99"/><w:semiHidden/><w:unhideWhenUsed/>' +
+      '<w:tblPr><w:tblInd w:w="0" w:type="dxa"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="108" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar></w:tblPr></w:style>' +
+      '</w:styles>';
+  }
+
+  /* Prepara una imagen: bytes, formato y tamaño que cabe en su caja */
+  function preparar(im) {
+    return new Promise(function (listo) {
+      var src = im.src, m = /^data:image\/(png|jpe?g);base64,(.*)$/i.exec(src || '');
+      function conBytes(b64, ext, w, h) {
+        var bin = atob(b64), bytes = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        im.bytes = bytes; im.ext = ext;
+        var k = Math.min(im.ancho / (w || 1), im.alto / (h || 1));
+        im.w = Math.max(0.05, (w || 1) * k); im.h = Math.max(0.05, (h || 1) * k);
+        listo();
+      }
+      var img = new Image();
+      img.onload = function () {
+        var w = img.naturalWidth || 1, h = img.naturalHeight || 1;
+        if (m) conBytes(m[2], /png/i.test(m[1]) ? 'png' : 'jpeg', w, h);
+        else {
+          try {
+            var c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d').drawImage(img, 0, 0);
+            conBytes(c.toDataURL('image/png').split(',')[1], 'png', w, h);
+          } catch (e) { conBytes(PIXEL, 'png', 1, 1); }
+        }
+      };
+      img.onerror = function () { conBytes(PIXEL, 'png', 1, 1); };
+      img.src = src;
+    });
+  }
+  var PIXEL = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMB/axxm6oAAAAASUVORK5CYII=';
+
+  /* ---------- Piezas que comparten las herramientas ---------- */
+  /* El membrete: logo, nombre y contacto a la izquierda; el tipo de documento a la derecha */
+  M.docxMembrete = function (d, m, derecha) {
+    derecha = derecha || {};
+    var logo = m.logo || (M.lienzo ? M.lienzo.iniciales(m, 160) : '');
+    var contacto = [m.telefono && 'Tel. ' + m.telefono, m.correo, m.lugar, m.rfc && 'RFC ' + m.rfc, m.web].filter(Boolean).join('   ·   ');
+    var quien = [{ c: [{ t: m.nombre || 'Tu nombre o el de tu negocio', b: true, tam: 15, color: m.nombre ? '#1D2A2E' : '#7B898C' }], f: { despues: 1 } }];
+    if (m.giro) quien.push({ c: [{ t: m.giro, tam: 9.5, color: '#4B5A5E' }], f: { despues: 2 } });
+    if (contacto) quien.push({ c: [{ t: contacto, tam: 8.3, color: '#4B5A5E' }] });
+    var der = [];
+    if (derecha.tipo) der.push({ c: [{ t: derecha.tipo, tam: derecha.tamTipo || 20, color: d.acento }], f: { alin: 'der', despues: 2 } });
+    if (derecha.folio) der.push({ c: [{ t: derecha.folio, tam: 9, color: '#4B5A5E' }], f: { alin: 'der' } });
+    var anchoDer = derecha.ancho || 2.1, anchoLogo = 0.95;
+    d.tabla({
+      anchos: [anchoLogo, d.util - anchoLogo - anchoDer, anchoDer], vAlin: 'center', margenCelda: 0.04,
+      bordes: { bottom: { c: d.suave(0.55), g: 0.75 } },
+      filas: [[{ img: d.img(logo, 0.82, 0.82), mar: 0.06 }, { parrafos: quien }, { parrafos: der.length ? der : [{ c: '' }] }]]
+    });
+  };
+  /* Una firma: imagen o espacio, la línea, el nombre y el cargo */
+  M.docxFirmas = function (d, firmas) {
+    var ancho = Math.min(2.7, (d.util - 0.4 * (firmas.length - 1)) / firmas.length);
+    var anchos = [];
+    firmas.forEach(function (f, i) { if (i) anchos.push(0.4); anchos.push(ancho); });
+    // Tres filas: lo que se firma, el trazo con su raya, y el nombre con el cargo
+    var fila1 = [], fila2 = [], fila3 = [];
+    firmas.forEach(function (f, i) {
+      if (i) { fila1.push(''); fila2.push(''); fila3.push(''); }
+      fila1.push({ t: [{ t: f.que || '', tam: 7.8, color: '#7B898C' }], alin: 'centro' });
+      fila2.push(f.img ? { img: d.img(f.img, 2.2, 0.6), alin: 'centro', vAlin: 'bottom', bordes: { bottom: { c: '#1D2A2E', g: 0.75 } } } :
+        { t: [{ t: ' ', tam: 26 }], alin: 'centro', vAlin: 'bottom', bordes: { bottom: { c: '#1D2A2E', g: 0.75 } } });
+      fila3.push({ parrafos: [{ c: [{ t: f.nombre || ' ', b: true, tam: 9.2 }], f: { alin: 'centro', antes: 3 } }].concat(f.cargo ? [{ c: [{ t: f.cargo, tam: 8, color: '#4B5A5E' }], f: { alin: 'centro' } }] : []) });
+    });
+    var total = anchos.reduce(function (s, a) { return s + a; }, 0);
+    d.espacio(14);
+    d.tabla({ anchos: anchos, alin: total < d.util - 0.1 ? 'der' : null, margenCelda: 0.02, filas: [fila1, fila2, fila3] });
+  };
+  /* Una tabla de datos con el estilo de las hojas: encabezado con raya de acento, renglones con filete */
+  M.docxTablaDatos = function (d, columnas, filas, o) {
+    o = o || {};
+    var anchos = columnas.map(function (c) { return c.ancho; });
+    var fil = '#DCE2E3';
+    var cab = columnas.map(function (c) { return { t: [{ t: c.t, tam: 7.8, color: '#7B898C' }], alin: c.alin, bordes: { bottom: { c: d.acento, g: 1 } } }; });
+    var cuerpo = filas.map(function (f) {
+      if (f && f.grupo) return { celdas: [{ parrafos: [{ c: [{ t: f.grupo, b: true, tam: 8.6, color: d.acento }], f: { junto: true } }], span: columnas.length, bordes: { bottom: { c: d.suave(0.55), g: 0.5 } }, antes: 6 }] };
+      if (f && f.celdas) return f;
+      var col = 0;
+      return f.map(function (cel) {
+        var c = (cel && typeof cel === 'object' && !Array.isArray(cel)) ? Object.assign({}, cel) : { t: cel };
+        if (!c.alin && columnas[col]) c.alin = columnas[col].alin;
+        col += c.span > 1 ? c.span : 1;
+        if (!c.bordes) c.bordes = { bottom: { c: fil, g: 0.5 } };
+        return c;
+      });
+    });
+    d.tabla({ anchos: anchos, encabezado: 1, tam: o.tam || 9.2, margenCelda: o.margen != null ? o.margen : 0.06, margenV: 0.045, filas: [cab].concat(cuerpo) });
+  };
+})();
+
+/* La mochila del gestor · una cosa a la vez
+   Cada herramienta se parte en preguntas (.pregunta), agrupadas en tramos. Se ve
+   una pregunta a la vez; la hoja de al lado ilumina la parte que se está
+   escribiendo ([data-parte] en la hoja, data-foco en la pregunta) y late cuando
+   cambia. En el celular, una ventanita enseña cómo va la hoja. */
+(function () {
+  'use strict';
+  var M = window.M;
+  var esc = M.esc;
+  var puntero = window.matchMedia && matchMedia('(pointer: fine)').matches;
+  function celular() { return window.matchMedia ? matchMedia('(max-width: 1020px)').matches : window.innerWidth <= 1020; }
+
+  /* ---------- El membrete, partido en preguntas ---------- */
+  M.vistaMembrete = function (m) {
+    var logo = m.logo ? '<img alt="" src="' + m.logo + '">' : '<span class="mono" style="background:' + esc(m.color || '#0B3C49') + '">' + esc(M.membrete.iniciales(m.nombre || 'Tu nombre')) + '</span>';
+    var contacto = [m.telefono, m.correo, m.lugar].filter(Boolean).map(esc).join('<br>');
+    return '<div class="tarjeta-membrete" style="--acento:' + esc(m.color || '#0B3C49') + '"><div class="tm-logo">' + logo + '</div><div class="tm-quien">' +
+      '<b>' + esc(m.nombre || 'Sin nombre todavía') + '</b>' + (m.giro ? '<span>' + esc(m.giro) + '</span>' : '') + (contacto ? '<small>' + contacto + '</small>' : '') + '</div></div>';
+  };
+  M.preguntasMembrete = function () {
+    var colores = M.COLORES.map(function (c) {
+      return '<label title="' + c[1] + '"><input type="radio" name="m-color" value="' + c[0] + '" data-mk="color"><span style="background:' + c[0] + '"></span><span class="sr">' + c[1] + '</span></label>';
+    }).join('');
+    var T = 'data-tramo="Tu membrete" data-foco="membrete"';
+    return '' +
+      '<section class="pregunta" data-paso="mb-listo" data-si="membreteListo" ' + T + '>' +
+      '<h2>Este es tu membrete</h2><p class="porque">Sale arriba en todo lo que hagas con la mochila. Se llena una vez y se queda en este navegador.</p>' +
+      '<div id="vista-membrete"></div>' +
+      '<p><button type="button" class="btn claro chico" data-accion="editar-membrete">Cambiar algo del membrete</button></p></section>' +
+
+      '<section class="pregunta" data-paso="mb-nombre" data-si="membreteEditar" ' + T + '>' +
+      '<h2>¿Cómo te llamas, o cómo se llama tu negocio?</h2><p class="porque">Va arriba y en grande, en cada hoja. Puede ser tu nombre, el de tu despacho o el de tu grupo de trabajo.</p>' +
+      '<div class="campo"><label for="m-nombre" class="sr">Tu nombre o el de tu negocio</label><input id="m-nombre" type="text" class="grande" data-mk="nombre" data-requerido="tu nombre o el de tu negocio" autocomplete="organization" placeholder="Tu nombre o el de tu negocio"></div>' +
+      '<div class="ejemplos" data-para="m-nombre"><span>Por ejemplo</span><button type="button">Raíz Viva, asesoría agroecológica</button><button type="button">Ana López Martínez</button></div></section>' +
+
+      '<section class="pregunta" data-paso="mb-giro" data-si="membreteEditar" ' + T + '>' +
+      '<h2>¿A qué te dedicas, en una línea?</h2><p class="porque">Le dice a quien recibe la hoja qué haces, antes de leer el resto.</p>' +
+      '<div class="campo"><label for="m-giro" class="sr">A qué te dedicas</label><input id="m-giro" type="text" class="grande" data-mk="giro" placeholder="Lo que haces, en pocas palabras"></div>' +
+      '<div class="ejemplos" data-para="m-giro"><span>Por ejemplo</span><button type="button">Capacitación y asesoría en producción agroecológica</button><button type="button">Proyectos de desarrollo rural</button><button type="button">Viveros y reforestación</button></div></section>' +
+
+      '<section class="pregunta" data-paso="mb-contacto" data-si="membreteEditar" ' + T + '>' +
+      '<h2>¿Cómo te encuentran?</h2><p class="porque">Lo mínimo para que te llamen o te escriban. Va debajo de tu nombre.</p>' +
+      '<div class="campos">' +
+      '<div class="campo c3"><label for="m-tel">Teléfono o WhatsApp</label><input id="m-tel" type="tel" data-mk="telefono" autocomplete="tel" placeholder="441 000 0000"></div>' +
+      '<div class="campo c3"><label for="m-correo">Correo</label><input id="m-correo" type="email" data-mk="correo" autocomplete="email" placeholder="nombre@correo.com"></div>' +
+      '<div class="campo"><label for="m-lugar">Municipio y estado</label><input id="m-lugar" type="text" data-mk="lugar" placeholder="Arroyo Seco, Querétaro"></div></div>' +
+      '<details class="mas"><summary>Más datos, si los tienes</summary><div class="campos">' +
+      '<div class="campo c3"><label for="m-rfc">RFC</label><input id="m-rfc" type="text" data-mk="rfc" autocomplete="off" style="text-transform:uppercase"></div>' +
+      '<div class="campo c3"><label for="m-web">Página o red social</label><input id="m-web" type="text" data-mk="web" placeholder="facebook.com/raizviva"></div></div></details></section>' +
+
+      '<section class="pregunta" data-paso="mb-cara" data-si="membreteEditar" ' + T + '>' +
+      '<h2>La cara de tus documentos</h2><p class="porque">Tu logo y un color. Sin logo, la hoja lleva tus iniciales en un círculo.</p>' +
+      '<div class="cara"><div class="logo-zona"><div class="logo-vista" id="m-logo-vista"></div><div><button type="button" class="btn claro chico" id="m-logo-subir">Subir logo</button><br><button type="button" class="btn-texto peligro" id="m-logo-quitar">Quitar el logo</button></div></div>' +
+      '<div class="campo"><span class="etiqueta">El color</span><div class="colores" role="radiogroup" aria-label="Color de tus documentos">' + colores + '</div></div></div></section>' +
+
+      '<section class="pregunta" data-paso="mb-firma" data-si="membreteEditar" data-tramo="Tu membrete" data-foco="firma">' +
+      '<h2>¿Quién firma?</h2><p class="porque">El nombre bajo la línea de la firma y tu profesión o cargo. La firma en imagen es opcional; sin ella, la hoja trae la línea para firmar a mano.</p>' +
+      '<div class="campos">' +
+      '<div class="campo c3"><label for="m-fnombre">Nombre en la firma</label><input id="m-fnombre" type="text" data-mk="firmaNombre" placeholder="Si lo dejas vacío, va el de arriba"></div>' +
+      '<div class="campo c3"><label for="m-titulo">Profesión o cargo</label><input id="m-titulo" type="text" data-mk="titulo" placeholder="Lic. en Producción Agropecuaria Sustentable"></div>' +
+      '<div class="campo"><span class="etiqueta">Tu firma en imagen</span><div class="logo-zona"><div class="logo-vista" id="m-firma-vista" style="width:150px"></div><div><button type="button" class="btn claro chico" id="m-firma-subir">Subir firma</button><br><button type="button" class="btn-texto peligro" id="m-firma-quitar">Quitar la firma</button></div></div>' +
+      '<span class="ayuda">Firma con tinta negra en una hoja blanca y tómale una foto de cerca.</span></div></div>' +
+      '<p class="ayuda" style="margin-top:16px">Todo esto vive en este navegador. En un aparato prestado, bórralo al terminar. <button type="button" class="btn-texto peligro" id="m-borrar">Borrar mis datos de este navegador</button></p></section>';
+  };
+  M.enlazarMembrete = function (raiz, alCambiar) {
+    var m = M.membrete.leer();
+    function pintarVistas() {
+      var lv = M.$('#m-logo-vista', raiz), fv = M.$('#m-firma-vista', raiz), vm = M.$('#vista-membrete', raiz);
+      if (lv) lv.innerHTML = m.logo ? '<img alt="Tu logo" src="' + m.logo + '">' : '<div class="mono" style="background:' + esc(m.color) + '">' + esc(M.membrete.iniciales(m.nombre)) + '</div>';
+      if (fv) fv.innerHTML = m.firma ? '<img alt="Tu firma" src="' + m.firma + '">' : '<span class="ayuda">sin firma</span>';
+      var lq = M.$('#m-logo-quitar', raiz), fq = M.$('#m-firma-quitar', raiz);
+      if (lq) lq.style.visibility = m.logo ? 'visible' : 'hidden';
+      if (fq) fq.style.visibility = m.firma ? 'visible' : 'hidden';
+      if (vm) vm.innerHTML = M.vistaMembrete(m);
+    }
+    function llenarMembrete() {
+      M.$$('[data-mk]', raiz).forEach(function (el) {
+        var v = m[el.dataset.mk];
+        if (el.type === 'radio') el.checked = el.value === v; else if (document.activeElement !== el) el.value = v || '';
+      });
+      pintarVistas();
+    }
+    function cambio() { M.membrete.guardar(m); pintarVistas(); if (alCambiar) alCambiar(m); }
+    raiz.addEventListener('input', function (e) {
+      var el = e.target; if (!el.dataset || !el.dataset.mk) return;
+      if (el.type === 'radio' && !el.checked) return;
+      m[el.dataset.mk] = el.dataset.mk === 'rfc' ? el.value.toUpperCase() : el.value; cambio();
+    });
+    raiz.addEventListener('change', function (e) { var el = e.target; if (el.type === 'radio' && el.dataset.mk && el.checked) { m[el.dataset.mk] = el.value; cambio(); } });
+    function subir(clave, lado) {
+      var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';
+      inp.onchange = function () { var f = inp.files && inp.files[0]; if (f) M.leerImagen(f, lado, function (url) { m[clave] = url; cambio(); }); };
+      inp.click();
+    }
+    function al(id, f) { var el = M.$(id, raiz); if (el) el.onclick = f; }
+    al('#m-logo-subir', function () { subir('logo', 520); });
+    al('#m-firma-subir', function () { subir('firma', 640); });
+    al('#m-logo-quitar', function () { m.logo = ''; cambio(); });
+    al('#m-firma-quitar', function () { m.firma = ''; cambio(); });
+    al('#m-borrar', function () {
+      (M.confirmar || function (t) { return Promise.resolve(window.confirm(t)); })('Se borra de este navegador todo lo de la mochila: tu membrete y todos tus documentos guardados. Si quieres conservar algo, descárgalo antes. ¿Borrar?')
+        .then(function (si) { if (si) { M.borrarTodo(); window.location.reload(); } });
+    });
+    llenarMembrete();
+    return { recargar: function () { m = M.membrete.leer(); llenarMembrete(); }, leer: function () { return m; } };
+  };
+
+  /* ---------- Los ejemplos que se tocan para llenar ---------- */
+  function enlazarEjemplos(raiz) {
+    raiz.addEventListener('click', function (e) {
+      var b = e.target.closest('.ejemplos button'); if (!b) return;
+      var caja = b.closest('.ejemplos'), id = caja.dataset.para, inp = id && document.getElementById(id);
+      if (!inp) return;
+      if (caja.dataset.modo === 'renglon' || inp.tagName === 'TEXTAREA' && caja.dataset.modo !== 'reemplazar') {
+        var ls = inp.value.split(/\r?\n/).map(function (x) { return x.trim(); }).filter(Boolean);
+        if (ls.indexOf(b.textContent) < 0) ls.push(b.textContent);
+        inp.value = ls.join('\n');
+      } else inp.value = b.textContent;
+      inp.dispatchEvent(new Event('input', { bubbles: true }));
+      inp.dispatchEvent(new Event('change', { bubbles: true }));
+      if (puntero) inp.focus();
+    });
+  }
+
+  /* ---------- La guía ---------- */
+  M.guia = function (o) {
+    var raiz = o.raiz, marco = o.marco;
+    var preguntas = [], porId = {}, tramos = [];
+    /* Lee las preguntas. Se vuelve a llamar cuando la página las cambia (reconstruir) */
+    function escanear() {
+      preguntas = M.$$('.pregunta', o.secciones || raiz);
+      porId = {}; tramos = [];
+      preguntas.forEach(function (p) {
+        porId[p.dataset.paso] = p;
+        var t = tramos.filter(function (x) { return x.nombre === p.dataset.tramo; })[0];
+        if (!t) { t = { nombre: p.dataset.tramo, pasos: [] }; tramos.push(t); }
+        t.pasos.push(p); p.tramo = t;
+        if (p._guia) return;
+        p._guia = true;
+        var donde = document.createElement('p'); donde.className = 'donde'; p.insertBefore(donde, p.firstChild);
+        var h = p.querySelector('h2'); if (h) { h.id = h.id || 'q-' + p.dataset.paso; p.setAttribute('aria-labelledby', h.id); }
+        p.setAttribute('role', 'group'); p.hidden = true;
+      });
+    }
+    escanear();
+    var editandoMembrete = o.membrete ? !M.membrete.leer().nombre : false;
+    var si = { membreteListo: function () { return !editandoMembrete; }, membreteEditar: function () { return editandoMembrete; } };
+    for (var k in (o.si || {})) si[k] = o.si[k];
+    var actual = null, latir = false;
+
+    /* El camino de arriba */
+    var camino = document.createElement('nav'); camino.className = 'camino'; camino.setAttribute('aria-label', 'Los tramos del documento');
+    function listaCamino() {
+      return tramos.map(function (t, i) {
+        return '<li><button type="button" data-tramo="' + i + '"><span class="num">' + (i + 1) + '</span><span class="nom">' + esc(t.nombre) + '</span></button></li>';
+      }).join('');
+    }
+    camino.innerHTML = '<ol class="camino-lista">' + listaCamino() + '</ol><div class="avance" aria-hidden="true"><i></i></div><div class="camino-pie"><span class="cuenta-pasos"></span><button type="button" class="btn-texto indice">Ver todos los pasos</button></div>';
+    var ancla = o.secciones || preguntas[0];
+    ancla.parentNode.insertBefore(camino, ancla);
+
+    /* Lo que se dice cuando falta algo, y los botones de abajo */
+    var falta = document.createElement('p'); falta.className = 'falta'; falta.hidden = true; falta.setAttribute('role', 'status');
+    var pie = document.createElement('div'); pie.className = 'pie-guia';
+    pie.innerHTML = '<button type="button" class="btn claro atras">Atrás</button><button type="button" class="btn claro ver-hoja">Ver la hoja</button><button type="button" class="btn seguir">Siguiente</button>';
+    raiz.appendChild(falta); raiz.appendChild(pie);
+
+    /* La ventanita del celular */
+    var ventana = document.createElement('button'); ventana.type = 'button'; ventana.className = 'ventanita';
+    ventana.setAttribute('aria-label', 'Ver la hoja completa');
+    ventana.innerHTML = '<span class="rot">Así va tu hoja</span><span class="marco-mini"></span><span class="ver">Ver completa</span>';
+    raiz.insertBefore(ventana, falta);
+
+    function visible(p) { var c = p.dataset.si; return !c || !si[c] || !!si[c](); }
+    function lista() { return preguntas.filter(visible); }
+    function requeridos(p) { return M.$$('[data-requerido]', p); }
+    function lleno(el) { return el.type === 'checkbox' ? el.checked : String(el.value || '').trim() !== ''; }
+    function estado() { var s = o.estado(); if (!s.guia) s.guia = { paso: '', visto: {} }; if (!s.guia.visto) s.guia.visto = {}; return s.guia; }
+    /* La página puede decir si un paso está listo: con un objeto por paso o con una función */
+    function listoDeLaPagina(id, p) {
+      if (typeof o.listo === 'function') return o.listo(id, p);
+      if (o.listo && o.listo[id]) return !!o.listo[id]();
+      return undefined;
+    }
+    function listo(p) {
+      var id = p.dataset.paso, a = listoDeLaPagina(id, p);
+      if (a !== undefined && a !== null) return !!a;
+      var r = requeridos(p);
+      if (r.length) return r.every(lleno);
+      if (/^mb-/.test(id)) return !!M.membrete.leer().nombre;
+      if (estado().visto[id]) return true;
+      // Sin requeridos: cuenta como lleno si ya trae algo escrito
+      return M.$$('input[type=text], input[type=number], input[type=email], input[type=tel], input[type=date], textarea', p).some(function (el) { return (el.dataset.k || el.dataset.mk) && lleno(el); });
+    }
+    function faltan() {
+      var l = [];
+      lista().forEach(function (p) {
+        var id = p.dataset.paso;
+        if (listoDeLaPagina(id, p) === false && p.dataset.falta) l.push({ paso: id, t: p.dataset.falta, tramo: p.tramo.nombre });
+        requeridos(p).forEach(function (el) { if (!lleno(el)) l.push({ paso: id, t: el.dataset.requerido, tramo: p.tramo.nombre }); });
+      });
+      return l;
+    }
+
+    function pintarCamino() {
+      var vis = lista(), hechos = vis.filter(listo).length;
+      M.$$('.camino-lista button', camino).forEach(function (b) {
+        var t = tramos[+b.dataset.tramo], suyos = t ? t.pasos.filter(visible) : [];
+        var es = !!(actual && porId[actual] && porId[actual].tramo === t);
+        b.parentNode.hidden = !suyos.length;
+        b.classList.toggle('actual', !!es);
+        b.classList.toggle('hecho', !es && suyos.length && suyos.every(listo));
+        b.setAttribute('aria-current', es ? 'step' : 'false');
+      });
+      var n = 0; M.$$('.camino-lista li', camino).forEach(function (li) { if (!li.hidden) li.querySelector('.num').textContent = ++n; });
+      M.$('.avance i', camino).style.width = (100 * hechos / Math.max(1, vis.length)).toFixed(1) + '%';
+      var i = vis.indexOf(porId[actual]);
+      M.$('.cuenta-pasos', camino).textContent = 'Paso ' + (i + 1) + ' de ' + vis.length;
+    }
+    function pintarDonde(p) {
+      var suyos = p.tramo.pasos.filter(visible), i = suyos.indexOf(p);
+      M.$('.donde', p).innerHTML = '<span class="tramo">' + esc(p.tramo.nombre) + '</span>' + (suyos.length > 1 ? '<span class="de">' + (i + 1) + ' de ' + suyos.length + '</span>' : '');
+    }
+    function pintarPie() {
+      if (!actual || !porId[actual]) return;
+      var vis = lista(), i = vis.indexOf(porId[actual]);
+      M.$('.atras', pie).style.visibility = i > 0 ? 'visible' : 'hidden';
+      var ult = i === vis.length - 1, sig = M.$('.seguir', pie);
+      sig.hidden = ult;
+      sig.textContent = porId[actual].dataset.seguir || (vis[i + 1] && vis[i + 1].tramo !== porId[actual].tramo ? 'Siguiente: ' + vis[i + 1].tramo.nombre.replace(/^./, function (x) { return x.toLowerCase(); }) : 'Siguiente');
+      if (celular() && sig.textContent.length > 18) sig.textContent = 'Siguiente';
+    }
+
+    /* Ilumina en la hoja la parte que se está llenando */
+    function aplicarFoco() {
+      var hoja = marco.querySelector('.hoja'); if (!hoja || !actual || !porId[actual]) return;
+      var claves = (porId[actual].dataset.foco || '').split(/\s+/).filter(Boolean);
+      var primero = null;
+      M.$$('[data-parte]', hoja).forEach(function (el) {
+        var partes = el.dataset.parte.split(/\s+/), si2 = claves.some(function (c) { return partes.indexOf(c) >= 0; });
+        el.classList.toggle('en-foco', si2);
+        if (si2 && !primero) primero = el;
+      });
+      hoja.classList.toggle('con-foco', !!primero);
+      return primero;
+    }
+    function seguirFoco(suave) {
+      var f = aplicarFoco(), panel = o.panel;
+      if (f && panel && !celular() && panel.scrollHeight > panel.clientHeight + 4) {
+        var pr = panel.getBoundingClientRect(), fr = f.getBoundingClientRect();
+        var meta = panel.scrollTop + (fr.top - pr.top) - Math.min(140, panel.clientHeight * 0.22);
+        if (fr.top < pr.top + 60 || fr.bottom > pr.bottom - 40) panel.scrollTo({ top: Math.max(0, meta), behavior: suave ? 'smooth' : 'auto' });
+      }
+      pintarVentana();
+    }
+    function pintarVentana() {
+      if (!celular()) return;
+      var mini = M.$('.marco-mini', ventana), hoja = marco.querySelector('.hoja');
+      if (!hoja) return;
+      var copia = hoja.cloneNode(true); copia.style.transform = ''; copia.style.position = 'absolute'; copia.style.left = '0'; copia.style.top = '0';
+      mini.innerHTML = ''; mini.appendChild(copia);
+      var W = mini.clientWidth || 320, H = mini.clientHeight || 190, ancho = copia.offsetWidth || 816;
+      var k = Math.max(W / ancho, 0.5);
+      var f = copia.querySelector('.en-foco'), fx = 0, fy = 0, fw = ancho, fh = 0;
+      if (f) {
+        var r0 = copia.getBoundingClientRect(), r1 = f.getBoundingClientRect();
+        fx = r1.left - r0.left; fy = r1.top - r0.top; fw = r1.width; fh = r1.height;
+      }
+      var dx = Math.max(0, Math.min(ancho * k - W, (fx + fw / 2) * k - W / 2));
+      var dy = Math.max(0, Math.min(copia.offsetHeight * k - H, (fy + Math.min(fh, H / k) / 2) * k - H / 2));
+      if (!f) { dx = 0; dy = 0; }
+      copia.style.transformOrigin = 'top left';
+      copia.style.transform = 'translate(' + (-dx).toFixed(1) + 'px,' + (-dy).toFixed(1) + 'px) scale(' + k.toFixed(4) + ')';
+    }
+    var pintarVentanaLuego = M.debounce(pintarVentana, 140);
+    if (window.MutationObserver) {
+      new MutationObserver(function () {
+        var f = aplicarFoco();
+        if (latir && f) {
+          M.$$('.en-foco', marco).forEach(function (el) { el.classList.remove('late'); void el.offsetWidth; el.classList.add('late'); });
+        }
+        latir = false;
+        pintarVentanaLuego();
+        pintarCamino();
+      }).observe(marco, { childList: true });
+    }
+    raiz.addEventListener('input', function () { latir = true; ocultarFalta(); });
+    raiz.addEventListener('change', function () { latir = true; });
+
+    function ocultarFalta() { if (!falta.hidden) { falta.hidden = true; insistir = null; pintarPie(); } }
+    var insistir = null;
+    function ir(id, op) {
+      op = op || {};
+      var p = porId[id];
+      if (!p || !visible(p)) { var vis = lista(); p = vis[0]; id = p.dataset.paso; }
+      var antes = actual;
+      if (antes && porId[antes]) porId[antes].hidden = true;
+      actual = id; p.hidden = false;
+      p.classList.remove('entra', 'entra-atras'); void p.offsetWidth;
+      if (antes && antes !== id) p.classList.add(op.atras ? 'entra-atras' : 'entra');
+      var g = estado(); g.paso = id; g.visto[id] = 1;
+      falta.hidden = true; insistir = null;
+      pintarDonde(p); pintarCamino(); pintarPie();
+      if (o.alEntrar && o.alEntrar[id]) o.alEntrar[id](p);
+      if (o.alCambiarPaso) o.alCambiarPaso(id, p);
+      seguirFoco(true);
+      if (!op.sinScroll) {
+        var top = camino.getBoundingClientRect().top + window.scrollY - 70;
+        if (window.scrollY > top + 10 || celular()) window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+      }
+      if (puntero && !op.sinFoco) {
+        var f = p.querySelector('input:not([type=radio]):not([type=checkbox]):not([type=file]), textarea, select');
+        if (f && !f.closest('details:not([open])')) setTimeout(function () { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } }, 30);
+      }
+      if (o.guardar && o.estado().tocado) o.guardar();
+    }
+    /* Antes de moverse, la página puede volver a dibujar sus preguntas si cambió cuántas hay */
+    function mover() { if (o.antesDeMover) o.antesDeMover(); }
+    function siguiente() {
+      mover();
+      var p = porId[actual], vis = lista(), i = vis.indexOf(p);
+      var r = requeridos(p).filter(function (el) { return !lleno(el); });
+      if (r.length && insistir !== actual) {
+        insistir = actual;
+        falta.textContent = 'Falta ' + r.map(function (el) { return el.dataset.requerido; }).join(' y ') + '. Puedes seguir y volver después.';
+        falta.hidden = false;
+        M.$('.seguir', pie).textContent = 'Seguir sin esto';
+        try { r[0].focus({ preventScroll: true }); } catch (e) { r[0].focus(); }
+        return;
+      }
+      if (o.antesDeSeguir && o.antesDeSeguir[actual] && o.antesDeSeguir[actual]() === false) return;
+      if (i < vis.length - 1) ir(vis[i + 1].dataset.paso);
+    }
+    function atras() {
+      mover();
+      var vis = lista(), i = vis.indexOf(porId[actual]);
+      if (i > 0) ir(vis[i - 1].dataset.paso, { atras: true });
+    }
+    M.$('.seguir', pie).onclick = siguiente;
+    M.$('.atras', pie).onclick = atras;
+    M.$('.ver-hoja', pie).onclick = function () { M.verVista('hoja'); };
+    ventana.onclick = function () { M.verVista('hoja'); };
+    camino.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-tramo]');
+      if (b) mover();
+      if (b) { var t = tramos[+b.dataset.tramo], v = t.pasos.filter(visible); if (v.length) ir(v[0].dataset.paso, { atras: lista().indexOf(v[0]) < lista().indexOf(porId[actual]) }); return; }
+      if (e.target.closest('.indice')) indice();
+    });
+    raiz.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' || e.shiftKey || e.isComposing) return;
+      var el = e.target;
+      if (!el.matches || !el.matches('.pregunta input:not([type=checkbox]):not([type=radio]):not([type=file])')) return;
+      if (el.closest('[data-sin-enter]')) return;
+      e.preventDefault(); siguiente();
+    });
+    raiz.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-accion="editar-membrete"]');
+      if (b) { editandoMembrete = true; ir('mb-nombre'); return; }
+      var irA = e.target.closest('[data-ir]');
+      if (irA) { e.preventDefault(); mover(); ir(irA.dataset.ir); }
+    });
+    enlazarEjemplos(raiz);
+
+    /* Todos los pasos, para saltar a cualquiera */
+    function indice() {
+      mover();
+      var d = M.cajon('cajon-indice', 'Todos los pasos');
+      var n = 0;
+      M.$('.cuerpo-cajon', d).innerHTML = '<ol class="indice-pasos">' + tramos.map(function (t) {
+        var v = t.pasos.filter(visible); if (!v.length) return '';
+        n++;
+        return '<li><b>' + n + '. ' + esc(t.nombre) + '</b><ul>' + v.map(function (p) {
+          var h = p.querySelector('h2'), ok = listo(p), es = p.dataset.paso === actual;
+          return '<li class="' + (ok ? 'listo' : '') + (es ? ' aqui' : '') + '"><button type="button" class="btn-texto" data-ir-indice="' + p.dataset.paso + '">' + esc(h ? h.textContent : p.dataset.paso) + '</button>' + (es ? '<span class="ayuda"> aquí vas</span>' : '') + '</li>';
+        }).join('') + '</ul></li>';
+      }).join('') + '</ol>';
+      M.$('.cuerpo-cajon', d).onclick = function (e) {
+        var b = e.target.closest('[data-ir-indice]'); if (!b) return;
+        M.cerrarCajon(d); mover(); ir(b.dataset.irIndice);
+      };
+      M.abrirCajon(d);
+    }
+
+    window.addEventListener('resize', M.debounce(function () { pintarVentana(); }, 200));
+    var api = {
+      ir: ir, siguiente: siguiente, atras: atras, actual: function () { return actual; },
+      faltan: faltan, indice: indice,
+      refrescar: function () { if (actual && (!porId[actual] || !visible(porId[actual]))) { var v = lista(); ir(v[0].dataset.paso, { sinScroll: true, sinFoco: true }); } pintarCamino(); pintarPie(); if (actual) pintarDonde(porId[actual]); seguirFoco(false); },
+      /* La página volvió a dibujar sus preguntas (cambió cuántas hay): se leen de nuevo y
+         se queda en el mismo paso; si ya no existe, en el que ocupa su lugar */
+      reconstruir: function () {
+        var antes = actual, i0 = antes && porId[antes] ? lista().indexOf(porId[antes]) : 0;
+        escanear();
+        M.$('.camino-lista', camino).innerHTML = listaCamino();
+        var p = antes && porId[antes];
+        if (p && visible(p)) {
+          p.hidden = false; pintarDonde(p); pintarCamino(); pintarPie(); seguirFoco(false);
+          return;
+        }
+        actual = null;
+        var v = lista(); if (!v.length) return;
+        ir(v[Math.max(0, Math.min(i0, v.length - 1))].dataset.paso, { sinScroll: true, sinFoco: true });
+      },
+      paso: function (id) { return porId[id] || null; },
+      /* Abre un documento: vuelve a donde se quedó, o al primer paso que toca */
+      abrir: function (op) {
+        op = op || {};
+        var g = estado();
+        var destino = op.paso || (g.paso && porId[g.paso] ? g.paso : '');
+        if (!destino) { var v = lista(); destino = (op.primero && porId[op.primero] && visible(porId[op.primero])) ? op.primero : v[0].dataset.paso; }
+        ir(destino, { sinScroll: true, sinFoco: !!op.sinFoco });
+      },
+      editarMembrete: function (siNo) { editandoMembrete = !!siNo; api.refrescar(); },
+      pintarFaltan: function (cont) {
+        var l = faltan();
+        cont.innerHTML = l.length ? '<div class="pendientes"><b>Antes de entregar, revisa:</b><ul>' + l.map(function (x) {
+          return '<li><a href="#" data-ir="' + esc(x.paso) + '">' + esc(x.t.replace(/^./, function (c) { return c.toUpperCase(); })) + '</a> <span class="ayuda">(' + esc(x.tramo) + ')</span></li>';
+        }).join('') + '</ul></div>' : '<p class="todo-listo">Todo lo indispensable está lleno.</p>';
+      }
+    };
+    return api;
+  };
+
+  /* ---------- Una lista que se llena de uno en uno ----------
+     Arriba, los renglones ya puestos, en corto; abajo, el que se está llenando. */
+  M.listaGuiada = function (o) {
+    var actual = -1, todas = false, CORTA = 6;
+    function filas() {
+      var l = o.items();
+      var desde = 0, hasta = l.length;
+      if (!todas && l.length > CORTA + 1) { desde = Math.max(0, Math.min(actual - 2, l.length - CORTA)); hasta = desde + CORTA; }
+      return l.map(function (x, i) {
+        if (i < desde || i >= hasta) return '';
+        var r = o.resumen(x, i) || {};
+        return '<li class="rg-fila' + (i === actual ? ' actual' : '') + '"' + (r.color ? ' style="--color:' + esc(r.color) + '"' : '') + '>' +
+          '<span class="rg-n">' + (r.n || i + 1) + '</span><span class="rg-t' + (r.t ? '' : ' vacio-t') + '">' + esc(r.t || o.sinNombre || 'Sin nombre todavía') + '</span>' +
+          (r.d ? '<span class="rg-d">' + esc(r.d) + '</span>' : '') +
+          '<span class="rg-a">' + (i === actual ? '<span class="rg-aqui">aquí</span>' : '<button type="button" data-rg-editar="' + i + '">Cambiar</button>') + '</span></li>';
+      }).join('') + (l.length > CORTA + 1 ? '<li class="rg-mas"><button type="button" class="btn-texto" data-rg-todas>' + (todas ? 'Ver menos' : 'Ver los ' + l.length) + '</button></li>' : '');
+    }
+    function pintarFilas() { var ol = M.$('.rg-lista', o.cont); if (ol) ol.innerHTML = filas(); }
+    function pintar() {
+      var l = o.items();
+      if (actual >= l.length) actual = l.length - 1;
+      var lista = l.length ? '<p class="rg-van">' + esc(o.cuantos ? o.cuantos(l.length) : 'Ya van ' + l.length) + '</p><ol class="rg-lista">' + filas() + '</ol>' : '<p class="rg-vacio">' + esc(o.vacio || 'Todavía no hay nada.') + '</p>';
+      var h = '';
+      if (actual >= 0 && l[actual]) {
+        h += '<div class="rg-editor" data-sin-enter><p class="rg-cual">' + esc(o.titulo ? o.titulo(l[actual], actual) : 'Renglón ' + (actual + 1)) + '</p>' + o.editor(l[actual], actual) +
+          '<div class="rg-botones"><button type="button" class="btn claro" data-rg-otra>' + M.ico.mas + esc(o.textoOtra || 'Agregar otro') + '</button>' +
+          (o.botones ? o.botones(l[actual], actual) : '') +
+          '<button type="button" class="btn-texto peligro" data-rg-quitar="' + actual + '">' + esc(o.textoQuitar || 'Quitar') + '</button></div></div>';
+      } else {
+        h += '<button type="button" class="btn" data-rg-otra>' + M.ico.mas + esc(o.textoPrimero || o.textoOtra || 'Agregar') + '</button>';
+      }
+      o.cont.innerHTML = h + lista;
+      if (o.llenar) o.llenar(o.cont);
+      if (o.alPintar) o.alPintar(o.cont, actual);
+    }
+    function enfocar() {
+      var f = M.$('.rg-editor input:not([type=checkbox]):not([type=radio]), .rg-editor textarea', o.cont);
+      if (f) setTimeout(function () { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } }, 20);
+    }
+    o.cont.addEventListener('click', function (e) {
+      var b;
+      if ((b = e.target.closest('[data-rg-editar]'))) { actual = +b.dataset.rgEditar; pintar(); enfocar(); var ed = M.$('.rg-editor', o.cont); if (ed && ed.getBoundingClientRect().top < 60) ed.scrollIntoView({ block: 'start', behavior: 'smooth' }); return; }
+      if (e.target.closest('[data-rg-todas]')) { todas = !todas; pintarFilas(); return; }
+      if ((b = e.target.closest('[data-rg-otra]'))) {
+        var i = o.agregar(); actual = i == null ? o.items().length - 1 : i; pintar(); enfocar();
+        if (o.alCambiar) o.alCambiar(); return;
+      }
+      if ((b = e.target.closest('[data-rg-quitar]'))) {
+        var j = +b.dataset.rgQuitar;
+        Promise.resolve(o.quitar(j)).then(function (hecho) {
+          if (hecho === false) return;
+          var n = o.items().length; actual = Math.min(j, n - 1); pintar(); if (o.alCambiar) o.alCambiar();
+        });
+      }
+    });
+    return {
+      pintar: pintar, filas: pintarFilas,
+      editar: function (i) { actual = i; pintar(); },
+      actual: function () { return actual; },
+      /* Al entrar al paso: el primero sin nombre, o el último */
+      empezar: function (esVacio) {
+        var l = o.items(), i = -1;
+        l.forEach(function (x, j) { if (i < 0 && esVacio && esVacio(x)) i = j; });
+        actual = i >= 0 ? i : (actual >= 0 && actual < l.length ? actual : l.length - 1);
+        pintar();
+      }
+    };
+  };
+
+  /* ---------- Entregar: PDF, Word, imagen, archivo ---------- */
+  var ICO = {
+    pdf: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h4"/>',
+    word: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="m8.5 11 1.2 6 1.8-4.5 1.8 4.5 1.2-6"/>',
+    imagen: '<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4.5 18 5-5 3.5 3.5 2.5-2.5 4 4"/>',
+    archivo: '<path d="M12 4v11"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M5 20h14"/>',
+    texto: '<path d="M5 6h14M5 10h14M5 14h9"/><path d="M15 17.5 17 20l3-4"/>'
+  };
+  M.entregas = function (cont, opciones) {
+    cont.innerHTML = '<div class="entregas">' + opciones.map(function (x, i) {
+      return '<button type="button" class="entrega' + (x.principal ? ' principal' : '') + '" data-entrega="' + i + '">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICO[x.ico] || ICO.archivo) + '</svg>' +
+        '<span class="t">' + esc(x.t) + '</span><span class="d">' + esc(x.d) + '</span></button>';
+    }).join('') + '</div>';
+    cont.onclick = function (e) {
+      var b = e.target.closest('[data-entrega]'); if (!b || b.disabled) return;
+      var x = opciones[+b.dataset.entrega];
+      var r = x.hacer();
+      if (r && r.then) {
+        b.disabled = true; b.classList.add('haciendo');
+        r.then(function (msg) { if (typeof msg === 'string' && msg) M.aviso(msg); }, function (err) { M.aviso('No se pudo: ' + ((err && err.message) || 'algo falló') + '.', 'mal'); })
+          .then(function () { b.disabled = false; b.classList.remove('haciendo'); });
+      }
+    };
+  };
+})();
+
+/* Cotizar y cobrar: la cuenta en el sobre, la cotización y el recibo en la hoja.
+   Se llena una pregunta a la vez (M.guia); al final sale en PDF, Word, imagen y archivo. */
 (function () {
   'use strict';
   var $ = M.$, n = M.num, esc = M.esc;
   var A = new M.Archivero('cobrar');
   var banco = $('.banco');
-  var s, c, memb;
+  var s, c, memb, guia, vistaMembrete;
   var COLOR_TRABAJO = '#00899e', COLOR_GASTOS = '#c46a1f', COLOR_IMPREVISTOS = '#7b52ae';
+  var PASOS_RECIBO = ['recibo-que', 'recibo-datos', 'recibo-entregar'];
 
   /* ---------- El documento vacío ---------- */
   function nuevo() {
@@ -1204,7 +2636,8 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
       vista: 'unico', incluye: '', noIncluye: '',
       anticipo: 50, iva: false, formaPago: 'Transferencia o efectivo', notas: '',
       tipoDoc: 'cotizacion',
-      recibo: { folio: '', fecha: M.hoyISO(), concepto: 'anticipo', monto: '', anteriores: '', forma: 'Transferencia', referencia: '', notaFiscal: true, manual: false }
+      recibo: { activo: false, folio: '', fecha: M.hoyISO(), concepto: 'anticipo', monto: '', anteriores: '', forma: 'Transferencia', referencia: '', notaFiscal: true, manual: false },
+      guia: { paso: '', visto: {} }
     };
   }
   function mezclar(base, x) {
@@ -1214,7 +2647,11 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
     }
     return base;
   }
-  function completar(d) { return mezclar(nuevo(), M.copia(d || {})); }
+  function completar(d) {
+    var x = mezclar(nuevo(), M.copia(d || {}));
+    if (x.tipoDoc === 'recibo') x.recibo.activo = true;
+    return x;
+  }
 
   /* ---------- La cuenta ---------- */
   function suma(l, f) { return (l || []).reduce(function (a, x) { return a + f(x); }, 0); }
@@ -1266,9 +2703,29 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
     }
     return [{ c: titulo, d: extra, q: 1, pu: c.precio, imp: c.precio }];
   }
+  function lineas(t) { return String(t || '').split(/\r?\n/).map(function (x) { return x.trim(); }).filter(Boolean); }
+  function vence() { return s.fecha && n(s.vigencia) ? M.fecha(M.sumarDias(s.fecha, n(s.vigencia))) : ''; }
+  /* Las condiciones, iguales en la hoja, en Word y en la imagen */
+  function condiciones() {
+    var cond = [], v = vence();
+    if (v) cond.push('Esta cotización vale hasta el ' + v + '.');
+    var ant = n(s.anticipo);
+    if (ant >= 100) cond.push('El pago completo se hace por adelantado, para apartar la fecha.');
+    else if (ant > 0) cond.push('Para apartar la fecha se pide un anticipo del ' + ant + '% (' + M.pesos(c.anticipo) + '); el resto se paga al terminar.');
+    else cond.push('El pago se hace al terminar el servicio.');
+    if (s.formaPago) cond.push('Forma de pago: ' + s.formaPago.replace(/^./, function (x) { return x.toLowerCase(); }) + '.');
+    lineas(s.notas).forEach(function (x) { cond.push(/[.!?]$/.test(x) ? x : x + '.'); });
+    cond.push(s.iva ? 'Precios en pesos mexicanos. El total incluye el IVA.' : 'Precios en pesos mexicanos.');
+    return cond;
+  }
+  function queRecibo() {
+    return { anticipo: 'anticipo' + (n(s.anticipo) && n(s.anticipo) < 100 ? ' del ' + n(s.anticipo) + '%' : ''), final: 'pago final', total: 'pago total', otro: 'pago parcial' }[s.recibo.concepto] || 'pago';
+  }
 
   /* ---------- El sobre en pantalla ---------- */
   function pintarSobre() {
+    $('#txt-horas').textContent = c.personas > 1 ? 'Horas en total, por ' + c.personas + ' personas' : 'Horas en total';
+    $('#sub-horas').textContent = M.cifra(c.horasTodas) + ' h';
     $('#txt-trabajo').textContent = 'Tu trabajo: ' + M.cifra(c.horas) + ' h' + (c.personas > 1 ? ' × ' + c.personas + ' personas' : '') + ' × ' + (n(s.tarifa) ? M.pesos(n(s.tarifa)) : '$?') + ' la hora';
     $('#sub-trabajo').textContent = M.pesos(c.honor);
     $('#sub-viaticos').textContent = M.pesos(c.viat);
@@ -1299,13 +2756,12 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
       fila('Tu trabajo', c.honor) + fila('Viáticos y traslado', c.viat) + fila('Materiales e insumos', c.mat) + (c.otros ? fila('Otros gastos', c.otros) : '') +
       fila('Imprevistos (' + n(s.imprevistos) + '%)', c.imp) + (c.ajuste ? fila('Redondeo', c.ajuste) : '') +
       (s.iva ? fila('IVA (16%), que se le entrega al SAT', c.iva) + fila('Total con IVA', c.total) : '') + '</div>';
-    if (c.horas && n(h0().hacer) && c.invisibles > 0 && n(s.tarifa)) {
+    if (c.horas && n(s.horas.hacer) && c.invisibles > 0 && n(s.tarifa)) {
       h += '<p class="nota">Horas que nadie ve: ' + M.cifra(c.invisibles) + ' de ' + M.cifra(c.horasTodas) + '. Si cobraras solo las de hacer el trabajo, cobrarías ' + M.pesos(c.soloHacer) + ' y las otras ' + M.cifra(c.invisibles) + ' horas las regalarías.</p>';
     }
     if (c.precio > 0) h += '<p class="nota">Lo que te queda a ti: ' + M.pesos(r2(c.honor + c.ajuste)) + (c.imp ? ', más los imprevistos (' + M.pesos(c.imp) + ') si nada sale mal.' : '.') + '</p>';
     $('#cuenta').innerHTML = h;
   }
-  function h0() { return s.horas; }
   function fila(t, v) { return '<div class="linea-cuenta"><span>' + esc(t) + '</span><b>' + M.pesos(v) + '</b></div>'; }
 
   /* ---------- Renglones del sobre ---------- */
@@ -1330,49 +2786,40 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
 
   /* ---------- La hoja ---------- */
   function pareja(rot, v) { return v ? '<dt>' + esc(rot) + '</dt><dd>' + esc(v) + '</dd>' : ''; }
-  function lineas(t) { return String(t || '').split(/\r?\n/).map(function (x) { return x.trim(); }).filter(Boolean); }
   function bloqueCliente(rot) {
     var cl = s.cliente;
-    return '<div><div class="rot">' + (rot || 'Para') + '</div><div class="dato-grande"' + (cl.nombre ? '' : ' style="color:var(--t-tenue)"') + '>' + esc(cl.nombre || 'Nombre del cliente') + '</div>' +
+    return '<div data-parte="cliente"><div class="rot">' + (rot || 'Para') + '</div><div class="dato-grande"' + (cl.nombre ? '' : ' style="color:var(--t-tenue)"') + '>' + esc(cl.nombre || 'Nombre del cliente') + '</div>' +
       (cl.contacto ? '<div class="dato">Atención: ' + esc(cl.contacto) + '</div>' : '') +
       ([cl.telefono, cl.correo].filter(Boolean).length ? '<div class="dato">' + esc([cl.telefono, cl.correo].filter(Boolean).join(', ')) + '</div>' : '') + '</div>';
   }
   function hojaCotizacion() {
     var m = memb, sv = s.servicio;
     var der = '<div class="tipo">Cotización</div><div class="folio">No. <b>' + esc(s.folio || 's/n') + '</b></div>';
-    var vence = s.fecha && n(s.vigencia) ? M.fecha(M.sumarDias(s.fecha, n(s.vigencia))) : '';
+    var v = vence();
     var datos = '<div class="datos">' + bloqueCliente() +
-      '<dl class="pares">' + pareja('Fecha', M.fecha(s.fecha)) + pareja('Vale hasta', vence) + pareja('Lugar', sv.lugar) + pareja('Cuándo', sv.cuando) + '</dl></div>';
-    var cuerpo = '<h2 class="titulo-doc"' + (sv.titulo ? '' : ' style="color:var(--t-tenue)"') + '>' + esc(sv.titulo || 'Nombre del servicio') + '</h2>' + (sv.descripcion ? '<p class="bajada">' + M.escBr(sv.descripcion) + '</p>' : '');
+      '<dl class="pares" data-parte="datos">' + pareja('Fecha', M.fecha(s.fecha)) + pareja('Vale hasta', v) + pareja('Lugar', sv.lugar) + pareja('Cuándo', sv.cuando) + '</dl></div>';
+    var cuerpo = '<div data-parte="servicio"><h2 class="titulo-doc"' + (sv.titulo ? '' : ' style="color:var(--t-tenue)"') + '>' + esc(sv.titulo || 'Nombre del servicio') + '</h2>' +
+      (sv.descripcion ? '<p class="bajada">' + M.escBr(sv.descripcion) + '</p>' : '<p class="bajada hueco" data-parte="servicio">Aquí va en qué consiste.</p>') + '</div>';
     var rs = renglonesCliente();
-    var tabla = '<table class="tabla"><thead><tr><th>Concepto</th><th class="num">Cant.</th><th class="num">Precio unitario</th><th class="num">Importe</th></tr></thead><tbody>' +
+    var tabla = '<table class="tabla" data-parte="tabla"><thead><tr><th>Concepto</th><th class="num">Cant.</th><th class="num">Precio unitario</th><th class="num">Importe</th></tr></thead><tbody>' +
       rs.map(function (r) {
         var pu = r.pu == null ? r.imp : r.pu;
         return '<tr><td class="concepto"><b>' + esc(r.c) + '</b>' + (r.d ? '<small>' + esc(r.d) + '</small>' : '') + '</td>' +
           '<td class="num">' + M.cifra(r.q) + (r.unidad ? ' h' : '') + '</td><td class="num">' + M.pesos(pu) + '</td><td class="num">' + M.pesos(r.imp) + '</td></tr>';
       }).join('') + '</tbody></table>';
-    var totales = '<div class="totales">' +
+    var totales = '<div class="totales" data-parte="totales">' +
       (s.iva ? '<div class="fila"><span>Subtotal</span><b>' + M.pesos(c.precio) + '</b></div><div class="fila"><span>IVA 16%</span><b>' + M.pesos(c.iva) + '</b></div>' : '') +
       '<div class="fila gran"><span>Total</span><b>' + M.pesos(c.total) + '</b></div>' +
       '<div class="letra">Son: ' + M.conLetra(c.total) + '</div></div>';
     var inc = lineas(s.incluye), noinc = lineas(s.noIncluye);
-    var listas = '';
+    var listas = '<div class="seccion hueco" data-parte="incluye">Aquí va lo que incluye el servicio y lo que no.</div>';
     if (inc.length || noinc.length) {
       var bl = function (t, l) { return l.length ? '<div class="seccion"><h3>' + t + '</h3><ul>' + l.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>' : ''; };
-      listas = '<div class="' + (inc.length && noinc.length ? 'dos-columnas' : '') + '">' + bl('Incluye', inc) + bl('No incluye', noinc) + '</div>';
+      listas = '<div data-parte="incluye" class="' + (inc.length && noinc.length ? 'dos-columnas' : '') + '">' + bl('Incluye', inc) + bl('No incluye', noinc) + '</div>';
     }
-    var cond = [];
-    if (vence) cond.push('Esta cotización vale hasta el ' + vence + '.');
-    var ant = n(s.anticipo);
-    if (ant >= 100) cond.push('El pago completo se hace por adelantado, para apartar la fecha.');
-    else if (ant > 0) cond.push('Para apartar la fecha se pide un anticipo del ' + ant + '% (' + M.pesos(c.anticipo) + '); el resto se paga al terminar.');
-    else cond.push('El pago se hace al terminar el servicio.');
-    if (s.formaPago) cond.push('Forma de pago: ' + s.formaPago.replace(/^./, function (x) { return x.toLowerCase(); }) + '.');
-    lineas(s.notas).forEach(function (x) { cond.push(/[.!?]$/.test(x) ? x : x + '.'); });
-    cond.push(s.iva ? 'Precios en pesos mexicanos. El total incluye el IVA.' : 'Precios en pesos mexicanos.');
-    var condiciones = '<div class="seccion"><h3>Condiciones</h3><ul>' + cond.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+    var condicionesH = '<div class="seccion" data-parte="condiciones"><h3>Condiciones</h3><ul>' + condiciones().map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
       (m.pago ? '<p style="margin-top:4pt"><b style="font-weight:500;color:var(--t-tinta)">Datos para el pago:</b> ' + M.escBr(m.pago) + '</p>' : '') + '</div>';
-    var cierre = '<div class="cierre">' + condiciones + '<div class="firmas">' + M.firma(m, 'Atentamente') + '</div></div>';
+    var cierre = '<div class="cierre">' + condicionesH + '<div class="firmas">' + M.firma(m, 'Atentamente') + '</div></div>';
     return M.hoja({ acento: m.color, pieIzq: M.pieMembrete(m), pieDer: 'Cotización No. ' + esc(s.folio || '') },
       M.encabezado(m, der) + datos + cuerpo + tabla + totales + listas + cierre);
   }
@@ -1380,24 +2827,24 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
     var m = memb, sv = s.servicio, r = s.recibo;
     var monto = n(r.monto), anteriores = n(r.anteriores), saldo = r2(c.total - anteriores - monto);
     var der = '<div class="tipo">Recibo</div><div class="folio">No. <b>' + esc(r.folio || 's/n') + '</b></div>';
-    var datos = '<div class="datos">' + bloqueCliente('Cliente') + '<dl class="pares">' + pareja('Fecha del pago', M.fecha(r.fecha)) + pareja('Forma de pago', r.forma) + pareja('Referencia', r.referencia) + pareja('Cotización', s.folio ? 'No. ' + s.folio : '') + '</dl></div>';
-    var que = { anticipo: 'anticipo' + (n(s.anticipo) && n(s.anticipo) < 100 ? ' del ' + n(s.anticipo) + '%' : ''), final: 'pago final', total: 'pago total', otro: 'pago parcial' }[r.concepto] || 'pago';
-    var recibi = '<div class="recibi"><p class="frase">Recibí de <b>' + esc(s.cliente.nombre || 'nombre del cliente') + '</b> la cantidad de</p>' +
+    var datos = '<div class="datos">' + bloqueCliente('Cliente') + '<dl class="pares" data-parte="datos">' + pareja('Fecha del pago', M.fecha(r.fecha)) + pareja('Forma de pago', r.forma) + pareja('Referencia', r.referencia) + pareja('Cotización', s.folio ? 'No. ' + s.folio : '') + '</dl></div>';
+    var recibi = '<div class="recibi" data-parte="recibi"><p class="frase">Recibí de <b>' + esc(s.cliente.nombre || 'nombre del cliente') + '</b> la cantidad de</p>' +
       '<div class="monto-recibo">' + M.pesos(monto) + '</div><div class="letra-recibo">(' + M.conLetra(monto) + ')</div>' +
-      '<p class="frase">por concepto de ' + esc(que) + ' del servicio <b>' + esc(sv.titulo || 'sin título') + '</b>.</p></div>';
+      '<p class="frase">por concepto de ' + esc(queRecibo()) + ' del servicio <b>' + esc(sv.titulo || 'sin título') + '</b>.</p></div>';
     var lugar = (sv.lugar || sv.cuando) ? '<dl class="pares" style="margin-top:6pt">' + pareja('Lugar del servicio', sv.lugar) + pareja('Fecha del servicio', sv.cuando) + '</dl>' : '';
-    var cuenta = '<div class="cuenta-recibo">' +
+    var cuenta = '<div class="cuenta-recibo" data-parte="cuenta-recibo">' +
       '<div class="fila"><span>Importe total del servicio' + (s.iva ? ' (con IVA)' : '') + '</span><b>' + M.pesos(c.total) + '</b></div>' +
       (anteriores ? '<div class="fila"><span>Pagos anteriores</span><b>' + M.pesos(anteriores) + '</b></div>' : '') +
       '<div class="fila"><span>Este pago</span><b>' + M.pesos(monto) + '</b></div>' +
       '<div class="fila fuerte"><span>' + (saldo <= 0.005 ? 'Pagado por completo' : 'Saldo pendiente') + '</span><b>' + M.pesos(Math.max(0, saldo)) + '</b></div></div>';
-    var nota = r.notaFiscal ? '<p class="nota-fiscal">Este recibo comprueba un pago entre las partes y no sustituye a una factura (CFDI).</p>' : '<div></div>';
+    var nota = r.notaFiscal ? '<p class="nota-fiscal" data-parte="nota">Este recibo comprueba un pago entre las partes y no sustituye a una factura (CFDI).</p>' : '<div data-parte="nota"></div>';
     var cierre = '<div class="cierre" style="margin-top:.45in">' + nota + '<div class="firmas">' + M.firma(m, 'Recibí') + '</div></div>';
     return M.hoja({ acento: m.color, pieIzq: M.pieMembrete(m), pieDer: 'Recibo No. ' + esc(r.folio || '') },
       M.encabezado(m, der) + datos + recibi + lugar + cuenta + cierre);
   }
   function pintarHojaYa() {
     $('#marco').innerHTML = s.tipoDoc === 'recibo' ? hojaRecibo() : hojaCotizacion();
+    $('#rot-hoja').textContent = s.tipoDoc === 'recibo' ? 'Así va tu recibo' : 'Así va tu cotización';
     M.ajustarHoja();
   }
   var pintarHoja = M.debounce(pintarHojaYa, 40);
@@ -1415,15 +2862,22 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
     if (r.concepto === 'final') { if (!n(r.anteriores)) r.anteriores = c.anticipo; }
     else if (r.concepto === 'anticipo' || r.concepto === 'total') r.anteriores = '';
     if (r.concepto !== 'otro') { r.monto = montoSugerido(); r.manual = false; }
-    M.llenar($('#paso-recibo'), s);
+    M.llenar(banco, s);
   }
   function asegurarRecibo() {
     if (!s.recibo.folio) s.recibo.folio = String((M.leer('folio:REC', 0) || 0) + 1).padStart(3, '0');
     if (!s.recibo.fecha) s.recibo.fecha = M.hoyISO();
     if (!s.recibo.manual) s.recibo.monto = montoSugerido();
   }
-  function mostrarPasoRecibo() {
-    $('#paso-recibo').classList.toggle('oculto', s.tipoDoc !== 'recibo');
+  function ponerTipo(t) {
+    if (s.tipoDoc === t) return;
+    s.tipoDoc = t; c = calcular(s);
+    if (t === 'recibo') { s.recibo.activo = true; asegurarRecibo(); }
+    M.llenar(banco, s); pintarHojaYa();
+  }
+  function hacerRecibo() {
+    s.tocado = true; s.recibo.activo = true; ponerTipo('recibo'); c = calcular(s); asegurarRecibo(); M.llenar(banco, s); actualizar(); guardarLuego();
+    guia.refrescar(); guia.ir('recibo-que');
   }
 
   /* ---------- Guardar ---------- */
@@ -1431,31 +2885,37 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
     if (!s.tocado) return;
     if (A.guardar(s)) {
       var f = parseInt(s.folio, 10); if (f > (M.leer('folio:COT', 0) || 0)) M.guardar('folio:COT', f);
-      var rf = parseInt(s.recibo.folio, 10); if (s.tipoDoc === 'recibo' && rf > (M.leer('folio:REC', 0) || 0)) M.guardar('folio:REC', rf);
+      var rf = parseInt(s.recibo.folio, 10); if (s.recibo.activo && rf > (M.leer('folio:REC', 0) || 0)) M.guardar('folio:REC', rf);
       var d = new Date(); $('#estado').textContent = 'Guardado ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
     }
   }, 350);
 
   function actualizar() { c = calcular(s); if (s.tipoDoc === 'recibo' && !s.recibo.manual) { s.recibo.monto = montoSugerido(); var mi = $('#r-monto'); if (mi && document.activeElement !== mi) mi.value = s.recibo.monto; } pintarSobre(); pintarHoja(); }
-  function abrir(d, mensaje, guardarYa) {
+  function abrir(d, mensaje, guardarYa, paso) {
     if (s && s.tocado) A.guardar(s);
     s = completar(d);
-    pintarListas(); M.llenar(banco, s); mostrarPasoRecibo();
-    if (s.tipoDoc === 'recibo') { c = calcular(s); asegurarRecibo(); M.llenar(banco, s); }
-    actualizar();
+    pintarListas(); M.llenar(banco, s);
+    c = calcular(s);
+    if (s.recibo.activo) { asegurarRecibo(); M.llenar(banco, s); }
+    actualizar(); pintarHojaYa();
     $('#estado').textContent = s.tocado ? 'Guardado' : 'Se guarda sola al escribir';
     if (s.tocado) A.marcarActual(s.id);
     if (guardarYa) { s.tocado = true; guardarLuego(); }
+    guia.abrir({ paso: paso, primero: memb.nombre ? 'cliente' : 'mb-nombre', sinFoco: true });
     if (mensaje) M.aviso(mensaje);
   }
 
   /* ---------- Cambios en el formulario ---------- */
-  M.escuchar(banco, function () { return s; }, function (k, el) {
+  M.escuchar(banco, function () { return s; }, function (k) {
     s.tocado = true;
     if (k === 'tarifa') M.guardar('tarifa', s.tarifa);
-    if (k === 'tipoDoc') { mostrarPasoRecibo(); if (s.tipoDoc === 'recibo') { c = calcular(s); asegurarRecibo(); M.llenar($('#paso-recibo'), s); } }
+    if (k === 'tipoDoc') {
+      var t = s.tipoDoc; s.tipoDoc = t === 'recibo' ? 'cotizacion' : 'recibo';
+      if (t === 'recibo') hacerRecibo(); else { ponerTipo('cotizacion'); guia.ir('entregar'); }
+      return;
+    }
     if (k === 'recibo.concepto') { c = calcular(s); aplicarConcepto(); }
-    if (k === 'recibo.monto') { s.recibo.manual = true; if (s.recibo.concepto !== 'otro' && Math.abs(n(s.recibo.monto) - montoSugerido()) > 0.005) { s.recibo.concepto = 'otro'; M.llenar($('#paso-recibo'), s); } }
+    if (k === 'recibo.monto') { s.recibo.manual = true; if (s.recibo.concepto !== 'otro' && Math.abs(n(s.recibo.monto) - montoSugerido()) > 0.005) { s.recibo.concepto = 'otro'; M.llenar(banco, s); } }
     if (k === 'recibo.anteriores' && s.recibo.concepto === 'final') { s.recibo.manual = false; }
     actualizar(); guardarLuego();
   });
@@ -1464,19 +2924,12 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
     var q = e.target.closest('[data-quitar]');
     if (q) { s[q.dataset.quitar].splice(+q.dataset.i, 1); s.tocado = true; pintarLista(q.dataset.quitar); actualizar(); guardarLuego(); return; }
     var sug = e.target.closest('.sugerencias button');
-    if (sug) {
-      var caja = sug.parentNode;
-      if (caja.dataset.lista) {
-        var nombre = caja.dataset.lista, t = sug.textContent;
-        s[nombre].push(nombre === 'materiales' ? { c: t, q: 1, p: '' } : { c: t, m: '' });
-        s.tocado = true; pintarLista(nombre); actualizar(); guardarLuego();
-        var ins = M.$$('#lista-' + nombre + ' .renglon'); var ult = ins[ins.length - 1];
-        if (ult) { var f = ult.querySelector(nombre === 'materiales' ? '.q' : '.monto'); if (f) f.focus(); }
-      } else if (caja.dataset.texto) {
-        var k = caja.dataset.texto, actual = lineas(s[k]);
-        if (actual.indexOf(sug.textContent) < 0) actual.push(sug.textContent);
-        s[k] = actual.join('\n'); s.tocado = true; M.llenar(banco, s); actualizar(); guardarLuego();
-      }
+    if (sug && sug.parentNode.dataset.lista && !sug.dataset.otro) {
+      var nombre = sug.parentNode.dataset.lista, t = sug.textContent;
+      s[nombre].push(nombre === 'materiales' ? { c: t, q: 1, p: '' } : { c: t, m: '' });
+      s.tocado = true; pintarLista(nombre); actualizar(); guardarLuego();
+      var ins = M.$$('#lista-' + nombre + ' .renglon'); var ult = ins[ins.length - 1];
+      if (ult) { var f = ult.querySelector(nombre === 'materiales' ? '.q' : '.monto'); if (f) f.focus(); }
     }
   });
   M.$$('.sugerencias[data-lista]').forEach(function (caja) {
@@ -1501,6 +2954,197 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
     M.aviso('Gasolina agregada a los viáticos.');
   };
 
+  /* ---------- Word ---------- */
+  function nombreArchivo(ext) {
+    var base = s.tipoDoc === 'recibo' ? 'recibo-' + (s.recibo.folio || '') : 'cotizacion-' + (s.folio || '');
+    return M.slug(base + '-' + (s.cliente.nombre || s.servicio.titulo || '')) + '.' + ext;
+  }
+  function pieWord() { return [memb.nombre, memb.telefono, memb.correo].filter(Boolean).join('   ·   '); }
+  function datosWord(d, izq, der) {
+    var paresW = der.filter(function (x) { return x[1]; }).map(function (x) { return { c: [{ t: x[0] + '   ', tam: 9, color: '#7B898C' }, { t: x[1], tam: 9 }], f: { despues: 1.5 } }; });
+    d.espacio(6);
+    d.tabla({ anchos: [d.util * 0.56, d.util * 0.44], margenCelda: 0.02, filas: [[{ parrafos: izq }, { parrafos: paresW.length ? paresW : [{ c: '' }] }]] });
+  }
+  function clienteWord(rot) {
+    var cl = s.cliente;
+    var l = [{ c: [{ t: rot || 'Para', tam: 7.8, color: '#7B898C' }], f: { despues: 1 } }, { c: [{ t: cl.nombre || 'Nombre del cliente', tam: 12, color: cl.nombre ? '#1D2A2E' : '#7B898C' }], f: { despues: 1 } }];
+    if (cl.contacto) l.push({ c: [{ t: 'Atención: ' + cl.contacto, tam: 9.5, color: '#4B5A5E' }] });
+    var tc = [cl.telefono, cl.correo].filter(Boolean).join(', ');
+    if (tc) l.push({ c: [{ t: tc, tam: 9.5, color: '#4B5A5E' }] });
+    return l;
+  }
+  function firmaWord(d, que) {
+    M.docxFirmas(d, [{ que: que, img: memb.firma, nombre: memb.firmaNombre || memb.nombre, cargo: memb.titulo }]);
+  }
+  function wordCotizacion() {
+    var m = memb, sv = s.servicio;
+    var d = M.docx({ acento: m.color, titulo: 'Cotización ' + (s.folio || ''), autor: m.nombre, pie: pieWord() });
+    M.docxMembrete(d, m, { tipo: 'Cotización', folio: 'No. ' + (s.folio || 's/n') });
+    datosWord(d, clienteWord(), [['Fecha', M.fecha(s.fecha)], ['Vale hasta', vence()], ['Lugar', sv.lugar], ['Cuándo', sv.cuando]]);
+    d.p([{ t: sv.titulo || 'Nombre del servicio', tam: 13 }], { antes: 10, despues: 2, junto: true });
+    if (sv.descripcion) d.p([{ t: sv.descripcion, tam: 9.5, color: '#4B5A5E' }], { despues: 6 });
+    var rs = renglonesCliente();
+    M.docxTablaDatos(d, [{ t: 'Concepto', ancho: d.util - 3.4 }, { t: 'Cant.', ancho: 0.7, alin: 'der' }, { t: 'Precio unitario', ancho: 1.35, alin: 'der' }, { t: 'Importe', ancho: 1.35, alin: 'der' }],
+      rs.map(function (r) {
+        var pu = r.pu == null ? r.imp : r.pu;
+        return [{ parrafos: [{ c: [{ t: r.c, b: true }] }].concat(r.d ? [{ c: [{ t: r.d, tam: 8.4, color: '#4B5A5E' }] }] : []) }, M.cifra(r.q) + (r.unidad ? ' h' : ''), M.pesos(pu), M.pesos(r.imp)];
+      }));
+    var ft = [];
+    if (s.iva) { ft.push([{ t: 'Subtotal' }, { t: M.pesos(c.precio), alin: 'der' }]); ft.push([{ t: 'IVA 16%' }, { t: M.pesos(c.iva), alin: 'der' }]); }
+    ft.push([{ t: [{ t: 'Total', b: true, color: '#FFFFFF', tam: 12 }], fondo: m.color || '#0B3C49' }, { t: [{ t: M.pesos(c.total), b: true, color: '#FFFFFF', tam: 12 }], fondo: m.color || '#0B3C49', alin: 'der' }]);
+    d.tabla({ anchos: [1.9, 1.4], alin: 'der', margenCelda: 0.09, margenV: 0.05, filas: ft, sinPie: true });
+    d.p([{ t: 'Son: ' + M.conLetra(c.total), tam: 7.9, color: '#4B5A5E' }], { alin: 'der', antes: 3, despues: 8 });
+    var inc = lineas(s.incluye), noinc = lineas(s.noIncluye);
+    if (inc.length) { d.titulo('Incluye', { tam: 9.5, b: true, antes: 8 }); d.lista(inc, { tam: 9 }); }
+    if (noinc.length) { d.titulo('No incluye', { tam: 9.5, b: true, antes: 8 }); d.lista(noinc, { tam: 9 }); }
+    d.titulo('Condiciones', { tam: 9.5, b: true, antes: 10 });
+    d.lista(condiciones(), { tam: 9 });
+    if (m.pago) d.p([{ t: 'Datos para el pago: ', b: true, tam: 9 }, { t: m.pago, tam: 9, color: '#4B5A5E' }], { antes: 4 });
+    firmaWord(d, 'Atentamente');
+    return d;
+  }
+  function wordRecibo() {
+    var m = memb, sv = s.servicio, r = s.recibo;
+    var monto = n(r.monto), anteriores = n(r.anteriores), saldo = r2(c.total - anteriores - monto);
+    var d = M.docx({ acento: m.color, titulo: 'Recibo ' + (r.folio || ''), autor: m.nombre, pie: pieWord() });
+    M.docxMembrete(d, m, { tipo: 'Recibo', folio: 'No. ' + (r.folio || 's/n') });
+    datosWord(d, clienteWord('Cliente'), [['Fecha del pago', M.fecha(r.fecha)], ['Forma de pago', r.forma], ['Referencia', r.referencia], ['Cotización', s.folio ? 'No. ' + s.folio : '']]);
+    d.espacio(8);
+    d.tabla({ anchos: [d.util], margenCelda: 0.22, margenV: 0.14, filas: [[{
+      fondo: d.suave(0.09), bordes: { top: { c: d.suave(0.55), g: 0.75 }, bottom: { c: d.suave(0.55), g: 0.75 }, left: { c: d.suave(0.55), g: 0.75 }, right: { c: d.suave(0.55), g: 0.75 } },
+      parrafos: [
+        { c: [{ t: 'Recibí de ', tam: 11 }, { t: s.cliente.nombre || 'nombre del cliente', b: true, tam: 11 }, { t: ' la cantidad de', tam: 11 }], f: { despues: 4 } },
+        { c: [{ t: M.pesos(monto), b: true, tam: 24, color: m.color || '#0B3C49' }], f: { despues: 2 } },
+        { c: [{ t: '(' + M.conLetra(monto) + ')', tam: 8.6, color: '#4B5A5E' }], f: { despues: 6 } },
+        { c: [{ t: 'por concepto de ' + queRecibo() + ' del servicio ', tam: 11 }, { t: sv.titulo || 'sin título', b: true, tam: 11 }, { t: '.', tam: 11 }] }
+      ]
+    }]] });
+    if (sv.lugar || sv.cuando) d.p([{ t: [sv.lugar && 'Lugar del servicio: ' + sv.lugar, sv.cuando && 'Fecha del servicio: ' + sv.cuando].filter(Boolean).join('     '), tam: 9, color: '#4B5A5E' }], { antes: 6 });
+    var ft = [[{ t: 'Importe total del servicio' + (s.iva ? ' (con IVA)' : '') }, { t: M.pesos(c.total), alin: 'der' }]];
+    if (anteriores) ft.push([{ t: 'Pagos anteriores' }, { t: M.pesos(anteriores), alin: 'der' }]);
+    ft.push([{ t: 'Este pago' }, { t: M.pesos(monto), alin: 'der' }]);
+    ft.push([{ t: [{ t: saldo <= 0.005 ? 'Pagado por completo' : 'Saldo pendiente', b: true }], bordes: { bottom: { c: m.color || '#0B3C49', g: 1 } } }, { t: [{ t: M.pesos(Math.max(0, saldo)), b: true }], alin: 'der', bordes: { bottom: { c: m.color || '#0B3C49', g: 1 } } }]);
+    d.espacio(6);
+    d.tabla({ anchos: [2.4, 1.3], alin: 'der', tam: 9.4, margenCelda: 0.05, margenV: 0.04, bordesCelda: { bottom: { c: '#DCE2E3', g: 0.5 } }, filas: ft });
+    if (r.notaFiscal) d.p([{ t: 'Este recibo comprueba un pago entre las partes y no sustituye a una factura (CFDI).', tam: 8, color: '#7B898C' }], { antes: 10 });
+    firmaWord(d, 'Recibí');
+    return d;
+  }
+  function bajarWord() {
+    c = calcular(s);
+    var d = s.tipoDoc === 'recibo' ? wordRecibo() : wordCotizacion();
+    return d.descargar(nombreArchivo('docx')).then(function () { return 'Listo: el Word se descargó.'; });
+  }
+
+  /* ---------- La imagen para WhatsApp ---------- */
+  var L = M.lienzo;
+  function bandaImagen(g, m, W) {
+    var col = m.color || '#0B3C49';
+    g.fillStyle = col; g.fillRect(0, 0, W, 250);
+    return L.logo(g, m, 72, 66, 118, true).then(function () {
+      var y = L.texto(g, m.nombre || 'Tu nombre o el de tu negocio', 220, 74, { tam: 44, peso: 600, color: '#FFFFFF', ancho: W - 292, max: 2, interlinea: 1.12 });
+      if (m.giro) L.texto(g, m.giro, 220, y + 6, { tam: 26, color: 'rgba(255,255,255,.82)', ancho: W - 292, max: 2 });
+    });
+  }
+  function pieImagen(g, m, W, H) {
+    L.linea(g, 72, H - 104, W - 72, H - 104, '#DCE2E3', 2);
+    var izq = m.telefono ? 'Tel. ' + m.telefono : (m.lugar || ''), der = m.correo || (m.telefono ? m.lugar || '' : '');
+    if (izq) L.texto(g, izq, 72, H - 82, { tam: 26, color: '#4B5A5E' });
+    if (der) L.texto(g, der, W - 72, H - 82, { tam: 26, color: '#4B5A5E', alin: 'der' });
+  }
+  function imagenCotizacion() {
+    var m = memb, sv = s.servicio, W = 1080, H = 1350, x = L.crear(W, H), g = x.g, col = m.color || '#0B3C49';
+    return L.fuentes().then(function () { return bandaImagen(g, m, W); }).then(function () {
+      L.texto(g, 'Cotización', 72, 296, { tam: 64, peso: 500, color: col });
+      L.texto(g, 'No. ' + (s.folio || 's/n'), W - 72, 306, { tam: 28, color: '#4B5A5E', alin: 'der' });
+      L.texto(g, M.fecha(s.fecha), W - 72, 344, { tam: 24, color: '#7B898C', alin: 'der' });
+      var y = 412;
+      L.texto(g, 'Para', 72, y, { tam: 24, color: '#7B898C' });
+      y = L.texto(g, s.cliente.nombre || 'Nombre del cliente', 72, y + 32, { tam: 38, peso: 500, color: '#1D2A2E', ancho: W - 144, max: 2, interlinea: 1.15 });
+      y = L.texto(g, sv.titulo || 'Nombre del servicio', 72, y + 26, { tam: 34, peso: 500, color: '#1D2A2E', ancho: W - 144, max: 2, interlinea: 1.18 });
+      var extra = [sv.cuando, sv.lugar, sv.duracion].filter(Boolean).join(', ');
+      if (extra) y = L.texto(g, extra, 72, y + 6, { tam: 25, color: '#4B5A5E', ancho: W - 144, max: 2 });
+      y += 22; L.linea(g, 72, y, W - 72, y, col, 3); y += 18;
+      var rs = renglonesCliente(), max = 4;
+      rs.slice(0, max).forEach(function (r) {
+        L.texto(g, r.c, 72, y, { tam: 27, color: '#1D2A2E', ancho: W - 144 - 230, max: 1 });
+        L.texto(g, M.pesos(r.imp), W - 72, y, { tam: 27, peso: 500, color: '#1D2A2E', alin: 'der' });
+        y += 44; L.linea(g, 72, y - 8, W - 72, y - 8, '#DCE2E3', 1.5);
+      });
+      if (rs.length > max) { L.texto(g, 'y ' + (rs.length - max) + ' conceptos más en la cotización completa', 72, y, { tam: 23, color: '#7B898C' }); y += 40; }
+      if (s.iva) { L.texto(g, 'Incluye IVA de ' + M.pesos(c.iva), 72, y, { tam: 23, color: '#7B898C' }); y += 36; }
+      y = Math.max(y + 20, 860);
+      L.rect(g, 72, y, W - 144, 132, 16, col);
+      L.texto(g, 'Total', 108, y + 44, { tam: 34, peso: 500, color: '#FFFFFF' });
+      L.texto(g, M.pesos(c.total), W - 108, y + 30, { tam: 64, peso: 600, color: '#FFFFFF', alin: 'der' });
+      y = L.texto(g, 'Son: ' + M.conLetra(c.total), W - 72, y + 146, { tam: 20, color: '#4B5A5E', alin: 'der' });
+      var cond = [];
+      if (vence()) cond.push('Vale hasta el ' + vence() + '.');
+      var ant = n(s.anticipo);
+      if (ant > 0 && ant < 100) cond.push('Anticipo del ' + ant + '% para apartar la fecha: ' + M.pesos(c.anticipo) + '.');
+      else if (ant >= 100) cond.push('Se paga completo por adelantado.');
+      y += 16;
+      cond.forEach(function (t) { y = L.texto(g, t, 72, y, { tam: 25, color: '#1D2A2E', ancho: W - 144, max: 2 }) + 4; });
+      pieImagen(g, m, W, H);
+      return x.c;
+    });
+  }
+  function imagenRecibo() {
+    var m = memb, sv = s.servicio, r = s.recibo, W = 1080, H = 1350, x = L.crear(W, H), g = x.g, col = m.color || '#0B3C49';
+    var monto = n(r.monto), anteriores = n(r.anteriores), saldo = r2(c.total - anteriores - monto);
+    return L.fuentes().then(function () { return bandaImagen(g, m, W); }).then(function () {
+      L.texto(g, 'Recibo', 72, 296, { tam: 64, peso: 500, color: col });
+      L.texto(g, 'No. ' + (r.folio || 's/n'), W - 72, 306, { tam: 28, color: '#4B5A5E', alin: 'der' });
+      L.texto(g, M.fecha(r.fecha), W - 72, 344, { tam: 24, color: '#7B898C', alin: 'der' });
+      var f1 = { tam: 30, color: '#1D2A2E', ancho: W - 224, max: 2 }, f3 = { tam: 20, color: '#4B5A5E', ancho: W - 224, max: 2 }, f4 = { tam: 29, color: '#1D2A2E', ancho: W - 224, max: 3 };
+      var t1 = 'Recibí de ' + (s.cliente.nombre || 'nombre del cliente') + ' la cantidad de', t4 = 'por concepto de ' + queRecibo() + ' del servicio ' + (sv.titulo || 'sin título') + '.';
+      var altoCaja = 36 + L.alto(g, t1, f1) + 140 + L.alto(g, '(' + M.conLetra(monto) + ')', f3) + 18 + L.alto(g, t4, f4) + 40;
+      L.rect(g, 72, 410, W - 144, altoCaja, 18, M.aclarar(col, 0.08), M.aclarar(col, 0.5), 2);
+      var y = L.texto(g, t1, 112, 446, f1);
+      L.texto(g, M.pesos(monto), 112, y + 14, { tam: 96, peso: 600, color: col });
+      y = L.texto(g, '(' + M.conLetra(monto) + ')', 112, y + 140, f3);
+      L.texto(g, t4, 112, y + 18, f4);
+      y = 410 + altoCaja + 52;
+      var filas = [['Importe total del servicio', M.pesos(c.total)]];
+      if (anteriores) filas.push(['Pagos anteriores', M.pesos(anteriores)]);
+      filas.push(['Este pago', M.pesos(monto)]);
+      filas.push([saldo <= 0.005 ? 'Pagado por completo' : 'Saldo pendiente', M.pesos(Math.max(0, saldo))]);
+      filas.forEach(function (f, i) {
+        var fuerte = i === filas.length - 1;
+        L.texto(g, f[0], 72, y, { tam: 27, peso: fuerte ? 600 : 400, color: '#1D2A2E' });
+        L.texto(g, f[1], W - 72, y, { tam: 27, peso: fuerte ? 600 : 500, color: '#1D2A2E', alin: 'der' });
+        y += 46; L.linea(g, 72, y - 8, W - 72, y - 8, fuerte ? col : '#DCE2E3', fuerte ? 3 : 1.5);
+      });
+      if (r.forma) L.texto(g, 'Pago en ' + r.forma.toLowerCase() + (r.referencia ? ', referencia ' + r.referencia : '') + '.', 72, y + 6, { tam: 23, color: '#7B898C', ancho: W - 144, max: 1 });
+      pieImagen(g, m, W, H);
+      return x.c;
+    });
+  }
+  function bajarImagen() {
+    c = calcular(s);
+    var p = s.tipoDoc === 'recibo' ? imagenRecibo() : imagenCotizacion();
+    return p.then(function (canvas) {
+      return L.entregar(canvas, nombreArchivo('png'), s.tipoDoc === 'recibo' ? 'Recibo' : 'Cotización');
+    }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; });
+  }
+
+  /* ---------- Entregar ---------- */
+  function bajarArchivo() {
+    s.tocado = true; guardarLuego();
+    var base = (s.tipoDoc === 'recibo' ? 'recibo-' + (s.recibo.folio || '') : 'cotizacion-' + (s.folio || '')) + '-' + (s.cliente.nombre || s.servicio.titulo || '');
+    M.descargarArchivo('cobrar', base, s);
+  }
+  function imprimir() { M.imprimir(); }
+  var pistaPDF = M.enNavegadorPrestado ? 'Si no pasa nada, abre la página en Chrome o Safari: los navegadores de WhatsApp o Facebook no imprimen.' : 'En la ventana de imprimir, elige «Guardar como PDF».';
+  function opcionesEntrega(que) {
+    return [
+      { ico: 'pdf', t: 'PDF', d: 'Para imprimirla o mandarla tal cual.', hacer: imprimir, principal: true },
+      { ico: 'word', t: 'Word', d: 'Para cambiarle lo que quieras en Word o en Google Docs.', hacer: bajarWord },
+      { ico: 'imagen', t: 'Imagen para WhatsApp', d: 'El ' + (que === 'recibo' ? 'recibo' : 'resumen de la cotización') + ' en una imagen, para mandarla desde el celular.', hacer: bajarImagen },
+      { ico: 'archivo', t: 'Archivo de la mochila', d: 'Para abrirla en otro aparato o guardarla en tu Drive.', hacer: bajarArchivo }
+    ];
+  }
+
   /* ---------- Acciones ---------- */
   function describir(d) {
     var x = calcular(completar(d));
@@ -1512,8 +3156,7 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
       extra: function (doc) { return '<button type="button" class="btn-texto" data-a="recibo" data-id="' + doc.id + '">Hacer recibo</button>'; },
       alExtra: function (a, doc) {
         if (a !== 'recibo' || !doc) return;
-        abrir(doc); s.tipoDoc = 'recibo'; s.tocado = true; mostrarPasoRecibo(); c = calcular(s); asegurarRecibo();
-        M.llenar(banco, s); actualizar(); guardarLuego();
+        abrir(doc); hacerRecibo();
         M.aviso('Recibo listo con los datos de la cotización. Revisa qué te pagaron.');
       },
       alNuevo: function () { abrir(nuevo(), 'Cotización nueva. Tu membrete ya está puesto.'); },
@@ -1521,7 +3164,7 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
       alAbrir: function (d) { abrir(d); },
       alDuplicar: function (d) {
         var x = completar(d); x.id = M.uid(); x.folio = String((M.leer('folio:COT', 0) || 0) + 1).padStart(3, '0'); x.fecha = M.hoyISO();
-        x.tipoDoc = 'cotizacion'; x.recibo = nuevo().recibo; abrir(x, 'Copia lista, con número nuevo.', true);
+        x.tipoDoc = 'cotizacion'; x.recibo = nuevo().recibo; x.guia = { paso: 'cliente', visto: {} }; abrir(x, 'Copia lista, con número nuevo.', true);
       },
       alBorrar: function (id) { if (s.id === id) abrir(nuevo()); }
     });
@@ -1552,38 +3195,55 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
     d.incluye = 'Materiales e insumos para las dos prácticas\nManual impreso para cada participante\nConstancia de participación\nVisita de seguimiento a los quince días';
     d.noIncluye = 'El espacio y el agua para la práctica\nLa comida de las personas participantes';
     d.notas = 'Si el taller se cancela con menos de cinco días, se cobra la preparación.';
-    abrir(d, 'Se abrió un ejemplo. Cámbialo por tus datos o empieza una nueva.', true);
+    abrir(d, 'Un ejemplo hecho: recórrelo con «Siguiente» para ver cómo se armó, o empieza una nueva.', true, 'cliente');
   }
 
   $('#ver-docs').onclick = verDocs;
   $('#nueva').onclick = function () { abrir(nuevo(), 'Cotización nueva. Tu membrete ya está puesto.'); };
   $('#ejemplo').onclick = ejemplo;
-  $('#pdf').onclick = M.imprimir;
-  $('#pdf-movil').onclick = M.imprimir;
-  $('#descargar').onclick = function () {
-    s.tocado = true; guardarLuego();
-    var base = (s.tipoDoc === 'recibo' ? 'recibo-' + (s.recibo.folio || '') : 'cotizacion-' + (s.folio || '')) + '-' + (s.cliente.nombre || s.servicio.titulo || '');
-    M.descargarArchivo('cobrar', base, s);
+  $('#pdf-movil').onclick = imprimir;
+  $('#hacer-recibo').onclick = hacerRecibo;
+  $('#otro-recibo').onclick = function () {
+    var r = s.recibo;
+    r.anteriores = r2(n(r.anteriores) + n(r.monto)); r.concepto = r.anteriores >= c.total ? 'otro' : 'final';
+    r.folio = String(Math.max(parseInt(r.folio, 10) || 0, M.leer('folio:REC', 0) || 0) + 1).padStart(3, '0');
+    r.fecha = M.hoyISO(); r.referencia = ''; r.manual = false;
+    s.tocado = true; aplicarConcepto(); actualizar(); guardarLuego(); guia.ir('recibo-que');
+    M.aviso('Recibo nuevo, con número ' + r.folio + '. Los pagos anteriores ya están sumados.');
   };
   M.alImprimir(function () {
     return (s.tipoDoc === 'recibo' ? 'Recibo ' + (s.recibo.folio || '') : 'Cotización ' + (s.folio || '')) + (s.cliente.nombre ? ' ' + s.cliente.nombre : '');
   }, pintarHojaYa);
-  if (M.enNavegadorPrestado) $('#pista').textContent = 'Si al apretar «Guardar en PDF» no pasa nada, abre esta página en Chrome o en Safari: los navegadores que vienen dentro de WhatsApp o Facebook no saben imprimir.';
 
   /* ---------- Arranque ---------- */
   memb = M.membrete.leer();
-  var detMembrete = $('#paso-membrete');
-  var vistaMembrete = M.montarMembrete($('#membrete'), function (m) {
-    memb = m; $('#res-membrete').textContent = m.nombre || 'Falta tu nombre'; pintarHoja();
+  $('#preguntas-membrete').outerHTML = M.preguntasMembrete();
+  vistaMembrete = M.enlazarMembrete($('#guia'), function (m) { memb = m; pintarHoja(); });
+  M.entregas($('#entregas-cot'), opcionesEntrega('cotizacion'));
+  M.entregas($('#entregas-rec'), opcionesEntrega('recibo'));
+  M.$$('#entregas-cot, #entregas-rec').forEach(function (el) { el.insertAdjacentHTML('afterend', '<p class="pista-impresion">Para el PDF: ' + pistaPDF.replace(/^./, function (x) { return x.toLowerCase(); }) + '</p>'); });
+  guia = M.guia({
+    raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: true,
+    estado: function () { return s; }, guardar: function () { guardarLuego(); },
+    si: { recibo: function () { return !!(s && s.recibo.activo); } },
+    listo: {
+      tarifa: function () { return n(s.tarifa) > 0; },
+      horas: function () { return c && c.horas > 0; }
+    },
+    alCambiarPaso: function (id) {
+      if (PASOS_RECIBO.indexOf(id) >= 0) ponerTipo('recibo');
+      else if (!/^mb-/.test(id)) ponerTipo('cotizacion');
+      if (id === 'entregar') guia.pintarFaltan($('#faltan-cot'));
+    },
+    alEntrar: { entregar: function () { guia.pintarFaltan($('#faltan-cot')); } }
   });
-  $('#res-membrete').textContent = memb.nombre || 'Falta tu nombre';
-  if (!memb.nombre) detMembrete.open = true;
   var id = A.idActual(), guardado = id && A.obtener(id);
   abrir(guardado || nuevo());
   M.montarVista();
   window.addEventListener('pagehide', function () { if (s && s.tocado) A.guardar(s); });
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && s && s.tocado) A.guardar(s); });
   window.addEventListener('pageshow', function () { M.ajustarHoja(); });
+  window.MOCHILA_PRUEBA = { estado: function () { return s; }, guia: function () { return guia; }, word: function () { c = calcular(s); return (s.tipoDoc === 'recibo' ? wordRecibo() : wordCotizacion()).blob(); }, imagen: function () { c = calcular(s); return s.tipoDoc === 'recibo' ? imagenRecibo() : imagenCotizacion(); } };
 })();
 
 </script>

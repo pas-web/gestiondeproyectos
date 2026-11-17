@@ -423,7 +423,7 @@
     if (muestra) texto = H.ejemplo;
     var der = '<div class="tipo">' + esc(H.nombre) + '</div><div class="folio">' + esc(M.fecha(M.hoyISO())) + '</div>';
     var p = s.proyecto;
-    var cab = '<div style="margin-top:.12in">' + (muestra ? '<span class="marca-muestra">Muestra con el ejemplo del formato: así se verá lo tuyo</span>' : '') +
+    var cab = '<div style="margin-top:.12in" data-parte="proyecto">' + (muestra ? '<span class="marca-muestra">Muestra con el ejemplo del formato: así se verá lo tuyo</span>' : '') +
       '<h2 class="titulo-doc"' + (p.nombre ? '' : ' style="color:var(--t-tenue)"') + '>' + esc(p.nombre || 'Nombre del proyecto') + '</h2>' +
       (p.lugar || p.gente ? '<p class="bajada">' + esc([p.lugar, p.gente].filter(Boolean).join('. ')) + '.</p>' : '') + '</div>';
     var cuerpo = '', ley = '';
@@ -444,9 +444,9 @@
       var f = leerMarco(texto);
       cuerpo = f.length ? htmlMarco(f) : '<div class="vacio-hoja">No encontré la tabla del marco lógico en lo que pegaste.</div>';
     }
-    var declara = s.declarar && !muestra ? '<p class="declara">Elaborado con apoyo de inteligencia artificial y revisado por ' + esc(m.firmaNombre || m.nombre || 'el equipo') + '.</p>' : '';
+    var declara = s.declarar && !muestra ? '<p class="declara" data-parte="declara">Elaborado con apoyo de inteligencia artificial y revisado por ' + esc(m.firmaNombre || m.nombre || 'el equipo') + '.</p>' : '';
     return M.hoja({ horizontal: true, compacta: true, acento: m.color, pieIzq: M.pieMembrete(m), pieDer: esc((p.nombre ? p.nombre + '. ' : '') + H.nombre) },
-      M.encabezado(m, der) + cab + (herr === 'arbol' || herr === 'objetivos' ? ley + cuerpo : cuerpo + ley) + declara);
+      M.encabezado(m, der) + cab + '<div data-parte="dibujo" class="zona-dibujo">' + (herr === 'arbol' || herr === 'objetivos' ? ley + cuerpo : cuerpo + ley) + '</div>' + declara);
   }
   function pintarHojaYa() {
     $('#marco').innerHTML = hojaDibujo();
@@ -458,7 +458,7 @@
     }
     M.ajustarHoja();
     var texto = s.respuestas[s.herramienta] || '';
-    $('#resumen-hoja').textContent = texto.trim() ? '' : 'Muestra: pega la respuesta en el paso 6.';
+    $('#resumen-hoja').textContent = texto.trim() ? 'Así va tu ' + HERR[s.herramienta].corto : 'Muestra del formato: pega la respuesta en «La respuesta».';
   }
   var pintarHoja = M.debounce(pintarHojaYa, 120);
 
@@ -556,13 +556,14 @@
     if (!s.tocado) return;
     if (A.guardar(s)) { var d = new Date(); $('#estado').textContent = 'Guardado ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
   }, 400);
-  function abrir(d, mensaje, guardarYa) {
+  function abrir(d, mensaje, guardarYa, paso) {
     if (s && s.tocado) A.guardar(s);
     s = completar(d);
     M.llenar(banco, s); todoHerramienta();
     $('#estado').textContent = s.tocado ? 'Guardado' : 'Se guarda solo al escribir';
     if (s.tocado) A.marcarActual(s.id);
     if (guardarYa) { s.tocado = true; guardarLuego(); }
+    guia.abrir({ paso: paso, primero: memb.nombre ? 'proyecto' : 'mb-nombre', sinFoco: true });
     if (mensaje) M.aviso(mensaje);
   }
 
@@ -639,7 +640,7 @@
     d.datos.marco = { cadena: d.respuestas.cambio, base: 'En el conteo de noviembre de 2026 quedaban 31 de los 200 encinos sembrados en julio. Ninguna área sembrada tiene hoy quien la cuide.', fondo: '' };
     d.respuestas.marco = '| Nivel | Resumen narrativo | Indicadores | Medios de verificación | Supuestos |\n|---|---|---|---|---|\n| Fin | Los cerros del valle recuperan sombra y suelo | No se mide en este proyecto: se le apuesta | | Las lluvias de los próximos años llegan a tiempo |\n| Propósito | Las plantas sembradas en las faenas del valle sobreviven a la primera seca | Al menos 700 de 1,000 plantas vivas en junio de 2028 (línea base: 31 de 200 vivas en noviembre de 2026) | Conteo por área con fotos y fecha, firmado por quien la cuida | Quien cuida cada área tiene agua cerca para regar |\n| Componente 1 | Plantas nativas producidas en el vivero del campus | 1,500 plantas listas para sembrar en junio de 2027 (línea base: 0) | Bitácora del vivero y conteo con fotos | La toma del campus da agua todo el año |\n| Componente 2 | Cada área sembrada tiene quien quede a cargo | Acta firmada con una persona responsable para cada una de las 5 áreas, antes de la faena (línea base: 0 áreas con responsable) | Acta de la asamblea | La delegación convoca la asamblea en enero |\n| Actividad 1.1 | Conseguir semilla y esquejes de especies nativas | Semilla etiquetada de al menos cuatro especies en marzo de 2027 | Inventario con fotos | Hay semilla disponible en la temporada |\n| Actividad 1.2 | Llenar bolsas, sembrar y regar por turnos | 1,500 bolsas sembradas en abril de 2027 | Bitácora de riego firmada | El servicio de agua del campus es continuo en abril |\n| Actividad 2.1 | Acordar en asamblea quién cuida cada área | Una asamblea con acta en enero de 2027 | Acta y lista de asistencia | La comunidad acepta repartir las áreas |';
     d.preguntar = true;
-    abrir(d, 'Se abrió un ejemplo con las cuatro herramientas. Cambia de herramienta en el paso 3 para ver cada dibujo.', true);
+    abrir(d, 'Un ejemplo con las cuatro herramientas: en «La herramienta» cambia de una a otra para ver cada dibujo.', true, 'proyecto');
   }
   $('#ver-docs').onclick = function () {
     M.listaDocs({
@@ -655,19 +656,92 @@
   }
   $('#nueva').onclick = function () { abrir(nuevo(), 'Proyecto nuevo.'); };
   $('#ejemplo').onclick = ejemplo;
-  $('#pdf').onclick = M.imprimir; $('#pdf-movil').onclick = M.imprimir;
-  $('#descargar').onclick = function () { s.tocado = true; guardarLuego(); M.descargarArchivo('prompts', 'proyecto-' + (s.proyecto.nombre || ''), s); };
+  $('#pdf-movil').onclick = M.imprimir;
   M.alImprimir(function () { return HERR[s.herramienta].nombre + ' ' + (s.proyecto.nombre || ''); }, pintarHojaYa);
-  if (M.enNavegadorPrestado) $('#pista').textContent = 'Si al apretar «Guardar en PDF» no pasa nada, abre esta página en Chrome o en Safari: los navegadores que vienen dentro de WhatsApp o Facebook no saben imprimir.';
 
   memb = M.membrete.leer();
-  var vistaMembrete = M.montarMembrete($('#membrete'), function (m) { memb = m; $('#res-membrete').textContent = m.nombre || 'Falta tu nombre'; pintarHoja(); });
-  $('#res-membrete').textContent = memb.nombre || 'Falta tu nombre';
-  if (!memb.nombre) $('#paso-membrete').open = true;
+  $('#preguntas-membrete').outerHTML = M.preguntasMembrete();
+  var vistaMembrete = M.enlazarMembrete($('#guia'), function (m) { memb = m; pintarHoja(); });
+  /* ---------- Entregar: PDF, Word, imagen y archivo ---------- */
+  var L = M.lienzo;
+  function nombreArchivo(ext) { return M.slug(HERR[s.herramienta].corto + '-' + (s.proyecto.nombre || '')) + '.' + ext; }
+  function sinFoco(f) {
+    var hoja = $('#marco .hoja'), quitados = hoja ? M.$$('.en-foco, .late', hoja) : [];
+    quitados.forEach(function (el) { el.classList.remove('en-foco', 'late'); });
+    if (hoja) hoja.classList.remove('con-foco');
+    try { return f(hoja); } finally { guia.refrescar(); }
+  }
+  function imagenHoja() {
+    pintarHojaYa();
+    return L.fuentes().then(function () { return sinFoco(function (hoja) { return L.desdeDom(hoja, { ancho: 2200 }); }); });
+  }
+  function imagenDibujo() {
+    pintarHojaYa();
+    return L.fuentes().then(function () { return sinFoco(function (hoja) { var z = hoja.querySelector('.zona-dibujo'); return L.desdeDom(z || hoja, { ancho: 2000, margen: 24 }); }); });
+  }
+  function textoRuns(t) { return String(t || '').split(/\r?\n/).join('\n'); }
+  function wordDibujo() {
+    var m = memb, herr = s.herramienta, H = HERR[herr], p = s.proyecto, texto = s.respuestas[herr] || '';
+    if (!texto.trim()) return Promise.reject(new Error('primero pega la respuesta de la IA o escribe el formato'));
+    return imagenDibujo().then(function (cv) {
+      var horizontal = true;
+      var d = M.docx({ horizontal: horizontal, acento: m.color, titulo: H.nombre + ' ' + (p.nombre || ''), autor: m.nombre, pie: [m.nombre, m.telefono, m.correo].filter(Boolean).join('   ·   '), margen: { izq: 0.55, der: 0.55, sup: 0.5, inf: 0.6 } });
+      M.docxMembrete(d, m, { tipo: H.nombre, folio: M.fecha(M.hoyISO()), tamTipo: H.nombre.length > 16 ? 15 : 20, ancho: 3.2 });
+      d.p([{ t: p.nombre || 'Nombre del proyecto', tam: 13 }], { antes: 8, despues: 1 });
+      if (p.lugar || p.gente) d.p([{ t: [p.lugar, p.gente].filter(Boolean).join('. ') + '.', tam: 9.5, color: '#4B5A5E' }], { despues: 6 });
+      if (herr === 'marco') {
+        var f = leerMarco(texto);
+        var cs = [{ t: 'Nivel', ancho: 1.05 }, { t: 'Resumen narrativo', ancho: 2.6 }, { t: 'Indicadores', ancho: 2.35 }, { t: 'Medios de verificación', ancho: 1.9 }, { t: 'Supuestos', ancho: 1.9 }];
+        var resto = d.util - cs.reduce(function (a, c) { return a + c.ancho; }, 0); cs[4].ancho += resto;
+        M.docxTablaDatos(d, cs, f.map(function (x) { return [{ t: [{ t: x.nivel, b: true, color: d.acento }] }, textoRuns(x.resumen), textoRuns(x.ind), textoRuns(x.mv), textoRuns(x.sup)]; }), { tam: 8.6 });
+      } else {
+        d.imagen(cv.toDataURL('image/png'), d.util, 5.4, { alin: 'centro' });
+        d.salto();
+        d.p([{ t: 'El mismo ' + H.corto + ', en texto para editar', b: true, tam: 11, color: d.acento }], { despues: 6 });
+        if (herr === 'arbol' || herr === 'objetivos') {
+          var t = leerArbol(texto), obj = herr === 'objetivos';
+          d.p([{ t: (obj ? 'Objetivo central: ' : 'Problema central: '), b: true }, { t: t.tronco ? t.tronco.texto : 'sin escribir' }], { despues: 6 });
+          var lineas = function (ns, nivel) { ns.forEach(function (nd) { d.p([{ t: nd.num + '  ', b: true, color: d.acento }, { t: nd.texto + (nd.hip ? ' (hipótesis)' : '') + (nd.fuera ? ' (fuera de alcance)' : '') }], { sangria: 0.25 * nivel, despues: 2 }); lineas(nd.hijos || [], nivel + 1); }); };
+          d.p([{ t: obj ? 'Fines' : 'Efectos', b: true, tam: 10 }], { antes: 6, despues: 3 }); lineas(t.arriba, 0);
+          d.p([{ t: obj ? 'Medios' : 'Causas', b: true, tam: 10 }], { antes: 6, despues: 3 }); lineas(t.abajo, 0);
+        } else {
+          var c = leerCambio(texto), nombres = ['Lo que hacemos: actividades', 'Lo que entregamos: productos', 'Lo que la gente hace distinto: resultados', 'El cambio grande y lento: impacto'];
+          if (c.apuesta) d.p([{ t: 'La apuesta. ', b: true }, { t: c.apuesta }], { despues: 6 });
+          c.cols.forEach(function (col, i) {
+            d.p([{ t: nombres[i], b: true, tam: 10 }], { antes: 6, despues: 3 });
+            d.lista(col.map(function (x) { return x.t + (x.hip ? ' (hipótesis)' : ''); }), { tam: 9.5 });
+            if (i < 3 && c.sq[i].length) d.lista(c.sq[i].map(function (x) { return 'Siempre que ' + x.t; }), { tam: 9, color: '#4B5A5E' });
+          });
+          if (c.fragil) d.p([{ t: 'El eslabón frágil. ', b: true }, { t: c.fragil + (c.quien ? ' Quién: ' + c.quien : '') }], { antes: 6 });
+        }
+      }
+      if (s.declarar) d.p([{ t: 'Elaborado con apoyo de inteligencia artificial y revisado por ' + (m.firmaNombre || m.nombre || 'el equipo') + '.', tam: 8.4, color: '#7B898C' }], { antes: 10 });
+      return d.descargar(nombreArchivo('docx'));
+    }).then(function () { return 'Listo: el Word se descargó.'; });
+  }
+  var pistaPDF = M.enNavegadorPrestado ? 'si no pasa nada, abre la página en Chrome o Safari: los navegadores de WhatsApp o Facebook no imprimen.' : 'en la ventana de imprimir, elige «Guardar como PDF» y la orientación horizontal.';
+  M.entregas($('#entregas'), [
+    { ico: 'pdf', t: 'PDF', d: 'La hoja con el dibujo, para imprimirla o mandarla tal cual.', hacer: M.imprimir, principal: true },
+    { ico: 'word', t: 'Word', d: 'El dibujo y su contenido en texto, para pegarlo en tu proyecto. El marco lógico va como tabla editable.', hacer: wordDibujo },
+    { ico: 'imagen', t: 'Imagen', d: 'La hoja en una imagen, para WhatsApp o para una presentación.', hacer: function () { return imagenHoja().then(function (cv) { return L.entregar(cv, nombreArchivo('png'), HERR[s.herramienta].nombre); }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; }); } },
+    { ico: 'archivo', t: 'Archivo de la mochila', d: 'Tu proyecto con las cuatro herramientas, para abrirlo en otro aparato.', hacer: function () { s.tocado = true; guardarLuego(); M.descargarArchivo('prompts', 'proyecto-' + (s.proyecto.nombre || ''), s); } }
+  ]);
+  $('#entregas').insertAdjacentHTML('afterend', '<p class="pista-impresion">Para el PDF: ' + pistaPDF + '</p>');
+  var guia = M.guia({
+    raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: true,
+    estado: function () { return s; }, guardar: function () { guardarLuego(); },
+    listo: {
+      respuesta: function () { return !!String(s.respuestas[s.herramienta] || '').trim(); },
+      auditoria: function () { var a = s.auditoria[s.herramienta] || {}; return HERR[s.herramienta].auditoria.every(function (x, i) { return a[i]; }); },
+      herramienta: function () { return !!(s.guia && s.guia.visto.herramienta); }
+    },
+    alEntrar: { entregar: function () { guia.pintarFaltan($('#faltan')); } }
+  });
   var id = A.idActual(), guardado = id && A.obtener(id);
   abrir(guardado || nuevo());
   M.montarVista();
   window.addEventListener('pagehide', function () { if (s && s.tocado) A.guardar(s); });
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && s && s.tocado) A.guardar(s); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { pintarHojaYa(); });
+  window.MOCHILA_PRUEBA = { estado: function () { return s; }, guia: function () { return guia; }, imagen: imagenHoja, dibujo: imagenDibujo, word: function () { var d0 = M.docx; var hecho; M.docx = function (o) { var d = d0(o); d.descargar = function () { hecho = d.blob(); return hecho; }; return d; }; return wordDibujo().then(function () { M.docx = d0; return hecho; }); } };
 })();

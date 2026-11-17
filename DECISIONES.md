@@ -1159,3 +1159,122 @@ y evaluar como dos caras).
   renglón nuevo al final de «Empieza aquí» (`FIJAS` en `curso.js`), después de
   «Todo el gimnasio». Así se encuentra desde la portada y desde el menú de todas
   las páginas del curso, siempre abierta, sin pasar por `DISPONIBLES`.
+
+## Bloque 21 (16 de noviembre de 2026): pieza por pieza, la parte práctica del presupuesto
+
+- **Página nueva `recursos/pieza-por-pieza/index.html`.** Cada equipo
+  presupuesta una pieza de su componente con su fotomontaje: hay 26, sacadas
+  del cronograma integrado y del catálogo (de las trancas del vertedor y los
+  cuarenta árboles al muelle, los contenedores, el estacionamiento, las
+  palapas y las diez bancas).
+  Siete pasos: la pieza, las preguntas, la hoja de campo, la lista, la
+  precotización, cotizar de verdad y la partida. Cada paso deja una hoja carta
+  con el emblema del Proyecto comunitario Presa de La Florida.
+- **El agente conoce el proyecto** por un expediente de diez secciones que
+  viaja dentro de la página (etapa, zonas, reglas que no se votan, criterios,
+  bolsillos, regla de cotizar, proveedores, rendimientos de referencia). Lee el
+  fotomontaje y numera sobre la foto lo que se cotiza; los números se mueven a
+  mano. Propone una solución inicial y pregunta de dos clases: lo que se decide
+  y lo que se mide; lo que se mide sale en la hoja de campo, con cómo medirlo.
+  Con las respuestas arma la lista: materiales, mano de obra pagada o en faena,
+  herramienta y flete, cada renglón con su cálculo y su clave del catálogo.
+- **Dos casas para la misma página.** En el sitio no hay agente: cada encargo
+  se copia a Claude, ChatGPT o Gemini con la foto y la respuesta se pega. En
+  Claude (https://claude.ai/artifact/3Jfmismt1HPLCwNMFas9id) el agente trabaja
+  ahí mismo con la cuenta de cada quien y las hojas se descargan para imprimir.
+  El artifact es privado hasta que se comparte.
+- **Precios de referencia con fuente.** Catálogo de 56 precios investigado el
+  16 de noviembre: 29 traen tienda o fuente, lugar, fecha y enlace; los 27 que
+  vienen de la práctica del presupuesto no tienen fuente y se marcan así. Lo que no está en
+  el catálogo se investiga en la web con un encargo aparte, que pide una tabla
+  con tienda, lugar, fecha y enlace; la página la lee y pone cada precio con su
+  fuente. La precotización dice que sirve para comparar y no sustituye las
+  cotizaciones.
+- **Cotizar de verdad.** Solicitudes de cotización por tipo de proveedor, con
+  folio, a nombre del «Proyecto comunitario Presa de La Florida», sin la UAQ;
+  dicen que no son orden de compra y salen impresas o como texto para WhatsApp.
+  Cada cotización se registra con fecha, si es por escrito, IVA y flete, y la
+  página revisa la regla de la clase renglón por renglón. Se toma la más barata,
+  salvo que el equipo escriba por qué otra.
+- **El contraste.** La IA contra lo cotizado, renglón por renglón. Las tres
+  diferencias más grandes en pesos se explican (causas marcadas y una línea del
+  equipo) antes de cerrar la partida, que lleva dos anexos: las cotizaciones y
+  el contraste.
+- **De la pieza al presupuesto de la presa.** «Llevar al archivo del equipo»
+  abre el `.json` de la práctica del presupuesto o empieza uno, reemplaza las
+  partidas de las actividades de la pieza y deja las demás. El archivo se abre
+  en la práctica y se junta en `recursos/presupuesto-de-la-presa/`.
+- **Pieza de ejemplo:** dos columpios de tronco, idea de la consulta que no
+  está en el cronograma, con proveedores y cotizaciones inventados y marcados
+  «de ejemplo».
+- **Enlace:** botón «Pieza por pieza» en la tarjeta de la Parte 2 de
+  `recursos/cronograma-y-presupuesto/index.html` y sección «La segunda vuelta:
+  cotizar pieza por pieza» (ancla `#pieza-por-pieza`), con el guion en tres
+  sesiones y el botón a la versión de Claude.
+- **Hallazgo: el jornal de $300 está abajo del mínimo.** El salario mínimo
+  general de 2026 es de $315.04 diarios (CONASAMI, DOF del 9 de diciembre de
+  2025). La práctica del presupuesto (ejemplo de la ruta de gestión) y La faena
+  también cuenta (`ejercicios/semana-08/ejercicio-14`, «el jornal de la región
+  es de $300») valorizan la faena a $300. Pieza por pieza la valoriza a $315.04.
+  Esas dos páginas no se tocaron.
+- **La fuente viaja con la página:** `recursos/pieza-por-pieza/fuente/`, con su
+  `LEEME.md`. `node construir.js` lee las actividades del cronograma integrado y
+  revisa que cada pieza apunte a una que existe, que no haya raya larga ni raya
+  corta y que no sobren marcas.
+- **Lo que sale del navegador** es solo lo que se manda a la IA: en el sitio, lo
+  que cada quien copia; en Claude, la foto y el encargo. Lo demás se guarda en
+  `localStorage` con el prefijo `pxp:` y en el `.pieza.json` que se descarga.
+- **Pendiente:** compartir el artifact por enlace antes de la primera sesión,
+  fijar las fechas de las tres sesiones y la de entrega de cotizaciones, y
+  decidir si la práctica y el ejercicio 14 pasan a $315.04.
+
+## Bloque 22 (16 de noviembre de 2026): una pregunta a la vez, en la mochila y en Pieza por pieza
+
+- **El problema.** Las cuatro herramientas de la mochila y Pieza por pieza
+  pedían muchos datos en una misma pantalla y el grupo se perdía. Ahora piden
+  una cosa a la vez, en orden, y la hoja de al lado enseña cómo se va armando.
+- **La guía, una sola para las cinco páginas** (`mochila/fuente/guia.js` y
+  `guia.css`). Una pregunta por tarjeta, agrupadas en tramos; arriba, el camino
+  con los tramos, la barra de avance, «Paso n de m» y «Ver todos los pasos».
+  Siguiente y Atrás; Enter pasa a la siguiente. Si falta algo indispensable
+  avisa («Falta… Puedes seguir y volver después») sin trabar. Cada documento
+  recuerda en qué paso se quedó. En la hoja se ilumina la parte que se está
+  llenando y late cuando cambia; lo que todavía no se llena aparece como hueco
+  punteado solo en esa pregunta y nunca se imprime. En el celular, los botones
+  van fijos abajo y una ventanita enseña la parte de la hoja que se llena.
+- **Cotizar y cobrar:** 21 pasos en 8 tramos. Lo que cuesta hacer el trabajo
+  va dentro de un sobre de papel kraft («solo tú lo ves»); el recibo sigue a la
+  cotización.
+- **Cronograma:** 11 pasos; las actividades se llenan de una en una y su barra
+  se ilumina en la gráfica.
+- **Presupuesto:** las partidas de una en una; aviso nuevo cuando un jornal va
+  por debajo del salario mínimo de 2026 ($315.04) y el ejemplo ya lo usa.
+- **Prompts y dibujos:** 12 pasos, de los datos del proyecto a la segunda
+  vuelta.
+- **Pieza por pieza: ocho tramos** (la pieza, las preguntas, la hoja de campo,
+  la lista, la precotización, pedir cotizaciones, lo que cotizaron y la
+  partida). Los pasos salen de la pieza: uno por pregunta del agente, uno por
+  medida de la orilla, uno por número de la foto para revisar la lista, una
+  solicitud y un registro de cotizaciones por proveedor, y uno por cada una de
+  las tres diferencias. El contacto para los proveedores se pide donde hace
+  falta, antes de las solicitudes. Los renglones se revisan en tarjetas y se
+  corrigen de uno en uno; las respuestas de opción y los imponderables se
+  tocan. Antes de entregar, la página dice qué falta y lleva ahí. Las piezas de
+  la versión 1 abren en el tramo donde iban.
+- **Lo que sale.** PDF siempre. Word editable, hecho en el navegador sin
+  librerías (`mochila/fuente/docx.js`): cotización, recibo, cronograma (la
+  gráfica como tabla sombreada), presupuesto, prompts (el marco lógico como
+  tabla; los árboles y la teoría del cambio como imagen y texto), solicitud de
+  cotización y partida (con la foto numerada, los anexos y las firmas). Imagen
+  para WhatsApp (`lienzo.js`): cotización, recibo, la gráfica del cronograma,
+  «quién pone qué» del presupuesto, los dibujos y el resumen de la partida; en
+  el celular sale por el menú de compartir. Las solicitudes también salen como
+  mensaje de WhatsApp. No se agregó salida en HTML: Pieza por pieza en Claude
+  sigue bajando la hoja suelta para imprimir.
+- **La fuente compartida.** `recursos/pieza-por-pieza/fuente/construir.js` lee
+  `guia.js`, `guia.css`, `docx.js` y `lienzo.js` de `mochila/fuente/`: si se
+  cambian, se reconstruyen la mochila y Pieza por pieza.
+- **Artifact de Claude** de Pieza por pieza republicado con esta versión; sigue
+  privado hasta que se comparta.
+- **Pendiente:** probarlo con el grupo en celular antes de la primera sesión de
+  Pieza por pieza, y compartir el artifact por enlace.

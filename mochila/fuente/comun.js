@@ -335,19 +335,19 @@
     var logo = m.logo ? '<img alt="" src="' + m.logo + '">' : '<div class="mono">' + M.esc(M.membrete.iniciales(m.nombre || 'Tu nombre')) + '</div>';
     var contacto = [m.telefono && 'Tel. ' + m.telefono, m.correo, m.lugar, m.rfc && 'RFC ' + m.rfc, m.web]
       .filter(Boolean).map(function (x) { return '<span>' + M.esc(x) + '</span>'; }).join('');
-    return '<header class="membrete">' +
+    return '<header class="membrete" data-parte="membrete">' +
       '<div class="logo">' + logo + '</div>' +
       '<div class="quien"><div class="nombre"' + (m.nombre ? '' : ' style="color:var(--t-tenue)"') + '>' + M.esc(nombre) + '</div>' +
       (m.giro ? '<div class="giro">' + M.esc(m.giro) + '</div>' : '') +
       (contacto ? '<div class="contacto">' + contacto + '</div>' : '') + '</div>' +
-      (derecha ? '<div class="doc">' + derecha + '</div>' : '') + '</header>';
+      (derecha ? '<div class="doc" data-parte="folio">' + derecha + '</div>' : '') + '</header>';
   };
   M.firma = function (m, que, opciones) {
     opciones = opciones || {};
     var nombre = opciones.nombre != null ? opciones.nombre : (m.firmaNombre || m.nombre || '');
     var cargo = opciones.cargo != null ? opciones.cargo : (m.titulo || '');
     var img = opciones.sinImagen ? '' : (m.firma ? '<img alt="" src="' + m.firma + '">' : '');
-    return '<div class="firma">' + (que ? '<div class="que">' + M.esc(que) + '</div>' : '') +
+    return '<div class="firma" data-parte="' + (opciones.parte || 'firma') + '">' + (que ? '<div class="que">' + M.esc(que) + '</div>' : '') +
       '<div class="trazo">' + img + '</div>' +
       '<div class="quien-firma">' + (M.esc(nombre) || '&nbsp;') + '</div>' +
       (cargo ? '<div class="cargo">' + M.esc(cargo) + '</div>' : '') + '</div>';

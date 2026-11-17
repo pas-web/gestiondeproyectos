@@ -1,0 +1,412 @@
+/* La mochila del gestor · estilos comunes
+   Dos superficies: el banco de trabajo (donde se llena) y la hoja (lo que se entrega).
+   El banco usa los colores del curso; la hoja usa solo el color de quien la firma. */
+
+:root {
+  color-scheme: light;
+  --petroleo: #0B3C49;
+  --verde: #0F6E6E;
+  --verde-hondo: #0A5555;
+  --arena: #D9A441;
+  --tinta: #1C2B28;
+  --tinta-2: #44584F;
+  --tenue: #6A7D77;
+  --plano: #ECF1EE;
+  --linea: #D3DFDA;
+  --campo-borde: #BFCFC9;
+  --kraft: #DDC398;
+  --kraft-solapa: #CFAE7E;
+  --kraft-borde: #B38D5B;
+  --kraft-tinta: #3A2913;
+  --kraft-tenue: #6B5130;
+  --aviso: #8A3B2B;
+  --aviso-fondo: #FBEDE8;
+  --ojo: #7A5A12;
+  --ojo-fondo: #FBF3DF;
+  --bien: #1F5A34;
+  --bien-fondo: #E6F2EA;
+  --sombra-hoja: 0 1px 2px rgba(11, 60, 73, .10), 0 12px 32px -8px rgba(11, 60, 73, .22);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: 'Jost', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px; line-height: 1.5; color: var(--tinta); background: var(--plano);
+}
+a { color: var(--verde); }
+button, input, select, textarea { font: inherit; color: inherit; }
+img { max-width: 100%; }
+.oculto { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+:focus-visible { outline: 2px solid var(--verde); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+
+/* ---------- La barra de arriba ---------- */
+.barra {
+  position: sticky; top: 0; z-index: 30;
+  background: var(--petroleo); color: #E8F1EE;
+  display: flex; align-items: center; gap: 14px;
+  padding: 0 20px; min-height: 58px;
+}
+.barra .casa { display: flex; align-items: center; gap: 8px; color: #E8F1EE; text-decoration: none; font-size: 14px; opacity: .85; white-space: nowrap; }
+.barra .casa:hover { opacity: 1; }
+.barra .casa svg { width: 22px; height: 22px; }
+.barra .herramienta { font-size: 19px; font-weight: 500; letter-spacing: -.005em; padding-left: 14px; border-left: 1px solid rgba(232, 241, 238, .25); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.barra .acciones { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.barra .estado { font-size: 13px; opacity: .7; white-space: nowrap; }
+.btn-barra {
+  background: transparent; color: #E8F1EE; border: 1px solid rgba(232, 241, 238, .4);
+  border-radius: 8px; padding: 7px 12px; font-size: 14px; cursor: pointer; white-space: nowrap;
+}
+.btn-barra:hover { background: rgba(255, 255, 255, .08); border-color: rgba(232, 241, 238, .7); }
+@media (max-width: 640px) {
+  .barra { gap: 10px; padding: 0 12px; }
+  .barra .casa span, .barra .estado { display: none; }
+  .barra .herramienta { font-size: 17px; padding-left: 10px; }
+}
+
+/* ---------- El banco: formulario a la izquierda, hoja a la derecha ---------- */
+.banco {
+  display: grid; grid-template-columns: minmax(0, 580px) minmax(0, 1fr);
+  gap: 32px; max-width: 1560px; margin: 0 auto; padding: 24px 28px 110px; align-items: start;
+}
+.panel-hoja { position: sticky; top: 76px; }
+@media (max-width: 1020px) {
+  .banco { grid-template-columns: minmax(0, 1fr); padding: 16px 14px 120px; gap: 18px; }
+  .panel-hoja { position: static; }
+  body[data-vista="llenar"] .panel-hoja { position: absolute; left: -12000px; top: 0; width: 100%; visibility: hidden; }
+  body[data-vista="hoja"] .formulario { display: none; }
+}
+
+/* Introducción corta de cada herramienta */
+.entrada { margin: 2px 0 18px; }
+.entrada p { margin: 0; color: var(--tinta-2); font-size: 15.5px; max-width: 60ch; }
+.entrada .acciones-entrada { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+/* ---------- Los pasos del formulario ---------- */
+.paso { border-top: 1px solid var(--linea); padding: 4px 0 18px; }
+.paso > summary, .paso > .cabeza {
+  list-style: none; display: flex; align-items: baseline; gap: 12px;
+  padding: 16px 0 6px; cursor: pointer;
+}
+.paso > .cabeza { cursor: default; }
+.paso > summary::-webkit-details-marker { display: none; }
+.paso .n { font-weight: 600; font-size: 26px; line-height: 1; color: var(--arena); min-width: 22px; font-variant-numeric: tabular-nums; }
+.paso h2 { font-size: 20px; font-weight: 500; margin: 0; letter-spacing: -.005em; color: var(--petroleo); }
+.paso .resumen-paso { margin-left: auto; font-size: 13.5px; color: var(--tenue); text-align: right; }
+.paso > summary .resumen-paso::after { content: "Abrir"; margin-left: 10px; color: var(--verde); font-weight: 500; }
+.paso[open] > summary .resumen-paso::after { content: "Cerrar"; }
+.paso .guia { font-size: 14.5px; color: var(--tinta-2); margin: 0 0 12px 34px; max-width: 58ch; }
+.paso .cuerpo { margin-left: 34px; }
+@media (max-width: 640px) {
+  .paso .guia, .paso .cuerpo { margin-left: 0; }
+  .paso h2 { font-size: 18px; }
+}
+
+/* ---------- Campos ---------- */
+.campos { display: grid; gap: 12px 14px; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.campo { grid-column: span 6; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.campo.c3 { grid-column: span 3; }
+.campo.c2 { grid-column: span 2; }
+.campo.c4 { grid-column: span 4; }
+@media (max-width: 520px) { .campo.c3, .campo.c2, .campo.c4 { grid-column: span 6; } .campo.c2.par { grid-column: span 3; } }
+.campo > label, .campo > .etiqueta { font-size: 14px; font-weight: 500; color: var(--tinta-2); }
+.campo .ayuda, .ayuda { font-size: 13.5px; color: var(--tenue); line-height: 1.45; }
+input[type=text], input[type=number], input[type=date], input[type=email], input[type=tel], select, textarea {
+  width: 100%; min-height: 44px; padding: 9px 11px; background: #fff;
+  border: 1px solid var(--campo-borde); border-radius: 8px; font-size: 16px; line-height: 1.35;
+}
+textarea { min-height: 84px; resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(15, 110, 110, .18); }
+input::placeholder, textarea::placeholder { color: #9AABA5; }
+input.monto, input.cant { text-align: right; font-variant-numeric: tabular-nums; }
+.con-prefijo { position: relative; }
+.con-prefijo > span { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--tenue); pointer-events: none; }
+.con-prefijo > input { padding-left: 24px; }
+.palomita { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; cursor: pointer; padding: 4px 0; }
+.palomita input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--verde); flex: none; }
+
+/* Selector de opciones (radio con botones) */
+.opciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.opciones label { position: relative; }
+.opciones input { position: absolute; opacity: 0; pointer-events: none; }
+.opciones span {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 7px 14px;
+  border: 1px solid var(--campo-borde); border-radius: 999px; background: #fff; cursor: pointer; font-size: 15px;
+}
+.opciones input:checked + span { background: var(--petroleo); border-color: var(--petroleo); color: #fff; }
+.opciones input:focus-visible + span { outline: 2px solid var(--verde); outline-offset: 2px; }
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 9px 18px; border-radius: 10px; border: 1px solid var(--verde);
+  background: var(--verde); color: #fff; font-weight: 500; font-size: 15.5px; cursor: pointer; text-decoration: none;
+}
+.btn:hover { background: var(--verde-hondo); border-color: var(--verde-hondo); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn.claro { background: #fff; color: var(--petroleo); border-color: var(--campo-borde); }
+.btn.claro:hover { border-color: var(--petroleo); background: #fff; }
+.btn.chico { min-height: 36px; padding: 6px 12px; font-size: 14.5px; border-radius: 8px; }
+.btn.peligro { background: #fff; color: var(--aviso); border-color: #E2C1B8; }
+.btn.peligro:hover { border-color: var(--aviso); background: #fff; }
+.btn-texto { background: none; border: none; padding: 6px 2px; color: var(--verde); font-weight: 500; cursor: pointer; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.btn-texto.peligro { color: var(--aviso); }
+
+/* ---------- Renglones (listas que se agregan y se quitan) ---------- */
+.renglones { display: flex; flex-direction: column; gap: 8px; }
+.renglon { display: grid; gap: 8px; align-items: center; }
+button.quitar {
+  width: 36px; height: 36px; border-radius: 8px; border: 1px solid transparent; background: transparent; padding: 0;
+  color: var(--tenue); cursor: pointer; font-size: 22px; line-height: 1; display: grid; place-items: center;
+}
+button.quitar:hover { color: var(--aviso); border-color: #E2C1B8; background: #fff; }
+.encabezado-renglones { display: grid; gap: 8px; font-size: 12.5px; color: var(--tenue); padding: 0 2px; }
+.sugerencias { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; align-items: center; }
+.sugerencias .rot { font-size: 13px; color: var(--tenue); margin-right: 2px; }
+.sugerencias button {
+  border: 1px dashed var(--campo-borde); background: transparent; border-radius: 999px; padding: 5px 11px;
+  font-size: 14px; cursor: pointer; color: var(--tinta-2);
+}
+.sugerencias button:hover { border-style: solid; border-color: var(--verde); color: var(--verde); }
+.agregar { margin-top: 8px; }
+
+/* ---------- El sobre: lo que el cliente no ve ---------- */
+.sobre {
+  position: relative; background: var(--kraft); color: var(--kraft-tinta);
+  border: 1px solid var(--kraft-borde); border-radius: 4px 4px 12px 12px;
+  padding: 58px 22px 22px; margin: 14px 0 6px;
+}
+.sobre::before {
+  content: ""; position: absolute; left: -1px; right: -1px; top: -1px; height: 46px;
+  background: var(--kraft-solapa); border: 1px solid var(--kraft-borde); border-bottom: none;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 34%, 0 100%); border-radius: 4px 4px 0 0;
+}
+.sobre .rotulo { position: absolute; top: 12px; left: 22px; right: 22px; display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; z-index: 1; }
+.sobre .rotulo b { font-weight: 600; }
+.sobre .rotulo span { color: var(--kraft-tenue); }
+.sobre h3 { font-size: 16.5px; font-weight: 600; margin: 18px 0 8px; color: var(--kraft-tinta); }
+.sobre h3:first-of-type { margin-top: 0; }
+.sobre .ayuda, .sobre .campo > label, .sobre .encabezado-renglones { color: var(--kraft-tenue); }
+.sobre .campo > label { color: var(--kraft-tinta); }
+.sobre input, .sobre select { border-color: var(--kraft-borde); }
+.sobre .sugerencias button { border-color: var(--kraft-borde); color: var(--kraft-tinta); }
+.sobre .sugerencias button:hover { border-color: var(--kraft-tinta); }
+.sobre .btn.claro { border-color: var(--kraft-borde); }
+.sobre hr { border: none; border-top: 1px dashed var(--kraft-borde); margin: 18px 0; }
+.subtotal-sobre { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; padding: 8px 0 0; color: var(--kraft-tinta); }
+.subtotal-sobre b { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* La cuenta: el resultado del sobre */
+.cuenta { background: #FFF9EE; border: 1px solid var(--kraft-borde); border-radius: 10px; padding: 16px 18px; }
+.cuenta .grande { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.cuenta .grande .t { font-size: 15px; color: var(--kraft-tenue); }
+.cuenta .grande .v { font-size: 34px; font-weight: 600; letter-spacing: -.01em; color: var(--kraft-tinta); }
+.cuenta .linea-cuenta { display: flex; justify-content: space-between; gap: 10px; font-size: 14.5px; padding: 3px 0; border-bottom: 1px dotted #D9C4A0; }
+.cuenta .linea-cuenta:last-child { border-bottom: none; }
+.cuenta .linea-cuenta b { font-weight: 500; font-variant-numeric: tabular-nums; }
+.cuenta .nota { font-size: 13.5px; color: var(--kraft-tenue); margin: 10px 0 0; }
+
+/* Barra segmentada: una sola cosa partida en sus piezas */
+.segmentos { display: flex; gap: 2px; height: 28px; margin: 12px 0 8px; }
+.segmentos > div { border-radius: 4px; min-width: 0; display: flex; align-items: center; padding: 0 8px; font-size: 13px; font-weight: 500; color: #fff; white-space: nowrap; overflow: visible; }
+.leyenda { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--tinta-2); }
+.leyenda span { display: inline-flex; align-items: center; gap: 6px; }
+.leyenda i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+/* ---------- Revisión: los avisos ---------- */
+.revision { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.revision li { border-radius: 8px; padding: 10px 12px 10px 38px; position: relative; font-size: 14.5px; line-height: 1.45; }
+.revision li::before { position: absolute; left: 12px; top: 10px; font-weight: 700; width: 18px; text-align: center; }
+.revision li.bien { background: var(--bien-fondo); color: var(--bien); }
+.revision li.bien::before { content: "✓"; }
+.revision li.mal { background: var(--aviso-fondo); color: var(--aviso); }
+.revision li.mal::before { content: "!"; }
+.revision li.ojo { background: var(--ojo-fondo); color: var(--ojo); }
+.revision li.ojo::before { content: "?"; }
+.revision li b { font-weight: 600; margin-right: 4px; }
+
+/* ---------- El panel de la hoja ---------- */
+.mesa-hoja { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.mesa-hoja .opciones span { min-height: 38px; }
+.mesa-hoja .derecha { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+.marco-hoja { position: relative; overflow: hidden; }
+.marco-hoja > .hoja { position: absolute; left: 0; top: 0; transform-origin: top left; }
+.pie-hoja { font-size: 13px; color: var(--tenue); margin-top: 10px; }
+.pista-impresion { font-size: 13px; color: var(--tenue); margin: 8px 0 0; }
+
+/* ---------- El conmutador del celular ---------- */
+.conmutador {
+  display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  background: rgba(255, 255, 255, .97); border-top: 1px solid var(--linea);
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); gap: 8px; align-items: center;
+  box-shadow: 0 -6px 18px rgba(11, 60, 73, .08);
+}
+.conmutador .dos { display: flex; background: var(--plano); border-radius: 10px; padding: 3px; flex: 1; }
+.conmutador .dos button { flex: 1; border: none; background: transparent; border-radius: 8px; padding: 9px 6px; font-size: 15px; cursor: pointer; color: var(--tinta-2); }
+.conmutador .dos button[aria-pressed="true"] { background: #fff; color: var(--petroleo); font-weight: 600; box-shadow: 0 1px 2px rgba(0, 0, 0, .08); }
+@media (max-width: 1020px) { .conmutador { display: flex; } }
+
+/* ---------- Cajón (lista de documentos) y avisos flotantes ---------- */
+dialog.cajon {
+  border: none; border-radius: 14px; padding: 0; width: min(640px, calc(100vw - 24px)); max-height: min(80vh, 720px);
+  box-shadow: 0 24px 64px rgba(11, 60, 73, .35); color: var(--tinta);
+}
+dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
+.cajon .cabeza-cajon { display: flex; align-items: center; gap: 10px; padding: 16px 18px; border-bottom: 1px solid var(--linea); position: sticky; top: 0; background: #fff; }
+.cajon .cabeza-cajon h2 { font-size: 19px; font-weight: 500; margin: 0; color: var(--petroleo); }
+.cajon .cabeza-cajon .cerrar { margin-left: auto; }
+.cajon .cuerpo-cajon { padding: 8px 18px 18px; overflow: auto; }
+.cajon .acciones-cajon { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 0 6px; }
+.lista-docs { list-style: none; margin: 8px 0 0; padding: 0; }
+.lista-docs li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 12px 0; border-top: 1px solid var(--linea); }
+.lista-docs li.actual .t::after { content: "abierto ahora"; margin-left: 8px; font-size: 12px; color: var(--verde); font-weight: 500; }
+.lista-docs .t { font-weight: 500; }
+.lista-docs .d { font-size: 13.5px; color: var(--tenue); grid-column: 1; }
+.lista-docs .v { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
+.lista-docs .a { grid-column: 1 / -1; display: flex; gap: 14px; flex-wrap: wrap; }
+.vacio { color: var(--tenue); font-size: 15px; padding: 12px 0; }
+
+.flotante {
+  position: fixed; left: 50%; bottom: 92px; transform: translateX(-50%) translateY(20px); opacity: 0;
+  background: var(--petroleo); color: #fff; padding: 11px 18px; border-radius: 10px; font-size: 15px; z-index: 60;
+  box-shadow: 0 10px 30px rgba(11, 60, 73, .3); transition: opacity .18s, transform .18s; pointer-events: none; max-width: calc(100vw - 32px);
+}
+.flotante.ver { opacity: 1; transform: translateX(-50%) translateY(0); }
+.flotante.mal { background: var(--aviso); }
+@media (min-width: 1021px) { .flotante { bottom: 28px; } }
+
+/* ---------- El membrete en el formulario ---------- */
+.logo-zona { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.logo-vista { width: 76px; height: 76px; border-radius: 10px; border: 1px dashed var(--campo-borde); background: #fff; display: grid; place-items: center; overflow: hidden; flex: none; }
+.logo-vista img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.logo-vista .mono { width: 100%; height: 100%; display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 26px; letter-spacing: .02em; }
+.colores { display: flex; flex-wrap: wrap; gap: 8px; }
+.colores label { position: relative; }
+.colores input { position: absolute; opacity: 0; pointer-events: none; }
+.colores span { display: block; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 0 1px var(--campo-borde); }
+.colores input:checked + span { box-shadow: 0 0 0 2px var(--tinta); }
+.colores input:focus-visible + span { outline: 2px solid var(--verde); outline-offset: 3px; }
+
+/* ===================================================================
+   LA HOJA: lo que se entrega. Medidas en pulgadas y puntos, como el papel.
+   =================================================================== */
+.hoja {
+  --acento: #0B3C49;
+  --acento-suave: color-mix(in srgb, var(--acento) 9%, #fff);
+  --acento-linea: color-mix(in srgb, var(--acento) 55%, #fff);
+  --t-tinta: #1D2A2E;
+  --t-2: #4B5A5E;
+  --t-tenue: #7B898C;
+  --t-filete: #DCE2E3;
+  position: relative; width: 8.5in; min-height: 11in; background: #fff; color: var(--t-tinta);
+  font-family: 'Jost', system-ui, sans-serif; font-size: 10pt; line-height: 1.42;
+  box-shadow: var(--sombra-hoja); text-align: left;
+  font-variant-numeric: lining-nums;
+}
+.hoja.horizontal { width: 11in; min-height: 8.5in; }
+.hoja table.pagina { width: 100%; border-collapse: collapse; }
+.hoja table.pagina > thead > tr > td, .hoja table.pagina > tfoot > tr > td { padding: 0; }
+.hoja .m-sup { height: .55in; }
+.hoja .m-inf { height: .62in; }
+.hoja .pie-doc { position: absolute; left: .65in; right: .65in; bottom: .3in; display: flex; justify-content: space-between; gap: .3in; font-size: 7.5pt; color: var(--t-tenue); }
+.hoja td.contenido { padding: 0 .65in; vertical-align: top; }
+.hoja.horizontal td.contenido { padding-left: .5in; padding-right: .5in; }
+.hoja.horizontal .pie-doc { left: .5in; right: .5in; }
+.hoja h1, .hoja h2, .hoja h3, .hoja p { margin: 0; }
+.hoja .num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+
+/* Membrete */
+.hoja .membrete { display: flex; gap: .22in; align-items: center; padding-bottom: .16in; border-bottom: .75pt solid var(--acento-linea); }
+.hoja .membrete .logo { width: .86in; height: .86in; flex: none; display: grid; place-items: center; }
+.hoja .membrete .logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.hoja .membrete .logo .mono { width: .78in; height: .78in; border-radius: 50%; background: var(--acento); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 22pt; letter-spacing: .02em; }
+.hoja .membrete .quien { flex: 1; min-width: 0; }
+.hoja .membrete .nombre { font-size: 15pt; font-weight: 600; line-height: 1.15; letter-spacing: -.005em; }
+.hoja .membrete .giro { font-size: 9.5pt; color: var(--t-2); margin-top: 1pt; }
+.hoja .membrete .contacto { font-size: 8.3pt; color: var(--t-2); margin-top: 4pt; line-height: 1.5; }
+.hoja .membrete .contacto span + span::before { content: ""; display: inline-block; width: 3pt; height: 3pt; border-radius: 50%; background: var(--acento-linea); margin: 0 6pt 1.5pt; vertical-align: middle; }
+.hoja .membrete .doc { text-align: right; flex: none; }
+.hoja .membrete .doc .tipo { font-size: 22pt; font-weight: 500; line-height: 1; color: var(--acento); letter-spacing: -.01em; }
+.hoja .membrete .doc .folio { font-size: 9pt; color: var(--t-2); margin-top: 5pt; }
+.hoja .membrete .doc .folio b { color: var(--t-tinta); font-weight: 600; }
+.hoja.compacta .membrete .logo { width: .62in; height: .62in; }
+.hoja.compacta .membrete .logo .mono { width: .58in; height: .58in; font-size: 16pt; }
+.hoja.compacta .membrete .nombre { font-size: 12.5pt; }
+
+/* Bloques de datos */
+.hoja .datos { display: grid; grid-template-columns: 1.25fr 1fr; gap: .3in; margin: .22in 0 .2in; }
+.hoja .rot { font-size: 7.8pt; color: var(--t-tenue); margin-bottom: 1.5pt; }
+.hoja .dato-grande { font-size: 12pt; font-weight: 500; line-height: 1.25; }
+.hoja .dato { font-size: 9.5pt; color: var(--t-2); }
+.hoja .pares { display: grid; grid-template-columns: auto 1fr; gap: 2pt 10pt; font-size: 9pt; align-content: start; }
+.hoja .pares dt { color: var(--t-tenue); }
+.hoja .pares dd { margin: 0; color: var(--t-tinta); }
+.hoja .titulo-doc { font-size: 13pt; font-weight: 500; margin: 0 0 3pt; }
+.hoja .bajada { font-size: 9.5pt; color: var(--t-2); max-width: 6.2in; }
+
+/* Tablas */
+.hoja table.tabla { width: 100%; border-collapse: collapse; margin: .1in 0 0; font-size: 9.2pt; }
+.hoja table.tabla thead th {
+  text-align: left; font-weight: 500; font-size: 7.8pt; color: var(--t-tenue);
+  padding: 0 6pt 4pt; border-bottom: 1pt solid var(--acento);
+}
+.hoja table.tabla thead th.num { text-align: right; }
+.hoja table.tabla td { padding: 5.5pt 6pt; border-bottom: .5pt solid var(--t-filete); vertical-align: top; }
+.hoja table.tabla tr { break-inside: avoid; }
+.hoja table.tabla td:first-child, .hoja table.tabla th:first-child { padding-left: 0; }
+.hoja table.tabla td:last-child, .hoja table.tabla th:last-child { padding-right: 0; }
+.hoja table.tabla .concepto b { font-weight: 500; }
+.hoja table.tabla .concepto small { display: block; font-size: 8.4pt; color: var(--t-2); margin-top: 1pt; line-height: 1.35; }
+.hoja table.tabla tr.grupo { break-after: avoid; }
+.hoja table.tabla tr.sub, .hoja table.tabla tr.total { break-before: avoid; }
+.hoja table.tabla tr.grupo td { font-weight: 600; font-size: 8.6pt; color: var(--acento); padding-top: 9pt; border-bottom-color: var(--acento-linea); }
+.hoja table.tabla tr.sub td { font-weight: 500; background: var(--acento-suave); }
+.hoja table.tabla tr.total td { font-weight: 600; font-size: 10pt; border-top: 1pt solid var(--acento); border-bottom: none; }
+
+/* Totales a la derecha */
+.hoja .totales { margin: .12in 0 0 auto; width: 3.1in; font-size: 9.5pt; }
+.hoja .totales .fila { display: flex; justify-content: space-between; padding: 3pt 0; }
+.hoja .totales .fila b { font-weight: 500; font-variant-numeric: tabular-nums; }
+.hoja .totales .fila.gran { margin-top: 3pt; padding: 7pt 9pt; background: var(--acento); color: #fff; border-radius: 3pt; font-size: 12pt; font-weight: 600; }
+.hoja .totales .fila.gran b { font-weight: 600; }
+.hoja .letra { font-size: 7.9pt; color: var(--t-2); text-align: right; margin-top: 4pt; letter-spacing: .01em; }
+
+/* Textos de condiciones */
+.hoja .seccion { margin-top: .2in; break-inside: avoid; }
+.hoja .seccion h3 { font-size: 9pt; font-weight: 600; color: var(--acento); margin-bottom: 3pt; }
+.hoja .seccion p, .hoja .seccion li { font-size: 8.8pt; color: var(--t-2); }
+.hoja .seccion ul { margin: 0; padding-left: 12pt; }
+.hoja .seccion li { margin: 1pt 0; }
+.hoja .dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: .3in; }
+
+/* Cierre: condiciones a la izquierda, firma a la derecha */
+.hoja .cierre { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: .4in; align-items: end; margin-top: .2in; break-inside: avoid; }
+.hoja .cierre > .seccion { margin-top: 0; }
+.hoja .cierre .firmas { margin-top: 0; justify-content: flex-end; }
+.hoja .cierre .firma { width: 100%; max-width: 2.6in; }
+
+/* Firmas */
+.hoja .firmas { display: flex; gap: .6in; margin-top: .35in; break-inside: avoid; flex-wrap: wrap; }
+.hoja .firma { width: 2.6in; text-align: center; }
+.hoja .firma .trazo { height: .55in; display: flex; align-items: flex-end; justify-content: center; border-bottom: .75pt solid var(--t-tinta); margin-bottom: 4pt; }
+.hoja .firma .trazo img { max-height: .6in; max-width: 2.2in; object-fit: contain; }
+.hoja .firma .quien-firma { font-size: 9.2pt; font-weight: 500; }
+.hoja .firma .cargo { font-size: 8pt; color: var(--t-2); }
+.hoja .firma .que { font-size: 7.8pt; color: var(--t-tenue); margin-bottom: 2pt; }
+
+.hoja .vacio-hoja { color: var(--t-tenue); font-size: 10pt; border: 1pt dashed var(--t-filete); border-radius: 6pt; padding: .3in; text-align: center; margin-top: .3in; }
+.hoja .marca-muestra { display: inline-block; font-size: 7.5pt; color: var(--t-tenue); border: .5pt solid var(--t-filete); border-radius: 99pt; padding: 1pt 7pt; margin-bottom: 6pt; }
+
+/* ---------- La impresión ---------- */
+#impresion { display: none; }
+@media print {
+  html, body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
+  body > *:not(#impresion) { display: none !important; }
+  #impresion { display: block !important; }
+  #impresion .hoja { box-shadow: none !important; transform: none !important; position: static !important; min-height: 0 !important; margin: 0 !important; }
+  #impresion .hoja .pie-doc { position: fixed; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+}
