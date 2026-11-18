@@ -169,3 +169,5 @@ table.veredicto tr.asi td { font-size: .95rem; }
 #telon .escenario > .lam.lam--cifra .cifra.media + .esquema.tira { max-height: 19vh; }
 #telon .escenario > .lam .guion-pitch.apoyo { font-size: 1.18rem; line-height: 1.42; }
 #telon .escenario > .lam .guion-pitch p { margin: .38rem 0; }
+table.veredicto.linea td:first-child strong { font-family: Georgia, serif; font-size: 1.45em; color: var(--marca); line-height: 1; }
+table.veredicto.linea td { padding-top: .55rem; padding-bottom: .55rem; }

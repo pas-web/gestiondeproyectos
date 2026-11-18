@@ -102,7 +102,7 @@
 <main>
 
 <div class="caso">
-  <strong>El encargo.</strong> Escriban el pitch de su componente de la presa: <strong>dos minutos, cinco partes, una petición</strong>. Las cuatro primeras partes son las mismas para cualquiera que las oiga. La quinta, la petición, cambia según a quién se le habla: se escribe una para el Ayuntamiento, otra para una fundación o programa, otra para un negocio y otra para la asamblea.
+  <strong>El encargo.</strong> Escriban el pitch de su componente de la presa: <strong>dos minutos, cinco partes, una petición</strong>. Las cuatro primeras partes son las mismas para cualquiera que las oiga. La quinta, la petición, cambia según a quién se le habla. Hoy escriban al menos dos: escojan entre el Ayuntamiento, una fundación o programa, un negocio y la asamblea.
 </div>
 
 <div class="caja ejemplo">
@@ -218,12 +218,12 @@
   var PUBLICOS = [
     { id: 'ayto', t: 'El Ayuntamiento', importa: 'Que resuelva algo que la gente ya le pide, que se vea, que quepa en su plan y en su año, y que no le deje un problema de mantenimiento.', cambia: 'Di cuánta gente lo pidió y de qué localidad. Nombra el área: Obras Públicas, Servicios Municipales, Turismo. Trae el oficio ya escrito.', pide: 'Especie antes que dinero: maquinaria, materiales, recolección, un visto bueno. Y una persona con quien darle seguimiento.' },
     { id: 'fondo', t: 'Una fundación o programa', importa: 'Que encaje con lo que ellos apoyan este año, que el cambio se pueda medir, que el dinero se pueda comprobar y que el proyecto siga vivo cuando se acabe el apoyo.', cambia: 'Usa sus palabras: lee su convocatoria y di en cuál de sus líneas cabes. Di el indicador y quién mantiene la obra después.', pide: 'Un monto dentro de su tope, para un concepto que sus reglas sí pagan, con la aportación de la comunidad dicha en pesos. O el paso anterior: que lean la idea en una hoja antes de la convocatoria.' },
-    { id: 'negocio', t: 'Un negocio de la zona', importa: 'Que sea cerca, que sus clientes y sus vecinos lo vean, que sea poco trámite y que se sepa que ayudó.', cambia: 'Menos números y más lugar: dónde queda, quién va. Di cómo se va a ver su apoyo: una placa, una mención en la inauguración, una foto.', pide: 'Algo de lo suyo, chico y concreto: diez bultos de cemento, el flete de un viaje, las tortas de una faena. Es más fácil dar de lo que se vende que dar dinero.' },
+    { id: 'negocio', t: 'Un negocio de la zona', importa: 'Que sea cerca, que sus clientes y sus vecinos lo vean, que sea poco trámite y que se sepa que ayudó.', cambia: 'Menos números y más lugar: dónde queda, quién va. Di cómo se va a ver su apoyo: una placa, una mención en la inauguración, una foto.', pide: 'Algo de lo suyo, chico y concreto: doce bultos de cemento, el flete de un viaje, las tortas de una faena. Es más fácil dar de lo que se vende que dar dinero.' },
     { id: 'asamblea', t: 'La asamblea', importa: 'Que sea lo que la gente dijo en la consulta, quién decide, quién se beneficia, qué les toca poner y quién lo cuida después.', cambia: 'Habla de "lo que ustedes dijeron", no de "nuestro proyecto". Sin palabras de formato. Enseña el plano o el fotomontaje en grande.', pide: 'El acuerdo en acta, las faenas con fecha y un comité con nombres. No se pide dinero: se pide la decisión y las manos.' }
   ];
   var HUMO = ['fortalecer', 'empoderar', 'promover', 'impulsar', 'fomentar', 'concientizar', 'sensibilizar', 'coadyuvar', 'integral', 'sustentable', 'sostenible', 'sinergia', 'innovador', 'holístic', 'detonar', 'potenciar', 'incidir'];
   var DESEO = ['esperamos', 'soñamos', 'sueño', 'ojalá', 'quisiéramos', 'deseamos', 'anhel', 'nos gustaría', 'tenemos la esperanza'];
-  var EXCUSA = ['perdón', 'disculp', 'no nos dio tiempo', 'no alcanzamos', 'somos solo estudiantes', 'apenas somos'];
+  var EXCUSA = ['perdón por', 'perdonen', 'disculpen que', 'una disculpa', 'no nos dio tiempo', 'no alcanzamos', 'somos solo estudiantes', 'apenas somos'];
   var EJEMPLO = {
     equipo: 'Componente 5 · convivencia y descanso (ejemplo)',
     frase: 'Tres palapas con mesa y seis bancas a la sombra, en la orilla norte',
@@ -275,7 +275,7 @@
     $('publicos').innerHTML = PUBLICOS.map(function (q) { return '<button type="button" data-p="' + q.id + '"' + (q.id === p.id ? ' class="activo"' : '') + '>' + q.t + '</button>'; }).join('');
     $('oido').innerHTML = '<div><div class="t">Lo que le importa</div>' + p.importa + '</div><div><div class="t">Lo que cambia en tu pitch</div>' + p.cambia + '</div><div><div class="t">Lo que se le pide</div>' + p.pide + '</div>';
     $('peticion').value = e.peticiones[p.id] || '';
-    $('peticion').placeholder = 'A ' + p.t.toLowerCase().replace(/^el |^la |^una? /, function (m) { return m; }) + ' le pedimos...';
+    $('peticion').placeholder = ({ ayto: 'Al Ayuntamiento', fondo: 'A la fundación', negocio: 'A la ferretería', asamblea: 'A la asamblea' })[p.id] + ' le pedimos...';
   }
   function revisar() {
     BLOQUES.forEach(function (b, i) { medir(document.querySelector('[data-m="' + i + '"]'), e.bloques[i], b.seg); });
@@ -296,11 +296,11 @@
       punto(/\d/.test(e.bloques[0]), 'La primera parte dice de qué tamaño es el problema, con un número.', 'A la primera parte le falta un número.', 'Cuántas personas, cuántos domingos, cuántos metros. Uno solo, que se entienda al oírlo.');
       punto(/\d/.test(e.bloques[2]) && /20\d\d|enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre/i.test(e.bloques[2]), 'El cambio trae un número con fecha.', 'El cambio no trae número con fecha.', 'Cuánto es hoy, a cuánto quieren llegar y para cuándo. Sin eso es un deseo.');
       punto(/\d|faena|jornal|permiso|acta/i.test(e.bloques[3]), 'Se dice lo que ya está puesto.', 'No se dice qué pone ya la comunidad.', 'El permiso, la faena, el material, con su valor. Es lo que más convence a quien duda.');
-      punto(/\d/.test(pet) && /\?/.test(pet), 'La petición trae cantidad o fecha y termina con una pregunta.', 'La petición todavía no es una petición.', 'Le falta la cantidad o la fecha, o no termina preguntando por el siguiente paso. "Lo que guste apoyar" no se puede contestar.');
+      punto(/\d|\b(un|una|dos|tres|cuatro|cinco|seis|ocho|diez|doce|veinte)\b/i.test(pet) && /20\d\d|enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|lunes|martes|miércoles|jueves|viernes|sábado|semana|hoy|mañana/i.test(pet) && /\?/.test(pet), 'La petición trae cantidad y fecha, y termina con una pregunta.', 'La petición todavía no es una petición.', 'Le falta la cantidad, o la fecha, o no termina preguntando por el siguiente paso. "Lo que guste apoyar" no se puede contestar.');
       var h = encontradas(HUMO, todo), d = encontradas(DESEO, todo), x = encontradas(EXCUSA, todo);
       punto(!h.length, 'No hay palabras de humo.', 'Palabras de humo: ' + h.join(', ') + '.', 'Suenan bien y no dicen nada que se pueda ver. Cámbienlas por lo que de verdad va a pasar: en vez de "fortalecer la convivencia", "que las familias se queden dos horas".');
       punto(!d.length, 'No se habla de deseos.', 'Se habla de deseos: ' + d.join(', ') + '.', 'Quien decide no apoya esperanzas: apoya planes. Digan qué van a hacer, no qué les gustaría.');
-      punto(!x.length, 'No hay disculpas.', 'Hay disculpas o excusas: ' + x.join(', ') + '.', 'Nadie pidió perdón por existir. Se quitan y el pitch gana cinco segundos.');
+      punto(!x.length, 'No hay disculpas.', 'Hay disculpas o excusas: ' + x.join(', ') + '.', 'No hay de qué disculparse: se quitan y el pitch gana cinco segundos.');
       punto(!!(e.temo.trim() && e.respuesta.trim()), 'La pregunta que temen ya tiene respuesta.', 'Falta escribir la pregunta que temen y su respuesta.', 'Está en el paso 5 de esta hoja.');
     }
     $('revision').innerHTML = r.join('');

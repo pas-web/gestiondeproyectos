@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calentamiento · ¿Humo o foto? · Gestión y Manejo de Proyectos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.5; font-size:1.05rem; min-height:100vh; display:flex; flex-direction:column; }
+  header.curso { background:var(--profundo); color:#EAF4F2; padding:.8rem 1.4rem; display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+  header.curso .titulo { font-family:Georgia,serif; font-size:1.4rem; font-weight:bold; }
+  header.curso a { color:#EAF4F2; font-size:.88rem; opacity:.8; }
+  .juegos { margin-left:auto; display:flex; gap:.4rem; flex-wrap:wrap; }
+  .juegos button { font:inherit; font-weight:bold; font-size:.9rem; border:2px solid #EAF4F2; background:transparent; color:#EAF4F2; border-radius:999px; padding:.3rem .9rem; cursor:pointer; }
+  .juegos button.activo { background:var(--arena); border-color:var(--arena); color:#2b2206; }
+  main { flex:1; width:100%; max-width:1100px; margin:0 auto; padding:1.2rem 1.2rem 2rem; display:flex; flex-direction:column; }
+  .regla { color:#45605a; font-size:1rem; margin:0 0 .8rem; }
+  .regla b { color:var(--profundo); }
+  .avance { display:flex; gap:.3rem; margin-bottom:1rem; }
+  .avance i { flex:1; height:8px; border-radius:99px; background:#DCE8E4; }
+  .avance i.bien { background:var(--marca); } .avance i.mal { background:#D98C7B; } .avance i.aqui { background:var(--arena); }
+  .carta { flex:1; background:#fff; border:1px solid var(--borde); border-radius:18px; padding:clamp(1.2rem,4vw,3rem); display:flex; flex-direction:column; justify-content:center; box-shadow:0 2px 24px rgba(11,60,73,.08); min-height:46vh; }
+  .carta .quien { font-size:.85rem; letter-spacing:.12em; text-transform:uppercase; font-weight:bold; color:var(--marca); margin-bottom:.6rem; }
+  .carta .frase { font-family:Georgia,serif; font-size:clamp(1.5rem,4.2vw,3rem); line-height:1.3; color:var(--profundo); margin:0; }
+  .carta .veredicto { margin-top:1.4rem; border-radius:12px; padding:.9rem 1.2rem; font-size:clamp(1rem,2vw,1.35rem); display:none; }
+  .carta.resuelta .veredicto { display:block; }
+  .veredicto.humo { background:#FBF0EE; border-left:7px solid var(--rojo); } .veredicto.foto { background:#EEF6F0; border-left:7px solid var(--verde); }
+  .veredicto b { display:block; font-size:.8em; letter-spacing:.1em; text-transform:uppercase; }
+  .veredicto.humo b { color:var(--rojo); } .veredicto.foto b { color:var(--verde); }
+  .veredicto .tu { font-size:.85em; color:#45605a; margin-top:.4rem; }
+  .botones { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; margin-top:1rem; }
+  .botones button { font:inherit; font-weight:bold; font-size:clamp(1.1rem,2.6vw,1.7rem); border:none; border-radius:16px; padding:1rem; cursor:pointer; color:#fff; }
+  .botones .a { background:var(--rojo); } .botones .b { background:var(--verde); }
+  .botones button small { display:block; font-weight:normal; font-size:.6em; opacity:.9; }
+  .sigue { display:none; margin-top:1rem; font:inherit; font-weight:bold; font-size:1.2rem; background:var(--arena); color:#2b2206; border:none; border-radius:999px; padding:.8rem 1.6rem; cursor:pointer; align-self:flex-end; }
+  .resuelta-fuera .botones { display:none; } .resuelta-fuera .sigue { display:block; }
+  .final { text-align:center; } .final .n { font-family:Georgia,serif; font-size:clamp(4rem,14vw,8rem); color:var(--marca); line-height:1; font-weight:bold; }
+  .final p { font-family:Georgia,serif; font-size:clamp(1.2rem,2.6vw,1.8rem); color:var(--profundo); }
+  .teclas { text-align:center; color:#7b8f8a; font-size:.85rem; margin-top:.8rem; }
+</style>
+</head>
+<body>
+<header class="curso">
+  <div><div class="titulo">Calentamiento</div><a href="index.html">La clase de gestión y pitch</a></div>
+  <div class="juegos" id="juegos"></div>
+</header>
+<main id="main"></main>
+<script>
+(function () {
+  var JUEGOS = [
+    { id: 'encargo', nombre: '¿Ya es un encargo?', a: 'Todavía no', as: 'falta a quién, cuánto o cuándo', b: 'Ya es un encargo', bs: 'se puede salir a pedirlo mañana',
+      regla: 'Para el <b>Mazo 1</b>. Un renglón de gestión está listo cuando dice a quién (con cargo), qué exactamente (con cantidad) y para cuándo. Se lee la frase, el grupo vota a mano alzada y luego se aprieta el botón.',
+      cierre: ['Un renglón de gestión se puede leer como un encargo: a quién, qué, cuánto y cuándo.', 'Lo que no trae cargo, cantidad y fecha todavía es una intención.'],
+      cartas: [
+        ['Renglón de gestión', 'Pedirle apoyo al municipio para la obra.', 0, '"El municipio" no contesta el teléfono y "apoyo" no se puede entregar. Falta el cargo, la cosa, la cantidad y la fecha.'],
+        ['Renglón de gestión', 'A la Dirección de Obras Públicas: dos viajes de grava y un día de máquina en marzo.', 1, 'Tiene oficina, cosa, cantidad y mes. Mañana se puede escribir el oficio.'],
+        ['Renglón de gestión', 'Buscar fundaciones que financien proyectos ambientales.', 0, 'Es una tarea de investigación, no un pedido. Se vuelve encargo cuando dice cuál fundación, qué línea suya y cuánto.'],
+        ['Renglón de gestión', 'A la ferretería del pueblo: doce bultos de cemento en febrero, con su nombre en la placa.', 1, 'Dice a quién, qué, cuánto, cuándo y hasta qué gana el otro.'],
+        ['Renglón de gestión', 'Que la comunidad participe en la construcción.', 0, '¿Cuántas personas, cuántos días, convocadas por quién? "Dos faenas de veinte personas en febrero, que convoca el comisariado" ya es un encargo.'],
+        ['Renglón de gestión', 'A Desarrollo Agropecuario del municipio: cuarenta bultos de cemento y doce láminas en febrero, para la sala de miel.', 1, 'Oficina, cosa, cantidad, mes y para qué. Falta saber si este año tienen material, pero ya se puede ir a preguntar.'],
+        ['Renglón de gestión', 'Conseguir patrocinios de empresas de la región.', 0, '¿Cuál empresa y qué de lo que vende? Es más fácil que alguien dé lo que ya tiene que dinero.'],
+        ['Renglón de gestión', 'A la asamblea del ejido de enero: el acuerdo en acta y un comité de tres personas.', 1, 'A la asamblea no se le pide dinero: se le pide la decisión y las manos, con fecha.']
+      ] },
+    { id: 'humo', nombre: '¿Humo o foto?', a: 'Humo', as: 'suena bien y no se ve', b: 'Foto', bs: 'se le puede tomar una foto',
+      regla: 'Para el <b>Mazo 2</b>. La prueba de cada frase de un pitch: ¿se le puede tomar una foto a lo que dice? Se lee la frase, el grupo vota a mano alzada y luego se aprieta el botón.',
+      cierre: ['Si quien escucha no puede dibujarlo, todavía no se dijo.', 'Donde haya humo, se pone lo que de verdad va a pasar: quién, cuántos, dónde y cuándo.'],
+      cartas: [
+        ['Frase de un pitch', 'Vamos a fortalecer el tejido social de la comunidad.', 0, 'Nadie puede dibujar un tejido social fortalecido. ¿Qué va a pasar? "Que las familias se queden dos horas en la orilla en lugar de una."'],
+        ['Frase de un pitch', 'Tres palapas de palma con mesa, en la orilla norte, antes de las lluvias.', 1, 'Qué, cuántas, dónde y cuándo. Se puede dibujar en una servilleta.'],
+        ['Frase de un pitch', 'Buscamos promover prácticas agropecuarias sustentables entre los productores.', 0, 'No sale en la foto. "Doce productores dejan de quemar el rastrojo y hacen composta con él, a partir de mayo" sí.'],
+        ['Frase de un pitch', 'Una señora nos dijo: "Venimos, nos mojamos los pies y nos vamos".', 1, 'Es la voz de una persona, textual. Se ve la escena completa.'],
+        ['Frase de un pitch', 'Es un proyecto integral, sustentable e innovador.', 0, 'Tres adjetivos y ninguna cosa. Quien lee cincuenta solicitudes en una tarde se los brinca.'],
+        ['Frase de un pitch', 'Cuarenta sabinos sembrados en julio, con cerco para que no se los coma el ganado.', 1, 'Hasta el ganado sale en la foto.'],
+        ['Frase de un pitch', 'Esperamos generar un impacto positivo en los visitantes.', 0, 'Dos veces humo: "esperamos" es un deseo, e "impacto positivo" no dice cuál. ¿Qué van a hacer distinto los visitantes?'],
+        ['Frase de un pitch', 'El ejido pone la palma, los horcones y cuarenta jornales: unos veinte mil pesos.', 1, 'Cosas que se pueden contar y un número que se puede comprobar.']
+      ] }
+  ];
+  var main = document.getElementById('main'), J = 0, i = 0, res = [];
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function menu() { document.getElementById('juegos').innerHTML = JUEGOS.map(function (j, n) { return '<button type="button" data-j="' + n + '"' + (n === J ? ' class="activo"' : '') + '>' + j.nombre + '</button>'; }).join(''); }
+  function avance() { var j = JUEGOS[J]; return '<div class="avance">' + j.cartas.map(function (c, n) { return '<i class="' + (res[n] === true ? 'bien' : res[n] === false ? 'mal' : n === i ? 'aqui' : '') + '"></i>'; }).join('') + '</div>'; }
+  function pinta() {
+    var j = JUEGOS[J]; menu();
+    if (i >= j.cartas.length) {
+      var ok = res.filter(function (r) { return r; }).length;
+      main.className = '';
+      main.innerHTML = '<p class="regla">' + j.regla + '</p>' + avance() + '<div class="carta final"><div class="n">' + ok + ' de ' + j.cartas.length + '</div><p>' + j.cierre[0] + '</p><p style="font-size:1.1rem;color:#45605a;font-family:inherit">' + j.cierre[1] + '</p></div><button class="sigue" style="display:block" type="button" data-otra>' + (J + 1 < JUEGOS.length ? 'Otra vez' : 'Otra vez') + '</button>';
+      return;
+    }
+    var c = j.cartas[i], hecho = res[i] !== undefined;
+    main.className = hecho ? 'resuelta-fuera' : '';
+    main.innerHTML = '<p class="regla">' + j.regla + '</p>' + avance()
+      + '<div class="carta' + (hecho ? ' resuelta' : '') + '"><div class="quien">' + c[0] + ' · ' + (i + 1) + ' de ' + j.cartas.length + '</div><p class="frase">' + esc(c[1]) + '</p>'
+      + '<div class="veredicto ' + (c[2] ? 'foto' : 'humo') + '"><b>' + (c[2] ? j.b : j.a) + '</b>' + esc(c[3]) + (hecho ? '<div class="tu">' + (res[i] ? 'Le atinaron.' : 'Esta vez no. Vale la pena discutir por qué.') + '</div>' : '') + '</div></div>'
+      + '<div class="botones"><button type="button" class="a" data-r="0">' + j.a + '<small>' + j.as + '</small></button><button type="button" class="b" data-r="1">' + j.b + '<small>' + j.bs + '</small></button></div>'
+      + '<button class="sigue" type="button" data-sigue>' + (i + 1 < j.cartas.length ? 'La que sigue ▸' : 'Ver el resultado ▸') + '</button>'
+      + '<div class="teclas">Teclas: 1 y 2 para votar · flecha derecha o espacio para seguir</div>';
+  }
+  function vota(r) { if (res[i] !== undefined) return; res[i] = (r === JUEGOS[J].cartas[i][2]); pinta(); }
+  function sigue() { if (i < JUEGOS[J].cartas.length && res[i] === undefined) return; i++; pinta(); }
+  function empieza(n) { J = n; i = 0; res = []; pinta(); try { history.replaceState(null, '', '?j=' + JUEGOS[J].id); } catch (x) {} }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button'); if (!b) return;
+    if (b.hasAttribute('data-j')) empieza(+b.getAttribute('data-j'));
+    else if (b.hasAttribute('data-r')) vota(+b.getAttribute('data-r'));
+    else if (b.hasAttribute('data-sigue')) sigue();
+    else if (b.hasAttribute('data-otra')) empieza(J);
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === '1') vota(0); else if (ev.key === '2') vota(1);
+    else if (ev.key === 'ArrowRight' || ev.key === ' ' || ev.key === 'Enter') { ev.preventDefault(); sigue(); }
+  });
+  var m = /[?&]j=(\w+)/.exec(location.search), ini = 0;
+  if (m) JUEGOS.forEach(function (j, n) { if (j.id === m[1]) ini = n; });
+  empieza(ini);
+})();
+</script>
+</body>
+</html>

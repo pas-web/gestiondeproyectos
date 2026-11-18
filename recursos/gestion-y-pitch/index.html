@@ -16,6 +16,11 @@
   .parte p { color:#45605a; font-size:.95rem; }
   .parte .enlaces { margin-top:auto; }
   .parte a.enlace-grande { font-size:.92rem; padding:.45rem 1rem; }
+  .bandas { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:.8rem; margin:1.2rem 0 .4rem; }
+  .banda { display:flex; flex-direction:column; gap:.6rem; background:var(--profundo); color:#EAF4F2; border-radius:14px; padding:1.1rem 1.4rem; text-decoration:none; }
+  .banda strong { font-family:Georgia,serif; color:var(--arena); font-size:1.3rem; }
+  .banda span { font-size:.97rem; opacity:.92; line-height:1.5; }
+  .banda .ir { align-self:flex-start; margin-top:auto; background:var(--arena); color:#2b2206; font-weight:bold; border-radius:999px; padding:.5rem 1.2rem; opacity:1; }
   .guion { background:#fff; border:1px solid var(--borde); border-radius:14px; padding:1rem 1.4rem; }
   .guion ol { padding-left:1.2rem; } .guion li { margin:.5rem 0; } .guion li b { color:var(--profundo); }
   .galeria { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:.8rem; }
@@ -38,7 +43,7 @@
 <main>
 
 <p style="font-family:Georgia,serif;font-size:1.6rem;color:var(--profundo);margin:1.4rem 0 .3rem">¿A quién se le pide, qué exactamente, y cómo se le dice?</p>
-<p class="pista" style="font-size:1rem">El presupuesto de la presa ya dice lo que falta. Esta clase enseña a salir a conseguirlo. Tiene dos partes que se dan en una sesión larga o en dos: primero cómo se gestiona (a quién, por cuál camino y con qué mensaje), y luego cómo se cuenta el proyecto en voz alta para que alguien dé el siguiente paso. Cada parte sigue la regla del curso: primero el dibujo, qué es la herramienta y para qué sirve; luego el procedimiento con ejemplos de La Florida; al final la práctica, donde cada equipo arma lo suyo.</p>
+<p class="pista" style="font-size:1rem">El presupuesto de la presa ya dice lo que falta. Esta clase enseña a salir a conseguirlo. Tiene dos partes que se dan en una sesión larga o en dos: primero cómo se gestiona (a quién, por cuál camino y con qué mensaje), y luego cómo se cuenta el proyecto en voz alta para que alguien dé el siguiente paso. El hilo es la presa de La Florida, y cada mazo cierra con un proyecto productivo de los que el grupo va a encontrar al egresar de Producción Agropecuaria Sustentable.</p>
 
 <div class="partes">
   <div class="parte">
@@ -46,8 +51,8 @@
     <div class="dentro">
       <div class="num">1</div>
       <h3>Salir a conseguir</h3>
-      <div class="min">Mazo de 33 láminas · unos 45 min · práctica de 50 min</div>
-      <p>Qué es gestionar y por qué es un trato y no un favor; el objetivo común; el mapa de gestión, que acomoda a los posibles aliados según si pueden, les importa y hay cómo llegar; los dos caminos (por convocatoria y gestión directa); cómo califican una solicitud y dónde buscar fondos hoy; el primer mensaje, la visita, las puertas que no se abren y lo que se hace después del sí y del no. La práctica arma el mapa de gestión del componente y el mensaje para pedir la primera cita.</p>
+      <div class="min">Mazo de 40 láminas · unos 45 min · práctica de 50 min</div>
+      <p>Abre con la historia de cómo se consiguió la Reserva de la Sierra Gorda. Luego: gestionar como trato, el objetivo común, el mapa de gestión, la gestión directa en cinco pasos (averiguar, acercarse, pedir, agradecer y contar qué pasó), el primer mensaje, el oficio y la visita; y después la convocatoria, que es una competencia con reloj. Cierra con dónde buscar apoyo para un proyecto productivo. La práctica arma el mapa de gestión del componente y el mensaje para pedir la primera cita.</p>
       <div class="enlaces"><a class="enlace-grande" href="mazo-gestion.html">Mazo 1</a> <a class="enlace-grande claro" href="practica-gestion.html">Práctica</a></div>
     </div>
   </div>
@@ -56,27 +61,39 @@
     <div class="dentro">
       <div class="num">2</div>
       <h3>Dos minutos</h3>
-      <div class="min">Mazo de 32 láminas · unos 45 min · práctica de 60 min</div>
-      <p>Qué es un pitch y para qué sirve; sus cinco partes (qué pasa y a quién, lo que vamos a hacer, lo que cambia, lo que ya está puesto y lo que te pido); cómo se pide con cantidad y fecha y la escalera de planes A, B y C; el mismo proyecto ante cuatro oídos (Ayuntamiento, fundación, negocio y asamblea); los nervios, las preguntas difíciles y los siete tropiezos. La práctica mide los segundos de cada parte, revisa el guion, trae reloj para ensayar y la hoja de quien escucha.</p>
+      <div class="min">Mazo de 37 láminas · unos 45 min · práctica de 40 min · ronda de 25 min</div>
+      <p>Empieza por oír un pitch completo con reloj y luego lo desarma: sus cinco partes (qué pasa y a quién, lo que vamos a hacer, lo que cambia, lo que ya está puesto y lo que te pido), el número que se ve, la frase que se puede dibujar, la petición con su escalera, el pitch de pasillo en una frase, los cuatro oídos y las reglas de la asamblea. Cierra con el mismo pitch para una sala de miel. La práctica mide los segundos, revisa el guion y trae reloj para ensayar.</p>
       <div class="enlaces"><a class="enlace-grande" href="mazo-pitch.html">Mazo 2</a> <a class="enlace-grande claro" href="practica-pitch.html">Práctica</a></div>
     </div>
   </div>
 </div>
 
-<a href="acordeon.html" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.8rem 1.4rem;align-items:center;background:var(--profundo);color:#EAF4F2;border-radius:14px;padding:1.1rem 1.4rem;text-decoration:none;margin:1.4rem 0 .4rem"><span><strong style="display:block;font-family:Georgia,serif;color:var(--arena);font-size:1.3rem;margin-bottom:.2rem">El acordeón de la clase</strong><span style="font-size:.97rem;opacity:.92;line-height:1.5">Las dos partes en una hoja por los dos lados, para llevar en la mochila: la ruta de una gestión, las tres preguntas del mapa, el primer mensaje, las cinco partes del pitch con sus segundos y la escalera de la petición. Se imprime o se guarda en el teléfono.</span></span><span style="background:var(--arena);color:#2b2206;font-weight:bold;border-radius:999px;padding:.55rem 1.2rem;white-space:nowrap">Abrir el acordeón</span></a>
+<div class="bandas">
+  <a class="banda" href="calentamiento.html">
+    <strong>El calentamiento</strong>
+    <span>Dos juegos de cinco minutos para proyectar y votar a mano alzada. "¿Ya es un encargo?", con ocho renglones de gestión, va antes de la primera práctica. "¿Humo o foto?", con ocho frases de pitch, va a media segunda parte. Los dos mazos lo abren desde su lámina.</span>
+    <span class="ir">Abrir el calentamiento</span>
+  </a>
+  <a class="banda" href="acordeon.html">
+    <strong>El acordeón de la clase</strong>
+    <span>Las dos partes en una hoja por los dos lados, para llevar en la mochila: la ruta de una gestión, las tres preguntas del mapa, el primer mensaje, las cinco partes del pitch con sus segundos y la escalera de la petición. Se imprime o se guarda en el teléfono.</span>
+    <span class="ir">Abrir el acordeón</span>
+  </a>
+</div>
 
 <h2>Cómo se da, paso a paso</h2>
 <div class="guion">
   <ol>
-    <li><b>Antes de la clase.</b> Cada equipo trae su presupuesto del componente (el archivo de la práctica del presupuesto o la hoja impresa) y una laptop. Se imprimen las hojas de quien escucha, una por persona, desde la práctica del pitch. En cuatro papelitos se escribe: Ayuntamiento, fundación o programa, negocio, asamblea. Conviene abrir cada práctica una vez y apretar "Cargar el ejemplo completo" para proyectarlo antes de dar la consigna.</li>
+    <li><b>Antes de la clase, lo que trae cada equipo.</b> Su presupuesto del componente (el archivo de la práctica del presupuesto o la hoja impresa), una laptop, <strong>una frase textual de la consulta</strong> (lo que dijo una persona, con sus palabras) y <strong>el número de hoy</strong> de su componente (cuánta gente, cuánto tiempo, cuántos metros). Sin esas dos cosas no sale la primera parte del pitch.</li>
+    <li><b>Antes de la clase, lo que prepara quien conduce.</b> Las hojas de quien escucha impresas, una por persona, desde la práctica del pitch. Cuatro papelitos: Ayuntamiento, fundación o programa, negocio, asamblea. El acordeón impreso por los dos lados, si se va a repartir. Conviene abrir cada práctica una vez y apretar "Cargar el ejemplo completo" para proyectarlo antes de dar la consigna.</li>
     <li><b>Parte 1, al aire (5 minutos).</b> "¿A quién se lo van a pedir primero, y qué le van a decir?" Tres respuestas al pizarrón, tal como salgan.</li>
-    <li><b>Mazo 1 (45 minutos).</b> Las que no se recortan: el trato y el objetivo común, el mapa de gestión, los dos caminos, el reloj de la convocatoria, el primer mensaje, la visita y lo que no se aguanta. Si el tiempo aprieta se brincan "Primero una hoja" y "Dónde buscar hoy", que quedan como consulta.</li>
-    <li><b>Práctica de gestión (50 minutos).</b> Se proyecta el ejemplo cargado y se lee un renglón en voz alta. Luego cada equipo escribe lo que le falta, lo acomoda en el mapa y arma el primer mensaje para quien quedó en "Primero". Al cierre, cada equipo lee su renglón de "Primero" y se reescriben las tres respuestas del pizarrón con cargo, cantidad y fecha.</li>
+    <li><b>Mazo 1 (45 minutos).</b> Las que no se recortan: cuándo empieza la gestión, la historia de la Sierra Gorda, el trato, el mapa, los cinco pasos, el primer mensaje con su correo malo, el oficio, la visita, lo que no se aguanta y el reloj de la convocatoria. Trae cuatro momentos para que el grupo participe: la apuesta de los cien pesos, los errores del correo, el reto del PROCODES y "¿Ya es un encargo?". Si el tiempo aprieta se brincan "Tres costumbres de quien gana" y "Dónde buscar si el proyecto es productivo", que quedan como consulta.</li>
+    <li><b>Práctica de gestión (50 minutos).</b> Se proyecta el ejemplo cargado y se lee un renglón en voz alta. Cada equipo escribe lo que le falta, lo acomoda en el mapa y arma el primer mensaje para quien quedó en "Primero". Al cierre, cada equipo lee su renglón de "Primero" y se reescriben las tres respuestas del pizarrón con cargo, cantidad y fecha.</li>
     <li><b>Parte 2, al aire (5 minutos).</b> La fila de las tortillas: dos personas voluntarias lo intentan con reloj, sin corrección.</li>
-    <li><b>Mazo 2 (45 minutos).</b> Las que no se recortan: el dibujo del pitch, las cinco partes, ponerle cara al problema, la frase que se puede dibujar, lo que ya está puesto, la petición con su escalera y los cuatro oídos. "Tres cifras famosas" se puede dejar para leer.</li>
-    <li><b>Práctica del pitch (40 minutos).</b> Veinticinco para escribir las cinco partes y la petición para dos oídos; quince para dos vueltas de ensayo con el reloj de la hoja, la segunda con el guion escondido.</li>
-    <li><b>El tribunal de los cuatro oídos (25 minutos).</b> Rondas de seis minutos: dos de pitch, dos de preguntas desde el papel que tocó, dos para llenar la hoja de quien escucha. Cierra la fila de las tortillas, con las mismas dos personas del inicio.</li>
-    <li><b>Si se da en dos sesiones.</b> La primera termina con el mapa de gestión y el mensaje. De tarea, cada equipo trae una frase textual de la consulta y el número de su línea base, que son la materia prima de la parte 1 del pitch.</li>
+    <li><b>Mazo 2 (45 minutos).</b> Las que no se recortan: oír el pitch completo y desarmarlo, las cinco partes, los golpecitos de "Las mañanitas", ponerle cara, la frase que se puede dibujar, lo que ya está puesto, la petición con su escalera y los cuatro oídos. Trae cinco momentos de participación: la canción a golpecitos, el número que se ve, "¿Humo o foto?", la frase de "y, pero, por eso" y el pitch malo actuado. Si el tiempo aprieta se brincan los tres tamaños, la asamblea y la sala de miel.</li>
+    <li><b>Práctica del pitch (40 minutos).</b> Veinticinco para escribir las cinco partes y la petición para dos oídos; quince para dos ensayos con el reloj de la hoja, el segundo con el guion escondido.</li>
+    <li><b>La ronda de los cuatro oídos (25 minutos).</b> Rondas de seis minutos: dos de pitch, dos de preguntas desde el papel que tocó, dos para llenar la hoja de quien escucha. Cierra la fila de las tortillas, con las mismas dos personas del inicio.</li>
+    <li><b>Si se da en dos sesiones.</b> La primera termina con el mapa de gestión y el mensaje. La segunda abre con la fila de las tortillas.</li>
     <li><b>Lo que queda para después de la clase.</b> Mandar el mensaje de verdad a quien quedó en "Primero" es decisión de cada equipo con el profesor: antes lo lee alguien de otro equipo, y se avisa al ejido.</li>
   </ol>
 </div>
@@ -84,7 +101,7 @@
 <h2>Los criterios que se publican</h2>
 <div class="contra">
   <div class="si"><div class="t">El mapa de gestión</div>Cada renglón se puede leer como un encargo: a quién (con cargo y oficina, sin nombres de personas), qué exactamente (con cantidad y fecha), quién va, cuándo y el plan B. Hay al menos uno en "Primero". Ningún aliado carga más del 60% de lo que falta. No todo se pide en dinero. La práctica lo revisa sola.</div>
-  <div class="si"><div class="t">El pitch</div>Cabe en dos minutos. La primera parte trae la voz de una persona y un número. Lo que se va a hacer se puede dibujar. El cambio trae número, fecha y quién lo cuenta. Se dice lo que ya puso la comunidad. La petición trae cantidad y fecha y termina en pregunta. Sin palabras de humo, sin deseos y sin disculpas. Y quien escucha puede repetirlo.</div>
+  <div class="si"><div class="t">El pitch</div>Cabe en dos minutos. La primera parte trae la voz de una persona y un número. Lo que se va a hacer se puede dibujar. El cambio trae número, fecha y quién lo cuenta. Se dice lo que ya puso la comunidad. La petición trae cantidad y fecha y termina en pregunta. Sin humo, sin deseos y sin disculpas. Y quien escucha puede repetirlo.</div>
 </div>
 
 <h2>Lo que ya existe en el curso y aquí se usa</h2>
@@ -99,30 +116,50 @@
   <dd>El mapa de las personas y el trato ensayado de la <a href="../../semanas/semana-08.html">semana 8</a> son el antecedente de la visita. Donde esa página habla del Fondo y de la dictaminadora, manda esta clase: se gestiona para la presa, con donantes y aliados en general.</dd>
 </dl>
 
-<h2>De dónde sale lo que se dice</h2>
+<h2>Para quien quiera más</h2>
 <details>
-  <summary>Lo que se retomó de la presentación original del curso, lo que se cambió y lo que se dejó fuera</summary>
+  <summary>Cinco videos cortos de pitch para ver antes o después de la clase</summary>
+  <p class="pista">Todos son de YouTube, de proyectos de estudiantes o comunidades. Tienen pocas vistas y pueden desaparecer: conviene abrirlos antes de proyectarlos. Se escogieron por su guion; no se revisó imagen ni sonido.</p>
   <ul>
-    <li><strong>Se retomó:</strong> los dos caminos (por convocatoria, que pide escribir, y gestión directa, que pide conversar); la convocatoria como competencia; las cuatro preguntas sobre el donante; revisar propuestas que ganaron, seguir instrucciones, cuidar ortografía y sumas, y darla a leer a alguien de fuera; decir qué pasa cuando se acaba el dinero; los criterios con que se evalúa; los correos comentados; ir de dos a la visita y repartirse los papeles; los obstáculos de la entrevista; empezar por el problema; informar y motivar, con el caso de los Acuerdos Recíprocos por Agua de Bolivia; el número que se puede ver; estar preparado más que motivado; el círculo del objetivo común.</li>
-    <li><strong>Se cambió:</strong> las "palabras poderosas" (fortalecer, empoderar, promover) ahora se enseñan como palabras de humo, porque hoy las trae cualquier solicitud; "maneja tu ansiedad conectándote con el presente" se cambió por dos cosas con estudio detrás, renombrar los nervios y ensayar frente a alguien; el acoso en la entrevista dejó de ser un obstáculo más de la lista y tiene su propia lámina; la lista de sitios donde buscar se revisó dirección por dirección; los nombres propios de los correos se cambiaron por cargos.</li>
-    <li><strong>Se dejó fuera:</strong> la vestimenta formal como regla (en una oficina de la sierra pesa más la puntualidad y la hoja impresa) y las direcciones que ya no abren.</li>
-    <li><strong>Es nuevo:</strong> el mapa de gestión; la ruta de cinco pasos con agradecer y contar qué pasó; el reloj de la convocatoria; la petición con cantidad y fecha y su escalera; los cuatro oídos; lo que ya está puesto como parte del pitch; las preguntas difíciles; y las tres cifras famosas que no hay que repetir.</li>
+    <li><a href="https://www.youtube.com/watch?v=ecx4dqXDc2k">Kuili, Premio Santander 2019</a> (2 minutos, Huajuapan de León, Oaxaca). El mejor modelo: abre con un problema local y su número, dice la solución y cierra diciendo en qué se va a usar el premio.</li>
+    <li><a href="https://www.youtube.com/watch?v=mQJYnFzgH0k">Uniminuto y el Cabildo Indígena Muisca de Suba</a> (1 minuto, Colombia). Una petición directa a una empresa, que dice qué gana ella. Para discutir: no dice cuánto pide y las fechas se contradicen.</li>
+    <li><a href="https://www.youtube.com/watch?v=jV0lZ5vD76E">Raíces Vivas, Educación Jalisco 2026</a> (casi 4 minutos, estudiantes de Zapopan). Tiene todas las partes. Para discutir: más de un minuto de música antes de la primera palabra, y no pide nada.</li>
+    <li><a href="https://www.youtube.com/watch?v=R6T7Oo-u0dY">Cerros de Cambio</a> (2 minutos y medio, Bogotá). Ordena la idea en tres. Para discutir: tampoco pide nada.</li>
+    <li><a href="https://www.youtube.com/watch?v=od-QB3n7--Y">Takutzi, Hult Prize UNAM</a> (2 minutos y medio). Sirve de contraejemplo: muchas cifras, palabras de humo y lemas, ninguna persona y ninguna petición. Se ve contando tropiezos.</li>
   </ul>
 </details>
 <details>
-  <summary>Las fuentes, para quien quiera leer más</summary>
+  <summary>Tres cifras famosas de oratoria que no hay que repetir</summary>
   <ul>
-    <li><strong>Gestión.</strong> GNDR y Change the Game Academy, <em>Movilización de recursos locales: una guía práctica</em>. Kim Klein, <em>Fundraising for Social Change</em>. World Giving Report 2025 (Charities Aid Foundation con Cemefi), capítulo México. JRS Biodiversity Foundation, "Why we decline". Center for Effective Philanthropy, encuesta a solicitantes rechazados. Reglas de operación del PROCODES 2026 (DOF, 15 de enero de 2026). Convocatoria 2026 del Programa de Pequeñas Donaciones en México.</li>
-    <li><strong>Pitch.</strong> Small, Loewenstein y Slovic (2007), sobre la persona identificable. Cryder, Loewenstein y Scheines (2013), sobre decir en qué se usa lo que se pide. List y Lucking-Reiley (2002) y Karlan y List (2007), sobre lo que ya está puesto. Flynn y Lake (2008), sobre el miedo a pedir. Chen, Yao y Kotha (2009), sobre preparación y pasión. Brooks (2014), sobre los nervios. Menzel y Carrell (1994), sobre el ensayo. Kanze, Huang, Conley y Higgins (2018), sobre las preguntas de riesgo. Fundación Natura Bolivia, Acuerdos Recíprocos por Agua.</li>
-    <li><strong>Con cautela.</strong> Los estudios sobre donativos se hicieron con donantes individuales y casi todos en Estados Unidos; aquí se usan como analogía y así se dice en las notas. La adaptación a los cuatro oídos es experiencia de oficio, no un estudio. Las direcciones y reglas se revisaron el 18 de noviembre de 2026 y envejecen rápido.</li>
+    <li><strong>"El 93% de la comunicación es lenguaje corporal."</strong> El estudio era sobre cómo se nota si alguien le cae bien o mal a otro. Su autor, Albert Mehrabian, advierte que no aplica a nada más.</li>
+    <li><strong>"La atención dura 8 segundos."</strong> Salió de un folleto de mercadotecnia de 2015 que no citaba ningún estudio.</li>
+    <li><strong>"Una historia se recuerda 22 veces más que un dato."</strong> Se repite en todos los cursos y nadie ha podido encontrar el estudio.</li>
+  </ul>
+  <p class="pista">Lo que se dice sí importa, la gente sí pone atención cuando algo le interesa y las historias sí ayudan. Lo que no existe son esos números, y quien cita una cifra falsa en un pitch pierde la confianza en todas las demás.</p>
+</details>
+<details>
+  <summary>Lo que se retomó de la presentación original del curso, lo que se cambió y lo que se dejó fuera</summary>
+  <ul>
+    <li><strong>Se retomó:</strong> los dos caminos (por convocatoria, que pide escribir, y gestión directa, que pide conversar); la convocatoria como competencia; las cuatro preguntas sobre el donante; leer propuestas que ganaron, seguir instrucciones, cuidar ortografía y sumas, y darla a leer a alguien de fuera; decir qué pasa cuando se acaba el dinero; los criterios con que se evalúa; los correos comentados; ir de dos a la visita y repartirse los papeles; los obstáculos de la entrevista; empezar por el problema; informar y motivar; el número que se puede ver; estar preparado más que motivado; el círculo del objetivo común.</li>
+    <li><strong>Se cambió:</strong> las "palabras poderosas" (fortalecer, empoderar, promover) ahora se enseñan como palabras de humo, porque hoy las trae cualquier solicitud; "maneja tu ansiedad conectándote con el presente" se cambió por dos cosas con estudio detrás, renombrar los nervios y ensayar frente a alguien; el acoso en la entrevista dejó de ser un obstáculo más de la lista y tiene su propia lámina; la lista de sitios donde buscar se revisó dirección por dirección; los nombres propios de los correos se quitaron; el caso de Bolivia y la cifra de la basura de Concá pasaron a las notas del conductor, y en su lugar van ejemplos de la presa y cuentas que el grupo puede comprobar.</li>
+    <li><strong>Se dejó fuera:</strong> la vestimenta formal como regla (en una oficina de la sierra pesa más la puntualidad y el papel en la mano) y las direcciones que ya no abren.</li>
+    <li><strong>Es nuevo:</strong> la historia del Grupo Ecológico Sierra Gorda; el mapa de gestión; los cinco pasos con agradecer y contar qué pasó; dónde se averigua; el oficio y el derecho de petición; el reloj de la convocatoria; dónde buscar para un proyecto productivo; oír un pitch completo antes de desarmarlo; el experimento de los golpecitos; la petición con cantidad y fecha y su escalera; "y, pero, por eso"; los cuatro oídos; las reglas de la asamblea; lo que ya está puesto como parte del pitch; las preguntas difíciles; y los dos juegos del calentamiento.</li>
+  </ul>
+</details>
+<details>
+  <summary>Las fuentes</summary>
+  <ul>
+    <li><strong>Gestión.</strong> Fichas del proyecto 887 del Fondo para el Medio Ambiente Mundial y del proyecto ME-M1101 del BID, sobre el Grupo Ecológico Sierra Gorda. GNDR y Change the Game Academy, <em>Movilización de recursos locales: una guía práctica</em>. Kim Klein, <em>Fundraising for Social Change</em>. World Giving Report 2025, capítulo México. INEGI, cuenta satélite de las instituciones sin fines de lucro 2024. JRS Biodiversity Foundation, "Why we decline". Center for Effective Philanthropy, encuesta a solicitantes. Reglas de operación del PROCODES 2026 (Diario Oficial, 15 de enero de 2026). Ley de Planeación del Estado de Querétaro. Artículo 8 de la Constitución.</li>
+    <li><strong>Pitch.</strong> Newton (1990), por medio de Heath y Heath, <em>Ideas que pegan</em>. Small, Loewenstein y Slovic (2007). Oppenheimer (2006). Cryder, Loewenstein y Scheines (2013). List y Lucking-Reiley (2002) y Karlan y List (2007). Flynn y Lake (2008). Chen, Yao y Kotha (2009). Olson (2015). Clarke, Cornelissen y Healey (2019). Brooks (2014). Menzel y Carrell (1994). Laske y DiGennaro Reed (2024). Kanze, Huang, Conley y Higgins (2018). Ley Agraria, artículos 24 a 31. Geilfus, <em>80 herramientas para el desarrollo participativo</em>.</li>
+    <li><strong>Con cautela.</strong> Los estudios sobre donativos e inversionistas se hicieron casi todos en Estados Unidos y con otro tipo de público; aquí se usan como analogía y así se dice en las notas. Varios se conocen por sus resúmenes y no por el texto completo. La adaptación a los cuatro oídos es experiencia de oficio. Los programas agropecuarios y sus reglas se revisaron el 18 de noviembre de 2026, con notas de prensa donde no hubo fuente oficial a la mano, y cambian cada año: antes de darle un dato a un grupo de productores, se confirma en la oficina.</li>
   </ul>
 </details>
 
 <h2>Las sketchplanations de la clase</h2>
-<p class="pista" style="font-size:.95rem">Dibujos a tinta, uno por idea, generados en Gemini con los prompts de <code>sketchplanations.md</code>. Se proyectan solos, sin texto que compita. Los esquemas de las herramientas (el pitch, la escalera, el mapa de gestión y el objetivo común) están dibujados dentro de los mazos.</p>
+<p class="pista" style="font-size:.95rem">Catorce dibujos a tinta, uno por idea, generados en Gemini con los prompts de <code>sketchplanations.md</code>. Se proyectan solos, sin texto que compita. Los esquemas de las herramientas (el pitch, la escalera, el mapa de gestión y el objetivo común) están dibujados dentro de los mazos.</p>
 <div class="galeria" id="galeria"></div>
 
-<p class="pista" style="margin-top:2.5rem">Todo abre sin internet y se comparte suelto: la carpeta completa se copia al Drive del grupo. Las prácticas guardan en el navegador de cada laptop y descargan un HTML con la fecha. Nada se sube a internet, y en los renglones van cargos y oficinas, no nombres de personas.</p>
+<p class="pista" style="margin-top:2.5rem">Todo abre sin internet, salvo los videos, y se comparte suelto: la carpeta completa se copia al Drive del grupo. Las prácticas guardan en el navegador de cada laptop y descargan un HTML con la fecha. Nada se sube a internet, y en los renglones van cargos y oficinas, no nombres de personas.</p>
 </main>
 <script>
 (function () {
