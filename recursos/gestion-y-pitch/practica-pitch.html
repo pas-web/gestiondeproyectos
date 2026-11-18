@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica · Dos minutos · Gestión y Manejo de Proyectos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1.02rem; }
+  body.proyector { font-size:1.3rem; }
+  header.curso { background:var(--profundo); color:#EAF4F2; padding:1rem 1.4rem; }
+  header.curso .curso-nombre { font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; opacity:.75; }
+  header.curso .titulo { font-family:Georgia,serif; font-size:1.7rem; font-weight:bold; margin:.15rem 0 0; }
+  header.curso .migas { font-size:.85rem; opacity:.75; } header.curso .migas a { color:#EAF4F2; }
+  main { max-width:1000px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.3em; margin:1.8rem 0 .4rem; }
+  h2 .n { color:var(--arena); font-size:1.25em; margin-right:.3rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:1rem 1.3rem; font-family:Georgia,serif; font-size:1.08em; }
+  .caso strong { color:var(--arena); }
+  .caja { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:.8rem 0; }
+  .caja.ejemplo { border-left:6px solid var(--arena); background:#FFFDF7; }
+  .rotulo { font-size:.78em; letter-spacing:.1em; text-transform:uppercase; color:#7C6222; font-weight:bold; }
+  label { font-size:.85em; font-weight:bold; color:var(--profundo); display:block; }
+  input[type=text], textarea, select { font:inherit; font-size:.97em; border:1px solid var(--borde); border-radius:8px; padding:.4rem .55rem; width:100%; background:#fff; color:var(--texto); }
+  textarea { min-height:6.2em; resize:vertical; line-height:1.5; }
+  .fila { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:.7rem; }
+  .bloque { display:grid; grid-template-columns:210px minmax(0,1fr); gap:.3rem 1.1rem; }
+  .bloque h3 { font-family:Georgia,serif; color:var(--profundo); margin:0; font-size:1.12em; line-height:1.25; }
+  .bloque h3 .n { color:var(--arena); font-size:1.5em; margin-right:.3rem; }
+  .bloque .guia { font-size:.9em; color:#45605a; margin:.3rem 0 0; }
+  .medidor { display:flex; align-items:center; gap:.6rem; font-size:.85em; color:#45605a; margin-top:.3rem; }
+  .medidor .barra { flex:1; height:8px; border-radius:99px; background:#E4EEEB; overflow:hidden; }
+  .medidor .barra i { display:block; height:100%; background:var(--marca); width:0; }
+  .medidor.pasado .barra i { background:var(--rojo); } .medidor.pasado b { color:var(--rojo); }
+  .publicos { display:flex; flex-wrap:wrap; gap:.4rem; margin:.5rem 0; }
+  .publicos button { font:inherit; font-weight:bold; font-size:.92em; border:2px solid var(--profundo); background:#fff; color:var(--profundo); border-radius:999px; padding:.35rem .9rem; cursor:pointer; }
+  .publicos button.activo { background:var(--profundo); color:#fff; }
+  .oido { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.7rem; margin:.6rem 0; }
+  .oido > div { background:#F7FAF9; border:1px solid var(--borde); border-radius:10px; padding:.6rem .8rem; font-size:.93em; }
+  .oido .t { font-size:.76em; letter-spacing:.08em; text-transform:uppercase; font-weight:bold; color:var(--marca); }
+  .total { display:flex; flex-wrap:wrap; gap:1rem; align-items:baseline; }
+  .total .v { font-family:Georgia,serif; font-size:2.2em; color:var(--profundo); font-variant-numeric:tabular-nums; }
+  .total .v.pasado { color:var(--rojo); }
+  .barra-pitch { position:relative; display:flex; height:34px; border-radius:10px; overflow:hidden; background:#E4EEEB; margin:.6rem 0 1.6rem; }
+  .barra-pitch span { display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold; font-size:.85rem; min-width:0; overflow:hidden; white-space:nowrap; transition:width .2s; }
+  .barra-pitch-caja { position:relative; }
+  .barra-pitch-caja .tope { position:absolute; top:-4px; bottom:-18px; width:0; border-left:3px dashed var(--rojo); }
+  .barra-pitch-caja .tope b { position:absolute; bottom:-4px; left:6px; font-size:.75rem; color:var(--rojo); white-space:nowrap; }
+  ul.revision { list-style:none; padding:0; margin:.4rem 0; }
+  ul.revision li { padding:.4rem .7rem .4rem 2.2rem; position:relative; border-bottom:1px dashed var(--borde); font-size:.96em; }
+  ul.revision li::before { position:absolute; left:.5rem; top:.4rem; font-weight:bold; width:1.3rem; text-align:center; }
+  ul.revision li.ok::before { content:"✓"; color:var(--verde); }
+  ul.revision li.falta::before { content:"!"; color:var(--rojo); }
+  ul.revision li.falta { background:#FBF0EE; }
+  ul.revision li small { display:block; color:#45605a; }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.4rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92em; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
+  .btn.peligro { background:#fff; color:var(--rojo); border:2px solid var(--rojo); }
+  .ayuda { font-size:.9em; color:#45605a; }
+  .pie-acciones { position:sticky; bottom:0; background:rgba(242,247,245,.96); border-top:1px solid var(--borde); padding:.5rem .8rem; margin:1.5rem -1rem 0; display:flex; flex-wrap:wrap; align-items:center; gap:.2rem; z-index:5; }
+  .guardado { font-size:.85rem; color:#45605a; margin-left:auto; }
+
+  /* El ensayo: guion grande y reloj */
+  #ensayo { position:fixed; inset:0; z-index:50; background:var(--profundo); color:#EAF4F2; display:none; flex-direction:column; }
+  #ensayo.abierto { display:flex; }
+  #ensayo .arriba { display:flex; align-items:center; gap:1.2rem; padding:.8rem 1.4rem; flex-wrap:wrap; }
+  #ensayo .reloj { font-family:Georgia,serif; font-size:clamp(3rem,9vw,6rem); line-height:1; font-variant-numeric:tabular-nums; color:#fff; }
+  #ensayo.aviso .reloj { color:var(--arena); } #ensayo.fin .reloj { color:#F08A75; }
+  #ensayo .ahora { font-size:1.2rem; flex:1; min-width:200px; } #ensayo .ahora b { color:var(--arena); display:block; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; }
+  #ensayo .pista-tiempo { display:flex; height:14px; margin:0 1.4rem; border-radius:99px; overflow:hidden; background:#11495a; position:relative; }
+  #ensayo .pista-tiempo span { border-right:2px solid var(--profundo); height:100%; }
+  #ensayo .pista-tiempo i { position:absolute; left:0; top:0; bottom:0; background:rgba(217,164,65,.85); width:0; }
+  #ensayo .texto { flex:1; overflow:auto; padding:1.2rem clamp(1rem,6vw,5rem) 2rem; font-family:Georgia,serif; font-size:clamp(1.3rem,2.6vw,2.1rem); line-height:1.5; }
+  #ensayo .texto p { margin:0 0 1.1em; opacity:.45; } #ensayo .texto p.vivo { opacity:1; }
+  #ensayo .texto p b { display:block; font-family:'Source Sans 3',system-ui,sans-serif; font-size:.5em; letter-spacing:.12em; text-transform:uppercase; color:var(--arena); }
+  #ensayo.sin-guion .texto p span { visibility:hidden; }
+  #ensayo .btn { background:var(--arena); color:#2b2206; } #ensayo .btn.claro { background:transparent; color:#EAF4F2; border-color:#EAF4F2; }
+
+  /* Lo que se imprime */
+  .hoja { display:none; }
+  .hoja h3 { font-family:Georgia,serif; color:var(--profundo); margin:0 0 .2rem; font-size:1.3rem; }
+  .hoja table { width:100%; border-collapse:collapse; font-size:.95rem; margin:.6rem 0; }
+  .hoja th { text-align:left; font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; border-bottom:2px solid #999; padding:.3rem .4rem; }
+  .hoja td { border-bottom:1px solid #bbb; padding:.5rem .4rem; vertical-align:top; }
+  .hoja .renglon { border-bottom:1px solid #999; height:2.1rem; }
+  @media (max-width:760px) { .bloque { grid-template-columns:1fr; } .oido { grid-template-columns:1fr; } }
+  @media print {
+    body { background:#fff; font-size:11.5pt; } header.curso, .pie-acciones, main > *:not(.hoja), #ensayo { display:none !important; }
+    main { max-width:none; padding:0; }
+    body[data-imprime="tarjeta"] #hojaTarjeta, body[data-imprime="retro"] #hojaRetro { display:block !important; }
+  }
+</style>
+</head>
+<body>
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="titulo">Práctica · Dos minutos</div>
+  <div class="migas"><a href="index.html">La clase de gestión y pitch</a> · <a href="mazo-pitch.html">Mazo 2</a> · por equipo</div>
+</header>
+<main>
+
+<div class="caso">
+  <strong>El encargo.</strong> Escriban el pitch de su componente de la presa: <strong>dos minutos, cinco partes, una petición</strong>. Las cuatro primeras partes son las mismas para cualquiera que las oiga. La quinta, la petición, cambia según a quién se le habla: se escribe una para el Ayuntamiento, otra para una fundación o programa, otra para un negocio y otra para la asamblea.
+</div>
+
+<div class="caja ejemplo">
+  <div class="rotulo">Así se ve uno hecho · la sombra de la orilla</div>
+  <p style="margin:.4rem 0">El botón de abajo carga un pitch completo del componente de convivencia y descanso, con sus cuatro peticiones. Léanlo en voz alta con el reloj antes de escribir el suyo: dura poco más de minuto y medio, con aire para respirar. Fíjense en tres cosas: empieza con lo que dijo una persona en la consulta, cada parte trae un número, y termina pidiendo una cosa con cantidad y fecha. Los números del ejemplo son inventados para enseñar la forma: los suyos salen de su consulta, de su cronograma y de su presupuesto.</p>
+  <button class="btn claro" id="cargarEjemplo" type="button">Cargar el ejemplo completo</button>
+</div>
+
+<div class="caja">
+  <div class="fila">
+    <div><label for="equipo">Equipo o componente</label><input type="text" id="equipo" placeholder="por ejemplo: componente 5, convivencia y descanso"></div>
+    <div><label for="frase">El proyecto en una frase que se pueda dibujar</label><input type="text" id="frase" placeholder="tres palapas y seis bancas en la orilla norte"></div>
+  </div>
+  <p class="ayuda">La frase que se puede dibujar es la prueba de que la idea está clara: si alguien la oye y puede hacer un dibujo, sirve. "Mejorar la convivencia en la presa" no se puede dibujar; "tres palapas y seis bancas en la orilla norte" sí.</p>
+</div>
+
+<h2><span class="n">1</span>El guion, parte por parte</h2>
+<p class="sub">Escriban como hablan. La barra de cada parte mide los segundos que tardarían en decirla a paso tranquilo (unas 140 palabras por minuto). Si una barra se pone roja, esa parte se comió el tiempo de otra.</p>
+<div id="bloques"></div>
+
+<h2><span class="n">2</span>La petición, según quién escucha</h2>
+<p class="sub">El mismo proyecto se le cuenta distinto a cada oído, y sobre todo se le pide distinto. Escojan a quién le hablan; la hoja guarda una petición por cada uno.</p>
+<div class="caja">
+  <div class="publicos" id="publicos"></div>
+  <div class="oido" id="oido"></div>
+  <div class="bloque" style="margin-top:.6rem">
+    <div><h3><span class="n">5</span>Lo que te pido</h3><p class="guia">Una cosa, con cantidad y con fecha. Y el siguiente paso, que sea chico y fácil de decir que sí: una visita, un oficio, una fecha.</p></div>
+    <div><textarea id="peticion" aria-label="La petición"></textarea><div class="medidor" id="medPeticion"><span class="barra"><i></i></span><span><b>0 s</b> de 30</span></div></div>
+  </div>
+</div>
+
+<h2><span class="n">3</span>La revisión</h2>
+<div class="caja">
+  <div class="total"><span class="v" id="totalSeg">0:00</span><span id="totalNota" class="ayuda"></span></div>
+  <div class="barra-pitch-caja"><div class="barra-pitch" id="barraPitch"></div><div class="tope" id="tope"><b>2:00</b></div></div>
+  <ul class="revision" id="revision"></ul>
+  <p class="ayuda">La barra enseña cuánto de sus dos minutos se lleva cada parte. La hoja revisa lo que una máquina puede revisar. Lo demás lo revisa quien escucha, en la ronda.</p>
+</div>
+
+<h2><span class="n">4</span>El ensayo y la ronda</h2>
+<div class="caja">
+  <p style="margin-top:0">Un pitch escrito todavía no existe: existe cuando se dijo en voz alta tres veces. <strong>Primera vuelta</strong>, con el guion a la vista y el reloj. <strong>Segunda</strong>, con el guion escondido: solo se ven los títulos de las cinco partes. <strong>Tercera</strong>, de pie frente a otro equipo, que llena la hoja de quien escucha.</p>
+  <button class="btn" id="abrirEnsayo" type="button">Ensayar con reloj</button>
+  <button class="btn claro" id="imprimeRetro" type="button">Imprimir la hoja de quien escucha</button>
+  <button class="btn claro" id="imprimeTarjeta" type="button">Imprimir mi tarjeta de bolsillo</button>
+  <p class="ayuda">La tarjeta de bolsillo trae el pitch completo con la petición del oído que esté escogido. La hoja de quien escucha sale en blanco: una por cada persona que oye.</p>
+</div>
+
+<h2><span class="n">5</span>La pregunta que temo</h2>
+<div class="caja">
+  <p class="ayuda" style="margin-top:0">Todo pitch tiene una pregunta que el equipo preferiría que nadie hiciera. Escríbanla y contéstenla en dos renglones, antes de que alguien la haga. Las más comunes: "¿y quién lo va a mantener?", "¿y por qué ustedes, si son estudiantes?", "¿y eso ya lo sabe el ejido?", "¿y por qué tan caro?".</p>
+  <div class="fila">
+    <div><label for="temo">La pregunta</label><textarea id="temo" style="min-height:4em"></textarea></div>
+    <div><label for="respuesta">Lo que contestamos, con un dato</label><textarea id="respuesta" style="min-height:4em"></textarea></div>
+  </div>
+</div>
+
+<div class="pie-acciones">
+  <button class="btn" id="descargar" type="button">Descargar mi pitch</button>
+  <button class="btn claro" id="proyector" type="button">Aa proyector</button>
+  <button class="btn peligro" id="borrar" type="button">Borrar todo</button>
+  <span class="guardado" id="guardado"></span>
+</div>
+
+<!-- Lo que se imprime -->
+<div class="hoja" id="hojaTarjeta"></div>
+<div class="hoja" id="hojaRetro">
+  <h3>La hoja de quien escucha</h3>
+  <p style="margin:.1rem 0 .4rem">Equipo que presenta: ______________________ &nbsp; Yo hago de: Ayuntamiento · fundación o programa · negocio · asamblea</p>
+  <table>
+    <tr><th style="width:52%">Al terminar, ¿puedo decir...</th><th>Sí</th><th>A medias</th><th>No</th><th style="width:26%">Lo que oí</th></tr>
+    <tr><td><strong>qué pasa y a quién le pasa?</strong> Me acuerdo de una persona o de una frase.</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><strong>qué van a hacer?</strong> Lo podría dibujar.</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><strong>qué va a cambiar y cómo lo van a saber?</strong> Oí un número con fecha.</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><strong>qué pone ya la comunidad y por qué este equipo?</strong></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><strong>qué me piden a mí, cuánto y para cuándo?</strong></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td><strong>Cupo en dos minutos</strong> y se dijo sin leer.</td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <p><strong>Me gustó</strong> (una cosa que no deben quitar):</p><div class="renglon"></div><div class="renglon"></div>
+  <p><strong>Me pregunto</strong> (lo que no entendí o lo que yo preguntaría si fuera quien decide):</p><div class="renglon"></div><div class="renglon"></div>
+  <p><strong>¿Y si...?</strong> (una idea para la siguiente vuelta):</p><div class="renglon"></div><div class="renglon"></div>
+  <p><strong>Si de mí dependiera, ¿doy el siguiente paso?</strong> &nbsp; Sí &nbsp;·&nbsp; Todavía no, porque: ______________________________________</p>
+</div>
+
+</main>
+
+<div id="ensayo" aria-hidden="true">
+  <div class="arriba">
+    <div class="reloj" id="reloj">0:00</div>
+    <div class="ahora"><b>Ahora</b><span id="ahora">Listos</span></div>
+    <div>
+      <button class="btn" id="arranca" type="button">Empezar</button>
+      <button class="btn claro" id="reinicia" type="button">De cero</button>
+      <button class="btn claro" id="esconde" type="button">Esconder el guion</button>
+      <button class="btn claro" id="cierra" type="button">Salir</button>
+    </div>
+  </div>
+  <div class="pista-tiempo" id="pistaTiempo"></div>
+  <div class="texto" id="textoEnsayo"></div>
+</div>
+
+<script>
+(function () {
+  var CLAVE = 'gdp-pitch-florida';
+  var PPS = 140 / 60; // palabras por segundo, a paso tranquilo
+  var BLOQUES = [
+    { t: 'Qué pasa y a quién', seg: 25, guia: 'Empieza por el problema, no por tu solución. Una persona o una frase textual de la consulta, y un número que diga de qué tamaño es.', ph: 'Los domingos llegan a la orilla...' },
+    { t: 'Lo que vamos a hacer', seg: 25, guia: 'Qué, dónde y cuándo, en cosas que se puedan contar y dibujar. Sin adjetivos.', ph: 'Proponemos...' },
+    { t: 'Lo que cambia y cómo lo sabremos', seg: 20, guia: 'El cambio en la gente, no la obra. Un número de hoy, el número al que quieren llegar, y quién lo cuenta.', ph: 'Hoy... Para diciembre de 2027...' },
+    { t: 'Lo que ya está puesto', seg: 20, guia: 'Lo que pone la comunidad (permiso, faena, material) con su valor en pesos, y lo que el equipo ya tiene hecho. Nadie quiere ser el primero en poner.', ph: 'El ejido ya dio... Nosotros traemos...' }
+  ];
+  var SEG_PETICION = 30, TOPE = 120;
+  var PUBLICOS = [
+    { id: 'ayto', t: 'El Ayuntamiento', importa: 'Que resuelva algo que la gente ya le pide, que se vea, que quepa en su plan y en su año, y que no le deje un problema de mantenimiento.', cambia: 'Di cuánta gente lo pidió y de qué localidad. Nombra el área: Obras Públicas, Servicios Municipales, Turismo. Trae el oficio ya escrito.', pide: 'Especie antes que dinero: maquinaria, materiales, recolección, un visto bueno. Y una persona con quien darle seguimiento.' },
+    { id: 'fondo', t: 'Una fundación o programa', importa: 'Que encaje con lo que ellos apoyan este año, que el cambio se pueda medir, que el dinero se pueda comprobar y que el proyecto siga vivo cuando se acabe el apoyo.', cambia: 'Usa sus palabras: lee su convocatoria y di en cuál de sus líneas cabes. Di el indicador y quién mantiene la obra después.', pide: 'Un monto dentro de su tope, para un concepto que sus reglas sí pagan, con la aportación de la comunidad dicha en pesos. O el paso anterior: que lean la idea en una hoja antes de la convocatoria.' },
+    { id: 'negocio', t: 'Un negocio de la zona', importa: 'Que sea cerca, que sus clientes y sus vecinos lo vean, que sea poco trámite y que se sepa que ayudó.', cambia: 'Menos números y más lugar: dónde queda, quién va. Di cómo se va a ver su apoyo: una placa, una mención en la inauguración, una foto.', pide: 'Algo de lo suyo, chico y concreto: diez bultos de cemento, el flete de un viaje, las tortas de una faena. Es más fácil dar de lo que se vende que dar dinero.' },
+    { id: 'asamblea', t: 'La asamblea', importa: 'Que sea lo que la gente dijo en la consulta, quién decide, quién se beneficia, qué les toca poner y quién lo cuida después.', cambia: 'Habla de "lo que ustedes dijeron", no de "nuestro proyecto". Sin palabras de formato. Enseña el plano o el fotomontaje en grande.', pide: 'El acuerdo en acta, las faenas con fecha y un comité con nombres. No se pide dinero: se pide la decisión y las manos.' }
+  ];
+  var HUMO = ['fortalecer', 'empoderar', 'promover', 'impulsar', 'fomentar', 'concientizar', 'sensibilizar', 'coadyuvar', 'integral', 'sustentable', 'sostenible', 'sinergia', 'innovador', 'holístic', 'detonar', 'potenciar', 'incidir'];
+  var DESEO = ['esperamos', 'soñamos', 'sueño', 'ojalá', 'quisiéramos', 'deseamos', 'anhel', 'nos gustaría', 'tenemos la esperanza'];
+  var EXCUSA = ['perdón', 'disculp', 'no nos dio tiempo', 'no alcanzamos', 'somos solo estudiantes', 'apenas somos'];
+  var EJEMPLO = {
+    equipo: 'Componente 5 · convivencia y descanso (ejemplo)',
+    frase: 'Tres palapas con mesa y seis bancas a la sombra, en la orilla norte',
+    bloques: [
+      'Los domingos llegan a la orilla de la presa de La Florida unas ochenta personas, y casi ninguna se queda más de una hora. En la consulta, 31 de 46 personas nos dijeron lo mismo. Una señora lo resumió así: "Venimos, nos mojamos los pies y nos vamos, porque no hay ni dónde sentarse a la sombra".',
+      'Proponemos una zona de convivencia en la orilla norte: tres palapas de palma con mesa y bancas, y seis bancas sueltas bajo los sabinos. Se construye de febrero a mayo de 2027, antes de las lluvias, con palaperos y carpinteros de la misma comunidad.',
+      'Si hay sombra y asiento, las familias se quedan. Hoy la visita dura menos de una hora. Para diciembre de 2027 queremos que la mitad de las familias se quede dos horas o más. Lo contamos nosotros, un domingo de cada mes.',
+      'El ejido ya dio el permiso por escrito, y pone la palma, los horcones y cuarenta jornales de faena: eso vale cerca de veinte mil pesos. Nosotros traemos el plano, el cronograma y el presupuesto con tres cotizaciones por partida.'
+    ],
+    peticiones: {
+      ayto: 'Al Ayuntamiento le pedimos una cosa: dos viajes de grava y un día de máquina en marzo de 2027, para emparejar el piso de las palapas. ¿Con quién de Obras Públicas lo vemos, y podemos pasar el jueves a dejar el oficio?',
+      fondo: 'Les pedimos 38 mil pesos para la madera labrada, la herrería y el flete: es el 80 por ciento de lo que se compra, y la comunidad pone el resto en faena y material. ¿Podemos mandarles la idea en una hoja esta semana, para que nos digan si cabe en su convocatoria de 2027?',
+      negocio: 'A la ferretería le pedimos doce bultos de cemento para anclar los horcones, en febrero. En la palapa va una placa con el nombre de quienes ayudaron, y los invitamos a la inauguración. ¿Se puede? Pasamos por ellos nosotros.',
+      asamblea: 'A la asamblea le pedimos tres cosas: que el acuerdo quede en el acta de hoy, dos faenas en febrero, y un comité de tres personas que cuide las palapas cuando estén listas. ¿Lo votamos?'
+    },
+    publico: 'ayto',
+    temo: '¿Y quién las va a mantener cuando ustedes terminen la carrera?',
+    respuesta: 'El comité de tres personas que nombra la asamblea, con una faena de mantenimiento cada seis meses que ya está en el cronograma. La palma se cambia cada cinco años y el ejido la tiene.'
+  };
+
+  function $(id) { return document.getElementById(id); }
+  function defecto() { return { equipo: '', frase: '', bloques: ['', '', '', ''], peticiones: { ayto: '', fondo: '', negocio: '', asamblea: '' }, publico: 'ayto', temo: '', respuesta: '' }; }
+  function cargar() { try { var s = JSON.parse(localStorage.getItem(CLAVE)); if (s && s.bloques && s.peticiones) return s; } catch (x) {} return defecto(); }
+  var e = cargar();
+  function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(e)); $('guardado').textContent = 'Guardado en este navegador.'; } catch (x) { $('guardado').textContent = 'Este navegador no deja guardar: descarga tu pitch antes de cerrar.'; } }
+  function palabras(t) { var m = (t || '').trim().match(/\S+/g); return m ? m.length : 0; }
+  function segundos(t) { return Math.round(palabras(t) / PPS); }
+  function mmss(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+  function esc(t) { return String(t || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function publico() { return PUBLICOS.filter(function (p) { return p.id === e.publico; })[0] || PUBLICOS[0]; }
+  function encontradas(lista, texto) { var t = texto.toLowerCase(); return lista.filter(function (w) { return t.indexOf(w) !== -1; }); }
+
+  function medir(el, texto, tope) {
+    var s = segundos(texto);
+    el.querySelector('i').style.width = Math.min(100, s / tope * 100) + '%';
+    el.querySelector('b').textContent = s + ' s';
+    el.classList.toggle('pasado', s > tope + 3);
+  }
+
+  function pintarBloques() {
+    $('bloques').innerHTML = BLOQUES.map(function (b, i) {
+      return '<div class="caja"><div class="bloque"><div><h3><span class="n">' + (i + 1) + '</span>' + b.t + '</h3><p class="guia">' + b.guia + '</p></div>'
+        + '<div><textarea data-b="' + i + '" placeholder="' + esc(b.ph) + '" aria-label="' + esc(b.t) + '">' + esc(e.bloques[i]) + '</textarea>'
+        + '<div class="medidor" data-m="' + i + '"><span class="barra"><i></i></span><span><b>0 s</b> de ' + b.seg + '</span></div></div></div></div>';
+    }).join('');
+  }
+  function pintarPublico() {
+    var p = publico();
+    $('publicos').innerHTML = PUBLICOS.map(function (q) { return '<button type="button" data-p="' + q.id + '"' + (q.id === p.id ? ' class="activo"' : '') + '>' + q.t + '</button>'; }).join('');
+    $('oido').innerHTML = '<div><div class="t">Lo que le importa</div>' + p.importa + '</div><div><div class="t">Lo que cambia en tu pitch</div>' + p.cambia + '</div><div><div class="t">Lo que se le pide</div>' + p.pide + '</div>';
+    $('peticion').value = e.peticiones[p.id] || '';
+    $('peticion').placeholder = 'A ' + p.t.toLowerCase().replace(/^el |^la |^una? /, function (m) { return m; }) + ' le pedimos...';
+  }
+  function revisar() {
+    BLOQUES.forEach(function (b, i) { medir(document.querySelector('[data-m="' + i + '"]'), e.bloques[i], b.seg); });
+    var pet = e.peticiones[e.publico] || '';
+    medir($('medPeticion'), pet, SEG_PETICION);
+    var todo = e.bloques.join(' ') + ' ' + pet;
+    var total = segundos(todo);
+    $('totalSeg').textContent = mmss(total);
+    $('totalSeg').classList.toggle('pasado', total > TOPE + 5);
+    $('totalNota').textContent = total === 0 ? 'Todavía no hay nada escrito.' : (total > TOPE + 5 ? 'Se pasa de los dos minutos: sobran unas ' + Math.round((total - TOPE) * PPS) + ' palabras. Lo que no cabe aquí va en la hoja que se deja, no en la voz.' : (total < 75 ? 'Va corto: queda lugar para un dato o un ejemplo más.' : 'Cabe en dos minutos a paso tranquilo. ' + palabras(todo) + ' palabras.'));
+    var segs = e.bloques.map(segundos).concat([segundos(pet)]), escala = Math.max(TOPE * 1.08, total), col = ['#D9A441', '#0F6E6E', '#2A8C86', '#4FA39C', '#0B3C49'];
+    $('barraPitch').innerHTML = segs.map(function (s, k) { return '<span style="width:' + (s / escala * 100) + '%;background:' + col[k] + (k === 0 ? ';color:#2b2206' : '') + '" title="Parte ' + (k + 1) + ': ' + s + ' s">' + (s >= 8 ? (k + 1) + ' · ' + s + ' s' : '') + '</span>'; }).join('');
+    $('tope').style.left = (TOPE / escala * 100) + '%';
+    var r = [];
+    function punto(ok, bien, mal, nota) { r.push('<li class="' + (ok ? 'ok' : 'falta') + '">' + (ok ? bien : mal) + (!ok && nota ? '<small>' + nota + '</small>' : '') + '</li>'); }
+    if (total > 0) {
+      punto(/["“”«»]/.test(e.bloques[0]), 'La primera parte trae una frase textual entre comillas.', 'La primera parte no trae la voz de nadie.', 'Pongan entre comillas una frase que alguien dijo en la consulta. Una persona se recuerda; "la población" no.');
+      punto(/\d/.test(e.bloques[0]), 'La primera parte dice de qué tamaño es el problema, con un número.', 'A la primera parte le falta un número.', 'Cuántas personas, cuántos domingos, cuántos metros. Uno solo, que se entienda al oírlo.');
+      punto(/\d/.test(e.bloques[2]) && /20\d\d|enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre/i.test(e.bloques[2]), 'El cambio trae un número con fecha.', 'El cambio no trae número con fecha.', 'Cuánto es hoy, a cuánto quieren llegar y para cuándo. Sin eso es un deseo.');
+      punto(/\d|faena|jornal|permiso|acta/i.test(e.bloques[3]), 'Se dice lo que ya está puesto.', 'No se dice qué pone ya la comunidad.', 'El permiso, la faena, el material, con su valor. Es lo que más convence a quien duda.');
+      punto(/\d/.test(pet) && /\?/.test(pet), 'La petición trae cantidad o fecha y termina con una pregunta.', 'La petición todavía no es una petición.', 'Le falta la cantidad o la fecha, o no termina preguntando por el siguiente paso. "Lo que guste apoyar" no se puede contestar.');
+      var h = encontradas(HUMO, todo), d = encontradas(DESEO, todo), x = encontradas(EXCUSA, todo);
+      punto(!h.length, 'No hay palabras de humo.', 'Palabras de humo: ' + h.join(', ') + '.', 'Suenan bien y no dicen nada que se pueda ver. Cámbienlas por lo que de verdad va a pasar: en vez de "fortalecer la convivencia", "que las familias se queden dos horas".');
+      punto(!d.length, 'No se habla de deseos.', 'Se habla de deseos: ' + d.join(', ') + '.', 'Quien decide no apoya esperanzas: apoya planes. Digan qué van a hacer, no qué les gustaría.');
+      punto(!x.length, 'No hay disculpas.', 'Hay disculpas o excusas: ' + x.join(', ') + '.', 'Nadie pidió perdón por existir. Se quitan y el pitch gana cinco segundos.');
+      punto(!!(e.temo.trim() && e.respuesta.trim()), 'La pregunta que temen ya tiene respuesta.', 'Falta escribir la pregunta que temen y su respuesta.', 'Está en el paso 5 de esta hoja.');
+    }
+    $('revision').innerHTML = r.join('');
+  }
+  function pintar() {
+    $('equipo').value = e.equipo; $('frase').value = e.frase; $('temo').value = e.temo; $('respuesta').value = e.respuesta;
+    pintarBloques(); pintarPublico(); revisar();
+  }
+
+  document.addEventListener('input', function (ev) {
+    var t = ev.target;
+    if (t.hasAttribute('data-b')) e.bloques[+t.getAttribute('data-b')] = t.value;
+    else if (t.id === 'peticion') e.peticiones[e.publico] = t.value;
+    else if (t.id === 'equipo' || t.id === 'frase' || t.id === 'temo' || t.id === 'respuesta') e[t.id] = t.value;
+    else return;
+    revisar(); guardar();
+  });
+  $('publicos').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button'); if (!b) return;
+    e.publico = b.getAttribute('data-p'); pintarPublico(); revisar(); guardar();
+  });
+  $('cargarEjemplo').addEventListener('click', function () {
+    var vacio = !(e.bloques.join('') + Object.keys(e.peticiones).map(function (k) { return e.peticiones[k]; }).join('')).trim();
+    if (vacio || confirm('Se cambia lo que hay escrito por el ejemplo. ¿Seguro?')) { e = JSON.parse(JSON.stringify(EJEMPLO)); pintar(); guardar(); }
+  });
+  $('borrar').addEventListener('click', function () { if (confirm('Se borra el pitch de este navegador. ¿Seguro?')) { try { localStorage.removeItem(CLAVE); } catch (x) {} e = defecto(); pintar(); $('guardado').textContent = ''; } });
+  $('proyector').addEventListener('click', function () { document.body.classList.toggle('proyector'); });
+
+  /* La tarjeta de bolsillo y la descarga */
+  function tarjetaHTML() {
+    var p = publico(), total = segundos(e.bloques.join(' ') + ' ' + (e.peticiones[p.id] || ''));
+    var filas = BLOQUES.map(function (b, i) { return '<tr><td style="width:26%"><strong>' + (i + 1) + ' · ' + b.t + '</strong><br><small>' + b.seg + ' s</small></td><td>' + esc(e.bloques[i]) + '</td></tr>'; }).join('');
+    var pets = PUBLICOS.map(function (q) { return e.peticiones[q.id] ? '<tr><td style="width:26%"><strong>5 · Lo que te pido</strong><br><small>' + q.t + '</small></td><td>' + esc(e.peticiones[q.id]) + '</td></tr>' : ''; });
+    return { una: '<h3>' + esc(e.equipo || 'Mi pitch') + '</h3><p style="margin:.1rem 0"><em>' + esc(e.frase) + '</em> · para ' + p.t.toLowerCase() + ' · ' + mmss(total) + '</p><table>' + filas + (pets[PUBLICOS.indexOf(p)] || '') + '</table>'
+      + (e.temo ? '<p><strong>La pregunta que temo:</strong> ' + esc(e.temo) + '<br><strong>Contesto:</strong> ' + esc(e.respuesta) + '</p>' : ''),
+      todas: '<h3>' + esc(e.equipo || 'Mi pitch') + '</h3><p><em>' + esc(e.frase) + '</em></p><table>' + filas + pets.join('') + '</table>'
+      + (e.temo ? '<p><strong>La pregunta que temo:</strong> ' + esc(e.temo) + '<br><strong>Contesto:</strong> ' + esc(e.respuesta) + '</p>' : '') };
+  }
+  function imprimir(cual) {
+    if (cual === 'tarjeta') $('hojaTarjeta').innerHTML = tarjetaHTML().una;
+    document.body.setAttribute('data-imprime', cual); window.print();
+  }
+  $('imprimeTarjeta').addEventListener('click', function () { imprimir('tarjeta'); });
+  $('imprimeRetro').addEventListener('click', function () { imprimir('retro'); });
+  $('descargar').addEventListener('click', function () {
+    var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Pitch · ' + esc(e.equipo) + '</title><style>body{font-family:Georgia,serif;max-width:760px;margin:2rem auto;padding:0 1rem;line-height:1.55;color:#1C2B28}h3{color:#0B3C49;font-size:1.5rem;margin:0}table{width:100%;border-collapse:collapse}td{border-bottom:1px solid #CFE3DD;padding:.6rem .4rem;vertical-align:top}small{color:#45605a}</style></head><body>' + tarjetaHTML().todas + '<p><small>Descargado el ' + new Date().toLocaleDateString('es-MX') + ' · Gestión y Manejo de Proyectos</small></p></body></html>';
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' })); a.download = 'pitch-' + new Date().toISOString().slice(0, 10) + '.html';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  /* El ensayo */
+  var t0 = 0, acumulado = 0, tic = null, cortes = [];
+  function partes() { return BLOQUES.map(function (b, i) { return { t: b.t, seg: b.seg, texto: e.bloques[i] }; }).concat([{ t: 'Lo que te pido · ' + publico().t.toLowerCase(), seg: SEG_PETICION, texto: e.peticiones[e.publico] || '' }]); }
+  function transcurrido() { return acumulado + (tic ? (Date.now() - t0) / 1000 : 0); }
+  function pintaEnsayo() {
+    var s = transcurrido(), ps = partes(), i = 0;
+    while (i < cortes.length - 1 && s >= cortes[i]) i++;
+    $('reloj').textContent = mmss(s);
+    $('ahora').textContent = s >= TOPE ? 'Se acabó el tiempo: cierra con la petición' : (i + 1) + ' · ' + ps[i].t;
+    $('ensayo').classList.toggle('aviso', s >= TOPE - 15 && s < TOPE);
+    $('ensayo').classList.toggle('fin', s >= TOPE);
+    $('pistaTiempo').querySelector('i').style.width = Math.min(100, s / TOPE * 100) + '%';
+    Array.prototype.forEach.call($('textoEnsayo').children, function (p, n) { p.classList.toggle('vivo', n === i); });
+  }
+  function abreEnsayo() {
+    var ps = partes(), suma = 0; cortes = ps.map(function (p) { suma += p.seg; return suma; });
+    $('textoEnsayo').innerHTML = ps.map(function (p, i) { return '<p><b>' + (i + 1) + ' · ' + p.t + ' · ' + p.seg + ' s</b><span>' + (esc(p.texto) || '(sin escribir)') + '</span></p>'; }).join('');
+    $('pistaTiempo').innerHTML = ps.map(function (p) { return '<span style="width:' + (p.seg / TOPE * 100) + '%"></span>'; }).join('') + '<i></i>';
+    acumulado = 0; para(); $('ensayo').classList.add('abierto'); $('ensayo').setAttribute('aria-hidden', 'false'); pintaEnsayo();
+  }
+  function para() { if (tic) { acumulado = transcurrido(); clearInterval(tic); tic = null; } $('arranca').textContent = acumulado > 0 ? 'Seguir' : 'Empezar'; }
+  $('abrirEnsayo').addEventListener('click', abreEnsayo);
+  $('arranca').addEventListener('click', function () { if (tic) { para(); return; } t0 = Date.now(); tic = setInterval(pintaEnsayo, 250); $('arranca').textContent = 'Pausa'; });
+  $('reinicia').addEventListener('click', function () { para(); acumulado = 0; $('arranca').textContent = 'Empezar'; pintaEnsayo(); });
+  $('esconde').addEventListener('click', function () { var s = $('ensayo').classList.toggle('sin-guion'); this.textContent = s ? 'Mostrar el guion' : 'Esconder el guion'; });
+  $('cierra').addEventListener('click', function () { para(); $('ensayo').classList.remove('abierto'); $('ensayo').setAttribute('aria-hidden', 'true'); });
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && $('ensayo').classList.contains('abierto')) $('cierra').click(); });
+
+  pintar();
+})();
+</script>
+</body>
+</html>

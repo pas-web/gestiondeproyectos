@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica · El mapa de gestión · Gestión y Manejo de Proyectos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; --verde:#1F4A2C; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.55; font-size:1.02rem; }
+  body.proyector { font-size:1.3rem; }
+  header.curso { background:var(--profundo); color:#EAF4F2; padding:1rem 1.4rem; }
+  header.curso .curso-nombre { font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; opacity:.75; }
+  header.curso .titulo { font-family:Georgia,serif; font-size:1.7rem; font-weight:bold; margin:.15rem 0 0; }
+  header.curso .migas { font-size:.85rem; opacity:.75; } header.curso .migas a { color:#EAF4F2; }
+  main { max-width:1000px; margin:0 auto; padding:1.2rem 1rem 4rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.3em; margin:1.8rem 0 .4rem; }
+  h2 .n { color:var(--arena); font-size:1.25em; margin-right:.3rem; }
+  .sub { color:#45605a; margin-top:0; }
+  .caso { background:var(--profundo); color:#EAF4F2; border-radius:12px; padding:1rem 1.3rem; font-family:Georgia,serif; font-size:1.08em; }
+  .caso strong { color:var(--arena); }
+  .caja { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:1rem 1.2rem; margin:.8rem 0; }
+  .caja.ejemplo { border-left:6px solid var(--arena); background:#FFFDF7; }
+  .rotulo { font-size:.78em; letter-spacing:.1em; text-transform:uppercase; color:#7C6222; font-weight:bold; }
+  label { font-size:.8em; font-weight:bold; color:var(--profundo); display:block; margin-bottom:.1rem; }
+  input[type=text], input[type=number], textarea, select { font:inherit; font-size:.95em; border:1px solid var(--borde); border-radius:8px; padding:.35rem .5rem; width:100%; background:#fff; color:var(--texto); }
+  textarea { resize:vertical; line-height:1.5; }
+  .fila { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:.6rem .8rem; }
+  .renglon { border-left:6px solid var(--borde); }
+  .renglon[data-z="1"] { border-left-color:var(--profundo); } .renglon[data-z="2"] { border-left-color:var(--arena); } .renglon[data-z="3"] { border-left-color:var(--marca); }
+  .renglon .cab { display:flex; gap:.7rem; align-items:center; flex-wrap:wrap; margin-bottom:.5rem; }
+  .renglon .num { font-family:Georgia,serif; font-weight:bold; font-size:1.5em; color:var(--arena); line-height:1; }
+  .renglon .zona { font-size:.76em; font-weight:bold; letter-spacing:.08em; text-transform:uppercase; border-radius:999px; padding:.15rem .7rem; background:#EEF4F2; color:#45605a; }
+  .renglon[data-z="1"] .zona { background:var(--profundo); color:#fff; } .renglon[data-z="2"] .zona { background:#FBEFD5; color:#7C6222; } .renglon[data-z="3"] .zona { background:#DDEDE8; color:#0B4A45; }
+  .renglon .quitar { margin-left:auto; font:inherit; font-size:.82em; background:none; border:none; color:var(--rojo); cursor:pointer; text-decoration:underline; }
+  .tres-si { display:flex; flex-wrap:wrap; gap:.3rem 1.1rem; margin:.5rem 0 .2rem; font-size:.93em; }
+  .tres-si label { display:flex; gap:.35rem; align-items:center; font-weight:normal; font-size:1em; color:var(--texto); }
+  .faltas { font-size:.86em; color:var(--rojo); margin:.4rem 0 0; }
+  svg.mapa { width:100%; height:auto; display:block; }
+  svg.mapa text { font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; }
+  ul.revision { list-style:none; padding:0; margin:.4rem 0; }
+  ul.revision li { padding:.4rem .7rem .4rem 2.2rem; position:relative; border-bottom:1px dashed var(--borde); font-size:.96em; }
+  ul.revision li::before { position:absolute; left:.5rem; top:.4rem; font-weight:bold; width:1.3rem; text-align:center; }
+  ul.revision li.ok::before { content:"✓"; color:var(--verde); } ul.revision li.falta::before { content:"!"; color:var(--rojo); }
+  ul.revision li.falta { background:#FBF0EE; } ul.revision li small { display:block; color:#45605a; }
+  .medios { display:flex; flex-wrap:wrap; gap:.4rem; margin:.4rem 0; }
+  .medios button { font:inherit; font-weight:bold; font-size:.92em; border:2px solid var(--profundo); background:#fff; color:var(--profundo); border-radius:999px; padding:.3rem .9rem; cursor:pointer; }
+  .medios button.activo { background:var(--profundo); color:#fff; }
+  #mensaje { min-height:13em; font-family:Georgia,serif; font-size:1em; background:#FFFDF7; }
+  .btn { font:inherit; font-weight:bold; border:none; border-radius:999px; padding:.45rem 1rem; cursor:pointer; margin:.4rem .4rem 0 0; background:var(--marca); color:#fff; font-size:.92em; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--profundo); }
+  .btn.peligro { background:#fff; color:var(--rojo); border:2px solid var(--rojo); }
+  .ayuda { font-size:.9em; color:#45605a; }
+  .pie-acciones { position:sticky; bottom:0; background:rgba(242,247,245,.96); border-top:1px solid var(--borde); padding:.5rem .8rem; margin:1.5rem -1rem 0; display:flex; flex-wrap:wrap; align-items:center; gap:.2rem; z-index:5; }
+  .guardado { font-size:.85rem; color:#45605a; margin-left:auto; }
+  .hoja { display:none; }
+  .hoja h3 { font-family:Georgia,serif; color:var(--profundo); margin:0 0 .3rem; font-size:1.3rem; }
+  .hoja table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  .hoja th { text-align:left; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; border-bottom:2px solid #999; padding:.3rem .4rem; }
+  .hoja td { border-bottom:1px solid #bbb; padding:.4rem; vertical-align:top; }
+  @media print {
+    body { background:#fff; font-size:10.5pt; } header.curso, .pie-acciones, main > *:not(.hoja) { display:none !important; }
+    main { max-width:none; padding:0; } .hoja { display:block !important; }
+    @page { size:landscape; margin:14mm; }
+  }
+</style>
+</head>
+<body>
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="titulo">Práctica · El mapa de gestión</div>
+  <div class="migas"><a href="index.html">La clase de gestión y pitch</a> · <a href="mazo-gestion.html">Mazo 1</a> · por equipo</div>
+</header>
+<main>
+
+<div class="caso">
+  <strong>El encargo.</strong> Con el presupuesto de su componente enfrente, armen su mapa de gestión: <strong>qué falta, a quién se le pide, qué exactamente, quién va, cuándo, y qué hacen si dicen que no</strong>. Al final, escriban el primer mensaje para pedir la cita con quien quedó en "Primero".
+</div>
+
+<div class="caja ejemplo">
+  <div class="rotulo">Así se ve uno hecho · la gestión de las palapas</div>
+  <p style="margin:.4rem 0">El botón carga el mapa completo del componente de convivencia y descanso: cinco renglones, cada uno con una persona con cargo, una cosa con cantidad, una fecha y un plan B. Fíjense en que ningún renglón dice "el municipio" ni "apoyo", y en que solo uno de los cinco pide dinero. Los números son de ejemplo, para enseñar la forma: los suyos salen de lo que quedó sin bolsillo, o con bolsillo pero sin gestionar, en su presupuesto.</p>
+  <button class="btn claro" id="cargarEjemplo" type="button">Cargar el ejemplo completo</button>
+</div>
+
+<div class="caja">
+  <div class="fila">
+    <div><label for="equipo">Equipo o componente</label><input type="text" id="equipo" placeholder="componente 5, convivencia y descanso"></div>
+    <div><label for="proyecto">El proyecto, como se le diría a alguien de fuera</label><input type="text" id="proyecto" placeholder="las palapas de la orilla norte de la presa de La Florida"></div>
+  </div>
+</div>
+
+<h2><span class="n">1</span>Lo que falta, renglón por renglón</h2>
+<p class="sub">Un renglón por cada cosa que el proyecto necesita y todavía no tiene asegurada. A cada posible aliado se le hacen tres preguntas, y con ellas la hoja lo acomoda en el mapa: si puede, le importa y hay cómo llegar, va primero.</p>
+<div id="renglones"></div>
+<button class="btn" id="agregar" type="button">Agregar un renglón</button>
+
+<h2><span class="n">2</span>El mapa</h2>
+<div class="caja">
+  <svg class="mapa" id="mapa" viewBox="0 0 1000 440" role="img" aria-label="El mapa de gestión con los renglones del equipo"></svg>
+  <p class="ayuda">Los números son los de sus renglones. "Primero" es por donde se empieza esta semana. "Acercarse antes de pedir" quiere decir que la primera visita es para preguntar y que los conozcan, no para pedir.</p>
+</div>
+
+<h2><span class="n">3</span>La revisión</h2>
+<div class="caja">
+  <ul class="revision" id="revision"></ul>
+</div>
+
+<h2><span class="n">4</span>El primer mensaje</h2>
+<p class="sub">El mensaje pide quince minutos, no la cosa. La cosa se pide en persona. El oficio es distinto: es el papel que se deja con sello de recibido, y ahí sí va la petición completa.</p>
+<div class="caja">
+  <div class="fila">
+    <div><label for="msgFila">¿A quién le escriben?</label><select id="msgFila"></select></div>
+    <div><label for="firma">Quiénes son, en una línea</label><input type="text" id="firma" placeholder="estudiantes de la UAQ que trabajamos con el ejido de La Florida"></div>
+  </div>
+  <div class="fila" style="margin-top:.6rem">
+    <div><label for="porque">Por qué a esa persona (la línea que demuestra que hicieron la tarea)</label><input type="text" id="porque" placeholder="Supimos que su área arregla caminos de la zona en marzo."></div>
+    <div><label for="dias">Dos opciones de día y hora</label><input type="text" id="dias" placeholder="el martes 12 o el jueves 14 de enero por la mañana"></div>
+  </div>
+  <div class="medios" id="medios"></div>
+  <textarea id="mensaje" aria-label="El mensaje"></textarea>
+  <p class="ayuda" id="msgNota"></p>
+  <button class="btn" id="copiar" type="button">Copiar el mensaje</button>
+  <button class="btn claro" id="rearmar" type="button">Volver a armarlo con los datos</button>
+  <p class="ayuda">El mensaje se arma solo con lo que escribieron y se puede corregir a mano. Donde dice [nombre] y [teléfono] van los de quien lo manda: esos no se guardan aquí. Antes de mandarlo, que lo lea alguien de otro equipo.</p>
+</div>
+
+<div class="pie-acciones">
+  <button class="btn" id="descargar" type="button">Descargar mi mapa</button>
+  <button class="btn claro" id="imprimir" type="button">Imprimir la hoja de gestión</button>
+  <button class="btn claro" id="proyector" type="button">Aa proyector</button>
+  <button class="btn peligro" id="borrar" type="button">Borrar todo</button>
+  <span class="guardado" id="guardado"></span>
+</div>
+
+<div class="hoja" id="hoja"></div>
+</main>
+
+<script>
+(function () {
+  var CLAVE = 'gdp-gestion-florida';
+  var FORMAS = [['dinero', 'Dinero'], ['especie', 'Material o cosas'], ['prestamo', 'Prestado: máquina, herramienta, lugar'], ['faena', 'Manos: faena, jornales'], ['permiso', 'Permiso, firma o visto bueno']];
+  var ZONAS = ['', 'Primero', 'Acercarse antes de pedir', 'Manos y voz', 'Después'];
+  var VAGO = /^(a |al |el |la |los |un |una )?(municipio|gobierno|ayuntamiento|presidencia|autoridades?|fundaci[oó]n(es)?|empresas?|negocios?|donantes?|gente|comunidad|quien corresponda)\.?$/i;
+  var MEDIOS = [['whats', 'WhatsApp'], ['correo', 'Correo'], ['oficio', 'Oficio']];
+  var EJEMPLO = {
+    equipo: 'Componente 5 · convivencia y descanso (ejemplo)', proyecto: 'las palapas de la orilla norte de la presa de La Florida',
+    filas: [
+      { que: 'Permiso para construir y manos para levantar las palapas', valor: 12000, quien: 'Asamblea del ejido, por medio del comisariado', forma: 'faena', camino: 'directa', puede: true, importa: true, llegar: true, pido: 'El acuerdo en acta y 2 faenas de 20 personas en febrero de 2027', va: 'Quien da la cara y una persona más', cuando: 'Asamblea de enero de 2027', planb: 'Faenas con la escuela y las familias que venden los domingos' },
+      { que: 'Piso parejo para las tres palapas', valor: 9000, quien: 'Dirección de Obras Públicas del Ayuntamiento', forma: 'prestamo', camino: 'directa', puede: true, importa: true, llegar: true, pido: '2 viajes de grava y 1 día de máquina en marzo de 2027', va: 'Dos del equipo: quien habla y quien apunta', cuando: 'Segunda semana de enero de 2027', planb: 'Un solo viaje de grava; se empareja a mano en faena' },
+      { que: 'Madera labrada, herrería y flete', valor: 38000, quien: 'PROCODES, por medio de un grupo de cinco personas de La Florida', forma: 'dinero', camino: 'convocatoria', puede: true, importa: true, llegar: false, pido: '$38,000: el 80% de lo que se compra; el grupo pone el 20% en faena y palma', va: 'El grupo que solicita, con el equipo; antes, visita a la oficina de la Reserva', cuando: 'Visita en diciembre de 2026; ventanilla en febrero de 2027', planb: 'Dos palapas en lugar de tres, con madera del ejido' },
+      { que: 'Cemento para anclar los horcones', valor: 2800, quien: 'Dueño de la ferretería del pueblo', forma: 'especie', camino: 'directa', puede: false, importa: true, llegar: true, pido: '12 bultos de cemento en febrero de 2027, con su nombre en la placa', va: 'Quien lleva los números', cuando: 'Enero de 2027', planb: '6 bultos y el resto con cooperación de los domingos' },
+      { que: 'Palma para los techos', valor: 6000, quien: 'Ejidatarios con palmar, por medio del comisariado', forma: 'especie', camino: 'directa', puede: true, importa: true, llegar: true, pido: '900 hojas de palma, cortadas en luna menguante de enero de 2027', va: 'Quien da la cara', cuando: 'Misma asamblea de enero de 2027', planb: 'Comprar la palma en Concá, con la cooperación' }
+    ],
+    msg: { fila: 1, medio: 'whats', firma: 'estudiantes de la UAQ que trabajamos con el ejido de La Florida', porque: 'Supimos que su área arregla caminos de la zona en marzo.', dias: 'el martes 12 o el jueves 14 de enero por la mañana', texto: '', editado: false }
+  };
+
+  function $(id) { return document.getElementById(id); }
+  function nueva() { return { que: '', valor: '', quien: '', forma: 'especie', camino: 'directa', puede: false, importa: false, llegar: false, pido: '', va: '', cuando: '', planb: '' }; }
+  function defecto() { return { equipo: '', proyecto: '', filas: [nueva()], msg: { fila: 0, medio: 'whats', firma: '', porque: '', dias: '', texto: '', editado: false } }; }
+  function cargar() { try { var s = JSON.parse(localStorage.getItem(CLAVE)); if (s && s.filas && s.msg) return s; } catch (x) {} return defecto(); }
+  var e = cargar();
+  function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(e)); $('guardado').textContent = 'Guardado en este navegador.'; } catch (x) { $('guardado').textContent = 'Este navegador no deja guardar: descarga tu mapa antes de cerrar.'; } }
+  function esc(t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function pesos(n) { return '$' + Math.round(n || 0).toLocaleString('es-MX'); }
+  function zona(f) { if (f.puede && f.importa && f.llegar) return 1; if (f.puede) return 2; if (f.importa || f.llegar) return 3; return 4; }
+  function vacia(f) { return !(f.que + f.quien + f.pido).trim(); }
+  function faltas(f) {
+    var r = [];
+    if (vacia(f)) return r;
+    if (!f.quien.trim()) r.push('falta a quién'); else if (VAGO.test(f.quien.trim())) r.push('"' + f.quien.trim() + '" no contesta el teléfono: ¿qué cargo, de qué oficina o de qué negocio?');
+    if (!f.pido.trim()) r.push('falta qué se pide'); else if (!/\d/.test(f.pido)) r.push('a la petición le falta una cantidad');
+    if (/\bapoy/i.test(f.pido) && !/\d/.test(f.pido)) r.push('"apoyo" no se puede entregar: ¿qué cosa?');
+    if (!f.va.trim()) r.push('falta quién va');
+    if (!f.cuando.trim()) r.push('falta cuándo');
+    if (!f.planb.trim()) r.push('falta el plan B');
+    return r;
+  }
+
+  function pintarRenglones() {
+    $('renglones').innerHTML = e.filas.map(function (f, i) {
+      var z = zona(f), fs = faltas(f);
+      return '<div class="caja renglon" data-i="' + i + '" data-z="' + (vacia(f) ? 0 : z) + '">'
+        + '<div class="cab"><span class="num">' + (i + 1) + '</span><span class="zona">' + (vacia(f) ? 'Sin llenar' : ZONAS[z]) + '</span><button type="button" class="quitar" data-quitar="' + i + '">Quitar</button></div>'
+        + '<div class="fila">'
+        + '<div style="grid-column:span 2"><label>Lo que falta</label><input type="text" data-c="que" value="' + esc(f.que) + '" placeholder="piso parejo para las tres palapas"></div>'
+        + '<div><label>Lo que vale ($)</label><input type="number" data-c="valor" value="' + esc(f.valor) + '" step="100" min="0" placeholder="del presupuesto"></div>'
+        + '<div><label>Forma en que llegaría</label><select data-c="forma">' + FORMAS.map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === f.forma ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></div>'
+        + '<div style="grid-column:span 2"><label>A quién: el cargo y la oficina o el negocio, sin nombres de personas</label><input type="text" data-c="quien" value="' + esc(f.quien) + '" placeholder="Dirección de Obras Públicas del Ayuntamiento"></div>'
+        + '<div><label>Camino</label><select data-c="camino"><option value="directa"' + (f.camino === 'directa' ? ' selected' : '') + '>Gestión directa</option><option value="convocatoria"' + (f.camino === 'convocatoria' ? ' selected' : '') + '>Por convocatoria</option></select></div>'
+        + '</div>'
+        + '<div class="tres-si"><label><input type="checkbox" data-c="puede"' + (f.puede ? ' checked' : '') + '> ¿Puede? Tiene la cosa o el dinero.</label><label><input type="checkbox" data-c="importa"' + (f.importa ? ' checked' : '') + '> ¿Le importa? Toca algo que le interesa.</label><label><input type="checkbox" data-c="llegar"' + (f.llegar ? ' checked' : '') + '> ¿Tenemos cómo llegar?</label></div>'
+        + '<div class="fila">'
+        + '<div style="grid-column:span 2"><label>Qué se le pide exactamente: la cosa, la cantidad y para cuándo</label><input type="text" data-c="pido" value="' + esc(f.pido) + '" placeholder="2 viajes de grava y 1 día de máquina en marzo de 2027"></div>'
+        + '<div><label>Quién va (el papel en el equipo)</label><input type="text" data-c="va" value="' + esc(f.va) + '" placeholder="quien da la cara y quien apunta"></div>'
+        + '<div><label>Cuándo se le busca</label><input type="text" data-c="cuando" value="' + esc(f.cuando) + '" placeholder="segunda semana de enero"></div>'
+        + '<div style="grid-column:1/-1"><label>Plan B: qué se hace si dice que no</label><input type="text" data-c="planb" value="' + esc(f.planb) + '" placeholder="un solo viaje; se empareja a mano en faena"></div>'
+        + '</div><p class="faltas"' + (fs.length ? '' : ' hidden') + '>' + (fs.length ? 'Todavía: ' + fs.join('; ') + '.' : '') + '</p></div>';
+    }).join('');
+  }
+  function refrescaRenglon(i) {
+    var d = document.querySelector('.renglon[data-i="' + i + '"]'), f = e.filas[i]; if (!d) return;
+    var z = zona(f), fs = faltas(f);
+    d.setAttribute('data-z', vacia(f) ? 0 : z); d.querySelector('.zona').textContent = vacia(f) ? 'Sin llenar' : ZONAS[z];
+    var p = d.querySelector('.faltas'); p.hidden = !fs.length; p.textContent = fs.length ? 'Todavía: ' + fs.join('; ') + '.' : '';
+  }
+
+  function pintarMapa() {
+    var cel = { 1: [530, 70], 2: [150, 70], 3: [530, 230], 4: [150, 230] }, cuenta = { 1: 0, 2: 0, 3: 0, 4: 0 };
+    var h = '<rect x="150" y="70" width="380" height="160" fill="#FBEFD5"/><rect x="530" y="70" width="380" height="160" fill="#0B3C49"/><rect x="150" y="230" width="380" height="160" fill="#EEF4F2"/><rect x="530" y="230" width="380" height="160" fill="#DDEDE8"/><rect x="150" y="70" width="760" height="320" fill="none" stroke="#0B3C49" stroke-width="3"/>'
+      + '<g font-weight="bold" font-size="21"><text x="166" y="100" fill="#5a4612">Acercarse antes de pedir</text><text x="546" y="100" fill="#D9A441">Primero</text><text x="166" y="260" fill="#45605a">Después</text><text x="546" y="260" fill="#0B4A45">Manos y voz</text></g>'
+      + '<text x="530" y="424" text-anchor="middle" font-size="17" font-weight="bold" fill="#0F6E6E">qué tan cerca está y cuánto le importa &#8594;</text><text transform="translate(128 230) rotate(-90)" text-anchor="middle" font-size="17" font-weight="bold" fill="#0F6E6E">cuánto puede poner &#8594;</text>';
+    e.filas.forEach(function (f, i) {
+      if (vacia(f)) return;
+      var z = zona(f), n = cuenta[z]++, x = cel[z][0] + 42 + (n % 7) * 50, y = cel[z][1] + 72 + Math.floor(n / 7) * 50;
+      var claro = z === 1;
+      h += '<g><title>' + esc(f.que + ' · ' + f.quien) + '</title><circle cx="' + x + '" cy="' + y + '" r="20" fill="' + (claro ? '#D9A441' : '#0B3C49') + '"/><text x="' + x + '" y="' + (y + 7) + '" text-anchor="middle" font-size="20" font-weight="bold" fill="' + (claro ? '#2b2206' : '#fff') + '">' + (i + 1) + '</text></g>';
+    });
+    $('mapa').innerHTML = h;
+  }
+
+  function revisar() {
+    var llenas = e.filas.filter(function (f) { return !vacia(f); }), r = [];
+    function punto(ok, bien, mal, nota) { r.push('<li class="' + (ok ? 'ok' : 'falta') + '">' + (ok ? bien : mal) + (!ok && nota ? '<small>' + nota + '</small>' : '') + '</li>'); }
+    if (!llenas.length) { $('revision').innerHTML = '<li class="falta">Todavía no hay renglones.<small>Empiecen por lo que quedó sin bolsillo en su presupuesto.</small></li>'; return; }
+    var conFaltas = [], i;
+    e.filas.forEach(function (f, n) { if (faltas(f).length) conFaltas.push(n + 1); });
+    punto(!conFaltas.length, 'Todos los renglones se pueden leer como un encargo: a quién, qué, quién va, cuándo y plan B.', 'Renglones que todavía no son un encargo: ' + conFaltas.join(', ') + '.', 'Cada renglón dice abajo, en rojo, lo que le falta.');
+    var primeros = llenas.filter(function (f) { return zona(f) === 1; }).length;
+    punto(primeros > 0, 'Hay ' + primeros + ' en "Primero": por ahí se empieza esta semana.', 'Nadie quedó en "Primero".', 'O faltan palomitas en las tres preguntas, o falta buscar a alguien cercano: el ejido, la escuela, un negocio, la propia universidad.');
+    var total = 0, por = {};
+    llenas.forEach(function (f) { var v = +f.valor || 0, k = (f.quien || '').trim().toLowerCase(); total += v; por[k] = (por[k] || 0) + v; });
+    var mayor = '', mv = 0; for (i in por) if (por[i] > mv) { mv = por[i]; mayor = i; }
+    if (total > 0 && llenas.length >= 3) punto(mv / total <= 0.6, 'Lo que falta está repartido: ningún aliado carga más del 60% de ' + pesos(total) + '.', 'Un solo aliado carga el ' + Math.round(mv / total * 100) + '% de lo que falta (' + pesos(mv) + ' de ' + pesos(total) + ').', 'Si ese dice que no, se cae casi todo. Partan ese renglón en pedidos más chicos para dos o tres puertas.');
+    else punto(false, '', 'Falta el valor de los renglones, o hay menos de tres.', 'Con el valor de cada cosa, la hoja revisa si todo depende de una sola puerta.');
+    var conv = llenas.filter(function (f) { return f.camino === 'convocatoria'; }).length;
+    punto(conv < llenas.length, conv ? 'Se usan los dos caminos: ' + conv + ' por convocatoria y ' + (llenas.length - conv) + ' de gestión directa.' : 'Todo es gestión directa. Si hay una convocatoria que pague algo de esto, vale un renglón.', 'Todo se le dejó a las convocatorias.', 'Los papeles que pide una convocatoria (el acta, la carta, el visto bueno) se consiguen conversando: falta al menos un renglón de gestión directa.');
+    var dinero = llenas.filter(function (f) { return f.forma === 'dinero'; }).length;
+    punto(dinero < llenas.length, 'No todo se pide en dinero: ' + (llenas.length - dinero) + ' de ' + llenas.length + ' renglones llegan de otra forma.', 'Todo se pide en dinero.', 'Es lo más difícil de soltar. ¿Qué de esto alguien ya lo tiene y lo puede prestar, donar o poner en faena?');
+    $('revision').innerHTML = r.join('');
+  }
+
+  /* El mensaje */
+  function armar() {
+    var f = e.filas[e.msg.fila] || e.filas[0] || nueva(), m = e.msg;
+    var quien = f.quien.trim() || '[a quién]', somos = m.firma.trim() || '[quiénes somos]', proy = e.proyecto.trim() || '[el proyecto]', dias = m.dias.trim() || '[dos opciones de día y hora]';
+    var porque = m.porque.trim() ? m.porque.trim().replace(/([^.?!])$/, '$1.') + ' ' : '';
+    if (m.medio === 'whats') return 'Buen día. Le escribe [nombre]. Somos ' + somos + ', y estamos preparando ' + proy + '. ' + porque + '¿Nos podría recibir quince minutos ' + dias + '? Le llevamos el plano y una hoja con el proyecto. Muchas gracias.';
+    if (m.medio === 'correo') return 'Asunto: Cita, ' + proy + '\n\nBuen día:\n\nMe dirijo a usted como ' + quien + '. Somos ' + somos + ', y estamos preparando ' + proy + '. ' + porque + '\n\nQuisiéramos pedirle quince minutos para presentarle el proyecto y escuchar su opinión. ¿Nos podría recibir ' + dias + '? Llevamos el plano y un resumen de una hoja.\n\nQuedo al pendiente. Gracias por su tiempo.\n\n[nombre y apellido]\n[teléfono]';
+    return 'Arroyo Seco, Qro., a [fecha]\n\n' + quien.toUpperCase() + '\nPRESENTE\n\nASUNTO: Solicitud para ' + proy + '\n\nQuienes suscribimos, ' + somos + ', nos dirigimos a usted para exponer lo siguiente.\n\nEstamos preparando ' + proy + (f.que.trim() ? '. Para realizarlo hace falta: ' + f.que.trim().replace(/\.$/, '') : '') + '. ' + porque + '\n\nPor lo anterior, solicitamos atentamente: ' + (f.pido.trim() || '[la cosa, la cantidad y para cuándo]').replace(/\.$/, '') + '.\n\nAnexamos el plano y el resumen del proyecto en una hoja. Para el seguimiento, nos puede localizar en el teléfono [teléfono].\n\nAgradecemos su atención.\n\nATENTAMENTE\n\n[nombres y firmas]\n\n(Se entregan dos tantos: uno se queda y el otro regresa con sello y fecha de recibido.)';
+  }
+  function pintarMensaje(forzar) {
+    var m = e.msg;
+    if (m.fila >= e.filas.length) m.fila = 0;
+    $('msgFila').innerHTML = e.filas.map(function (f, i) { return '<option value="' + i + '"' + (i === m.fila ? ' selected' : '') + '>' + (i + 1) + ' · ' + esc(f.quien || 'sin llenar') + '</option>'; }).join('');
+    $('medios').innerHTML = MEDIOS.map(function (o) { return '<button type="button" data-m="' + o[0] + '"' + (o[0] === m.medio ? ' class="activo"' : '') + '>' + o[1] + '</button>'; }).join('');
+    if (forzar || !m.editado || !m.texto) { m.texto = armar(); m.editado = false; }
+    $('mensaje').value = m.texto; notaMensaje();
+  }
+  function notaMensaje() {
+    var t = $('mensaje').value, n = (t.trim().match(/\S+/g) || []).length, m = e.msg.medio, av = [];
+    var tope = m === 'whats' ? 80 : (m === 'correo' ? 130 : 220);
+    if (n > tope) av.push('va largo: ' + n + ' palabras, y conviene que no pase de ' + tope);
+    if (/\[[^\]]+\]/.test(t.replace(/\[nombre[^\]]*\]|\[tel[^\]]*\]|\[fecha\]|\[nombres y firmas\]/g, ''))) av.push('quedan datos entre corchetes sin llenar');
+    if (m !== 'oficio' && !/\?/.test(t)) av.push('no termina con una pregunta que se pueda contestar');
+    if (/\bapoy/i.test(t)) av.push('dice "apoyo": mejor la cosa por su nombre');
+    $('msgNota').innerHTML = (av.length ? '<strong style="color:var(--rojo)">Ojo:</strong> ' + av.join('; ') + '.' : n + ' palabras. Se lee en ' + (n < 90 ? 'menos de medio minuto.' : 'cerca de un minuto.'));
+  }
+
+  function pintar() { $('equipo').value = e.equipo; $('proyecto').value = e.proyecto; $('firma').value = e.msg.firma; $('porque').value = e.msg.porque; $('dias').value = e.msg.dias; pintarRenglones(); pintarMapa(); revisar(); pintarMensaje(); }
+
+  $('renglones').addEventListener('input', function (ev) {
+    var t = ev.target, c = t.getAttribute('data-c'), d = t.closest('.renglon'); if (!c || !d) return;
+    var i = +d.getAttribute('data-i');
+    e.filas[i][c] = t.type === 'checkbox' ? t.checked : t.value;
+    refrescaRenglon(i); pintarMapa(); revisar(); pintarMensaje(); guardar();
+  });
+  $('renglones').addEventListener('change', function (ev) { if (ev.target.matches('select,[type=checkbox]')) ev.target.dispatchEvent(new Event('input', { bubbles: true })); });
+  $('renglones').addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-quitar]'); if (!b) return;
+    var i = +b.getAttribute('data-quitar');
+    if (!vacia(e.filas[i]) && !confirm('Se quita el renglón ' + (i + 1) + '. ¿Seguro?')) return;
+    e.filas.splice(i, 1); if (!e.filas.length) e.filas.push(nueva()); pintar(); guardar();
+  });
+  $('agregar').addEventListener('click', function () { e.filas.push(nueva()); pintarRenglones(); pintarMensaje(); guardar(); var u = document.querySelectorAll('.renglon'); u[u.length - 1].querySelector('input').focus(); });
+  ['equipo', 'proyecto'].forEach(function (id) { $(id).addEventListener('input', function () { e[id] = this.value; pintarMensaje(); guardar(); }); });
+  ['firma', 'porque', 'dias'].forEach(function (id) { $(id).addEventListener('input', function () { e.msg[id] = this.value; pintarMensaje(); guardar(); }); });
+  $('msgFila').addEventListener('change', function () { e.msg.fila = +this.value; pintarMensaje(true); guardar(); });
+  $('medios').addEventListener('click', function (ev) { var b = ev.target.closest('button'); if (!b) return; e.msg.medio = b.getAttribute('data-m'); pintarMensaje(true); guardar(); });
+  $('mensaje').addEventListener('input', function () { e.msg.texto = this.value; e.msg.editado = true; notaMensaje(); guardar(); });
+  $('rearmar').addEventListener('click', function () { pintarMensaje(true); guardar(); });
+  $('copiar').addEventListener('click', function () {
+    var t = $('mensaje'), b = this; t.select();
+    var listo = function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar el mensaje'; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t.value).then(listo, function () { document.execCommand('copy'); listo(); }); else { document.execCommand('copy'); listo(); }
+  });
+  $('cargarEjemplo').addEventListener('click', function () {
+    var hay = e.filas.some(function (f) { return !vacia(f); });
+    if (!hay || confirm('Se cambia lo que hay escrito por el ejemplo. ¿Seguro?')) { e = JSON.parse(JSON.stringify(EJEMPLO)); pintar(); guardar(); }
+  });
+  $('borrar').addEventListener('click', function () { if (confirm('Se borra el mapa de este navegador. ¿Seguro?')) { try { localStorage.removeItem(CLAVE); } catch (x) {} e = defecto(); pintar(); $('guardado').textContent = ''; } });
+  $('proyector').addEventListener('click', function () { document.body.classList.toggle('proyector'); });
+
+  function hojaHTML() {
+    var filas = e.filas.filter(function (f) { return !vacia(f); }).map(function (f, i) {
+      return '<tr><td>' + (i + 1) + '</td><td><strong>' + esc(f.que) + '</strong>' + (f.valor ? '<br>' + pesos(+f.valor) : '') + '</td><td>' + esc(f.quien) + '<br><em>' + ZONAS[zona(f)] + ' · ' + (f.camino === 'convocatoria' ? 'por convocatoria' : 'gestión directa') + '</em></td><td>' + esc(f.pido) + '</td><td>' + esc(f.va) + '<br>' + esc(f.cuando) + '</td><td>' + esc(f.planb) + '</td><td style="width:11%"></td></tr>';
+    }).join('');
+    return '<h3>Hoja de gestión · ' + esc(e.equipo || 'equipo') + '</h3><p style="margin:.1rem 0 .5rem"><em>' + esc(e.proyecto) + '</em></p><table><tr><th>#</th><th>Lo que falta</th><th>A quién</th><th>Qué exactamente</th><th>Quién va y cuándo</th><th>Plan B</th><th>Qué pasó y fecha</th></tr>' + filas + '</table>';
+  }
+  $('imprimir').addEventListener('click', function () { $('hoja').innerHTML = hojaHTML(); window.print(); });
+  $('descargar').addEventListener('click', function () {
+    var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Mapa de gestión · ' + esc(e.equipo) + '</title><style>body{font-family:Georgia,serif;max-width:1100px;margin:2rem auto;padding:0 1rem;line-height:1.5;color:#1C2B28}h3{color:#0B3C49;font-size:1.5rem;margin:0}table{width:100%;border-collapse:collapse;font-size:.95rem}th{text-align:left;border-bottom:2px solid #0B3C49;padding:.4rem}td{border-bottom:1px solid #CFE3DD;padding:.5rem .4rem;vertical-align:top}pre{white-space:pre-wrap;font-family:Georgia,serif;background:#FFFDF7;border:1px solid #CFE3DD;border-radius:8px;padding:1rem}</style></head><body>' + hojaHTML() + '<h3 style="margin-top:2rem">El primer mensaje</h3><pre>' + esc($('mensaje').value) + '</pre><p><small>Descargado el ' + new Date().toLocaleDateString('es-MX') + ' · Gestión y Manejo de Proyectos</small></p></body></html>';
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' })); a.download = 'mapa-de-gestion-' + new Date().toISOString().slice(0, 10) + '.html';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  pintar();
+})();
+</script>
+</body>
+</html>

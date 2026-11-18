@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La clase de gestión y pitch · Gestión y Manejo de Proyectos</title>
+<link rel="stylesheet" href="mazo.css">
+<style>
+  .partes { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin:1rem 0; }
+  .parte { background:#fff; border:1px solid var(--borde); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; }
+  .parte img { width:100%; display:block; border-bottom:1px solid var(--borde); aspect-ratio:16/9; object-fit:cover; }
+  .parte .dentro { padding:1rem 1.3rem 1.1rem; display:flex; flex-direction:column; flex:1; }
+  .parte .num { font-family:Georgia,serif; font-size:2.2rem; color:var(--arena); line-height:1; }
+  .parte h3 { font-family:Georgia,serif; color:var(--profundo); margin:.3rem 0 .2rem; font-size:1.25rem; }
+  .parte .min { font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:#45605a; font-weight:bold; }
+  .parte p { color:#45605a; font-size:.95rem; }
+  .parte .enlaces { margin-top:auto; }
+  .parte a.enlace-grande { font-size:.92rem; padding:.45rem 1rem; }
+  .guion { background:#fff; border:1px solid var(--borde); border-radius:14px; padding:1rem 1.4rem; }
+  .guion ol { padding-left:1.2rem; } .guion li { margin:.5rem 0; } .guion li b { color:var(--profundo); }
+  .galeria { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:.8rem; }
+  .galeria figure { margin:0; background:#fff; border:1px solid var(--borde); border-radius:10px; padding:.4rem; }
+  .galeria img { width:100%; border-radius:6px; display:block; }
+  .galeria figcaption { font-size:.8rem; color:#45605a; padding:.3rem .2rem 0; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.35rem; margin:2.2rem 0 .6rem; }
+  .consulta dt { font-weight:bold; color:var(--profundo); margin-top:.8rem; } .consulta dd { margin:.15rem 0 .3rem; }
+  details { background:#fff; border:1px solid var(--borde); border-radius:12px; padding:.7rem 1.1rem; margin:.5rem 0; }
+  details summary { cursor:pointer; font-weight:bold; color:var(--profundo); }
+  details ul { padding-left:1.2rem; } details li { margin:.35rem 0; }
+</style>
+</head>
+<body>
+<header class="curso">
+  <div class="curso-nombre">Gestión y Manejo de Proyectos · UAQ Campus Concá · 2026</div>
+  <div class="titulo">La clase de gestión y pitch</div>
+  <div class="migas">Conseguir lo que falta y contarlo en dos minutos · <a href="../../index.html">volver al curso</a></div>
+</header>
+<main>
+
+<p style="font-family:Georgia,serif;font-size:1.6rem;color:var(--profundo);margin:1.4rem 0 .3rem">¿A quién se le pide, qué exactamente, y cómo se le dice?</p>
+<p class="pista" style="font-size:1rem">El presupuesto de la presa ya dice lo que falta. Esta clase enseña a salir a conseguirlo. Tiene dos partes que se dan en una sesión larga o en dos: primero cómo se gestiona (a quién, por cuál camino y con qué mensaje), y luego cómo se cuenta el proyecto en voz alta para que alguien dé el siguiente paso. Cada parte sigue la regla del curso: primero el dibujo, qué es la herramienta y para qué sirve; luego el procedimiento con ejemplos de La Florida; al final la práctica, donde cada equipo arma lo suyo.</p>
+
+<div class="partes">
+  <div class="parte">
+    <img src="img/dos-caminos.webp" alt="Dibujo: una persona frente a dos caminos, uno hacia un escritorio con papeles y otro hacia una puerta abierta" onerror="this.style.display='none'">
+    <div class="dentro">
+      <div class="num">1</div>
+      <h3>Salir a conseguir</h3>
+      <div class="min">Mazo de 33 láminas · unos 45 min · práctica de 50 min</div>
+      <p>Qué es gestionar y por qué es un trato y no un favor; el objetivo común; el mapa de gestión, que acomoda a los posibles aliados según si pueden, les importa y hay cómo llegar; los dos caminos (por convocatoria y gestión directa); cómo califican una solicitud y dónde buscar fondos hoy; el primer mensaje, la visita, las puertas que no se abren y lo que se hace después del sí y del no. La práctica arma el mapa de gestión del componente y el mensaje para pedir la primera cita.</p>
+      <div class="enlaces"><a class="enlace-grande" href="mazo-gestion.html">Mazo 1</a> <a class="enlace-grande claro" href="practica-gestion.html">Práctica</a></div>
+    </div>
+  </div>
+  <div class="parte">
+    <img src="img/dos-minutos.webp" alt="Dibujo: una persona habla frente a otra que escucha, con un reloj de arena entre las dos y una puerta que empieza a abrirse" onerror="this.style.display='none'">
+    <div class="dentro">
+      <div class="num">2</div>
+      <h3>Dos minutos</h3>
+      <div class="min">Mazo de 32 láminas · unos 45 min · práctica de 60 min</div>
+      <p>Qué es un pitch y para qué sirve; sus cinco partes (qué pasa y a quién, lo que vamos a hacer, lo que cambia, lo que ya está puesto y lo que te pido); cómo se pide con cantidad y fecha y la escalera de planes A, B y C; el mismo proyecto ante cuatro oídos (Ayuntamiento, fundación, negocio y asamblea); los nervios, las preguntas difíciles y los siete tropiezos. La práctica mide los segundos de cada parte, revisa el guion, trae reloj para ensayar y la hoja de quien escucha.</p>
+      <div class="enlaces"><a class="enlace-grande" href="mazo-pitch.html">Mazo 2</a> <a class="enlace-grande claro" href="practica-pitch.html">Práctica</a></div>
+    </div>
+  </div>
+</div>
+
+<a href="acordeon.html" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.8rem 1.4rem;align-items:center;background:var(--profundo);color:#EAF4F2;border-radius:14px;padding:1.1rem 1.4rem;text-decoration:none;margin:1.4rem 0 .4rem"><span><strong style="display:block;font-family:Georgia,serif;color:var(--arena);font-size:1.3rem;margin-bottom:.2rem">El acordeón de la clase</strong><span style="font-size:.97rem;opacity:.92;line-height:1.5">Las dos partes en una hoja por los dos lados, para llevar en la mochila: la ruta de una gestión, las tres preguntas del mapa, el primer mensaje, las cinco partes del pitch con sus segundos y la escalera de la petición. Se imprime o se guarda en el teléfono.</span></span><span style="background:var(--arena);color:#2b2206;font-weight:bold;border-radius:999px;padding:.55rem 1.2rem;white-space:nowrap">Abrir el acordeón</span></a>
+
+<h2>Cómo se da, paso a paso</h2>
+<div class="guion">
+  <ol>
+    <li><b>Antes de la clase.</b> Cada equipo trae su presupuesto del componente (el archivo de la práctica del presupuesto o la hoja impresa) y una laptop. Se imprimen las hojas de quien escucha, una por persona, desde la práctica del pitch. En cuatro papelitos se escribe: Ayuntamiento, fundación o programa, negocio, asamblea. Conviene abrir cada práctica una vez y apretar "Cargar el ejemplo completo" para proyectarlo antes de dar la consigna.</li>
+    <li><b>Parte 1, al aire (5 minutos).</b> "¿A quién se lo van a pedir primero, y qué le van a decir?" Tres respuestas al pizarrón, tal como salgan.</li>
+    <li><b>Mazo 1 (45 minutos).</b> Las que no se recortan: el trato y el objetivo común, el mapa de gestión, los dos caminos, el reloj de la convocatoria, el primer mensaje, la visita y lo que no se aguanta. Si el tiempo aprieta se brincan "Primero una hoja" y "Dónde buscar hoy", que quedan como consulta.</li>
+    <li><b>Práctica de gestión (50 minutos).</b> Se proyecta el ejemplo cargado y se lee un renglón en voz alta. Luego cada equipo escribe lo que le falta, lo acomoda en el mapa y arma el primer mensaje para quien quedó en "Primero". Al cierre, cada equipo lee su renglón de "Primero" y se reescriben las tres respuestas del pizarrón con cargo, cantidad y fecha.</li>
+    <li><b>Parte 2, al aire (5 minutos).</b> La fila de las tortillas: dos personas voluntarias lo intentan con reloj, sin corrección.</li>
+    <li><b>Mazo 2 (45 minutos).</b> Las que no se recortan: el dibujo del pitch, las cinco partes, ponerle cara al problema, la frase que se puede dibujar, lo que ya está puesto, la petición con su escalera y los cuatro oídos. "Tres cifras famosas" se puede dejar para leer.</li>
+    <li><b>Práctica del pitch (40 minutos).</b> Veinticinco para escribir las cinco partes y la petición para dos oídos; quince para dos vueltas de ensayo con el reloj de la hoja, la segunda con el guion escondido.</li>
+    <li><b>El tribunal de los cuatro oídos (25 minutos).</b> Rondas de seis minutos: dos de pitch, dos de preguntas desde el papel que tocó, dos para llenar la hoja de quien escucha. Cierra la fila de las tortillas, con las mismas dos personas del inicio.</li>
+    <li><b>Si se da en dos sesiones.</b> La primera termina con el mapa de gestión y el mensaje. De tarea, cada equipo trae una frase textual de la consulta y el número de su línea base, que son la materia prima de la parte 1 del pitch.</li>
+    <li><b>Lo que queda para después de la clase.</b> Mandar el mensaje de verdad a quien quedó en "Primero" es decisión de cada equipo con el profesor: antes lo lee alguien de otro equipo, y se avisa al ejido.</li>
+  </ol>
+</div>
+
+<h2>Los criterios que se publican</h2>
+<div class="contra">
+  <div class="si"><div class="t">El mapa de gestión</div>Cada renglón se puede leer como un encargo: a quién (con cargo y oficina, sin nombres de personas), qué exactamente (con cantidad y fecha), quién va, cuándo y el plan B. Hay al menos uno en "Primero". Ningún aliado carga más del 60% de lo que falta. No todo se pide en dinero. La práctica lo revisa sola.</div>
+  <div class="si"><div class="t">El pitch</div>Cabe en dos minutos. La primera parte trae la voz de una persona y un número. Lo que se va a hacer se puede dibujar. El cambio trae número, fecha y quién lo cuenta. Se dice lo que ya puso la comunidad. La petición trae cantidad y fecha y termina en pregunta. Sin palabras de humo, sin deseos y sin disculpas. Y quien escucha puede repetirlo.</div>
+</div>
+
+<h2>Lo que ya existe en el curso y aquí se usa</h2>
+<dl class="consulta">
+  <dt>El presupuesto de la presa</dt>
+  <dd>De <a href="../cronograma-y-presupuesto/practica-presupuesto.html">la práctica del presupuesto</a> y de <a href="../presupuesto-de-la-presa/index.html">el presupuesto de la presa</a> sale la lista de lo que falta: lo que quedó sin bolsillo, y lo que tiene bolsillo pero nadie ha ido a pedir. Los cuatro bolsillos del <a href="../cronograma-y-presupuesto/mazo-presupuesto.html">Mazo 2 de esa clase</a> son el punto de partida del mapa de gestión.</dd>
+  <dt>El semáforo y la ruta de la propuesta</dt>
+  <dd>Para el camino de la convocatoria, esta clase no repite lo que ya está: <a href="../semaforo-de-convocatorias.html">el semáforo</a> decide en quince minutos si vale la pena aplicar, <a href="../ruta-de-la-propuesta.html">la ruta de la propuesta</a> trae las once estaciones de la consulta al fallo, y <a href="../procodes-2026.html">la guía del PROCODES</a>, las reglas por dentro.</dd>
+  <dt>El pitch y la Troika de la semana 10</dt>
+  <dd>Las cinco partes de este pitch son los cuatro movimientos de la <a href="../../semanas/semana-10.html">semana 10</a> con dos cambios: lo que ya puso la comunidad tiene su propia parte, y la petición se escribe una vez por cada oído. La Troika sigue sirviendo como segunda ronda de retroalimentación.</dd>
+  <dt>El trato de la semana 8</dt>
+  <dd>El mapa de las personas y el trato ensayado de la <a href="../../semanas/semana-08.html">semana 8</a> son el antecedente de la visita. Donde esa página habla del Fondo y de la dictaminadora, manda esta clase: se gestiona para la presa, con donantes y aliados en general.</dd>
+</dl>
+
+<h2>De dónde sale lo que se dice</h2>
+<details>
+  <summary>Lo que se retomó de la presentación original del curso, lo que se cambió y lo que se dejó fuera</summary>
+  <ul>
+    <li><strong>Se retomó:</strong> los dos caminos (por convocatoria, que pide escribir, y gestión directa, que pide conversar); la convocatoria como competencia; las cuatro preguntas sobre el donante; revisar propuestas que ganaron, seguir instrucciones, cuidar ortografía y sumas, y darla a leer a alguien de fuera; decir qué pasa cuando se acaba el dinero; los criterios con que se evalúa; los correos comentados; ir de dos a la visita y repartirse los papeles; los obstáculos de la entrevista; empezar por el problema; informar y motivar, con el caso de los Acuerdos Recíprocos por Agua de Bolivia; el número que se puede ver; estar preparado más que motivado; el círculo del objetivo común.</li>
+    <li><strong>Se cambió:</strong> las "palabras poderosas" (fortalecer, empoderar, promover) ahora se enseñan como palabras de humo, porque hoy las trae cualquier solicitud; "maneja tu ansiedad conectándote con el presente" se cambió por dos cosas con estudio detrás, renombrar los nervios y ensayar frente a alguien; el acoso en la entrevista dejó de ser un obstáculo más de la lista y tiene su propia lámina; la lista de sitios donde buscar se revisó dirección por dirección; los nombres propios de los correos se cambiaron por cargos.</li>
+    <li><strong>Se dejó fuera:</strong> la vestimenta formal como regla (en una oficina de la sierra pesa más la puntualidad y la hoja impresa) y las direcciones que ya no abren.</li>
+    <li><strong>Es nuevo:</strong> el mapa de gestión; la ruta de cinco pasos con agradecer y contar qué pasó; el reloj de la convocatoria; la petición con cantidad y fecha y su escalera; los cuatro oídos; lo que ya está puesto como parte del pitch; las preguntas difíciles; y las tres cifras famosas que no hay que repetir.</li>
+  </ul>
+</details>
+<details>
+  <summary>Las fuentes, para quien quiera leer más</summary>
+  <ul>
+    <li><strong>Gestión.</strong> GNDR y Change the Game Academy, <em>Movilización de recursos locales: una guía práctica</em>. Kim Klein, <em>Fundraising for Social Change</em>. World Giving Report 2025 (Charities Aid Foundation con Cemefi), capítulo México. JRS Biodiversity Foundation, "Why we decline". Center for Effective Philanthropy, encuesta a solicitantes rechazados. Reglas de operación del PROCODES 2026 (DOF, 15 de enero de 2026). Convocatoria 2026 del Programa de Pequeñas Donaciones en México.</li>
+    <li><strong>Pitch.</strong> Small, Loewenstein y Slovic (2007), sobre la persona identificable. Cryder, Loewenstein y Scheines (2013), sobre decir en qué se usa lo que se pide. List y Lucking-Reiley (2002) y Karlan y List (2007), sobre lo que ya está puesto. Flynn y Lake (2008), sobre el miedo a pedir. Chen, Yao y Kotha (2009), sobre preparación y pasión. Brooks (2014), sobre los nervios. Menzel y Carrell (1994), sobre el ensayo. Kanze, Huang, Conley y Higgins (2018), sobre las preguntas de riesgo. Fundación Natura Bolivia, Acuerdos Recíprocos por Agua.</li>
+    <li><strong>Con cautela.</strong> Los estudios sobre donativos se hicieron con donantes individuales y casi todos en Estados Unidos; aquí se usan como analogía y así se dice en las notas. La adaptación a los cuatro oídos es experiencia de oficio, no un estudio. Las direcciones y reglas se revisaron el 18 de noviembre de 2026 y envejecen rápido.</li>
+  </ul>
+</details>
+
+<h2>Las sketchplanations de la clase</h2>
+<p class="pista" style="font-size:.95rem">Dibujos a tinta, uno por idea, generados en Gemini con los prompts de <code>sketchplanations.md</code>. Se proyectan solos, sin texto que compita. Los esquemas de las herramientas (el pitch, la escalera, el mapa de gestión y el objetivo común) están dibujados dentro de los mazos.</p>
+<div class="galeria" id="galeria"></div>
+
+<p class="pista" style="margin-top:2.5rem">Todo abre sin internet y se comparte suelto: la carpeta completa se copia al Drive del grupo. Las prácticas guardan en el navegador de cada laptop y descargan un HTML con la fecha. Nada se sube a internet, y en los renglones van cargos y oficinas, no nombres de personas.</p>
+</main>
+<script>
+(function () {
+  var fotos = [
+    ['objetivo-comun', 'Objetivo común'], ['no-solo-dinero', 'No solo dinero'], ['dos-caminos', 'Dos caminos'], ['la-ruta-de-una-gestion', 'La ruta'], ['es-una-competencia', 'Es una competencia'], ['van-dos', 'Van dos'], ['dar-las-gracias', 'Dar las gracias'],
+    ['dos-minutos', 'Dos minutos'], ['ponle-cara', 'Ponle cara'], ['un-numero-que-se-ve', 'Un número que se ve'], ['palabras-de-humo', 'Palabras de humo'], ['cuatro-oidos', 'Cuatro oídos'], ['en-la-mano', 'En la mano'], ['estoy-emocionado', 'Estoy emocionado']
+  ];
+  var g = document.getElementById('galeria');
+  fotos.forEach(function (f) {
+    var fig = document.createElement('figure');
+    fig.innerHTML = '<img src="img/' + f[0] + '.webp" alt="' + f[1] + '" loading="lazy" onerror="this.parentNode.style.display=\'none\'"><figcaption>' + f[1] + '</figcaption>';
+    g.appendChild(fig);
+  });
+})();
+</script>
+</body>
+</html>

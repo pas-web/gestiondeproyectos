@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El acordeón · Gestión y pitch · Gestión y Manejo de Proyectos</title>
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28; --rojo:#8A3B2B; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.45; font-size:1rem; }
+  .barra { background:var(--profundo); color:#EAF4F2; padding:.7rem 1.2rem; display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+  .barra a { color:#EAF4F2; font-size:.9rem; } .barra button { font:inherit; font-weight:bold; background:var(--arena); color:#2b2206; border:none; border-radius:999px; padding:.4rem 1.1rem; cursor:pointer; margin-left:auto; }
+  .pagina { background:#fff; max-width:820px; margin:1.2rem auto; padding:1.6rem 1.8rem 1.4rem; border:1px solid var(--borde); border-radius:14px; }
+  .cab { display:grid; grid-template-columns:minmax(0,1fr) 210px; gap:1.2rem; align-items:center; border-bottom:3px solid var(--profundo); padding-bottom:.8rem; margin-bottom:1rem; }
+  .cab img { width:100%; border-radius:8px; display:block; }
+  .cab .lado { font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; font-weight:bold; color:var(--marca); }
+  .cab h1 { font-family:Georgia,serif; color:var(--profundo); font-size:2rem; line-height:1.1; margin:.15rem 0 .3rem; }
+  .cab p { margin:0; font-family:Georgia,serif; font-style:italic; color:#45605a; font-size:1.05rem; }
+  h2 { font-family:Georgia,serif; color:var(--marca); font-size:1.12rem; margin:1.1rem 0 .4rem; }
+  .ruta { display:grid; grid-template-columns:repeat(5,1fr); gap:.4rem; counter-reset:r; }
+  .ruta div { background:#F2F7F5; border-radius:10px; padding:.5rem .6rem .55rem; font-size:.86rem; position:relative; }
+  .ruta div::before { counter-increment:r; content:counter(r); display:inline-flex; width:1.5rem; height:1.5rem; border-radius:50%; background:var(--arena); color:#2b2206; font-family:Georgia,serif; font-weight:bold; align-items:center; justify-content:center; margin-right:.35rem; }
+  .ruta b { color:var(--profundo); font-size:.95rem; } .ruta span { display:block; margin-top:.2rem; color:#45605a; }
+  .dos { display:grid; grid-template-columns:1fr 1fr; gap:.3rem 1.4rem; }
+  ul { margin:.2rem 0; padding-left:1.1rem; } li { margin:.22rem 0; font-size:.93rem; } li b { color:var(--profundo); }
+  .si { border-left:5px solid var(--marca); background:#EEF6F4; border-radius:0 10px 10px 0; padding:.5rem .8rem; font-family:Georgia,serif; font-size:.95rem; }
+  .no { border-left:5px solid var(--rojo); background:#FBF0EE; border-radius:0 10px 10px 0; padding:.5rem .8rem; font-family:Georgia,serif; font-size:.95rem; margin-bottom:.4rem; }
+  .si small, .no small { display:block; font-family:'Source Sans 3',system-ui,sans-serif; font-weight:bold; letter-spacing:.08em; text-transform:uppercase; font-size:.68rem; }
+  .si small { color:var(--marca); } .no small { color:var(--rojo); }
+  .partes { display:grid; grid-template-columns:25fr 25fr 20fr 20fr 30fr; gap:.3rem; }
+  .partes div { border-radius:10px; padding:.5rem .55rem .6rem; font-size:.84rem; color:#fff; background:var(--marca); }
+  .partes div:first-child { background:#FBEFD5; color:#5a4612; } .partes div:last-child { background:var(--profundo); }
+  .partes b { display:block; font-size:.93rem; line-height:1.2; margin-bottom:.2rem; } .partes i { font-style:normal; font-weight:bold; opacity:.8; font-size:.78rem; display:block; margin-top:.3rem; }
+  .partes div:last-child b { color:var(--arena); }
+  .escalera { display:grid; grid-template-columns:1fr 1fr 1fr; gap:.3rem; align-items:end; }
+  .escalera div { border-radius:10px 10px 0 0; padding:.5rem .7rem; font-size:.88rem; color:#fff; }
+  .escalera div:nth-child(1) { background:var(--profundo); min-height:6.6rem; } .escalera div:nth-child(2) { background:var(--marca); min-height:5rem; } .escalera div:nth-child(3) { background:var(--arena); color:#2b2206; min-height:3.6rem; }
+  .escalera b { display:block; font-size:1rem; }
+  .pie { font-size:.78rem; color:#45605a; border-top:1px solid var(--borde); margin-top:1rem; padding-top:.5rem; }
+  @media (max-width:640px) { .cab { grid-template-columns:1fr; } .ruta, .partes, .escalera { grid-template-columns:1fr; } .dos { grid-template-columns:1fr; } .escalera div { min-height:0 !important; border-radius:10px; } }
+  @media print {
+    body { background:#fff; font-size:10.3pt; } .barra { display:none; }
+    .pagina { border:none; margin:0; max-width:none; padding:0; page-break-after:always; break-after:page; } .pagina:last-of-type { page-break-after:auto; break-after:auto; }
+    * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    @page { size:letter; margin:13mm; }
+  }
+</style>
+</head>
+<body>
+<div class="barra"><a href="index.html">La clase de gestión y pitch</a><span style="opacity:.75;font-size:.9rem">Una hoja, por los dos lados</span><button type="button" onclick="window.print()">Imprimir</button></div>
+
+<div class="pagina">
+  <div class="cab">
+    <div><div class="lado">Lado 1 · Gestión y Manejo de Proyectos</div><h1>Salir a conseguir</h1><p>Gestionar no es pedir un favor: es proponer un trato.</p></div>
+    <img src="img/objetivo-comun.webp" alt="Dibujo: un puente que se arma desde las dos orillas">
+  </div>
+
+  <h2>La ruta de una gestión</h2>
+  <div class="ruta">
+    <div><b>Averiguar</b><span>Qué le importa este año y quién decide ahí.</span></div>
+    <div><b>Acercarse</b><span>Un mensaje corto que pide quince minutos.</span></div>
+    <div><b>Pedir</b><span>En persona: una cosa, con cantidad y fecha.</span></div>
+    <div><b>Agradecer</b><span>Ese mismo día, digan sí o digan no.</span></div>
+    <div><b>Contar qué pasó</b><span>La foto de la obra con lo que pusieron.</span></div>
+  </div>
+
+  <div class="dos">
+    <div>
+      <h2>¿A quién primero? Tres preguntas</h2>
+      <ul>
+        <li><b>¿Puede?</b> Tiene la cosa o el dinero.</li>
+        <li><b>¿Le importa?</b> El proyecto toca algo que le interesa.</li>
+        <li><b>¿Tenemos cómo llegar?</b> Alguien del equipo o del ejido lo conoce.</li>
+      </ul>
+      <p style="font-size:.9rem;margin:.3rem 0">Tres síes: va primero. Si puede y no nos conoce, la primera visita es para preguntar, no para pedir.</p>
+      <h2>Recurso no quiere decir dinero</h2>
+      <p style="font-size:.9rem;margin:.3rem 0">Comprado, en faena, prestado, trocado o donado. Solo lo primero necesita dinero. Es más fácil que alguien dé lo que ya tiene.</p>
+    </div>
+    <div>
+      <h2>El primer mensaje</h2>
+      <ul>
+        <li><b>Asunto:</b> de qué se trata, en seis palabras.</li>
+        <li><b>Quién soy</b> y con quién vengo.</li>
+        <li><b>Por qué a usted:</b> una línea que demuestre que hice la tarea.</li>
+        <li><b>Qué pido:</b> quince minutos. La cosa se pide en persona.</li>
+        <li><b>Cuándo:</b> dos opciones de día y un teléfono.</li>
+      </ul>
+      <h2>La visita</h2>
+      <p style="font-size:.9rem;margin:.3rem 0">Van dos: una persona habla y la otra apunta. Primero se pregunta, luego se pide. Se sale con una fecha y se deja la hoja.</p>
+    </div>
+  </div>
+
+  <h2>Así se escribe un renglón de gestión</h2>
+  <div class="no"><small>Todavía no es gestión</small>"Pedirle apoyo al municipio."</div>
+  <div class="si"><small>Ya es un encargo</small>"A la Dirección de Obras Públicas: dos viajes de grava y un día de máquina en marzo. Van dos del equipo la segunda semana de enero. Plan B: un solo viaje y se empareja a mano."</div>
+
+  <div class="dos">
+    <div>
+      <h2>Si es por convocatoria, antes de escribir</h2>
+      <ul><li>¿A quién le dan? ¿Qué pagan? ¿Qué les importa? ¿Qué piden que pongas?</li><li>Los papeles lentos (acta, cotizaciones, cartas) se juntan antes de que abra la ventanilla.</li><li>Se escribe con la tabla de puntos enfrente, y lo lee alguien que no conoce el proyecto.</li></ul>
+    </div>
+    <div>
+      <h2>Lo que no se aguanta</h2>
+      <p style="font-size:.9rem;margin:.3rem 0">Ninguna gestión vale un trato humillante ni un acoso. Se va de dos, se termina la reunión, se cuenta ese día al profesor o a la coordinación y se busca otra puerta.</p>
+    </div>
+  </div>
+  <div class="pie">Gestión y Manejo de Proyectos · UAQ Campus Concá · La clase de gestión y pitch</div>
+</div>
+
+<div class="pagina">
+  <div class="cab">
+    <div><div class="lado">Lado 2 · Gestión y Manejo de Proyectos</div><h1>Dos minutos</h1><p>Contar el proyecto para que alguien dé el siguiente paso.</p></div>
+    <img src="img/dos-minutos.webp" alt="Dibujo: dos personas, un reloj de arena y una puerta que se abre">
+  </div>
+
+  <h2>Las cinco partes del pitch</h2>
+  <div class="partes">
+    <div><b>1 · Qué pasa y a quién</b>Una persona o una frase de la consulta, y un número.<i>25 s</i></div>
+    <div><b>2 · Lo que vamos a hacer</b>Qué, dónde y cuándo. Que se pueda dibujar.<i>25 s</i></div>
+    <div><b>3 · Lo que cambia</b>Hoy, la meta, la fecha y quién lo cuenta.<i>20 s</i></div>
+    <div><b>4 · Lo que ya está puesto</b>Lo que pone la comunidad, en pesos.<i>20 s</i></div>
+    <div><b>5 · Lo que te pido</b>Una cosa, con cantidad y fecha. Y el siguiente paso.<i>30 s</i></div>
+  </div>
+  <p style="font-size:.9rem;margin:.4rem 0 0">Las cuatro primeras son iguales para todos. La quinta cambia según quién escucha. Un pitch salió bien si al terminar hay una fecha.</p>
+
+  <div class="dos">
+    <div>
+      <h2>La petición</h2>
+      <div class="no"><small>No se puede contestar</small>"Venimos a ver con qué nos puede apoyar."</div>
+      <div class="si"><small>Se contesta con sí, no o a ver</small>"Le pedimos dos viajes de grava y un día de máquina en marzo. ¿Con quién de Obras Públicas lo vemos?"</div>
+      <p style="font-size:.9rem;margin:.4rem 0">Después de pedir, se guarda silencio.</p>
+    </div>
+    <div>
+      <h2>La escalera</h2>
+      <div class="escalera">
+        <div><b>Plan A</b>Lo que de verdad necesitas.</div>
+        <div><b>Plan B</b>Más chico, o en especie.</div>
+        <div><b>Plan C</b>Un consejo o un contacto.</div>
+      </div>
+      <p style="font-size:.9rem;margin:.4rem 0">Nadie se va sin una fecha.</p>
+    </div>
+  </div>
+
+  <h2>El mismo proyecto, cuatro oídos</h2>
+  <div class="dos">
+    <ul>
+      <li><b>El Ayuntamiento:</b> que la gente ya lo pida y que quepa en su año. Se le pide especie: máquina, material, un visto bueno.</li>
+      <li><b>Una fundación o programa:</b> que encaje en sus líneas y se pueda medir. Un monto dentro de su tope.</li>
+    </ul>
+    <ul>
+      <li><b>Un negocio:</b> que sea cerca y que se sepa que ayudó. Algo de lo que vende.</li>
+      <li><b>La asamblea:</b> que sea lo que la gente dijo. El acuerdo en acta, las faenas y un comité.</li>
+    </ul>
+  </div>
+
+  <div class="dos">
+    <div>
+      <h2>Antes de hablar</h2>
+      <ul><li>No "estoy tranquilo": <b>"estoy emocionado"</b>.</li><li>Tres ensayos en voz alta, de pie, con reloj y frente a alguien.</li><li>El plano o el fotomontaje en la mano, y una hoja para dejar.</li><li>La pregunta que temes, ya contestada con un dato.</li></ul>
+    </div>
+    <div>
+      <h2>Los siete tropiezos</h2>
+      <ul><li>Pedir "apoyo", sin cantidad ni fecha.</li><li>Puros números y ninguna persona.</li><li>La lástima, los deseos y las excusas.</li><li>Palabras de humo: fortalecer, promover, impulsar.</li><li>No saber a quién se le habla.</li><li>Seguir hablando después de pedir.</li></ul>
+    </div>
+  </div>
+  <div class="pie">Gestión y Manejo de Proyectos · UAQ Campus Concá · La clase de gestión y pitch</div>
+</div>
+</body>
+</html>
