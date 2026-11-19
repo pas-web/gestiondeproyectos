@@ -88,7 +88,7 @@
   .nivel[data-n="3"].on { background:var(--n3bg); } .nivel[data-n="2"].on { background:var(--n2bg); }
   .nivel[data-n="1"].on { background:var(--n1bg); } .nivel[data-n="0"].on { background:var(--n0bg); }
 
-  /* ---------- el mapa: las doce de un vistazo ---------- */
+  /* ---------- el mapa: las diez de un vistazo ---------- */
   .mapa { display:grid; gap:.9rem; margin:.9rem 0; }
   .grupo-m { background:#fff; border:1px solid var(--borde); border-radius:16px; padding:.85rem 1rem; border-left:6px solid var(--c); }
   .grupo-m h3 { color:var(--c); font-size:.95rem; }
@@ -209,10 +209,10 @@
   <div class="tarjeta">
     <h3>Lo que viene</h3>
     <ol class="viene">
-      <li><div><b>Lo que sé hacer</b><span>Doce herramientas del curso, una por una. Cuatro respuestas posibles y tocas una.</span></div></li>
+      <li><div><b>Lo que sé hacer</b><span>Diez herramientas del curso, una por una. Cuatro respuestas posibles y tocas una.</span></div></li>
       <li><div><b>La prueba y el hueco</b><span>Dónde se ve una de las que sí sabes, y qué pasó con una de las que no.</span></div></li>
       <li><div><b>Lo que me llevo</b><span>Lo más valioso que aprendiste y lo que te faltó aprender.</span></div></li>
-      <li><div><b>Cómo trabajé</b><span>Seis frases sobre tu parte en el semestre.</span></div></li>
+      <li><div><b>Cómo trabajé</b><span>Tres frases sobre tu parte en el semestre y cómo te fue con tu contrato de gestión.</span></div></li>
       <li><div><b>Mi calificación</b><span>Eliges tu número y armas tu porqué con lo que ya contestaste.</span></div></li>
       <li><div><b>Mandarlo</b><span>Le llega a tu profesor y te quedas con tu hoja de cierre para la conferencia.</span></div></li>
     </ol>
@@ -226,12 +226,12 @@
   <div class="curso">Paso 1 de 6</div>
   <h2>Lo que sé hacer</h2>
   <p class="entrada">Si mañana alguien de tu comunidad te la pide, ¿cómo andas? Toca la respuesta que sea verdad hoy y pasa sola a la siguiente.</p>
-  <div class="puntos" id="puntos" role="tablist" aria-label="Las doce herramientas"></div>
+  <div class="puntos" id="puntos" role="tablist" aria-label="Las diez herramientas"></div>
   <div id="mazo"></div>
   <div id="mapa-zona" hidden>
     <div class="tarjeta" style="box-shadow:none;background:#F7FBFA">
       <h3>Tu mapa del curso</h3>
-      <p class="mini" style="margin:0">Así quedaron las doce. Si alguna no te convence, tócala y la cambias.</p>
+      <p class="mini" style="margin:0">Así quedaron las diez. Si alguna no te convence, tócala y la cambias.</p>
     </div>
     <div class="mapa" id="mapa"></div>
   </div>
@@ -339,8 +339,34 @@
 <section class="paso" data-titulo="Cómo trabajé">
   <div class="curso">Paso 4 de 6</div>
   <h2>Cómo trabajé</h2>
-  <p class="entrada">Saber hacer es una parte; la otra es cómo estuviste. Toca qué tan seguido fue cierta cada frase durante el semestre.</p>
+  <p class="entrada">Saber hacer es una parte; la otra es cómo estuviste. Toca qué tan seguido fue cierta cada frase durante el semestre y cuenta cómo te fue con tu contrato de gestión.</p>
   <div class="tarjeta" id="afirmaciones"></div>
+  <div class="tarjeta">
+    <h3>Mi contrato de gestión</h3>
+    <p class="mini" style="margin-top:0">Lo firmaste al empezar el semestre, contigo y no con la escuela. Tenía dos compromisos: contactar a una persona de tu lista de puentes y desarrollar una habilidad. Si no te acuerdas de lo que pusiste, <a href="contrato-de-gestion.html" target="_blank" rel="noopener">ábrelo aquí</a> o búscalo en tu expediente.</p>
+    <span class="rotulo" style="margin-top:.8rem">Compromiso 1 · Contactar a una persona de mi lista</span>
+    <div class="fichas" data-uno="contrato.c1">
+      <button type="button" class="ficha">Lo cumplí</button>
+      <button type="button" class="ficha">Lo cumplí a medias</button>
+      <button type="button" class="ficha">No lo cumplí</button>
+      <button type="button" class="ficha">No me acuerdo qué puse</button>
+    </div>
+    <span class="rotulo" style="margin-top:.9rem">Compromiso 2 · Desarrollar mi habilidad</span>
+    <div class="fichas" data-uno="contrato.c2">
+      <button type="button" class="ficha">Lo cumplí</button>
+      <button type="button" class="ficha">Lo cumplí a medias</button>
+      <button type="button" class="ficha">No lo cumplí</button>
+      <button type="button" class="ficha">No me acuerdo qué puse</button>
+    </div>
+    <label class="campo" for="t-contrato"><span>Cuenta cómo te fue</span></label>
+    <textarea id="t-contrato" data-k="contrato.cuento" placeholder="A quién buscaste y qué pasó, qué habilidad practicaste y dónde se nota. Si no lo cumpliste, qué se atravesó."></textarea>
+    <div class="arranca" data-para="t-contrato"><span>Para arrancar</span>
+      <button type="button">Contacté a la persona que puse y me respondió.</button>
+      <button type="button">Busqué a la persona, pero no logré que me atendiera.</button>
+      <button type="button">Mi habilidad era</button>
+      <button type="button">Lo dejé para después y ya no lo hice, porque</button>
+    </div>
+  </div>
   <div class="tarjeta">
     <h3>Mis solicitudes reales</h3>
     <p class="mini" style="margin-top:0">Las veces que le pediste algo de verdad a una persona u organización: una cotización, un permiso, un apoyo. Cuenta haberla hecho, no que te dijeran que sí.</p>
@@ -361,7 +387,7 @@
 
   <div class="tarjeta espejo">
     <h3>Tu espejo</h3>
-    <span class="rotulo" style="margin-top:.6rem">Las doce herramientas</span>
+    <span class="rotulo" style="margin-top:.6rem">Las diez herramientas</span>
     <div class="barra" id="e-barra"></div>
     <div class="leyenda" id="e-leyenda"></div>
     <p id="e-trabajo" style="margin:.8rem 0 0"></p>
@@ -446,8 +472,6 @@
     crono: '<path d="M4 5v22h24"/><path d="M8 10h9M12 15h10M17 20h8" stroke-width="3.200"/>',
     presu: '<circle cx="16" cy="16" r="11"/><path d="M19.500 12.500c-.6-1.300-1.900-2-3.500-2-2 0-3.500 1-3.500 2.700 0 3.800 7 1.800 7 5.600 0 1.700-1.500 2.700-3.500 2.700-1.700 0-3-.8-3.600-2.100M16 8v2.500M16 21.500V24"/>',
     cotizar: '<path d="M8 4h12l5 5v19H8z"/><path d="M20 4v5h5M12 15h9M12 19h9M12 23h5"/>',
-    actores: '<circle cx="11" cy="11" r="4"/><circle cx="22" cy="12.500" r="3.200"/><path d="M3.500 26c.5-5 3.500-7.500 7.500-7.500s7 2.500 7.500 7.500M20 19c4 0 7 2 8 7"/>',
-    pitch: '<path d="M5 13v6h4l8 6V7l-8 6z"/><path d="M21.500 12.500c1.500 1.800 1.500 5.200 0 7M24.500 9.500c3 3.500 3 9.500 0 13"/>',
     ia: '<path d="M14 4l2.200 6.300L22.500 12.500l-6.300 2.200L14 21l-2.200-6.300L5.500 12.500l6.300-2.200z"/><circle cx="22.500" cy="22.500" r="4"/><path d="m25.500 25.500 3 3"/>'
   };
   var HERR = [
@@ -460,8 +484,6 @@
     { id: 'crono', t: 'Cronograma', d: 'Las actividades con responsable, con lo que dejan y con fechas, dibujadas en una gráfica de barras.' },
     { id: 'presu', t: 'Presupuesto', d: 'Partidas con cantidad y precio, quién pone cada una, lo que va en especie y un renglón para imprevistos.' },
     { id: 'cotizar', t: 'Cotizar un servicio', d: 'Sacar lo que vale tu hora de trabajo y entregar una cotización que alguien puede aceptar y pagar.' },
-    { id: 'actores', t: 'Aliados y trato', d: 'Saber quién decide, quién ayuda y quién puede frenar el proyecto, y qué se le pide a cada quien.' },
-    { id: 'pitch', t: 'Contar el proyecto', d: 'Explicarlo en dos minutos a alguien que no lo conoce, de modo que entienda qué se le está pidiendo.' },
     { id: 'ia', t: 'Usar una IA y revisarle', d: 'Pedirle un borrador con un buen prompt y encontrar lo que inventó antes de usarlo.' }
   ];
   var NIVELES = [
@@ -473,18 +495,15 @@
   var AFIRMA = [
     { id: 'presente', t: 'Llegué a las sesiones y estuve presente de verdad, no solo de cuerpo.' },
     { id: 'parte', t: 'Cumplí mi parte en el equipo sin que me la tuvieran que recordar.' },
-    { id: 'reintento', t: 'Cuando algo me salió «aún no», lo volví a intentar.' },
-    { id: 'expediente', t: 'Mantuve mi expediente al día, aunque nadie me lo pidiera esa semana.' },
-    { id: 'retro', t: 'Di retroalimentación útil a mis compañeros y respondí la que recibí.' },
     { id: 'voz', t: 'Dije a tiempo lo que no me parecía, en lugar de guardármelo.' }
   ];
   var ESCALA = ['Siempre', 'Casi siempre', 'A veces', 'Casi nunca'];
   var PALOMA = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 8.500 3.200 3.200L13 4.800"/></svg>';
 
   /* ---------- el estado y el guardado ---------- */
-  var s = { paso: 0, carta: 0, sabe: {}, trabajo: {}, prueba: {}, hueco: {}, usadas: {} };
+  var s = { paso: 0, carta: 0, sabe: {}, trabajo: {}, prueba: {}, hueco: {}, contrato: {}, usadas: {} };
   try { var g = JSON.parse(localStorage.getItem(CLAVE) || 'null'); if (g && typeof g === 'object') for (var k in g) s[k] = g[k]; } catch (e) {}
-  ['sabe', 'trabajo', 'prueba', 'hueco', 'usadas'].forEach(function (k) { if (!s[k] || typeof s[k] !== 'object') s[k] = {}; });
+  ['sabe', 'trabajo', 'prueba', 'hueco', 'contrato', 'usadas'].forEach(function (k) { if (!s[k] || typeof s[k] !== 'object') s[k] = {}; });
   var $ = function (q, r) { return (r || document).querySelector(q); };
   var $$ = function (q, r) { return Array.prototype.slice.call((r || document).querySelectorAll(q)); };
   var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
@@ -603,10 +622,17 @@
   pintarEscalas();
   function cuentaTrabajo() { var c = [0, 0, 0, 0]; AFIRMA.forEach(function (a) { var v = s.trabajo[a.id]; if (typeof v === 'number') c[v]++; }); return c; }
   function trabajoCompleto() { return AFIRMA.every(function (a) { return typeof s.trabajo[a.id] === 'number'; }); }
+  function contratoCompleto() { return !!(txt('contrato.c1') && txt('contrato.c2') && txt('contrato.cuento').length >= 15); }
+  function fraseContrato() {
+    var a = txt('contrato.c1'), b = txt('contrato.c2'), baja = function (x) { return x.charAt(0).toLowerCase() + x.slice(1); };
+    if (!a && !b) return '';
+    return 'De mi contrato de gestión: ' + [a && 'contactar a una persona de mi lista, ' + baja(a), b && 'desarrollar mi habilidad, ' + baja(b)].filter(Boolean).join('; ') + '.';
+  }
+  function resumenContrato() { return [fraseContrato(), txt('contrato.cuento')].filter(Boolean).join(' '); }
   function fraseTrabajo() {
     var c = cuentaTrabajo(), partes = [];
     ESCALA.forEach(function (x, i) { if (c[i]) partes.push(x.toLowerCase() + ' en ' + c[i]); });
-    return partes.length ? 'De las seis frases sobre mi trabajo: ' + partes.join(', ') + '.' : '';
+    return partes.length ? 'De las tres frases sobre mi trabajo: ' + partes.join(', ') + '.' : '';
   }
 
   /* ---------- paso 5: el espejo, el número y el porqué ---------- */
@@ -625,17 +651,18 @@
     $('#e-barra').innerHTML = NIVELES.map(function (x) { var c = porNivel(x.n).length; return c ? '<i style="flex:' + c + ';background:' + x.barra + '"></i>' : ''; }).join('');
     $('#e-leyenda').innerHTML = NIVELES.map(function (x) { return '<span><i style="background:' + x.barra + '"></i>' + esc(x.corto) + '<b>' + porNivel(x.n).length + '</b></span>'; }).join('');
     var sol = txt('solicitudes');
-    $('#e-trabajo').innerHTML = (fraseTrabajo() ? esc(fraseTrabajo()) : '<span class="mini">Todavía no contestas el paso 4.</span>') + (sol !== '' ? ' ' + esc(fraseSolicitudes()) : '');
+    $('#e-trabajo').innerHTML = (fraseTrabajo() ? esc(fraseTrabajo()) : '<span class="mini">Todavía no contestas el paso 4.</span>') + (sol !== '' ? ' ' + esc(fraseSolicitudes()) : '') + (fraseContrato() ? ' ' + esc(fraseContrato()) : '');
   }
   function fraseSolicitudes() { var v = txt('solicitudes'); return v === '' ? '' : v === '0' ? 'No hice solicitudes reales.' : v === '1' ? 'Hice una solicitud real.' : v === '2' ? 'Hice dos solicitudes reales.' : 'Hice tres o más solicitudes reales.'; }
   function piezas() {
     var p = [], a;
-    if ((a = porNivel(3)).length) p.push('Sé hacer por mi cuenta ' + a.length + ' de las doce herramientas: ' + lista(a) + '.');
+    if ((a = porNivel(3)).length) p.push('Sé hacer por mi cuenta ' + a.length + ' de las diez herramientas: ' + lista(a) + '.');
     if ((a = porNivel(2)).length) p.push('Con un ejemplo al lado saco ' + (a.length === 1 ? 'una más: ' : 'otras ' + a.length + ': ') + lista(a) + '.');
     if ((a = porNivel(0).concat(porNivel(1))).length) p.push('Todavía no domino ' + lista(a) + '.');
     var pc = herr(leer('prueba.cual'));
     if (pc) p.push('Mi mejor evidencia es ' + lista([pc]) + (txt('prueba.donde') && txt('prueba.donde') !== 'Otra' ? ': ' + txt('prueba.donde').charAt(0).toLowerCase() + txt('prueba.donde').slice(1) : '') + (txt('prueba.que') ? ' (' + txt('prueba.que') + ')' : '') + '.');
     if (fraseTrabajo()) p.push(fraseTrabajo());
+    if (fraseContrato()) p.push(fraseContrato());
     if (fraseSolicitudes()) p.push(fraseSolicitudes());
     if (txt('llevo')) p.push('Lo más valioso que me llevo: ' + txt('llevo'));
     return p;
@@ -665,6 +692,7 @@
       ['Mi prueba', esc(resumenPrueba())], ['Mi hueco', esc(resumenHueco())],
       ['Lo más valioso que aprendí', esc(txt('llevo'))], ['Cambié de idea', esc(cambioIdea())], ['Lo que no aprendí', esc(txt('falto'))],
       ['Cómo trabajé', esc([fraseTrabajo(), fraseSolicitudes()].filter(Boolean).join(' '))],
+      ['Mi contrato de gestión', esc(resumenContrato())],
       ['Mi porqué', esc(txt('porque'))]
     ].filter(function (f) { return f[1]; });
     $('#cierre').innerHTML = '<div class="cab"><div class="n">' + esc(txt('num') || '?') + '</div><div><small>Mi calificación propuesta</small><b>' + esc(txt('nombre') || 'Falta tu nombre') + '</b></div></div>' +
@@ -675,7 +703,7 @@
     return ['CIERRE FINAL · Gestión y Manejo de Proyectos', 'Nombre: ' + txt('nombre'), 'Calificación que propongo: ' + txt('num'), '',
       'LO QUE SÉ HACER', resumenSabe(), '', 'MI PRUEBA: ' + (resumenPrueba() || 'sin contestar'), 'MI HUECO: ' + (resumenHueco() || 'sin contestar'), '',
       'LO MÁS VALIOSO QUE APRENDÍ: ' + txt('llevo'), 'CAMBIÉ DE IDEA: ' + cambioIdea(), 'LO QUE NO APRENDÍ: ' + txt('falto'), '',
-      'CÓMO TRABAJÉ: ' + fraseTrabajo() + ' ' + fraseSolicitudes(), '', 'MI PORQUÉ: ' + txt('porque'), '',
+      'CÓMO TRABAJÉ: ' + fraseTrabajo() + ' ' + fraseSolicitudes(), 'MI CONTRATO DE GESTIÓN: ' + (resumenContrato() || 'sin contestar'), '', 'MI PORQUÉ: ' + txt('porque'), '',
       'QUE SE QUEDE: ' + txt('queda'), 'QUE CAMBIE: ' + txt('cambia')].join('\n');
   }
   function aB64(t) {
@@ -687,7 +715,8 @@
   function loQueFalta() {
     if (!txt('nombre')) return { paso: 0, t: 'Falta tu nombre', d: 'Sin él, tu profesor no sabe de quién es este cierre. Está en la portada.', foco: '[data-k="nombre"]' };
     if (contestadas() < HERR.length) return { paso: 1, t: 'Te faltan herramientas por contestar', d: 'Llevas ' + contestadas() + ' de ' + HERR.length + '. Las que faltan tienen su rayita gris arriba.', carta: true };
-    if (!trabajoCompleto()) return { paso: 4, t: 'Falta una frase de «Cómo trabajé»', d: 'Son seis y se contestan con un toque cada una.' };
+    if (!trabajoCompleto()) return { paso: 4, t: 'Falta una frase de «Cómo trabajé»', d: 'Son tres y se contestan con un toque cada una.' };
+    if (!contratoCompleto()) return { paso: 4, t: 'Falta tu contrato de gestión', d: 'Toca cómo te fue con cada compromiso y cuéntalo en un par de renglones.', foco: '#t-contrato' };
     if (!txt('num')) return { paso: 5, t: 'Todavía no eliges tu número', d: 'Es lo único que no se puede quedar en blanco: tu propuesta de calificación.' };
     if (txt('porque').length < 40) return { paso: 5, t: 'Falta tu porqué', d: 'Un número solo no se puede conversar. Toca dos o tres piezas y la frase se arma sola.', foco: '#porque' };
     return null;
@@ -721,7 +750,8 @@
     /* Los mismos nombres de campo que la autoevaluación de la unidad 1, para que el recolector los acomode igual */
     var datos = {
       tipo: TIPO, nombre: txt('nombre'), num: txt('num'),
-      suelo: resumenTrabajo(), sobre: '',
+      suelo: resumenTrabajo() + ' | CONTRATO: ' + (resumenContrato() || 'sin contestar'), sobre: '',
+      contrato: resumenContrato(),
       evidencias: resumenSabe() + ' PRUEBA: ' + (resumenPrueba() || 'sin contestar'),
       porque: txt('porque'),
       nose: 'HUECO: ' + (resumenHueco() || 'sin contestar') + ' NO APRENDÍ: ' + txt('falto'),

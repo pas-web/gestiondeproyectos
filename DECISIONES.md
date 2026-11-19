@@ -1369,3 +1369,9 @@ y evaluar como dos caras).
   con `tipo: autoeval-final` y los mismos nombres de campo; si no sale, deja
   copiar el cierre o mandarlo por correo. `?demo` la recorre sin mandar nada.
   No carga `curso.js`: trae su propio botón de volver. Va en «Empieza aquí».
+- **Ajuste del mismo día (pedido de Eduardo):** las herramientas quedan en
+  diez (salen «Aliados y trato» y «Contar el proyecto») y las frases de cómo
+  trabajó en tres (salen la del «aún no», la del expediente y la de la
+  retroalimentación). Entra el contrato de gestión: cómo le fue con cada uno
+  de sus dos compromisos, a toques, y un renglón para contarlo. Es obligatorio
+  para mandar.
