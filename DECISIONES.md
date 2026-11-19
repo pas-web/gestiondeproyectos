@@ -1323,3 +1323,24 @@ y evaluar como dos caras).
   el presupuesto que se descarga. Las partes y reglas del encargo son las mismas
   en las dos páginas (`AG.partesPlano` en Pieza por pieza, `partesPlano` en la
   práctica): si se cambian, se cambian en las dos.
+
+## 19 de noviembre de 2026: el Mazo 2, más corto, y cuatro agujeros
+
+- **Salen cinco láminas del Mazo 2** (queda en 19, unos 30 minutos): la
+  pregunta al aire del árbol, El 20% que pone el grupo, Lo que casi ningún
+  donante perdona, La prueba del donante y la de la asamblea, y la ruta de
+  gestión armada. El 20% del PROCODES lo siguen calculando la práctica y el
+  gimnasio La faena también cuenta; el ejemplo de la ruta de gestión se
+  sigue cargando en la práctica. Queda la figura del árbol.
+- **Sale el doble papel de los agujeros**: quedan el flete olvidado, el
+  presupuesto al centavo, el pecado mayor y el dinero que llega tarde. En la
+  práctica, lo mismo en dos bolsillos queda como aviso, no como agujero. El
+  presupuesto agujerado cambia ese caso por uno del dinero que llega tarde (el
+  letrero de bienvenida en marzo de 2027) y se queda en cinco casos.
+- **La fuente de la práctica se puso al día:** las sesiones de los oficios
+  pagados y del plano para quien la va a hacer habían editado la página
+  publicada sin tocar `fuente/presupuesto/practica.html`. Se copió la página
+  publicada a la plantilla (la reconstrucción salió idéntica) antes de
+  cambiar nada. De aquí en adelante, la práctica se cambia en la plantilla y
+  se corre `node construir.js`.
+
