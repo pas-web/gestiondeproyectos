@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu cierre final · Gestión y Manejo de Proyectos · 2026</title>
+<meta name="description" content="La autoevaluación final del curso: qué sabes hacer, qué todavía no, qué te llevas y qué calificación propones.">
+<style>
+  :root { --marca:#0F6E6E; --profundo:#0B3C49; --fondo:#F2F7F5; --borde:#CFE3DD; --arena:#D9A441; --texto:#1C2B28;
+          --gris:#5F7771; --n3:#1F6B4A; --n3bg:#E6F4EC; --n2:#0F6E6E; --n2bg:#E3F2F1; --n1:#A26A0B; --n1bg:#FBF2DD;
+          --n0:#8A4A2C; --n0bg:#F8E9E1; --sombra:0 10px 30px rgba(11,60,73,.10), 0 2px 6px rgba(11,60,73,.06); }
+  * { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font-family:'Source Sans 3','Segoe UI',system-ui,-apple-system,sans-serif; background:var(--fondo);
+         color:var(--texto); line-height:1.55; font-size:1.02rem; }
+  button, input, textarea { font:inherit; color:inherit; }
+  button { cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  a { color:var(--marca); }
+
+  /* ---------- la barra de arriba y el camino ---------- */
+  .tope { position:sticky; top:0; z-index:5; background:var(--profundo); color:#fff; }
+  .tope .fila { max-width:720px; margin:0 auto; padding:.6rem 1.1rem; display:flex; align-items:center; gap:.8rem; }
+  .tope a { color:#CFE9E4; font-size:.86rem; text-decoration:none; white-space:nowrap; }
+  .tope a:hover { text-decoration:underline; }
+  .tope .donde { flex:1; text-align:right; font-size:.86rem; color:#CFE9E4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .camino { height:5px; background:rgba(255,255,255,.16); }
+  .camino i { display:block; height:100%; width:0; background:var(--arena); transition:width .35s ease; }
+
+  main { max-width:720px; margin:0 auto; padding:1.3rem 1.1rem 7.5rem; }
+  .paso { display:none; animation:entra .3s ease; }
+  .paso.vivo { display:block; }
+  @keyframes entra { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce) { .paso, .carta { animation:none !important; } * { transition:none !important; } }
+
+  .curso { font-size:.74rem; letter-spacing:.13em; text-transform:uppercase; color:var(--marca); font-weight:700; }
+  h1 { font-family:Georgia,'Times New Roman',serif; color:var(--profundo); font-size:2.05rem; line-height:1.15; margin:.25rem 0 .6rem; }
+  h2 { font-family:Georgia,'Times New Roman',serif; color:var(--profundo); font-size:1.55rem; line-height:1.2; margin:.2rem 0 .45rem; }
+  h3 { color:var(--profundo); font-size:1.05rem; margin:0 0 .3rem; line-height:1.3; }
+  p { margin:.55rem 0; }
+  .entrada { color:#334743; }
+  .mini { font-size:.88rem; color:var(--gris); line-height:1.5; }
+  .franja { width:64px; height:6px; background:var(--arena); border-radius:3px; margin:1rem 0; }
+
+  .tarjeta { background:#fff; border:1px solid var(--borde); border-radius:16px; padding:1.05rem 1.15rem; margin:.9rem 0; box-shadow:var(--sombra); }
+  .clave { border-left:5px solid var(--arena); background:#FBF7EC; padding:.75rem 1rem; margin:1rem 0; border-radius:0 12px 12px 0; }
+  .clave b { color:var(--profundo); }
+
+  label.campo { display:block; margin-top:.85rem; }
+  label.campo > span, .rotulo { display:block; font-size:.76rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--profundo); margin-bottom:.3rem; }
+  input[type=text], textarea { width:100%; font-size:1rem; padding:.7rem .8rem; border:1.5px solid var(--borde); border-radius:10px; background:#FDFDFB; }
+  textarea { min-height:5rem; resize:vertical; }
+  input:focus, textarea:focus, button:focus-visible { outline:3px solid rgba(15,110,110,.35); outline-offset:1px; border-color:var(--marca); }
+
+  /* ---------- la lista de lo que viene ---------- */
+  .viene { list-style:none; margin:.4rem 0 0; padding:0; counter-reset:v; }
+  .viene li { counter-increment:v; display:flex; gap:.75rem; align-items:flex-start; padding:.5rem 0; border-top:1px dashed var(--borde); }
+  .viene li:first-child { border-top:none; }
+  .viene li::before { content:counter(v); flex:none; width:28px; height:28px; border-radius:50%; background:var(--marca); color:#fff; font-weight:700; font-size:.9rem; display:grid; place-items:center; }
+  .viene b { display:block; color:var(--profundo); }
+  .viene span { font-size:.9rem; color:var(--gris); }
+
+  /* ---------- las cartas de lo que sé hacer ---------- */
+  .puntos { display:flex; gap:5px; flex-wrap:wrap; margin:.9rem 0 .2rem; }
+  .puntos button { width:22px; height:10px; border-radius:6px; border:none; padding:0; background:#D5E3DF; transition:transform .15s, background .2s; }
+  .puntos button.aqui { transform:scaleY(1.5); outline:2px solid var(--profundo); outline-offset:1px; }
+  .puntos button.n3 { background:var(--n3); } .puntos button.n2 { background:#4FA7A2; }
+  .puntos button.n1 { background:var(--arena); } .puntos button.n0 { background:#C98A6B; }
+  .carta { background:#fff; border:1px solid var(--borde); border-radius:20px; box-shadow:var(--sombra); overflow:hidden; animation:entra .28s ease; }
+  .carta .cabeza { display:flex; gap:1rem; align-items:center; padding:1.1rem 1.15rem .9rem; background:linear-gradient(180deg,#F5FAF8,#fff); }
+  .carta .dib { flex:none; width:74px; height:74px; border-radius:18px; background:#E7F3F0; display:grid; place-items:center; color:var(--marca); }
+  .carta .dib svg { width:46px; height:46px; }
+  .carta .cuenta { font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gris); font-weight:700; }
+  .carta h3 { font-family:Georgia,serif; font-size:1.35rem; margin:.05rem 0 0; }
+  .carta .quees { padding:0 1.15rem; color:#334743; margin:.2rem 0 .9rem; }
+  .niveles { display:grid; gap:.55rem; padding:0 1.15rem 1.15rem; }
+  .nivel { display:flex; gap:.8rem; align-items:center; text-align:left; width:100%; min-height:62px; padding:.65rem .9rem; border-radius:14px;
+           border:2px solid var(--borde); background:#fff; transition:transform .12s, border-color .15s, background .15s, box-shadow .15s; }
+  .nivel:hover { border-color:#9CC7BF; box-shadow:0 3px 10px rgba(11,60,73,.08); }
+  .nivel:active { transform:scale(.985); }
+  .nivel .bola { flex:none; width:30px; height:30px; border-radius:50%; border:2px solid currentColor; display:grid; place-items:center; }
+  .nivel .bola svg { width:16px; height:16px; opacity:0; transition:opacity .15s; }
+  .nivel b { display:block; color:var(--profundo); line-height:1.25; }
+  .nivel span.d { display:block; font-size:.86rem; color:var(--gris); line-height:1.35; margin-top:.1rem; }
+  .nivel[data-n="3"] { color:var(--n3); } .nivel[data-n="2"] { color:var(--n2); }
+  .nivel[data-n="1"] { color:var(--n1); } .nivel[data-n="0"] { color:var(--n0); }
+  .nivel.on { border-color:currentColor; }
+  .nivel.on .bola { background:currentColor; } .nivel.on .bola svg { opacity:1; color:#fff; }
+  .nivel[data-n="3"].on { background:var(--n3bg); } .nivel[data-n="2"].on { background:var(--n2bg); }
+  .nivel[data-n="1"].on { background:var(--n1bg); } .nivel[data-n="0"].on { background:var(--n0bg); }
+
+  /* ---------- el mapa: las doce de un vistazo ---------- */
+  .mapa { display:grid; gap:.9rem; margin:.9rem 0; }
+  .grupo-m { background:#fff; border:1px solid var(--borde); border-radius:16px; padding:.85rem 1rem; border-left:6px solid var(--c); }
+  .grupo-m h3 { color:var(--c); font-size:.95rem; }
+  .grupo-m .vacio { font-size:.9rem; color:var(--gris); margin:.1rem 0 0; }
+  .fichas { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.35rem; }
+  .ficha { border:1.5px solid var(--borde); background:#fff; border-radius:999px; padding:.42rem .85rem; font-size:.93rem; min-height:40px; transition:background .15s, border-color .15s, color .15s; }
+  .ficha:hover { border-color:var(--marca); }
+  .ficha.on { background:var(--profundo); border-color:var(--profundo); color:#fff; }
+  .grupo-m .ficha { background:var(--bg); border-color:transparent; color:var(--texto); }
+
+  /* ---------- frases para arrancar ---------- */
+  .arranca { display:flex; flex-wrap:wrap; gap:.4rem; margin:.5rem 0 .1rem; }
+  .arranca span { width:100%; font-size:.8rem; color:var(--gris); }
+  .arranca button { border:1.5px dashed #B7D3CC; background:#F7FBFA; border-radius:12px; padding:.45rem .7rem; font-size:.9rem; text-align:left; color:#2B4A45; }
+  .arranca button:hover { border-style:solid; border-color:var(--marca); }
+  .dos { display:grid; gap:.6rem; }
+  @media (min-width:600px) { .dos { grid-template-columns:1fr 1fr; } }
+
+  /* ---------- cómo trabajé ---------- */
+  .afirma { padding:.9rem 0; border-top:1px dashed var(--borde); }
+  .afirma:first-of-type { border-top:none; padding-top:.2rem; }
+  .afirma p { margin:0 0 .5rem; font-weight:600; color:var(--profundo); }
+  .escala { display:grid; grid-template-columns:repeat(4,1fr); gap:.35rem; }
+  .escala button { min-height:50px; border-radius:12px; border:2px solid var(--borde); background:#fff; font-size:.86rem; line-height:1.15; padding:.3rem .2rem; transition:background .15s, border-color .15s, color .15s; }
+  .escala button:hover { border-color:#9CC7BF; }
+  .escala button.on { background:var(--marca); border-color:var(--marca); color:#fff; font-weight:700; }
+  .cuantas { display:grid; grid-template-columns:repeat(4,1fr); gap:.35rem; }
+  .cuantas button { min-height:56px; border-radius:12px; border:2px solid var(--borde); background:#fff; font-family:Georgia,serif; font-size:1.3rem; color:var(--profundo); }
+  .cuantas button small { display:block; font-family:inherit; font-size:.7rem; font-family:'Segoe UI',system-ui,sans-serif; color:var(--gris); }
+  .cuantas button.on { background:var(--profundo); border-color:var(--profundo); color:#fff; } .cuantas button.on small { color:#CFE9E4; }
+
+  /* ---------- el espejo y el número ---------- */
+  .espejo .barra { display:flex; height:22px; border-radius:11px; overflow:hidden; background:#E4EDEA; margin:.5rem 0 .6rem; }
+  .espejo .barra i { display:block; transition:flex .3s; }
+  .leyenda { display:grid; grid-template-columns:1fr 1fr; gap:.25rem .9rem; font-size:.9rem; }
+  .leyenda span { display:flex; align-items:center; gap:.45rem; }
+  .leyenda i { width:12px; height:12px; border-radius:4px; flex:none; }
+  .leyenda b { margin-left:auto; color:var(--profundo); }
+  .numeros { display:grid; grid-template-columns:repeat(6,1fr); gap:.4rem; margin:.7rem 0 .3rem; }
+  .numeros button { aspect-ratio:1/1; min-height:52px; border-radius:16px; border:2px solid var(--borde); background:#fff; font-family:Georgia,serif; font-size:1.7rem; color:var(--profundo); transition:transform .12s, background .15s; }
+  .numeros button:hover { border-color:var(--marca); }
+  .numeros button.on { background:var(--profundo); border-color:var(--profundo); color:#fff; transform:scale(1.06); box-shadow:var(--sombra); }
+  .piezas { display:grid; gap:.4rem; margin:.5rem 0; }
+  .pieza { display:flex; gap:.6rem; align-items:flex-start; text-align:left; border:1.5px solid var(--borde); background:#fff; border-radius:12px; padding:.55rem .75rem; font-size:.93rem; }
+  .pieza::before { content:"+"; flex:none; width:22px; height:22px; border-radius:50%; background:#E7F3F0; color:var(--marca); font-weight:700; display:grid; place-items:center; line-height:1; }
+  .pieza.usada { background:var(--n3bg); border-color:#BFDFCD; } .pieza.usada::before { content:"✓"; background:var(--n3); color:#fff; font-size:.8rem; }
+
+  /* ---------- la hoja de cierre ---------- */
+  .cierre { background:#fff; border-radius:20px; box-shadow:var(--sombra); overflow:hidden; border:1px solid var(--borde); }
+  .cierre .cab { background:var(--profundo); color:#fff; padding:1.1rem 1.2rem; display:flex; align-items:center; gap:1rem; }
+  .cierre .cab .n { flex:none; width:74px; height:74px; border-radius:20px; background:var(--arena); color:var(--profundo); font-family:Georgia,serif; font-size:2.4rem; display:grid; place-items:center; font-weight:700; }
+  .cierre .cab small { display:block; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:#CFE9E4; }
+  .cierre .cab b { font-family:Georgia,serif; font-size:1.3rem; line-height:1.2; }
+  .cierre .cuerpo { padding:1rem 1.2rem 1.15rem; }
+  .cierre dl { margin:0; } .cierre dt { font-size:.74rem; letter-spacing:.07em; text-transform:uppercase; font-weight:700; color:var(--marca); margin-top:.8rem; }
+  .cierre dt:first-child { margin-top:0; } .cierre dd { margin:.12rem 0 0; }
+
+  .aviso { border-radius:14px; padding:.8rem 1rem; margin:.9rem 0; display:none; }
+  .aviso.ver { display:block; } .aviso b { display:block; }
+  .aviso.falta { background:var(--n1bg); border:1px solid #EBD49A; color:#6B4706; }
+  .aviso.ok { background:var(--n3bg); border:1px solid #BFDFCD; color:#17523A; }
+  .aviso.yendo { background:#EEF4F3; border:1px solid var(--borde); }
+  .otras { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.7rem; }
+
+  .btn { border:none; border-radius:14px; background:var(--marca); color:#fff; font-weight:700; padding:.85rem 1.3rem; min-height:52px; font-size:1.02rem; transition:background .15s, transform .1s; }
+  .btn:hover { background:#0B5A5A; } .btn:active { transform:scale(.98); } .btn[disabled] { opacity:.6; cursor:default; }
+  .btn.claro { background:#fff; color:var(--profundo); border:2px solid var(--borde); }
+  .btn.claro:hover { background:#F1F8F6; border-color:#9CC7BF; }
+  .btn.grande { width:100%; font-size:1.1rem; min-height:60px; background:var(--profundo); }
+  .btn.chico { min-height:44px; padding:.5rem .9rem; font-size:.92rem; }
+
+  /* ---------- la barra de abajo ---------- */
+  .abajo { position:fixed; left:0; right:0; bottom:0; z-index:5; background:rgba(242,247,245,.94); backdrop-filter:blur(8px); border-top:1px solid var(--borde); }
+  .abajo .fila { max-width:720px; margin:0 auto; padding:.65rem 1.1rem calc(.65rem + env(safe-area-inset-bottom)); display:flex; gap:.6rem; align-items:center; }
+  .abajo .guardado { flex:1; font-size:.8rem; color:var(--gris); text-align:center; }
+  .abajo .btn { min-width:8.5rem; }
+  .temblor { animation:temblor .45s; }
+  @keyframes temblor { 20% { transform:translateX(-6px); } 40% { transform:translateX(6px); } 60% { transform:translateX(-4px); } 80% { transform:translateX(4px); } }
+  @media (max-width:480px) {
+    main { padding-top:1rem; }
+    h2 { font-size:1.4rem; }
+    .carta .cabeza { padding:.85rem 1rem .6rem; gap:.8rem; }
+    .carta .dib { width:56px; height:56px; border-radius:14px; } .carta .dib svg { width:36px; height:36px; }
+    .carta h3 { font-size:1.2rem; }
+    .carta .quees { padding:0 1rem; margin:.1rem 0 .7rem; font-size:.97rem; line-height:1.45; }
+    .niveles { padding:0 1rem 1rem; gap:.45rem; }
+    .nivel { min-height:56px; padding:.5rem .75rem; }
+    .nivel span.d { font-size:.82rem; }
+    .abajo .btn { min-width:7rem; padding-left:.9rem; padding-right:.9rem; }
+    .escala button { font-size:.8rem; }
+    .numeros { gap:.3rem; } .numeros button { min-height:0; font-size:1.35rem; border-radius:12px; }
+  }
+  .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+</style>
+</head>
+<body>
+
+<header class="tope">
+  <div class="fila"><a href="../index.html">Volver al curso</a><span class="donde" id="donde" aria-live="polite"></span></div>
+  <div class="camino" aria-hidden="true"><i id="avance"></i></div>
+</header>
+
+<main>
+
+<!-- ===================== 0 · PORTADA ===================== -->
+<section class="paso" data-titulo="Tu cierre final">
+  <div class="curso">Gestión y Manejo de Proyectos · 2026</div>
+  <h1>Tu cierre final</h1>
+  <div class="franja"></div>
+  <p class="entrada">Esta es la autoevaluación que sí cuenta. Aquí propones tu calificación y dices en qué te apoyas. Casi todo se contesta tocando una opción; escribir, lo mínimo. Te toma unos diez minutos y se guarda sola en este teléfono, así que puedes salir y volver.</p>
+
+  <div class="tarjeta">
+    <label class="campo" style="margin-top:0"><span>Tu nombre completo</span>
+      <input type="text" data-k="nombre" autocomplete="name" placeholder="Como aparece en la lista"></label>
+    <p class="mini" style="margin-bottom:0">Solo lo ve tu profesor. No se publica en ningún lado.</p>
+  </div>
+
+  <div class="tarjeta">
+    <h3>Lo que viene</h3>
+    <ol class="viene">
+      <li><div><b>Lo que sé hacer</b><span>Doce herramientas del curso, una por una. Cuatro respuestas posibles y tocas una.</span></div></li>
+      <li><div><b>La prueba y el hueco</b><span>Dónde se ve una de las que sí sabes, y qué pasó con una de las que no.</span></div></li>
+      <li><div><b>Lo que me llevo</b><span>Lo más valioso que aprendiste y lo que te faltó aprender.</span></div></li>
+      <li><div><b>Cómo trabajé</b><span>Seis frases sobre tu parte en el semestre.</span></div></li>
+      <li><div><b>Mi calificación</b><span>Eliges tu número y armas tu porqué con lo que ya contestaste.</span></div></li>
+      <li><div><b>Mandarlo</b><span>Le llega a tu profesor y te quedas con tu hoja de cierre para la conferencia.</span></div></li>
+    </ol>
+  </div>
+
+  <div class="clave"><b>Decir «todavía no» no te baja la calificación.</b> Lo que pesa es que lo que digas se pueda comprobar. Una autoevaluación inflada se cae en la conferencia; una honesta, hacia arriba o hacia abajo, se sostiene sola.</div>
+</section>
+
+<!-- ===================== 1 · LO QUE SÉ HACER ===================== -->
+<section class="paso" data-titulo="Lo que sé hacer">
+  <div class="curso">Paso 1 de 6</div>
+  <h2>Lo que sé hacer</h2>
+  <p class="entrada">Si mañana alguien de tu comunidad te la pide, ¿cómo andas? Toca la respuesta que sea verdad hoy y pasa sola a la siguiente.</p>
+  <div class="puntos" id="puntos" role="tablist" aria-label="Las doce herramientas"></div>
+  <div id="mazo"></div>
+  <div id="mapa-zona" hidden>
+    <div class="tarjeta" style="box-shadow:none;background:#F7FBFA">
+      <h3>Tu mapa del curso</h3>
+      <p class="mini" style="margin:0">Así quedaron las doce. Si alguna no te convence, tócala y la cambias.</p>
+    </div>
+    <div class="mapa" id="mapa"></div>
+  </div>
+</section>
+
+<!-- ===================== 2 · LA PRUEBA Y EL HUECO ===================== -->
+<section class="paso" data-titulo="La prueba y el hueco">
+  <div class="curso">Paso 2 de 6</div>
+  <h2>La prueba y el hueco</h2>
+  <p class="entrada">Decir «lo sé hacer» es fácil. Aquí escoges una herramienta que sí dominas y dices dónde se puede ver, y una que no, y qué pasó con ella.</p>
+
+  <div class="tarjeta">
+    <h3>Una que sí sé hacer, y dónde se ve</h3>
+    <p class="mini" style="margin-top:0">Escoge la que mejor te salió. Tu profesor puede ir a buscarla.</p>
+    <span class="rotulo">Cuál</span>
+    <div class="fichas" id="prueba-cual"></div>
+    <div id="prueba-resto">
+      <span class="rotulo" style="margin-top:.9rem">Dónde está</span>
+      <div class="fichas" data-uno="prueba.donde">
+        <button type="button" class="ficha">En el Drive del equipo</button>
+        <button type="button" class="ficha">En mi expediente</button>
+        <button type="button" class="ficha">La hice frente al grupo</button>
+        <button type="button" class="ficha">La hice con la mochila del gestor</button>
+        <button type="button" class="ficha">La usé fuera del curso</button>
+        <button type="button" class="ficha">Otra</button>
+      </div>
+      <label class="campo"><span>Qué va a encontrar quien la busque (opcional)</span>
+        <input type="text" data-k="prueba.que" placeholder="Ej. El cronograma de reforestación, con mi nombre en seis renglones"></label>
+    </div>
+  </div>
+
+  <div class="tarjeta">
+    <h3>Una que todavía no, y qué pasó</h3>
+    <p class="mini" style="margin-top:0">Escoge la que más te pesa no saber. Nombrarla es el primer paso para aprenderla.</p>
+    <span class="rotulo">Cuál</span>
+    <div class="fichas" id="hueco-cual"></div>
+    <div id="hueco-resto">
+      <span class="rotulo" style="margin-top:.9rem">Por qué se quedó así</span>
+      <div class="fichas" data-uno="hueco.porque">
+        <button type="button" class="ficha">Me faltó practicarla</button>
+        <button type="button" class="ficha">No estuve ese día</button>
+        <button type="button" class="ficha">La hizo otra persona del equipo</button>
+        <button type="button" class="ficha">No le entendí cuando se explicó</button>
+        <button type="button" class="ficha">No le vi utilidad</button>
+        <button type="button" class="ficha">Otra</button>
+      </div>
+      <span class="rotulo" style="margin-top:.9rem">Qué haría para aprenderla</span>
+      <div class="fichas" data-uno="hueco.plan">
+        <button type="button" class="ficha">Hacer una con la mochila del gestor</button>
+        <button type="button" class="ficha">Repetir su ejercicio del gimnasio</button>
+        <button type="button" class="ficha">Pedirle a alguien del grupo que me explique</button>
+        <button type="button" class="ficha">Usarla en un proyecto de verdad</button>
+        <button type="button" class="ficha">Por ahora, nada</button>
+        <button type="button" class="ficha">Otra</button>
+      </div>
+      <label class="campo"><span>Si quieres, cuéntalo con tus palabras (opcional)</span>
+        <input type="text" data-k="hueco.nota" placeholder="Ej. El presupuesto lo llenó mi compañera y yo solo revisé las sumas"></label>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3 · LO QUE ME LLEVO ===================== -->
+<section class="paso" data-titulo="Lo que me llevo">
+  <div class="curso">Paso 3 de 6</div>
+  <h2>Lo que me llevo</h2>
+  <p class="entrada">Tres preguntas cortas. Puedes tocar una frase para arrancar y cambiarla hasta que suene a ti, o escribir la tuya desde cero.</p>
+
+  <div class="tarjeta">
+    <h3>Lo más valioso que aprendí</h3>
+    <p class="mini" style="margin-top:0">Algo que vas a seguir usando cuando ya no haya curso.</p>
+    <label class="sr" for="t-llevo">Lo más valioso que aprendí</label>
+    <textarea id="t-llevo" data-k="llevo" placeholder="Escríbelo como se lo contarías a alguien de tu casa."></textarea>
+    <div class="arranca" data-para="t-llevo"><span>Para arrancar</span>
+      <button type="button">Aprendí que primero se escucha a la gente y luego se propone.</button>
+      <button type="button">Aprendí que pedir no cuesta tanto como yo creía.</button>
+      <button type="button">Ahora sé sacar cuánto vale una hora de mi trabajo.</button>
+      <button type="button">Entendí que una actividad sin responsable no se hace.</button>
+    </div>
+  </div>
+
+  <div class="tarjeta">
+    <h3>Algo en lo que cambié de idea</h3>
+    <p class="mini" style="margin-top:0">Sobre los proyectos, el dinero, la comunidad o sobre ti.</p>
+    <div class="dos">
+      <label class="campo" style="margin-top:.3rem"><span>Antes creía que</span><input type="text" data-k="antes" placeholder="Ej. un proyecto era llenar un formato"></label>
+      <label class="campo" style="margin-top:.3rem"><span>Ahora creo que</span><input type="text" data-k="ahora" placeholder="Ej. es una apuesta que se le explica a la gente"></label>
+    </div>
+  </div>
+
+  <div class="tarjeta">
+    <h3>Lo que no aprendí y me hubiera gustado</h3>
+    <p class="mini" style="margin-top:0">Lo que el curso te quedó a deber, o lo que tú dejaste pasar.</p>
+    <label class="sr" for="t-falto">Lo que no aprendí</label>
+    <textarea id="t-falto" data-k="falto" placeholder="Di qué fue y, si lo sabes, por qué no se dio."></textarea>
+    <div class="arranca" data-para="t-falto"><span>Para arrancar</span>
+      <button type="button">Me faltó llevar un proyecto hasta ejecutarlo en el terreno.</button>
+      <button type="button">Me faltó manejar dinero de verdad y rendir cuentas.</button>
+      <button type="button">Me faltó practicar más el presupuesto por mi cuenta.</button>
+      <button type="button">Me faltó hablar con más gente de la comunidad.</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4 · CÓMO TRABAJÉ ===================== -->
+<section class="paso" data-titulo="Cómo trabajé">
+  <div class="curso">Paso 4 de 6</div>
+  <h2>Cómo trabajé</h2>
+  <p class="entrada">Saber hacer es una parte; la otra es cómo estuviste. Toca qué tan seguido fue cierta cada frase durante el semestre.</p>
+  <div class="tarjeta" id="afirmaciones"></div>
+  <div class="tarjeta">
+    <h3>Mis solicitudes reales</h3>
+    <p class="mini" style="margin-top:0">Las veces que le pediste algo de verdad a una persona u organización: una cotización, un permiso, un apoyo. Cuenta haberla hecho, no que te dijeran que sí.</p>
+    <div class="cuantas" data-uno="solicitudes" data-valor="1">
+      <button type="button" data-v="0">0<small>ninguna</small></button>
+      <button type="button" data-v="1">1<small>una</small></button>
+      <button type="button" data-v="2">2<small>dos</small></button>
+      <button type="button" data-v="3 o más">3+<small>tres o más</small></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 5 · MI CALIFICACIÓN ===================== -->
+<section class="paso" data-titulo="Mi calificación">
+  <div class="curso">Paso 5 de 6</div>
+  <h2>Mi calificación</h2>
+  <p class="entrada">Primero mírate en el espejo de lo que contestaste. Después elige tu número y arma tu porqué.</p>
+
+  <div class="tarjeta espejo">
+    <h3>Tu espejo</h3>
+    <span class="rotulo" style="margin-top:.6rem">Las doce herramientas</span>
+    <div class="barra" id="e-barra"></div>
+    <div class="leyenda" id="e-leyenda"></div>
+    <p id="e-trabajo" style="margin:.8rem 0 0"></p>
+  </div>
+
+  <div class="tarjeta">
+    <h3>La calificación que propongo es…</h3>
+    <div class="numeros" id="numeros" role="radiogroup" aria-label="Tu calificación"></div>
+    <p class="mini" id="num-nota" style="margin-bottom:0">Va de 5 a 10. Este número es tu propuesta para el acta.</p>
+  </div>
+
+  <div class="tarjeta">
+    <h3>Mi porqué</h3>
+    <p class="mini" style="margin-top:0">Un número solo no se puede conversar. Toca las piezas que quieras usar y la frase se arma sola; luego la corriges a tu gusto.</p>
+    <div class="piezas" id="piezas"></div>
+    <label class="sr" for="porque">Mi porqué</label>
+    <textarea id="porque" data-k="porque" style="min-height:8rem" placeholder="Me pongo este número porque…"></textarea>
+  </div>
+
+  <div class="clave"><b>Cómo se cruza con la lectura de tu profesor.</b> Si las dos coinciden, esa queda. Si la tuya es más baja, sube sin que hagas nada. Si la tuya es más alta, lo conversan cinco minutos y defiendes tu caso con evidencia. Tu calificación nunca baja por sorpresa.</div>
+</section>
+
+<!-- ===================== 6 · MANDARLO ===================== -->
+<section class="paso" data-titulo="Mandarlo">
+  <div class="curso">Paso 6 de 6</div>
+  <h2>Tu hoja de cierre</h2>
+  <p class="entrada">Esto es lo que le llega a tu profesor. Léelo una vez; si algo no te convence, regresa y cámbialo.</p>
+
+  <div class="cierre" id="cierre"></div>
+
+  <div class="tarjeta">
+    <h3>Para el profesor (opcional)</h3>
+    <p class="mini" style="margin-top:0">Lo lee antes de volver a dar el curso. Aquí también se vale la honestidad.</p>
+    <label class="campo"><span>Que se quede</span><input type="text" data-k="queda" placeholder="Ej. La consulta en la presa y las prácticas con cotizaciones reales"></label>
+    <label class="campo"><span>Que cambie</span><input type="text" data-k="cambia" placeholder="Ej. Más tiempo para el presupuesto y menos formatos"></label>
+  </div>
+
+  <div class="aviso" id="aviso" role="status"></div>
+  <button type="button" class="btn grande" id="enviar">Mandársela al profesor</button>
+  <p class="mini" id="pista-envio" style="text-align:center">Solo la ve tu profesor. Puedes volver a mandarla: cuenta la más reciente.</p>
+
+  <details class="tarjeta" id="otras" style="box-shadow:none">
+    <summary style="cursor:pointer;font-weight:700;color:var(--profundo)">Si no se puede mandar, hay otras dos formas</summary>
+    <p class="mini">Las dos cuentan exactamente igual. Copia tu cierre y pégaselo a tu profesor por donde le escribas, o mándaselo por correo.</p>
+    <div class="otras">
+      <button type="button" class="btn claro chico" id="copiar">Copiar mi cierre</button>
+      <button type="button" class="btn claro chico" id="correo">Mandarlo por correo</button>
+    </div>
+  </details>
+
+  <p class="mini" style="text-align:center;margin-top:1.4rem">Lleva tu expediente a la conferencia. Con esta hoja y tu carpeta, cinco minutos alcanzan.</p>
+</section>
+
+</main>
+
+<nav class="abajo" aria-label="Avanzar">
+  <div class="fila">
+    <button type="button" class="btn claro" id="atras">Atrás</button>
+    <span class="guardado" id="guardado">Se guarda solo</span>
+    <button type="button" class="btn" id="sigue">Empezar</button>
+  </div>
+</nav>
+
+<script>
+(function () {
+  'use strict';
+  /* El recolector es el mismo de la autoevaluación de la unidad 1 (curso.js, RECOLECTOR_URL). */
+  var RECOLECTOR_URL = 'https://script.google.com/macros/s/AKfycbz-M_AoafL63sudpLaySyzWGV_f3y8DNolotyplGuwer5mCpqvGL-8Rz8s7f8z7Xf_nHQ/exec';
+  var CORREO = 'eduardo.lusan@gmail.com';
+  var TIPO = 'autoeval-final';
+  var DEMO = /[?&]demo\b/.test(location.search);
+  var CLAVE = 'gestion-autoeval-final' + (DEMO ? '-demo' : '');
+  var PREFIJO = 'GESTF·';
+
+  var ICO = {
+    consulta: '<path d="M5 7h22v14H15l-6 5v-5H5z"/><path d="M11 12h10M11 16h6"/>',
+    pedir: '<path d="M5 9h22v15H5z"/><path d="m5 10 11 8 11-8"/>',
+    arbol: '<rect x="11" y="13" width="10" height="6" rx="1.5"/><rect x="4" y="3" width="9" height="5" rx="1.5"/><rect x="19" y="3" width="9" height="5" rx="1.5"/><rect x="4" y="24" width="9" height="5" rx="1.5"/><rect x="19" y="24" width="9" height="5" rx="1.5"/><path d="M16 13v-2H8.500V8M16 11h7.500V8M16 19v2H8.500v3M16 21h7.500v3"/>',
+    objetivos: '<circle cx="16" cy="17" r="10"/><circle cx="16" cy="17" r="5.500"/><circle cx="16" cy="17" r="1.200"/><path d="m16 17 9-11M25 6h-4M25 6v4"/>',
+    cambio: '<rect x="2" y="12" width="6" height="8" rx="1.500"/><rect x="13" y="12" width="6" height="8" rx="1.500"/><rect x="24" y="12" width="6" height="8" rx="1.500"/><path d="M8 16h5M19 16h5M11 14l2 2-2 2M22 14l2 2-2 2"/>',
+    marco: '<rect x="4" y="5" width="24" height="22" rx="2"/><path d="M4 11h24M4 16.500h24M4 22h24M11 5v22M19.500 5v22"/>',
+    crono: '<path d="M4 5v22h24"/><path d="M8 10h9M12 15h10M17 20h8" stroke-width="3.200"/>',
+    presu: '<circle cx="16" cy="16" r="11"/><path d="M19.500 12.500c-.6-1.300-1.900-2-3.500-2-2 0-3.500 1-3.500 2.700 0 3.800 7 1.800 7 5.600 0 1.700-1.500 2.700-3.500 2.700-1.700 0-3-.8-3.600-2.100M16 8v2.500M16 21.500V24"/>',
+    cotizar: '<path d="M8 4h12l5 5v19H8z"/><path d="M20 4v5h5M12 15h9M12 19h9M12 23h5"/>',
+    actores: '<circle cx="11" cy="11" r="4"/><circle cx="22" cy="12.500" r="3.200"/><path d="M3.500 26c.5-5 3.500-7.500 7.500-7.500s7 2.500 7.500 7.500M20 19c4 0 7 2 8 7"/>',
+    pitch: '<path d="M5 13v6h4l8 6V7l-8 6z"/><path d="M21.500 12.500c1.500 1.800 1.500 5.200 0 7M24.500 9.500c3 3.500 3 9.500 0 13"/>',
+    ia: '<path d="M14 4l2.200 6.300L22.500 12.500l-6.300 2.200L14 21l-2.200-6.300L5.500 12.500l6.300-2.200z"/><circle cx="22.500" cy="22.500" r="4"/><path d="m25.500 25.500 3 3"/>'
+  };
+  var HERR = [
+    { id: 'consulta', t: 'Preguntar antes de proponer', d: 'Diseñar una consulta y hacerla sin prometer nada, como la que hicimos sobre la presa.' },
+    { id: 'pedir', t: 'Pedir algo de verdad', d: 'Hacer una solicitud real a una persona u organización, por escrito o de frente, y aguantar que digan que no.' },
+    { id: 'arbol', t: 'Árbol de problemas', d: 'El problema al centro, sus causas abajo y sus efectos arriba, armado con lo que dijo la gente.' },
+    { id: 'objetivos', t: 'Árbol de objetivos', d: 'Voltear el árbol de problemas en positivo y decidir qué parte sí está al alcance del grupo.' },
+    { id: 'cambio', t: 'Teoría del cambio', d: 'La cadena completa: lo que hacemos, lo que entregamos, lo que la gente hace distinto y el cambio grande.' },
+    { id: 'marco', t: 'Marco lógico', d: 'La tabla con fin, propósito, componentes y actividades, cada uno con su indicador y su supuesto.' },
+    { id: 'crono', t: 'Cronograma', d: 'Las actividades con responsable, con lo que dejan y con fechas, dibujadas en una gráfica de barras.' },
+    { id: 'presu', t: 'Presupuesto', d: 'Partidas con cantidad y precio, quién pone cada una, lo que va en especie y un renglón para imprevistos.' },
+    { id: 'cotizar', t: 'Cotizar un servicio', d: 'Sacar lo que vale tu hora de trabajo y entregar una cotización que alguien puede aceptar y pagar.' },
+    { id: 'actores', t: 'Aliados y trato', d: 'Saber quién decide, quién ayuda y quién puede frenar el proyecto, y qué se le pide a cada quien.' },
+    { id: 'pitch', t: 'Contar el proyecto', d: 'Explicarlo en dos minutos a alguien que no lo conoce, de modo que entienda qué se le está pidiendo.' },
+    { id: 'ia', t: 'Usar una IA y revisarle', d: 'Pedirle un borrador con un buen prompt y encontrar lo que inventó antes de usarlo.' }
+  ];
+  var NIVELES = [
+    { n: 3, t: 'La hago por mi cuenta', d: 'Me dan una hoja en blanco y la saco.', corto: 'Las hago por mi cuenta', c: 'var(--n3)', bg: 'var(--n3bg)', barra: '#1F6B4A' },
+    { n: 2, t: 'La hago con un ejemplo al lado', d: 'Necesito ver una hecha o que alguien me oriente.', corto: 'Las hago con un ejemplo al lado', c: 'var(--n2)', bg: 'var(--n2bg)', barra: '#4FA7A2' },
+    { n: 1, t: 'La entiendo, pero no la he hecho', d: 'Sé para qué sirve; la vi en clase o la hizo alguien más.', corto: 'Las entiendo, pero no las he hecho', c: 'var(--n1)', bg: 'var(--n1bg)', barra: '#D9A441' },
+    { n: 0, t: 'Todavía no', d: 'Si me la piden mañana, no sabría por dónde empezar.', corto: 'Todavía no', c: 'var(--n0)', bg: 'var(--n0bg)', barra: '#C98A6B' }
+  ];
+  var AFIRMA = [
+    { id: 'presente', t: 'Llegué a las sesiones y estuve presente de verdad, no solo de cuerpo.' },
+    { id: 'parte', t: 'Cumplí mi parte en el equipo sin que me la tuvieran que recordar.' },
+    { id: 'reintento', t: 'Cuando algo me salió «aún no», lo volví a intentar.' },
+    { id: 'expediente', t: 'Mantuve mi expediente al día, aunque nadie me lo pidiera esa semana.' },
+    { id: 'retro', t: 'Di retroalimentación útil a mis compañeros y respondí la que recibí.' },
+    { id: 'voz', t: 'Dije a tiempo lo que no me parecía, en lugar de guardármelo.' }
+  ];
+  var ESCALA = ['Siempre', 'Casi siempre', 'A veces', 'Casi nunca'];
+  var PALOMA = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 8.500 3.200 3.200L13 4.800"/></svg>';
+
+  /* ---------- el estado y el guardado ---------- */
+  var s = { paso: 0, carta: 0, sabe: {}, trabajo: {}, prueba: {}, hueco: {}, usadas: {} };
+  try { var g = JSON.parse(localStorage.getItem(CLAVE) || 'null'); if (g && typeof g === 'object') for (var k in g) s[k] = g[k]; } catch (e) {}
+  ['sabe', 'trabajo', 'prueba', 'hueco', 'usadas'].forEach(function (k) { if (!s[k] || typeof s[k] !== 'object') s[k] = {}; });
+  var $ = function (q, r) { return (r || document).querySelector(q); };
+  var $$ = function (q, r) { return Array.prototype.slice.call((r || document).querySelectorAll(q)); };
+  var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  function leer(k) { var o = s, p = k.split('.'); for (var i = 0; i < p.length; i++) { if (o == null) return ''; o = o[p[i]]; } return o == null ? '' : o; }
+  function poner(k, v) { var o = s, p = k.split('.'); for (var i = 0; i < p.length - 1; i++) { if (!o[p[i]] || typeof o[p[i]] !== 'object') o[p[i]] = {}; o = o[p[i]]; } o[p[p.length - 1]] = v; guardar(); }
+  var reloj;
+  function guardar() {
+    clearTimeout(reloj);
+    reloj = setTimeout(function () {
+      try { localStorage.setItem(CLAVE, JSON.stringify(s)); $('#guardado').textContent = 'Guardado'; }
+      catch (e) { $('#guardado').textContent = 'No se pudo guardar aquí'; }
+    }, 250);
+  }
+  var txt = function (k) { return String(leer(k) || '').trim(); };
+  var herr = function (id) { return HERR.filter(function (h) { return h.id === id; })[0]; };
+  function porNivel(n) { return HERR.filter(function (h) { return s.sabe[h.id] === n; }); }
+  function contestadas() { return HERR.filter(function (h) { return typeof s.sabe[h.id] === 'number'; }).length; }
+  function lista(a) { a = a.map(function (h) { return h.t.charAt(0).toLowerCase() + h.t.slice(1); }); return a.length > 1 ? a.slice(0, -1).join(', ') + ' y ' + a[a.length - 1] : (a[0] || ''); }
+
+  /* ---------- los campos de texto ---------- */
+  $$('[data-k]').forEach(function (c) {
+    c.value = leer(c.dataset.k);
+    c.addEventListener('input', function () { poner(c.dataset.k, c.value); });
+  });
+  $$('.arranca').forEach(function (z) {
+    z.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      var c = document.getElementById(z.dataset.para);
+      c.value = (c.value.trim() ? c.value.trim() + ' ' : '') + b.textContent;
+      poner(c.dataset.k, c.value); c.focus();
+    });
+  });
+  /* Grupos donde se escoge una sola ficha */
+  function pintarUno(z) {
+    var v = leer(z.dataset.uno);
+    $$('button', z).forEach(function (b) { var on = (b.dataset.v != null ? b.dataset.v : b.textContent) === String(v) && v !== ''; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+  }
+  $$('[data-uno]').forEach(function (z) {
+    pintarUno(z);
+    z.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      poner(z.dataset.uno, b.dataset.v != null ? b.dataset.v : b.textContent); pintarUno(z);
+    });
+  });
+
+  /* ---------- paso 1: las cartas ---------- */
+  var mazo = $('#mazo'), puntos = $('#puntos');
+  function pintarPuntos() {
+    puntos.innerHTML = HERR.map(function (h, i) {
+      var n = s.sabe[h.id];
+      return '<button type="button" role="tab" data-i="' + i + '" class="' + (typeof n === 'number' ? 'n' + n : '') + (i === s.carta && !enMapa() ? ' aqui' : '') + '" aria-label="' + esc(h.t) + '"></button>';
+    }).join('');
+  }
+  function enMapa() { return s.carta >= HERR.length; }
+  function pintarCarta() {
+    pintarPuntos();
+    $('#mapa-zona').hidden = !enMapa();
+    if (enMapa()) { mazo.innerHTML = ''; pintarMapa(); return; }
+    var h = HERR[s.carta], n = s.sabe[h.id];
+    mazo.innerHTML = '<article class="carta"><div class="cabeza"><div class="dib"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICO[h.id] + '</svg></div>' +
+      '<div><div class="cuenta">' + (s.carta + 1) + ' de ' + HERR.length + '</div><h3>' + esc(h.t) + '</h3></div></div>' +
+      '<p class="quees">' + esc(h.d) + '</p><div class="niveles">' +
+      NIVELES.map(function (x) {
+        return '<button type="button" class="nivel' + (n === x.n ? ' on' : '') + '" data-n="' + x.n + '" aria-pressed="' + (n === x.n) + '"><span class="bola">' + PALOMA + '</span><span><b>' + esc(x.t) + '</b><span class="d">' + esc(x.d) + '</span></span></button>';
+      }).join('') + '</div></article>';
+  }
+  var saltando = false;
+  mazo.addEventListener('click', function (e) {
+    var b = e.target.closest('.nivel'); if (!b || saltando) return;
+    var h = HERR[s.carta]; s.sabe[h.id] = +b.dataset.n; guardar();
+    $$('.nivel', mazo).forEach(function (x) { x.classList.toggle('on', x === b); });
+    pintarPuntos(); saltando = true;
+    setTimeout(function () {
+      saltando = false;
+      /* A la siguiente sin contestar; si ya están todas, al mapa */
+      var sig = -1;
+      for (var i = 1; i <= HERR.length; i++) { var j = (s.carta + i) % HERR.length; if (typeof s.sabe[HERR[j].id] !== 'number') { sig = j; break; } }
+      s.carta = contestadas() === HERR.length ? HERR.length : (sig < 0 ? HERR.length : sig);
+      guardar(); pintarCarta(); pintarBarra();
+      if (enMapa()) $('#mapa-zona').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 380);
+  });
+  puntos.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; s.carta = +b.dataset.i; guardar(); pintarCarta(); });
+  function pintarMapa() {
+    $('#mapa').innerHTML = NIVELES.map(function (x) {
+      var hs = porNivel(x.n);
+      return '<div class="grupo-m" style="--c:' + x.c + ';--bg:' + x.bg + '"><h3>' + esc(x.corto) + ' · ' + hs.length + '</h3>' +
+        (hs.length ? '<div class="fichas">' + hs.map(function (h) { return '<button type="button" class="ficha" data-ir="' + HERR.indexOf(h) + '">' + esc(h.t) + '</button>'; }).join('') + '</div>' : '<p class="vacio">Ninguna aquí.</p>') + '</div>';
+    }).join('');
+  }
+  $('#mapa').addEventListener('click', function (e) { var b = e.target.closest('[data-ir]'); if (!b) return; s.carta = +b.dataset.ir; guardar(); pintarCarta(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  /* ---------- paso 2: la prueba y el hueco ---------- */
+  function pintarPrueba() {
+    var fuertes = porNivel(3); var nota = '';
+    if (!fuertes.length) { fuertes = porNivel(2); nota = 'No marcaste ninguna «por mi cuenta», así que escoge de las que haces con un ejemplo al lado.'; }
+    var debiles = porNivel(0).concat(porNivel(1));
+    function fichas(cont, hs, clave, vacio, notaArriba) {
+      if (hs.every(function (h) { return h.id !== leer(clave); })) poner(clave, '');
+      cont.innerHTML = (notaArriba ? '<p class="mini" style="width:100%;margin:0 0 .3rem">' + notaArriba + '</p>' : '') +
+        (hs.length ? hs.map(function (h) { var on = leer(clave) === h.id; return '<button type="button" class="ficha' + (on ? ' on' : '') + '" data-id="' + h.id + '" aria-pressed="' + on + '">' + esc(h.t) + '</button>'; }).join('') : '<p class="mini" style="margin:0">' + vacio + '</p>');
+      cont.onclick = function (e) { var b = e.target.closest('[data-id]'); if (!b) return; poner(clave, b.dataset.id); pintarPrueba(); };
+    }
+    fichas($('#prueba-cual'), fuertes, 'prueba.cual', 'Todavía no marcas ninguna que hagas por tu cuenta o con un ejemplo. Regresa al paso 1 si quieres revisarlo; si así es, sigue adelante.', nota);
+    fichas($('#hueco-cual'), debiles, 'hueco.cual', 'No marcaste ninguna como «todavía no» ni como «la entiendo, pero no la he hecho». Si de verdad es así, sigue adelante.');
+    $('#prueba-resto').hidden = !leer('prueba.cual');
+    $('#hueco-resto').hidden = !leer('hueco.cual');
+  }
+
+  /* ---------- paso 4: cómo trabajé ---------- */
+  $('#afirmaciones').innerHTML = AFIRMA.map(function (a) {
+    return '<div class="afirma"><p>' + esc(a.t) + '</p><div class="escala" data-a="' + a.id + '">' + ESCALA.map(function (x, i) { return '<button type="button" data-v="' + i + '">' + x + '</button>'; }).join('') + '</div></div>';
+  }).join('');
+  function pintarEscalas() { $$('.escala').forEach(function (z) { var v = s.trabajo[z.dataset.a]; $$('button', z).forEach(function (b) { var on = String(v) === b.dataset.v; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }); }); }
+  $('#afirmaciones').addEventListener('click', function (e) { var b = e.target.closest('.escala button'); if (!b) return; s.trabajo[b.parentNode.dataset.a] = +b.dataset.v; guardar(); pintarEscalas(); pintarBarra(); });
+  pintarEscalas();
+  function cuentaTrabajo() { var c = [0, 0, 0, 0]; AFIRMA.forEach(function (a) { var v = s.trabajo[a.id]; if (typeof v === 'number') c[v]++; }); return c; }
+  function trabajoCompleto() { return AFIRMA.every(function (a) { return typeof s.trabajo[a.id] === 'number'; }); }
+  function fraseTrabajo() {
+    var c = cuentaTrabajo(), partes = [];
+    ESCALA.forEach(function (x, i) { if (c[i]) partes.push(x.toLowerCase() + ' en ' + c[i]); });
+    return partes.length ? 'De las seis frases sobre mi trabajo: ' + partes.join(', ') + '.' : '';
+  }
+
+  /* ---------- paso 5: el espejo, el número y el porqué ---------- */
+  var numerosEl = $('#numeros');
+  [5, 6, 7, 8, 9, 10].forEach(function (n) {
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = n; b.setAttribute('role', 'radio');
+    b.addEventListener('click', function () { poner('num', String(n)); pintarNumero(); pintarBarra(); });
+    numerosEl.appendChild(b);
+  });
+  function pintarNumero() {
+    var v = txt('num');
+    $$('button', numerosEl).forEach(function (b) { var on = b.textContent === v; b.classList.toggle('on', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); });
+    $('#num-nota').textContent = v ? 'Propones un ' + v + '. Ahora sostenlo con tu porqué.' : 'Va de 5 a 10. Este número es tu propuesta para el acta.';
+  }
+  function pintarEspejo() {
+    $('#e-barra').innerHTML = NIVELES.map(function (x) { var c = porNivel(x.n).length; return c ? '<i style="flex:' + c + ';background:' + x.barra + '"></i>' : ''; }).join('');
+    $('#e-leyenda').innerHTML = NIVELES.map(function (x) { return '<span><i style="background:' + x.barra + '"></i>' + esc(x.corto) + '<b>' + porNivel(x.n).length + '</b></span>'; }).join('');
+    var sol = txt('solicitudes');
+    $('#e-trabajo').innerHTML = (fraseTrabajo() ? esc(fraseTrabajo()) : '<span class="mini">Todavía no contestas el paso 4.</span>') + (sol !== '' ? ' ' + esc(fraseSolicitudes()) : '');
+  }
+  function fraseSolicitudes() { var v = txt('solicitudes'); return v === '' ? '' : v === '0' ? 'No hice solicitudes reales.' : v === '1' ? 'Hice una solicitud real.' : v === '2' ? 'Hice dos solicitudes reales.' : 'Hice tres o más solicitudes reales.'; }
+  function piezas() {
+    var p = [], a;
+    if ((a = porNivel(3)).length) p.push('Sé hacer por mi cuenta ' + a.length + ' de las doce herramientas: ' + lista(a) + '.');
+    if ((a = porNivel(2)).length) p.push('Con un ejemplo al lado saco ' + (a.length === 1 ? 'una más: ' : 'otras ' + a.length + ': ') + lista(a) + '.');
+    if ((a = porNivel(0).concat(porNivel(1))).length) p.push('Todavía no domino ' + lista(a) + '.');
+    var pc = herr(leer('prueba.cual'));
+    if (pc) p.push('Mi mejor evidencia es ' + lista([pc]) + (txt('prueba.donde') && txt('prueba.donde') !== 'Otra' ? ': ' + txt('prueba.donde').charAt(0).toLowerCase() + txt('prueba.donde').slice(1) : '') + (txt('prueba.que') ? ' (' + txt('prueba.que') + ')' : '') + '.');
+    if (fraseTrabajo()) p.push(fraseTrabajo());
+    if (fraseSolicitudes()) p.push(fraseSolicitudes());
+    if (txt('llevo')) p.push('Lo más valioso que me llevo: ' + txt('llevo'));
+    return p;
+  }
+  function pintarPiezas() {
+    var ps = piezas(), actual = $('#porque').value;
+    $('#piezas').innerHTML = ps.length ? ps.map(function (t, i) { return '<button type="button" class="pieza' + (actual.indexOf(t) >= 0 ? ' usada' : '') + '" data-i="' + i + '">' + esc(t) + '</button>'; }).join('') : '<p class="mini">Las piezas salen de los pasos anteriores. Contéstalos y aquí aparecen.</p>';
+    $('#piezas').onclick = function (e) {
+      var b = e.target.closest('.pieza'); if (!b) return;
+      var t = ps[+b.dataset.i], c = $('#porque'), v = c.value;
+      if (v.indexOf(t) >= 0) v = v.replace(t, '').replace(/\s{2,}/g, ' ').trim();
+      else { if (!v.trim() && txt('num')) v = 'Me pongo ' + txt('num') + ' porque:'; v = (v.trim() ? v.trim() + ' ' : '') + t; }
+      c.value = v; poner('porque', v); pintarPiezas();
+    };
+  }
+  $('#porque').addEventListener('input', pintarPiezas);
+
+  /* ---------- paso 6: la hoja de cierre y el envío ---------- */
+  function resumenSabe() { return NIVELES.map(function (x) { var hs = porNivel(x.n); return x.corto + ' (' + hs.length + ')' + (hs.length ? ': ' + lista(hs) : ''); }).join('. ') + '.'; }
+  function resumenPrueba() { var h = herr(leer('prueba.cual')); return h ? h.t + [txt('prueba.donde'), txt('prueba.que')].filter(Boolean).map(function (x) { return '. ' + x; }).join('') + '.' : ''; }
+  function resumenHueco() { var h = herr(leer('hueco.cual')); return h ? h.t + [txt('hueco.porque'), txt('hueco.plan') && 'Para aprenderla: ' + txt('hueco.plan'), txt('hueco.nota')].filter(Boolean).map(function (x) { return '. ' + x; }).join('') + '.' : ''; }
+  function resumenTrabajo() { return AFIRMA.map(function (a) { var v = s.trabajo[a.id]; return a.t + ' ' + (typeof v === 'number' ? ESCALA[v] : 'sin contestar'); }).join(' | '); }
+  function cambioIdea() { return txt('antes') || txt('ahora') ? 'Antes creía que ' + (txt('antes') || '…') + '. Ahora creo que ' + (txt('ahora') || '…') + '.' : ''; }
+  function pintarCierre() {
+    var filas = [
+      ['Lo que sé hacer', NIVELES.map(function (x) { var hs = porNivel(x.n); return hs.length ? '<b>' + esc(x.corto) + ' (' + hs.length + '):</b> ' + esc(lista(hs)) + '.' : ''; }).filter(Boolean).join('<br>') || 'Sin contestar.'],
+      ['Mi prueba', esc(resumenPrueba())], ['Mi hueco', esc(resumenHueco())],
+      ['Lo más valioso que aprendí', esc(txt('llevo'))], ['Cambié de idea', esc(cambioIdea())], ['Lo que no aprendí', esc(txt('falto'))],
+      ['Cómo trabajé', esc([fraseTrabajo(), fraseSolicitudes()].filter(Boolean).join(' '))],
+      ['Mi porqué', esc(txt('porque'))]
+    ].filter(function (f) { return f[1]; });
+    $('#cierre').innerHTML = '<div class="cab"><div class="n">' + esc(txt('num') || '?') + '</div><div><small>Mi calificación propuesta</small><b>' + esc(txt('nombre') || 'Falta tu nombre') + '</b></div></div>' +
+      '<div class="cuerpo"><dl>' + filas.map(function (f) { return '<dt>' + f[0] + '</dt><dd>' + f[1] + '</dd>'; }).join('') + '</dl></div>';
+    if (txt('enviado')) { $('#enviar').textContent = 'Volver a mandarla'; $('#pista-envio').textContent = 'La mandaste el ' + txt('enviado') + '. Si le mueves a algo, vuelve a mandarla: cuenta la más reciente.'; }
+  }
+  function textoCierre() {
+    return ['CIERRE FINAL · Gestión y Manejo de Proyectos', 'Nombre: ' + txt('nombre'), 'Calificación que propongo: ' + txt('num'), '',
+      'LO QUE SÉ HACER', resumenSabe(), '', 'MI PRUEBA: ' + (resumenPrueba() || 'sin contestar'), 'MI HUECO: ' + (resumenHueco() || 'sin contestar'), '',
+      'LO MÁS VALIOSO QUE APRENDÍ: ' + txt('llevo'), 'CAMBIÉ DE IDEA: ' + cambioIdea(), 'LO QUE NO APRENDÍ: ' + txt('falto'), '',
+      'CÓMO TRABAJÉ: ' + fraseTrabajo() + ' ' + fraseSolicitudes(), '', 'MI PORQUÉ: ' + txt('porque'), '',
+      'QUE SE QUEDE: ' + txt('queda'), 'QUE CAMBIE: ' + txt('cambia')].join('\n');
+  }
+  function aB64(t) {
+    if (window.TextEncoder) { var a = new TextEncoder().encode(t), b = ''; for (var i = 0; i < a.length; i++) b += String.fromCharCode(a[i]); return btoa(b); }
+    return btoa(unescape(encodeURIComponent(t)));
+  }
+  function avisa(clase, titulo, texto) { var a = $('#aviso'); a.className = 'aviso ver ' + clase; a.innerHTML = '<b>' + titulo + '</b>' + texto; a.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+  /* Lo que falta para poder mandarla: a qué paso llevar y qué decir */
+  function loQueFalta() {
+    if (!txt('nombre')) return { paso: 0, t: 'Falta tu nombre', d: 'Sin él, tu profesor no sabe de quién es este cierre. Está en la portada.', foco: '[data-k="nombre"]' };
+    if (contestadas() < HERR.length) return { paso: 1, t: 'Te faltan herramientas por contestar', d: 'Llevas ' + contestadas() + ' de ' + HERR.length + '. Las que faltan tienen su rayita gris arriba.', carta: true };
+    if (!trabajoCompleto()) return { paso: 4, t: 'Falta una frase de «Cómo trabajé»', d: 'Son seis y se contestan con un toque cada una.' };
+    if (!txt('num')) return { paso: 5, t: 'Todavía no eliges tu número', d: 'Es lo único que no se puede quedar en blanco: tu propuesta de calificación.' };
+    if (txt('porque').length < 40) return { paso: 5, t: 'Falta tu porqué', d: 'Un número solo no se puede conversar. Toca dos o tres piezas y la frase se arma sola.', foco: '#porque' };
+    return null;
+  }
+  $('#enviar').addEventListener('click', function () {
+    var f = loQueFalta(), btn = this;
+    if (f) {
+      avisa('falta', f.t, f.d + ' Te llevo.');
+      setTimeout(function () {
+        if (f.carta) { for (var i = 0; i < HERR.length; i++) if (typeof s.sabe[HERR[i].id] !== 'number') { s.carta = i; break; } }
+        ir(f.paso); var el = f.foco && $(f.foco); if (el) { el.focus(); el.classList.add('temblor'); setTimeout(function () { el.classList.remove('temblor'); }, 600); }
+      }, 1100);
+      return;
+    }
+    var hoy = new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+    avisa('yendo', 'Mandándola…', 'Aguanta un segundo, no cierres la página.');
+    btn.disabled = true; btn.textContent = 'Mandando…';
+    function acabo(bien, demo) {
+      if (acabo.ya) return; acabo.ya = true; btn.disabled = false;
+      if (bien) {
+        poner('enviado', hoy); btn.textContent = 'Volver a mandarla';
+        avisa('ok', demo ? 'Así se ve cuando sale' : 'Se la mandaste', demo ? 'Esto es una prueba: no se mandó nada.' : 'Le llegó a tu profesor y nadie más la ve. Toma captura de tu hoja de cierre o cópiala, y llévala con tu expediente a la conferencia.');
+        $('#pista-envio').textContent = 'La mandaste el ' + hoy + '. Si le mueves a algo, vuelve a mandarla: cuenta la más reciente.';
+      } else {
+        btn.textContent = 'Mandársela al profesor';
+        avisa('falta', 'No se pudo mandar', 'Puede ser el internet. Vuelve a intentarlo, o usa una de las otras dos formas de aquí abajo: cuentan exactamente igual.');
+        $('#otras').open = true;
+      }
+    }
+    if (DEMO) { setTimeout(function () { acabo(true, true); }, 800); return; }
+    /* Los mismos nombres de campo que la autoevaluación de la unidad 1, para que el recolector los acomode igual */
+    var datos = {
+      tipo: TIPO, nombre: txt('nombre'), num: txt('num'),
+      suelo: resumenTrabajo(), sobre: '',
+      evidencias: resumenSabe() + ' PRUEBA: ' + (resumenPrueba() || 'sin contestar'),
+      porque: txt('porque'),
+      nose: 'HUECO: ' + (resumenHueco() || 'sin contestar') + ' NO APRENDÍ: ' + txt('falto'),
+      frase: txt('llevo'), brujulas: cambioIdea(), noes: txt('solicitudes'),
+      profesor: 'QUE SE QUEDE: ' + txt('queda') + ' QUE CAMBIE: ' + txt('cambia'),
+      resumen: textoCierre(),
+      codigo: PREFIJO + aB64(JSON.stringify(s))
+    };
+    var marco = document.createElement('iframe'); marco.name = 'envio-autoeval-final'; marco.style.display = 'none'; document.body.appendChild(marco);
+    var fm = document.createElement('form'); fm.method = 'POST'; fm.action = RECOLECTOR_URL; fm.target = marco.name; fm.style.display = 'none';
+    Object.keys(datos).forEach(function (k) { var i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = datos[k] == null ? '' : datos[k]; fm.appendChild(i); });
+    document.body.appendChild(fm);
+    marco.addEventListener('load', function () { acabo(true); });
+    marco.addEventListener('error', function () { acabo(false); });
+    setTimeout(function () { acabo(false); }, 12000);
+    acabo.ya = false; fm.submit();
+  });
+  $('#copiar').addEventListener('click', function () {
+    var t = textoCierre(), b = this;
+    function listo() { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar mi cierre'; }, 1800); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(listo, viejo); else viejo();
+    function viejo() { var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); listo(); } catch (e) {} a.remove(); }
+  });
+  $('#correo').addEventListener('click', function () {
+    location.href = 'mailto:' + CORREO + '?subject=' + encodeURIComponent('Cierre final · ' + (txt('nombre') || 'sin nombre')) + '&body=' + encodeURIComponent(textoCierre());
+  });
+
+  /* ---------- moverse entre pasos ---------- */
+  var pasos = $$('.paso');
+  function pintarBarra() {
+    var enCartas = s.paso === 1 && !enMapa();
+    $('#atras').style.visibility = s.paso === 0 ? 'hidden' : 'visible';
+    $('#sigue').style.display = s.paso === pasos.length - 1 ? 'none' : '';
+    $('#sigue').textContent = s.paso === 0 ? 'Empezar' : enCartas ? (contestadas() === HERR.length ? 'Ver mi mapa' : 'Saltar esta') : s.paso === pasos.length - 2 ? 'Ver mi hoja' : 'Siguiente';
+    $('#sigue').classList.toggle('claro', enCartas && contestadas() < HERR.length);
+    $('#donde').textContent = s.paso === 0 ? 'Diez minutos' : 'Paso ' + s.paso + ' de ' + (pasos.length - 1) + ' · ' + pasos[s.paso].dataset.titulo;
+    var hecho = s.paso === 1 ? 0.3 + 0.7 * contestadas() / HERR.length : s.paso;
+    $('#avance').style.width = Math.round(100 * hecho / (pasos.length - 1)) + '%';
+  }
+  function ir(n) {
+    s.paso = Math.max(0, Math.min(pasos.length - 1, n)); guardar();
+    pasos.forEach(function (p, i) { p.classList.toggle('vivo', i === s.paso); });
+    if (s.paso === 1) { if (contestadas() === HERR.length && !enMapa() && typeof s.sabe[(HERR[s.carta] || {}).id] === 'number') s.carta = HERR.length; pintarCarta(); }
+    if (s.paso === 2) pintarPrueba();
+    if (s.paso === 5) { pintarEspejo(); pintarNumero(); pintarPiezas(); }
+    if (s.paso === 6) pintarCierre();
+    pintarBarra(); window.scrollTo(0, 0);
+  }
+  $('#sigue').addEventListener('click', function () {
+    if (s.paso === 0 && !txt('nombre')) { var c = $('[data-k="nombre"]'); c.focus(); c.classList.add('temblor'); setTimeout(function () { c.classList.remove('temblor'); }, 600); return; }
+    if (s.paso === 1 && !enMapa()) { s.carta = contestadas() === HERR.length ? HERR.length : s.carta + 1; guardar(); pintarCarta(); pintarBarra(); window.scrollTo(0, 0); return; }
+    ir(s.paso + 1);
+  });
+  $('#atras').addEventListener('click', function () {
+    if (s.paso === 1 && !enMapa() && s.carta > 0) { s.carta--; guardar(); pintarCarta(); pintarBarra(); return; }
+    if (s.paso === 1 && enMapa()) { s.carta = HERR.length - 1; guardar(); pintarCarta(); pintarBarra(); return; }
+    ir(s.paso - 1);
+  });
+  ir(s.paso || 0);
+  window.CIERRE_PRUEBA = { estado: function () { return s; }, ir: ir, texto: textoCierre };
+})();
+</script>
+</body>
+</html>

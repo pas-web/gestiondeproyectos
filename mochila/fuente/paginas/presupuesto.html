@@ -79,8 +79,6 @@
     </div>
   </div>
 
-  <div id="preguntas-membrete"></div>
-
   <section class="pregunta" data-paso="proyecto" data-tramo="El proyecto" data-foco="proyecto">
     <h2>¿De qué proyecto es el presupuesto?</h2>
     <p class="porque">El nombre va arriba de la hoja. Que sea el mismo del cronograma, para que se reconozcan.</p>
@@ -155,9 +153,11 @@
   </section>
 
   <section class="pregunta" data-paso="hoja-firma" data-tramo="La hoja" data-foco="firma">
-    <h2>¿Quién da el visto bueno?</h2>
-    <p class="porque">Quien revisa firma junto a ti: la tesorera del comité, la delegada, quien pone el dinero.</p>
+    <h2>¿Quién lo firma?</h2>
+    <p class="porque">Las firmas son opcionales. Si escribes quién lo elaboró o quién da el visto bueno (la tesorera del comité, la delegada, quien pone el dinero), la hoja deja su raya para firmar.</p>
     <div class="campos">
+      <div class="campo c3"><label for="ela-nombre">Elaboró</label><input id="ela-nombre" type="text" data-k="elaboro.nombre" placeholder="Tu nombre o el del equipo"></div>
+      <div class="campo c3"><label for="ela-cargo">Cargo de quien elaboró</label><input id="ela-cargo" type="text" data-k="elaboro.cargo" placeholder="Ej. Tesorería del grupo"></div>
       <div class="campo c3"><label for="rev-nombre">Visto bueno</label><input id="rev-nombre" type="text" data-k="reviso.nombre" placeholder="Nombre"></div>
       <div class="campo c3"><label for="rev-cargo">Cargo</label><input id="rev-cargo" type="text" data-k="reviso.cargo" placeholder="Ej. Tesorera del comité"></div>
     </div>
@@ -165,7 +165,7 @@
 
   <section class="pregunta" data-paso="entregar" data-tramo="Entregar">
     <h2>Tu presupuesto está listo</h2>
-    <p class="porque">Con más de tres fuentes, la hoja sale horizontal. Elige cómo lo entregas.</p>
+    <p class="porque">Es una pieza de tu proyecto, por eso sale sin logo: en Word para pegarlo en tu documento y seguir editándolo, o en imagen JPG para una presentación o para el grupo. Con más de tres fuentes, la hoja sale horizontal.</p>
     <div id="faltan"></div>
     <div id="entregas"></div>
   </section>
@@ -180,7 +180,7 @@
 
 <nav class="conmutador" aria-label="Volver a las preguntas">
   <button type="button" class="btn claro" data-ver="llenar">Volver a las preguntas</button>
-  <button type="button" class="btn" id="pdf-movil" data-ico="pdf">PDF</button>
+  <button type="button" class="btn" id="word-movil">Word</button>
 </nav>
 
 <script>

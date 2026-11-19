@@ -49,12 +49,23 @@ la guía los relee y se queda en el mismo paso. `listo` puede ser una función
 lee `guia.js`, `guia.css`, `docx.js` y `lienzo.js` de esta carpeta: si se
 cambian, también se reconstruye Pieza por pieza.
 
+## Quién lleva membrete
+
+Solo `cobrar.html`: la cotización y el recibo salen con logo, nombre, contacto y
+firma (`M.preguntasMembrete()`, `M.encabezado()`, `M.docxMembrete()`). El
+cronograma, el presupuesto y los dibujos son piezas para armar un proyecto y
+salen sin marca: usan `M.sinMembrete()`, `M.cabezaProducto()` y
+`M.docxTitulo()`, no preguntan el membrete y entregan Word editable e imagen
+JPG, sin PDF. Las firmas de esas hojas se escriben a mano (`elaboro`, `reviso`)
+y solo aparecen si se llenan.
+
 ## Lo que sale
 
-PDF por la ventana de imprimir; Word con `M.docx()` (y `M.docxMembrete`,
+PDF por la ventana de imprimir (solo en cotizar y cobrar); Word con `M.docx()` (y `M.docxMembrete`,
 `M.docxTablaDatos`, `M.docxFirmas`); imagen con `M.lienzo` (tarjetas de
 1080 × 1350 para la cotización, el recibo y el presupuesto; la gráfica de
-1600 px del cronograma; la hoja completa en los dibujos). En el celular la
+1600 px del cronograma; la hoja completa en los dibujos). Las imágenes salen en JPG: `M.lienzo.entregar` escoge el formato por la
+extensión del nombre. En el celular la
 imagen sale por el menú de compartir; en la computadora se descarga. Cada
 página deja `window.MOCHILA_PRUEBA` para probar sin hacer clic.
 

@@ -205,25 +205,31 @@
       pintar(raiz, 1);
       return x.c;
     },
-    blob: function (c) {
+    blob: function (c, tipo) {
+      tipo = tipo || 'image/png';
+      if (tipo === 'image/jpeg') {
+        var b2 = document.createElement('canvas'); b2.width = c.width; b2.height = c.height;
+        var g2 = b2.getContext('2d'); g2.fillStyle = '#FFFFFF'; g2.fillRect(0, 0, b2.width, b2.height); g2.drawImage(c, 0, 0); c = b2;
+      }
       return new Promise(function (listo) {
-        if (c.toBlob) c.toBlob(function (b) { listo(b); }, 'image/png');
-        else { var u = c.toDataURL('image/png'), bin = atob(u.split(',')[1]), a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); listo(new Blob([a], { type: 'image/png' })); }
+        if (c.toBlob) c.toBlob(function (b) { listo(b); }, tipo, 0.92);
+        else { var u = c.toDataURL(tipo, 0.92), bin = atob(u.split(',')[1]), a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); listo(new Blob([a], { type: tipo })); }
       });
     },
     /* En el celular abre el menú de compartir (WhatsApp, correo); si no se puede, descarga */
     entregar: function (c, nombre, titulo) {
-      return M.lienzo.blob(c).then(function (b) {
+      var tipo = /\.jpe?g$/i.test(nombre || '') ? 'image/jpeg' : 'image/png';
+      return M.lienzo.blob(c, tipo).then(function (b) {
         var archivo = null;
-        try { archivo = new File([b], nombre, { type: 'image/png' }); } catch (e) { archivo = null; }
+        try { archivo = new File([b], nombre, { type: tipo }); } catch (e) { archivo = null; }
         var tactil = window.matchMedia && matchMedia('(pointer: coarse)').matches;
         if (tactil && archivo && navigator.canShare && navigator.canShare({ files: [archivo] })) {
           return navigator.share({ files: [archivo], title: titulo || nombre }).then(function () { return 'compartida'; }, function (e) {
             if (e && e.name === 'AbortError') return 'cancelada';
-            M.descargar(nombre, b, 'image/png'); return 'descargada';
+            M.descargar(nombre, b, tipo); return 'descargada';
           });
         }
-        M.descargar(nombre, b, 'image/png');
+        M.descargar(nombre, b, tipo);
         return 'descargada';
       });
     }

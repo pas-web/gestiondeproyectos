@@ -347,6 +347,16 @@
       filas: [[{ img: d.img(logo, 0.82, 0.82), mar: 0.06 }, { parrafos: quien }, { parrafos: der.length ? der : [{ c: '' }] }]]
     });
   };
+  /* La cabeza de un producto de trabajo: qué es a la izquierda y la fecha a la derecha, sin logo */
+  M.docxTitulo = function (d, o) {
+    var anchoDer = 2.4;
+    d.tabla({
+      anchos: [d.util - anchoDer, anchoDer], vAlin: 'bottom', margenCelda: 0.04,
+      bordes: { bottom: { c: d.suave(0.55), g: 0.75 } },
+      filas: [[{ parrafos: [{ c: [{ t: o.tipo || '', tam: o.tamTipo || 20, color: d.acento }] }] },
+        { parrafos: [{ c: [{ t: o.folio || '', tam: 9, color: '#4B5A5E' }], f: { alin: 'der' } }] }]]
+    });
+  };
   /* Una firma: imagen o espacio, la línea, el nombre y el cargo */
   M.docxFirmas = function (d, firmas) {
     var ancho = Math.min(2.7, (d.util - 0.4 * (firmas.length - 1)) / firmas.length);

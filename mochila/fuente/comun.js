@@ -285,7 +285,7 @@
       '<div class="campo"><span class="etiqueta">Tu firma en imagen (opcional)</span><div class="logo-zona"><div class="logo-vista" id="m-firma-vista" style="width:150px"></div><div><button type="button" class="btn claro chico" id="m-firma-subir">Subir firma</button><br><button type="button" class="btn-texto peligro" id="m-firma-quitar">Quitar</button></div></div><span class="ayuda">Firma con tinta negra en una hoja blanca y tómale una foto de cerca. Si no la subes, la hoja trae la línea para firmar a mano.</span></div>' +
       '<div class="campo"><label for="m-pago">Datos para que te paguen (opcional)</label><textarea id="m-pago" data-mk="pago" rows="2" placeholder="Banco, nombre de la cuenta y CLABE"></textarea><span class="ayuda">Salen en las condiciones de pago. Se guardan solo en este navegador.</span></div>' +
       '</div>' +
-      '<p class="ayuda" style="margin-top:14px">El membrete se llena una vez y sale en todo lo que hagas con la mochila: cotizaciones, recibos, cronogramas, presupuestos y dibujos. Vive en este navegador; en un aparato prestado, bórralo al terminar. <button type="button" class="btn-texto peligro" id="m-borrar">Borrar mis datos de este navegador</button></p>';
+      '<p class="ayuda" style="margin-top:14px">El membrete se llena una vez y sale en tus cotizaciones y en tus recibos. Vive en este navegador; en un aparato prestado, bórralo al terminar. <button type="button" class="btn-texto peligro" id="m-borrar">Borrar mis datos de este navegador</button></p>';
 
     function pintarVistas() {
       var lv = M.$('#m-logo-vista', contenedor), fv = M.$('#m-firma-vista', contenedor);
@@ -366,6 +366,12 @@
       '<tbody><tr><td class="contenido">' + contenido + '</td></tr></tbody>' +
       '<tfoot><tr><td><div class="m-inf"></div></td></tr></tfoot>' +
       '</table><div class="pie-doc"><span>' + (o.pieIzq || '') + '</span><span>' + (o.pieDer || '') + '</span></div></article>';
+  };
+  /* Los productos de trabajo (cronograma, presupuesto, dibujos) no llevan membrete:
+     son piezas de un proyecto. Solo la cotización y el recibo salen con logo. */
+  M.sinMembrete = function () { return M.copia(MEMBRETE_VACIO); };
+  M.cabezaProducto = function (derecha) {
+    return '<header class="membrete producto" data-parte="membrete"><div class="doc" data-parte="folio">' + derecha + '</div></header>';
   };
   M.pieMembrete = function (m) {
     return M.esc([m.nombre, m.telefono, m.correo].filter(Boolean).join('   ·   '));

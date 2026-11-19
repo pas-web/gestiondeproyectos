@@ -513,7 +513,7 @@
     c = calcular(s);
     var p = s.tipoDoc === 'recibo' ? imagenRecibo() : imagenCotizacion();
     return p.then(function (canvas) {
-      return L.entregar(canvas, nombreArchivo('png'), s.tipoDoc === 'recibo' ? 'Recibo' : 'Cotización');
+      return L.entregar(canvas, nombreArchivo('jpg'), s.tipoDoc === 'recibo' ? 'Recibo' : 'Cotización');
     }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; });
   }
 

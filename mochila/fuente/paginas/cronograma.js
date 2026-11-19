@@ -7,7 +7,7 @@
   var A = new M.Archivero('cronograma');
   var banco = $('.banco');
   var PALETA = ['#00899e', '#c46a1f', '#7b52ae', '#a8781a', '#2f6fb7', '#3f8f3a'], GRIS = '#8A9699';
-  var s, memb, guia, lista, vistaMembrete;
+  var s, memb, guia, lista;
 
   function lunesProximo() { var d = new Date(), mas = ((8 - d.getDay()) % 7) || 7; d.setDate(d.getDate() + mas); return M.aISO(d); }
   function actVacia(hito) { return { id: M.uid(), fase: '', nombre: '', resp: '', prod: '', ini: 1, dur: hito ? 0 : 1, hito: !!hito, dep: '' }; }
@@ -16,7 +16,7 @@
       id: M.uid(), tocado: false, creado: new Date().toISOString(),
       titulo: 'Cronograma de actividades', proyecto: '', lugar: '', ejecuta: '',
       inicio: lunesProximo(), unidad: 'semanas', periodos: '', lluvias: { si: false, de: 6, a: 10 },
-      fases: [], acts: [actVacia()], ver: { responsables: true, tabla: true }, nota: '', reviso: { nombre: '', cargo: '' },
+      fases: [], acts: [actVacia()], ver: { responsables: true, tabla: true }, nota: '', elaboro: { nombre: '', cargo: '' }, reviso: { nombre: '', cargo: '' },
       guia: { paso: '', visto: {} }
     };
   }
@@ -254,9 +254,9 @@
         }).join('') + '</tbody></table></div>';
     }
     var nota = s.nota ? '<p class="nota-pie" data-parte="nota">' + M.escBr(s.nota) + '</p>' : '<p class="nota-pie hueco" data-parte="nota">Aquí va la nota al pie.</p>';
-    var firmas = '<div class="firmas">' + M.firma(m, 'Elaboró') + (s.reviso.nombre ? M.firma(m, 'Revisó', { nombre: s.reviso.nombre, cargo: s.reviso.cargo, sinImagen: true }) : '') + '</div>';
+    var firmas = '<div class="firmas">' + (s.elaboro.nombre ? M.firma(m, 'Elaboró', { nombre: s.elaboro.nombre, cargo: s.elaboro.cargo, sinImagen: true }) : '') + (s.reviso.nombre ? M.firma(m, 'Revisó', { nombre: s.reviso.nombre, cargo: s.reviso.cargo, sinImagen: true }) : '') + '</div>';
     return M.hoja({ horizontal: true, compacta: true, acento: m.color, pieIzq: M.pieMembrete(m), pieDer: esc((s.proyecto ? s.proyecto + '. ' : '') + tipo) },
-      M.encabezado(m, der) + cabeza + leyenda + tabla + nota + fechas + firmas);
+      M.cabezaProducto(der) + cabeza + leyenda + tabla + nota + fechas + firmas);
   }
   function filaFechas(a) {
     var i = n(a.ini) - 1, d = n(a.dur);
@@ -279,7 +279,7 @@
   function wordCronograma() {
     var m = memb, acts = vivas(), conResp = !!s.ver.responsables, tipo = s.titulo || 'Cronograma';
     var d = M.docx({ horizontal: true, acento: m.color, titulo: tipo + (s.proyecto ? ' ' + s.proyecto : ''), autor: m.nombre, pie: [m.nombre, m.telefono, m.correo].filter(Boolean).join('   ·   '), margen: { izq: 0.5, der: 0.5, sup: 0.5, inf: 0.6 } });
-    M.docxMembrete(d, m, { tipo: tipo, folio: M.fecha(M.hoyISO()), tamTipo: tipo.length > 16 ? 15 : 20, ancho: 3.2 });
+    M.docxTitulo(d, { tipo: tipo, folio: M.fecha(M.hoyISO()) });
     d.p([{ t: s.proyecto || 'Nombre del proyecto', tam: 13 }], { antes: 8, despues: 1 });
     d.p([{ t: bajada(), tam: 9, color: '#4B5A5E' }], { despues: 6 });
     var cols = columnas(), wN = 0.3, wAct = conResp ? 2.5 : 3.3, wResp = conResp ? 1.3 : 0;
@@ -345,9 +345,10 @@
           .concat([a.resp, a.prod, fc.e, fc.t, deps(a).join(', ')]);
       }), { tam: 8.2 });
     }
-    var firmas = [{ que: 'Elaboró', img: m.firma, nombre: m.firmaNombre || m.nombre, cargo: m.titulo }];
+    var firmas = [];
+    if (s.elaboro.nombre) firmas.push({ que: 'Elaboró', nombre: s.elaboro.nombre, cargo: s.elaboro.cargo });
     if (s.reviso.nombre) firmas.push({ que: 'Revisó', nombre: s.reviso.nombre, cargo: s.reviso.cargo });
-    M.docxFirmas(d, firmas);
+    if (firmas.length) M.docxFirmas(d, firmas);
     return d;
   }
 
@@ -360,10 +361,8 @@
     var x = L.crear(W, H), ctx = x.g, ancho = (XF - XN) / N;
     return L.fuentes().then(function () {
       ctx.fillStyle = col0; ctx.fillRect(0, 0, W, 14);
-      return L.logo(ctx, m, X0, 46, 70);
-    }).then(function () {
-      L.texto(ctx, m.nombre || '', X0 + 90, 52, { tam: 26, peso: 600, color: '#1D2A2E', ancho: 700, max: 1 });
-      L.texto(ctx, s.titulo || 'Cronograma', XF, 50, { tam: 34, peso: 500, color: col0, alin: 'der' });
+      L.texto(ctx, s.titulo || 'Cronograma', X0, 56, { tam: 34, peso: 500, color: col0 });
+      L.texto(ctx, M.fecha(M.hoyISO()), XF, 66, { tam: 22, color: '#4B5A5E', alin: 'der' });
       L.texto(ctx, s.proyecto || 'Nombre del proyecto', X0, 140, { tam: 44, peso: 600, color: '#1D2A2E', ancho: W - 144, max: 1 });
       L.texto(ctx, bajada(), X0, 198, { tam: 24, color: '#4B5A5E', ancho: W - 144, max: 1 });
       var yE = 254;
@@ -440,7 +439,7 @@
     $('#estado').textContent = s.tocado ? 'Guardado' : 'Se guarda solo al escribir';
     if (s.tocado) A.marcarActual(s.id);
     if (guardarYa) { s.tocado = true; guardarLuego(); }
-    guia.abrir({ paso: paso, primero: memb.nombre ? 'proyecto' : 'mb-nombre', sinFoco: true });
+    guia.abrir({ paso: paso, primero: 'proyecto', sinFoco: true });
     if (mensaje) M.aviso(mensaje);
   }
 
@@ -536,18 +535,15 @@
     });
   };
   function abrirArchivo() {
-    M.abrirArchivo('cronograma', function (datos) { var d = completar(datos); d.id = M.uid(); memb = M.membrete.leer(); vistaMembrete.recargar(); abrir(d, 'Se abrió «' + (d.proyecto || 'el cronograma') + '».', true); });
+    M.abrirArchivo('cronograma', function (datos) { var d = completar(datos); d.id = M.uid(); abrir(d, 'Se abrió «' + (d.proyecto || 'el cronograma') + '».', true); });
   }
   function nombreArchivo(ext) { return M.slug('cronograma-' + (s.proyecto || '')) + '.' + ext; }
   $('#nueva').onclick = function () { abrir(nuevo(), 'Cronograma nuevo.'); };
   $('#ejemplo').onclick = ejemplo;
-  $('#pdf-movil').onclick = M.imprimir;
   M.alImprimir(function () { return 'Cronograma ' + (s.proyecto || ''); }, pintarHojaYa);
 
   /* ---------- Arranque ---------- */
-  memb = M.membrete.leer();
-  $('#preguntas-membrete').outerHTML = M.preguntasMembrete();
-  vistaMembrete = M.enlazarMembrete($('#guia'), function (m) { memb = m; pintarColoresFase(); refrescarFechas(); pintarHoja(); });
+  memb = M.sinMembrete();
   lista = M.listaGuiada({
     cont: $('#lista-acts'),
     items: function () { return s.acts; },
@@ -567,16 +563,15 @@
     llenar: function (cont) { M.llenar(cont, s); },
     alPintar: function (cont, i) { focoAct(i); }
   });
-  var pistaPDF = M.enNavegadorPrestado ? 'si no pasa nada, abre la página en Chrome o Safari: los navegadores de WhatsApp o Facebook no imprimen.' : 'en la ventana de imprimir, elige «Guardar como PDF» y la orientación horizontal.';
+  function bajarWord() { return wordCronograma().descargar(nombreArchivo('docx')).then(function () { return 'Listo: el Word se descargó.'; }); }
   M.entregas($('#entregas'), [
-    { ico: 'pdf', t: 'PDF', d: 'Para imprimirlo o mandarlo tal cual. Sale horizontal.', hacer: M.imprimir, principal: true },
-    { ico: 'word', t: 'Word', d: 'La gráfica como tabla, para pegarla en tu proyecto y seguir editándola.', hacer: function () { return wordCronograma().descargar(nombreArchivo('docx')).then(function () { return 'Listo: el Word se descargó.'; }); } },
-    { ico: 'imagen', t: 'Imagen para WhatsApp', d: 'La gráfica en una imagen, para mandarla desde el celular.', hacer: function () { return imagenCronograma().then(function (c) { return L.entregar(c, nombreArchivo('png'), 'Cronograma'); }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; }); } },
-    { ico: 'archivo', t: 'Archivo de la mochila', d: 'Para abrirlo en otro aparato o guardarlo en tu Drive.', hacer: function () { s.tocado = true; guardarLuego(); M.descargarArchivo('cronograma', 'cronograma-' + (s.proyecto || ''), s); } }
+    { ico: 'word', t: 'Word editable', d: 'La gráfica como tabla y el calendario con fechas, para pegarlos en tu proyecto y seguir editándolos.', hacer: bajarWord, principal: true },
+    { ico: 'imagen', t: 'Imagen JPG', d: 'La gráfica en una imagen, para una presentación o para mandarla por WhatsApp.', hacer: function () { return imagenCronograma().then(function (c) { return L.entregar(c, nombreArchivo('jpg'), 'Cronograma'); }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; }); } },
+    { ico: 'archivo', t: 'Guardar para seguir después', d: 'Un archivo de la mochila, para abrirlo en otro aparato o guardarlo en tu Drive.', hacer: function () { s.tocado = true; guardarLuego(); M.descargarArchivo('cronograma', 'cronograma-' + (s.proyecto || ''), s); } }
   ]);
-  $('#entregas').insertAdjacentHTML('afterend', '<p class="pista-impresion">Para el PDF: ' + pistaPDF + '</p>');
+  $('#word-movil').onclick = function () { bajarWord().then(function (msg) { M.aviso(msg); }); };
   guia = M.guia({
-    raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: true,
+    raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: false,
     estado: function () { return s; }, guardar: function () { guardarLuego(); },
     listo: { actividades: function () { return vivas().length > 0; }, fases: function () { return s.fases.length > 0 || !!(s.guia && s.guia.visto.fases); } },
     alEntrar: {

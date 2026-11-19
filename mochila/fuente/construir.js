@@ -9,7 +9,7 @@ const path = require('path');
 const F = __dirname;
 const SALIDA = path.join(F, '..');
 const leer = (p) => fs.readFileSync(path.join(F, p), 'utf8');
-const VERSION = 'versión 2 · 16 de noviembre de 2026';
+const VERSION = 'versión 3 · 19 de noviembre de 2026';
 
 const fuentes = [400, 500, 600, 700].map((w) =>
   "@font-face{font-family:'Jost';font-style:normal;font-weight:" + w + ';font-display:swap;src:url(data:font/woff2;base64,' +

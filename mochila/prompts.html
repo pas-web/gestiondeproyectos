@@ -424,6 +424,10 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
 
+/* ---------- La cabeza de un producto de trabajo: sin logo, solo qué es y la fecha ---------- */
+.hoja .membrete.producto .doc { flex: 1; text-align: left; display: flex; justify-content: space-between; align-items: baseline; gap: .3in; }
+.hoja .membrete.producto .doc .folio { margin-top: 0; }
+
 /* La mochila del gestor · una cosa a la vez
    La tarjeta de la pregunta, el camino de arriba, la ventanita del celular,
    la hoja con la parte en foco y las salidas del final. */
@@ -975,11 +979,9 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
     <div class="acciones-prompt"><button type="button" class="btn" id="copiar-vuelta" data-ico="copiar">Copiar la segunda vuelta</button></div>
   </section>
 
-  <div id="preguntas-membrete"></div>
-
   <section class="pregunta" data-paso="entregar" data-tramo="Entregar">
     <h2>Tu dibujo está listo</h2>
-    <p class="porque">La hoja sale horizontal, con el dibujo en limpio. Elige cómo lo entregas.</p>
+    <p class="porque">Es una pieza de tu proyecto, por eso sale sin logo: en Word para pegarlo en tu documento y seguir editándolo, o en imagen JPG para una presentación o para mandarlo.</p>
     <div id="faltan"></div>
     <div id="entregas"></div>
   </section>
@@ -994,7 +996,7 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
 
 <nav class="conmutador" aria-label="Volver a las preguntas">
   <button type="button" class="btn claro" data-ver="llenar">Volver a las preguntas</button>
-  <button type="button" class="btn" id="pdf-movil" data-ico="pdf">PDF</button>
+  <button type="button" class="btn" id="word-movil">Word</button>
 </nav>
 
 <script>
@@ -1285,7 +1287,7 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
       '<div class="campo"><span class="etiqueta">Tu firma en imagen (opcional)</span><div class="logo-zona"><div class="logo-vista" id="m-firma-vista" style="width:150px"></div><div><button type="button" class="btn claro chico" id="m-firma-subir">Subir firma</button><br><button type="button" class="btn-texto peligro" id="m-firma-quitar">Quitar</button></div></div><span class="ayuda">Firma con tinta negra en una hoja blanca y tómale una foto de cerca. Si no la subes, la hoja trae la línea para firmar a mano.</span></div>' +
       '<div class="campo"><label for="m-pago">Datos para que te paguen (opcional)</label><textarea id="m-pago" data-mk="pago" rows="2" placeholder="Banco, nombre de la cuenta y CLABE"></textarea><span class="ayuda">Salen en las condiciones de pago. Se guardan solo en este navegador.</span></div>' +
       '</div>' +
-      '<p class="ayuda" style="margin-top:14px">El membrete se llena una vez y sale en todo lo que hagas con la mochila: cotizaciones, recibos, cronogramas, presupuestos y dibujos. Vive en este navegador; en un aparato prestado, bórralo al terminar. <button type="button" class="btn-texto peligro" id="m-borrar">Borrar mis datos de este navegador</button></p>';
+      '<p class="ayuda" style="margin-top:14px">El membrete se llena una vez y sale en tus cotizaciones y en tus recibos. Vive en este navegador; en un aparato prestado, bórralo al terminar. <button type="button" class="btn-texto peligro" id="m-borrar">Borrar mis datos de este navegador</button></p>';
 
     function pintarVistas() {
       var lv = M.$('#m-logo-vista', contenedor), fv = M.$('#m-firma-vista', contenedor);
@@ -1366,6 +1368,12 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
       '<tbody><tr><td class="contenido">' + contenido + '</td></tr></tbody>' +
       '<tfoot><tr><td><div class="m-inf"></div></td></tr></tfoot>' +
       '</table><div class="pie-doc"><span>' + (o.pieIzq || '') + '</span><span>' + (o.pieDer || '') + '</span></div></article>';
+  };
+  /* Los productos de trabajo (cronograma, presupuesto, dibujos) no llevan membrete:
+     son piezas de un proyecto. Solo la cotización y el recibo salen con logo. */
+  M.sinMembrete = function () { return M.copia(MEMBRETE_VACIO); };
+  M.cabezaProducto = function (derecha) {
+    return '<header class="membrete producto" data-parte="membrete"><div class="doc" data-parte="folio">' + derecha + '</div></header>';
   };
   M.pieMembrete = function (m) {
     return M.esc([m.nombre, m.telefono, m.correo].filter(Boolean).join('   ·   '));
@@ -1701,25 +1709,31 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
       pintar(raiz, 1);
       return x.c;
     },
-    blob: function (c) {
+    blob: function (c, tipo) {
+      tipo = tipo || 'image/png';
+      if (tipo === 'image/jpeg') {
+        var b2 = document.createElement('canvas'); b2.width = c.width; b2.height = c.height;
+        var g2 = b2.getContext('2d'); g2.fillStyle = '#FFFFFF'; g2.fillRect(0, 0, b2.width, b2.height); g2.drawImage(c, 0, 0); c = b2;
+      }
       return new Promise(function (listo) {
-        if (c.toBlob) c.toBlob(function (b) { listo(b); }, 'image/png');
-        else { var u = c.toDataURL('image/png'), bin = atob(u.split(',')[1]), a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); listo(new Blob([a], { type: 'image/png' })); }
+        if (c.toBlob) c.toBlob(function (b) { listo(b); }, tipo, 0.92);
+        else { var u = c.toDataURL(tipo, 0.92), bin = atob(u.split(',')[1]), a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); listo(new Blob([a], { type: tipo })); }
       });
     },
     /* En el celular abre el menú de compartir (WhatsApp, correo); si no se puede, descarga */
     entregar: function (c, nombre, titulo) {
-      return M.lienzo.blob(c).then(function (b) {
+      var tipo = /\.jpe?g$/i.test(nombre || '') ? 'image/jpeg' : 'image/png';
+      return M.lienzo.blob(c, tipo).then(function (b) {
         var archivo = null;
-        try { archivo = new File([b], nombre, { type: 'image/png' }); } catch (e) { archivo = null; }
+        try { archivo = new File([b], nombre, { type: tipo }); } catch (e) { archivo = null; }
         var tactil = window.matchMedia && matchMedia('(pointer: coarse)').matches;
         if (tactil && archivo && navigator.canShare && navigator.canShare({ files: [archivo] })) {
           return navigator.share({ files: [archivo], title: titulo || nombre }).then(function () { return 'compartida'; }, function (e) {
             if (e && e.name === 'AbortError') return 'cancelada';
-            M.descargar(nombre, b, 'image/png'); return 'descargada';
+            M.descargar(nombre, b, tipo); return 'descargada';
           });
         }
-        M.descargar(nombre, b, 'image/png');
+        M.descargar(nombre, b, tipo);
         return 'descargada';
       });
     }
@@ -2075,6 +2089,16 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
       filas: [[{ img: d.img(logo, 0.82, 0.82), mar: 0.06 }, { parrafos: quien }, { parrafos: der.length ? der : [{ c: '' }] }]]
     });
   };
+  /* La cabeza de un producto de trabajo: qué es a la izquierda y la fecha a la derecha, sin logo */
+  M.docxTitulo = function (d, o) {
+    var anchoDer = 2.4;
+    d.tabla({
+      anchos: [d.util - anchoDer, anchoDer], vAlin: 'bottom', margenCelda: 0.04,
+      bordes: { bottom: { c: d.suave(0.55), g: 0.75 } },
+      filas: [[{ parrafos: [{ c: [{ t: o.tipo || '', tam: o.tamTipo || 20, color: d.acento }] }] },
+        { parrafos: [{ c: [{ t: o.folio || '', tam: 9, color: '#4B5A5E' }], f: { alin: 'der' } }] }]]
+    });
+  };
   /* Una firma: imagen o espacio, la línea, el nombre y el cargo */
   M.docxFirmas = function (d, firmas) {
     var ancho = Math.min(2.7, (d.util - 0.4 * (firmas.length - 1)) / firmas.length);
@@ -2141,7 +2165,7 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
     var T = 'data-tramo="Tu membrete" data-foco="membrete"';
     return '' +
       '<section class="pregunta" data-paso="mb-listo" data-si="membreteListo" ' + T + '>' +
-      '<h2>Este es tu membrete</h2><p class="porque">Sale arriba en todo lo que hagas con la mochila. Se llena una vez y se queda en este navegador.</p>' +
+      '<h2>Este es tu membrete</h2><p class="porque">Sale arriba en tus cotizaciones y en tus recibos, que son lo único que lleva tu logo. Se llena una vez y se queda en este navegador.</p>' +
       '<div id="vista-membrete"></div>' +
       '<p><button type="button" class="btn claro chico" data-accion="editar-membrete">Cambiar algo del membrete</button></p></section>' +
 
@@ -3073,9 +3097,9 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
       var f = leerMarco(texto);
       cuerpo = f.length ? htmlMarco(f) : '<div class="vacio-hoja">No encontré la tabla del marco lógico en lo que pegaste.</div>';
     }
-    var declara = s.declarar && !muestra ? '<p class="declara" data-parte="declara">Elaborado con apoyo de inteligencia artificial y revisado por ' + esc(m.firmaNombre || m.nombre || 'el equipo') + '.</p>' : '';
+    var declara = s.declarar && !muestra ? '<p class="declara" data-parte="declara">Elaborado con apoyo de inteligencia artificial y revisado por ' + 'el equipo' + '.</p>' : '';
     return M.hoja({ horizontal: true, compacta: true, acento: m.color, pieIzq: M.pieMembrete(m), pieDer: esc((p.nombre ? p.nombre + '. ' : '') + H.nombre) },
-      M.encabezado(m, der) + cab + '<div data-parte="dibujo" class="zona-dibujo">' + (herr === 'arbol' || herr === 'objetivos' ? ley + cuerpo : cuerpo + ley) + '</div>' + declara);
+      M.cabezaProducto(der) + cab + '<div data-parte="dibujo" class="zona-dibujo">' + (herr === 'arbol' || herr === 'objetivos' ? ley + cuerpo : cuerpo + ley) + '</div>' + declara);
   }
   function pintarHojaYa() {
     $('#marco').innerHTML = hojaDibujo();
@@ -3281,16 +3305,13 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
     });
   };
   function abrirArchivo() {
-    M.abrirArchivo('prompts', function (datos) { var d = completar(datos); d.id = M.uid(); memb = M.membrete.leer(); vistaMembrete.recargar(); abrir(d, 'Se abrió «' + (d.proyecto.nombre || 'el proyecto') + '».', true); });
+    M.abrirArchivo('prompts', function (datos) { var d = completar(datos); d.id = M.uid(); abrir(d, 'Se abrió «' + (d.proyecto.nombre || 'el proyecto') + '».', true); });
   }
   $('#nueva').onclick = function () { abrir(nuevo(), 'Proyecto nuevo.'); };
   $('#ejemplo').onclick = ejemplo;
-  $('#pdf-movil').onclick = M.imprimir;
   M.alImprimir(function () { return HERR[s.herramienta].nombre + ' ' + (s.proyecto.nombre || ''); }, pintarHojaYa);
 
-  memb = M.membrete.leer();
-  $('#preguntas-membrete').outerHTML = M.preguntasMembrete();
-  var vistaMembrete = M.enlazarMembrete($('#guia'), function (m) { memb = m; pintarHoja(); });
+  memb = M.sinMembrete();
   /* ---------- Entregar: PDF, Word, imagen y archivo ---------- */
   var L = M.lienzo;
   function nombreArchivo(ext) { return M.slug(HERR[s.herramienta].corto + '-' + (s.proyecto.nombre || '')) + '.' + ext; }
@@ -3315,7 +3336,7 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
     return imagenDibujo().then(function (cv) {
       var horizontal = true;
       var d = M.docx({ horizontal: horizontal, acento: m.color, titulo: H.nombre + ' ' + (p.nombre || ''), autor: m.nombre, pie: [m.nombre, m.telefono, m.correo].filter(Boolean).join('   ·   '), margen: { izq: 0.55, der: 0.55, sup: 0.5, inf: 0.6 } });
-      M.docxMembrete(d, m, { tipo: H.nombre, folio: M.fecha(M.hoyISO()), tamTipo: H.nombre.length > 16 ? 15 : 20, ancho: 3.2 });
+      M.docxTitulo(d, { tipo: H.nombre, folio: M.fecha(M.hoyISO()) });
       d.p([{ t: p.nombre || 'Nombre del proyecto', tam: 13 }], { antes: 8, despues: 1 });
       if (p.lugar || p.gente) d.p([{ t: [p.lugar, p.gente].filter(Boolean).join('. ') + '.', tam: 9.5, color: '#4B5A5E' }], { despues: 6 });
       if (herr === 'marco') {
@@ -3344,22 +3365,20 @@ textarea.respuesta { min-height: 220px; font-family: ui-monospace, 'SFMono-Regul
           if (c.fragil) d.p([{ t: 'El eslabón frágil. ', b: true }, { t: c.fragil + (c.quien ? ' Quién: ' + c.quien : '') }], { antes: 6 });
         }
       }
-      if (s.declarar) d.p([{ t: 'Elaborado con apoyo de inteligencia artificial y revisado por ' + (m.firmaNombre || m.nombre || 'el equipo') + '.', tam: 8.4, color: '#7B898C' }], { antes: 10 });
+      if (s.declarar) d.p([{ t: 'Elaborado con apoyo de inteligencia artificial y revisado por el equipo.', tam: 8.4, color: '#7B898C' }], { antes: 10 });
       return d.descargar(nombreArchivo('docx'));
     }).then(function () { return 'Listo: el Word se descargó.'; });
   }
-  var pistaPDF = M.enNavegadorPrestado ? 'si no pasa nada, abre la página en Chrome o Safari: los navegadores de WhatsApp o Facebook no imprimen.' : 'en la ventana de imprimir, elige «Guardar como PDF» y la orientación horizontal.';
   M.entregas($('#entregas'), [
-    { ico: 'pdf', t: 'PDF', d: 'La hoja con el dibujo, para imprimirla o mandarla tal cual.', hacer: M.imprimir, principal: true },
-    { ico: 'word', t: 'Word', d: 'El dibujo y su contenido en texto, para pegarlo en tu proyecto. El marco lógico va como tabla editable.', hacer: wordDibujo },
-    { ico: 'imagen', t: 'Imagen', d: 'La hoja en una imagen, para WhatsApp o para una presentación.', hacer: function () { return imagenHoja().then(function (cv) { return L.entregar(cv, nombreArchivo('png'), HERR[s.herramienta].nombre); }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; }); } },
-    { ico: 'archivo', t: 'Archivo de la mochila', d: 'Tu proyecto con las cuatro herramientas, para abrirlo en otro aparato.', hacer: function () { s.tocado = true; guardarLuego(); M.descargarArchivo('prompts', 'proyecto-' + (s.proyecto.nombre || ''), s); } }
+    { ico: 'word', t: 'Word editable', d: 'El dibujo y su contenido en texto, para pegarlo en tu proyecto y seguir editándolo. El marco lógico va como tabla.', hacer: wordDibujo, principal: true },
+    { ico: 'imagen', t: 'Imagen JPG', d: 'La hoja en una imagen, para una presentación o para mandarla por WhatsApp.', hacer: function () { return imagenHoja().then(function (cv) { return L.entregar(cv, nombreArchivo('jpg'), HERR[s.herramienta].nombre); }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; }); } },
+    { ico: 'archivo', t: 'Guardar para seguir después', d: 'Un archivo de la mochila con tu proyecto y sus cuatro herramientas, para abrirlo en otro aparato.', hacer: function () { s.tocado = true; guardarLuego(); M.descargarArchivo('prompts', 'proyecto-' + (s.proyecto.nombre || ''), s); } }
   ]);
-  $('#entregas').insertAdjacentHTML('afterend', '<p class="pista-impresion">Para el PDF: ' + pistaPDF + '</p>');
+  $('#word-movil').onclick = function () { wordDibujo().then(function (msg) { M.aviso(msg); }, function (err) { M.aviso('No se pudo: ' + ((err && err.message) || 'algo falló') + '.', 'mal'); }); };
   /* Cada paso de «Tu proyecto» es de una herramienta (data-si="h-…") */
   function deHerramienta(h) { return function () { return !!s && s.herramienta === h; }; }
   var guia = M.guia({
-    raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: true,
+    raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: false,
     estado: function () { return s; }, guardar: function () { guardarLuego(); },
     si: { 'h-arbol': deHerramienta('arbol'), 'h-objetivos': deHerramienta('objetivos'), 'h-cambio': deHerramienta('cambio'), 'h-marco': deHerramienta('marco') },
     listo: {

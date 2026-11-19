@@ -424,6 +424,10 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
 
+/* ---------- La cabeza de un producto de trabajo: sin logo, solo qué es y la fecha ---------- */
+.hoja .membrete.producto .doc { flex: 1; text-align: left; display: flex; justify-content: space-between; align-items: baseline; gap: .3in; }
+.hoja .membrete.producto .doc .folio { margin-top: 0; }
+
 /* La mochila del gestor · una cosa a la vez
    La tarjeta de la pregunta, el camino de arriba, la ventanita del celular,
    la hoja con la parte en foco y las salidas del final. */
@@ -731,7 +735,7 @@ details.mas[open] > summary { margin-bottom: 12px; }
   <section class="heroe">
     <div>
       <h1>La mochila del gestor</h1>
-      <p class="lead">Cuatro herramientas para cuando el curso termine. Cada una pregunta una cosa a la vez y va armando una hoja con tu nombre, lista para mandar: la cotización y el recibo de un servicio, el cronograma, el presupuesto, y el árbol, la teoría del cambio o el marco lógico de un proyecto.</p>
+      <p class="lead">Cuatro herramientas para cuando el curso termine. Cada una pregunta una cosa a la vez y va armando su hoja. La cotización y el recibo salen con tu logo, listos para mandar. El cronograma, el presupuesto, y el árbol, la teoría del cambio o el marco lógico salen limpios, sin logo, porque son piezas para armar tu proyecto: en Word para seguir editándolas o en imagen JPG.</p>
       <div id="estado-membrete"></div>
     </div>
     <div class="mesa" aria-label="Las hojas que salen de la mochila">
@@ -744,33 +748,33 @@ details.mas[open] > summary { margin-bottom: 12px; }
 
   <section class="seccion-p">
     <h2>Lo que trae</h2>
-    <p class="sub">Las cuatro hablan el idioma de la clase: el sobre, los imponderables, la joroba, el renglón sin dueño, las pruebas del árbol. Al final cada una entrega PDF, Word para seguir editando e imagen para WhatsApp. Ninguna necesita cuenta ni contraseña.</p>
+    <p class="sub">Las cuatro hablan el idioma de la clase: el sobre, los imponderables, la joroba, el renglón sin dueño, las pruebas del árbol. Al final cada una entrega un Word para seguir editando y una imagen JPG. Ninguna necesita cuenta ni contraseña.</p>
     <div class="cuatro">
       <article class="herr">
         <div><h3>Cotizar y cobrar</h3><p>Saca la cuenta de un taller o de un servicio: las horas de trabajo por lo que vale tu hora, los viáticos, los materiales y un colchón para imprevistos. Tu cliente ve solo lo que tú decidas.</p></div>
-        <div class="sale"><b>Sale</b>La cotización y, cuando te paguen, el recibo con la cantidad con letra: en PDF, en Word y en imagen.</div>
+        <div class="sale"><b>Sale</b>La cotización y, cuando te paguen, el recibo con la cantidad con letra, los dos con tu logo: en PDF, en Word y en imagen JPG.</div>
         <a class="btn" href="cobrar.html">Abrir</a>
       </article>
       <article class="herr">
         <div><h3>Cronograma</h3><p>Actividades con quién responde, qué dejan y cuándo, por semanas o por meses, con fases, hitos y la temporada de lluvias. Te avisa de la joroba y de las dependencias que no cuadran.</p></div>
-        <div class="sale"><b>Sale</b>La gráfica de Gantt y el calendario con fechas: en PDF horizontal, en Word como tabla y en imagen.</div>
+        <div class="sale"><b>Sale</b>La gráfica de Gantt y el calendario con fechas, sin logo: en Word como tabla editable y en imagen JPG.</div>
         <a class="btn" href="cronograma.html">Abrir</a>
       </article>
       <article class="herr">
         <div><h3>Presupuesto</h3><p>Partidas por rubro con unidad, cantidad y precio, y con quién pone cada una, en dinero o en especie. Los imponderables van con renglón propio y la hoja revisa el flete.</p></div>
-        <div class="sale"><b>Sale</b>La matriz de aportaciones con firmas: en PDF, en Word, en hoja de cálculo y en una imagen de quién pone qué.</div>
+        <div class="sale"><b>Sale</b>La matriz de aportaciones, sin logo: en Word editable, en hoja de cálculo y en una imagen JPG de quién pone qué.</div>
         <a class="btn" href="presupuesto.html">Abrir</a>
       </article>
       <article class="herr">
         <div><h3>Prompts y dibujos</h3><p>Prompts con las reglas de la clase para pedirle a una IA el árbol de problemas, el árbol de objetivos, la teoría del cambio y el marco lógico. Pegas la respuesta, la auditas y la hoja la dibuja.</p></div>
-        <div class="sale"><b>Sale</b>El árbol, la cadena o la matriz en limpio: en PDF, en imagen y en Word, con el marco lógico como tabla editable.</div>
+        <div class="sale"><b>Sale</b>El árbol, la cadena o la matriz en limpio, sin logo: en Word editable, con el marco lógico como tabla, y en imagen JPG.</div>
         <a class="btn" href="prompts.html">Abrir</a>
       </article>
     </div>
   </section>
 
   <section class="dos-notas">
-    <div><h3>Tu membrete, una vez</h3><p>Nombre o logo, contacto, color y firma se llenan en cualquiera de las cuatro y salen en todo lo que hagas. Si todavía no tienes logo, la hoja pone tus iniciales.</p></div>
+    <div><h3>Tu logo, solo donde cobras</h3><p>Nombre o logo, contacto, color y firma se llenan una vez en «Cotizar y cobrar» y salen en tus cotizaciones y recibos. Si todavía no tienes logo, la hoja pone tus iniciales. Lo demás sale sin marca, para que lo pegues en el proyecto de quien sea.</p></div>
     <div><h3>Dónde se guarda</h3><p>En el navegador donde lo llenas; nada se sube a internet. Para pasarlo a otro aparato o guardarlo en tu Drive, cada herramienta descarga un archivo que se vuelve a abrir. En una computadora prestada, borra tus datos al terminar.</p></div>
   </section>
 
@@ -780,7 +784,7 @@ details.mas[open] > summary { margin-bottom: 12px; }
     <p class="firma-e"><b>Eduardo Luna Sánchez</b>, noviembre de 2026</p>
   </aside>
 
-  <p class="pie-p">Gestión y Manejo de Proyectos, UAQ Campus Concá. La mochila del gestor, versión 2 · 16 de noviembre de 2026. <a href="../index.html">Volver al curso</a></p>
+  <p class="pie-p">Gestión y Manejo de Proyectos, UAQ Campus Concá. La mochila del gestor, versión 3 · 19 de noviembre de 2026. <a href="../index.html">Volver al curso</a></p>
 </main>
 
 <script>
@@ -1071,7 +1075,7 @@ details.mas[open] > summary { margin-bottom: 12px; }
       '<div class="campo"><span class="etiqueta">Tu firma en imagen (opcional)</span><div class="logo-zona"><div class="logo-vista" id="m-firma-vista" style="width:150px"></div><div><button type="button" class="btn claro chico" id="m-firma-subir">Subir firma</button><br><button type="button" class="btn-texto peligro" id="m-firma-quitar">Quitar</button></div></div><span class="ayuda">Firma con tinta negra en una hoja blanca y tómale una foto de cerca. Si no la subes, la hoja trae la línea para firmar a mano.</span></div>' +
       '<div class="campo"><label for="m-pago">Datos para que te paguen (opcional)</label><textarea id="m-pago" data-mk="pago" rows="2" placeholder="Banco, nombre de la cuenta y CLABE"></textarea><span class="ayuda">Salen en las condiciones de pago. Se guardan solo en este navegador.</span></div>' +
       '</div>' +
-      '<p class="ayuda" style="margin-top:14px">El membrete se llena una vez y sale en todo lo que hagas con la mochila: cotizaciones, recibos, cronogramas, presupuestos y dibujos. Vive en este navegador; en un aparato prestado, bórralo al terminar. <button type="button" class="btn-texto peligro" id="m-borrar">Borrar mis datos de este navegador</button></p>';
+      '<p class="ayuda" style="margin-top:14px">El membrete se llena una vez y sale en tus cotizaciones y en tus recibos. Vive en este navegador; en un aparato prestado, bórralo al terminar. <button type="button" class="btn-texto peligro" id="m-borrar">Borrar mis datos de este navegador</button></p>';
 
     function pintarVistas() {
       var lv = M.$('#m-logo-vista', contenedor), fv = M.$('#m-firma-vista', contenedor);
@@ -1152,6 +1156,12 @@ details.mas[open] > summary { margin-bottom: 12px; }
       '<tbody><tr><td class="contenido">' + contenido + '</td></tr></tbody>' +
       '<tfoot><tr><td><div class="m-inf"></div></td></tr></tfoot>' +
       '</table><div class="pie-doc"><span>' + (o.pieIzq || '') + '</span><span>' + (o.pieDer || '') + '</span></div></article>';
+  };
+  /* Los productos de trabajo (cronograma, presupuesto, dibujos) no llevan membrete:
+     son piezas de un proyecto. Solo la cotización y el recibo salen con logo. */
+  M.sinMembrete = function () { return M.copia(MEMBRETE_VACIO); };
+  M.cabezaProducto = function (derecha) {
+    return '<header class="membrete producto" data-parte="membrete"><div class="doc" data-parte="folio">' + derecha + '</div></header>';
   };
   M.pieMembrete = function (m) {
     return M.esc([m.nombre, m.telefono, m.correo].filter(Boolean).join('   ·   '));
@@ -1487,25 +1497,31 @@ details.mas[open] > summary { margin-bottom: 12px; }
       pintar(raiz, 1);
       return x.c;
     },
-    blob: function (c) {
+    blob: function (c, tipo) {
+      tipo = tipo || 'image/png';
+      if (tipo === 'image/jpeg') {
+        var b2 = document.createElement('canvas'); b2.width = c.width; b2.height = c.height;
+        var g2 = b2.getContext('2d'); g2.fillStyle = '#FFFFFF'; g2.fillRect(0, 0, b2.width, b2.height); g2.drawImage(c, 0, 0); c = b2;
+      }
       return new Promise(function (listo) {
-        if (c.toBlob) c.toBlob(function (b) { listo(b); }, 'image/png');
-        else { var u = c.toDataURL('image/png'), bin = atob(u.split(',')[1]), a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); listo(new Blob([a], { type: 'image/png' })); }
+        if (c.toBlob) c.toBlob(function (b) { listo(b); }, tipo, 0.92);
+        else { var u = c.toDataURL(tipo, 0.92), bin = atob(u.split(',')[1]), a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); listo(new Blob([a], { type: tipo })); }
       });
     },
     /* En el celular abre el menú de compartir (WhatsApp, correo); si no se puede, descarga */
     entregar: function (c, nombre, titulo) {
-      return M.lienzo.blob(c).then(function (b) {
+      var tipo = /\.jpe?g$/i.test(nombre || '') ? 'image/jpeg' : 'image/png';
+      return M.lienzo.blob(c, tipo).then(function (b) {
         var archivo = null;
-        try { archivo = new File([b], nombre, { type: 'image/png' }); } catch (e) { archivo = null; }
+        try { archivo = new File([b], nombre, { type: tipo }); } catch (e) { archivo = null; }
         var tactil = window.matchMedia && matchMedia('(pointer: coarse)').matches;
         if (tactil && archivo && navigator.canShare && navigator.canShare({ files: [archivo] })) {
           return navigator.share({ files: [archivo], title: titulo || nombre }).then(function () { return 'compartida'; }, function (e) {
             if (e && e.name === 'AbortError') return 'cancelada';
-            M.descargar(nombre, b, 'image/png'); return 'descargada';
+            M.descargar(nombre, b, tipo); return 'descargada';
           });
         }
-        M.descargar(nombre, b, 'image/png');
+        M.descargar(nombre, b, tipo);
         return 'descargada';
       });
     }
@@ -1861,6 +1877,16 @@ details.mas[open] > summary { margin-bottom: 12px; }
       filas: [[{ img: d.img(logo, 0.82, 0.82), mar: 0.06 }, { parrafos: quien }, { parrafos: der.length ? der : [{ c: '' }] }]]
     });
   };
+  /* La cabeza de un producto de trabajo: qué es a la izquierda y la fecha a la derecha, sin logo */
+  M.docxTitulo = function (d, o) {
+    var anchoDer = 2.4;
+    d.tabla({
+      anchos: [d.util - anchoDer, anchoDer], vAlin: 'bottom', margenCelda: 0.04,
+      bordes: { bottom: { c: d.suave(0.55), g: 0.75 } },
+      filas: [[{ parrafos: [{ c: [{ t: o.tipo || '', tam: o.tamTipo || 20, color: d.acento }] }] },
+        { parrafos: [{ c: [{ t: o.folio || '', tam: 9, color: '#4B5A5E' }], f: { alin: 'der' } }] }]]
+    });
+  };
   /* Una firma: imagen o espacio, la línea, el nombre y el cargo */
   M.docxFirmas = function (d, firmas) {
     var ancho = Math.min(2.7, (d.util - 0.4 * (firmas.length - 1)) / firmas.length);
@@ -1927,7 +1953,7 @@ details.mas[open] > summary { margin-bottom: 12px; }
     var T = 'data-tramo="Tu membrete" data-foco="membrete"';
     return '' +
       '<section class="pregunta" data-paso="mb-listo" data-si="membreteListo" ' + T + '>' +
-      '<h2>Este es tu membrete</h2><p class="porque">Sale arriba en todo lo que hagas con la mochila. Se llena una vez y se queda en este navegador.</p>' +
+      '<h2>Este es tu membrete</h2><p class="porque">Sale arriba en tus cotizaciones y en tus recibos, que son lo único que lleva tu logo. Se llena una vez y se queda en este navegador.</p>' +
       '<div id="vista-membrete"></div>' +
       '<p><button type="button" class="btn claro chico" data-accion="editar-membrete">Cambiar algo del membrete</button></p></section>' +
 
@@ -2424,9 +2450,9 @@ details.mas[open] > summary { margin-bottom: 12px; }
   var m = M.membrete.leer(), cont = M.$('#estado-membrete');
   if (m.nombre) {
     var mini = m.logo ? '<img alt="" src="' + m.logo + '">' : '<span style="background:' + M.esc(m.color) + ';width:100%;height:100%;display:grid;place-items:center">' + M.esc(M.membrete.iniciales(m.nombre)) + '</span>';
-    cont.innerHTML = '<span class="tu-membrete"><span class="mini">' + mini + '</span><span>Tu membrete ya está puesto: <b>' + M.esc(m.nombre) + '</b></span></span>';
+    cont.innerHTML = '<span class="tu-membrete"><span class="mini">' + mini + '</span><span>Tu membrete para cotizar ya está puesto: <b>' + M.esc(m.nombre) + '</b></span></span>';
   } else {
-    cont.innerHTML = '<span class="tu-membrete" style="padding-left:16px">Empieza por tu membrete, en cualquiera de las cuatro.</span>';
+    cont.innerHTML = '<span class="tu-membrete" style="padding-left:16px">Tu logo va solo en la cotización y el recibo. Lo demás sale limpio, para tu proyecto.</span>';
   }
 })();
 </script>

@@ -24,7 +24,7 @@
     var T = 'data-tramo="Tu membrete" data-foco="membrete"';
     return '' +
       '<section class="pregunta" data-paso="mb-listo" data-si="membreteListo" ' + T + '>' +
-      '<h2>Este es tu membrete</h2><p class="porque">Sale arriba en todo lo que hagas con la mochila. Se llena una vez y se queda en este navegador.</p>' +
+      '<h2>Este es tu membrete</h2><p class="porque">Sale arriba en tus cotizaciones y en tus recibos, que son lo único que lleva tu logo. Se llena una vez y se queda en este navegador.</p>' +
       '<div id="vista-membrete"></div>' +
       '<p><button type="button" class="btn claro chico" data-accion="editar-membrete">Cambiar algo del membrete</button></p></section>' +
 

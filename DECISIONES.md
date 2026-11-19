@@ -1344,3 +1344,28 @@ y evaluar como dos caras).
   cambiar nada. De aquí en adelante, la práctica se cambia en la plantilla y
   se corre `node construir.js`.
 
+
+## 19 de noviembre de 2026: la mochila sin logo (versión 3) y el cierre final
+
+- **Solo la cotización y el recibo llevan membrete** (pedido de Eduardo). El
+  cronograma, el presupuesto y los dibujos son piezas para armar proyectos, de
+  quien sea: ya no preguntan el membrete ni lo ponen en la hoja, en el Word o
+  en la imagen. Arriba va solo qué es y la fecha. Las firmas de «Elaboró» y
+  de quien revisa se escriben en su paso y solo salen si se llenan.
+- **Esas tres entregan Word editable e imagen JPG**, sin PDF. El presupuesto
+  conserva la hoja de cálculo y las tres conservan el archivo de la mochila,
+  que es para seguir después, no para entregar. Todas las imágenes de la
+  mochila, también la de la cotización, salen ahora en JPG.
+- **Las muestras de la portada** (`img/cronograma.webp`, `presupuesto.webp`,
+  `arbol.webp`) se volvieron a sacar de los ejemplos, ya sin membrete.
+- **El cierre final** (`evaluacion/autoevaluacion-final.html`): la
+  autoevaluación que sí cuenta, hecha para contestarse a toques desde el
+  teléfono. Seis pasos: doce herramientas con cuatro respuestas («la hago por
+  mi cuenta», «con un ejemplo al lado», «la entiendo, pero no la he hecho»,
+  «todavía no»), la prueba de una que sí y el hueco de una que no, lo que se
+  lleva y lo que le faltó, seis frases de cómo trabajó y sus solicitudes
+  reales, el número de 5 a 10 con un porqué que se arma con piezas de sus
+  respuestas, y la hoja de cierre. Manda al mismo recolector de la unidad 1
+  con `tipo: autoeval-final` y los mismos nombres de campo; si no sale, deja
+  copiar el cierre o mandarlo por correo. `?demo` la recorre sin mandar nada.
+  No carga `curso.js`: trae su propio botón de volver. Va en «Empieza aquí».

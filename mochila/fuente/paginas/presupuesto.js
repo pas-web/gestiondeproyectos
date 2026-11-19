@@ -8,7 +8,7 @@
   var banco = $('.banco');
   var PALETA = ['#00899e', '#c46a1f', '#7b52ae', '#a8781a', '#2f6fb7', '#3f8f3a'], GRIS = '#8A9699';
   var RUBROS = ['Materiales e insumos', 'Herramienta y equipo', 'Mano de obra y jornales', 'Servicios', 'Traslados y fletes', 'Capacitación y difusión'];
-  var s, memb, c, guia, lista, vistaMembrete;
+  var s, memb, c, guia, lista;
 
   function partidaVacia(rubro, fuente) { return { id: M.uid(), rubro: rubro, c: '', u: '', q: '', p: '', f: fuente || '' }; }
   function nuevo() {
@@ -19,7 +19,7 @@
       proyecto: '', lugar: '', organizacion: '', fecha: M.hoyISO(), periodo: '',
       fuentes: [{ id: f1, nombre: 'Apoyo solicitado', tipo: 'dinero' }, { id: f2, nombre: 'Aportación del grupo', tipo: 'especie' }],
       rubros: rubros, partidas: [partidaVacia(rubros[0].id, f1)],
-      imp: { pct: 5, f: f1 }, ver: { rubros: true }, notas: '', reviso: { nombre: '', cargo: '' },
+      imp: { pct: 5, f: f1 }, ver: { rubros: true }, notas: '', elaboro: { nombre: '', cargo: '' }, reviso: { nombre: '', cargo: '' },
       guia: { paso: '', visto: {} }
     };
   }
@@ -202,9 +202,9 @@
       }).join('') + '</div>';
     }
     var notas = s.notas ? '<p class="notas-p" data-parte="notas"><b>Notas.</b> ' + M.escBr(s.notas) + '</p>' : '<p class="notas-p hueco" data-parte="notas">Aquí van las notas: de dónde salen los precios y cómo se valoriza la faena.</p>';
-    var firmas = '<div class="firmas">' + M.firma(m, 'Elaboró') + (s.reviso.nombre ? M.firma(m, 'Visto bueno', { nombre: s.reviso.nombre, cargo: s.reviso.cargo, sinImagen: true }) : '') + '</div>';
+    var firmas = '<div class="firmas">' + (s.elaboro.nombre ? M.firma(m, 'Elaboró', { nombre: s.elaboro.nombre, cargo: s.elaboro.cargo, sinImagen: true }) : '') + (s.reviso.nombre ? M.firma(m, 'Visto bueno', { nombre: s.reviso.nombre, cargo: s.reviso.cargo, sinImagen: true }) : '') + '</div>';
     return M.hoja({ horizontal: horizontal, compacta: true, acento: m.color, pieIzq: M.pieMembrete(m), pieDer: esc((s.proyecto ? s.proyecto + '. ' : '') + 'Presupuesto') },
-      M.encabezado(m, der) + cabeza + resumen + matriz + rubros + notas + firmas);
+      M.cabezaProducto(der) + cabeza + resumen + matriz + rubros + notas + firmas);
   }
   function pintarHojaYa() {
     $('#marco').innerHTML = hojaPresupuesto(); M.ajustarHoja();
@@ -217,7 +217,7 @@
   function wordPresupuesto() {
     var m = memb, F = s.fuentes, horizontal = F.length > 3;
     var d = M.docx({ horizontal: horizontal, acento: m.color, titulo: 'Presupuesto ' + (s.proyecto || ''), autor: m.nombre, pie: [m.nombre, m.telefono, m.correo].filter(Boolean).join('   ·   '), margen: { izq: 0.6, der: 0.6, sup: 0.55, inf: 0.65 } });
-    M.docxMembrete(d, m, { tipo: 'Presupuesto', folio: M.fecha(s.fecha) });
+    M.docxTitulo(d, { tipo: 'Presupuesto', folio: M.fecha(s.fecha) });
     d.p([{ t: s.proyecto || 'Nombre del proyecto', tam: 13 }], { antes: 8, despues: 1 });
     if (bajada()) d.p([{ t: bajada(), tam: 9.5, color: '#4B5A5E' }], { despues: 4 });
     // el resumen: total a la izquierda, quién pone a la derecha
@@ -260,9 +260,10 @@
       }
     }
     if (s.notas) d.p([{ t: 'Notas. ', b: true, tam: 8.6 }, { t: s.notas, tam: 8.6, color: '#4B5A5E' }], { antes: 10 });
-    var firmas = [{ que: 'Elaboró', img: m.firma, nombre: m.firmaNombre || m.nombre, cargo: m.titulo }];
+    var firmas = [];
+    if (s.elaboro.nombre) firmas.push({ que: 'Elaboró', nombre: s.elaboro.nombre, cargo: s.elaboro.cargo });
     if (s.reviso.nombre) firmas.push({ que: 'Visto bueno', nombre: s.reviso.nombre, cargo: s.reviso.cargo });
-    M.docxFirmas(d, firmas);
+    if (firmas.length) M.docxFirmas(d, firmas);
     return d;
   }
 
@@ -272,11 +273,8 @@
     var m = memb, W = 1080, H = 1350, x = L.crear(W, H), g = x.g, col = m.color || '#0B3C49';
     return L.fuentes().then(function () {
       g.fillStyle = col; g.fillRect(0, 0, W, 14);
-      return L.logo(g, m, 72, 52, 72);
-    }).then(function () {
-      L.texto(g, m.nombre || '', 164, 60, { tam: 26, peso: 600, color: '#1D2A2E', ancho: W - 236, max: 1 });
-      if (m.giro) L.texto(g, m.giro, 164, 96, { tam: 21, color: '#4B5A5E', ancho: W - 236, max: 1 });
-      L.texto(g, 'Presupuesto', 72, 168, { tam: 30, peso: 500, color: col });
+      L.texto(g, 'Presupuesto', 72, 104, { tam: 40, peso: 500, color: col });
+      L.texto(g, M.fecha(s.fecha), W - 72, 118, { tam: 22, color: '#4B5A5E', alin: 'der' });
       var y = L.texto(g, s.proyecto || 'Nombre del proyecto', 72, 210, { tam: 46, peso: 600, color: '#1D2A2E', ancho: W - 144, max: 2, interlinea: 1.12 });
       if (bajada()) y = L.texto(g, bajada(), 72, y + 8, { tam: 23, color: '#4B5A5E', ancho: W - 144, max: 2 });
       y += 30; L.linea(g, 72, y, W - 72, y, '#DCE2E3', 2); y += 26;
@@ -346,7 +344,7 @@
     $('#estado').textContent = s.tocado ? 'Guardado' : 'Se guarda solo al escribir';
     if (s.tocado) A.marcarActual(s.id);
     if (guardarYa) { s.tocado = true; guardarLuego(); }
-    guia.abrir({ paso: paso, primero: memb.nombre ? 'proyecto' : 'mb-nombre', sinFoco: true });
+    guia.abrir({ paso: paso, primero: 'proyecto', sinFoco: true });
     if (mensaje) M.aviso(mensaje);
   }
 
@@ -430,18 +428,15 @@
     });
   };
   function abrirArchivo() {
-    M.abrirArchivo('presupuesto', function (datos) { var d = completar(datos); d.id = M.uid(); memb = M.membrete.leer(); vistaMembrete.recargar(); abrir(d, 'Se abrió «' + (d.proyecto || 'el presupuesto') + '».', true); });
+    M.abrirArchivo('presupuesto', function (datos) { var d = completar(datos); d.id = M.uid(); abrir(d, 'Se abrió «' + (d.proyecto || 'el presupuesto') + '».', true); });
   }
   function nombreArchivo(ext) { return M.slug('presupuesto-' + (s.proyecto || '')) + '.' + ext; }
   $('#nueva').onclick = function () { abrir(nuevo(), 'Presupuesto nuevo.'); };
   $('#ejemplo').onclick = ejemplo;
-  $('#pdf-movil').onclick = M.imprimir;
   M.alImprimir(function () { return 'Presupuesto ' + (s.proyecto || ''); }, pintarHojaYa);
 
   /* ---------- Arranque ---------- */
-  memb = M.membrete.leer();
-  $('#preguntas-membrete').outerHTML = M.preguntasMembrete();
-  vistaMembrete = M.enlazarMembrete($('#guia'), function (m) { memb = m; pintarHoja(); });
+  memb = M.sinMembrete();
   lista = M.listaGuiada({
     cont: $('#lista-partidas'),
     items: function () { return s.partidas; },
@@ -460,17 +455,16 @@
     llenar: function (cont) { M.llenar(cont, s); },
     alPintar: function (cont, i) { focoPartida(i); }
   });
-  var pistaPDF = M.enNavegadorPrestado ? 'si no pasa nada, abre la página en Chrome o Safari: los navegadores de WhatsApp o Facebook no imprimen.' : 'en la ventana de imprimir, elige «Guardar como PDF».';
+  function bajarWord() { return wordPresupuesto().descargar(nombreArchivo('docx')).then(function () { return 'Listo: el Word se descargó.'; }); }
   M.entregas($('#entregas'), [
-    { ico: 'pdf', t: 'PDF', d: 'Para imprimirlo o mandarlo tal cual.', hacer: M.imprimir, principal: true },
-    { ico: 'word', t: 'Word', d: 'La matriz completa, para pegarla en tu proyecto y seguir editándola.', hacer: function () { return wordPresupuesto().descargar(nombreArchivo('docx')).then(function () { return 'Listo: el Word se descargó.'; }); } },
-    { ico: 'imagen', t: 'Imagen para WhatsApp', d: 'Quién pone qué, en una imagen, para el grupo o el comité.', hacer: function () { return imagenPresupuesto().then(function (cv) { return L.entregar(cv, nombreArchivo('png'), 'Presupuesto'); }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; }); } },
+    { ico: 'word', t: 'Word editable', d: 'La matriz completa, para pegarla en tu proyecto y seguir editándola.', hacer: bajarWord, principal: true },
+    { ico: 'imagen', t: 'Imagen JPG', d: 'Quién pone qué, en una imagen, para una presentación, el grupo o el comité.', hacer: function () { return imagenPresupuesto().then(function (cv) { return L.entregar(cv, nombreArchivo('jpg'), 'Presupuesto'); }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; }); } },
     { ico: 'texto', t: 'Hoja de cálculo', d: 'Las partidas en CSV, para abrirlas en Excel o en Google Sheets.', hacer: csv },
-    { ico: 'archivo', t: 'Archivo de la mochila', d: 'Para abrirlo en otro aparato o guardarlo en tu Drive.', hacer: function () { s.tocado = true; guardarLuego(); M.descargarArchivo('presupuesto', 'presupuesto-' + (s.proyecto || ''), s); } }
+    { ico: 'archivo', t: 'Guardar para seguir después', d: 'Un archivo de la mochila, para abrirlo en otro aparato o guardarlo en tu Drive.', hacer: function () { s.tocado = true; guardarLuego(); M.descargarArchivo('presupuesto', 'presupuesto-' + (s.proyecto || ''), s); } }
   ]);
-  $('#entregas').insertAdjacentHTML('afterend', '<p class="pista-impresion">Para el PDF: ' + pistaPDF + ' Con más de tres fuentes la hoja sale horizontal.</p>');
+  $('#word-movil').onclick = function () { bajarWord().then(function (msg) { M.aviso(msg); }); };
   guia = M.guia({
-    raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: true,
+    raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: false,
     estado: function () { return s; }, guardar: function () { guardarLuego(); },
     listo: { partidas: function () { return s.partidas.some(viva); }, fuentes: function () { return s.fuentes.length > 0; } },
     alEntrar: {

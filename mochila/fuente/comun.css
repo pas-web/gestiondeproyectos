@@ -410,3 +410,7 @@ dialog.cajon::backdrop { background: rgba(11, 60, 73, .45); }
   #impresion .hoja .pie-doc { position: fixed; }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
+
+/* ---------- La cabeza de un producto de trabajo: sin logo, solo qué es y la fecha ---------- */
+.hoja .membrete.producto .doc { flex: 1; text-align: left; display: flex; justify-content: space-between; align-items: baseline; gap: .3in; }
+.hoja .membrete.producto .doc .folio { margin-top: 0; }

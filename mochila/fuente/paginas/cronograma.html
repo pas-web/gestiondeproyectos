@@ -78,8 +78,6 @@
     </div>
   </div>
 
-  <div id="preguntas-membrete"></div>
-
   <section class="pregunta" data-paso="proyecto" data-tramo="El proyecto" data-foco="proyecto">
     <h2>¿Cómo se llama el proyecto?</h2>
     <p class="porque">Va arriba de la gráfica. Que se entienda qué se va a hacer.</p>
@@ -124,7 +122,7 @@
 
   <section class="pregunta" data-paso="fases" data-tramo="Las fases" data-foco="gantt leyenda">
     <h2>¿En qué etapas se parte?</h2>
-    <p class="porque">Opcional. Cada fase lleva su color en la gráfica y agrupa sus actividades. Sin fases, todas las barras van en el color de tu membrete.</p>
+    <p class="porque">Opcional. Cada fase lleva su color en la gráfica y agrupa sus actividades. Sin fases, todas las barras van en un solo color.</p>
     <div class="renglones fases-lista" id="lista-fases" data-sin-enter></div>
     <div class="sugerencias" id="sug-fases"><span class="rot">Agregar:</span><button type="button">Preparar</button><button type="button">Construir</button><button type="button">Operar</button><button type="button">Entregar</button><button type="button">Otra</button></div>
   </section>
@@ -151,10 +149,12 @@
   </section>
 
   <section class="pregunta" data-paso="hoja-firma" data-tramo="La hoja" data-foco="nota firma">
-    <h2>¿Una nota, y quién lo revisa?</h2>
-    <p class="porque">La nota aclara de qué depende el calendario. Quien revisa firma junto a ti.</p>
+    <h2>¿Una nota, y quién lo firma?</h2>
+    <p class="porque">La nota aclara de qué depende el calendario. Las firmas son opcionales: si escribes quién lo elaboró o quién lo revisó, la hoja deja su raya para firmar.</p>
     <div class="campo"><label for="nota">Nota al pie</label><textarea id="nota" data-k="nota" rows="2" placeholder="Ej. Calendario sujeto a la fecha en que llegue el recurso."></textarea></div>
     <div class="campos">
+      <div class="campo c3"><label for="ela-nombre">Elaboró</label><input id="ela-nombre" type="text" data-k="elaboro.nombre" placeholder="Tu nombre o el del equipo"></div>
+      <div class="campo c3"><label for="ela-cargo">Cargo de quien elaboró</label><input id="ela-cargo" type="text" data-k="elaboro.cargo" placeholder="Ej. Equipo de reforestación"></div>
       <div class="campo c3"><label for="rev-nombre">Revisó</label><input id="rev-nombre" type="text" data-k="reviso.nombre" placeholder="Nombre"></div>
       <div class="campo c3"><label for="rev-cargo">Cargo de quien revisó</label><input id="rev-cargo" type="text" data-k="reviso.cargo" placeholder="Ej. Delegada de la comunidad"></div>
     </div>
@@ -162,7 +162,7 @@
 
   <section class="pregunta" data-paso="entregar" data-tramo="Entregar">
     <h2>Tu cronograma está listo</h2>
-    <p class="porque">La hoja sale horizontal. Elige cómo la entregas.</p>
+    <p class="porque">Es una pieza de tu proyecto, por eso sale sin logo: en Word para pegarla en tu documento y seguir editándola, o en imagen JPG para una presentación o para mandarla.</p>
     <div id="faltan"></div>
     <div id="entregas"></div>
   </section>
@@ -177,7 +177,7 @@
 
 <nav class="conmutador" aria-label="Volver a las preguntas">
   <button type="button" class="btn claro" data-ver="llenar">Volver a las preguntas</button>
-  <button type="button" class="btn" id="pdf-movil" data-ico="pdf">PDF</button>
+  <button type="button" class="btn" id="word-movil">Word</button>
 </nav>
 
 <script>

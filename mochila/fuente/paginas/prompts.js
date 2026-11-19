@@ -437,9 +437,9 @@
       var f = leerMarco(texto);
       cuerpo = f.length ? htmlMarco(f) : '<div class="vacio-hoja">No encontré la tabla del marco lógico en lo que pegaste.</div>';
     }
-    var declara = s.declarar && !muestra ? '<p class="declara" data-parte="declara">Elaborado con apoyo de inteligencia artificial y revisado por ' + esc(m.firmaNombre || m.nombre || 'el equipo') + '.</p>' : '';
+    var declara = s.declarar && !muestra ? '<p class="declara" data-parte="declara">Elaborado con apoyo de inteligencia artificial y revisado por ' + 'el equipo' + '.</p>' : '';
     return M.hoja({ horizontal: true, compacta: true, acento: m.color, pieIzq: M.pieMembrete(m), pieDer: esc((p.nombre ? p.nombre + '. ' : '') + H.nombre) },
-      M.encabezado(m, der) + cab + '<div data-parte="dibujo" class="zona-dibujo">' + (herr === 'arbol' || herr === 'objetivos' ? ley + cuerpo : cuerpo + ley) + '</div>' + declara);
+      M.cabezaProducto(der) + cab + '<div data-parte="dibujo" class="zona-dibujo">' + (herr === 'arbol' || herr === 'objetivos' ? ley + cuerpo : cuerpo + ley) + '</div>' + declara);
   }
   function pintarHojaYa() {
     $('#marco').innerHTML = hojaDibujo();
@@ -645,16 +645,13 @@
     });
   };
   function abrirArchivo() {
-    M.abrirArchivo('prompts', function (datos) { var d = completar(datos); d.id = M.uid(); memb = M.membrete.leer(); vistaMembrete.recargar(); abrir(d, 'Se abrió «' + (d.proyecto.nombre || 'el proyecto') + '».', true); });
+    M.abrirArchivo('prompts', function (datos) { var d = completar(datos); d.id = M.uid(); abrir(d, 'Se abrió «' + (d.proyecto.nombre || 'el proyecto') + '».', true); });
   }
   $('#nueva').onclick = function () { abrir(nuevo(), 'Proyecto nuevo.'); };
   $('#ejemplo').onclick = ejemplo;
-  $('#pdf-movil').onclick = M.imprimir;
   M.alImprimir(function () { return HERR[s.herramienta].nombre + ' ' + (s.proyecto.nombre || ''); }, pintarHojaYa);
 
-  memb = M.membrete.leer();
-  $('#preguntas-membrete').outerHTML = M.preguntasMembrete();
-  var vistaMembrete = M.enlazarMembrete($('#guia'), function (m) { memb = m; pintarHoja(); });
+  memb = M.sinMembrete();
   /* ---------- Entregar: PDF, Word, imagen y archivo ---------- */
   var L = M.lienzo;
   function nombreArchivo(ext) { return M.slug(HERR[s.herramienta].corto + '-' + (s.proyecto.nombre || '')) + '.' + ext; }
@@ -679,7 +676,7 @@
     return imagenDibujo().then(function (cv) {
       var horizontal = true;
       var d = M.docx({ horizontal: horizontal, acento: m.color, titulo: H.nombre + ' ' + (p.nombre || ''), autor: m.nombre, pie: [m.nombre, m.telefono, m.correo].filter(Boolean).join('   ·   '), margen: { izq: 0.55, der: 0.55, sup: 0.5, inf: 0.6 } });
-      M.docxMembrete(d, m, { tipo: H.nombre, folio: M.fecha(M.hoyISO()), tamTipo: H.nombre.length > 16 ? 15 : 20, ancho: 3.2 });
+      M.docxTitulo(d, { tipo: H.nombre, folio: M.fecha(M.hoyISO()) });
       d.p([{ t: p.nombre || 'Nombre del proyecto', tam: 13 }], { antes: 8, despues: 1 });
       if (p.lugar || p.gente) d.p([{ t: [p.lugar, p.gente].filter(Boolean).join('. ') + '.', tam: 9.5, color: '#4B5A5E' }], { despues: 6 });
       if (herr === 'marco') {
@@ -708,22 +705,20 @@
           if (c.fragil) d.p([{ t: 'El eslabón frágil. ', b: true }, { t: c.fragil + (c.quien ? ' Quién: ' + c.quien : '') }], { antes: 6 });
         }
       }
-      if (s.declarar) d.p([{ t: 'Elaborado con apoyo de inteligencia artificial y revisado por ' + (m.firmaNombre || m.nombre || 'el equipo') + '.', tam: 8.4, color: '#7B898C' }], { antes: 10 });
+      if (s.declarar) d.p([{ t: 'Elaborado con apoyo de inteligencia artificial y revisado por el equipo.', tam: 8.4, color: '#7B898C' }], { antes: 10 });
       return d.descargar(nombreArchivo('docx'));
     }).then(function () { return 'Listo: el Word se descargó.'; });
   }
-  var pistaPDF = M.enNavegadorPrestado ? 'si no pasa nada, abre la página en Chrome o Safari: los navegadores de WhatsApp o Facebook no imprimen.' : 'en la ventana de imprimir, elige «Guardar como PDF» y la orientación horizontal.';
   M.entregas($('#entregas'), [
-    { ico: 'pdf', t: 'PDF', d: 'La hoja con el dibujo, para imprimirla o mandarla tal cual.', hacer: M.imprimir, principal: true },
-    { ico: 'word', t: 'Word', d: 'El dibujo y su contenido en texto, para pegarlo en tu proyecto. El marco lógico va como tabla editable.', hacer: wordDibujo },
-    { ico: 'imagen', t: 'Imagen', d: 'La hoja en una imagen, para WhatsApp o para una presentación.', hacer: function () { return imagenHoja().then(function (cv) { return L.entregar(cv, nombreArchivo('png'), HERR[s.herramienta].nombre); }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; }); } },
-    { ico: 'archivo', t: 'Archivo de la mochila', d: 'Tu proyecto con las cuatro herramientas, para abrirlo en otro aparato.', hacer: function () { s.tocado = true; guardarLuego(); M.descargarArchivo('prompts', 'proyecto-' + (s.proyecto.nombre || ''), s); } }
+    { ico: 'word', t: 'Word editable', d: 'El dibujo y su contenido en texto, para pegarlo en tu proyecto y seguir editándolo. El marco lógico va como tabla.', hacer: wordDibujo, principal: true },
+    { ico: 'imagen', t: 'Imagen JPG', d: 'La hoja en una imagen, para una presentación o para mandarla por WhatsApp.', hacer: function () { return imagenHoja().then(function (cv) { return L.entregar(cv, nombreArchivo('jpg'), HERR[s.herramienta].nombre); }).then(function (r) { return r === 'compartida' ? 'Imagen compartida.' : r === 'cancelada' ? '' : 'Listo: la imagen se descargó.'; }); } },
+    { ico: 'archivo', t: 'Guardar para seguir después', d: 'Un archivo de la mochila con tu proyecto y sus cuatro herramientas, para abrirlo en otro aparato.', hacer: function () { s.tocado = true; guardarLuego(); M.descargarArchivo('prompts', 'proyecto-' + (s.proyecto.nombre || ''), s); } }
   ]);
-  $('#entregas').insertAdjacentHTML('afterend', '<p class="pista-impresion">Para el PDF: ' + pistaPDF + '</p>');
+  $('#word-movil').onclick = function () { wordDibujo().then(function (msg) { M.aviso(msg); }, function (err) { M.aviso('No se pudo: ' + ((err && err.message) || 'algo falló') + '.', 'mal'); }); };
   /* Cada paso de «Tu proyecto» es de una herramienta (data-si="h-…") */
   function deHerramienta(h) { return function () { return !!s && s.herramienta === h; }; }
   var guia = M.guia({
-    raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: true,
+    raiz: $('#guia'), marco: $('#marco'), panel: $('.panel-hoja'), membrete: false,
     estado: function () { return s; }, guardar: function () { guardarLuego(); },
     si: { 'h-arbol': deHerramienta('arbol'), 'h-objetivos': deHerramienta('objetivos'), 'h-cambio': deHerramienta('cambio'), 'h-marco': deHerramienta('marco') },
     listo: {
