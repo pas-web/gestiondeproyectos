@@ -217,8 +217,8 @@ function calcular(e) {
   return s;
 }
 
-// La revisión: cinco agujeros (flete, centavo, doble papel, pecado mayor y dinero que llega tarde)
-// y tres avisos que no cuentan como agujero (sin precio, sin actividad, sin bolsillo).
+// La revisión: cuatro agujeros (flete, centavo, pecado mayor y dinero que llega tarde)
+// y cuatro avisos que no cuentan como agujero (sin precio, sin actividad, en dos bolsillos, sin bolsillo).
 // Todo lo que se compra se cotiza: el precio de referencia se cambia por el cotizado, sin columna de papel.
 function revisar(e, s) {
   // las partidas recién creadas y vacías no se revisan todavía
@@ -241,8 +241,8 @@ function revisar(e, s) {
   r(hayCompras && !(e.imp && e.imp.si && +e.imp.pct > 0) ? 1 : 0, 'El presupuesto al centavo', hayCompras ? 'Los imponderables tienen renglón y nombre.' : 'Todavía no hay compras.', 'Sin imponderables: falta un colchón chico, alrededor del 5% de lo que se compra, con nombre honesto.');
 
   var vistos = {}, doble = [];
-  ps.forEach(function (p) { var k = (p.que || '').trim().toLowerCase().slice(0, 28); if (!k) return; var firma = p.bolsillo + '|' + esDinero(p); if (vistos[k] && vistos[k] !== firma) { doble.push(p); marca(p, 'doble papel'); } else vistos[k] = firma; });
-  r(doble.length, 'El doble papel', 'Nada aparece dos veces en bolsillos distintos.', 'Lo mismo aparece en dos bolsillos o comprado y en especie a la vez: ' + ids(doble) + '. Cada cosa vive en un solo lugar.');
+  ps.forEach(function (p) { var k = (p.que || '').trim().toLowerCase().slice(0, 28); if (!k) return; var firma = p.bolsillo + '|' + esDinero(p); if (vistos[k] && vistos[k] !== firma) { doble.push(p); marca(p, 'en dos bolsillos'); } else vistos[k] = firma; });
+  if (doble.length) lista.push({ clase: 'ojo', titulo: 'Lo mismo en dos bolsillos', texto: 'Lo mismo aparece en dos bolsillos, o comprado y en especie a la vez: ' + ids(doble) + '. Cada cosa vive en un solo lugar.' });
 
   // la asistencia técnica especializada sí la paga PROCODES, hasta el 10% de lo que aprueba
   var asesoria = function (p) { return /asesor|asistencia t[eé]cnica|acompa[ñn]amiento t[eé]cnico/i.test(p.que || ''); };
